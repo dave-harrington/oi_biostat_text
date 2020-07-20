@@ -1,0 +1,109 @@
+\documentclass[10pt,openany]%,oneside]
+{book}
+\newcommand{\versiondate}[0]{July 17th, 2020}
+
+%comment these two lines out to revert to default font
+\usepackage{kpfonts}
+\usepackage[T1]{fontenc}
+\usepackage{inconsolata}
+
+\usepackage{
+  amsmath, calc,
+  caption, changepage,
+  endnotes, enumerate,
+  epstopdf,
+  fancyhdr,
+  fix-cm,
+  fncychap,
+  footmisc,
+  fullminipage,
+  geometry, graphicx,
+  ifthen, lscape,
+  makeidx, manfnt,
+  marginnote,
+  mdframed,
+  multicol, multirow,
+  setspace, soul,
+  tabto,
+  textcomp,
+  varioref, verbatim,
+  wasysym, wrapfig
+}
+%\usepackage[usenames,dvipsnames]{color, colortbl}
+\usepackage{color, colortbl}
+\usepackage[explicit]{titlesec}
+\usepackage{imakeidx, titlesec, paralist, qtree}%
+\usepackage{subfigure}
+\include{extraTeX/style/colorsV1}
+
+% _____ Online Version _____ %
+\usepackage[bookmarksnumbered, colorlinks = false, pdfborder = {0 0 0}, urlcolor = oiGB, colorlinks=true, linkcolor = oiGB, citecolor = oiGB, backref = true]{hyperref}
+\newcommand{\printlocation}[0]{}
+
+% _____ Print Version _____ %
+%\definecolor{oiB}{rgb}{0,0,0}\definecolor{chaptertitlegray}{rgb}{0,0,0}\usepackage[colorlinks=false,pdfborder={0 0 0},urlcolor= black,colorlinks=black,linkcolor=black, citecolor=black,backref=true]{hyperref}
+
+
+% _____ COLOR PRINT Version _____ %
+%\usepackage[colorlinks=false,pdfborder={0 0 0},urlcolor= black,colorlinks=black,linkcolor=black, citecolor=black,backref=true]{hyperref} %\renewcommand{\printlocation}[0]{\noindent Printed in China. \\}
+
+
+
+\def\labelitemi{--}
+\setstretch{1.1}
+  
+\usepackage[style=authortitle-ibid, maxnames=2,natbib=true,sortcites=true,block=space,backend=bibtex]{biblatex}
+\usepackage{fnpct}
+\AdaptNoteOpt\footfullcite\multfootcite
+
+\bibliography{eoce.bib}
+
+\makeindex 
+\include{extraTeX/style/style}
+%\include{extraTeX/style/tablet}
+%\include{extraTeX/style/video}
+\include{extraTeX/preamble/title_derivative_oi_biostat}
+\date{}
+\renewcommand\contentsname{Table of Contents}
+\setcounter{tocdepth}{1}
+
+\begin{document}
+
+\renewcommand{\thepage}{}
+\maketitle
+
+\include{extraTeX/preamble/copyright_derivative_oi_biostat}
+\renewcommand{\thepage}{\arabic{page}}
+\tableofcontents
+
+\include{extraTeX/preamble/foreword_oi_biostat}
+\include{extraTeX/preamble/preface_oi_biostat}
+
+\normalsize
+\begingroup
+\include{extraTeX/style/headers}
+\includechapter{1}{ch_intro_to_data_oi_biostat}
+\includechapter{2}{ch_probability_oi_biostat}
+\includechapter{3}{ch_distributions_oi_biostat}
+\includechapter{4}{ch_inference_foundations_oi_biostat}
+\includechapter{5}{ch_inference_for_means_oi_biostat}
+\includechapter{6}{ch_simple_linear_regression_oi_biostat}
+\includechapter{7}{ch_multiple_linear_regression_oi_biostat}
+\includechapter{8}{ch_inference_for_props_oi_biostat}
+\endgroup
+
+\begingroup
+\include{extraTeX/style/style_appendices}
+\appendix{}
+\addtocontents{toc}{\protect\setcounter{tocdepth}{0}}%
+\include{extraTeX/eoce_solutions/eoce_solutions}
+\include{extraTeX/appendix/TeX/zTable}
+\include{extraTeX/appendix/TeX/tTable}
+\include{extraTeX/appendix/TeX/chiSquareTable}
+\endgroup
+
+\cleardoublepage
+\addcontentsline{toc}{chapter}{Index}
+\printindex
+
+\end{document}

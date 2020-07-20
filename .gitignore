@@ -1,0 +1,25 @@
+# LaTeX temporary files
+*.aux
+*.log
+*.toc
+*.lof
+*.lot
+*.idx
+*.out
+*.xml
+
+# SyncTeX
+*.synctex.gz
+
+# BibTeX
+*.bbl
+*.blg
+%*.bib
+*-blx.aux
+*-blx.bib
+
+# main
+# main.tex
+main.pdf
+*.Rhistory
+*.swp

@@ -1,0 +1,19 @@
+library(openintro)
+library(oibiostat)
+data(forest.birds)
+data(COL)
+
+myPDF("forestbirdsAbundanceBox.pdf", 4, 4,
+      mar = c(1, 3.5, 1, 0.5),
+      mgp = c(2, 0.5, 0)
+)
+
+boxPlot(forest.birds$abundance,
+        ylab = 'Abundance',
+        ylim = c(0,50),
+        pch = 19,
+        pchCex = 1,
+        lcol = COL[1],
+        col = COL[1,3])
+
+dev.off()

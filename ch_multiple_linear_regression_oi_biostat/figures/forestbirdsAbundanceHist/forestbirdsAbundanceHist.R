@@ -1,0 +1,17 @@
+library(openintro)
+library(oibiostat)
+data(forest.birds)
+data(COL)
+
+myPDF("forestbirdsAbundanceHist.pdf",
+      5.5, 3.7,
+      mar = c(3.5, 3.5, 0.5, 1),
+      mgp = c(2.4, 0.7, 0))
+histPlot(forest.birds$abundance,
+         breaks = 10,
+         xlab = 'Abundance',
+         ylab = "Frequency",
+         ylim = c(0, 15),
+         col = COL[1],
+         border = COL[5])
+dev.off()

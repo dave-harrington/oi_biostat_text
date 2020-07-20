@@ -1,0 +1,303 @@
+library(openintro)
+data(COL)#
+#
+library(oibiostat)#
+data(golub.train)
+## analysis#
+#
+gene.matrix = as.matrix(golub.train[,-(1:6)])#
+#
+leuk.type = (golub.train$cancer == "aml")#
+table(leuk.type)#
+#
+aml.mean.expression = apply(gene.matrix[leuk.type == TRUE,], 2, mean)#
+all.mean.expression = apply(gene.matrix[leuk.type == FALSE,], 2, mean)#
+#
+diff.mean.expression = (aml.mean.expression - all.mean.expression)#
+myPDF("golubHist.pdf",#
+      6.05, 3.1,#
+      mar = c(3.5, 3.5, 0.5, 1),#
+      mgp = c(2.6, 0.7, 0))#
+histPlot(diff.mean.expression,#
+         breaks = 30,#
+         xlab = 'Difference in Mean Expression (AML-ALL)',#
+         ylab = "Frequency",#
+         ylim = c(0, 3750),#
+         col = COL[1],#
+         border = COL[5])#
+dev.off()#
+myPDF("golubBoxPlot.pdf", 5, 7,#
+      mar = c(5, 4, 1, 0.5),#
+      mgp = c(3, 0.25, 0))#
+#
+boxPlot(diff.mean.expression,#
+        ylab = 'Difference in Mean Expression (AML-ALL)',#
+        ylim = c(-30000, 25000),#
+        pch = 19,#
+        pchCex = 0.8,#
+        lcol = COL[1],#
+        col = COL[1,3])#
+#
+dev.off()
+library(openintro)#
+data(COL)#
+#
+library(oibiostat)#
+data(golub.train)#
+#
+## analysis#
+#
+gene.matrix = as.matrix(golub.train[,-(1:6)])#
+#
+leuk.type = (golub.train$cancer == "aml")#
+table(leuk.type)#
+#
+aml.mean.expression = apply(gene.matrix[leuk.type == TRUE,], 2, mean)#
+all.mean.expression = apply(gene.matrix[leuk.type == FALSE,], 2, mean)#
+#
+diff.mean.expression = (aml.mean.expression - all.mean.expression)#
+myPDF("golubHist.pdf",#
+      6.05, 3.1,#
+      mar = c(3.5, 3.5, 0.5, 1),#
+      mgp = c(2.6, 0.7, 0))#
+histPlot(diff.mean.expression,#
+         breaks = 30,#
+         xlab = 'Difference in Mean Expression (AML-ALL)',#
+         ylab = "Frequency",#
+         ylim = c(0, 3750),#
+         col = COL[1],#
+         border = COL[5])#
+dev.off()#
+myPDF("golubBoxPlot.pdf", 5, 7,#
+      mar = c(1, 5, 1, 0.5),#
+      mgp = c(3.5, 0.5, 0))#
+#
+boxPlot(diff.mean.expression,#
+        ylab = 'Difference in Mean Expression (AML-ALL)',#
+        # ylim = c(-30000, 25000),#
+        pch = 19,#
+        pchCex = 0.8,#
+        lcol = COL[1],#
+        col = COL[1,3])#
+#
+dev.off()
+library(openintro)#
+data(COL)#
+#
+library(oibiostat)#
+data(golub.train)#
+#
+## analysis#
+#
+gene.matrix = as.matrix(golub.train[,-(1:6)])#
+#
+leuk.type = (golub.train$cancer == "aml")#
+table(leuk.type)#
+#
+aml.mean.expression = apply(gene.matrix[leuk.type == TRUE,], 2, mean)#
+all.mean.expression = apply(gene.matrix[leuk.type == FALSE,], 2, mean)#
+#
+diff.mean.expression = (aml.mean.expression - all.mean.expression)#
+myPDF("golubHist.pdf",#
+      6.05, 3.1,#
+      mar = c(3.5, 3.5, 0.5, 1),#
+      mgp = c(2.6, 0.7, 0))#
+histPlot(diff.mean.expression,#
+         breaks = 30,#
+         xlab = 'Difference in Mean Expression (AML-ALL)',#
+         ylab = "Frequency",#
+         ylim = c(0, 3750),#
+         col = COL[1],#
+         border = COL[5])#
+dev.off()#
+myPDF("golubBoxPlot.pdf", 4, 5,#
+      mar = c(1, 5, 1, 0.5),#
+      mgp = c(3.5, 0.5, 0))#
+#
+boxPlot(diff.mean.expression,#
+        ylab = 'Difference in Mean Expression (AML-ALL)',#
+        # ylim = c(-30000, 25000),#
+        pch = 19,#
+        pchCex = 0.8,#
+        lcol = COL[1],#
+        col = COL[1,3])#
+#
+dev.off()
+library(openintro)#
+data(COL)#
+#
+library(oibiostat)#
+data(golub.train)#
+#
+## analysis#
+#
+gene.matrix = as.matrix(golub.train[,-(1:6)])#
+#
+leuk.type = (golub.train$cancer == "aml")#
+table(leuk.type)#
+#
+aml.mean.expression = apply(gene.matrix[leuk.type == TRUE,], 2, mean)#
+all.mean.expression = apply(gene.matrix[leuk.type == FALSE,], 2, mean)#
+#
+diff.mean.expression = (aml.mean.expression - all.mean.expression)#
+myPDF("golubHist.pdf",#
+      6.05, 3.1,#
+      mar = c(3.5, 3.5, 0.5, 1),#
+      mgp = c(2.6, 0.7, 0))#
+histPlot(diff.mean.expression,#
+         breaks = 30,#
+         xlab = 'Difference in Mean Expression (AML-ALL)',#
+         ylab = "Frequency",#
+         ylim = c(0, 3750),#
+         col = COL[1],#
+         border = COL[5])#
+dev.off()#
+myPDF("golubBoxPlot.pdf", 5, 6.5,#
+      mar = c(1, 5, 1, 0.5),#
+      mgp = c(3.5, 0.5, 0))#
+#
+boxPlot(diff.mean.expression,#
+        ylab = 'Difference in Mean Expression (AML-ALL)',#
+        # ylim = c(-30000, 25000),#
+        pch = 19,#
+        pchCex = 0.8,#
+        lcol = COL[1],#
+        col = COL[1,3])#
+#
+dev.off()
+library(openintro)#
+data(COL)#
+#
+library(oibiostat)#
+data(golub.train)#
+#
+## analysis#
+#
+gene.matrix = as.matrix(golub.train[,-(1:6)])#
+#
+leuk.type = (golub.train$cancer == "aml")#
+table(leuk.type)#
+#
+aml.mean.expression = apply(gene.matrix[leuk.type == TRUE,], 2, mean)#
+all.mean.expression = apply(gene.matrix[leuk.type == FALSE,], 2, mean)#
+#
+diff.mean.expression = (aml.mean.expression - all.mean.expression)#
+myPDF("golubHist.pdf",#
+      6.05, 3.5,#
+      mar = c(3.5, 3.5, 0.5, 1),#
+      mgp = c(2.6, 0.7, 0))#
+histPlot(diff.mean.expression,#
+         breaks = 30,#
+         xlab = 'Difference in Mean Expression (AML-ALL)',#
+         ylab = "Frequency",#
+         ylim = c(0, 3750),#
+         col = COL[1],#
+         border = COL[5])#
+dev.off()#
+myPDF("golubBoxPlot.pdf", 5, 7,#
+      mar = c(1, 5, 1, 0.5),#
+      mgp = c(3.5, 0.5, 0))#
+#
+boxPlot(diff.mean.expression,#
+        ylab = 'Difference in Mean Expression (AML-ALL)',#
+        # ylim = c(-30000, 25000),#
+        pch = 19,#
+        pchCex = 0.8,#
+        lcol = COL[1],#
+        col = COL[1,3])#
+#
+dev.off()
+library(openintro)#
+data(COL)#
+#
+library(oibiostat)#
+data(golub.train)#
+#
+## analysis#
+#
+gene.matrix = as.matrix(golub.train[,-(1:6)])#
+#
+leuk.type = (golub.train$cancer == "aml")#
+table(leuk.type)#
+#
+aml.mean.expression = apply(gene.matrix[leuk.type == TRUE,], 2, mean)#
+all.mean.expression = apply(gene.matrix[leuk.type == FALSE,], 2, mean)#
+#
+diff.mean.expression = (aml.mean.expression - all.mean.expression)#
+myPDF("golubHist.pdf",#
+      6.05, 3.5,#
+      mar = c(3.5, 3.5, 0.5, 1),#
+      mgp = c(2.6, 0.7, 0))#
+histPlot(diff.mean.expression,#
+         breaks = 30,#
+         xlab = 'Difference in Mean Expression (AML-ALL)',#
+         ylab = "Frequency",#
+         ylim = c(0, 3750),#
+         col = COL[1],#
+         border = COL[5])#
+dev.off()#
+myPDF("golubBoxPlot.pdf", 5, 6.7,#
+      mar = c(1, 5, 1, 0.5),#
+      mgp = c(3.5, 0.5, 0))#
+#
+boxPlot(diff.mean.expression,#
+        ylab = 'Difference in Mean Expression (AML-ALL)',#
+        # ylim = c(-30000, 25000),#
+        pch = 19,#
+        pchCex = 0.8,#
+        lcol = COL[1],#
+        col = COL[1,3])#
+#
+dev.off()
+# bar graph of distribution of number heads, 3 coin tosses#
+#
+library(openintro)#
+data(COL)#
+#
+x.values = c(0, 1, 2, 3)#
+x.probs = c(1/8, 3/8, 3/8, 1/8)#
+#
+x.dist.table = as.table(cbind(x.values, x.probs))#
+x.dist.table#
+barplot(x.probs, names.arg = c("0", "1", "2", "3"), xlab = "Values of X", ylab = "Probabilities")
+barplot(x.probs, col=COL[1], ylim=c(0,.4), width=2, names.arg = c("0", "1", "2", "3"), xlab = "Values of X", ylab = "Probabilities")
+# bar graph of distribution of number heads, 3 coin tosses#
+#
+library(openintro)#
+data(COL)#
+#
+x.values = c(0, 1, 2, 3)#
+x.probs = c(1/8, 3/8, 3/8, 1/8)#
+#
+x.dist.table = as.table(cbind(x.values, x.probs))#
+x.dist.table#
+barplot(x.probs, names.arg = c("0", "1", "2", "3"), xlab = "Values of X", ylab = "Probabilities")#
+#
+myPDF("barPlotCoinTossing.pdf",#
+      5.6,#
+      4,#
+      mar = c(2, 5, 0.5, 0.5),#
+      mgp = c(2.2, 0.6, 0))#
+barplot(x.probs, col=COL[1], ylim=c(0,.4), width=2, names.arg = c("0", "1", "2", "3"), xlab = "Values of X", ylab = "Probabilities")#
+#
+dev.off()
+# bar graph of distribution of number heads, 3 coin tosses#
+#
+library(openintro)#
+data(COL)#
+#
+x.values = c(0, 1, 2, 3)#
+x.probs = c(1/8, 3/8, 3/8, 1/8)#
+#
+x.dist.table = as.table(cbind(x.values, x.probs))#
+x.dist.table#
+barplot(x.probs, names.arg = c("0", "1", "2", "3"), xlab = "Values of X", ylab = "Probabilities")#
+#
+myPDF("barPlotCoinTossing.pdf",#
+      7,#
+      5,#
+      mar = c(2, 5, 0.5, 0.5),#
+      mgp = c(2.2, 0.6, 0))#
+barplot(x.probs, col=COL[1], ylim=c(0,.4), width=2, names.arg = c("0", "1", "2", "3"), xlab = "Values of X", ylab = "Probabilities")#
+#
+dev.off()

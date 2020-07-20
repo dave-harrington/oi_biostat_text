@@ -1,0 +1,1332 @@
+%!TEX root=../../main.tex
+\begin{chapterpage}{Probability}
+  \chaptertitle{Probability}
+  \label{probability}
+  \chaptersection{basicsOfProbability}
+  \chaptersection{conditionalProbabilitySection}
+  \chaptersection{sectionExtendedExampleCatGenetics}
+  \chaptersection{notesChapterProbability}
+\end{chapterpage}
+\renewcommand{\chapterfolder}{ch_probability_oi_biostat}
+
+\index{probability|(}
+
+\chapterintro{{\large What are the chances that a woman with an abnormal mammogram has breast cancer? What is the probability that a woman with an abnormal mammogram has breast cancer, given that she is in her 40's? What is the likelihood that out of 100 women who undergo a mammogram and test positive for breast cancer, at least one of the women has received a false positive result? \\
+
+\noindent%
+These questions use the language of probability to express statements about outcomes that may or may not occur. More specifically, probability is used to quantify the level of uncertainty about each outcome.  Like all mathematical tools, probability becomes easier to understand and work with once important concepts and terminology have been formalized. \\
+
+\noindent%
+This chapter introduces that formalization, using two types of examples. One set of examples uses settings familiar to most people -- rolling dice or picking cards from a deck. The other set of examples draws from medicine, biology, and public health, reflecting the contexts and language specific to those fields. The approaches to solving these two types of problems are surprisingly similar, and in both cases, seemingly difficult problems can be solved in a series of reliable steps.}}
+
+\section{Defining probability}
+\label{basicsOfProbability}
+
+\subsection{Some examples}
+
+The rules of probability can easily be modeled with classic scenarios, such as flipping coins or rolling dice. When a coin is flipped, there are only two possible outcomes, heads or tails. With a fair coin, each outcome is equally likely; thus, the chance of flipping heads is 1/2, and likewise for tails. The following examples deal with rolling a die or multiple dice; a die is a cube with six faces numbered \resp{1}, \resp{2}, \resp{3}, \resp{4}, \resp{5}, and \resp{6}. 
+
+\begin{examplewrap}
+\begin{nexample}{What is the chance of getting \resp{1} when rolling a die?}\label{probOf1}
+If the die is fair, then there must be an equal chance of rolling a \resp{1} as any other possible number. Since there are six outcomes, the chance must be 1-in-6 or, equivalently, $1/6$.
+\end{nexample}
+\end{examplewrap}
+
+\begin{examplewrap}
+\begin{nexample}{What is the chance of not rolling a \resp{2}?}\label{probNot2}
+Not rolling a \resp{2} is the same as getting a \resp{1}, \resp{3}, \resp{4}, \resp{5}, or \resp{6}, which makes up five of the six equally likely outcomes and has probability $5/6$.
+\end{nexample}
+\end{examplewrap}
+
+\begin{examplewrap}
+\begin{nexample}{Consider rolling two fair dice. What is the chance of getting two \resp{1}s?}\label{probOf2Ones}
+If $1/6^{th}$ of the time the first die is a \resp{1} and $1/6^{th}$ of \emph{those} times the second die is also a \resp{1}, then the chance that both dice are \resp{1} is $(1/6) (1/6)$ or $1/36$.
+\end{nexample}
+\end{examplewrap}
+
+Probability can also be used to model less artificial contexts, such as to predict the inheritance of genetic disease. Cystic fibrosis (CF) is a life-threatening genetic disorder caused by mutations in the \textit{CFTR} gene located on chromosome 7. Defective copies of \textit{CFTR} can result in the reduced quantity and function of the CFTR protein, which leads to the buildup of thick mucus in the lungs and pancreas.\footnote{The CFTR protein is responsible for transporting sodium and chloride ions across cell membranes.} CF is an autosomal recessive disorder; an individual only develops CF if they have inherited two affected copies of \textit{CFTR}. Individuals with one normal (wild-type) copy and one defective (mutated) copy are known as carriers; they do not develop CF, but may pass the disease-causing mutation onto their offspring.
+
+\textD{\newpage}
+
+\begin{examplewrap}
+\begin{nexample}{Suppose that both members of a couple are CF carriers. What is the probability that a child of this couple will be affected by CF? Assume that a parent has an equal chance of passing either gene copy (i.e., allele) to a child.}\label{CFInheritanceExample}
+
+\textit{Solution 1: Enumerate all of the possible outcomes and exploit the fact that the outcomes are equally likely, as in Example~\ref{probOf1}.}  Figure~\ref{fig:cfInheritance} shows the four possible genotypes for a child of these parents. The paternal chromosome is in blue and the maternal chromosome in green, while chromosomes with the wild-type and mutated versions of \textit{CFTR} are marked with $+$ and $-$, respectively. The child is only affected if they have genotype ($-$/$-$), with two mutated copies of \textit{CFTR}. Each of the four outcomes occurs with equal likelihood, so the child will be affected with probability 1-in-4, or $1/4$.  It is important to recognize that the child being an unaffected carrier ($+$/$-$) consists of two distinct outcomes, not one. 
+
+\textit{Solution 2:  Calculate the proportion of outcomes that produce an affected child, as in Example~\ref{probOf2Ones}.}  During reproduction, one parent will pass along an affected copy half of the time.  When the child receives an affected allele from one parent, half of the those times, they will also receive an affected allele from the other parent. Thus, the proportion of times the child will have two affected copies is $(1/2) \times (1/2) = 1/4$.
+\end{nexample}
+\end{examplewrap}
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width= 0.775\textwidth]{ch_probability_oi_biostat/figures/cfInheritance/cfInheritance.png}
+	\caption{Pattern of CF inheritance for a child of two unaffected carriers}
+	\label{fig:cfInheritance}
+\end{figure}
+
+\textD{\newpage}
+
+\begin{exercisewrap}
+\begin{nexercise}
+Suppose the father has CF and the mother is an unaffected carrier. What is the probability that their child will be affected by the disease?\footnotemark{}
+\end{nexercise}
+\end{exercisewrap}
+\footnotetext{Since the father has CF, he must have two affected copies; he will always pass along a defective copy of the gene.  Since the mother will pass along a defective copy half of the time, the child will be affected half of the time, or with probability $(1) \times (1/2) = 1/2$.}
+
+\subsection{Probability}
+
+% \index{random phenomena |(}
+
+Probability is used to assign a level of uncertainty to the outcomes of phenomena that either happen randomly (e.g. rolling dice, inheriting of disease alleles), or appear random because of a lack of understanding about exactly how the phenomenon occurs (e.g. a woman in her 40's developing breast cancer). Modeling these complex phenomena as random can be useful, and in either case, the interpretation of probability is the same: the chance that some event will occur.
+
+Mathematicians and philosophers have struggled for centuries to arrive at a clear statement of how probability is defined, or what it means. The most common definition is used in this text.
+
+\begin{onebox}{Probability}
+The \term{probability} of an outcome is the proportion of times the outcome would occur if the random phenomenon could be observed an infinite number of times.
+\end{onebox}
+
+%\index{Law of Large Numbers |(}
+
+This definition of probability can be illustrated by simulation. Suppose a die is rolled many times. Let $\hat{p}_n$ be the proportion of outcomes that are \resp{1} after the first $n$ rolls. As the number of rolls increases, $\hat{p}_n$ will converge to the probability of rolling a \resp{1}, $p = 1/6$. Figure~\ref{fig:dieProp} shows this convergence for 100,000 die rolls. The tendency of $\hat{p}_n$ to stabilize around $p$ is described by the \term{Law of Large Numbers}. The behavior shown in Figure~\ref{fig:dieProp} matches most people's intuition about probability, but proving mathematically that the behavior is always true is surprisingly difficult and beyond the level of this text.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.85\textwidth]{ch_probability_oi_biostat/figures/dieProp/dieProp}
+	\caption{The fraction of die rolls that are \resp{1} at each stage in a simulation. The proportion tends to get closer to the probability $1/6 \approx 0.167$ as the number of rolls increases.}
+	\label{fig:dieProp}
+\end{figure}
+
+Occasionally the proportion veers off from the probability and appear to defy the Law of Large Numbers, as $\hat{p}_n$ does many times in Figure~\ref{fig:dieProp}. However, the likelihood of these large deviations becomes smaller as the number of rolls increases.
+
+\begin{onebox}{Law of Large Numbers}
+As more observations are collected, the proportion $\hat{p}_n$ of occurrences with a particular outcome converges to the probability $p$ of that outcome.
+\end{onebox}
+
+%\index{Law of Large Numbers |)}
+
+Probability is defined as a proportion, and it always takes values between 0~and~1 (inclusively). It may also be expressed as a percentage between 0\% and 100\%. The probability of rolling a \resp{1}, $p$, can also be written as $P$(rolling a \resp{1}).
+
+This notation can be further abbreviated. For instance, if it is clear that the process is ``rolling a die'', $P($rolling a \resp{1}$)$ can be written as~$P($\resp{1}$)$.  There also exists a notation for an event itself; the event $A$ of rolling a 1 can be written as $A = \{\text{rolling a \resp{1}}\}$, with associated probability $P(A)$.\marginpar[\raggedright\vspace{-13mm}
+
+$P(A)$\vspace{1mm}\\\footnotesize Probability of\\outcome $A$]{\raggedright\vspace{-13mm}
+	
+	$P(A)$\vspace{1mm}\\\footnotesize Probability of\\outcome $A$} 
+
+\index{random phenomena|)}
+
+\subsection{Disjoint or mutually exclusive outcomes}
+
+%\index{disjoint|(}
+%\index{mutually exclusive|(}
+
+Two outcomes are \termsub{disjoint}{disjoint events} or \termsub{mutually exclusive}{mutually exclusive events} if they cannot both happen at the same time. When rolling a die, the outcomes \resp{1} and \resp{2} are disjoint since they cannot both occur.  However, the outcomes \resp{1} and ``rolling an odd number'' are not disjoint since both occur if the outcome of the roll is a \resp{1}.\footnote{The terms \emph{disjoint} and \emph{mutually exclusive} are equivalent and interchangeable.} 
+
+What is the probability of rolling a \resp{1} or a \resp{2}? When rolling a die, the outcomes \resp{1} and \resp{2} are disjoint. The probability that one of these outcomes will occur is computed by adding their separate probabilities:
+\begin{eqnarray*}
+P(\text{\resp{1} or \resp{2}}) = P(\text{\resp{1}})+P(\text{\resp{2}}) = 1/6 + 1/6 = 1/3
+\end{eqnarray*}
+What about  the probability of rolling a \resp{1}, \resp{2}, \resp{3}, \resp{4}, \resp{5}, or \resp{6}? Here again, all of the outcomes are disjoint, so add the individual probabilities:
+\begin{eqnarray*}
+&&P(\text{\resp{1} or \resp{2} or \resp{3} or \resp{4} or \resp{5} or \resp{6}}) \\
+	&&\quad= P(\text{\resp{1}})+P(\text{\resp{2}})+P(\text{\resp{3}})+P(\text{\resp{4}})+P(\text{\resp{5}})+P(\text{\resp{6}}) \\
+	&&\quad= 1/6 + 1/6 + 1/6 + 1/6 + 1/6 + 1/6 = 1.
+\end{eqnarray*}
+
+\begin{onebox}{Addition Rule of disjoint outcomes} If $A_1$ and $A_2$ represent two disjoint outcomes, then the probability that either one of them occurs is given by
+\begin{eqnarray*}
+P(A_1\text{ or } A_2) = P(A_1) + P(A_2)
+\end{eqnarray*}
+If there are $k$ disjoint outcomes $A_1$, ..., $A_k$, then the probability that either one of these outcomes will occur is
+\begin{eqnarray}
+P(A_1) + P(A_2) + \cdots + P(A_k)
+\end{eqnarray}
+\end{onebox}
+
+\textD{\newpage}
+
+\index{event|(}
+
+\begin{exercisewrap}
+\begin{nexercise}
+Consider the CF example. Is the event that two carriers of CF have a child that is also a carrier represented by mutually exclusive outcomes? Calculate the probability of this event.\footnotemark{}
+\end{nexercise}
+\end{exercisewrap}
+\footnotetext{Yes, there are two mutually exclusive outcomes for which a child of two carriers can also be a carrier - a child can either receive an affected copy of $CFTR$ from the mother and a normal copy from the father, or vice versa (since each parent can only contribute one allele). Thus, the probability that a child will be a carrier is 1/4 + 1/4 = 1/2.}
+
+Probability problems often deal with \indexthis{\emph{sets}}{sets} or \indexthis{\emph{collections}}{collections} of outcomes. Let $A$ represent the event in which a die roll results in \resp{1} or \resp{2} and $B$~represent the event that the die roll is a \resp{4} or a \resp{6}. We write $A$ as the set of outcomes $\{$\resp{1},~\resp{2}$\}$ and $B=\{$\resp{4}, \resp{6}$\}$. These sets are commonly called \termsub{events}{event}. Because $A$ and $B$ have no elements in common, they are disjoint events. $A$ and $B$ are represented in Figure~\ref{fig:disjointEvents}.
+
+\begin{figure}[hhh]
+\centering
+\includegraphics[width=0.55\textwidth]{ch_probability_oi_biostat/figures/disjointEvents/disjointEvents.png}
+\caption{Three events, $A$, $B$, and $D$, consist of outcomes from rolling a die. $A$ and $B$ are disjoint since they do not have any outcomes in common.}
+\label{fig:disjointEvents}
+\end{figure}
+
+The Addition Rule applies to both disjoint outcomes and disjoint events. The probability that one of the disjoint events $A$ or $B$ occurs is the sum of the separate probabilities:
+\begin{align*}
+P(A\text{ or }B) = P(A) + P(B) = 1/3 + 1/3 = 2/3
+\end{align*}
+
+\begin{exercisewrap}
+\begin{nexercise}
+(a) Verify the probability of event $A$, $P(A)$, is $1/3$ using the Addition Rule. (b) Do the same for event $B$.\footnotemark{}
+\end{nexercise}
+\end{exercisewrap}
+\footnotetext{(a) $P(A) = P($\resp{1} or \resp{2}$) = P($\resp{1}$) + P($\resp{2}$) = \frac{1}{6} + \frac{1}{6} = \frac{2}{6} = \frac{1}{3}$. (b) Similarly, $P(B) = 1/3$.}
+
+\begin{exercisewrap}
+\begin{nexercise}\label{exerExaminingDisjointSetsABD}%
+(a) Using Figure~\ref{fig:disjointEvents} as a reference, which outcomes are represented by event $D$? (b) Are events $B$ and $D$ disjoint? (c) Are events $A$ and $D$ disjoint?\footnotemark{}
+\end{nexercise}
+\end{exercisewrap}
+\footnotetext{(a)~Outcomes \resp{2} and \resp{3}. (b)~Yes, events $B$ and $D$ are disjoint because they share no outcomes. (c)~The events $A$ and $D$ share an outcome in common, \resp{2}, and so are not disjoint.}
+
+\textD{\newpage}
+
+\begin{exercisewrap}
+\begin{nexercise}
+In Guided Practice~\ref{exerExaminingDisjointSetsABD}, you confirmed $B$ and $D$ from Figure~\ref{fig:disjointEvents} are disjoint. Compute the probability that event $B$ or event $D$~occurs.\footnotemark{}
+\end{nexercise}
+\end{exercisewrap}
+\footnotetext{Since $B$ and $D$ are disjoint events, use the Addition Rule: $P(B$ or $D) = P(B) + P(D) = \frac{1}{3} + \frac{1}{3} = \frac{2}{3}$.}
+
+\index{event|)}
+%\index{disjoint|)}
+%\index{mutually exclusive|)}
+
+
+\subsection{Probabilities when events are not disjoint}
+
+\term{Venn diagrams} are useful when outcomes can be categorized as ``in'' or ``out'' for two or three variables, attributes, or random processes. The Venn diagram in Figure~\ref{fig:cardsDiamondFaceVenn} uses one oval to represent diamonds and another to represent face cards (the cards labeled jacks, queens, and kings); if a card is both a diamond and a face card, it falls into the intersection of the ovals.
+
+\begin{figure}[h]
+\centering
+\begin{tabular}{lll lll lll lll l}
+\resp{2$\clubsuit$} & \resp{3$\clubsuit$} & \resp{4$\clubsuit$} & \resp{5$\clubsuit$} & \resp{6$\clubsuit$} & \resp{7$\clubsuit$} & \resp{8$\clubsuit$} & \resp{9$\clubsuit$} & \resp{10$\clubsuit$} & \resp{J$\clubsuit$} & \resp{Q$\clubsuit$} & \resp{K$\clubsuit$} & \resp{A$\clubsuit$}  \\
+\color{redcards} \resp{2$\diamondsuit$} & \color{redcards}\resp{3$\diamondsuit$} & \color{redcards}\resp{4$\diamondsuit$} & \color{redcards}\resp{5$\diamondsuit$} & \color{redcards}\resp{6$\diamondsuit$} & \color{redcards}\resp{7$\diamondsuit$} & \color{redcards}\resp{8$\diamondsuit$} & \color{redcards}\resp{9$\diamondsuit$} & \color{redcards}\resp{10$\diamondsuit$} & \color{redcards}\resp{J$\diamondsuit$} & \color{redcards}\resp{Q$\diamondsuit$} & \color{redcards}\resp{K$\diamondsuit$} & \color{redcards}\resp{A$\diamondsuit$} \\
+\color{redcards}\resp{2$\heartsuit$} & \color{redcards}\resp{3$\heartsuit$} & \color{redcards}\resp{4$\heartsuit$} & \color{redcards}\resp{5$\heartsuit$} & \color{redcards}\resp{6$\heartsuit$} & \color{redcards}\resp{7$\heartsuit$} & \color{redcards}\resp{8$\heartsuit$} & \color{redcards}\resp{9$\heartsuit$} & \color{redcards}\resp{10$\heartsuit$} & \color{redcards}\resp{J$\heartsuit$} & \color{redcards}\resp{Q$\heartsuit$} & \color{redcards}\resp{K$\heartsuit$} & \color{redcards}\resp{A$\heartsuit$} \\
+\resp{2$\spadesuit$} & \resp{3$\spadesuit$} & \resp{4$\spadesuit$} & \resp{5$\spadesuit$} & \resp{6$\spadesuit$} & \resp{7$\spadesuit$} & \resp{8$\spadesuit$} & \resp{9$\spadesuit$} & \resp{10$\spadesuit$} & \resp{J$\spadesuit$} & \resp{Q$\spadesuit$} & \resp{K$\spadesuit$} & \resp{A$\spadesuit$}
+\end{tabular}
+\caption{A \indexthis{regular deck of 52 cards}{deck of cards} is split into four suits: $\clubsuit$ (club), {\color{redcards}$\diamondsuit$} (diamond), {\color{redcards}$\heartsuit$} (heart), $\spadesuit$ (spade). Each suit has 13 labeled cards: \resp{2}, \resp{3}, ..., \resp{10}, \resp{J} (jack), \resp{Q} (queen), \resp{K} (king), and \resp{A} (ace). Thus, each card is a unique combination of a suit and a label, e.g. {\color{redcards}\resp{4$\heartsuit$}} and \resp{J$\clubsuit$}. %The cards that are {\color{redcards}$\diamondsuit$} or {\color{redcards}$\heartsuit$} are typically colored {\color{redcards}red} while the other two suits are typically colored black.
+	}
+\label{deckOfCards}
+\end{figure}
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.65\textwidth]{ch_probability_oi_biostat/figures/cardsDiamondFaceVenn/cardsDiamondFaceVenn.png}
+	\caption{A Venn diagram for diamonds and face cards.}
+	\label{fig:cardsDiamondFaceVenn}
+\end{figure}
+
+\begin{exercisewrap}
+\begin{nexercise}
+(a) What is the probability that a randomly selected card is a diamond? (b)~What is the probability that a randomly selected card is a face card?\footnotemark{}
+\end{nexercise}
+\end{exercisewrap}
+\footnotetext{(a) There are 52 cards and 13 diamonds. If the cards are thoroughly shuffled, each card has an equal chance of being drawn, so the probability that a randomly selected card is a diamond is $P({\color{redcards}\diamondsuit}) = \frac{13}{52} = 0.250$. (b)~Likewise, there are 12 face cards, so $P($face card$) = \frac{12}{52} = \frac{3}{13} = 0.231$.}
+
+\textD{\newpage}
+
+Let $A$ represent the event that a randomly selected card is a diamond and $B$ represent the event that it is a face card. Events $A$ and $B$ are not disjoint -- the cards {\color{redcards}\resp{J}$\diamondsuit$}, {\color{redcards}\resp{Q}$\diamondsuit$}, and {\color{redcards}\resp{K}$\diamondsuit$} fall into both categories. 
+
+As a result, adding the probabilities of the two events together is not sufficient to calculate $P(A \ \text{or} \ B)$:
+\begin{eqnarray*}
+	P(A) + P(B) = P({\color{redcards}\diamondsuit}) + P(\text{face card}) = 12/52 + 13/52
+	\label{overCountFaceDiamond}
+\end{eqnarray*}
+Instead, a small modification is necessary. The three cards that are in both events were counted twice. To correct the double counting, subtract the probability that both events occur:
+
+\begin{eqnarray}
+P(A\text{ or } B) &=&P(\text{face card or }{\color{redcards}\diamondsuit})  \notag \\
+ &=& P(\text{face card}) + P({\color{redcards}\diamondsuit}) - P(\text{face card and }{\color{redcards}\diamondsuit}) \label{diamondFace} \\
+ &=& 13/52 + 12/52 - 3/52 \notag \\
+ &=& 22/52 = 11/26 \notag
+\end{eqnarray}
+Equation~(\ref{diamondFace}) is an example of the \term{General Addition Rule}. 
+
+\begin{onebox}{General Addition Rule}
+If $A$ and $B$ are any two events, disjoint or not, then the probability that at least one of them will occur is
+\begin{eqnarray}
+P(A\text{ or }B) = P(A) + P(B) - P(A\text{ and }B)
+\label{generalAdditionRule}
+\end{eqnarray}
+where $P(A$ and $B)$ is the probability that both events occur.
+\end{onebox}
+
+Note that in the language of statistics, "or" is inclusive such that $A$ or $B$ occurs means $A$, $B$, or both $A$ and $B$ occur.
+
+\begin{exercisewrap}
+\begin{nexercise}
+(a) If $A$ and $B$ are disjoint, describe why this implies $P(A$ and $B) = 0$. (b) Using part (a), verify that the General Addition Rule simplifies to the Addition Rule for disjoint events if $A$ and $B$ are disjoint.\footnotemark{}
+\end{nexercise}
+\end{exercisewrap}
+\footnotetext{(a) If $A$ and $B$ are disjoint, $A$ and $B$ can never occur simultaneously. (b) If $A$ and $B$ are disjoint, then the last term of Equation~(\ref{generalAdditionRule}) is 0 (see part (a)) and we are left with the Addition Rule for disjoint events.}
+
+\begin{exercisewrap}
+\begin{nexercise}
+Human immunodeficiency virus (HIV) and tuberculosis (TB) affect substantial proportions of the population in certain areas of the developing world. Individuals sometimes are co-infected (i.e., have both diseases). Children of HIV-infected mothers may have HIV and TB can spread from one family member to another.  In a mother-child pair, let $A = \{\text{the mother has HIV} \}$,  $B = \{\textrm{the mother has TB} \}$, $C = \{\text{the child has HIV} \}$,  $D = \{\text{the child has TB} \}$.  Write out the definitions of the events $A \text{ or } B$, $A \text{ and } B$, $A \text{ and } C$, $A \text{ or } D$.\footnotemark{}
+\end{nexercise}
+\end{exercisewrap}
+\footnotetext{Events $A$ or $B$: the mother has HIV, the mother has TB, or the mother has both HIV and TB. Events $A$ and $B$: the mother has both HIV and TB. Events $A$ and $C$: The mother has HIV and the child has HIV. $A$ or $D$: The mother has HIV, the child has TB, or the mother has HIV and the child has TB.}
+
+
+\textD{\newpage}
+
+
+\subsection{Probability distributions}
+\label{introProbDistributions}
+
+A \term{probability distribution} consists of all disjoint outcomes and their associated probabilities. Figure~\ref{diceProb} shows the probability distribution for the sum of two dice. 
+
+\begin{figure}[h] \small
+\centering
+\begin{tabular}{l ccc ccc ccc cc}
+  \hline
+  \ \vspace{-3mm} \\
+Dice sum\vspace{0.3mm} & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11 & 12  \\
+Probability & $\frac{1}{36}$ & $\frac{2}{36}$ & $\frac{3}{36}$ & $\frac{4}{36}$ & $\frac{5}{36}$ & $\frac{6}{36}$ & $\frac{5}{36}$ & $\frac{4}{36}$ & $\frac{3}{36}$ & $\frac{2}{36}$ & $\frac{1}{36}$\vspace{1mm} \\
+   \hline
+\end{tabular}
+\caption{Probability distribution for the sum of two dice.}
+\label{diceProb}
+\end{figure}
+
+\begin{onebox}{Rules for a probability distribution}
+A probability distribution is a list of all possible outcomes and their associated probabilities that satisfies three rules: \vspace{-2mm}
+\begin{enumerate}
+\setlength{\itemsep}{0mm}
+\item The outcomes listed must be disjoint.
+\item Each probability must be between 0 and 1.
+\item The probabilities must total to 1. \vspace{1mm}
+\end{enumerate}
+\end{onebox}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.73\textwidth]{ch_probability_oi_biostat/figures/diceSumDist/diceSumDist}
+\caption{The probability distribution of the sum of two dice.}
+\label{diceSumDist}
+\end{figure}
+
+Probability distributions can be summarized in a bar plot. The probability distribution for the sum of two dice is shown in Figure~\ref{diceSumDist}, with the bar heights representing the probabilities of outcomes.
+
+Figure~\ref{fig:birthwtMarginalDist} shows a bar plot of the birth weight data for 3,999,386 live births in the United States in 2010, for which total counts have been converted to proportions. Since birth weight trends do not change much between years,  it is valid to consider the plot as a representation of the probability distribution of birth weights for upcoming years, such as 2017. The data are available as part of the US CDC National Vital Statistics System.\footnote{\url{http://205.207.175.93/vitalstats/ReportFolders/reportFolders.aspx}} 
+
+The graph shows that while most babies born weighed between 2000 and 5000 grams (2 to 5 kg), there were both small (less than 1000 grams) and large (greater than 5000 grams) babies. Pediatricians consider birth weights between 2.5 and 5 kg as normal.\footnote{\url{https://www.nlm.nih.gov/medlineplus/birthweight.html}} A probability distribution gives a sense of which outcomes can be considered unusual (i.e., outcomes with low probability).
+
+
+\begin{figure}[h]
+	\includegraphics[width=\textwidth]{ch_probability_oi_biostat/figures/birthwtMarginalDist/birthwtMarginalDist.pdf}
+	\caption{Distribution of birth weights (in grams) of babies born in the US in 2010}
+	\label{fig:birthwtMarginalDist}
+\end{figure}
+
+\subsubsection{Continuous probability distributions}
+\label{contDist}
+
+\index{data!FCID|(}
+
+Probability distributions for events that take on a finite number of possible outcomes, such as the sum of two dice rolls, are referred to as \term{discrete probability distributions}. 
+
+Consider how the probability distribution for adult heights in the US might best be represented. Unlike the sum of two dice rolls, height can occupy any value over a continuous range. Thus, height has a \term{continuous probability distribution}, which is specified by a \term{probability density function} rather than a table; Figure~\ref{fdicHeightContDist} shows a histogram of the height for 3 million US adults from the mid-1990's, with an overlaid density curve.\footnote{This sample can be considered a simple random sample from the US population. It relies on the USDA Food Commodity Intake Database.} 
+
+Just as in the discrete case, the probabilities of all possible outcomes must still sum to 1; the total area under a probability density function equals 1. 
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.7\textwidth]{ch_probability_oi_biostat/figures/fdicHeightContDist/fdicHeightContDist}
+	\caption{The continuous probability distribution of heights for US adults.}
+	\label{fdicHeightContDist}	
+\end{figure}
+
+\textD{\newpage}
+
+\begin{examplewrap}
+\begin{nexample}{Estimate the probability that a randomly selected adult from the US population has height between 180 and 185 centimeters. In Figure~\ref{usHeightsHist180185}, the two bins between 180 and 185 centimeters have counts of 195,307 and 156,239 people.}\label{probabilityOfBetween180185}%
+
+Find the proportion of the histogram's area that falls in the range \resp{180} cm and \resp{185}: add the heights of the bins in the range and divide by the sample size:
+
+\begin{align*}                                                    
+\frac{195,307+156,239}{\text{3,000,000}} = 0.1172                
+\end{align*}
+
+The probability can be calculated precisely with the use of computing software, by finding the area of the shaded region under the curve between \resp{180} and \resp{185}:
+\begin{align*}
+P(\text{\var{height} between \resp{180} and \resp{185}})
+= \text{area between \resp{180} and \resp{185}}
+= 0.1157
+\end{align*}
+\end{nexample}
+\end{examplewrap}
+
+\begin{figure}[h]
+	\centering
+	\subfigure[]{
+		\includegraphics[width=0.485\textwidth]{ch_probability_oi_biostat/figures/usHeightsHist180185/usHeightsHist180185}
+		\label{usHeightsHist180185}
+	}
+	\subfigure[]{
+		\includegraphics[width=0.485\textwidth]{ch_probability_oi_biostat/figures/fdicHeightContDistFilled/fdicHeightContDistFilled}
+		\label{fdicHeightContDistFilled}		
+	}
+	\caption{\subref{usHeightsHist180185} A histogram with bin sizes of 2.5 cm, with bars between \resp{180} and \resp{185} cm shaded.  \subref{fdicHeightContDistFilled} Density for heights in the US adult population with the area between \resp{180} and \resp{185} cm shaded.}
+\end{figure}
+
+\begin{examplewrap}
+\begin{nexample}{What is the probability that a randomly selected person is \textbf{exactly} \resp{180}~cm? Assume that height can be measured perfectly.}
+	\label{probabilityOfExactly180cm}
+	This probability is zero. A person might be close to \resp{180} cm, but not exactly \resp{180} cm tall. This also coheres with the definition of probability as an area under the density curve; there is no area captured between \resp{180}~cm and \resp{180}~cm.
+\end{nexample}
+\end{examplewrap}
+
+\begin{exercisewrap}
+\begin{nexercise}
+Suppose a person's height is rounded to the nearest centimeter. Is there a chance that a random person's \textbf{measured} height will be \resp{180} cm?\footnotemark{}
+\end{nexercise}
+\end{exercisewrap}
+\footnotetext{This has positive probability. Anyone between \resp{179.5} cm and \resp{180.5} cm will have a \emph{measured} height of \resp{180} cm. This a more realistic scenario to encounter in practice versus Example~\ref{probabilityOfExactly180cm}.}
+
+\index{data!FCID|)}
+
+
+\textD{\newpage}
+
+
+\subsection{Complement of an event}
+
+Rolling a die produces a value in the set $\{$\resp{1}, \resp{2}, \resp{3}, \resp{4}, \resp{5}, \resp{6}$\}$. This set of all possible outcomes is called the \term{sample space} ($S$)\marginpar[\raggedright\vspace{-5mm}
+
+$S$\\\footnotesize Sample space]{\raggedright\vspace{-5mm}
+
+$S$\\\footnotesize Sample space}\index{S@$S$} for rolling a die. 
+
+Let $D=\{$\resp{2}, \resp{3}$\}$ represent the event that the outcome of a die roll is \resp{2} or \resp{3}. The \term{complement}\marginpar[\raggedright\vspace{0.2mm}
+
+$A^c$\\\footnotesize Complement\\of outcome $A$]{\raggedright\vspace{0.2mm}
+
+$A^c$\\\footnotesize Complement\\of outcome $A$}\index{Ac@$A^c$} of $D$ represents all outcomes in the sample space that are not in $D$, which is denoted by $D^c = \{$\resp{1}, \resp{4}, \resp{5}, \resp{6}$\}$. That is, $D^c$ is the set of all possible outcomes not already included in $D$. Figure~\ref{fig:complementOfD} shows the relationship between $D$, $D^c$, and the sample space $S$. 
+
+\begin{figure}[hht]
+\centering
+\includegraphics[width=0.50\textwidth]{ch_probability_oi_biostat/figures/complementOfD/complementOfD}
+\caption{Event $D=\{$\resp{2}, \resp{3}$\}$ and its complement, $D^c = \{$\resp{1}, \resp{4}, \resp{5}, \resp{6}$\}$. $S$~represents the sample space, which is the set of all possible events.}
+\label{fig:complementOfD}
+\end{figure}
+
+\begin{exercisewrap}
+\begin{nexercise}
+(a) Compute $P(D^c) = P($rolling a \resp{1}, \resp{4}, \resp{5}, or \resp{6}$)$. (b) What is $P(D) + P(D^c)$?\footnotemark{}
+\end{nexercise}
+\end{exercisewrap}
+\footnotetext{(a)~The outcomes are disjoint and each has probability $1/6$, so the total probability is $4/6=2/3$. (b)~We can also see that $P(D)=\frac{1}{6} + \frac{1}{6} = 1/3$. Since $D$ and $D^c$ are disjoint, $P(D) + P(D^c) = 1$.}
+
+\begin{exercisewrap}
+\begin{nexercise}
+Events $A=\{$\resp{1}, \resp{2}$\}$ and $B=\{$\resp{4}, \resp{6}$\}$ are shown in Figure~\ref{fig:disjointEvents} on page~\pageref{fig:disjointEvents}. (a) Write out what $A^c$ and $B^c$ represent. (b)~Compute $P(A^c)$ and $P(B^c)$. (c)~Compute $P(A)+P(A^c)$ and $P(B)+P(B^c)$.\footnotemark{}
+\end{nexercise}
+\end{exercisewrap}
+\footnotetext{Brief solutions: (a)~$A^c=\{$\resp{3}, \resp{4}, \resp{5}, \resp{6}$\}$ and $B^c=\{$\resp{1}, \resp{2}, \resp{3}, \resp{5}$\}$. (b)~Noting that each outcome is disjoint, add the individual outcome probabilities to get $P(A^c)=2/3$ and $P(B^c)=2/3$. (c)~$A$~and~$A^c$ are disjoint, and the same is true of $B$~and~$B^c$. Therefore, $P(A) + P(A^c) = 1$ and $P(B) + P(B^c) = 1$.}
+
+A complement of an event $A$ is constructed to have two very important properties: every possible outcome not in $A$ is in $A^c$, and $A$ and $A^c$ are disjoint. If every possible outcome not in $A$ is in $A^c$, this implies that
+\begin{eqnarray}
+P(A\text{ or }A^c) = 1.
+\label{complementSumTo1}
+\end{eqnarray}
+Then, by Addition Rule for disjoint events,
+\begin{eqnarray}
+P(A\text{ or }A^c) = P(A) + P(A^c).
+\label{complementDisjointEquation}
+\end{eqnarray}
+Combining Equations~(\ref{complementSumTo1}) and~(\ref{complementDisjointEquation}) yields a useful relationship between the probability of an event and its complement.
+
+\begin{onebox}{Complement}
+The complement of event $A$ is denoted $A^c$, and $A^c$ represents all outcomes not in~$A$. $A$ and $A^c$ are mathematically related: \vspace{-2mm}
+\begin{eqnarray}\label{complement}
+P(A) + P(A^c) = 1, \quad\text{i.e.}\quad P(A) = 1-P(A^c)
+\end{eqnarray}
+\end{onebox}
+
+In simple examples, computing either $A$ or $A^c$ is feasible in a few steps. However, as problems grow in complexity, using the relationship between an event and its complement can be a useful strategy.
+
+\begin{exercisewrap}
+\begin{nexercise}
+Let $A$ represent the event of selecting an adult from the US population with height between 180 and 185 cm, as calculated in Example~\ref{probabilityOfBetween180185}. What is $P(A^c)$?\footnotemark{}
+\end{nexercise}
+\end{exercisewrap}
+\footnotetext{$P(A^c) = 1 - P(A) = 1 - 0.1157 = 0.8843$.}
+
+\begin{exercisewrap}
+\begin{nexercise}
+Let $A$ represent the event in which two dice are rolled and their total is less than \resp{12}. (a) What does the event $A^c$ represent? (b) Determine $P(A^c)$ from Figure~\ref{diceProb} on page~\pageref{diceProb}. (c) Determine $P(A)$.\footnotemark{}
+\end{nexercise}
+\end{exercisewrap}
+\footnotetext{(a)~The complement of $A$: when the total is equal to \resp{12}. (b)~$P(A^c) = 1/36$. (c)~Use the probability of the complement from part (b), $P(A^c) = 1/36$, and Equation~(\ref{complement}): $P($less than \resp{12}$) = 1 - P($\resp{12}$) = 1 - 1/36 = 35/36$.}
+
+\begin{exercisewrap}
+\begin{nexercise}
+Consider again the probabilities from Figure~\ref{diceProb} and rolling two dice. Find the following probabilities: (a)~The sum of the dice is \emph{not} \resp{6}. (b)~The sum is at least \resp{4}. That is, determine the probability of the event $B=\{$\resp{4}, \resp{5}, ..., \resp{12}$\}$. (c) The sum is no more than \resp{10}. That is, determine the probability of the event $D=\{$\resp{2}, \resp{3}, ..., \resp{10}$\}$.\footnotemark{}
+\end{nexercise}
+\end{exercisewrap}
+\footnotetext{(a)~First find $P($\resp{6}$)=5/36$, then use the complement: $P($not \resp{6}$) = 1 - P($\resp{6}$) = 31/36$.
+
+(b)~First find  the complement, which requires much less effort: $P($\resp{2} or \resp{3}$)=1/36+2/36=1/12$. Then calculate $P(B) = 1-P(B^c) = 1-1/12 = 11/12$.
+
+(c)~As before, finding the complement is the more direct way to determine $P(D)$. First find $P(D^c) = P($\resp{11} or \resp{12}$)=2/36 + 1/36=1/12$. Then calculate $P(D) = 1 - P(D^c) = 11/12$.}
+
+
+\subsection{Independence}
+\label{probabilityIndependence}
+
+Just as variables and observations can be independent, random phenomena can also be independent. Two processes are \term{independent} if knowing the outcome of one provides no information about the outcome of the other. For instance, flipping a coin and rolling a die are two independent processes -- knowing that the coin lands heads up does not help determine the outcome of the die roll. On the other hand, stock prices usually move up or down together, so they are not independent. 
+
+Example~\ref{probOf2Ones} provides a basic example of two independent processes: rolling two dice. What is the probability that both will be \resp{1}? Suppose one of the dice is blue and the other green. If the outcome of the blue die is a \resp{1}, it provides no information about the outcome of the green die. This question was first encountered in Example~\ref{probOf2Ones}: $1/6^{th}$ of the time the blue die is a \resp{1}, and $1/6^{th}$ of \emph{those} times the green die will also be \resp{1}. This is illustrated in Figure~\ref{fig:indepForRollingTwo1s}. Because the rolls are independent, the probabilities of the corresponding outcomes can be multiplied to obtain the final answer: $(1/6)(1/6)=1/36$. This can be generalized to many independent processes. 
+
+\begin{figure}[hht]
+\centering
+\includegraphics[width=0.5\textwidth]{ch_probability_oi_biostat/figures/indepForRollingTwo1s/indepForRollingTwo1s.png}
+\caption{$1/6^{th}$ of the time, the first roll is a \resp{1}. Then $1/6^{th}$ of \emph{those} times, the second roll will also be a \resp{1}.}
+\label{fig:indepForRollingTwo1s}
+\end{figure}
+
+Complicated probability problems, such as those that arise in biology or medicine, are often solved with the simple ideas used in the dice example. For instance, independence was used implicitly in the second solution to Example~\ref{CFInheritanceExample}, when calculating the probability that two carriers will have an affected child with cystic fibrosis. Genes are typically passed along from the mother and father independently. This allows for the assumption that, on average, half of the offspring who receive a mutated gene copy from the mother will also receive a mutated copy from the father.
+
+
+\begin{exercisewrap}
+\begin{nexercise}\label{threeDice}%
+What if there were also a red die independent of the other two? What is the probability of rolling the three dice and getting all \resp{1}s?\footnotemark{}
+\end{nexercise}
+\end{exercisewrap}
+\footnotetext{The same logic applies from Example~\ref{probOf2Ones}. If $1/36^{th}$ of the time the blue and green dice are both \resp{1}, then $1/6^{th}$ of \emph{those} times the red die will also be \resp{1}, so multiply:
+{\begin{align*}
+P(blue=\text{\small\resp{1} and } green=\text{\small\resp{1} and } red=\text{\small\resp{1}})
+	&= P(blue=\text{\small\resp{1}}) P(green=\text{\small\resp{1}}) P(red=\text{\small\resp{1}}) \\
+	&= (1/6) (1/6) (1/6)
+	= 1/216
+\end{align*}}}
+
+\begin{exercisewrap}
+\begin{nexercise}
+Three US adults are randomly selected. The probability the height of a single adult is between 180 and 185 cm is 0.1157.\footnotemark{}\vspace{-1.5mm}
+	\begin{enumerate}
+		\setlength{\itemsep}{0mm}
+		\item[(a)] What is the probability that all three are between 180 and 185 cm tall?
+		\item[(b)] What is the probability that none are between 180 and 185 cm tall?
+	\end{enumerate}
+\end{nexercise}
+\end{exercisewrap}
+\footnotetext{Brief answers: (a) $0.1157 \times 0.1157 \times 0.1157 = 0.0015$. (b) $(1-0.1157)^3 = 0.692$}
+
+\textD{\newpage}
+
+\begin{onebox}{Multiplication Rule for independent processes}
+\index{Multiplication Rule|textbf}%
+If $A$ and $B$ represent events from two different and independent processes, then the probability that both $A$ and $B$ occur is given by: \vspace{-1.5mm}
+\begin{eqnarray}\label{eqForIndependentEvents}
+P(A \text{ and }B) = P(A)  P(B)
+\end{eqnarray}
+Similarly, if there are $k$ events $A_1$, ..., $A_k$ from $k$ independent processes, then the probability they all occur is\vspace{-1.5mm}
+\begin{eqnarray*}
+P(A_1) P(A_2) \cdots P(A_k)
+\end{eqnarray*}
+\end{onebox}
+
+\begin{examplewrap}
+\begin{nexample}{\textbf{Mandatory drug testing.} Mandatory drug testing in the workplace is common practice for certain professions, such as air traffic controllers and transportation workers.  A false positive in a drug screening test occurs when the test incorrectly indicates that a screened person is an illegal drug user. Suppose a mandatory drug test has a false positive rate of 1.2\% (i.e., has probability  0.012 of indicating that an employee is using illegal drugs when that is not the case).  Given 150 employees who are in reality drug free, what is the probability that at least one will (falsely) test positive? Assume that the outcome of one drug test has no effect on the others.}
+
+First, note that the complement of at least 1 person testing positive is that no one tests positive (i.e., all employees test negative). The multiplication rule can then be used to calculate the probability of 150 negative tests.
+
+   \begin{align*} 
+   P(\text{At least 1 "+"}) &= P(\text{1 or 2 or 3 \ldots or 150 are "+"}) \\
+           &= 1 - P(\text{None are "+"}) \\
+           & = 1 - P(\text{150 are "-"}) \\
+		   &= 1 - P(\text{"-"})^{150} \\
+           &= 1 - (0.988)^{150} = 1 - 0.16 = 0.84.
+    \end{align*}
+ 
+Even when using a test with a small probability of a false positive, the company is more than 80\% likely to incorrectly claim at least one employee is an illegal drug user!
+\end{nexample}
+\end{examplewrap}
+
+\begin{exercisewrap}
+\begin{nexercise}
+Because of the high likelihood of at least one false positive in company wide drug screening programs, an individual with a positive test is almost always re-tested with a different screening test: one that is more expensive than the first, but has a lower false positive probability. Suppose the second test has a false positive rate of 0.8\%.  What is the probability that an employee who is not using illegal drugs will test positive on both tests?\footnotemark{}
+\end{nexercise}
+\end{exercisewrap}
+\footnotetext{The outcomes of the two tests are independent of one another; $P (A\text{ and } B) = P(A) \times P(B)$, where events $A$ and $B$ are the results of the two tests. The probability of a false positive with the first test is 0.012 and 0.008 with the second. Thus, the probability of an employee who is not using illegal drugs testing positive on both tests is $0.012 \times 0.008 = 9.6 \times 10^{-5}$}
+
+\textD{\newpage}
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[height=0.5\textwidth]{ch_probability_oi_biostat/figures/aboInheritance/aboInheritance.png}
+	\caption{Inheritance of ABO blood groups.}
+	\label{fig:aboInheritance}
+\end{figure}
+
+\begin{examplewrap}
+\begin{nexample}{\textbf{ABO blood groups.} There are four different common blood types (A, B, AB, and O), which are determined by the presence of certain antigens located on cell surfaces. Antigens are substances used by the immune system to recognize self versus non-self; if the immune system encounters antigens not normally found on the body's own cells, it will attack the foreign cells. When patients receive blood transfusions, it is critical that the antigens of transfused cells match those of the patient's, or else an immune system response will be triggered.
+		
+The ABO blood group system consists of four different blood groups, which describe whether an individual's red blood cells carry the A antigen, B antigen, both, or neither. The ABO gene has three alleles: ${I}^{A}$, ${I}^{B}$, and \textit{i}. The \textit{i} allele is recessive to both ${I}^{A}$ and ${I}^{B}$, and does not produce antigens; thus, an individual with genotype ${I}^{A}i$ is blood group A and an individual with genotype ${I}^{B}i$ is blood group B. The ${I}^{A}$ and ${I}^{B}$ alleles are codominant, such that individuals of ${I}^{A}$${I}^{B}$ genotype are AB. Individuals homozygous for the \textit{i} allele are known as blood group O, with neither A nor B antigens.
+
+Suppose that both members of a couple have Group AB blood.	
+\begin{enumerate}[a)]
+	\item What is the probability that a child of this couple will have Group A blood?
+	\item What is the probability that they have two children with Group A blood?
+\end{enumerate}}
+\begin{enumerate}[a)]
+	\item An individual with Group AB blood is genotype ${I}^{A}$${I}^{B}$. Two ${I}^{A}$${I}^{B}$ parents can produce children with genotypes ${I}^{A}$${I}^{B}$, ${I}^{A}$${I}^{A}$, or ${I}^{B}$${I}^{B}$. Of these possibilities, only children with genotype ${I}^{A}$${I}^{A}$ have Group A blood. Each parent has 0.5 probability of passing down their ${I}^{A}$ allele. Thus, the probability that a child of this couple will have Group A blood is P(parent 1 passes down ${I}^{A}$ allele) $\times$ P(parent 2 passes down ${I}^{A}$ allele) = $0.5 \times 0.5 = 0.25$.
+	
+	\item Inheritance of alleles is independent between children. Thus, the probability of two children having Group A blood equals P(child 1 has Group A blood) $\times$ P(child 2 has group A blood). The probability of a child of this couple having Group A blood was previously calculated as 0.25. The answer is given by $0.25 \times 0.25 = 0.0625$.
+\end{enumerate}
+\end{nexample}
+\end{examplewrap}
+
+The previous examples in this section have used independence to solve probability problems. The definition of independence can also be used to check whether two events are independent -- two events $A$ and $B$ are independent if they satisfy Equation~\eqref{eqForIndependentEvents}.
+
+\begin{examplewrap}
+\begin{nexample}{Is the event of drawing a heart from a deck of cards independent of drawing an ace?}
+The probability the card is a heart is $1/4$ ($13/52=1/4$) and the probability that it is an ace is $1/13$ ($4/52=1/13$). The probability that the card is the ace of hearts (\resp{A}${\color{redcards}\heartsuit}$) is $1/52$. Check whether Equation~\ref{eqForIndependentEvents} is satisfied:
+
+\begin{align*}
+P({\color{redcards}\heartsuit}) P(\text{\resp{A}}) = \left(\frac{1}{4} \right) \left( \frac{1}{13} \right) = \frac{1}{52} 
+= P({\color{redcards}\heartsuit}\text{ and \resp{A}})
+\end{align*}
+Since the equation holds, the event that the card is a heart and the event that the card is an ace are independent events.
+\end{nexample}
+\end{examplewrap}
+
+\begin{examplewrap}
+\begin{nexample}
+ {In the general population, about 15\% of adults between 25 and 40  years of age are hypertensive.  Suppose that among males of this age, hypertension occurs about 18\% of the time.  Is hypertension independent of sex?}\label{hypertensionIndEx}%
+
+Assume that the population is 50\% male, 50\% female; it is given in the problem that hypertension occurs about 15\% of the time in adults between ages 25 and 40. 
+
+\[P(\text{hypertension}) \times P(\text{male}) = (0.15)(0.50) = 0.075 \neq 0.18\] 
+
+Equation~\ref{eqForIndependentEvents} is not satisfied, therefore hypertension is not independent of sex. In other words, knowing whether an individual is male or female is informative as to whether they are hypertensive. If hypertension and sex were independent, then we would expect hypertension to occur at an equal rate in males as in females.
+\end{nexample}
+\end{examplewrap}
+
+
+%_________________
+\section{Conditional probability}
+\label{conditionalProbabilitySection}
+
+While it is difficult to obtain precise estimates, the US CDC estimated that in 2012, approximately 29.1 million Americans had type 2 diabetes -- about 9.3\% of the population.\footnote{21 million of these cases are diagnosed, while the CDC predicts that 8.1 million cases are undiagnosed; that is, approximately 8.1 million people are living with diabetes, but they (and their physicians) are unaware that they have the condition.} A health care practitioner seeing a new patient would expect a 9.3\% chance that the patient might have diabetes. 
+
+However, this is only the case if nothing is known about the patient. The prevalence of type 2 diabetes varies with age. Between the ages of 20 and 44, only about 4\% of the population have diabetes, but almost 27\% of people age 65 and older have the disease. Knowing the age of a patient provides information about the chance of diabetes; age and diabetes status are not independent. While the probability of diabetes in a randomly chosen member of the population is 0.093, the \textit{conditional} probability of diabetes in a person known to be 65 or older is 0.27.
+
+Conditional probability is used to  characterize how the probability of an outcome varies with the knowledge of another factor or condition, and is closely related to the concepts of marginal and joint probabilities.
+
+\subsection{Marginal and joint probabilities}
+\label{marginalAndJointProbabilities}
+
+\index{marginal probability|(}
+\index{joint probability|(}
+
+
+Figures~\ref{DiabetesAgeContTable} and \ref{DiabetesAgeProbTable} provide additional information about the relationship between diabetes prevalence and age.\footnote{Because the CDC provides only approximate numbers for diabetes prevalence, the numbers in the table are approximations of actual population counts.} Figure~\ref{DiabetesAgeContTable} is a contingency table for the entire US population in 2012; the values in the table are in thousands (to make the table more readable).  
+
+% latex table generated in R 3.0.1 by xtable 1.7-1 package
+% Thu Sep 10 11:36:48 2015
+\begin{figure}[ht]
+	\centering
+	\begin{tabular}{rrrr}
+		\hline
+		& Diabetes & No Diabetes & Sum \\ 
+		\hline
+		Less than 20 years & 200 & 86,664 & 86,864 \\ 
+		20 to 44 years & 4,300 & 98,724 & 103,024 \\ 
+		45 to 64 years & 13,400 & 68,526 & 81,926 \\ 
+		Greater than 64 years & 11,200 & 30,306 & 41,506 \\ 
+		Sum & 29,100 & 284,220 & 313,320 \\ 
+		\hline
+	\end{tabular}
+	\caption{Contingency table showing type 2 diabetes status and age group, in thousands}
+	\label{DiabetesAgeContTable}
+\end{figure}
+% can xtable insert comma separators automatically?  If not, I will add them by hand. JV: apparently R can do this, but I didn't manage to get it working http://stackoverflow.com/questions/1581232/adding-commas-into-number-for-output
+
+In the first row, for instance, Figure~\ref{DiabetesAgeContTable} shows that in the entire population of approximately 313,320,000 people, approximately 200,000 individuals were in the less than 20 years age group and diagnosed with diabetes -- about 0.1\%. The table also indicates that among the approximately 86,864,000 individuals less than 20 years of age, only 200,000 suffered from type 2 diabetes, approximately 0.2\%.  The distinction between these two statements is small but important. The first provides information about the size of the group with type 2 diabetes population that is less than 20 years of age, relative to the entire population. In contrast, the second statement is about the size of the diabetes population within the less than 20 years of age group, relative to the size of that age group.
+
+\textD{\newpage}
+
+\begin{exercisewrap}
+\begin{nexercise}\label{DiabetesAge20to44}%
+What fraction of the US population are 45 to 64 years of age and have diabetes?  What fraction of the population age 45 to 64 have diabetes?\footnotemark{}
+\end{nexercise}
+\end{exercisewrap}
+\footnotetext{The first value is given by the intersection of "45 - 64 years of age" and "diabetes", divided by the total population number: $13,400,000/313,320,000 = 0.043$. The second value is given by dividing 13,400,000 by 81,926,000, the number of individuals in that age group: $13,400,000/81,926,000 = 0.164$.}
+
+The entries in Figure~\ref{DiabetesAgeProbTable} show the proportions of the population in each of the eight categories defined by diabetes status and age, obtained by dividing each value in the cells of Figure~\ref{DiabetesAgeContTable} by the total population size.
+
+%  xtable(diabetes.age.table.thousands, digits = 0)
+%  this table uses census counts; still not perfect, but closer
+
+% latex table generated in R 3.0.1 by xtable 1.7-1 package
+% Thu Sep 10 11:44:44 2015
+\begin{figure}[ht]
+	\centering
+	\begin{tabular}{rrrr}
+		\hline
+		& Diabetes & No Diabetes & Sum \\ 
+		\hline
+		Less than 20 years & 0.001 & 0.277 & 0.277 \\ 
+		20 to 44 years & 0.014 & 0.315 & 0.329 \\ 
+		45 to 64 years & 0.043 & 0.219 & 0.261 \\ 
+		Greater than 64 years & 0.036 & 0.097 & 0.132 \\ 
+		Sum & 0.093 & 0.907 & 1.000 \\ 
+		\hline
+	\end{tabular}
+	\caption{Probability table summarizing diabetes status and age group}
+	\label{DiabetesAgeProbTable}
+\end{figure}
+%   xtable(diabetes.age.table.prop, digits = 3)
+
+If these proportions are interpreted as probabilities for randomly chosen individuals from the population, the value 0.014 in the first column of the second row implies that the probability of selecting someone at random who has diabetes and whose age is between 20 and 44 is 0.014, or 1.4\%. The entries in the eight main table cells (i.e., excluding the values in the margins) are \term{joint probabilities}, which specify the probability of two events happening at the same time -- in this case, diabetes and a particular age group. In probability notation, this joint probability can be expressed as $0.014 = P(\text{diabetes and age 20 to 44})$.\footnote{Alternatively, this is commonly written as as $P(\text{diabetes, age 20 to 44})$, with a comma replacing ``and''.}
+
+The values in the last row and column of the table are the sums of the corresponding rows or columns. The sum of the of the probabilities of the disjoint events (diabetes, age 20 to 44) and (no diabetes, age 20 to 44), 0.329, is the probability of being in the age group 20 to 44. The row and column sums are \term{marginal probabilities}; they are probabilities about only one type of event, such as age. For example, the sum of the first column (0.093) is the marginal probability of a member of the population having diabetes.
+
+\begin{onebox}{Marginal and joint probabilities}
+A \emph{\hiddenterm{marginal probability}} is a probability only related to a single event or process, such as $P(A)$. A \emph{\hiddenterm{joint probability}} is the probability that two or more events or processes occur jointly, such as $P(A \textrm{ and } B)$.
+\end{onebox}
+
+\begin{exercisewrap}
+\begin{nexercise}\label{MarginalJointProbDiabetes}%
+What is the interpretation of the value 0.907 in the last row of the table?  And of the value 0.097 directly above it?\footnotemark{}
+\end{nexercise}
+\end{exercisewrap}
+\footnotetext{The value 0.907 in the last row indicates the total proportion of individuals in the population who do not have diabetes. The value 0.097 indicates the joint probability of not having diabetes and being in the greater than 64 years age group.}
+
+
+\textD{\newpage}
+
+
+\subsection{Defining conditional probability}
+
+\index{conditional probability|(}
+
+The probability that a randomly selected individual from the US has diabetes is 0.093, the sum of the first column in Figure~\ref{DiabetesAgeProbTable}. How does that probability change if it is known that the individual's age is 64 or greater?  
+
+The conditional probability can be calculated from Figure~\ref{DiabetesAgeContTable}, which shows that 11,200,000 of the 41,506,000 people in that age group have diabetes, so the likelihood that someone from that age group has diabetes is:
+\[  
+\frac{11,200,000}{41,506,000} = 0.27,
+\]
+or 27\%. The additional information about a patient's age allows for a more accurate estimate of the probability of diabetes.
+
+Similarly, the conditional probability can be calculated from the joint and marginal proportions in Figure~\ref{DiabetesAgeProbTable}. Consider the main difference between the conditional probability versus the joint and marginal probabilities. Both the joint probability and marginal probabilities are probabilities relative to the entire population. However, the conditional probability is the probability of having diabetes, \textit{relative only to} the segment of the population greater than the age of 64.
+
+Intuitively, the denominator in the calculation of a conditional probability must account for the fact that only a segment of the population is being considered, rather than the entire population. The conditional probability of diabetes given age 64 or older is simply the joint probability of having diabetes and being greater than 64 years of age divided by the marginal probability of being in that age group:
+\begin{align*}
+\frac{\text{prop. of population with diabetes, age 64 or greater}}{\text{prop. of population greater than age 64}} &= \frac{11,200,000/313,320,000}{41,506,000/313,320,000}\\
+&= \frac{0.036}{0.132} \\
+&= 0.270.
+\end{align*}
+This leads to the mathematical definition of conditional probability.
+
+\begin{onebox}{Conditional probability}
+The conditional probability of an event $A$ given an event or condition $B$ is:
+\begin{align}
+P(A | B) = \frac{P(A\text{ and }B)}{P(B)}
+\label{condProbEq}
+\end{align}
+\end{onebox}
+
+\begin{exercisewrap}
+\begin{nexercise}
+Calculate the probability that a randomly selected person has diabetes, given that their age is between 45 and 64.\footnotemark{}
+\end{nexercise}
+\end{exercisewrap}
+\footnotetext{Let $A$ be the event a person has diabetes, and $B$ the event that their age is between 45 and 64. Use the information in Figure~\ref{DiabetesAgeProbTable} to calculate $P(A|B)$. $P(A|B) = \frac{P(A\text{ and }B)}{P(B)} = \frac{0.043}{0.261} = 0.165.$}\textD{\vspace{-2mm}}
+
+\textD{\newpage}
+
+\begin{exercisewrap}
+\begin{nexercise}
+Calculate the probability that a randomly selected person is between 45 and 64 years old, given that the person has diabetes.\footnotemark{}
+\end{nexercise}
+\end{exercisewrap}
+\footnotetext{Again, let $A$ be the event a person has diabetes, and $B$ the event that their age is between 45 and 64. Find $P(B|A)$. $P(B|A) = \frac{P(A\text{ and }B)}{P(A)} = \frac{0.043}{0.093} = 0.462.$}\textD{\vspace{-2mm}}
+
+Conditional probabilities have similar properties to regular (unconditional) probabilities.
+
+\begin{onebox}{Sum of conditional probabilities}
+Let $A_1$, ..., $A_k$ represent all the disjoint outcomes for a variable or process. Then if $B$ is an event, possibly for another variable or process, we have: \vspace{-1mm}
+\begin{align*}
+P(A_1|B)+\cdots+P(A_k|B) = 1
+\end{align*}\vspace{-5.5mm} \par
+The rule for complements also holds when an event and its complement are conditioned on the same information: \vspace{-1.5mm}
+\begin{align*}
+P(A | B) = 1 - P(A^c | B)
+\end{align*}
+\end{onebox}
+
+\begin{exercisewrap}
+\begin{nexercise} 
+Calculate the probability a randomly selected person is older than 20 years of age, given that the person has diabetes.\footnotemark{}
+\end{nexercise}
+\end{exercisewrap}
+\footnotetext{Let $A$ be the event that a person has diabetes, and $B$ be the event that their age is less than 20 years. The desired probability is $P(B^c|A) = 1 - P(B|A) = 1 - \frac{0.001}{0.093} = 0.989$.}
+
+
+\textD{\newpage}
+
+
+\subsection{General multiplication rule}
+
+Section~\ref{probabilityIndependence} introduced the Multiplication Rule for independent processes. Here, the \term{General Multiplication Rule} is introduced for events that might not be independent.
+
+\begin{onebox}{General Multiplication Rule}
+If $A$ and $B$ represent two outcomes or events, then \vspace{-1.5mm}
+\begin{eqnarray*}
+P(A\text{ and }B) = P(A | B) P(B)
+\end{eqnarray*} \vspace{-6.5mm} \par
+It is useful to think of $A$ as the outcome of interest and $B$ as the condition.
+\end{onebox}
+
+This General Multiplication Rule is simply a rearrangement of the definition for conditional probability in Equation~(\ref{condProbEq}) on page~\pageref{condProbEq}.
+
+\begin{examplewrap}
+\begin{nexample}{Suppose that among male adults between 25 and 40 years of age, hypertension occurs about 18\% of the time. Assume that the population is 50\% male, 50\% female. What is the probability of randomly selecting a male with hypertension from the population of individuals 25-40 years of age?} 
+Let $A$ be the event that a person has hypertension, and $B$ the event that they are a male adult between 25 and 40 years of age. $P(A|B)$, the probability of hypertension given male sex, is 0.18. Thus, $P(A \text{ and } B) = (0.18)(0.50) = 0.09$.
+\end{nexample}
+\end{examplewrap}
+
+
+\subsection{Independence and conditional probability}
+
+If two events are independent, knowing the outcome of one should provide no information about the other.
+
+\begin{examplewrap}
+\begin{nexample}{Let $X$ and $Y$ represent the outcomes of rolling two dice. Use the formula for conditional probability to compute $P(Y =$ \resp{1}$\ |\ X = $ \resp{1}$)$. What is $P(Y=1)$? Is this different from $P(Y =$ \resp{1}$\ |\ X = $ \resp{1}$)$?}\label{condProbOfRollingA1AfterOne1}%
+\[\frac{P(Y = \text{ \resp{1} and }X=\text{ \resp{1}})}{P(X=\text{ \resp{1}})} = \frac{1/36}{1/6} = 1/6\]
+
+The probability $P(Y=1) = 1/6$ is the same as the conditional probability. The probability that $Y=1$ was unchanged by knowledge about $X$, since the events $X$ and $Y$ are independent.
+\end{nexample}
+\end{examplewrap}
+
+\textD{\newpage}
+
+Using the Multiplication Rule for independent events allows for a mathematical illustration of why the condition information has no influence in Example~\ref{condProbOfRollingA1AfterOne1}:
+
+\begin{eqnarray*}
+P(Y=\text{\resp{1}}\ |\ X=\text{\resp{1}})
+	&=& \frac{P(Y=\text{\resp{1} and }X=\text{\resp{1}})}{P(X=\text{\resp{1}})} \\
+	&=& \frac{P(Y=\text{\resp{1}}) \color{oiGB}P(X=\text{\resp{1}})}{\color{oiGB}P(X=\text{\resp{1}})} \\
+	&=& P(Y=\text{\resp{1}}) \\
+\end{eqnarray*}
+
+This is a specific instance of the more general result that if two events $A$ and $B$ are independent, $P(A |B) = P(A)$ as long as $P(B) > 0$:
+\begin{eqnarray*}
+	P(A | B) &= \dfrac{P(A \text{ and } B)}{P(B)} \\
+	     &= \dfrac{P(A) P(B)}{P(B)} \\
+		 &= P(A)
+\end{eqnarray*} 
+
+\begin{exercisewrap}
+\begin{nexercise}
+In the US population, about 45\% of people are blood group O. Suppose that 40\% of Asian people living in the US are blood group O, and that the Asian population in the United States is approximately 4\%. Do these data suggest that blood group is independent of ethnicity?\footnotemark{}
+\end{nexercise}
+\end{exercisewrap}
+\footnotetext{Let $A$ represent blood group O, and $B$ represent Asian ethnicity. Since $P(A|B) = 0.40$ does not equal $P(A) = 0.45$, the two events are not independent. Blood group does not seem to be independent of ethnicity.}
+
+
+\subsection{Bayes' Theorem}
+\label{bayesTheoremSubsection}
+
+\index{Bayes' Theorem|(}
+
+This chapter began with a straightforward question -- what are the chances that a woman with an abnormal (i.e., positive) mammogram has breast cancer?  For a clinician, this question can be rephrased as the conditional probability  that a woman has breast cancer, given that her mammogram is abnormal. This conditional probability is called the \term{positive predictive value} (PPV) of a mammogram. More concisely, if $A = \text{\{a woman has breast cancer\}}$, and $B = \text{\{a mammogram is  positive\}}$, the PPV of a mammogram is $P(A|B)$.
+
+The characteristics of a mammogram (and other diagnostic tests) are given with the reverse conditional probabilities\textemdash  the probability that the mammogram correctly returns a positive result if a woman has breast cancer, as well as the probability that the mammogram correctly returns a negative result if a woman does not have breast cancer. These are the probabilities $P(B|A)$ and $P(B^c|A^c)$, respectively.
+
+Given the probabilities $P(B|A)$ and $P(B^c|A^c)$, as well as the marginal probability of disease $P(A)$, how can the positive predictive value $P(A|B)$ be calculated?
+
+There are several possible strategies for approaching this type of problem\textemdash 1) constructing tree diagrams, 2) using a purely algebraic approach using Bayes' Theorem, and 3) creating contingency tables based on calculating conditional probabilities from a large, hypothetical population.
+
+\textD{\newpage}
+
+\begin{examplewrap}
+\begin{nexample}{In Canada, about 0.35\% of women over 40 will develop breast cancer in any given year. A common screening test for cancer is the mammogram, but it is not perfect. In about 11\% of patients with breast cancer, the test gives a \term{false negative}: it indicates a woman does not have breast cancer when she does have breast cancer. Similarly, the test gives a \term{false positive} in 7\% of patients who do not have breast cancer: it indicates these patients have breast cancer when they actually do not.\footnotemark{}\label{probabilityOfBreastCancerGivenPositiveTestExample}%
+If a randomly selected woman over 40 is tested for breast cancer using a mammogram and the test is positive -- that is, the test suggests the woman has cancer -- what is the probability she has breast cancer?}
+Read on in the text for three solutions to this example.
+\end{nexample}
+\end{examplewrap}
+\footnotetext{The probabilities reported here were obtained using studies reported at \oiRedirect{textbook-breastCancerDotOrg_20090831b}{www.breastcancer.org} and \oiRedirect{textbook-ncbi_nih_breast_cancer}{www.ncbi.nlm.nih.gov/pmc/articles/PMC1173421}.}
+
+
+\subsubsection{Example~\ref{probabilityOfBreastCancerGivenPositiveTestExample} Solution 1. Tree Diagram.}
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.93\textwidth]{ch_probability_oi_biostat/figures/BreastCancerTreeDiagram/BreastCancerTreeDiagram}
+	\caption{A tree diagram for breast cancer screening.}
+	\label{BreastCancerTreeDiagram}
+\end{figure}
+
+A \term{tree diagram} is a tool to organize outcomes and probabilities around the structure of data, and is especially useful when two or more processes occur in a sequence, with each process  conditioned on its predecessors. 
+
+In Figure~\ref{BreastCancerTreeDiagram}, the primary branches split the population by cancer status, and show the marginal probabilities 0.0035 and 0.9965 of having cancer or not, respectively. The secondary branches are conditioned on the primary branch and show conditional probabilities; for example, the top branch is the probability that a mammogram is positive given that an individual has cancer. The problem provides enough information to compute the probability of testing positive if breast cancer is present, since this probability is the complement of the probability of a false negative: $1 - 0.11 = 0.89$.
+
+Joint probabilities can be constructed at the end of each branch by multiplying the numbers from right to left, such as the probability that a woman tests positive given that she has breast cancer (abbreviated as BC):
+
+\begin{align*}
+P(\text{BC and mammogram$^+$}) &= P(\text{mammogram$^+$ } |\ \text{BC}) \times  P(\text{BC}) \\
+	&= (0.89) (0.0035) = 0.00312
+\end{align*}
+
+\textD{\newpage}
+
+Using the tree diagram allows for the information in the problem to be mapped out in a way that makes it easier to calculate the desired conditional probability. In this case, the diagram makes it clear that there are two scenarios in which someone can test positive: either testing positive when having breast cancer or by testing positive in the absence of breast cancer. To find the probability that a woman has breast cancer given that she tests positive, apply the conditional probability formula: divide the probability of testing positive when having breast cancer by the probability of testing positive.
+
+The probability of a positive test result is the sum of the two corresponding scenarios:
+\begin{align*}
+P(\text{mammogram$^+$}) =&  P(\text{mammogram$^+$ and has BC}) + P(\text{mammogram$^+$ and no BC}) \\
+=&[P(\text{mammogram$^+$ } | \text{ has BC}) \times P(\text{has BC})] + [P(\text{mammogram$^+$ } | \text{ no BC}) \times P(\text{no BC})] \\
+=& (0.0035)(0.89) + (0.9965)(0.07) = 0.07288
+\end{align*}
+
+Thus, if the mammogram screening is positive for a patient, the probability that the patient has breast cancer is given by: 
+\begin{align*}
+P(\text{has BC } | \text{ mammogram$^+$})
+	&= \frac{P(\text{has BC and mammogram$^+$})}{P(\text{mammogram$^+$})}\\
+	&= \frac{0.00312}{0.07288} \approx 0.0428
+\end{align*}
+
+Even with a positive mammogram, there is still only a~4\%~chance of breast cancer! It may seem surprising that even when the false negative and false positive probabilities of the test are small (0.11 and 0.07, respectively), the conditional probability of disease given a positive test could also be so small. In this population, the probability that a woman does not have breast cancer is high (1 - 0.0035 = 0.9965), which results in a relatively high number of false positives in comparison to true positives.
+
+Calculating probabilities for diagnostic tests is done so often in medicine that the topic has some specialized terminology. The \term{sensitivity} of a test is the probability of a positive test result when disease is present, such as a positive mammogram when a patient has breast cancer. The \term{specificity} of a test is the probability of a negative test result when disease is absent.\footnote{The specificity and sensitivity are, respectively, the probability of a true positive test result and the probability of a true negative test result.} The probability of disease in a population is referred to as the \term{prevalence}. With specificity and sensitivity information for a particular test, along with disease prevalence, the \term{positive predictive value} (PPV) can be calculated: the probability that disease is present when a test result is positive. Similarly, the \term{negative predictive value} is the probability that disease is absent when test results are negative. These terms are used for nearly all diagnostic tests used to screen for diseases.
+
+\begin{exercisewrap}
+\begin{nexercise}
+	Identify the prevalence, sensitivity, specificity, and PPV from the scenario in Example~\ref{probabilityOfBreastCancerGivenPositiveTestExample}.\footnotemark{}
+\end{nexercise}
+\end{exercisewrap}
+\footnotetext{The prevalence of breast cancer is 0.0035. The sensitivity is the probability of a positive test result when disease is present, which is the complement of a false negative: $1 - 0.11 = 0.89$. The specificity is the probability of a negative test result when disease is absent, which is the complement of a false positive: $1 - 0.07 = 0.93$. The PPV is 0.04, the probability of breast cancer given a positive mammogram.}
+
+
+\textD{\newpage}
+
+
+\subsubsection{Example~\ref{probabilityOfBreastCancerGivenPositiveTestExample} Solution 2. Bayes' Rule.}
+
+The process used to solve the problem via the tree diagram can be condensed into a single algebraic expression by substituting the original probability expressions into the numerator and denominator:
+
+\begin{small}
+\begin{align*}
+P(\text{has BC } | \text{ mammogram$^+$})
+&= \frac{P(\text{has BC and mammogram$^+$})}{P(\text{mammogram$^+$})} \\
+&= \frac{P(\text{mammogram$^+$ } | \text{ has BC}) \times P(\text{has BC})}
+{[P(\text{mammogram$^+$ } | \text{ has BC}) \times P(\text{has BC})] + [P(\text{mammogram$^+$ } | \text{ no BC}) \times P(\text{no BC})]}
+\end{align*}
+\end{small}
+
+The expression can also be written in terms of diagnostic testing language, where $D = \text{\{has disease\}}$, $D^c = \text{\{does not have disease\}}$, $T^{+} = \text{\{positive test result\}}$, and $T^{-} = \text{\{negative test result\}}$.
+
+\begin{align*}
+P(D|T^{+}) &= \dfrac{P(D \text{ and } T^{+})}{P(T^{+})} \\
+&= \dfrac{P(T^{+}|D) \times P(D)}{[P(T^{+}|D) \times P(D)] + [P(T^{+}|D^c) \times P(D^c)]} \\
+\text{PPV} &= \dfrac{\text{sensitivity } \times \text{ prevalence}}{[\text{sensitivity } \times \text{ prevalence}] + [\text{(1 - specificity) } \times \text{ (1 - prevalence)}]}
+\end{align*}
+
+The generalization of this formula is known as Bayes' Theorem or Bayes' Rule.
+
+\begin{onebox}{Bayes' Theorem}
+Consider the following conditional probability for variable 1 and variable 2:\vspace{-1.5mm}
+\begin{align*}
+P(\text{outcome $A_1$ of variable 1 } | \text{ outcome $B$ of variable 2})
+\end{align*}
+Bayes' Theorem states that this conditional probability can be identified as the following fraction:\vspace{-1.5mm}
+\begin{align}
+\frac{P(B | A_1) P(A_1)}
+	{P(B | A_1) P(A_1) + P(B | A_2) P(A_2) + \cdots + P(B | A_k) P(A_k)}
+	\label{equationOfBayesTheorem}
+\end{align}
+where $A_2$, $A_3$, ..., and $A_k$ represent all other possible outcomes of the first variable.\index{Bayes' Theorem|textbf}
+\end{onebox}
+
+The numerator identifies the probability of getting both $A_1$ and $B$. The denominator is the marginal probability of getting $B$. This bottom component of the fraction describes the adding of probabilities from the different ways to get $B$. 
+
+To apply Bayes' Theorem correctly, there are two preparatory steps:
+\begin{enumerate}
+\setlength{\itemsep}{0mm}
+\item[(1)] First identify the marginal probabilities of each possible outcome of the first variable: $P(A_1)$, $P(A_2)$, ..., $P(A_k)$.
+\item[(2)] Then identify the probability of the outcome $B$, conditioned on each possible scenario for the first variable: $P(B | A_1)$, $P(B | A_2)$, ..., $P(B | A_k)$.
+\end{enumerate}
+Once these probabilities are identified, they can be applied directly within the formula.
+
+
+\textD{\newpage}
+
+
+\subsubsection{Example~\ref{probabilityOfBreastCancerGivenPositiveTestExample} Solution 3. Contingency Table.}
+
+The positive predictive value (PPV) of a diagnostic test can be calculated by constructing a two-way contingency table for a large, hypothetical population and calculating conditional probabilities by conditioning on rows or columns. Using a large enough hypothetical population results in an empirical estimate of PPV that is very close to the exact value obtained via using the previously discussed approaches.
+
+Begin by constructing an empty $2 \times 2$ table, with the possible outcomes of the diagnostic test as the rows, and the possible disease statuses as the columns (Figure~\ref{tableMammogramSetup}). Include cells for the row and column sums.
+
+Choose a large number $N$, for the hypothetical population size. Typically, $N$ of 100,000 is sufficient for an accurate estimate. 
+
+\begin{figure}[ht]
+	\centering
+	\begin{tabular}{rrrr}
+		\hline
+		& Breast Cancer Present & Breast Cancer Absent & Sum \\ 
+		\hline
+		Mammogram Positive & -- & -- & -- \\ 
+		Mammogram Negative & -- & -- & -- \\ 
+		Sum & -- & -- & 100,000 \\ 
+		\hline
+	\end{tabular}
+	\caption{A $2 \times 2$ table for the mammogram example, with hypothetical population size $N$ of 100,000.}
+	\label{tableMammogramSetup}
+\end{figure}
+
+Continue populating the table, using the provided information about the prevalence of breast cancer in this population (0.35\%), the chance of a false negative mammogram (11\%), and the chance of a false positive (7\%):
+
+\begin{enumerate}
+	\item Calculate the two column totals (the number of women with and without breast cancer) from $P(\text{BC})$, the disease prevalence:
+	\[N \times P(\text{BC}) = 100,000 \times .0035 = 350 \text{ women with BC}\]
+	\[N \times [1 - P(\text{BC})] = 100,000 \times [1 - .0035] = 99,650 \text{ women without BC}\]
+	
+	Alternatively, the number of women without breast cancer can be calculated by subtracting the number of women with breast cancer from $N$.
+	
+	\item Calculate the two numbers in the first column: the number of women who have breast cancer and tested either negative (false negative) or positive (true positive).
+	\[\text{ women with BC} \times P(\text{false "-"}) = 350 \times .11 = 38.5 \text{ false "-" results}\]
+	\[\text{ women with BC} \times [1 - P(\text{true "+"})] = 350 \times [1 - .11] = 311.5 \text{ true "+" results}\]
+	
+	\item Calculate the two numbers in the second column: the number of women who do not have breast cancer and tested either positive (false positive) or negative (true negative). 
+	\[\text{ women without BC} \times P(\text{false "+"}) = 99,650 \times .07 = 6,975.5 \text{ false "+" results}\]
+	\[\text{ women without BC} \times [1 - P(\text{true "-"})] = 99,650 \times [1 - .07] = 92,674.5 \text{ true "-" results}\]
+	
+	\item Complete the table by calculating the two row totals: the number of positive and negative mammograms out of 100,000.
+	\[(\text{true "+" results}) + (\text{false "+" results}) = 311.5 + 6,975.5 = 7,287 \text{ "+" mammograms}\]
+	\[(\text{true "-" results}) + (\text{false "-" results}) = 38.5 + 92,674.5 = 92,713 \text{ "-" mammograms}\]
+	
+	\item Finally, calculate the PPV of the mammogram by using the ratio of the number of true positives to the total number of positive mammograms. This estimate is more than accurate enough, with the calculated value differing only in the third decimal place from the exact calculation, 
+	
+	\[\dfrac{\text{ true "+" results}}{\text{ "+" mammograms}} = \dfrac{311.5}{7,287} = 0.0427 \]
+	
+\end{enumerate}
+
+\begin{figure}[ht]
+	\centering
+	\begin{tabular}{rrrr}
+		\hline
+		& Breast Cancer Present & Breast Cancer Absent & Sum \\ 
+		\hline
+		Mammogram Positive & 311.5 & 6,975.5 & 7,287 \\ 
+		Mammogram Negative &  38.5 & 92,674.5 & 92,713 \\ 
+		Sum & 350 & 99,650 & 100,000 \\ 
+		\hline
+	\end{tabular}
+	\caption{Completed table for the mammogram example. The table shows again why the PPV of the mammogram is low: almost 7,300 women will have a positive mammogram result in this hypothetical population, but only \textasciitilde312 of those women actually have breast cancer.}
+	\label{tableMammogramExample}
+\end{figure}
+
+\begin{exercisewrap}
+\begin{nexercise}
+Some congenital disorders are caused by errors that occur during cell division, resulting in the presence of additional chromosome copies. Trisomy 21 occurs in approximately 1 out of 800 births. Cell-free fetal DNA (cfDNA) testing is one commonly used way to screen fetuses for trisomy 21. The test sensitivity is 0.98 and the specificity is 0.995. Calculate the PPV and NPV of the test.\footnotemark{}
+\end{nexercise}
+\end{exercisewrap}
+\footnotetext{PPV = $\dfrac{P(T^{+}|D) \times P(D)}{[P(T^{+}|D) \times P(D)] + [P(T^{+}|D^c) \times P(D^c)]} = \dfrac{(0.98)(1/800)}{(0.98)(1/800) + (1 - 0.995)(799/800)} = 0.197$ \\ NPV = $\dfrac{P(T^{-}|D^c) \times P(D^c)}{[P(T^{-}|D) \times P(D)] + [P(T^{-}|D^c) \times P(D^c)]} = \dfrac{(0.995)(799/800)}{(1-0.98)(1/800) + (0.995)(799/800)} = 0.999975$}
+
+\index{Bayes' Theorem|)}
+\index{tree diagram|)}
+\index{conditional probability|)}
+\index{probability|)}
+
+
+%____________
+\section[Extended example]{Extended example: cat genetics}
+\label{sectionExtendedExampleCatGenetics}
+
+So far, the principles of probability have only been illustrated with short examples. In a more complex setting, it can be surprisingly difficult to accurately translate a problem scenario into the language of probability. This section demonstrates how the rules of probability can be applied to work through a relatively sophisticated conditioning problem.
+
+\subsubsection{Problem statement}
+
+The gene that controls white coat color in cats, $KIT$, is known to be responsible for multiple phenotypes such as deafness and blue eye color. A dominant allele $W$ at one location in the gene has complete penetrance for white coat color; all cats with the $W$ allele have white coats. There is incomplete penetrance for blue eyes and deafness; not all white cats will have blue eyes and not all white cats will be deaf. However, deafness and blue eye color are strongly linked, such that white cats with blue eyes are much more likely to be deaf. The variation in penetrance for eye color and deafness may be due to other genes as well as environmental factors.
+
+Suppose that 30\% of white cats have one blue eye, while 10\% of white cats have two blue eyes. About 73\% of white cats with two blue eyes are deaf and 40\% of white cats with one blue eye are deaf. Only 19\% of white cats with other eye colors are deaf.
+
+\begin{enumerate}[a)]
+	\item Calculate the prevalence of deafness among white cats.
+	
+	\item Given that a white cat is deaf, what is the probability that it has two blue eyes?
+	
+	\item Suppose that deaf, white cats have an increased chance of being blind, but that the prevalence of blindness differs according to eye color. While deaf, white cats with two blue eyes or two non-blue eyes have probability 0.20 of developing blindness, deaf and white cats with one blue eye have probability 0.40 of developing blindness. White cats that are not deaf have probability 0.10 of developing blindness, regardless of their eye color.
+	
+	\begin{enumerate}[i.]
+		\item What is the prevalence of blindness among deaf, white cats?
+		
+		\item What is the prevalence of blindness among white cats?
+		
+		\item Given that a cat is white and blind, what is the probability that it has two blue eyes?
+	\end{enumerate}
+\end{enumerate}
+
+\subsubsection{Defining notation}
+
+Before beginning any calculations, it is essential to clearly define any notation that will be used. For this problem, there are several events of interest: deafness, number of blue eyes (either 0, 1, or 2), and blindness. 
+
+\begin{itemize}
+	\item Let $D$ represent the event that a white cat is deaf.
+	\item Let $B_0$ = \{zero blue eyes\}, $B_1$ = \{one blue eye\}, and $B_2$ = \{two blue eyes\}.
+	\item Let $L$ represent the event that a white cat is blind.
+\end{itemize}
+
+Note that since all cats mentioned in the problem are white, it is not necessary to define whiteness as an event; white cats represent the sample space.
+
+\subsubsection{Part a) Deafness}
+
+The prevalence of deafness among white cats is the proportion of white cats that are deaf; i.e., the probability of deafness among white cats. In the notation of probability, this question asks for the value of $P(D)$.
+
+\begin{examplewrap}
+\begin{nexample}{The following information has been given in the problem. Re-write the information using the notation defined earlier.
+	\begin{quote}
+		Suppose that 30\% of white cats have one blue eye, while 10\% of white cats have two blue eyes. About 73\% of white cats with two blue eyes are deaf and 40\% of white cats with one blue eye are deaf. Only 19\% of white cats with other eye colors are deaf.
+	\end{quote}}
+
+The first sentence provides information about the prevalence of white cats with one blue eye and white cats with two blue eyes: $P(B_1) = 0.30$ and $P(B_2) = 0.10$. The only other possible eye color combination is zero blue eyes (i.e., two non-blue eyes); i.e., since $P(B_0) + P(B_1) + P(B_2) = 1$, $P(B_0) = 1  - P(B_1) - P(B_2) = 0.60$. 60\% of white cats have two non-blue eyes.
+
+While it is not difficult to recognize that the second and third sentences provide information about deafness in relation to eye color, it can be easy to miss that these probabilities are conditional probabilities. A close reading should focus on the language\textemdash "About 73\% \textit{of} white cats with two blue eyes are deaf...": i.e., out of the white cats that have two blue eyes, 73\% are deaf. Thus, these are probabilities of deafness conditioned on eye color. From these sentences, $P(D|B_2) = 0.73$, $P(D|B_1) = 0.40$, and $P(D|B_0) = 0.19$. 
+\end{nexample}
+\end{examplewrap}
+
+Consider that there are three possible ways to partition the event $D$, that a white cat is deaf: a cat could be deaf and have two blue eyes, be deaf and have one blue eye (and one non-blue eye), or be deaf and have two non-blue eyes. Thus, by the addition rule of disjoint outcomes: 
+\[P(D) = P(D \textrm{ and } B_2 ) + P(D \textrm{ and } B_1 ) + P(D \textrm{ and } B_0 )\]
+
+Although the joint probabilities of being deaf and having particular eye colors are not given in the problem, these can be solved for based on the given information. The definition of conditional probability $P(A|B)$ relates the joint probability $P(A \textrm{ and } B)$ with the marginal probability $P(B)$.\footnote{This rearrangement of the definition of conditional probability, $P(A \textrm{ and } B) = P(A|B)P(B)$, is also known as the general multiplication rule.}  
+\[P(A|B) = \dfrac{P(A \textrm{ and } B)}{P(B)} \qquad P(A \textrm{ and } B) = P(A|B)P(B) \]
+
+Thus, the probability $P(D)$ is given by:
+\begin{align*}
+P(D) =& P(D \textrm{ and } B_2 ) + P(D \textrm{ and } B_1 ) + P(D \textrm{ and } B_0 ) \\
+=& P(D|B_2)P(B_2) + P(D|B_1)P(B_1) + P(D|B_0)P(B_0) \\
+=& (0.73)(0.10) + (0.40)(0.30) + (0.19)(0.60) \\
+=& 0.307
+\end{align*}
+
+The prevalence of deafness among white cats is 0.307.
+
+
+\textD{\newpage}
+
+
+\subsubsection{Part b) Deafness and eye color}
+
+The probability that a white cat has two blue eyes, given that it is deaf, can be expressed as $P(B_2|D)$. 
+
+\begin{examplewrap}
+\begin{nexample}{Using the definition of conditional probability, solve for $P(B_2|D)$.}
+	
+\[P(B_2|D) = \dfrac{P(D \textrm{ and } B_2)}{P(D)} = \dfrac{P(D|B_2)P(B_2)}{P(D)} = \dfrac{(0.73)(0.10)}{0.307} = 0.238 \]
+
+The probability that a white cat has two blue eyes, given that it is deaf, is 0.238.
+\end{nexample}
+\end{examplewrap}
+
+It is also possible to think of this as a Bayes' Rule problem, where there are three possible partitions of the event of deafness, $D$. In this problem, it is possible to directly solve from the definition of conditional probability since $P(D)$  was solved for in part a); note that the expanded denominator below matches the earlier work to calculate $P(D)$.
+\[P(B_2|D) = \dfrac{P(D \textrm{ and } B_2)}{P(D)} = \dfrac{P(D|B_2)P(B_2)}{P(D|B_2)P(B_2) + P(D|B_1)P(B_1) + P(D|B_0)P(B_0)} \]
+
+
+\subsubsection{Part c) Blindness, deafness, and eye color}
+
+\begin{examplewrap}
+\begin{nexample}{The following information has been given in the problem. Re-write the information using the notation defined earlier.
+		\begin{quote}
+			Suppose that deaf, white cats have an increased chance of being blind, but that the prevalence of blindness differs according to eye color. While deaf, white cats with two blue eyes or two non-blue eyes have probability 0.20 of developing blindness, deaf and white cats with one blue eye have probability 0.40 of developing blindness. White cats that are not deaf have probability 0.10 of developing blindness, regardless of their eye color.
+		\end{quote}}
+
+The second sentence gives probabilities of blindness, conditional on eye color and being deaf: $P(L|B_2, D) = P(L|B_0, D) = 0.20$, and $P(L|B_1, D) = 0.40$. The third sentence gives the probability that a white cat is blind, given that it is not deaf: $P(L|D^C) = 0.10$.  
+\end{nexample}
+\end{examplewrap}
+
+Part i. asks for the prevalence of blindness among deaf, white cats: $P(L|D)$. As in part a), the event of blindness given deafness can be partitioned by eye color:
+\[P(L|D) = P(L \textrm{ and } B_0|D) + P(L \textrm{ and } B_1 | D) + P(L \textrm{ and } |D)\]
+
+\begin{examplewrap}
+\begin{nexample}{Expand the previous expression using the general multiplication rule, $P(A \textrm{ and } B) = P(A|B)P(B)$.}
+	
+	The general multiplication rule may seem difficult to apply when conditioning is present, but the principle remains the same. Think of the conditioning as a way to restrict the sample space; in this context, conditioning on deafness implies that for this part of the problem, all the cats being considered are deaf (and white). 
+	
+	For instance, consider the first term, $P(L \textrm{ and } B_0|D)$, the probability of being blind and having two non-blue eyes, given deafness. How could this be rewritten if the probability were simply $P(L \textrm{ and } B_0)$? 
+	\[P(L \textrm{ and } B_0) = P(L|B_0)P(B_0) \]
+	
+	Now, recall that for this part of the problem, the sample space is restricted to deaf (and white) cats. Thus, all of the terms in the expansion should include conditioning on deafness:
+	\[P(L \textrm{ and } B_0|\textcolor{red}{D}) = P(L|\textcolor{red}{D}, B_0)P(B_0|\textcolor{red}{D}) \]
+	
+	Thus, 
+	\[P(L|D) = P(L|D, B_0)P(B_0|D) + P(L|D, B_1)P(B_1|D) + P(L|D, B_2)P(B_2|D)\]
+\end{nexample}
+\end{examplewrap}
+
+Although $P(L|D, B_0)$, $P(L|D, B_1)$, and $P(L|D, B_2)$ are given from the problem statement, $P(B_0|D$, $P(B_1|D)$, and $P(B_2|D)$ are not. However, note that the probability that a white cat has two blue eyes given that it is deaf, $P(B_2|D)$, was calculated in part b). 
+
+\begin{exercisewrap}
+\begin{nexercise}
+Calculate $P(B_0|D)$ and $P(B_1|D)$.\footnotemark{}
+\end{nexercise}
+\end{exercisewrap}
+\footnotetext{\[P(B_0|D) = \dfrac{P(D \textrm{ and } B_0)}{P(D)} = \dfrac{P(D|B_0)P(B_0)}{P(D)} = \dfrac{(0.19)(0.60)}{0.307} = 0.371 \] \[P(B_1|D) = \dfrac{P(D \textrm{ and } B_1)}{P(D)} = \dfrac{P(D|B_1)P(B_1)}{P(D)} = \dfrac{(0.40)(0.30)}{0.307} = 0.391 \]}
+
+There is now sufficient information to calculate $P(L|D)$: 
+\begin{align*}
+P(L|D) =& P(L \textrm{ and } B_0|D) + P(L \textrm{ and } B_1 | D) + P(L \textrm{ and } |D) \\
+=& P(L|D, B_0)P(B_0|D) + P(L|D, B_1)P(B_1|D) + P(L|D, B_2)P(B_2|D) \\
+=& (0.20)(0.371) + (0.40)(0.391) + (0.20)(0.238) \\
+=& 0.278
+\end{align*}
+The prevalence of blindness among deaf, white cats is 0.278.
+
+Part ii. asks for the prevalence of blindness among white cats, $P(L)$. Again, partitioning is an effective strategy. Instead of partitioning by eye color, however, partition by deafness.
+
+\textD{\newpage}
+
+\begin{examplewrap}
+\begin{nexample}{Calculate the prevalence of blindness among white cats, $P(L)$.}
+\begin{align*}
+P(L) =& P(L \textrm{ and } D) + P(L \textrm{ and } D^C) \\
+=& P(L|D)P(D) + P(L|D^C)P(D^C) \\
+=& (0.278)(0.307) + (0.10)(1 - 0.307) \\
+=& 0.155
+\end{align*}	
+	
+$P(D)$ was calculated in part a), while $P(L|D)$ was calculated in part c, i. The conditioning probability of blindness given a white cat is not deaf is 0.10, as given in the question statement. By the definition of the complement, $P(D^C) = 1 - P(D)$. 
+
+The prevalence of blindness among white cats is 0.155.
+\end{nexample}
+\end{examplewrap}
+
+Part iii. asks for the probability that a cat has two blue eyes, given that it is white and blind. This probability can be expressed as $P(B_2|L)$. Recall that since all cats being discussed in the problem are white, it is not necessary to condition on coat color.
+
+Start out with the definition of conditional probability:
+\[P(B_2|L) = \dfrac{P(B_2 \textrm{ and } L)}{P(L)} \]
+
+The key to calculating $P(B_2|L)$ relies on recognizing that the event a cat is blind and has two blue eyes can be partitioned by whether or not the cat is also deaf:
+\begin{align}
+P(B_2|L) &= \dfrac{P(B_2 \textrm{ and } L \textrm{ and } D) + P(B_2 \textrm{ and } L \textrm{ and } D^C)}{P(L)}
+\label{pB2GivenL}
+\end{align}
+
+\begin{examplewrap}
+\begin{nexample}{Draw a tree diagram to organize the events involved in this problem. Identify the branches that represent the possible paths for a white cat to both have two blue eyes and be blind. }
+
+When drawing a tree diagram, remember that each branch is conditioned on the previous branches. While there are various possible trees, the goal is to construct a tree for which as many of the branches as possible have known probabilities. 
+
+The tree for this problem will have three branch points, corresponding to either deafness, blindness, or eye color. The first set of branches contain unconditional probabilities, the second set contains conditional probabilities given one event, and the third set contains conditional probabilities given two events.
+
+Recall that the probabilities $P(L|D, B_0)$, $P(L|D, B_1)$, and $P(L|D, B_2)$ were provided in the problem statement. These are the only probabilities conditioned on two events that have previously appeared in the problem, so blindness is the most convenient choice of third branch point. 
+
+It is not immediately obvious whether it will be more efficient to start with deafness or eye color, since unconditional and conditional probabilities related to both have appeared in the problem. Figure~\ref{catGeneticsTrees} shows two trees, one starting with deafness and the other starting with eye color. The two possible paths for a white cat to both have two blue eyes and be blind are shown in green.
+\end{nexample}
+\end{examplewrap}
+
+\begin{figure}[h]
+\centering
+\subfigure[]{\includegraphics[width=0.485\textwidth]{ch_probability_oi_biostat/figures/catGeneticsTrees/catGeneticsTreesA}
+	\label{catGeneticsTreesA}
+	}
+\subfigure[]{\includegraphics[width=0.485\textwidth]{ch_probability_oi_biostat/figures/catGeneticsTrees/catGeneticsTreesB}
+	\label{catGeneticsTreesB}
+	}
+\caption{In \subref{catGeneticsTreesA}, the first branch is based on deafness, while in \subref{catGeneticsTreesB}, the first branch is based on eye color. }
+\label{catGeneticsTrees}
+\end{figure}
+
+\begin{examplewrap}
+\begin{nexample}{Expand Equation~\ref{pB2GivenL} according to the tree shown in Figure~\ref{catGeneticsTreesA}, and solve for $P(B_2|L)$.}
+	
+\begin{align*}
+P(B_2|L) &= \dfrac{P(B_2 \textrm{ and } L \textrm{ and } D) + P(B_2 \textrm{ and } L \textrm{ and } D^C)}{P(L)} \\
+&= \dfrac{P(L|B_2, D)P(B_2|D)P(D) + P(L|B_2, D^C)P(B_2|D^C)P(D^C)}{P(L)} \\
+&= \dfrac{(0.20)(0.238)(0.307) + (0.10)P(B_2|D^C)P(D^C)}{0.155}
+\end{align*}
+
+Two of the probabilities have not been calculated previously: $P(B_2|D^C)$ and $P(D^C)$. From the definition of the complement, $P(D^C) = 1 - P(D) = 0.693$; $P(D)$ was calculated in part a). To calculate $P(B_2|D^C)$, apply the definition of conditional probability as in part b), where $P(B_2|D)$ was calculated:
+\[P(B_2|D^C) = \dfrac{P(D^C \textrm{ and } B_2)}{P(D^C)} = \dfrac{P(D^C|B_2)(P(B_2)}{P(D^C)} = \dfrac{(1-0.73)(0.10)}{0.693} = 0.0390.\]
+
+\begin{align*}
+P(B_2|L) &= \dfrac{(0.20)(0.238)(0.307) + (0.10)(0.0390)(0.693)}{0.155} \\
+&= 0.112
+\end{align*}
+	
+The probability that a white cat has two blue eyes, given that it is blind, is 0.112.
+\end{nexample}
+\end{examplewrap}
+
+\begin{exercisewrap}
+\begin{nexercise}
+Expand Equation~\ref{pB2GivenL} according to the tree shown in Figure~\ref{catGeneticsTreesB}, and solve for $P(B_2|L)$.\footnotemark{}
+\end{nexercise}
+\end{exercisewrap}
+\footnotetext{\[P(B_2|L) = \frac{P(L|B_2, D)P(D|B_2)P(B_2) + P(L|B_2, D^C)P(D^C|B_2)P(B_2)}{P(L)} = \frac{(0.20)(0.73)(0.10) + (0.10)(1-0.73)(0.10)}{0.155} = 0.112\]}
+
+A tree diagram is useful for visualizing the different possible ways that a certain set of outcomes can occur. Although conditional probabilities can certainly be calculated without the help of tree diagrams, it is often easy to make errors with a strictly algebraic approach. Once a tree is constructed, it can be used to solve for several probabilities of interest. The following example shows how one of the previous trees can be applied to answer a different question than the one posed in part c), iii.
+
+\textD{\newpage}
+
+\begin{examplewrap}
+\begin{nexample}{What is the probability that a white cat has one blue eye and one non-blue eye, given that it is not blind?}
+
+Calculate $P(B_1|L^C)$. Start with the definition of conditional probability, then expand.
+
+\[P(B_1|L^C) = \dfrac{P(B_1 \textrm{ and } L^C)}{P(L^C)} = \frac{P(B_1 \textrm{ and } L^C \textrm{ and } D) + P(B_1 \textrm{ and } L^C \textrm{ and } D^C)}{P(L^C)} \]
+
+
+Figure~\ref{catGeneticsTreesC} is a reproduction of the earlier tree diagram (Figure~\ref{catGeneticsTreesB}), with yellow arrows showing the two paths of interest.
+	
+	As before, expand the numerator and fill in the known values.
+	
+	\begin{align*}
+	P(B_1|L^C) =& \frac{P(B_1 \textrm{ and } L^C \textrm{ and } D) + P(B_1 \textrm{ and } L^C \textrm{ and } D^C)}{P(L^C)}\\
+	=& \frac{P(L^C|D, B_1)P(D|B_1)P(B_1) + P(L^C|D^C, B_1)P(D^C|B_1)P(B_1)}{P(L^C)} \\
+	=& \frac{\textcolor{red}{P(L^C|D, B_1)}(0.40)(0.30) + \textcolor{red}{P(L^C|D^C, B_1)P(D^C|B_1)}(0.30)}{\textcolor{red}{P(L^C)}}
+	\end{align*} 
+	
+	The probabilities in red are not known. Apply the definition of the complement; recall that the rule for complements holds when an event and its complement are conditioned on the same information: $P(A|B) = 1 - P(A^C|B)$.
+	
+	\begin{itemize}
+		\item $P(L^C) = 1 - P(L) = 1 - 0.155 = 0.845$
+		\item $P(D^C|B_1) = 1 - P(D|B_1) = 1 - 0.40 = 0.60$
+		\item $P(L^C|D, B_1) = 1 - P(L|D, B_1) = 1 - 0.40 = 0.60$
+	\end{itemize}
+	
+	The definition of the complement can also be applied to calculate $P(L^C|D^C, B_1)$. The problem statement originally specified that white cats that are not deaf have probability 0.10 of developing blindness regardless of eye color: $P(L|D^C) = 0.10$. Thus, $P(L^C|D^C, B_1) = P(L^C|D^C)$. By the definition of the complement, $P(L^C|D^C) = 1 - P(L|D^C) = 1 - 0.10 = 0.90$.
+	
+	\begin{align*}
+	P(B_1|L^C) =& \frac{P(B_1 \textrm{ and } L^C \textrm{ and } D) + P(B_1 \textrm{ and } L^C \textrm{ and } D^C)}{P(L^C)}\\
+	=& \frac{P(L^C|D, B_1)P(D|B_1)P(B_1) + P(L^C|D^C, B_1)P(D^C|B_1)P(B_1)}{P(L^C)} \\
+	=& \frac{(0.60)(0.40)(0.30) + (0.90)(0.60)(0.30)}{0.845} \\
+	=& 0.277 
+	\end{align*} 
+	
+	The probability that a white cat has one blue eye and one non-blue eye, given that it is not blind, is 0.277.
+\end{nexample}
+\end{examplewrap}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.5\textwidth]{ch_probability_oi_biostat/figures/catGeneticsTrees/catGeneticsTreesC}
+\caption{The two possible paths for a white cat to both have one blue eye (and one non-blue eye) and to not be blind are shown in yellow.}
+\label{catGeneticsTreesC}
+\end{figure}
+	
+
+%___________
+\section{Notes}
+\label{notesChapterProbability}
+
+Probability is a powerful framework for quantifying uncertainty and randomness. In particular, conditional probability represents a way to update the uncertainty associated with an event given that specific information has been observed. For example, the probability that a person has a particular disease can be adjusted based on observed information, such as age, sex, or the results of a diagnostic test.
+
+As discussed in the text, there are several possible approaches to solving conditional probability problems, including the use of tree diagrams or contingency tables. It can also be intuitive to use a simulation approach in computing software; refer to the labs for details about this method. Regardless of the specific approach that will be used for calculation, it is always advisable to start any problem by understanding the problem context (i.e., the sample space, given information, probabilities of interest) and reading the problem carefully, in order to avoid mistakes when translating between words and probability notation. A common mistake is to confuse joint and conditional probabilities.
+
+Probability distributions were briefly introduced in Section~\ref{introProbDistributions}. This topic will be discussed in greater detail in the next chapter.
+
+Probability forms the foundation for data analysis and statistical inference, since nearly every conclusion to a study should be accompanied by a measure of uncertainty. For example, the publication reporting the results of the LEAP study discussed in Chapter~\ref{introductionToData} included the probability that the observed results could have been due to chance variation. This aspect of probability will be discussed in later chapters.
+
+The four labs for Chapter 2 cover basic principles of probability, conditional probability, positive predictive value of a diagnostic test (via Bayes' Theorem), and the calculation of probabilities conditional on several events in the context of genetic inheritance. Probabilities can be calculated algebraically, using formulas given in this and other texts, but can also be calculated with simple simulations, since a probability represents a proportion of times an event happens when an experiment is repeated many times.  Computers are particularly good at keeping track of events during many replications of an experiment.  The labs for this chapter use both algebraic and simulation methods, and are particularly useful for building programming skills with the \textsf{R} language.
+
+In medicine, the positive predictive value of a diagnostic test may be one of the most important applications of probability theory. It is certainly the most common. The positive predictive value of a test is the conditional probability of the presence of a disease or condition, given a positive test for the condition, and is often used when counseling patients about their risk for being diagnosed with a disease in the future.  The lab on positive predictive value examines the conditional probability of a trisomy 21 genetic mutation (Down syndrome) given that a test based on cell-free DNA suggests its presence.
+

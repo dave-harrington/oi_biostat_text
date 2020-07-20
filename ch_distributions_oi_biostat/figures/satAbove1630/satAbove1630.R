@@ -1,0 +1,13 @@
+library(openintro)
+data(COL)
+
+myPDF("satAbove1630.pdf", 3, 1.4,
+      mar = c(1.2, 0, 0, 0),
+      mgp = c(3, 0.17, 0))
+normTail(1500, 300,
+         U = 1630,
+         axes = FALSE,
+         col = COL[1])
+axis(1, at = c(1630),
+     cex.axis = 0.8)
+dev.off()

@@ -1,0 +1,1162 @@
+%!TEX root=../../main.tex
+
+\section{Exercises}
+
+%need to add in conceptual questions about ci for mean, such as 9-12 of original 04e.tex from openintro
+
+% Also add an exercise that reverses the suit coding for swimmer 3 in the swim suit example and ask students to examine the effect
+
+% add exercise to compute remaining t-tests for expenses by ethnicity within age cohorts.  Check the chapter file to see which ones are left for reader.
+
+%__________________
+\subsection{One-sample means with the t-distribution}
+
+% 1 ODD (OI4 7.1)
+
+\eoce{\qt{Identify the critical $t$\label{identify_critical_t}} An independent 
+random sample is selected from an approximately normal population with unknown 
+standard deviation. Find the degrees of freedom and the critical $t$-value 
+(t$^\star$) for the given sample size and confidence level.
+\begin{parts}
+\item $n = 6$, CL = 90\%
+\item $n = 21$, CL = 98\%
+\item $n = 29$, CL = 95\%
+\item $n = 12$, CL = 99\%
+\end{parts}
+}{}
+
+% 2 ODD (OI4 7.3) edited
+
+\eoce{\qt{Find the p-value, Part I\label{find_T_pval_1}} An independent random 
+sample is selected from an approximately normal population with an unknown 
+standard deviation. Find the p-value for the given sets of alternative hypothesis and test statistic, and determine if the null hypothesis would be rejected
+at $\alpha = 0.05$.
+\begin{parts}
+\item $H_A: \mu > \mu_0 $, $n = 11$, $T = 1.91$
+\item $H_A: \mu < \mu_0 $, $n = 17$, $T = -3.45$
+\item $H_A: \mu \ne \mu_0 $, $n = 7$, $T = 0.83$
+\item $H_A: \mu > \mu_0 $, $n = 28$, $T = 2.13$
+\end{parts}
+}{}
+
+% 3 oi_biostat
+
+\eoce{\qt{Cutoff values\label{cutoff_values}} The following are cutoff values for the upper 5\% of a $t$-distribution with either degrees of freedom 10, 50, or 100: 2.23, 1.98, and 2.01. Identify which value belongs to which distribution and explain your reasoning.
+}{}
+
+% 4 EVEN (OI4 7.4)
+
+\eoce{\qt{Find the p-value, Part II\label{find_T_pval_2}} An independent 
+random sample is selected from an approximately normal population with an 
+unknown standard deviation.  Find the p-value for the given sets of alternative hypothesis and test statistic, and determine if the null hypothesis would be rejected
+at $\alpha = 0.01$.
+\begin{parts}
+\item $H_A: \mu > 0.5$, $n = 26$, $T = 2.485$
+\item $H_A: \mu < 3$, $n = 18$, $T = 0.5$
+\end{parts}
+}{}
+
+
+% 5 ODD (OI4 7.5)
+
+\eoce{\qt{Working backwards, Part I\label{work_backwards_1}} A 95\% confidence 
+interval for a population mean, $\mu$, is given as (18.985, 21.015). This 
+confidence interval is based on a simple random sample of 36 observations. 
+Calculate the sample mean and standard deviation. Assume that all conditions 
+necessary for inference are satisfied. Use the $t$-distribution in any 
+calculations.
+}{}
+
+% 6 EVEN (OI4 7.6)
+
+\eoce{\qt{Working backwards, Part II\label{work_backwards_2}} A 90\% confidence 
+interval for a population mean is (65, 77). The population distribution is 
+approximately normal and the population standard deviation is unknown. This 
+confidence interval is based on a simple random sample of 25 observations. 
+Calculate the sample mean, the margin of error, and the sample standard deviation.
+}{}
+
+\textD{\newpage}
+
+% 7 ODD (OI4 7.7)
+
+\eoce{\qt{Sleep habits of New Yorkers\label{ny_sleep_habits}} New York is 
+known as "the city that never sleeps". A random sample of 25 New Yorkers 
+were asked how much sleep they get per night. Statistical summaries of 
+these data are shown below. Do these data provide strong evidence that New 
+Yorkers sleep less than 8 hours a night on average?
+\begin{center}
+\begin{tabular}{rrrrrr}
+ \hline
+n 	& $\bar{x}$	& s		& min 	& max \\ 
+ \hline
+25 	& 7.73 		& 0.77 	& 6.17 	& 9.78 \\ 
+  \hline
+\end{tabular}
+\end{center}
+
+\begin{parts}
+\item Write the hypotheses in symbols and in words.
+\item Check conditions, then calculate the test statistic, $T$, and the 
+associated degrees of freedom.
+\item Find and interpret the p-value in this context. Drawing a picture 
+may be helpful.
+\item What is the conclusion of the hypothesis test?
+\item If you were to construct a 90\% confidence interval that corresponded 
+to this hypothesis test, would you expect 8 hours to be in the interval?
+\end{parts}
+}{}
+
+% 8 EVEN (OI4 7.8)
+
+\eoce{\qt{Heights of adults\label{adult_heights}}
+	Researchers studying anthropometry 
+	collected body girth measurements and skeletal diameter measurements, as well as 
+	age, weight, height and gender, for 507 physically active individuals. The 
+	histogram below shows the sample distribution of heights in centimeters. 
+	\footfullcite{Heinz:2003} \\
+	\begin{minipage}[c]{0.75\textwidth}
+		\begin{center}
+			\includegraphics[width=0.9\textwidth]{ch_inference_for_means_oi_biostat/figures/eoce/adult_heights/adult_heights_hist.pdf}
+		\end{center}
+	\end{minipage}
+	\begin{minipage}[c]{0.23\textwidth}
+		\begin{center}
+			\begin{tabular}{l|r l}
+				Min     & 147.2 \\
+				Q1      & 163.8 \\
+				Median  & 170.3 \\
+				Mean    & 171.1 \\
+				SD      &  9.4 \\
+				Q3      & 177.8 \\
+				Max     & 198.1 \\
+			\end{tabular}
+		\end{center}
+	\end{minipage}
+	\begin{parts}
+		\item What is the point estimate for the average height of active individuals? 
+		What about the median?
+		\item What is the point estimate for the standard deviation of the heights of 
+		active individuals? What about the IQR?
+		\item Is a person who is 1m 80cm (180 cm) tall considered unusually tall? And is 
+		a person who is 1m 55cm (155cm) considered unusually short? Explain your 
+		reasoning.
+		\item The researchers take another random sample of physically active 
+		individuals. Would you expect the mean and the standard deviation of this new 
+		sample to be the ones given above? Explain your reasoning.
+		\item The sample means obtained are point estimates for the mean height of all 
+		active individuals, if the sample of individuals is equivalent to a simple 
+		random sample.
+		What measure do we use to quantify the variability of such an estimate?
+		Compute 
+		this quantity using the data from the original sample under the condition that 
+		the data are a simple random sample. 
+	\end{parts}
+}{}
+
+% 9 ODD (OI4 7.9)
+
+\eoce{\qt{Find the mean\label{find_mean}} You are given the following hypotheses:
+\begin{align*}
+H_0&: \mu = 60 \\
+H_A&: \mu < 60
+\end{align*}
+We know that the sample standard deviation is 8 and the sample size is 20. For 
+what sample mean would the p-value be equal to 0.05? Assume that all conditions 
+necessary for inference are satisfied.
+}{}
+
+\textD{\newpage}
+
+% 10 EVEN (OI4 7.10)
+
+\eoce{\qt{$t^\star$ vs. $z^\star$\label{critical_t_vs_z}} For a given confidence 
+level, $t^{\star}_{df}$ is larger than $z^{\star}$. Explain how $t^{*}_{df}$ 
+being slightly larger than $z^{*}$ affects the width of the confidence interval.
+}{}
+
+% 11 ODD (OI4 7.11)
+
+\eoce{\qt{Play the piano\label{play_piano_2_sided}}
+	Georgianna claims that in a small city renowned for its music school, the average child takes less than 5 years of piano lessons. We have a random sample of 20 children from the city, with a 
+	mean of 4.6 years of piano lessons and a standard deviation of 2.2 years.
+	\begin{parts}
+		\item
+		Evaluate Georgianna's claim using a hypothesis test.
+		\item
+		Construct a 95\% confidence interval for the number of years
+		students in this city take piano lessons, and interpret it
+		in context of the data.
+		\item
+		Do your results from the hypothesis test and the confidence
+		interval agree? Explain your reasoning.
+	\end{parts}
+}{}
+
+% 12 EVEN (OI4 7.12) edited
+
+\eoce{\qt{Auto exhaust and lead exposure\label{auto_exhaust_lead_exposure}} 
+Researchers interested in lead exposure due to car exhaust sampled the blood 
+of 52 police officers subjected to constant inhalation of automobile exhaust 
+fumes while working traffic enforcement in a primarily urban environment. The 
+blood samples of these officers had an average lead concentration of 
+124.32 $\mu$g/l  and a SD of 37.74 $\mu$g/l; a previous study of individuals 
+from a nearby suburb, with no history of exposure, found an average blood 
+level concentration of 35 $\mu$g/l.\footfullcite{Mortada:2000}
+\begin{parts}
+\item Write down the hypotheses that would be appropriate for testing if the 
+police officers appear to have been exposed to a higher concentration of lead.
+\item Explicitly state and check all conditions necessary for inference on these 
+data.
+\item Test the hypothesis that the downtown police officers have a higher lead 
+exposure than the group in the previous study. Interpret your results in context.
+\item Based on your preceding result, without performing a calculation, would 
+a 99\% confidence interval for the average blood concentration level of police 
+officers contain 35 $\mu$g/l?
+\item Based on your preceding result, without performing a calculation, would a 99\% confidence interval for this difference contain 0? Explain why or why not.
+\end{parts}
+}{}
+
+% 13 ODD (OI4 7.13)
+
+\eoce{\qt{Car insurance savings\label{car_insurance_savings}} A market researcher 
+wants to evaluate car insurance savings at a competing company. Based on past 
+studies he is assuming that the standard deviation of savings is \$100. He wants 
+to collect data such that he can get a margin of error of no more than \$10 at a 
+95\% confidence level. How large of a sample should he collect?
+}{}
+
+
+\textD{\newpage}
+
+
+%__________________
+\subsection{Paired data}
+
+% 14 ODD (OI4 7.15)
+
+\eoce{\qt{Air quality\label{air_quality_shortened}}
+	Air quality measurements were collected in 
+	a random sample of 25 country capitals in 2013, and then again in the same 
+	cities in 2014. We would like to use these data to compare
+	average air quality between the two years.
+	Should we use a paired or non-paired test? Explain your reasoning.
+}{}
+
+% 15 ODD (OI4 7.17)
+
+\eoce{\qt{Paired or not, Part I\label{paired_or_not_1}} In each of the following 
+scenarios, determine if the data are paired.
+\begin{parts}
+\item Compare pre- (beginning of semester) and post-test (end of semester) scores 
+of students.
+\item Assess gender-related salary gap by comparing salaries of randomly sampled 
+men and women.
+\item Compare artery thicknesses at the beginning of a study and after 2 years of 
+taking Vitamin E for the same group of patients.
+\item Assess effectiveness of a diet regimen by comparing the before and after 
+weights of subjects.
+\end{parts}
+}{}
+
+% 16 EVEN (OI4 7.18)
+
+\eoce{\qt{Paired or not, Part II\label{paired_or_not_2}} In each of the following 
+scenarios, determine if the data are paired.
+\begin{parts}
+\item We would like to know if Intel's stock and Southwest Airlines' stock have 
+similar rates of return. To find out, we take a random sample of 50 days, and 
+record Intel's and Southwest's stock on those same days.
+\item We randomly sample 50 items from Target stores and note the price for 
+each. Then we visit Walmart and collect the price for each of those same 50 
+items.
+\item A school board would like to determine whether there is a difference in 
+average SAT scores for students at one high school versus another high school 
+in the district. To check, they take a simple random sample of 100 students from 
+each high school.
+\end{parts}
+}{}
+
+% 17 ODD
+
+\eoce{\qt{Global warming, Part I\label{global_warming_v2_1}}
+	Let's consider a limited set of climate data,
+	examining temperature differences in 1948 vs~2018.
+	We sampled 197 locations from the
+	National Oceanic and Atmospheric Administration's
+	(NOAA) historical data,
+	where the data was available for both years of interest.
+	We want to know: were there more days with temperatures
+	exceeding 90\textdegree{}F in 2018 or
+	in~1948?\footfullcite{webpage:noaa_1948_2018}
+	The difference in number of days exceeding 90\textdegree{}F
+	(number of days in 2018 - number of days in 1948) was calculated
+	for each of the 197 locations.
+	The average of these differences was 2.9 days with 
+	a standard deviation of 17.2 days.
+	We are interested in determining whether these data provide
+	strong evidence that there were more days in 2018 that
+	exceeded 90\textdegree{}F from NOAA's weather
+	stations.\vspace{3mm}
+	
+	\noindent%
+	\begin{minipage}[c]{0.65\textwidth}
+		\begin{parts}
+			\item
+			Is there a relationship between the observations collected
+			in 1948 and 2018?
+			Or are the observations in the two groups independent?
+			Explain.
+			\item
+			Write hypotheses for this research in symbols and in words.
+			\item
+			Check the conditions required to complete this test.
+			A histogram of the differences is given to the right.
+			\item
+			Calculate the test statistic and find the p-value.
+			\item
+			Use $\alpha = 0.05$ to evaluate the test,
+			and interpret your conclusion in context.
+			\item
+			What type of error might we have made?
+			Explain in context what the error means.
+			\item
+			Based on the results of this hypothesis test,
+			would you expect a confidence interval for the
+			average difference between the number of days
+			exceeding 90\textdegree{}F from 1948 and 2018
+			to include 0?
+			Explain your reasoning.
+		\end{parts}
+	\end{minipage}
+	\begin{minipage}[c]{0.02\textwidth}
+		\ 
+	\end{minipage}
+	\begin{minipage}[c]{0.32\textwidth}
+		\includegraphics[width=\textwidth]{ch_inference_for_means_oi_biostat/figures/eoce/global_warming_v2_1/global_warming_v2_1_diffs}
+	\end{minipage}
+	% library(openintro); d <- climate70$dx90_2018 - climate70$dx90_1948; mean(d); sd(d); length(d); t.test(d)
+}{}
+
+\textD{\newpage}
+
+% 18 EVEN (OI4, 7.20) edited
+
+\eoce{\qt{High School and Beyond, Part I\label{hs_beyond_1}} The National Center of 
+Education Statistics conducted a survey of high school seniors, collecting test data 
+on reading, writing, and several other subjects. Here we examine a simple random 
+sample of 200 students from this survey. Side-by-side box plots of reading and 
+writing scores as well as a histogram of the differences in scores are shown below.
+\begin{center}
+\includegraphics[width=0.44\textwidth]{ch_inference_for_means_oi_biostat/figures/eoce/hs_beyond_1/hs_beyond_read_write_box.pdf}
+\includegraphics[width=0.54\textwidth]{ch_inference_for_means_oi_biostat/figures/eoce/hs_beyond_1/hs_beyond_diff_hist.pdf}
+\end{center}
+\begin{parts}
+
+\item Is there a clear difference in the average reading and writing scores?
+\item Are the reading and writing scores of each student independent of each other?
+\item The average observed difference in scores is $\bar{x}_{read-write} = -0.545$, 
+and the standard deviation of the differences is 8.887 points. Do these data provide 
+convincing evidence of a difference between the average scores on the two exams? Conduct a hypothesis test; interpret your conclusions in context.
+\item Based on the results of this hypothesis test, would you expect a confidence 
+interval for the average difference between the reading and writing scores to include 0? 
+Explain your reasoning.
+\end{parts}
+}{}
+
+% 19 ODD (OI4, 7.21)
+
+\eoce{\qt{Global warming, Part II\label{global_warming_v2_2}}
+	We considered the change in the number of days exceeding
+	90\textdegree{}F from 1948 and 2018 at 197 randomly sampled
+	locations from the NOAA database in
+	Exercise~\ref{global_warming_v2_1}.
+	The mean and standard deviation of the reported differences
+	are 2.9 days and 17.2 days.
+	\begin{parts}
+		\item
+		Calculate a 90\% confidence interval for the average
+		difference between number of days exceeding 90\textdegree{}F
+		between 1948 and 2018.
+		We've already checked the conditions for you.
+		\item
+		Interpret the interval in context.
+		\item
+		Does the confidence interval provide convincing evidence
+		that there were more days exceeding 90\textdegree{}F
+		in 2018 than in 1948 at NOAA stations?
+		Explain.
+	\end{parts}
+}{}
+
+% 20 EVEN (OI4, 7.22)
+
+\eoce{\qt{High school and beyond, Part II\label{hs_beyond_2}} We considered the differences 
+between the reading and writing scores of a random sample of 200 students who took the High 
+School and Beyond Survey in Exercise~\ref{hs_beyond_1}. The mean and standard deviation of the 
+differences are $\bar{x}_{read-write} = -0.545$ and 8.887 points.
+\begin{parts}
+\item Calculate a 95\% confidence interval for the average difference between the reading and 
+writing scores of all students.
+\item Interpret this interval in context.
+\item Does the confidence interval provide convincing evidence that there is a real difference 
+in the average scores? Explain.
+\end{parts}
+}{}
+
+\textD{\newpage}
+
+% 21 ODD (OI3, 5.23)
+
+\eoce{\qt{Gifted children\label{gifted_children}} Researchers collected a simple random sample 
+of 36 children who had been identified as gifted in a large city. The following histograms show 
+the distributions of the IQ scores of mothers and fathers of these children. Also provided are 
+some sample statistics.\footfullcite{Graybill:1994}
+
+\begin{center}
+\includegraphics[width=\textwidth]{ch_inference_for_means_oi_biostat/figures/eoce/gifted_children/gifted_children_IQ_hist.pdf} \\[2mm]
+{\small
+\begin{tabular}{r | c c c}
+		& Mother	& Father	& Diff. \\
+\hline
+Mean	& 118.2 	& 114.8	    & 3.4 \\
+SD		& 6.5		& 3.5		& 7.5 \\
+n		& 36		& 36		& 36
+\end{tabular}
+}
+\end{center}
+
+\begin{parts}
+\item Are the IQs of mothers and the IQs of fathers in this data set related? Explain.
+\item Conduct a hypothesis test to evaluate if the scores are equal on average. Make sure to 
+clearly state your hypotheses, check the relevant conditions, and state your conclusion in the 
+context of the data.
+\end{parts}
+}{}
+
+% 22 oi_biostat, pset_05, spring 2016
+
+\eoce{\qt{DDT exposure\label{ddt_exposure}} Suppose that you are interested in determining whether exposure to the organochloride DDT, which has been used extensively as an insecticide for many years, is associated with breast cancer in women. As part of a study that investigated this issue, blood was drawn from a sample of women diagnosed with breast cancer over a six-year period and a sample of healthy control subjects matched to the cancer patients on age, menopausal status, and date of blood donation. Each woman's blood level of DDE (an important byproduct of DDT in the human body) was measured, and the difference in levels for each patient and her matched control calculated. A sample of 171 such differences has mean $\overline{d} = 2.7$ ng/mL and standard deviation $s_{d} = 15.9$ ng/mL. Differences were calculated as $DDE_{cancer} - DDE_{control}$.
+	
+\begin{parts}
+\item Test the null hypothesis that the mean blood levels of DDE are identical for women with breast cancer and for healthy control subjects. What do you conclude?
+
+\item Would you expect a 95\% confidence interval for the true difference in population mean DDE levels to contain the value 0?	
+\end{parts}	
+	
+}{}
+
+
+% 23 oi_biostat, blue_eggs_food
+
+\eoce{\qt{Blue-green eggshells\label{blue_eggs_food}} It is hypothesized that the blue-green color of the eggshells of many avian species represents an informational signal as to the health of the female that laid the eggs. To investigate this hypothesis, researchers conducted a study in which birds assigned to the treatment group were provided with supplementary food before and during laying; they predict that if eggshell coloration is related to female health at laying, females given supplementary food will lay more intensely blue-green eggs than control females. Nests were paired according to when nest construction began, and the study examined 16 nest pairs.
+
+\begin{parts}	
+\item The blue-green chroma (BGC) of eggs was measured on the day of laying; BGC refers to the proportion of total reflectance that is in the blue-green region of the spectrum, with a higher value representing a deeper blue-green color. In the food supplemented group, BGC chroma had $\overline{x} = 0.594$ and $s = 0.010$; in the control group, BGC chroma had $\overline{x} = 0.586$ and $s = 0.009$. A paired $t$-test resulted in $t = 2.28$ and $p = 0.038$. Interpret the results in the context of the data.
+\item In general, healthier birds are also known to lay heavier eggs. Egg mass was also measured for both groups. In the food supplemented group, egg mass had $\overline{x} = 1.70$ grams and $s = 0.11$ grams; in the control group, egg mass had $\overline{x} = 0.586$ grams and $s = 0.009$ grams. The test statistic from a paired $t$-test was 2.64 with $p$-value 0.019. Compute and interpret a 95\% confidence interval for $\delta$, the population mean difference in egg mass between the groups. 
+\end{parts}	
+}{}
+
+
+\textD{\newpage}
+
+
+%__________________
+\subsection{Difference of two means}
+
+% 24 EVEN (OI4, 7.24) edited
+
+\eoce{\qt{Diamond prices, Part I\label{diamonds_two_group}} A diamond's price is determined by various measures of quality, including carat weight. The price of diamonds increases as carat weight increases. While the difference between the size of a 0.99 carat diamond and a 1 carat diamond is undetectable to the human eye, the price difference can be substantial.\footfullcite{ggplot2} \\[1mm]
+	\begin{minipage}[c]{0.6\textwidth}
+		\begin{tabular}{l c c }
+			\hline
+			& 0.99 carats	 	& 1 carat\\
+			\hline	
+			Mean 	& \$ 44.51			& \$ 56.81			 \\
+			SD		& \$ 13.32			&\$ 16.13			 \\
+			n		&23				    & 23 \\
+			\hline
+		\end{tabular}
+	\end{minipage}%
+	\begin{minipage}[c]{0.4\textwidth}
+		\begin{center}
+			\includegraphics[width=0.85\textwidth]{ch_inference_for_means_oi_biostat/figures/eoce/diamonds_1/diamonds_box.pdf}
+		\end{center}
+	\end{minipage}
+	
+	\begin{parts}
+		\item Use the data to assess whether there is a difference between the average standardized prices of 0.99 and 1 carat diamonds.
+		\item Construct a 95\% confidence interval for the average difference between the standardized prices of 0.99 and 1 carat diamonds. 	
+	\end{parts}
+}{}
+
+% 25 ODD (OI4, 7.23)
+
+\eoce{\qt{Friday the 13$^{\text{th}}$, Part I\label{friday_13th_traffic}} In the 
+	early 1990's, researchers in the UK collected data on traffic flow, number of 
+	shoppers, and traffic accident related emergency room admissions on Friday the 
+	13$^{\text{th}}$ and the previous Friday, Friday the 6$^{\text{th}}$. The 
+	histograms below show the distribution of number of cars passing by a specific 
+	intersection on Friday the 6$^{\text{th}}$ and Friday the 13$^{\text{th}}$ for 
+	many such date pairs. Also given are some sample statistics, where the 
+	difference is the number of cars on the 6th minus the number of cars on the 13th.\footfullcite{Scanlon:1993}
+	\begin{center}
+		\includegraphics[width=\textwidth]{ch_inference_for_means_oi_biostat/figures/eoce/friday_13th_traffic/friday_13th_traffic_hist} \\
+		$\:$ \\
+		{\small
+			\begin{tabular}{l c c c}
+				\hline
+				& 6$^{\text{th}}$   & 13$^{\text{th}}$  & Diff.\\
+				\hline  
+				$\bar{x}$   &128,385            & 126,550       & 1,835 \\
+				$s$     &7,259          & 7,664         & 1,176 \\
+				$n$     &10             & 10                & 10 \\
+				\hline
+			\end{tabular}
+		}
+	\end{center}
+	\begin{parts}
+		\item Are there any underlying structures in these data that should be 
+		considered in an analysis? Explain.
+		\item What are the hypotheses for evaluating whether the number of people out 
+		on Friday the 6$^{\text{th}}$ is different than the number out on Friday the 
+		13$^{\text{th}}$?
+		\item Check conditions to carry out the hypothesis test from part~(b).
+		\item Calculate the test statistic and the p-value.
+		\item What is the conclusion of the hypothesis test?
+		\item Interpret the p-value in this context.
+		\item What type of error might have been made in the conclusion of your test? 
+		Explain.
+	\end{parts}
+}{}
+
+\textD{\newpage}
+
+% 26 EVEN oi_biostat, flycatcher_eggs
+
+\eoce{\qt{Egg volume\label{egg_volume}} In a study examining 131 collared flycatcher eggs, researchers measured various characteristics in order to study their relationship to egg size (assayed as egg volume, in $mm^3$). These characteristics included nestling sex and survival. A single pair of collared flycatchers generally lays around 6 eggs per breeding season; laying order of the eggs was also recorded. 
+	
+\begin{parts}
+\item Is there evidence at the $\alpha = 0.10$ significance level to suggest that egg size differs between male and female chicks? If so, do heavier eggs tend to contain males or females? For male chicks, $\overline{x} = 1619.95$, $s = 127.54$, and $n = 80$. For female chicks, $\overline{x} = 1584.20$, $s = 102.51$, and $n = 48$. Sex was only recorded for eggs that hatched.
+
+\item Construct a 95\% confidence interval for the difference in egg size between chicks that successfully fledged (developed capacity to fly) and chicks that died in the nest. From the interval, is there evidence of a size difference in eggs between these two groups? For chicks that fledged, $\overline{x} = 1605.87$, $s = 126.32$, and $n = 89$. For chicks that died in the nest, $\overline{x} = 1606.91$, $s = 103.46$, $n = 42$. 
+
+\item Are eggs that are laid first a significantly different size compared to eggs that are laid sixth? For eggs laid first, $\overline{x} = 1581.98$, $s = 155.95$, and $n = 22$. For eggs laid sixth, $\overline{x} = 1659.62$, $s = 124.59$, and $n = 20$.
+\end{parts}	
+}{}
+
+% 27 ODD (OI4, 7.25)
+
+\eoce{\qt{Friday the 13$^{\text{th}}$, Part II\label{friday_13th_accident}}
+	The Friday the $13^{th}$ study reported in
+	Exercise~\ref{friday_13th_traffic} also provides data on traffic
+	accident related emergency room admissions.
+	The distributions of these counts from Friday the 6$^{\text{th}}$ and
+	Friday the 13$^{\text{th}}$ are shown below for six such paired dates
+	along with summary statistics.
+	You may assume that conditions for inference are met.
+	\begin{center}
+		\includegraphics[width=0.9\textwidth]{ch_inference_for_means_oi_biostat/figures/eoce/friday_13th_accident/friday_13th_accident_hist} \\
+		$\:$ \\
+		\begin{minipage}[c]{0.32\textwidth}
+			\begin{tabular}{l c c c}
+				\hline
+				& 6$^{\text{th}}$   & 13$^{\text{th}}$  & diff\\
+				\hline  
+				Mean    &7.5                & 10.83             & -3.33 \\
+				SD      &3.33           & 3.6               & 3.01 \\
+				n       &6              & 6             & 6 \\
+				\hline
+			\end{tabular}
+		\end{minipage}
+	\end{center}
+	
+	\begin{parts}
+		\item Conduct a hypothesis test to evaluate if there is a difference between 
+		the average numbers of traffic accident related emergency room admissions 
+		between Friday the 6$^{\text{th}}$ and Friday the~13$^{\text{th}}$.
+		\item Calculate a 95\% confidence interval for the difference between the 
+		average numbers of traffic accident related emergency room admissions between 
+		Friday the 6$^{\text{th}}$ and Friday the 13$^{\text{th}}$.
+		\item The conclusion of the original study states, ``Friday 13th is unlucky for 
+		some. The risk of hospital admission as a result of a transport accident may be 
+		increased by as much as 52\%. Staying at home is recommended.'' Do you agree 
+		with this statement? Explain your reasoning.
+	\end{parts}
+}{}
+
+\textD{\newpage}
+
+% 28 EVEN oi_biostat, pset 04, spring 2016 
+
+\eoce{\qt{Avian influenza, Part I\label{avian_influenza_two_group}} In recent years, widespread outbreaks of avian influenza have posed a global threat to both poultry production and human health. One strategy being explored by researchers involves developing chickens that are genetically resistant to infection. In 2011, a team of investigators reported in \textit{Science} that they had successfully generated transgenic chickens that are resistant to the virus. As a part of assessing whether the genetic modification might be hazardous to the health of the chicks, hatch weights between transgenic chicks and non-transgenic chicks were collected. Does the following data suggest that there is a difference in hatch weights between transgenic and non-transgenic chickens?
+		
+\begin{tabular}{l c c}
+	\hline
+	& transgenic chicks	(g) & non-transgenic chicks (g) \\
+	\hline	
+	$\bar{x}$ &45.14			& 44.99 		    \\
+	$s$		  &3.32			&  4.57		    \\
+	$n$		  &54				& 54			\\
+	\hline
+\end{tabular}			
+}{}
+
+
+
+% 29 ODD (OI3, 5.31)
+
+\eoce{\qt{Chicken diet and weight, Part I\label{chick_wts_linseed_horsebean}} Chicken farming 
+is a multi-billion dollar industry, and any methods that increase the growth rate of young 
+chicks can reduce consumer costs while increasing company profits, possibly by millions of 
+dollars. An experiment was conducted to measure and compare the effectiveness of various feed 
+supplements on the growth rate of chickens. Newly hatched chicks were randomly allocated into 
+six groups, and each group was given a different feed supplement. Below are some summary 
+statistics from this data set along with box plots showing the distribution of weights by feed 
+type. \footfullcite{data:chickwts}
+
+\noindent\begin{minipage}[c]{0.65\textwidth}
+\begin{center}
+\includegraphics[width= \textwidth]{ch_inference_for_means_oi_biostat/figures/eoce/chick_wts_linseed_horsebean/chick_wts_box.pdf}
+\end{center}
+\end{minipage}
+\begin{minipage}[c]{0.35\textwidth}
+{\footnotesize\begin{tabular}{l c c c}
+\hline
+       		& Mean		& SD	& n \\
+\hline
+casein      & 323.58 	& 64.43	& 12 \\
+horsebean 	& 160.20 	& 38.63	& 10 \\
+linseed  	& 218.75 	& 52.24	& 12 \\
+meatmeal 	& 276.91 	& 64.90	& 11 \\
+soybean  	& 246.43 	& 54.13	& 14 \\
+sunflower 	& 328.92 	& 48.84	& 12 \\
+\hline
+\end{tabular}}
+\end{minipage} 
+
+\begin{parts}
+\item Describe the distributions of weights of chickens that were fed linseed and horsebean.
+\item Do these data provide strong evidence that the average weights of chickens that were fed 
+linseed and horsebean are different? Use a 5\% significance level.
+\item What type of error might we have committed? Explain.
+\item Would your conclusion change if we used $\alpha = 0.01$?
+\end{parts}
+}{}
+
+% 30 EVEN (OI3, 5.32)
+
+\eoce{\qt{Fuel efficiency of manual and automatic cars, Part I\label{fuel_eff_city}} Each year 
+the US Environmental Protection Agency (EPA) releases fuel economy data on cars manufactured in 
+that year. Below are summary statistics on fuel efficiency (in miles/gallon) from random 
+samples of cars with manual and automatic transmissions manufactured in 2012. Do these data 
+provide strong evidence of a difference between the average fuel efficiency of cars with manual 
+and automatic transmissions in terms of their average city mileage? Assume that conditions for 
+inference are satisfied. \footfullcite{data:epaMPG}
+
+\noindent\begin{minipage}[c]{0.38\textwidth}
+\begin{center}
+\begin{tabular}{l c c }
+\hline
+		& \multicolumn{2}{c}{City MPG} \\
+\hline
+       	& Automatic 	& Manual		 \\
+Mean  	& 16.12    		& 19.85  	 \\
+SD 		& 3.58    		& 4.51  	 \\
+n		& 26			& 26 \\
+\hline
+& \\
+& \\
+\end{tabular}
+\end{center}
+\end{minipage}
+\begin{minipage}[c]{0.6\textwidth}
+\begin{center}
+\includegraphics[width=0.7\textwidth]{ch_inference_for_means_oi_biostat/figures/eoce/fuel_eff_city/fuel_eff_city_box.pdf}
+\end{center}
+\end{minipage}
+}{}
+
+\textD{\newpage}
+
+% 31 ODD (OI3, 5.33)
+
+\eoce{\qt{Chicken diet and weight, Part II\label{chick_wts_casein_soybean}} Casein is a common 
+weight gain supplement for humans. Does it have an effect on chickens? Using data provided in 
+Exercise~\ref{chick_wts_linseed_horsebean}, test the hypothesis that the average weight of 
+chickens that were fed casein is different than the average weight of chickens that were fed 
+soybean. If your hypothesis test yields a statistically significant result, discuss whether or 
+not the higher average weight of chickens can be attributed to the casein diet. Assume that 
+conditions for inference are satisfied.
+}{}
+
+% 32 EVEN (OI3, 5.34)
+
+\eoce{\qt{Fuel efficiency of manual and automatic cars, Part II\label{fuel_eff_hway}} The table 
+provides summary statistics on highway fuel economy of cars manufactured in 2012 (from 
+Exercise~\ref{fuel_eff_city}). Use these statistics to calculate a 98\% confidence interval 
+for the difference between average highway mileage of manual and automatic cars, and 
+interpret this interval in the context of the data.\footfullcite{data:epaMPG}
+
+\noindent\begin{minipage}[c]{0.38\textwidth}
+\begin{center}
+\begin{tabular}{l c c }
+\hline
+		& \multicolumn{2}{c}{Hwy MPG} \\
+\hline
+       	& Automatic 	& Manual		 \\
+Mean  	& 22.92   		& 27.88    		 \\
+SD 		& 5.29     		& 5.01    		 \\
+n		& 26			& 26 \\
+\hline
+& \\
+& \\
+\end{tabular}
+\end{center}
+\end{minipage}
+\begin{minipage}[c]{0.6\textwidth}
+\begin{center}
+\includegraphics[width=0.7\textwidth]{ch_inference_for_means_oi_biostat/figures/eoce/fuel_eff_hway/fuel_eff_hway_box.pdf}
+\end{center}
+\end{minipage}
+}{}
+
+% 33 ODD (OI3, 5.35)
+
+\eoce{\qt{Gaming and distracted eating\label{gaming_distracted_eating_intake}} A group 
+of researchers are interested in the possible effects of distracting stimuli during eating, 
+such as an increase or decrease in the amount of food consumption. To test this hypothesis, 
+they monitored food intake for a group of 44 patients who were randomized into two equal 
+groups. The treatment group ate lunch while playing solitaire, and the control group ate lunch 
+without any added distractions. Patients in the treatment group ate 52.1 grams of biscuits, 
+with a standard deviation of 45.1 grams, and patients in the control group ate 27.1 grams of 
+biscuits, with a standard deviation of 26.4 grams. Do these data provide convincing evidence 
+that the average food intake (measured in amount of biscuits consumed) is different for the 
+patients in the treatment group? Assume that conditions for inference are 
+satisfied.\footfullcite{Oldham:2011}
+}{}
+
+% 34 oi_biostat
+
+\eoce{\qt{Placebos without deception\label{placebos_deception}} 
+While placebo treatment can influence subjective symptoms, it is typically believed that patient response to placebo requires concealment or deception; in other words, a patient must believe that they are receiving an effective treatment in order to experience the benefits of being treated with an inert substance. Researchers recruited patients suffering from irritable bowel syndrome (IBS) to test whether placebo responses are neutralized by awareness that the treatment is a placebo.
+
+Patients were randomly assigned to either the treatment arm or control arm. Those in the treatment arm were given placebo pills, which were described as "something like sugar pills, which have been shown in rigorous clinical testing to produce significant mind-body self-healing processes". Those in the control arm did not receive treatment. At the end of the study, all participants answered a questionnaire called the IBS Global Improvement Scale (IBS-GIS) which measures whether IBS symptoms have improved; higher scores are indicative of more improvement.
+
+At the end of the study, the 37 participants in the open placebo group had IBS-GIS scores with $\overline{x} = 5.0$ and $s = 1.5$, while the 43 participants in the no treatment group had IBS-GIS scores with $\overline{x} = 3.9$ and $s = 1.3$. 
+
+Based on an analysis of the data, summarize whether the study demonstrates evidence that placebos administered without deception may be an effective treatment for IBS.
+}{}
+
+\textD{\newpage}
+
+% 35 ODD (OI4, 7.31)
+
+\eoce{\qt{Prison isolation experiment, Part I\label{prison_isolation_T}}
+	Subjects from Central Prison in Raleigh, NC, volunteered
+	for an experiment involving an ``isolation'' experience.
+	The goal of the experiment was to find a treatment 
+	that reduces subjects' psychopathic deviant T scores.
+	This score measures a person's need for control or their rebellion against 
+	control, and it is part of a commonly used mental health test called the 
+	Minnesota Multiphasic Personality Inventory (MMPI) test. The experiment had 
+	three treatment groups: 
+	\begin{enumerate}[(1)]
+		\setlength{\itemsep}{0mm}
+		\item
+		Four hours of sensory restriction plus a 15 minute
+		``therapeutic" tape advising that professional help
+		is available.
+		\item
+		Four hours of sensory restriction plus a 15 minute
+		``emotionally neutral'' tape on training hunting dogs.
+		\item
+		Four hours of  sensory restriction but no taped message.
+	\end{enumerate}
+	Forty-two subjects were randomly assigned to these treatment groups, and an 
+	MMPI test was administered before and after the treatment. Distributions of the 
+	differences between pre and post treatment scores (pre - post) are shown below, 
+	along with some sample statistics. Use this information to independently test 
+	the effectiveness of each treatment. Make sure to clearly state your 
+	hypotheses, check conditions, and interpret results in the context of the data.\footfullcite{data:prison}
+	
+	\begin{center}
+		\includegraphics[width=\textwidth]{ch_inference_for_means_oi_biostat/figures/eoce/prison_isolation_T/prison_isolation_hist} \\
+		$\:$ \\
+		\begin{tabular}{l  r  r  r  r  }
+			\hline
+			& Tr 1  & Tr 2  & Tr 3      \\
+			\hline
+			Mean            & 6.21  & 2.86  & -3.21           \\
+			SD              & 12.3  & 7.94  & 8.57       \\
+			n               & 14        & 14        & 14     \\
+			\hline
+	\end{tabular}
+	\end{center}
+}{}
+\textD{\vspace{10mm}}
+
+
+%__________________
+\subsection{Power calculations for a difference of means}
+
+% 36 EVEN (OI4, 7.34)
+
+\eoce{\qt{Email outreach efforts\label{email_outreach_efforts}} A medical research group is 
+recruiting people to complete short surveys about their medical history. For example, one 
+survey asks for information on a person's family history in regards to cancer. Another survey 
+asks about what topics were discussed during the person's last visit to a hospital. So far, as 
+people sign up, they complete an average of just 4~surveys, and the standard deviation of the 
+number of surveys is about~2.2. The research group wants to try a new interface that they think 
+will encourage new enrollees to complete more surveys, where they will randomize each enrollee 
+to either get the new interface or the current interface. How many new enrollees do they need 
+for each interface to detect an effect size of 0.5 surveys per enrollee, if the desired power 
+level is 80\%?
+}{}
+
+% 37 ODD (OI4, 7.33)
+
+\eoce{\qt{Increasing corn yield\label{increase_corn_yield}} A large farm wants to try out a new 
+	type of fertilizer to evaluate whether it will improve the farm's corn production. The land is 
+	broken into plots that produce an average of 1,215 pounds of corn with a standard deviation of 
+	94 pounds per plot. The owner is interested in detecting any average difference of at least 40 
+	pounds per plot. How many plots of land would be needed for the experiment if the desired power 
+	level is 90\%? Assume each plot of land gets treated with either the current fertilizer or the 
+	new fertilizer.
+}{}
+
+
+\textD{\newpage}
+
+
+%__________________
+\subsection{Comparing many means with ANOVA}
+
+% 38 EVEN (OI4, 7.35)
+
+\eoce{\qt{Fill in the blank\label{fitb_anova}} When doing an ANOVA, you observe large 
+differences in means between groups. Within the ANOVA framework, this would most likely be 
+interpreted as evidence strongly favoring the \underline{\hspace{20mm}} hypothesis.
+}{}
+
+% 39 ODD (OI4, 7.37)
+
+\eoce{\qt{Chicken diet and weight, Part III\label{chick_wts_anova}} In 
+Exercises~\ref{chick_wts_linseed_horsebean} and \ref{chick_wts_casein_soybean} we compared the 
+effects of two types of feed at a time. A better analysis would first consider all feed types 
+at once: casein, horsebean, linseed, meat meal, soybean, and sunflower. The ANOVA output below 
+can be used to test for differences between the average weights of chicks on different diets.
+\begin{center}
+\begin{tabular}{lrrrrr}
+\hline
+ 		  & Df 	& Sum Sq	  & Mean Sq   & F value & Pr($>$F) \\ 
+\hline
+feed 	  & 5 	& 231,129.16  & 46,225.83 & 15.36 	& 0.0000 \\ 
+Residuals & 65  & 195,556.02  & 3,008.55  &  		&  \\ 
+\hline
+%\multicolumn{6}{r}{$s_{pooled} = 55.85$ on $df=65$}
+\end{tabular}
+\end{center}
+Conduct a hypothesis test to determine if these data provide convincing evidence that the 
+average weight of chicks varies across some (or all) groups. Make sure to check relevant 
+conditions. Figures and summary statistics are shown below.
+
+\begin{minipage}[c]{0.61\textwidth}
+\begin{center}
+\includegraphics[width=0.87\textwidth]{ch_inference_for_means_oi_biostat/figures/eoce/chick_wts_anova/chick_wts_box.pdf}
+\end{center}
+\end{minipage}
+\begin{minipage}[c]{0.37\textwidth}
+{\footnotesize\begin{tabular}{l c c c}
+\hline
+       		& Mean		& SD	& n \\
+\hline
+casein  	& 323.58 	& 64.43	& 12 \\
+horsebean 	& 160.20 	& 38.63	& 10 \\
+linseed  	& 218.75 	& 52.24	& 12 \\
+meatmeal 	& 276.91 	& 64.90	& 11 \\
+soybean  	& 246.43 	& 54.13	& 14 \\
+sunflower 	& 328.92 	& 48.84	& 12 \\
+\hline
+\end{tabular}}
+\end{minipage} 
+}{}
+
+% 40 EVEN (OI4, 7.38)
+
+\eoce{\qt{Teaching descriptive statistics\label{teach_descriptive_stats}} A study compared five 
+different methods for teaching descriptive statistics. The five methods were traditional 
+lecture and discussion, programmed textbook instruction, programmed text with lectures, 
+computer instruction, and computer instruction with lectures. 45 students were randomly 
+assigned, 9 to each method. After completing the course, students took a 1-hour exam. 
+\begin{parts}
+\item What are the hypotheses for evaluating if the average test scores are different for the 
+different teaching methods?
+\item What are the degrees of freedom associated with the $F$-test for evaluating these 
+hypotheses?
+\item Suppose the p-value for this test is 0.0168. What is the conclusion?
+\end{parts}
+}{}
+
+\textD{\newpage}
+
+% 41 ODD (OI4, 7.39)
+
+\eoce{\qt{Coffee, depression, and physical activity\label{coffee_depression_phys_act}} Caffeine 
+is the world's most widely used stimulant, with approximately 80\% consumed in the form of 
+coffee. Participants in a study investigating the relationship between coffee consumption and 
+exercise were asked to report the number of hours they spent per week on moderate (e.g., brisk 
+walking) and vigorous (e.g., strenuous sports and jogging) exercise. Based on these data the 
+researchers estimated the total hours of metabolic equivalent tasks (MET) per week, a value 
+always greater than 0. The table below gives summary statistics of MET for women in this study 
+based on the amount of coffee consumed.\footfullcite{Lucas:2011}
+ 
+\begin{adjustwidth}{-4em}{-4em}
+
+\begin{center}
+\begin{tabular}{l  r  r  r  r  r  r}
+\multicolumn{1}{c}{}	& \multicolumn{5}{c}{\textit{Caffeinated coffee consumption}} \\
+\cline{2-6}
+				& $\le$ 1 cup/week	& 2-6 cups/week	& 1 cup/day	& 2-3 cups/day & $\ge$ 4 cups/day & Total	\\
+\hline
+Mean			& 18.7	& 19.6	& 19.3	& 18.9	& 17.5 			  \\
+SD				& 21.1	& 25.5	& 22.5	& 22.0	& 22.0 \\
+n				& 12,215	& 6,617 		& 17,234	& 12,290	& 2,383 	& 50,739 \\
+\hline
+\end{tabular}
+\end{center}
+\end{adjustwidth}
+
+\begin{parts}
+
+\item Write the hypotheses for evaluating if the average physical activity level varies among 
+the different levels of coffee consumption.
+
+\item Check conditions and describe any assumptions you must make to proceed with the test.
+
+\item Below is part of the output associated with this test. Fill in the empty cells.
+
+\begin{center}
+\textD{\footnotesize}
+\renewcommand{\arraystretch}{1.25}
+\begin{tabular}{lrrrrr}
+  \hline
+ 			& Df 	& Sum Sq		& Mean Sq	& F value	& Pr($>$F) \\ 
+  \hline
+coffee	 	& \fbox{\textcolor{white}{{\footnotesize XXXXX}}}	 & \fbox{\textcolor{white}{{\footnotesize XXXXX}}} 		& \fbox{\textcolor{white}{{\footnotesize XXXXX}}} 			& \fbox{\textcolor{white}{{\footnotesize XXXXX}}} 	& 0.0003 \\ 
+Residuals		& \fbox{\textcolor{white}{{\footnotesize XXXXX}}} & 25,564,819 	& \fbox{\textcolor{white}{{\footnotesize  XXXXX}}} 			&  		&  \\ 
+   \hline
+Total			& \fbox{\textcolor{white}{{\footnotesize XXXXX}}} &25,575,327
+\end{tabular}
+\end{center}
+
+\item What is the conclusion of the test?
+
+\end{parts}
+}{}
+
+% 42 EVEN (OI4, 7.40)
+
+\eoce{\qt{Student performance across discussion sections\label{student_performance_sections}} A 
+professor who teaches a large introductory statistics class (197 students) with eight 
+discussion sections would like to test if student performance differs by discussion section, 
+where each discussion section has a different teaching assistant. The summary table below shows 
+the average final exam score for each discussion section as well as the standard deviation of 
+scores and the number of students in each section.
+\begin{center}
+\begin{tabular}{rrrrrrrrr}
+  \hline
+ 			& Sec 1 & Sec 2 & Sec 3 & Sec 4 & Sec 5 & Sec 6 & Sec 7 & Sec 8 \\ 
+  \hline
+$n_i$		& 33 & 19 & 10 & 29 & 33 & 10 & 32 & 31 \\ 
+$\bar{x}_i$	& 92.94 & 91.11 & 91.80 & 92.45 & 89.30 & 88.30 & 90.12 & 93.35 \\ 
+$s_i$ 		& 4.21 & 5.58 & 3.43 & 5.92 & 9.32 & 7.27 & 6.93 & 4.57 \\ 
+   \hline
+\end{tabular}
+\end{center}
+The ANOVA output below can be used to test for differences between the average scores from the 
+different discussion sections.
+\begin{center}
+\begin{tabular}{lrrrrr}
+\hline
+ 			& Df 		& Sum Sq & Mean Sq 	& F value & Pr($>$F) \\ 
+\hline
+section 		& 7 		& 525.01 	& 75.00 		& 1.87 	& 0.0767 \\ 
+Residuals 	& 189	& 7584.11	& 40.13 		&  		&  \\ 
+\hline
+\end{tabular}
+\end{center}
+Conduct a hypothesis test to determine if these data provide convincing evidence that the 
+average score varies across some (or all) groups. Check conditions and describe any assumptions 
+you must make to proceed with the test.
+}{}
+
+\textD{\newpage}
+
+% 43 ODD (OI4, 7.41)
+
+\eoce{\qt{GPA and major\label{gpa_major}} Undergraduate students taking an introductory 
+statistics course at Duke University conducted a survey about GPA and major. The side-by-side 
+box plots show the distribution of GPA among three groups of majors. Also provided is the ANOVA 
+output.
+\begin{center}
+\includegraphics[width=0.75\textwidth]{ch_inference_for_means_oi_biostat/figures/eoce/gpa_major/gpa_major.pdf}
+\end{center}
+\begin{center}
+\begin{tabular}{lrrrrr}
+  \hline
+            & Df    & Sum Sq    & Mean Sq   & F value   & Pr($>$F) \\ 
+  \hline
+major       & 2     & 0.03      & 0.015      & 0.185     & 0.8313 \\ 
+Residuals   & 195   & 15.77     & 0.081      &           &  \\ 
+   \hline
+\end{tabular}
+\end{center}
+\begin{parts}
+\item Write the hypotheses for testing for a difference between average GPA across majors.
+\item What is the conclusion of the hypothesis test?
+\item How many students answered these questions on the survey, i.e. what is the sample size?
+\end{parts}
+}{}
+
+% 44 EVEN (OI4, 7.42)
+
+\eoce{\qt{Work hours and education\label{work_hours_education}} The General Social Survey 
+collects data on demographics, education, and work, among many other characteristics of US 
+residents. \footfullcite{data:gss:2010} Using ANOVA, we can consider educational attainment 
+levels for all 1,172 respondents at once. Below are the distributions of hours worked by 
+educational attainment and relevant summary statistics that will be helpful in carrying out 
+this analysis.
+\begin{center}
+
+\begin{tabular}{l  r  r  r  r  r  r}
+\multicolumn{1}{c}{}	& \multicolumn{5}{c}{\textit{Educational attainment}} \\
+\cline{2-6}
+				& Less than HS 	& HS		& Jr Coll	& Bachelor's & Graduate & Total	\\
+\hline
+Mean			& 38.67			& 39.6	& 41.39	& 42.55	& 40.85 	& 40.45			  \\
+SD				& 15.81			& 14.97	& 18.1	& 13.62	& 15.51	& 15.17		 \\
+n				& 121			& 546 	& 97		& 253	& 155 	& 1,172 \\
+\hline
+\end{tabular}
+
+\includegraphics[width=\textwidth]{ch_inference_for_means_oi_biostat/figures/eoce/work_hours_education/work_hours_education.pdf}
+\end{center}
+\begin{parts}
+\item Write hypotheses for evaluating whether the average number of hours worked varies across 
+the five groups.
+\item Check conditions and describe any assumptions you must make to proceed with the test.
+\item Below is part of the output associated with this test. Fill in the empty cells.
+
+\begin{center}
+\renewcommand{\arraystretch}{1.25}
+\begin{tabular}{lrrrrr}
+  \hline
+ 			& Df 	& Sum Sq									& Mean Sq										& F value										& Pr($>$F) \\ 
+  \hline
+degree	 	& \fbox{\textcolor{white}{{\footnotesize XXXXX}}}	 	& \fbox{\textcolor{white}{{\footnotesize XXXXX}}} 		& 501.54	& \fbox{\textcolor{white}{{\footnotesize XXXXX}}} 	& 0.0682 \\ 
+Residuals		& \fbox{\textcolor{white}{{\footnotesize XXXXX}}} & 267,382 	& \fbox{\textcolor{white}{{\footnotesize  XXXXX}}} 			&  		&  \\ 
+   \hline
+Total			& \fbox{\textcolor{white}{{\footnotesize XXXXX}}} &\fbox{\textcolor{white}{{\footnotesize XXXXX}}}
+\end{tabular}
+\end{center}
+
+\item What is the conclusion of the test?
+
+\end{parts}
+}{}
+
+\textD{\newpage}
+
+% 45 ODD (OI4, 7.43)
+
+\eoce{\qt{True / False: ANOVA, Part I\label{tf_anova_1}} Determine if the following statements 
+are true or false in ANOVA, and explain your reasoning for statements you identify as false.
+\begin{parts}
+\item As the number of groups increases, the modified significance level for pairwise tests 
+increases as well.
+\item As the total sample size increases, the degrees of freedom for the residuals increases as 
+well.
+\item The constant variance condition can be somewhat relaxed when the sample sizes are 
+relatively consistent across groups.
+\item The independence assumption can be relaxed when the total sample size is large.
+\end{parts}
+}{}
+
+% 46 EVEN (OI4, 7.44)
+
+\eoce{\qt{Child care hours\label{child_care_hours}} The China Health and Nutrition Survey aims 
+to examine the effects of the health, nutrition, and family planning policies and programs 
+implemented by national and local governments.\footfullcite{data:china} It, for example, 
+collects information on number of hours Chinese parents spend taking care of their children 
+under age 6. The side-by-side box plots below show the distribution of this variable by 
+educational attainment of the parent. Also provided below is the ANOVA output for comparing 
+average hours across educational attainment categories.
+\begin{center}
+\includegraphics[width=\textwidth]{ch_inference_for_means_oi_biostat/figures/eoce/child_care_hours/child_care_hours.pdf}
+\end{center}
+\begin{center}
+\begin{tabular}{lrrrrr}
+  \hline
+ & Df & Sum Sq & Mean Sq & F value & Pr($>$F) \\ 
+  \hline
+education & 4 & 4142.09 & 1035.52 & 1.26 & 0.2846 \\ 
+  Residuals & 794 & 653047.83 & 822.48 &  &  \\ 
+   \hline
+\end{tabular}
+\end{center}
+\begin{parts}
+\item Write the hypotheses for testing for a difference between the average number of hours 
+spent on child care across educational attainment levels.
+\item What is the conclusion of the hypothesis test?
+\end{parts}
+}{}
+
+\textD{\newpage}
+
+% 47 ODD (OI4, 7.45)
+
+\eoce{\qt{Prison isolation experiment, Part II\label{prison_isolation_anova}} 
+Exercise~\ref{prison_isolation_T} introduced an experiment that was conducted with the goal of 
+identifying a treatment that reduces subjects' psychopathic deviant T scores, where this score 
+measures a person's need for control or his rebellion against control. In 
+Exercise~\ref{prison_isolation_T} you evaluated the success of each treatment individually. An 
+alternative analysis involves comparing the success of treatments. The relevant ANOVA output is 
+given below.
+\begin{center}
+\begin{tabular}{lrrrrr}
+  \hline
+ & Df & Sum Sq & Mean Sq & F value & Pr($>$F) \\ 
+  \hline
+treatment & 2 & 639.48 & 319.74 & 3.33 & 0.0461 \\ 
+  Residuals & 39 & 3740.43 & 95.91 &  &  \\ 
+   \hline
+\multicolumn{6}{r}{$s_{pooled} = 9.793$ on $df=39$}
+\end{tabular}
+\end{center}
+\begin{parts}
+\item What are the hypotheses?
+\item What is the conclusion of the test? Use a 5\% significance level.
+\item If in part~(b) you determined that the test is significant, conduct pairwise tests to 
+determine which groups are different from each other. If you did not reject the null hypothesis 
+in part~(b), recheck your answer.
+\end{parts}
+}{}
+
+% 48 EVEN (OI4, 7.46)
+
+\eoce{\qt{True / False: ANOVA, Part II\label{tf_anova_2}} Determine if the following statements 
+are true or false, and explain your reasoning for statements you identify as false.
+
+If the null hypothesis that the means of four groups are all the same is rejected using ANOVA 
+at a 5\% significance level, then ...
+\begin{parts}
+\item we can then conclude that all the means are different from one another.
+\item the standardized variability between groups is higher than the standardized variability 
+within groups.
+\item the pairwise analysis will identify at least one pair of means that are significantly 
+different.
+\item the appropriate $\alpha$ to be used in pairwise comparisons is 0.05 / 4 = 0.0125 since 
+there are four groups.
+\end{parts}
+}{}

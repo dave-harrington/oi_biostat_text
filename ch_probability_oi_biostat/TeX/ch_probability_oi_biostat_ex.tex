@@ -1,0 +1,599 @@
+%!TEX root=../../main.tex
+
+%_______________
+\section{Exercises}
+
+
+
+%_______________
+\subsection{Defining probability}
+
+% 1 ODD (OI4, 3.1) edited
+
+\eoce{\qt{True or false\label{tf_prob_definitions}} Determine if the statements 
+below are true or false, and explain your reasoning.
+\begin{parts}
+\item Assume that a couple has an equal chance of having a boy or a girl. If a couple's previous three children have all been boys, then the chance that their next child is a boy is somewhat less than 50\%.
+\item Drawing a face card (jack, queen, or king) and drawing a red card from a 
+full deck of playing cards are mutually exclusive events.
+\item Drawing a face card and drawing an ace from a full deck of playing cards 
+are mutually exclusive events.
+\end{parts}
+}{}
+
+% 2 EVEN (OI4, 3.6)
+
+\eoce{\qt{Dice rolls\label{dice_rolls}} If you roll a pair of fair dice, what is 
+	the probability of
+	\begin{parts}
+		\item getting a sum of 1?
+		\item getting a sum of 5?
+		\item getting a sum of 12?
+	\end{parts}
+}{}
+
+% 3 oi_biostat
+
+\eoce{\qt{Colorblindness\label{colorblindness}} Red-green colorblindness is a commonly inherited form of colorblindness; the gene involved is transmitted on the X chromosome in a recessive manner. If a male inherits an affected X chromosome, he is necessarily colorblind (genotype $X^{-}Y$). However, a female can only be colorblind if she inherits two defective copies (genotype $X^{-}X^{-}$); heterozygous females are not colorblind. Suppose that a couple consists of a genotype $X^{+}Y$ male and a genotype $X^{+}X^{-}$ female.
+\begin{parts}
+\item What is the probability of the couple producing a colorblind male?
+\item True or false: Among the couple's offspring, colorblindness and female sex are mutually exclusive events.
+\end{parts}
+}{}
+
+% 4 oi_biostat
+
+\eoce{\qt{Diabetes and hypertension\label{diabetes_hypertension}} Diabetes and hypertension are two of the most common diseases in Western, industrialized nations. In the United States, approximately 9\% of the population have diabetes, while about 30\% of adults have high blood pressure. The two diseases frequently occur together: an estimated 6\% of the population have both diabetes and hypertension.
+\begin{parts}
+\item Are having diabetes and having hypertension disjoint?
+\item Draw a Venn diagram summarizing the variables and their associated probabilities.
+\item Let $A$ represent the event of having diabetes, and $B$ the event of having hypertension. Calculate $P(A \text{ or } B)$. 
+\item What percent of Americans have neither hypertension nor diabetes?
+\item Is the event of someone being hypertensive independent of the event that someone has diabetes?
+\end{parts}
+}{}
+
+% 3 million who have both in 1992, out of 256 million ~ 1.1%
+% 2012: approx 9% have diabetes http://www.diabetes.org/diabetes-basics/statistics/
+% approx 1/3 Americans have hypertension: 30\% http://www.diabetes.org/are-you-at-risk/lower-your-risk/bloodpressure.html?referrer=https://www.google.com/
+
+\textD{\newpage}
+
+% 5 ODD (OI4, 3.11) edited
+
+\eoce{\qt{Educational attainment by gender\label{edu_attain_couples}} The table 
+	below shows the distribution of education level attained by US residents by 
+	gender based on data collected during the 2010 American Community Survey.
+	\footfullcite{eduSex}
+	\begin{center}
+		\begin{tabular}{l p{7cm} c c }
+			&                                       & \multicolumn{2}{c}{\textit{Gender}} \\
+			\cline{3-4}
+			&                                                   & Male  & Female \\
+			\cline{2-4}
+			& Less than 9th grade                               & 0.07  & 0.13 \\
+			& 9th to 12th grade, no diploma                     & 0.10  & 0.09 \\
+			\textit{Highest}    & HS graduate (or equivalent)   & 0.30  & 0.20 \\
+			\textit{education}  & Some college, no degree       & 0.22  & 0.24 \\ 
+			\textit{attained}   & Associate's degree            & 0.06  & 0.08 \\
+			& Bachelor's degree                                 & 0.16  & 0.17 \\
+			& Graduate or professional degree                   & 0.09  & 0.09 \\
+			\cline{2-4} 
+			& Total                                             & 1.00  & 1.00
+		\end{tabular}
+	\end{center}
+	\begin{parts}
+		\item What is the probability that a randomly chosen individual is a high school graduate? Assume that there is an equal proportion of males and females in the population.
+		\item Define Event $A$ as having a graduate or professional degree. Calculate the probability of the complement, $A^c$.
+		\item What is the probability that a randomly chosen man has at least a 
+		Bachelor's degree?
+		\item What is the probability that a randomly chosen woman has at least a 
+		Bachelor's degree?
+		\item What is the probability that a man and a woman getting married both have at 
+		least a Bachelor's degree? Note any assumptions made -- are they reasonable?
+	\end{parts}
+}{}
+
+% 6 EVEN (OI4, 3.8)
+
+\eoce{\qt{Poverty and language\label{poverty_language}} The American Community 
+Survey is an ongoing survey that provides data every year to give communities the 
+current information they need to plan investments and services. The 2010 American 
+Community Survey estimates that 14.6\% of Americans live below the poverty line, 
+20.7\% speak a language other than English (foreign language) at home, and 4.2\% 
+fall into both categories. \footfullcite{poorLang}
+\begin{parts}
+\item Are living below the poverty line and speaking a foreign language at home 
+disjoint?
+\item Draw a Venn diagram summarizing the variables and their associated 
+probabilities.
+\item What percent of Americans live below the poverty line and only speak 
+English at home?
+\item What percent of Americans live below the poverty line or speak a foreign 
+language at home?
+\item What percent of Americans live above the poverty line and only speak 
+English at home? 
+\item Is the event that someone lives below the poverty line independent of the 
+event that the person speaks a foreign language at home?
+\end{parts}
+}{}
+
+% 7 oi_biostat, from urgent_care_visits
+
+\eoce{\qt{Urgent care visits\label{urgent_care}} Urgent care centers are open beyond typical office hours and provide a broader range of services than that of many primary care offices. A study conducted to collect information about urgent care centers in the United States reported that in one week, 15.8\% of centers saw 0-149 patients, 33.7\% saw 150-299 patients, 28.8\% saw 300-449 patients, and 21.7\% saw 450 or more patients. Assume that the data can be treated as a probability distribution of patient visits for any given week. 
+	\begin{parts}	
+		\item What is the probability that three random urgent care centers in a county all see between 300-449 patients in a week? Note any assumptions made. Are the assumptions reasonable?
+		\item What is the probability that ten random urgent care centers throughout a state all see 450 or more patients in a week? Note any assumptions made. Are the assumptions reasonable?
+		\item With the information provided, is it possible to compute the probability that one urgent care center sees between 150-299 patients in one week and 300-449 patients in the next week? Explain why or why not.
+	\end{parts}	
+}{}
+
+\textD{\newpage}
+
+% 8 EVEN (OI4, 3.12) edited
+
+\eoce{\qt{School absences\label{school_absences}} Data collected at elementary 
+schools in DeKalb County, GA suggest that each year roughly 25\% of students miss 
+exactly one day of school, 15\% miss 2 days, and 28\% miss 3 or more days due to 
+sickness. \footfullcite{Mizan:2011}
+\begin{parts}
+\item What is the probability that a student chosen at random doesn't miss any 
+days of school due to sickness this year?
+\item What is the probability that a student chosen at random misses no more than 
+one day?
+\item What is the probability that a student chosen at random misses at least one 
+day?
+\item If a parent has two kids at a DeKalb County elementary school, what is the 
+probability that neither kid will miss any school? Note any assumptions made and evaluate how reasonable they are.
+\item If a parent has two kids at a DeKalb County elementary school, what is the 
+probability that both kids will miss some school, i.e. at least one day? Note any assumptions made and evaluate how reasonable they are.
+\end{parts}
+}{}
+
+% 9 ODD (OI4, 3.9)
+
+\eoce{\qt{Disjoint vs. independent\label{disjoint_indep}} In parts~(a) and~(b), 
+	identify whether the events are disjoint, independent, or neither (events cannot 
+	be both disjoint and independent).
+	\begin{parts}
+		\item You and a randomly selected student from your class both earn A's in this 
+		course. 
+		\item You and your class study partner both earn A's in this course.
+		\item If two events can occur at the same time, must they be dependent?
+	\end{parts}
+}{}
+
+
+% 10 EVEN (OI3, 2.18) edited
+
+\eoce{\qt{Health coverage, frequencies\label{health_coverage_freqs}} The 
+Behavioral Risk Factor Surveillance System (BRFSS) is an annual telephone survey 
+designed to identify risk factors in the adult population and report emerging 
+health trends. The following table summarizes two variables for the respondents: 
+health status and health coverage, which describes whether each respondent had 
+health insurance. \footfullcite{data:BRFSS2010}
+\begin{center}
+\begin{tabular}{rrrrrrrr}
+                    &       & \multicolumn{5}{c}{\textit{Health Status}} &  \\ 
+\cline{3-7}
+                    &       & Excellent & Very good & Good  & Fair  & Poor  & Total\\ 
+\cline{2-8}
+\textit{Health}     & No    & 459       & 727       & 854   & 385   & 99    & 2,524 \\ 
+\textit{Coverage}   & Yes   & 4,198     & 6,245     & 4,821 & 1,634 & 578   & 17,476 \\ 
+\cline{2-8}
+                    & Total & 4,657     & 6,972     & 5,675 & 2,019 & 677   & 20,000
+\end{tabular}
+\end{center}
+\begin{parts}
+\item If one individual is drawn at random, what is the probability that the 
+respondent has excellent health and doesn't have health coverage?
+\item If one individual is drawn at random, what is the probability that the 
+respondent has excellent health or doesn't have health coverage?
+\end{parts}
+}{}
+
+
+\textD{\newpage}
+
+
+%_______________
+\subsection{Conditional probability}
+
+% 11 ODD (OI4, 3.15)
+
+\eoce{\qt{Global warming\label{global_warming}} A Pew Research poll asked 
+	1,306 Americans ``From what you've read and heard, is there solid evidence that 
+	the average temperature on earth has been getting warmer over the past few 
+	decades, or not?". The table below shows the distribution of responses by party 
+	and ideology, where the counts have been replaced with relative frequencies.
+	\footfullcite{globalWarming}
+	\begin{center}
+		\begin{tabular}{ll  ccc c} 
+			&                           & \multicolumn{3}{c}{\textit{Response}} \\
+			\cline{3-5}
+			&                           & Earth is  & Not       & Don't Know    &   \\
+			&                           & warming   & warming   & Refuse        & Total\\
+			\cline{2-6}
+			& Conservative Republican   & 0.11      & 0.20      & 0.02      & 0.33  \\
+			\textit{Party and}  & Mod/Lib Republican        & 0.06      & 0.06      & 0.01      & 0.13 \\
+			\textit{Ideology}   & Mod/Cons Democrat         & 0.25      & 0.07      & 0.02      & 0.34 \\
+			& Liberal Democrat          & 0.18      & 0.01      & 0.01      & 0.20\\
+			\cline{2-6}
+			&Total                      & 0.60      & 0.34      & 0.06      & 1.00
+		\end{tabular}
+	\end{center}
+	\begin{parts}
+		\item Are believing that the earth is warming and being a liberal Democrat mutually 
+		exclusive?
+		\item What is the probability that a randomly chosen respondent believes the 
+		earth is warming or is a liberal Democrat?
+		\item What is the probability that a randomly chosen respondent believes the 
+		earth is warming given that he is a liberal Democrat?
+		\item What is the probability that a randomly chosen respondent believes the 
+		earth is warming given that he is a conservative Republican?
+		\item Does it appear that whether or not a respondent believes the earth is 
+		warming is independent of their party and ideology? Explain your reasoning.
+		\item What is the probability that a randomly chosen respondent is a 
+		moderate/liberal Republican given that he does not believe that the earth is 
+		warming? 
+	\end{parts}
+}{}
+
+% 12 oi_biostat
+
+\eoce{\qt{ABO blood groups\label{abo_blood_groups}} The ABO blood group system consists of four different blood groups, which describe whether an individual's red blood cells carry the A antigen, B antigen, both, or neither. The ABO gene has three alleles: ${I}^{A}$, ${I}^{B}$, and \textit{i}. The \textit{i} allele is recessive to both ${I}^{A}$ and ${I}^{B}$, while the ${I}^{A}$ and ${I}^{B}$ allels are codominant. Individuals homozygous for the \textit{i} allele are known as blood group O, with neither A nor B antigens.
+	
+	\begin{center}
+		\begin{tabular}{cc}
+			\textbf{Alleles inherited} & \textbf{Blood type} \\
+			$I^A$ and $I^A$ & A \\
+			$I^A$ and $I^B$ & AB \\
+			$I^A$ and $i$ & A \\
+			$I^B$ and $I^B$ & B \\
+			$I^B$ and $i$ & B \\
+			$i$ and $i$ & O \\
+		\end{tabular}
+	\end{center}
+	
+	Blood group follows the rules of Mendelian single-gene inheritance -- alleles are inherited independently from either parent, with probability 0.5.
+	
+	\begin{parts}
+		\item Suppose that both members of a couple have Group AB blood. What is the probability that a child of this couple will have Group A blood?
+		\item Suppose that one member of a couple is genotype $I^{B}i$ and the other is $I^{A}i$. What is the probability that their first child has Type O blood and the next two do not?
+		\item Suppose that one member of a couple is genotype $I^{B}i$ and the other is $I^{A}i$. Given that one child has Type O blood and two do not, what is the probability of the first child having Type O blood?
+	\end{parts}
+	
+}
+
+\textD{\newpage}
+
+% 13 oi_biostat, 2014 brfss data
+
+\eoce{\qt{Seat belts\label{seat_belts}}
+	Seat belt use is the most effective way to save lives and reduce injuries in motor vehicle crashes. In a 2014 survey, respondents were asked, "How often do you use seat belts when you drive or ride in a car?". The following table shows the distribution of seat belt usage by sex.
+	\begin{center}
+		\begin{tabular}{rrrrrrrr}
+			& &  \multicolumn{5}{c}{\textit{Seat Belt Usage}} &  \\ 
+			\cline{3-7}
+			&       & Always & Nearly always & Sometimes    & Seldom     & Never  & Total \\ 
+			\cline{2-8}
+			\multirow{2}{*}{\textit{Sex}}    & Male    & 146,018   & 19,492    & 7,614   &  3,145  & 4,719 & 180,988 \\ 
+			& Female   & 229,246    & 16,695    & 5,549    & 1,815  & 2,675 &  255,980 \\ 
+			\cline{2-8}
+			& Total & 375,264    & 36,187    & 13,163    & 4,960   & 7,394  &  436,968
+		\end{tabular}
+	\end{center}
+	\begin{parts}
+		\item Calculate the marginal probability that a randomly chosen individual always wears seatbelts.
+		\item What is the probability that a randomly chosen female always wears seatbelts?
+		\item What is the conditional probability of a randomly chosen individual always wearing seatbelts, given that they are female? 
+		\item What is the conditional probability of a randomly chosen individual always wearing seatbelts, given that they are male?
+		\item Calculate the probability that an individual who never wears seatbelts is male.
+		\item Does gender seem independent of seat belt usage?
+	\end{parts}
+}{}
+
+% 14 EVEN (OI4, 3.16)
+
+\eoce{\qt{Health coverage, relative frequencies\label{health_coverage_rel_freqs}} 
+The Behavioral Risk Factor Surveillance System (BRFSS) is an annual telephone 
+survey designed to identify risk factors in the adult population and report 
+emerging health trends. The following table displays the distribution of health 
+status of respondents to this survey (excellent, very good, good, fair, poor) 
+conditional on whether or not they have health insurance.
+\begin{center}
+\begin{tabular}{rrrrrrrr}
+& &  \multicolumn{5}{c}{\textit{Health Status}} &  \\ 
+\cline{3-7}
+                    &       & Excellent & Very good & Good      & Fair      & Poor      & Total \\ 
+\cline{2-8}
+\textit{Health}     & No    & 0.0230    & 0.0364    & 0.0427    & 0.0192    & 0.0050    & 0.1262 \\ 
+\textit{Coverage}   & Yes   & 0.2099    & 0.3123    & 0.2410    & 0.0817    & 0.0289    & 0.8738 \\ 
+\cline{2-8}
+                    & Total & 0.2329    & 0.3486    & 0.2838    & 0.1009    & 0.0338    & 1.0000
+\end{tabular}
+\end{center}
+\begin{parts}
+\item Are being in excellent health and having health coverage mutually 
+exclusive?
+\item What is the probability that a randomly chosen individual has excellent 
+health?
+\item What is the probability that a randomly chosen individual has excellent 
+health given that he has health coverage?
+\item What is the probability that a randomly chosen individual has excellent 
+health given that he doesn't have health coverage?
+\item Do having excellent health and having health coverage appear to be 
+independent?
+\end{parts}
+}{}
+
+
+% 15 ODD (OI3, 2.23), edited
+
+\eoce{\qt{HIV in Swaziland\label{tree_hiv_swaziland}} Swaziland has the highest 
+	HIV prevalence in the world: 25.9\% of this country's population is infected with 
+	HIV.\footfullcite{ciaFactBookHIV:2012} The ELISA test is one of the first and 
+	most accurate tests for HIV. For those who carry HIV, the ELISA test is 99.7\% 
+	accurate. For those who do not carry HIV, the test is 92.6\% accurate. Calculate the PPV and NPV of the test.
+}{}
+
+
+\textD{\newpage}
+
+% 16 EVEN (OI4, 3.18)
+
+\eoce{\qt{Assortative mating\label{assortative_mating}} Assortative mating is a 
+nonrandom mating pattern where individuals with similar genotypes and/or 
+phenotypes mate with one another more frequently than what would be expected 
+under a random mating pattern. Researchers studying this topic collected data on 
+eye colors of 204 Scandinavian men and their female partners. The table below 
+summarizes the results. For simplicity, we only include heterosexual 
+relationships in this exercise. \footfullcite{Laeng:2007}
+\begin{center}
+\begin{tabular}{ll  ccc c} 
+                                        &           & \multicolumn{3}{c}{\textit{Partner (female)}} \\
+\cline{3-5}
+                                        &           & Blue  & Brown     & Green     & Total \\
+\cline{2-6}
+                                        & Blue      & 78    & 23        & 13        & 114 \\
+\multirow{2}{*}{\textit{Self (male)}}   & Brown     & 19    & 23        & 12        & 54 \\
+                                        & Green     & 11    & 9         & 16        & 36 \\
+\cline{2-6}  
+                                        & Total     & 108   & 55        & 41        & 204
+\end{tabular}
+\end{center}
+\begin{parts}
+\item What is the probability that a randomly chosen male respondent or his 
+partner has blue eyes?
+\item What is the probability that a randomly chosen male respondent with blue 
+eyes has a partner with blue eyes? 
+\item What is the probability that a randomly chosen male respondent with brown 
+eyes has a partner with blue eyes? What about the probability of a randomly 
+chosen male respondent with green eyes having a partner with blue eyes?
+\item Does it appear that the eye colors of male respondents and their partners 
+are independent? Explain your reasoning.
+\end{parts}
+}{}
+
+% 17 ODD (OI4, 3.21)
+
+\eoce{\qt{It's never lupus\label{tree_lupus}} Lupus is a medical phenomenon where 
+	antibodies that are supposed to attack foreign cells to prevent infections 
+	instead see plasma proteins as foreign bodies, leading to a high risk of blood 
+	clotting. It is believed that 2\% of the population suffer from this disease. The 
+	test is 98\% accurate if a person actually has the disease. The test is 74\% 
+	accurate if a person does not have the disease. There is a line from the Fox 
+	television show \emph{House} that is often used after a patient tests positive 
+	for lupus: ``It's never lupus." Do you think there is truth to this statement? 
+	Use appropriate probabilities to support your answer.
+}{}
+
+
+% 18 EVEN (OI4, 3.20) edited
+
+\eoce{\qt{Predisposition for thrombosis\label{tree_thrombosis}} A genetic test is 
+used to determine if people have a predisposition for \textit{thrombosis}, which 
+is the formation of a blood clot inside a blood vessel that obstructs the flow of 
+blood through the circulatory system. It is believed that 3\% of people actually 
+have this predisposition. The genetic test is 99\% accurate if a person actually 
+has the predisposition, meaning that the probability of a positive test result 
+when a person actually has the predisposition is 0.99. The test is 98\% accurate 
+if a person does not have the predisposition. 
+\begin{parts}
+\item What is the probability that a 
+randomly selected person who tests positive for the predisposition by the test 
+actually has the predisposition?
+\item What is the probability that a randomly selected person who tests negative for the predisposition by the test actually does not have the predisposition?
+\end{parts}
+}{}
+
+\textD{\newpage}
+
+% 19 oi_biostat
+
+% http://www.pewforum.org/2013/12/30/publics-views-on-human-evolution/
+
+\eoce{\qt{Views on evolution\label{views_evolution}} A 2013 analysis conducted by the Pew Research Center found that 60\% of survey respondents agree with the statement "humans and other living things have evolved over time" while 33\% say that "humans and other living things have existed in their present form since the beginning of time" (7\% responded "don't know"). They also found that there are differences among partisan groups in beliefs about evolution. While roughly two-thirds of Democrats (67\%) and independents (65\%) say that humans and other living things have evolved over time, 48\% of Republicans reject the idea of evolution. Suppose that 45\% of respondents identified as Democrats, 40\% identified as Republicans, and 15\% identified as political independents. The survey was conducted among a national sample of 1,983 adults.
+\begin{parts}
+\item Suppose that a person is randomly selected from the population and found to identify as a Democrat. What is the probability that this person does not agree with the idea of evolution?
+\item Suppose that a political independent is randomly selected from the population. What is the probability that this person does not agree with the idea of evolution?
+\item Suppose that a person is randomly selected from the population and found to identify as a Republican. What is the probability that this person agrees with the idea of evolution?
+\item Suppose that a person is randomly selected from the population and found to support the idea of evolution. What is the probability that this person identifies as a Republican?
+\end{parts}
+}{}
+
+
+% 20 oi_biostat, from 2016 final exam
+
+\eoce{\qt{Cystic fibrosis testing\label{cf_testing}} The prevalence of cystic fibrosis in the United States is approximately 1 in 3,500 births. Various screening strategies for CF exist. One strategy uses dried blood samples to check the levels of immunoreactive trypsogen (IRT); IRT levels are commonly elevated in newborns with CF. The sensitivity of the IRT screen is 87\% and the specificity is 99\%. 
+\begin{parts}
+\item In a hypothetical population of 100,000, how many individuals would be expected to test positive? Of those who test positive, how many would be true positives? Calculate the PPV of IRT.
+\item In order to account for lab error or physiological fluctuations in IRT levels, infants who tested positive on the initial IRT screen are asked to return for another IRT screen at a later time, usually two weeks after the first test. This is referred to as an IRT/IRT screening strategy. Calculate the PPV of IRT/IRT.
+\end{parts}
+}{}
+
+% 21 oi_biostat
+
+\eoce{\qt{Mumps\label{mumps}} Mumps is a highly contagious viral infection that most often occurs in children, but can affect adults, particularly if they are living in shared living spaces such as college dormitories. It is most recognizable by the swelling of salivary glands at the side of the face under the ears, but earlier symptoms include headaches, fever, and joint pain. Suppose a college student at a university presents to a physician with symptoms of headaches, fever, and joint pain. Let $A$ = \{headaches, fever, and joint pain\}, and suppose that the possible disease state of the patient can be partitioned into: $B_1$ = normal, $B_2$ = common cold, $B_3$ = mumps. From clinical experience, the physician estimates $P(A|B_i)$: $P(A|B_1) = 0.001$, $P(A|B_2) = 0.70$, $P(A|B_3) = 0.95$. The physician, aware that some students have contracted the mumps, then estimates that for students at this university, $P(B_1) = 0.95$, $P(B_2) = 0.025$, and $P(B_3) = 0.025$. Given the previous symptoms, which of the disease states is most likely?}{}
+
+
+% 22 EVEN (OI3, 2.26)
+
+\eoce{\qt{Twins\label{tree_twins}} About 30\% of human twins are identical, and 
+the rest are fraternal. Identical twins are necessarily the same sex -- half are 
+males and the other half are females. One-quarter of fraternal twins are both 
+male, one-quarter both female, and one-half are mixes: one male, one female. You 
+have just become a parent of twins and are told they are both girls. Given this 
+information, what is the probability that they are identical?
+}{}
+
+\textD{\newpage}
+
+% 23 oi_biostat
+
+\eoce{\qt{IQ testing\label{iq_testing}} A psychologist conducts a study on intelligence in which participants are asked to take an IQ test consisting of $n$ questions, each with $m$ choices.
+	\begin{parts}
+		\item One thing the psychologist must be careful about when analyzing the results is accounting for lucky guesses. Suppose that for a given question a particular participant either knows the answer or guesses. The participant knows the correct answer with probability $p$, and does not know the answer (and therefore will have to guess) with probability $1-p$. The participant guesses completely randomly. What is the conditional probability that the participant knew the answer to a question, given that they answered it correctly?
+		\item About 1 in 1,100 people have IQs over 150. If a subject receives a score of greater than some specified amount, they are considered by the psychologist to have an IQ over 150. But the psychologist's test is not perfect. Although all individuals with IQ over 150 will definitely receive such a score, individuals with IQs less than 150 can also receive such scores about 0.1\% of the time due to lucky guessing. Given that a subject in the study is labeled as having an IQ over 150, what is the probability that they actually have an IQ below 150?
+	\end{parts}
+}{}
+
+% 24 oi_biostat
+
+\eoce{\qt{Breast cancer and age\label{breast_cancer_age}} The strongest risk factor for breast cancer is age; as a woman gets older, her risk of developing breast cancer increases. The following table shows the average percentage of American women in each age group who develop breast cancer, according to statistics from the National Cancer Institute. For example, approximately 3.56\% of women in their 60's get breast cancer. 
+	
+	\begin{table}[htb!]
+		\centering
+		\small
+		\begin{tabular}{l|l}
+			\textbf{Age Group}  & \textbf{Prevalence} \\ \hline
+			30 - 40 &     0.0044                        \\
+			40 - 50 &      0.0147                          \\
+			50 - 60 &      0.0238                          \\
+			60 - 70 &      0.0356                         \\
+			70 - 80 &       0.0382                        \\ \hline
+		\end{tabular}
+	\end{table}
+	
+	A mammogram typically identifies a breast cancer about 85\% of the time, and is correct 95\% of the time when a woman does not have breast cancer. 
+	
+	\begin{parts}
+		\item Calculate the PPV for each age group. Describe any trend(s) you see in the PPV values as prevalence changes. Explain the reason for the trend(s) in language that someone who has not taken a statistics course would understand.
+		\item Suppose that two new mammogram imaging technologies have been developed which can improve the PPV associated with mammograms; one improves sensitivity to 99\% (but specificity remains at 95\%), while the other improves specificity to 99\% (while sensitivity remains at 85\%). Which technology offers a higher increase in PPV? Explain why.
+	\end{parts}
+	}{}
+
+\textD{\newpage}
+
+% 25 oi_biostat
+
+\eoce{\qt{Prostate-specific antigen\label{psa_test}} Prostate-specific antigen (PSA) is a protein produced by the cells of the prostate gland. Blood PSA level is often elevated in men with prostate cancer, but a number of benign (not cancerous) conditions can also cause a man's PSA level to rise. The PSA test for prostate cancer is a laboratory test that measures PSA levels from a blood sample. The test measures the amount of PSA in ng/ml (nanograms per milliliter of blood).
+	
+	The sensitivity and specificity of the PSA test depend on the cutoff value used to label a PSA level as abnormally high. In the last decade, 4.0 ng/ml has been considered the upper limit of normal, and values 4.1 and higher were used to classify a PSA test as positive.  Using this value, the sensitivity of the PSA test is 20\% and the specificity is 94\%.
+	
+	The likelihood that a man has undetected prostate cancer depends on his age.  This likelihood is also called the prevalence of undetected cancer in the male population.  The following table shows the prevalence of undetected prostate cancer by age group.
+	
+	\begin{table}[htb!]
+		\centering
+		\small
+		\begin{tabular}{l|l|l|l}
+			\textbf{Age Group}  & \textbf{Prevalence} & \textbf{PPV} & \textbf{NPV}\\ \hline
+			$<$ 50 years &       0.001 &               &                         \\
+			50 - 60 years &      0.020 &               &                         \\
+			61 - 70 years &      0.060  &              &                         \\
+			71 - 80 years &       0.100 &               &                        \\ \hline
+		\end{tabular}
+	\end{table}
+	
+	\begin{parts}
+		\item Calculate the missing PPV and NPV values.
+		\item Describe any trends you see in the PPV and NPV values.
+		\item Explain the reason for the trends in part b), in language that someone who has not taken a statistics course would understand.
+		\item The cutoff for a positive test is somewhat controversial. Explain, in your own words, how lowering the cutoff for a positive test from 4.1 ng/ml to 2.5 ng/ml would affect sensitivity and specificity.
+	\end{parts}
+	
+	}{}
+
+
+\textD{\newpage}
+
+
+%_______________
+\subsection{Extended example}
+
+% 26 oi_biostat
+
+\eoce{\qt{Eye color\label{eye_color}}  One of the earliest models for the genetics of eye color was developed in 1907, and proposed a single-gene inheritance model, for which brown eye color is always dominant over blue eye color. Suppose that in the population, 25\% of individuals are homozygous dominant ($BB$), 50\% are heterozygous ($Bb$), and 25\% are homozygous recessive ($bb$).
+	\begin{parts}
+		\item Suppose that two parents have brown eyes. What is the probability that their first child has blue eyes?
+		
+		\item Does the probability change if it is now known that the paternal grandfather had blue eyes? Justify your answer.
+		
+		\item Given that their first child has brown eyes, what is the probability that their second child has blue eyes? Ignore the condition given in part (b). 
+		
+	\end{parts}
+	
+}{}
+
+% 27 oi_biostat
+
+\eoce{\qt{Colorblindness\label{colorblindness}} The most common form of colorblindness is a recessive, sex-linked hereditary condition caused by a defect on the X chromosome. Females are XX, while males are XY. Individuals inherit one chromosome from each parent, with equal probability; for example, an individual has a 50\% chance of inheriting their father's X chromosome, and a 50\% chance of inheriting their father's Y chromosome. If a male has an X chromosome with the defect, he is colorblind. However, a female with only one defective X chromosome will not be colorblind. Thus, colorblindness is more common in males than females; 7\% of males are colorblind but only 0.5\% of females are colorblind.
+	\begin{parts}
+	\item Assume that the X chromosome with the wild-type allele is $X^{+}$ and the one with the disease allele is $X^{-}$. What is the expected frequency of each possible female genotype: $X^{+}X^{+}$, $X^{+}X^{-}$, and $X^{-}X^{-}$? What is the expected frequency of each possible male genotype: $X^{+}Y$ and $X^{-}Y$?
+	
+	\item Suppose that two parents are not colorblind. What is the probability that they have a colorblind child?
+	\end{parts}
+	}{}
+
+% 28 oi_biostat, 2020 final exam
+
+\eoce{\qt{Rapid feathering\label{rapid_feathering}} Sex linkage refers to the inheritance pattern that results from a mutation occurring on a gene located on a sex chromosome. A classic example of a sex-linked trait in humans is red-green color blindness; females can only be red-green colorblind if they have two copies of the mutation (one on each X chromosome), while a single copy of the mutation is sufficient to confer colorblindness in males (since males only have one X chromosome).  
+	
+	In birds, females are the heterogametic sex (with sex chromosomes ZW) and males are the homogametic sex (with sex chromosomes ZZ). A commonly known sex-linked trait in domestic chickens is the rapid feathering trait, which is carried on the Z chromosome. Chickens with the rapid feathering trait grow feathers at a faster rate; this difference is especially pronounced within the first few days from hatching. The wild-type allele $K^-$ is dominant to the mutant alelle $K^+$; presence of the $K^-$ allele produces slow feathering. Females can be either genotype $Z^{K^+}W$ or $Z^{K^-}W$. Males can be either heterozygous ($Z^{K^+}Z^{K^-}$), homozygous for slow feathering ($Z^{K^-}Z^{K^-}$), or homozygous for rapid feathering ($Z^{K^+}Z^{K^+}$).
+	
+	In a population of chickens, 9\% of males are rapid feathering and 16\% of females are rapid feathering. Suppose that slow feathering chickens are mated. What is the probability that out of their 12 offspring, at least two are rapid feathering? 
+	
+}{}
+
+\textD{\newpage}
+
+% 29 oi_biostat, 2020 midterm exam
+
+\eoce{\qt{Genetics of Australian cattle dogs\label{acd_genetics}} Australian cattle dogs are known to have a high prevalence of congenital deafness. Deafness in both ears is referred to as bilateral deafness, while deafness in one ear is referred to as unilateral deafness.
+
+Deafness in dogs is associated with the white spotting gene $S$ that controls the expression of coat and eye pigmentation. The dominant allele $S$ produces solid color, while the three recessive alleles contribute to increasing amounts of white in coat pigmentation: Irish spotting ($s^i$), piebald ($s^p$), and extreme white piebald ($s^w$). The $s^p$ and $s^w$ alleles are responsible for the distinctive Australian cattle dog coat pattern of white hair evenly speckled throughout either a predominantly red or black coat. The dogs are born with white coats, and the speckled pattern develops as they age. 
+
+While all Australian cattle dogs have some combination of the $s^p$ and $s^w$ alleles, the gene displays incomplete penetrance such that individuals show some variation in phenotype despite having the same genotype. Individuals with low penetrance of the alleles tend to have additional patterns on their coat, such as a dark "mask" around one or both eyes (in other words, a unilateral mask or a bilateral mask). High penetrance of the piebald alleles is associated with deafness.
+
+Suppose that 40\% of Australian cattle dogs have black coats; these individuals are commonly referred to as "Blue Heelers" as opposed to "Red Heelers". Among Blue Heelers, 35\% of individuals have bilateral masks and 25\% have unilateral masks. About 50\% of Red Heelers exhibit no eye masking and 10\% have bilateral masks. 
+
+Let $M$ represent the event that an Australian cattle dog has a facial mask, where $M_2$ represents a bilateral mask, $M_1$ represents a unilateral mask, and $M_0$ indicates lack of a mask.
+
+	\begin{parts}
+		
+		\item Calculate the probability an Australian cattle dog has a facial mask and a black coat.
+		
+		\item Calculate the prevalence of bilateral masks in Australian cattle dogs.
+		
+		\item Among Australian cattle dogs with bilateral facial masks, what is the probability of being a Red Heeler?
+		
+		\item Unilateral deafness occurs in Red Heelers with probability 0.15, in both dogs that either lack facial masking or exhibit a unilateral mask; for both unmasked and unilaterally masked Red Heelers, 60\% of dogs are not deaf. The overall prevalence of bilaterally masked Australian cattle dogs with bilateral deafness and red coats is 1.2\% and the overall prevalence of bilaterally masked Australian cattle dogs with unilateral deafness and red coats is 4.5\%; these prevalences are the same for Australian cattle dogs with black coats. Among Blue Heelers with either no facial masking or a unilateral mask, the probability of unilateral deafness is 0.05 and the probability of bilateral deafness is 0.01. 
+		
+		Let $D$ represent the event that an Australian cattle dog is deaf (i.e., deaf in at least one ear), where $D_2$ represents bilateral deafness and $D_1$ represents unilateral deafness. 
+		
+		\begin{subparts}
+			
+			\item What is the probability that an Australian cattle dog has a bilateral mask, no hearing deficits, and a red coat?
+			
+			\item Calculate the proportion of bilaterally masked Blue Heelers without hearing deficits.
+			
+			\item Compare the prevalence of deafness between Red Heelers and Blue Heelers.
+			
+			\item If a dog is known to have no hearing deficits, what is the probability it is a Blue Heeler?
+			
+		\end{subparts}
+		
+	\end{parts}
+
+}{}
+

@@ -1,0 +1,73 @@
+
+
+\chapter*{Preface}
+
+This text introduces statistics and its applications in the life sciences and biomedical research.  It is based on the freely available \textit{OpenIntro Statistics}, and, like \textit{OpenIntro}, it may be downloaded at no cost.\footnote{PDF available at \url{https://www.openintro.org/book/biostat/} and source available at \url{https://github.com/OI-Biostat/oi_biostat_text}.}  In writing \textit{Introduction to Statistics for the Life and Biomedical Sciences}, we have added substantial new material, but also retained some examples and exercises from \textit{OpenIntro} that illustrate important ideas even if they do not relate directly to medicine or the life sciences. Because of its link to the original \textit{OpenIntro} project, this text is often referred to as \textit{OpenIntro Biostatistics} in the supplementary materials.
+
+This text is intended for undergraduate and graduate students interested in careers in biology or medicine, and may also be profitably read by students of public health or medicine.  It covers many of the traditional introductory topics in statistics, in addition to discussing some newer methods being used in molecular biology. 
+
+Statistics has become an integral part of research in medicine and biology, and the tools for summarizing data and drawing inferences from data are essential both for understanding the outcomes of studies and for incorporating measures of uncertainty into that understanding.  An introductory text in statistics for students who will work in medicine, public health, or the life sciences should be more than simply the usual introduction, supplemented with an occasional example from biology or medical science. By drawing the majority of examples and exercises in this text from published data, we hope to convey the value of statistics in medical and biological research. In cases where examples draw on important material in biology or medicine, the problem statement contains the necessary background information. 
+
+Computing is an essential part of the practice of statistics.  Nearly everyone entering the biomedical sciences will need to interpret the results of analyses conducted in software; many will also need to be capable of conducting such analyses. The text and associated materials separate those two activities to allow students and instructors to emphasize either or both skills. The text discusses the important features of figures and tables used to support an interpretation, rather than the process of generating such material from data. This allows students whose main focus is understanding statistical concepts not to be distracted by the details of a particular software package. In our experience, however, we have found that many students enter a research setting after only a single course in statistics. These students benefit from a practical introduction to data analysis that incorporates the use of a statistical computing language. There are self-paced learning labs associated with the text provide such an introduction; these are described in more detail later in this preface. The datasets used in this book are available via the \textsf{R} \texttt{openintro} package available on CRAN\footnote{Diez DM, Barr CD, \c{C}etinkaya-Rundel M. 2012. \texttt{openintro}: OpenIntro data sets and supplement functions. \urlwofont{http://cran.r-project.org/web/packages/openintro}.}  and the \textsf{R} \texttt{oibiostat} package available via \href{<https://github.com/OI-Biostat/oi_biostat_data>}{GitHub}.
+
+\subsection*{Textbook overview}
+
+The chapters of this book are as follows:
+
+\begin{description}
+\setlength{\itemsep}{0mm}
+
+\item[1. Introduction to data.] Data structures, basic data collection principles, numerical and graphical summaries, and exploratory data analysis.
+\item[2. Probability.] The basic principles of probability.
+\item[3. Distributions of random variables.] Introduction to random variables and distributions of discrete and continuous distributions.
+\item[4. Foundations for inference.] General ideas for statistical inference in the context of estimating a population mean.
+\item[5. Inference for numerical data.] Inference for one-sample and two-sample means with the $t$-distribution, power calculations for a difference of means, and ANOVA.
+\item[6. Simple linear regression.] An introduction to linear regression with a single explanatory variable, evaluating model assumptions, and inference in a regression context.
+\item[7. Multiple linear regression.] General multiple regression model, categorical predictors with more than two values, interaction, and model selection.
+\item[8. Inference for categorical data.] Inference for proportions using the normal and chi-square distributions, as well as exact techniques.
+
+\end{description}
+
+\subsection*{Examples, exercises, and appendices}
+
+Examples and within-chapter exercises throughout the textbook may be identified by their distinctive bullets: {\Large\color{red}Design update makes this last sentence a bit off. Sample language for what might be used instead is in OS4.}
+
+\begin{examplewrap}
+\begin{nexample}{Large filled bullets signal the start of an example.}
+Full solutions to examples are provided within the main text and often include an accompanying table or figure.
+\end{nexample}
+\end{examplewrap}
+
+\begin{exercisewrap}
+\begin{nexercise}
+Empty bullets signal readers that an exercise has been inserted into the text for additional practice and guidance. Solutions are provided for all within-chapter exercises in footnotes.\footnotemark
+\end{nexercise}
+\end{exercisewrap}
+\footnotetext{Full solutions are located in the footnotes.}
+
+There are exercises at the end of each chapter that are useful for practice or homework assignments. Solutions to odd numbered problems can be found in Appendix~\ref{eoceSolutions}. Readers will notice that there are fewer end of chapter exercises in the last three chapters.  The more complicated methods, such as multiple regression, do not always lend themselves to hand calculation, and computing is increasingly important both to gain practical experience with these methods and to explore complex datasets. For students more interested in concepts than computing, however, we have included useful end of chapter exercises that emphasize the interpretation of output from statistical software.
+
+Probability tables for the normal, $t$, and chi-square distributions are in Appendix~\ref{distributionTables}, and PDF copies of these tables are also available from \href{http://www.openintro.org}{\color{black}\textbf{openintro.org}} for anyone to download, print, share, or modify.  The labs and the text also illustrate the use of simple \textsf{R} commands to calculate probabilities from common distributions.
+
+\subsection*{Self-paced learning labs}
+
+The labs associated with the text can be downloaded from \href{https://github.com/OI-Biostat/oi_biostat_labs}{github.com/OI-Biostat/oi\us{}biostat\us{}labs}.  They provide guidance on conducting data analysis and visualization with the \textsf{R} statistical language and the computing environment RStudio, while building understanding of statistical concepts.  The labs begin from first principles and require no previous experience with statistical software. Both \textsf{R} and RStudio are freely available for all major computing operating systems, and the Unit 0 labs (\texttt{00\_getting\_started}) provide information on downloading and installing them. Information on downloading and installing the packages may also be found at \href{http://www.openintro.org}{\color{black}\textbf{openintro.org}}. 
+
+The labs for each chapter all have the same structure. Each lab consists of a set of three documents: a handout with the problem statements, a template to be used for working through the lab, and a solution set with the problem solutions. The handout and solution set are most easily read in PDF format (although Rmd files are also provided), while the template is an Rmd file that can be loaded into RStudio. Each chapter of labs is accompanied by a set of "Lab Notes", which provides a reference guide of all new \textsf{R} functions discussed in the labs.
+
+Learning is best done, of course, if a student attempts the lab exercises before reading the solutions. The "Lab Notes" may be a useful resource to refer to while working through problems.
+
+\subsection*{OpenIntro, online resources, and getting involved}
+
+OpenIntro is an organization focused on developing free and affordable education materials. The first project, \emph{OpenIntro Statistics}, is intended for introductory statistics courses at the high school through university levels. Other projects examine the use of randomization methods for learning about statistics and conducting analyses (\emph{Introductory Statistics with Randomization and Simulation}) and advanced statistics that may be taught at the high school level (\emph{Advanced High School Statistics}).
+
+We encourage anyone learning or teaching statistics to visit \textbf{openintro.org} and get involved by using the many online resources, which are all free, or by creating new material. Students can test their knowledge with practice quizzes, or try an application of concepts learned in each chapter using real data and the top-rated and free statistical software \textsf{R}. Teachers can download the source for course materials, labs, slides, data sets, \textsf{R} figures, or create their own custom quizzes and problem sets for students to take on the website. Everyone is also welcome to download this textbook as a PDF or the book's source files to create a custom version of this textbook or to simply share a copy with a friend or on a website. All of these products are free, and anyone is welcome to use these online tools and resources with or without this textbook as a companion.
+
+
+\subsection*{Acknowledgements}
+
+The \emph{OpenIntro} project would not have been possible without the dedication and volunteer hours of all those involved.  The authors of \textit{OpenIntro Statistics} would like to thank Andrew Bray, Meenal Patel, Yongtao Guan, Filipp Brunshteyn, Rob Gould, and Chris Pope for their involvement and contributions.  Dalene Stangl, Dave Harrington, Jan de Leeuw, Kevin Rader, and Philippe Rigollet provided valuable feedback on early editions of the text.
+
+This text has benefited from feedback from Andrea Foulkes, Raji Balasubramanian, Curry Hilton, Michael Parzen, Kevin Rader and the many excellent teaching fellows at Harvard College who assisted in courses using the book.  The cover design was provided by Pierre Baduel.
+
+

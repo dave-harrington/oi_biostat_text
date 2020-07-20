@@ -1,0 +1,2215 @@
+\ \textD{\newpage}
+
+%!TEX root=../../main.tex
+\begin{chapterpage}{Introduction to data}
+  \chaptertitle{Introduction to data}
+  \label{introductionToData}
+  \chaptersection{leapCaseStudy}
+  \chaptersection{dataBasics}
+  \chaptersection{dataCollectionPrinciples}
+  \chaptersection{numericalData}
+  \chaptersection{categoricalData}
+  \chaptersection{relationshipsBetweenTwoVariables}
+  \chaptersection{exploratoryDataAnalysis}
+  \chaptersection{notesChapterData}
+\end{chapterpage}
+\renewcommand{\chapterfolder}{ch_intro_to_data}
+
+
+\chapterintro{Making observations and recording \term{data} form the backbone of empirical research, and represent the beginning of a systematic approach to investigating scientific questions. As a discipline, statistics focuses on addressing the following three questions in a rigorous and efficient manner: How can data best be collected? How should data be analyzed? What can be inferred from data? \\
+
+\noindent{}This chapter provides a brief discussion on the principles of data collection, and introduces basic methods for summarizing and exploring data.}
+
+\section[Case study]{Case study: preventing peanut allergies}
+\label{leapCaseStudy}
+
+\index{data!LEAP|(}
+
+The proportion of young children in Western countries with peanut allergies has doubled in the last 10 years. Previous research suggests that exposing infants to peanut-based foods, rather than excluding such foods from their diets, may be an effective strategy for preventing the development of peanut allergies. The "Learning Early about Peanut Allergy" (LEAP) study was conducted to investigate whether early exposure to peanut products reduces the probability that a child will develop peanut allergies.\footnote{Du Toit, George, et al. Randomized trial of peanut consumption in infants at risk for peanut allergy. New England Journal of Medicine 372.9 (2015): 803-813.}
+
+The study team enrolled children in the United Kingdom between 2006 and 2009, selecting 640 infants with eczema, egg allergy, or both. Each child was randomly assigned to either the peanut consumption (treatment) group or the peanut avoidance (control) group. Children in the treatment group were fed at least 6 grams of peanut protein daily until 5 years of age, while children in the control group avoided consuming peanut protein until 5 years of age.
+
+At 5 years of age, each child was tested for peanut allergy using an oral food challenge (OFC): 5 grams of peanut protein in a single dose. A child was recorded as passing the oral food challenge if no allergic reaction was detected, and failing the oral food challenge if an allergic reaction occurred. These children had previously been tested for peanut allergy through a skin test, conducted at the time of study entry; the main analysis presented in the paper was based on data from 530 children with an earlier negative skin test.\footnote{Although a total of 542 children had an earlier negative skin test, data collection did not occur for 12 children.} 
+
+Individual-level data from the study are shown in Figure~\ref{leapStudyResultsDF} for 5 of the 530 children\textemdash each row represents a participant and shows the participant's study ID number, treatment group assignment, and OFC outcome.\footnote{The data are available as \data{LEAP} in the \textsf{R} package \texttt{oibiostat}.}
+ 
+% latex table generated in R 3.1.1 by xtable 1.7-4 package
+% Mon Sep 28 09:14:28 2015
+
+\begin{figure}[ht]
+\centering
+\begin{tabular}{lll}
+  \hline
+participant.ID & treatment.group & overall.V60.outcome \\ 
+  \hline
+LEAP\_100522 & Peanut Consumption & PASS OFC \\ 
+  LEAP\_103358 & Peanut Consumption & PASS OFC \\ 
+  LEAP\_105069 & Peanut Avoidance & PASS OFC \\ 
+  LEAP\_994047 & Peanut Avoidance & PASS OFC \\ 
+  LEAP\_997608 & Peanut Consumption & PASS OFC \\ 
+   \hline
+\end{tabular}
+\caption{Individual-level LEAP results, for five children.}
+\label{leapStudyResultsDF}
+\end{figure}
+
+%print(xtable(LEAP[c(1,2,3,529, 530),c("participant.ID", "treatment.group", "overall.V60.outcome")]),include.rownames=FALSE)
+
+The data can be organized in the form of a two-way summary table; Figure~\ref{leapStudyResults} shows the results categorized by treatment group and OFC outcome. 
+
+% latex table generated in R 3.1.1 by xtable 1.7-4 package
+% Thu Jul 16 07:12:04 2015
+\begin{figure}[ht]
+\centering
+\begin{tabular}{rrrr}
+  \hline
+ & FAIL OFC & PASS OFC & Sum \\ 
+  \hline
+Peanut Avoidance & 36 & 227 & 263 \\ 
+  Peanut Consumption & 5 & 262 & 267 \\ 
+  Sum & 41 & 489 & 530 \\ 
+   \hline
+\end{tabular}
+\caption{Summary of LEAP results, organized by treatment group (either peanut avoidance or consumption) and result of the oral food challenge at 5 years of age (either pass or fail).} 
+\label{leapStudyResults}
+\end{figure}
+%library(xtable); outcome.table = addmargins(table(LEAP$treatment.group, LEAP$overall.V60.outcome)); xtable(outcome.table, digits = 0, caption = "LEAP Study Results", caption  = "leapStudyResults")
+
+\textD{\newpage}
+
+The summary table makes it easier to identify patterns in the data. Recall that the question of interest is whether children in the peanut consumption group are more or less likely to develop peanut allergies than those in the peanut avoidance group. In the avoidance group, the proportion of children failing the OFC is $36/263 = 0.137$ (13.7\%); in the consumption group, the proportion of children failing the OFC is $5/267 = 0.019$ (1.9\%).  Figure~\ref{leapBarPlots} shows a graphical method of displaying the study results, using either the number of individuals per category from Figure~\ref{leapStudyResults} or the proportion of individuals with a specific OFC outcome in a group. 
+
+\begin{figure}[h]
+	\centering
+	\subfigure[]{
+		\includegraphics[width=0.48\textwidth]{ch_intro_to_data_oi_biostat/figures/leapBarPlot/leapBarPlot.pdf}
+		\label{leapBarPlot}
+	}
+	\subfigure[]{
+		\includegraphics[width=0.48\textwidth]{ch_intro_to_data_oi_biostat/figures/leapBarPlot/leapBarPlotSta.pdf} 
+		\label{leapBarPlotSta}		
+	}
+	\caption{\subref{leapBarPlot} A bar plot displaying the number of individuals who failed or passed the OFC in each treatment group. \subref{leapBarPlotSta} A bar plot displaying the proportions of individuals in each group that failed or passed the OFC.}
+	\label{leapBarPlots}
+\end{figure}
+
+The proportion of participants failing the OFC is 11.8\% higher in the peanut avoidance group than the peanut consumption group. Another way to summarize the data is to compute the ratio of the two proportions (0.137/0.019 = 7.31), and conclude that the proportion of participants failing the OFC in the avoidance group is more than 7 times as large as in the consumption group; i.e., the risk of failing the OFC was more than 7 times as great for participants in the avoidance group relative to the consumption group.
+
+Based on the results of the study, it seems that early exposure to peanut products may be an effective strategy for reducing the chances of developing peanut allergies later in life. It is important to note that this study was conducted in the United Kingdom at a single site of pediatric care; it is not clear that these results can be generalized to other countries or cultures.
+
+The results also raise an important statistical issue: does the study provide definitive evidence that peanut consumption is beneficial? In other words, is the 11.8\% difference between the two groups larger than one would expect by chance variation alone? The material on inference in later chapters will provide the statistical tools to evaluate this question.
+
+\index{data!LEAP|)}
+
+
+%______________
+\section{Data basics}
+\label{dataBasics}
+
+Effective organization and description of data is a first step in most analyses. This section introduces a structure for organizing data and basic terminology used to describe data.
+
+\subsection{Observations, variables, and data matrices}
+\label{frogDataExample}
+
+\index{data!frog|(}
+
+In evolutionary biology, parental investment refers to the amount of time, energy, or other resources devoted towards raising offspring. This section introduces the \data{frog} dataset, which originates from a 2013 study about maternal investment in a frog species.\footnote{Chen, W., et al. Maternal investment increases with altitude in a frog on the Tibetan Plateau. Journal of evolutionary biology 26.12 (2013): 2710-2715.} Reproduction is a costly process for female frogs, necessitating a trade-off between individual egg size and total number of eggs produced. Researchers were interested in investigating how maternal investment varies with altitude and collected measurements on egg clutches found at breeding ponds across 11 study sites; for 5 sites, the body size of individual female frogs was also recorded.
+
+% latex table generated in R 3.1.1 by xtable 1.7-4 package
+% Fri Jul 17 09:47:19 2015
+\begin{figure}[ht]
+\centering
+\begin{tabular}{rlrrrrr}
+  \hline
+ & altitude & latitude & egg.size & clutch.size & clutch.volume & body.size \\ 
+  \hline
+1 & 3,462.00 & 34.82 & 1.95 & 181.97 & 177.83 & 3.63 \\ 
+  2 & 3,462.00 & 34.82 & 1.95 & 269.15 & 257.04 & 3.63 \\ 
+  3 & 3,462.00 & 34.82 & 1.95 & 158.49 & 151.36 & 3.72 \\ 
+  150 & 2,597.00 & 34.05 & 2.24 & 537.03 & 776.25 & NA \\ 
+   \hline
+\end{tabular}
+\caption{Data matrix for the \data{frog} dataset.} 
+\label{frogDF}
+\end{figure}
+%library(xtable); xtable(frog.altitude[c(1,2,3,529, 530),c( "altitude", "latitude", "egg.size", "clutch.size", "clutch.volume", "body.size")], digits = 2, caption = "Frog Study Data Matrix", label = "frogDF" )
+
+Figure~\ref{frogDF} displays rows 1, 2, 3, and 150 of the data from the 431 clutches observed as part of the study.\footnote{The \data{frog} dataset is available in the \textsf{R} package \texttt{oibiostat}.} Each row in the table corresponds to a single clutch, indicating where the clutch was collected (\var{altitude} and \var{latitude}), \var{egg.size}, \var{clutch.size}, \var{clutch.volume}, and \var{body.size} of the mother when available. "NA" corresponds to a missing value, indicating that information on an individual female was not collected for that particular clutch. The recorded characteristics are referred to as \term{variables}; in this table, each column represents a variable.
+
+\begin{figure}[h]
+	\centering\small
+	\begin{tabular}{lp{10.5cm}}
+		\hline
+		{\bf variable} & {\bf description} \\
+		\hline
+		\var{altitude} & Altitude of the study site in meters above sea level \\
+		\var{latitude} & Latitude of the study site measured in degrees \\
+		\var{egg.size} & Average diameter of an individual egg to the 0.01 mm  \\
+		\var{clutch.size} & Estimated number of eggs in clutch\\
+		\var{clutch.volume} & Volume of egg clutch in mm$^3$  \\
+		\var{body.size} & Length of mother frog in cm \\
+		\hline
+	\end{tabular}
+	\caption{Variables and their descriptions for the \data{frog} dataset.\vspaceB{-3.5mm}}
+	\label{frogVariables}
+\end{figure}
+
+It is important to check the definitions of variables, as they are not always obvious. For example, why has \var{clutch.size} not been recorded as whole numbers? For a given clutch, researchers counted approximately 5 grams' worth of eggs and then estimated the total number of eggs based on the mass of the entire clutch. Definitions of the variables are given in Figure~\ref{frogVariables}.\footnote{The data discussed here are in the original scale; in the published paper, some values have undergone a natural log transformation.}
+
+\textD{\newpage}
+
+The data in Figure~\ref{frogDF} are organized as a \term{data matrix}. Each row of a data matrix corresponds to an observational unit, and each column corresponds to a variable. A piece of the data matrix for the LEAP study introduced in Section~\ref{leapCaseStudy} is shown in Figure~\ref{leapStudyResultsDF}; the rows are study participants and three variables are shown for each participant. Data matrices are a convenient way to record and store data. If the data are collected for another individual, another row can easily be added; similarly, another column can be added for a new variable.
+
+\index{data!frog|)}
+
+
+\subsection{Types of variables}
+\label{variableTypes}
+
+\index{data!famuss|(}
+
+The Functional polymorphisms Associated with human Muscle Size and Strength study (FAMuSS) measured a variety of demographic, phenotypic, and genetic characteristics for about 1,300 participants.\footnote{Thompson PD, Moyna M, Seip, R, et al., 2004.  Functional Polymorphisms Associated with Human Muscle Size and Strength.  Medicine and Science in Sports and Exercise 36:1132 - 1139.} Data from the study have been used in a number of subsequent studies\footnote{Pescatello L, et al. Highlights from the functional single nucleotide polymorphisms associated with human muscle size and strength or FAMuSS study, BioMed Research International 2013.}, such as one examining the relationship between muscle strength and genotype at a location on the ACTN3 gene.\footnote{Clarkson P, et al., Journal of Applied Physiology 99: 154-163, 2005.} 
+
+The \data{famuss} dataset is a subset of the data for 595 participants.\footnote{The subset is from Foulkes, Andrea S. Applied statistical genetics with R: for population-based association studies. Springer Science \& Business Media, 2009. The full version of the data is available at \url{http://people.umass.edu/foulkes/asg/data.html}.} Four rows of the \data{famuss} dataset are shown in Figure~\ref{famussDF}, and the variables are described in Figure~\ref{famussVariables}.
+
+% latex table generated in R 3.1.2 by xtable 1.7-4 package
+% Tue Jun 30 14:27:16 2015
+\begin{figure}[h]
+	\centering
+	\begin{tabular}{rlrlrrlr}
+		\hline
+		& sex & age & race & height & weight & actn3.r577x & ndrm.ch \\ 
+		\hline
+		1 & Female & 27 & Caucasian & 65.0 & 199.0 & CC & 40.0 \\ 
+		2 & Male & 36 & Caucasian & 71.7 & 189.0 & CT & 25.0 \\ 
+		3 & Female & 24 & Caucasian & 65.0 & 134.0 & CT & 40.0 \\ 
+		595 & Female & 30 & Caucasian & 64.0 & 134.0 & CC & 43.8 \\ 
+		\hline
+	\end{tabular}
+	\caption{Four rows from the \data{famuss} data matrix.}
+	\label{famussDF}
+\end{figure}
+
+%library(xtable); xtable(famuss[c(1,2,3,595),c( "sex", "age", "race", "height", "weight", "actn3.r577x", "ndrm.ch")],digits = 1, caption = "famussDF")
+
+
+\begin{figure}[h]
+	\centering\small
+	\begin{tabular}{lp{10.5cm}}
+		\hline
+		{\bf variable} & {\bf description} \\
+		\hline
+		\var{sex} & Sex of the participant \\
+		\var{age} & Age in years   \\
+		\var{race} & Race, recorded as \texttt{African Am} (African American), \texttt{Caucasian}, \texttt{Asian}, \texttt{Hispanic} or \texttt{Other} \\
+		\var{height} & Height in inches    \\
+		\var{weight} & Weight in pounds \\
+		\var{actn3.r577x} & Genotype at the location r577x in the ACTN3 gene. \\
+		\var{ndrm.ch} & Percent change in strength in the non-dominant arm, comparing strength after to before training \\
+		\hline
+	\end{tabular}
+	\caption{Variables and their descriptions for the \data{famuss} dataset.\vspaceB{-3.5mm}}
+	\label{famussVariables}
+\end{figure}
+
+\index{data!famuss|)}
+
+The variables \var{age}, \var{height}, \var{weight}, and \var{ndrm.ch} are \termsub{numerical variables}{numerical variable}. They take on numerical values, and it is reasonable to add, subtract, or take averages with these values. In contrast, a variable reporting telephone numbers would not be classified as numerical, since sums, differences, and averages in this context have no meaning. Age measured in years is said to be \termsub{discrete}{numerical variable!discrete}, since it can only take on numerical values with jumps; i.e., positive integer values. Percent change in strength in the non-dominant arm (\var{ndrm.ch}) is \termsub{continuous}{numerical variable!continuous}, and can take on any value within a specified range.
+
+\textD{\newpage}
+
+The variables \var{sex}, \var{race}, and \var{actn3.r577x} are \termsub{categorical variables}{categorical variable}, which take on values that are names or labels. The possible values of a categorical variable are called the variable's \termsub{levels}{categorical variable!levels}.\footnote{Categorical variables are sometimes called \term{factor variables}.}  For example, the levels of \var{actn3.r577x} are the three possible genotypes at this particular locus: CC, CT, or TT.  Categorical variables without a natural ordering are called \termsub{nominal categorical variables}{categorical variable!nominal}; \var{sex}, \var{race}, and \var{actn3.r577x} are all nominal categorical variables. Categorical variables with levels that have a natural ordering are referred to as \termsub{ordinal categorical variables}{categorical variable!ordinal}. For example, age of the participants grouped into 5-year intervals (15-20, 21-25, 26-30, etc.) is an ordinal categorical variable.  
+
+\begin{figure}
+\centering
+\includegraphics[width=0.70\textwidth]{ch_intro_to_data_oi_biostat/figures/variables/variableTypes.png}
+\caption{Breakdown of variables into their respective types.}
+\label{variableTypesFig}
+\end{figure}
+
+\begin{examplewrap}
+\begin{nexample}{Classify the variables in the \data{frog} dataset: \var{altitude}, \var{latitude}, \var{egg.size}, \var{clutch.size}, \var{clutch.volume}, and \var{body.size}.}
+
+The variables \var{egg.size}, \var{clutch.size}, \var{clutch.volume}, and \var{body.size} are continuous numerical variables, and can take on all positive values.
+
+In the context of this study, the variables \var{altitude} and \var{latitude} are best described as categorical variables, since the numerical values of the variables correspond to the 11 specific study sites where data were collected. Researchers were interested in exploring the relationship between altitude and maternal investment; it would be reasonable to consider \var{altitude} an ordinal categorical variable.
+\end{nexample}
+\end{examplewrap}
+
+\begin{exercisewrap}
+\begin{nexercise} \index{!LEAP}
+	Characterize the variables \var{treatment.group} and \var{overall.V60.outcome} from the LEAP study (discussed in Section~\ref{leapCaseStudy}).\footnotemark{}
+\end{nexercise}
+\end{exercisewrap}
+\footnotetext{These variables measure non-numerical quantities, and thus are categorical variables with two levels.}
+
+\begin{exercisewrap}
+\begin{nexercise}
+Suppose that on a given day, a research assistant collected data on the first 20 individuals visiting a walk-in clinic: age (measured as less than 21, 21 - 65, and greater than 65 years of age), sex, height, weight, and reason for the visit.  Classify each of the variables.\footnotemark{}
+\end{nexercise}
+\end{exercisewrap}
+\footnotetext{Height and weight are continuous numerical variables. Age as measured by the research assistant is ordinal categorical. Sex and the reason for the visit are nominal categorical variables.} 
+
+
+\textD{\newpage}
+
+
+\subsection{Relationships between variables}
+\label{variableRelations}
+
+Many studies are motivated by a researcher examining how two or more variables are related. For example, do the values of one variable increase as the values of another decrease? Do the values of one variable tend to differ by the levels of another variable?
+
+One study used the \data{famuss} data to investigate whether ACTN3 genotype at a particular location (residue 577) is associated with change in muscle strength. The ACTN3 gene codes for a protein involved in muscle function. A common mutation in the gene at a specific location changes the cytosine (C) nucleotide to a thymine (T) nucleotide; individuals with the TT genotype are unable to produce any ACTN3 protein. 
+
+Researchers hypothesized that genotype at this location might influence muscle function. As a measure of muscle function, they recorded the percent change in non-dominant arm strength after strength training; this variable, \var{ndrm.ch}, is the \term{response variable} in the study. A response variable is defined by the particular research question a study seeks to address, and measures the outcome of interest in the study. A study will typically examine whether the values of a response variable differ as values of an \term{explanatory variable} change, and if so, how the two variables are related. A given study may examine several explanatory variables for a single response variable.\footnote{Response variables are sometimes called dependent variables and explanatory variables are often called independent variables or predictors.} The explanatory variable examined in relation to \var{ndrm.ch} in the study is \var{actn3.r557x}, ACTN3 genotype at location 577. 
+
+\begin{examplewrap}
+\begin{nexample}{In the maternal investment study conducted on frogs, researchers collected measurements on egg clutches and female frogs at 11 study sites, located at differing altitudes, in order to investigate how maternal investment varies with altitude. Identify the response and explanatory variables in the study.}
+
+The variables \var{egg.size}, \var{clutch.size}, and \var{clutch.volume} are response variables indicative of maternal investment.
+	
+The explanatory variable examined in the study is \var{altitude}. 
+
+While \var{latitude} is an environmental factor that might potentially influence features of the egg clutches, it is not a variable of interest in this particular study.
+
+Female body size (\var{body.size}) is neither an explanatory nor response variable.
+
+\label{frogVarTypesEx}
+\end{nexample}
+\end{examplewrap}
+
+\begin{exercisewrap}
+\begin{nexercise}
+Refer to the variables from the \data{famuss} dataset described in Figure~\ref{famussVariables} to formulate a question about the relationships between these variables, and identify the response and explanatory variables in the context of the question.\footnotemark{}
+\end{nexercise}
+\end{exercisewrap}
+\footnotetext{Two sample questions: (1)  Does change in participant arm strength after training seem associated with race? The response variable is \var{ndrm.ch} and the explanatory variable is \var{race}. (2)  Do male participants appear to respond differently to strength training than females? The response variable is \var{ndrm.ch} and the explanatory variable is \var{sex}.}
+
+
+%_____________
+\section{Data collection principles}
+\label{dataCollectionPrinciples}
+
+%\index{sample|(}
+\index{population|(}
+
+The first step in research is to identify questions to investigate. A clearly articulated research question is essential for selecting subjects to be studied, identifying relevant variables, and determining how data should be collected.
+
+\subsection{Populations and samples}
+\label{populationsAndSamples}
+
+\textD{\noindent}%
+Consider the following research questions:
+
+\begin{enumerate}
+\setlength{\itemsep}{0mm}
+
+\item Do bluefin tuna from the Atlantic Ocean have particularly high levels of mercury, such that they are unsafe for human consumption?
+
+\item For infants predisposed to developing a peanut allergy, is there evidence that introducing peanut products early in life is an effective strategy for reducing the risk of developing a peanut allergy?
+
+\item Does a recently developed drug designed to treat glioblastoma, a form of brain cancer, appear more effective at inducing tumor shrinkage than the drug currently on the market?
+\end{enumerate}
+
+Each of these questions refers to a specific target \term{population}. For example, in the first question, the target population consists of all bluefin tuna from the Atlantic Ocean; each individual bluefin tuna represents a case. It is almost always either too expensive or logistically impossible to collect data for every case in a population. As a result, nearly all research is based on information obtained about a sample from the population. A \term{sample} represents a small fraction of the population. Researchers interested in evaluating the mercury content of bluefin tuna from the Atlantic Ocean could collect a sample of 500 bluefin tuna (or some other quantity), measure the mercury content, and use the observed information to formulate an answer to the research question. 
+
+\begin{exercisewrap}
+\begin{nexercise}
+Identify the target populations for the remaining two research questions.\footnotemark{}
+\end{nexercise}
+\end{exercisewrap}
+\footnotetext{In Question 2, the target population consists of infants predisposed to developing a peanut allergy. In Question 3, the target population consists of patients with glioblastoma.}
+
+
+%\textD{\ \vspace{5mm}}
+\textD{\newpage}
+
+
+\subsection{Anecdotal evidence}
+\label{anecdotalEvidence}
+
+Anecdotal evidence typically refers to unusual observations that are easily recalled because of their striking characteristics. Physicians may be more likely to remember the characteristics of a single patient with an unusually good response to a drug instead of the many patients who did not respond.  The dangers of drawing general conclusions from anecdotal information are obvious; no single observation should be used to draw conclusions about a population.
+
+While it is incorrect to generalize from individual observations, unusual observations can sometimes be valuable.  E.C. Heyde was a general practitioner from Vancouver who noticed that a few of his elderly patients with aortic-valve stenosis (an abnormal narrowing) caused by an accumulation of calcium had also suffered massive gastrointestinal bleeding. In 1958, he published his observation.\footnote{Heyde EC. Gastrointestinal bleeding in aortic stenosis. N Engl J Med 1958;259:196.} Further research led to the identification of the underlying cause of the association, now called Heyde's Syndrome.\footnote{Greenstein RJ, McElhinney AJ, Reuben D, Greenstein AJ. Co-lonic vascular ectasias and aortic stenosis: coincidence or causal relationship? Am J Surg 1986;151:347-51.}
+
+An anecdotal observation can never be the basis for a conclusion, but may well inspire the design of a more systematic study that could be definitive.  
+
+
+\textD{\newpage}
+
+
+\subsection{Sampling from a population}
+
+Sampling from a population, when done correctly, provides reliable information about the characteristics of a large population. The US Centers for Disease Control (US CDC) conducts several surveys to obtain information about the US population, including the Behavior Risk Factor Surveillance System (BRFSS).\footnote{\url{https://www.cdc.gov/brfss/index.html}} The BRFSS was established in 1984 to collect data about health-related risk behaviors, and now collects data from more than 400,000 telephone interviews conducted each year. Data from a recent BRFSS survey are used in Chapter~\ref{foundationsForInference}. The CDC conducts similar surveys for diabetes, health care access, and immunization. Likewise, the World Health Organization (WHO) conducts the World Health Survey in partnership  with approximately 70 countries to learn about the health of adult populations and the health systems in those countries.\footnote{\url{http://www.who.int/healthinfo/survey/en/}}  
+
+The general principle of sampling is straightforward: a sample from a population is useful for learning about a population only when the sample is \termsub{representative}{sample!representative sample} of the population. In other words, the characteristics of the sample should correspond to the characteristics of the population. 
+
+Suppose that the quality improvement team at an integrated health care system, such as Harvard Pilgrim Health Care, is interested in learning about how members of the health plan perceive the quality of the services offered under the plan. A common pitfall in conducting a survey is to use a \termsub{convenience sample}{sample!convenience sample}, in which individuals who are easily accessible are more likely to be included in the sample than other individuals. If a sample were collected by approaching plan members visiting an outpatient clinic during a particular week, the sample would fail to enroll generally healthy members who typically do not use outpatient services or schedule routine physical examinations; this method would produce an unrepresentative sample (Figure~\ref{sampleConvenienceHealthPlan}). 
+
+%JV: Weird stuff going on with the floats for these sampling figures...
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.6\textwidth]{ch_intro_to_data_oi_biostat/figures/sampleHealthPlan/sampleConvenienceHealthPlan.png}
+	\caption{Instead of sampling from all members equally, approaching members visiting a clinic during a particular week disproportionately selects members who frequently use outpatient services.}
+	\label{sampleConvenienceHealthPlan}
+\end{figure}
+
+\index{sample!random sample|(}
+
+Random sampling is the best way to ensure that a sample reflects a population. In a \term{simple random sample}, each member of a population has the same chance of being sampled. One way to achieve a simple random sample of the health plan members is to randomly select a certain number of names from the complete membership roster, and contact those individuals for an interview (Figure~\ref{sampleRandomHealthPlan}). 
+
+\textD{\newpage}
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.55\textwidth]{ch_intro_to_data_oi_biostat/figures/sampleHealthPlan/sampleRandomHealthPlan.png}
+	\caption{Five members are randomly selected from the population to be interviewed.}
+	\label{sampleRandomHealthPlan}
+\end{figure}
+
+Even when a simple random sample is taken, it is not guaranteed that the sample is representative of the population. If the \term{non-response} rate \index{sample!non-response} for a survey is high, that may be indicative of a biased sample. Perhaps a majority of participants did not respond to the survey because only a certain group within the population is being reached; for example, if questions assume that participants are fluent in English, then a high non-response rate would be expected if the population largely consists of individuals who are not fluent in English (Figure~\ref{sampleNonResponseHealthPlan}). Such \term{non-response bias} \index{sample!non-response bias} can skew results; generalizing from an unrepresentative sample may likely lead to incorrect conclusions about a population. 
+
+\begin{figure}[h]
+	\centering
+	{\includegraphics[width=0.55\textwidth]{ch_intro_to_data_oi_biostat/figures/sampleHealthPlan/sampleNonResponseHealthPlan.png}
+	\caption{Surveys may only reach a certain group within the population, which leads to non-response bias. For example, a survey written in English may only result in responses from health plan members fluent in English.}}
+	\label{sampleNonResponseHealthPlan}
+\end{figure}
+
+\begin{exercisewrap}
+\begin{nexercise}
+It is increasingly common for health care facilities to follow-up a patient visit with an email providing a link to a website where patients can rate their experience.  Typically, less than 50\% of patients visit the website. If half of those who respond indicate a negative experience, do you think that this implies that at least 25\% of patient visits are unsatisfactory?\footnotemark{}
+\end{nexercise}
+\end{exercisewrap}
+\footnotetext{It is unlikely that the patients who respond constitute a representative sample from the larger population of patients. This is not a random sample, because individuals are selecting themselves into a group, and it is unclear that each person has an equal chance of answering the survey. If our experience is any guide, dissatisfied people are more likely to respond to these informal surveys than satisfied patients.}
+
+\index{sample!random sample|)}
+\index{population|)}
+%\index{sample|)}
+
+
+\textD{\newpage}
+
+
+%___________
+\subsection{Sampling methods}
+\label{fourSamplingMethods}
+\label{threeSamplingMethods}
+
+Almost all statistical methods are based on the notion of implied randomness. If data are not sampled from a population at random, these statistical methods -- calculating estimates and errors associated with estimates -- are not reliable. Four random sampling methods are discussed in this section: simple, stratified, cluster, and multistage sampling.
+
+In a \termsub{simple random sample}{sample!simple random}, each case in the population has an equal chance of being included in the sample (Figure~\ref{simple_stratified}). Under simple random sampling, each case is sampled independently of the other cases; i.e., knowing that a certain case is included in the sample provides no information about which other cases have also been sampled. 
+
+In \termsub{stratified sampling}{sample!stratified sampling}, the population is first divided into groups called \term{strata}\index{sample!strata|textbf} before cases are selected within each stratum (typically through simple random sampling) (Figure~\ref{simple_stratified}). The strata are chosen such that similar cases are grouped together. Stratified sampling is especially useful when the cases in each stratum are very similar with respect to the outcome of interest, but cases between strata might be quite different. 
+
+Suppose that the health care provider has facilities in different cities. If the range of services offered differ by city, but all locations in a given city will offer similar services, it would be effective for the quality improvement team to use stratified sampling to identify participants for their study, where each city represents a stratum and plan members are randomly sampled from each city.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=\textwidth]{ch_intro_to_data_oi_biostat/figures/samplingMethodsFigure/simple_stratified}
+	\caption{Examples of simple random\index{sample!simple random sampling} and stratified sampling\index{sample!stratified sampling}. In the top panel, simple random sampling is used to randomly select 18 cases (circled orange dots) out of the total population (all dots). The bottom panel illustrates stratified sampling: cases are grouped into six strata, then simple random sampling is employed within \mbox{each stratum}.}
+	\label{simple_stratified}
+\end{figure}
+
+\textD{\newpage}
+
+In a \termsub{cluster sample}{sample!cluster sample}, the population is first divided into many groups, called \termsub{clusters}{sample!cluster}. Then, a fixed number of clusters is sampled and all observations from each of those clusters are included in the sample (Figure~\ref{cluster_multistage}). A \termsub{multistage sample}{sample!multistage sample} is similar to a cluster sample, but rather than keeping all observations in each cluster, a random sample is collected within each selected cluster (Figure~\ref{cluster_multistage}).
+
+\begin{figure}
+	\centering
+	\includegraphics[width=\textwidth]{ch_intro_to_data_oi_biostat/figures/samplingMethodsFigure/cluster_multistage}
+	\caption{Examples of cluster\index{sample!cluster sampling} and multistage sampling\index{sample!multistage sampling}. The top panel illustrates cluster sampling: data are binned into nine clusters, three of which are sampled, and all observations within these clusters are sampled. The bottom panel illustrates multistage sampling, which differs from cluster sampling in that only a subset from each of the three selected clusters are sampled.}
+	\label{cluster_multistage}
+\end{figure}
+
+Unlike with stratified sampling, cluster and multistage sampling are most helpful when there is high case-to-case variability within a cluster, but the clusters themselves are similar to one another. For example, if neighborhoods in a city represent clusters, cluster and multistage sampling work best when the population within each neighborhood is very diverse, but neighborhoods are relatively similar.
+
+Applying stratified, cluster, or multistage sampling can often be more economical than only drawing random samples. However, analysis of data collected using such methods is more complicated than when using data from a simple random sample; this text will only discuss analysis methods for simple random samples. 
+
+%\textD{\newpage}
+
+\begin{examplewrap}
+\begin{nexample}{Suppose researchers are interested in estimating the malaria rate in a densely tropical portion of rural Indonesia. There are 30 villages in the area, each more or less similar to the others. The goal is to test 150 individuals for malaria. Evaluate which sampling method should be employed.}
+	A simple random sample would likely draw individuals from all 30 villages, which could make data collection extremely expensive. Stratified sampling is not advisable, since there is not enough information to determine how strata of similar individuals could be built. However, cluster sampling or multistage sampling are both reasonable options. For example, with multistage sampling, half of the villages could be randomly selected, and then 10 people selected from each village. This strategy is more efficient than a simple random sample, and can still provide a sample representative of the population of interest.
+\end{nexample}
+\end{examplewrap}
+
+
+\subsection{Introducing experiments and observational studies}
+
+The two primary types of study designs used to collect data are experiments and observational studies.
+
+In an \term{experiment}, researchers directly influence how data arise, such as by assigning groups of individuals to different treatments and assessing how the outcome varies across treatment groups. The LEAP study is an example of an experiment with two groups, an experimental group that received the intervention (peanut consumption) and a control group that received a standard approach (peanut avoidance). In studies assessing effectiveness of a new drug, individuals in the control group typically receive a \term{placebo}, an inert substance with the appearance of the experimental intervention. The study is designed such that on average, the only difference between the individuals in the treatment groups is whether or not they consumed peanut protein. This allows for observed differences in experimental outcome to be directly attributed to the intervention and constitute evidence of a causal relationship between intervention and outcome. 
+
+In an \term{observational study}, researchers merely observe and record data, without interfering with how the data arise. For example, to investigate why certain diseases develop, researchers might collect data by conducting surveys, reviewing medical records, or following a \term{cohort} of many similar individuals. Observational studies can provide evidence of an association between variables, but cannot by themselves show a causal connection. However, there are many instances where randomized experiments are unethical, such as to explore whether lead exposure in young children is associated with cognitive impairment. 
+
+\subsection[Experiments]{Experiments}
+\label{experiments}
+
+\textD{\noindent}%
+Experimental design is based on three principles: control, randomization, and replication.
+
+\index{data!LEAP|(}
+
+\begin{description}
+
+	\item[Control.] When selecting participants for a study, researchers work to \term{control} for extraneous variables and choose a sample of participants that is representative of the population of interest. For example, participation in a study might be restricted to individuals who have a condition that suggests they may benefit from the intervention being tested. Infants enrolled in the LEAP study were required to be between 4 and 11 months of age, with severe eczema and/or allergies to eggs.
+
+	\item[Randomization.] Randomly assigning patients to treatment groups ensures that groups are balanced with respect to both variables that can and cannot be controlled. For example, randomization in the LEAP study ensures that the proportion of males to females is approximately the same in both groups. Additionally, perhaps some infants were more susceptible to peanut allergy because of an undetected genetic condition; under randomization, it is reasonable to assume that such infants were present in equal numbers in both groups. Randomization allows differences in outcome between the groups to be reasonably attributed to the treatment rather than inherent variability in patient characteristics, since the treatment represents the only systematic difference between the two groups. 
+	
+	In situations where researchers suspect that variables other than the intervention may influence the response, individuals can be first grouped into \term{blocks} according to a certain attribute and then randomized to treatment group within each block; this technique is referred to as \term{blocking} or \term{stratification}. The team behind the LEAP study stratified infants into two cohorts based on whether or not the child developed a red, swollen mark (a wheal) after a skin test at the time of enrollment; afterwards, infants were randomized between peanut consumption and avoidance groups. Figure~\ref{leapBlocking} illustrates the blocking scheme used in the study. 
+
+	\item[Replication.] The results of a study conducted on a larger number of cases are generally more reliable than smaller studies; observations made from a large sample are more likely to be representative of the population of interest. In a single study, \term{replication} is accomplished by collecting a sufficiently large sample. The LEAP study randomized a total of 640 infants.
+
+\end{description}
+
+Randomized experiments are an essential tool in research. The US Food and Drug Administration typically requires that a new drug can only be marketed after two independently conducted randomized trials confirm its safety and efficacy; the European Medicines Agency has a similar policy. Large randomized experiments in medicine have provided the basis for major public health initiatives. In 1954, approximately 750,000 children participated in a randomized study comparing polio vaccine with a placebo.\footnote{Meier, Paul. "The biggest public health experiment ever: the 1954 field trial of the Salk poliomyelitis vaccine." \textit{Statistics: a guide to the unknown}. San Francisco: Holden-Day (1972): 2-13.}  In the United States, the results of the study quickly led to the widespread and successful use of the vaccine for polio prevention.
+
+	\begin{figure}
+		\centering
+		\includegraphics[width=0.78\textwidth]{ch_intro_to_data_oi_biostat/figures/leapBlocking/leapBlocking.png}
+		\caption{A simplified schematic of the blocking scheme used in the LEAP study, depicting 640 patients that underwent randomization. Patients are first divided into blocks based on response to the initial skin test, then each block is randomized between the avoidance and consumption groups. This strategy ensures an even representation of patients in each group who had positive and negative skin tests.}
+		\label{leapBlocking}
+	\end{figure}
+
+\index{data!LEAP|)}
+
+
+\textD{\newpage}
+
+
+\subsection{Observational studies}
+
+In observational studies, researchers simply observe selected potential explanatory and response variables. Participants who differ in important explanatory variables may also differ in other ways that influence response; as a result, it is not advisable to make causal conclusions about the relationship between explanatory and response variables based on observational data. For example, while observational studies of obesity have shown that obese individuals tend to die sooner than individuals with normal weight, it would be misleading to conclude that obesity causes shorter life expectancy. Instead, underlying factors are probably involved; obese individuals typically exhibit other health behaviors that influence life expectancy, such as reduced exercise or unhealthy diet.
+
+Suppose that an observational study tracked sunscreen use and incidence of skin cancer, and found that the more sunscreen a person uses, the more likely they are to have skin cancer. These results do not mean that sunscreen causes skin cancer. One important piece of missing information is sun exposure -- if someone is often exposed to sun, they are both more likely to use sunscreen and to contract skin cancer. Sun exposure is a \term{confounding variable}: a variable associated with both the explanatory and response variables.\footnote{Also called a \term{lurking variable}, \term{confounding factor}, or a \term{confounder}.} There is no guarantee that all confounding variables can be examined or measured; as a result, it is not advisable to draw causal conclusions from observational studies. 
+
+\begin{center}
+	\includegraphics[height=1.25in]{ch_intro_to_data_oi_biostat/figures/variables/confoundingVariable.png}
+\end{center}
+
+Confounding is not limited to observational studies. For example, consider a randomized study comparing two treatments (varenicline and buproprion) against a placebo as therapies for aiding smoking cessation.\footnote{Jorenby, Douglas E., et al. "Efficacy of varenicline, an $\alpha4\beta2$ nicotinic acetylcholine receptor partial agonist, vs placebo or sustained-release bupropion for smoking cessation: a randomized controlled trial." JAMA 296.1 (2006): 56-63.} At the beginning of the study, participants were randomized into groups: 352 to varenicline, 329 to buproprion, and 344 to placebo. Not all participants successfully completed the assigned therapy: 259, 225, and 215 patients in each group did so, respectively. If an analysis were based only on the participants who completed therapy, this could introduce confounding; it is possible that there are underlying differences between individuals who complete the therapy and those who do not. Including all randomized participants in the final analysis maintains the original randomization scheme and controls for differences between the groups.\footnote{This strategy, commonly used for analyzing clinical trial data, is referred to as an intention-to-treat analysis.}
+
+\begin{exercisewrap}
+\begin{nexercise}
+As stated in Example~\ref{frogVarTypesEx}, female body size (\var{body.size}) in the parental investment study is neither an explanatory nor a response variable. Previous research has shown that larger females tend to produce larger eggs and egg clutches; however, large body size can be costly at high altitudes. Discuss a possible reason for why the study team chose to measure female body size when it is not directly related to their main research question.\footnotemark{}
+\end{nexercise}
+\end{exercisewrap}
+\footnotetext{Female body size is a potential confounding variable, since it may be associated with both the explanatory variable (altitude) and response variables (measures of maternal investment). If the study team observes, for example, that clutch size tends to decrease at higher altitudes, they should check whether the apparent association is not simply due to frogs at higher altitudes having smaller body size and thus, laying smaller clutches.}
+
+Observational studies may reveal interesting patterns or associations that can be further investigated with follow-up experiments. Several observational studies based on dietary data from different countries showed a strong association between dietary fat and breast cancer in women. These observations led to the launch of the Women's Health Initiative (WHI), a large randomized trial sponsored by the US National Institutes of Health (NIH).  In the WHI, women were randomized to standard versus low fat diets, and the previously observed association was not confirmed.  
+
+Observational studies can be either prospective or retrospective. A \term{prospective study} identifies participants and collects information at scheduled times or as events unfold. For example, in the Nurses' Health Study, researchers recruited registered nurses beginning in 1976 and collected data through administering biennial surveys; data from the study have been used to investigate risk factors for major chronic diseases in women.\footnote{\texttt{\oiRedirect{textbook-channing_nurse_study}{www.channing.harvard.edu/nhs}}} \termsub{Retrospective studies}{retrospective study} collect data after events have taken place, such as from medical records. Some datasets may contain both retrospectively- and prospectively-collected variables. The Cancer Care Outcomes Research and Surveillance Consortium (CanCORS) enrolled participants with lung or colorectal cancer, collected information about diagnosis, treatment, and previous health behavior, but also maintained contact with participants to gather data about long-term outcomes.\footnote{Ayanian, John Z., et al. "Understanding cancer treatment and outcomes: the cancer care outcomes research and surveillance consortium." Journal of Clinical Oncology 22.15 (2004): 2992-2996}  
+
+
+%____________
+\section[Numerical data]{Numerical data}
+\label{numericalData}
+
+\index{data!frog|(}
+
+This section discusses techniques for exploring and summarizing numerical variables, using the \data{frog} data from the parental investment study introduced in Section~\ref{dataBasics}.
+
+\subsection{Measures of center: mean and median}
+\label{measuresOfCenter}
+
+The \term{mean}, sometimes called the \indexthis{average}{mean!average}, is a measure of center for a \term{distribution} of data. To find the average clutch volume for the observed egg clutches, add all the clutch volumes and divide by the total number of clutches.\footnote{For computational convenience, the volumes are rounded to the first~decimal.}
+\begin{align*}
+\overline{x} =& \frac{177.8 + 257.0 + \cdots + 933.3}{431} = 882.5\ \textrm{mm}^{3}
+\end{align*}
+The sample mean is often labeled $\overline{x}$\marginpar[\raggedright$\overline{x}$\\\footnotesize sample\\ mean]{\raggedright$\overline{x}$\\\footnotesize sample\\ mean}, to distinguish it from $\mu$,\marginpar[\raggedright$\mu$\\\footnotesize population\\ mean]{\raggedright$\mu$\\\footnotesize population\\ mean} the mean of the entire population from which the sample is drawn. The letter $x$ is being used as a generic placeholder for the variable of interest, \var{clutch.volume}.
+
+\begin{onebox}{Mean}
+		The sample mean of a numerical variable is the sum of the values of all observations divided by the number of observations:
+		\begin{align}
+		\overline{x} =& \frac{x_1+x_2+\cdots+x_n}{n}
+		\label{samplemeanEquation}
+		\end{align}
+		where $x_1, x_2, \dots, x_n$ represent the $n$ observed values.
+\end{onebox}
+
+\begin{comment}
+\marginpar[\raggedright\vspace{-8mm}
+$n$\\\footnotesize sample size]{\raggedright\vspace{-8mm}
+$n$\\\footnotesize sample size}\vspace{-2mm}
+\end{comment}
+
+The \term{median} is another measure of center; it is the middle number in a distribution after the values have been ordered from smallest to largest. If the distribution contains an even number of observations, the median is the average of the middle two observations. There are 431 clutches in the dataset, so the median is the clutch volume of the $216^{th}$ observation in the sorted values of \var{clutch.volume}: $831.8\ \textrm{mm}^{3}$.
+
+
+\textD{\newpage}
+
+
+\subsection{Measures of spread: standard deviation and interquartile range}
+\label{measuresOfSpread}
+
+The spread of a distribution refers to how similar or varied the values in the distribution are to each other; i.e., whether the values are tightly clustered or spread over a wide range.  
+
+The standard deviation for a set of data describes the typical distance between an observation and the mean. The distance of a single observation from the mean is its \term{deviation}. Below are the deviations for the $1^{st}$, $2^{nd}$, $3^{rd}$, and $431^{st}$ observations in the \var{clutch.volume} variable.
+\begin{align*}
+x_1-\overline{x} &= 177.8 - 882.5 = -704.7 \hspace{5mm}\text{ } \\
+x_2-\overline{x} &= 257.0 - 882.5 = -625.5 \\
+x_3-\overline{x} &= 151.4 - 882.5 = -731.1 \\
+&\ \vdots \\
+x_{431}-\overline{x} &= 933.2 - 882.5 = 50.7
+\end{align*}
+% library(openintro); d <- frog.altitude$clutch.volume; round(mean(d),1); d[c(1,2,3,431)]; d[c(1,2,3,431)] - round(mean(d),1); (d[c(1,2,3,431)] - round(mean(d)))^2; sum((d - round(mean(d)))^2)/49; sqrt(sum((d - round(mean(d)))^2)/49); var(d); sd(d)
+
+The sample \term{variance}\label{varianceFirstDiscussed}, the average of the squares of these deviations, is denoted by $s^2$\marginpar[\raggedright$s^2$\\\footnotesize sample variance]{\raggedright$s^2$\\\footnotesize sample variance}:
+\begin{align*}
+s^2 &= \frac{(-704.7)^2 + (-625.5)^2 + (-731.1)^2 + \cdots + (50.7)^2}{431-1} \\
+&= \frac{496,602.09 + 391,250.25 + 534,507.21 + \cdots + 2570.49}{430} \\
+&= 143,680.9
+\end{align*}
+The denominator is $n-1$ rather than $n$; this mathematical nuance accounts for the fact that sample mean has been used to estimate the population mean in the calculation. Details on the statistical theory can be found in more advanced texts. 
+
+The sample \term{standard deviation} $s$ is the square root of the variance:
+$$s=\sqrt{143,680.9} = 379.05 \textrm{mm}^{3}$$
+\marginpar[\raggedright\vspace{-10mm}
+
+$s$\\\footnotesize sample standard deviation]{\raggedright\vspace{-10mm}
+$s$\\\footnotesize sample standard deviation
+}\index{s@$s$}
+
+Like the mean, the population values for variance and standard deviation are denoted by Greek letters:
+$\sigma_{}^2$\marginpar[\raggedright$\sigma_{}^2$\\\footnotesize population variance\\ \hspace{2mm}]{\raggedright$\sigma_{}^2$\\\footnotesize population variance\\ \hspace{2mm}} for the variance and $\sigma$ for the standard deviation.\marginpar[\raggedright$\sigma$\\\footnotesize population standard deviation\\ \hspace{2mm}]{\raggedright$\sigma$\\\footnotesize population standard deviation\\ \hspace{2mm}}
+
+
+\begin{onebox}{Standard Deviation}
+		The sample standard deviation of a numerical variable is computed as the square root of the variance, which is the sum of squared deviations divided by the number of observations minus 1.
+		\begin{eqnarray}
+		s = \sqrt{\frac{({x_1 - \overline{x})}^{2}+({x_2 - \overline{x})}^{2}+\cdots+({x_n - \overline{x})}^{2}}{n-1}}
+		\label{SDEquation}
+		\end{eqnarray}
+		where $x_1, x_2, \dots, x_n$ represent the $n$ observed values.
+\end{onebox}
+
+\textD{\newpage}
+
+Variability can also be measured using the \term{interquartile range} (IQR). The IQR for a distribution is the difference between the first and third quartiles: $Q_3 - Q_1$. The first quartile ($Q_1$) is equivalent to the 25$^{th}$ percentile; i.e., 25\% of the data fall below this value. The third quartile ($Q_3$) is equivalent to the 75$^{th}$ percentile. By definition, the median represents the second quartile, with half the values falling below it and half falling above. The IQR for \var{clutch.volume} is $1096.0 - 609.6 = 486.4\ \textrm{mm}^{3}$.  
+
+Measures of center and spread are ways to summarize a distribution numerically. Using numerical summaries allows for a distribution to be efficiently described with only a few numbers.\footnote{Numerical summaries are also known as summary statistics.} For example, the calculations for \var{clutch.volume} indicate that the typical egg clutch has volume of about 880 mm$^3$, while the middle $50\%$ of egg clutches have volumes between approximately $600\ \textrm{mm}^{3}$ and $1100.0\ \textrm{mm}^{3}$.
+\textD{\\[5mm]}
+
+
+\subsection{Robust estimates}
+
+Figure~\ref{frogClutchVolDotPlot} shows the values of \var{clutch.volume} as points on a single axis. There are a few values that seem extreme relative to the other observations: the four largest values, which appear distinct from the rest of the distribution. How do these extreme values affect the value of the numerical summaries?
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=\textwidth]{ch_intro_to_data_oi_biostat/figures/frogClutchVolDotPlot/frogClutchVolDotPlot}
+    \caption{\termsub{Dot plot}{dot plot} of clutch volumes from the \data{frog} data.}
+	\label{frogClutchVolDotPlot}
+\end{figure}
+
+Figure~\ref{frogRobustOrNotTable} shows the summary statistics calculated under two scenarios, one with and one without the four largest observations. For these data, the median does not change, while the IQR differs by only about 6 $\textrm{mm}^{3}$. In contrast, the mean and standard deviation are much more affected, particularly the standard deviation.
+
+\begin{figure}[ht]
+	\centering
+	\begin{tabular}{l c cc c cc}
+		\hline
+		& \hspace{0mm} & \multicolumn{2}{c}{\bf robust} & \hspace{2mm} & \multicolumn{2}{c}{\bf not robust} \\
+		scenario && median & IQR && $\overline{x}$ & $s$ \\ 
+		\hline
+		original data (with extreme observations) 	&& 831.8 & 486.9 && 882.5 & 379.1 \\
+		% library(openintro); data(frog.altitude); d <- frog.altitude$clutch.volume; median(d); IQR(d); mean(d); sd(d)
+		data without four largest observations && 831.8 & 493.9 && 867.9 & 349.2 \\
+		% library(openintro); data(frog.altitude); d <- frog.altitude$clutch.volume; a <- d<= 2000; median(d[a]); IQR(d[a]); mean(d[a]); sd(d[a])
+		\hline
+	\end{tabular}
+	\caption{A comparison of how the median, IQR, mean ($\overline{x}$), and standard deviation ($s$) change when extreme observations are present.}
+	\label{frogRobustOrNotTable}
+\end{figure}
+
+The median and IQR are referred to as \term{robust estimates} because extreme observations have little effect on their values. For distributions that contain extreme values, the median and IQR will provide a more accurate sense of the center and spread than the mean and standard deviation. 
+
+
+\textD{\newpage}
+
+
+\subsection{Visualizing distributions of data: histograms and boxplots}
+\label{histogramsBoxplots}
+
+Graphs show important features of a distribution that are not evident from numerical summaries, such as asymmetry or extreme values. While dot plots show the exact value of each observation, histograms and boxplots graphically summarize distributions.
+
+In a \term{histogram}, observations are grouped into bins and plotted as bars. Figure~\ref{frogBinnedClutchVolTable} shows the number of clutches with volume between 0 and 200 $\textrm{mm}^{3}$, 200 and 400 $\textrm{mm}^{3}$, etc. up until 2,600 and 2,800 $\textrm{mm}^{3}$.\footnote{By default in \textsf{R}, the bins are left-open and right-closed; i.e., the intervals are of the form (a, b]. Thus, an observation with value 200 would fall into the 0-200 bin instead of the 200-400 bin.} These binned counts are plotted in Figure~\ref{frogHist}.
+
+\begin{figure}[ht]
+	\centering\small
+	\begin{tabular}{l ccc ccc ccc c}
+		\hline
+		\raisebox{-1.5ex}[0pt]{Clutch volumes} & \\
+		& \raisebox{1.5ex}[0pt]{0-200} & \raisebox{1.5ex}[0pt]{200-400} & \raisebox{1.5ex}[0pt]{400-600} & \raisebox{1.5ex}[0pt]{600-800} & \raisebox{1.5ex}[0pt]{$\cdots$} & \raisebox{1.5ex}[0pt]{2400-2600} & \raisebox{1.5ex}[0pt]{2600-2800} \\
+		\hline
+		\raisebox{-.25ex}[0pt]{Count} & \raisebox{-.25ex}[0pt]{4} & \raisebox{-.25ex}[0pt]{29} & \raisebox{-.25ex}[0pt]{69} & \raisebox{-.25ex}[0pt]{99} & \raisebox{-.25ex}[0pt]{$\cdots$} & \raisebox{-.25ex}[0pt]{2} & \raisebox{-.25ex}[0pt]{1} \\
+		\hline
+	\end{tabular}
+	\caption{The counts for the binned \var{clutch.volume} data.}
+	\label{frogBinnedClutchVolTable}
+\end{figure}
+% hist(frog.altitude$clutch.volume, breaks = 14, plot = FALSE)
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=0.82\textwidth]{ch_intro_to_data_oi_biostat/figures/frogHist/frogHist}
+	\caption{A histogram of \var{clutch.volume}.}
+	\label{frogHist}
+\end{figure}
+
+Histograms provide a view of the \term{data density}. Higher bars indicate more frequent observations, while lower bars represent relatively rare observations. Figure~\ref{frogHist} shows that most of the egg clutches have volumes between 500-1,000 mm$^3$, and there are many more clutches with volumes smaller than 1,000 mm$^{3}$ than clutches with larger volumes. 
+
+Histograms show the \term{shape} of a distribution\label{shapeFirstDiscussed}. The tails of a \term{symmetric} distribution are roughly equal, with data trailing off from the center roughly equally in both directions. Asymmetry arises when one tail of the distribution is longer than the other. A distribution is said to be \termsub{right skewed}{skew!right skewed} when data trail off to the right, and \termsub{left skewed}{skew!left skewed} when data trail off to the left.\footnote{Other ways to describe data that are skewed to the right/left: \termni{skewed to the right/left} or \termni{skewed to the positive/negative end}.} Figure~\ref{frogHist} shows that the distribution of clutch volume is right skewed; most clutches have relatively small volumes, and only a few clutches have high volumes. 
+
+\textD{\newpage}
+
+A \term{mode} is represented by a prominent peak in the distribution.\footnote{Another definition of mode, which is not typically used in statistics, is the value with the most occurrences. It is common that a dataset contains \emph{no} observations with the same value, which makes this other definition impractical for many datasets.} Figure~\ref{singleBiMultiModalPlots} shows histograms that have one, two, or three major peaks. Such distributions are called \termsub{unimodal}{modality!unimodal}, \termsub{bimodal}{modality!bimodal}, and \termsub{multimodal}{modality!multimodal}, respectively. Any distribution with more than two prominent peaks is called multimodal. Note that the less prominent peak in the unimodal distribution was not counted since it only differs from its neighboring bins by a few observations. Prominent is a subjective term, but it is usually clear in a histogram where the major peaks are.  
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.95\textwidth]{ch_intro_to_data_oi_biostat/figures/singleBiMultiModalPlots/singleBiMultiModalPlots}
+	\caption{From left to right: unimodal, bimodal, and multimodal distributions.}
+	\label{singleBiMultiModalPlots}
+\end{figure}
+
+A \term{boxplot} indicates the positions of the first, second, and third quartiles of a distribution in addition to extreme observations.\footnote{Boxplots are also known as box-and-whisker plots.} Figure~\ref{frogBoxPlot} shows a boxplot of \var{clutch.volume} alongside a vertical dot plot.
+
+\begin{figure}[th]
+	\centering
+	\includegraphics[width=0.9\mycaptionwidth]{ch_intro_to_data_oi_biostat/figures/frogBoxPlot/frogBoxPlot}
+	\caption{A boxplot and dot plot of \var{clutch.volume}. The horizontal dashes indicate the bottom 50\% of the data and the open circles represent the top 50\%.}
+	\label{frogBoxPlot}
+\end{figure}
+
+\textD{\newpage}
+
+In a boxplot, the interquartile range is represented by a rectangle extending from the first quartile to the third quartile, and the rectangle is split by the median (second quartile). Extending outwards from the box, the \term{whiskers} capture the data that fall between $Q_1 - 1.5\times IQR$ and $Q_3 + 1.5\times IQR$. The whiskers must end at data points; the values given by adding or subtracting $1.5\times IQR$ define the maximum reach of the whiskers. For example, with the \var{clutch.volume} variable, $Q_3 + 1.5 \times IQR = 1,096.5 + 1.5\times 486.4 = 1,826.1\ \textrm {mm}^{3}$. However, there was no clutch with volume 1,826.1\ $\textrm {mm}^{3}$; thus, the upper whisker extends to 1,819.7 $\textrm {mm}^{3}$, the largest observation that is smaller than $Q_3 + 1.5\times IQR$.
+
+Any observation that lies beyond the whiskers is shown with a dot; these observations are called outliers. An \term{outlier} is a value that appears extreme relative to the rest of the data. For the \var{clutch.volume} variable, there are several large outliers and no small outliers, indicating the presence of some unusually large egg clutches.
+
+The high outliers in Figure~\ref{frogBoxPlot} reflect the right-skewed nature of the data. The right skew is also observable from the position of the median relative to the first and third quartiles; the median is slightly closer to the first quartile. In a symmetric distribution, the median will be halfway between the first and third quartiles.
+
+\begin{exercisewrap}
+\begin{nexercise}
+Use the histogram and boxplot in Figure~\ref{famussHistandBox} to describe the distribution of \var{height} in the \data{famuss} data, where height is measured in inches.\footnotemark{}
+\end{nexercise}
+\end{exercisewrap}
+\footnotetext{The data are roughly symmetric (the left tail is slightly longer than the right tail), and the distribution is unimodal with one prominent peak at about 67 inches. The middle 50\% of individuals are between 5.5 feet and just under 6 feet tall. There is one low outlier and one high outlier, representing individuals that are unusually short/tall relative to the other individuals.}
+
+\begin{figure}[h]
+	\centering
+	\subfigure[]{
+		\includegraphics[width=0.65\textwidth]
+		{ch_intro_to_data_oi_biostat/figures/famussHist/famussHist}
+		\label{famussHist}
+	}
+	\subfigure[]{
+		\includegraphics[width=0.31\textwidth]
+		{ch_intro_to_data_oi_biostat/figures/famussBoxPlot/famussBoxPlot}
+		\label{famussBoxPlot}
+	}
+	\caption{A histogram and boxplot of \var{height} in the \data{famuss} data.}
+	\label{famussHistandBox}
+\end{figure}	
+
+
+\textD{\newpage}
+
+
+\subsection{Transforming data}
+\label{transformingDataSubsection}
+
+When working with strongly skewed data, it can be useful to apply a \term{transformation}, and rescale the data using a function. A natural log transformation is commonly used to clarify the features of a variable when there are many values clustered near zero and all observations are positive.
+
+\begin{figure}[ht]
+	\centering
+	\subfigure[]{
+		\includegraphics[width=0.485\textwidth]
+		{ch_intro_to_data_oi_biostat/figures/wdiIncomeHistRegTransformed/wdiIncomeHistReg}
+		\label{incomeHistReg}
+	}
+	\subfigure[]{
+		\includegraphics[width=0.485\textwidth]
+		{ch_intro_to_data_oi_biostat/figures/wdiIncomeHistRegTransformed/wdiIncomeHistLog}
+		\label{incomeHistLog}
+	}
+	\caption{\subref{incomeHistReg} Histogram of per capita income. \subref{incomeHistLog} Histogram of the log-transformed per capita income.}
+	\label{incomeHistTransform}
+\end{figure}
+
+For example, income data are often skewed right; there are typically large clusters of low to moderate income, with a few large incomes that are outliers. Figure~\ref{incomeHistReg} shows a histogram of average yearly per capita income measured in US dollars for 165 countries in 2011.\footnote{The data are available as \data{wdi.2011} in the \textsf{R} package \texttt{oibiostat}.} The data are heavily right skewed, with the majority of countries having average yearly per capita income lower than \$10,000. Once the data are log-transformed, the distribution becomes roughly symmetric (Figure~\ref{incomeHistLog}).\footnote{In statistics, the natural logarithm is usually written $\log$. In other settings it is sometimes written as  $\ln$.} 
+
+For symmetric distributions, the mean and standard deviation are particularly informative summaries. If a distribution is symmetric, approximately 70\% of the data are within one standard deviation of the mean and 95\% of the data are within two standard deviations of the mean; this guideline is known as the \term{empirical rule}.
+
+\begin{examplewrap}
+\begin{nexample}{On the log-transformed scale, mean $\log$ income is 8.50, with standard deviation 1.54. Apply the empirical rule to describe the distribution of average yearly per capita income among the 165 countries.}
+
+According to the empirical rule, the middle 70\% of the data are within one standard deviation of the mean, in the range (8.50 - 1.54, 8.50 + 1.54) = (6.96, 10.04) log(USD). 95\% of the data are within two standard deviations of the mean, in the range (8.50 - 2(1.54), 8.50 + 2(1.54)) = (5.42, 11.58) log(USD). 	
+
+Undo the log transformation. The middle 70\% of the data are within the range ($e^{6.96}$, $e^{10.04}$) = (\$1,054, \$22,925). The middle 95\% of the data are within the range ($e^{5.42}$, $e^{11.58}$) = (\$226, \$106,937).	
+\end{nexample}
+\end{examplewrap}
+
+Functions other than the natural log can also be used to transform data, such as the square root and inverse.  
+
+
+%__________
+\section[Categorical data]{Categorical data}
+\label{categoricalData}
+
+\index{data!famuss|(}
+
+This section introduces tables and plots for summarizing categorical data, using the \data{famuss} dataset introduced in Section~\ref{variableTypes}. 
+
+A table for a single variable is called a \term{frequency table}. Figure~\ref{famussFrequencyTable} is a frequency table for the \var{actn3.r577x} variable, showing the distribution of genotype at location r577x on the ACTN3 gene for the FAMuSS study participants.
+
+In a \term{relative frequency table} like Figure~\ref{famussRelFrequencyTable}, the proportions per each category are shown instead of the counts.
+
+% latex table generated in R 3.0.2 by xtable 1.7-4 package
+% Mon Aug 10 15:53:11 2015
+\begin{figure}[ht]
+	\centering
+	\begin{tabular}{rrrrr}
+		\hline
+		& CC & CT & TT & Sum \\ 
+		\hline
+		Counts & 173 & 261 & 161 & 595 \\ 
+		\hline
+	\end{tabular}
+	\caption{A frequency table for the \var{actn3.r577x} variable.} 
+	\label{famussFrequencyTable}
+\end{figure}
+%library(openintro); library(xtable); data(famuss); a = addmargins(table(famuss$actn3.r577x)); genotype.table = matrix(a, ncol=4, byrow=T); colnames(genotype.table) = c("CC", "CT", "TT", "Sum"); rownames(genotype.table) = "Counts"; xtable(genotype.table, digits = 0, caption = "A frequency table for the actn3.r577x variable.", label = "famussFrequencyTable")
+
+% latex table generated in R 3.3.2 by xtable 1.8-2 package
+% Mon Jun 12 13:34:06 2017
+\begin{figure}[ht]
+	\centering
+	\begin{tabular}{rrrrr}
+		\hline
+		& CC & CT & TT & Sum \\ 
+		\hline
+		Proportions & 0.291 & 0.439 & 0.271 & 1.000 \\ 
+		\hline
+	\end{tabular}
+	\caption{A relative frequency table for the \var{actn3.r577x} variable.} 
+	\label{famussRelFrequencyTable}
+\end{figure}
+
+%library(openintro); library(xtable); data(famuss); a = addmargins(prop.table(table(famuss$actn3.r577x))); genotype.table = matrix(a, ncol=4, byrow=T); colnames(genotype.table) = c("CC", "CT", "TT", "Sum"); rownames(genotype.table) = "Proportions"; xtable(genotype.table, digits = 3, caption = "A relative frequency table for the actn3.r577x variable.", label = "famussRelFrequencyTable")
+
+A bar plot is a common way to display a single categorical variable. The left panel of Figure~\ref{famussBarPlot} shows a \term{bar plot} of the counts per genotype for the \var{actn3.r577x} variable. The plot in the right panel shows the proportion of observations that are in each level (i.e. in each genotype).
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.9\textwidth]{ch_intro_to_data_oi_biostat/figures/famussBarPlot/famussBarPlot}
+	\caption{Two bar plots of \var{actn3.r577x}. The left panel shows the counts, and the right panel shows the proportions for each genotype.}
+	\label{famussBarPlot}
+\end{figure}
+
+
+%___________
+\section{Relationships between two variables}
+\label{relationshipsBetweenTwoVariables}
+
+This section introduces numerical and graphical methods for exploring and summarizing relationships between two variables. Approaches vary depending on whether the two variables are both numerical, both categorical, or whether one is numerical and one is categorical.
+
+\subsection{Two numerical variables}
+
+\subsubsection{Scatterplots}
+\label{scatterPlots}
+
+In the frog parental investment study, researchers used clutch volume as a primary variable of interest rather than egg size because clutch volume represents both the eggs and the protective gelatinous matrix surrounding the eggs. The larger the clutch volume, the higher the energy required to produce it; thus, higher clutch volume is indicative of increased maternal investment. Previous research has reported that larger body size allows females to produce larger clutches; is this idea supported by the \data{frog} data?
+
+A \term{scatterplot} provides a case-by-case view of the relationship between two numerical variables. Figure~\ref{frogClutchVolBodySize} shows clutch volume plotted against body size, with clutch volume on the $y$-axis and body size on the $x$-axis. Each point represents a single case. For this example, each case is one egg clutch for which both volume and body size (of the female that produced the clutch) have been recorded.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.8\textwidth]
+	{ch_intro_to_data_oi_biostat/figures/frogClutchVolBodySize/frogClutchVolBodySize}
+	\caption{A scatterplot showing \var{clutch.volume} (vertical axis) vs. \var{body.size} (horizontal axis). }
+	\label{frogClutchVolBodySize}
+\end{figure}
+
+
+The plot shows a discernible pattern, which suggests an \term{association}, or relationship,  between clutch volume and body size; the points tend to lie in a straight line, which is indicative of a \term{linear association}. Two variables are \term{positively associated} if increasing values of one tend to occur with increasing values of the other; two variables are \term{negatively associated} if increasing values of one variable occurs with decreasing values of the other. If there is no evident relationship between two variables, they are said to be \term{uncorrelated} or \term{independent}.
+
+As expected, clutch volume and body size are positively associated; larger frogs tend to produce egg clutches with larger volumes. These observations suggest that larger females are capable of investing more energy into offspring production relative to smaller females.
+
+\index{data!frog|)}
+\index{data!nhanes|(}
+
+The National Health and Nutrition Examination Survey (NHANES) consists of a set of surveys and measurements conducted by the US CDC to assess the health and nutritional status of adults and children in the United States. The following example uses data from a sample of 500 adults (individuals ages 21 and older) from the \data{NHANES} dataset.\footnote{The sample are available as \data{nhanes.samp.adult.500} in the \textsf{R} \texttt{oibiostat} package.}
+
+\begin{examplewrap}
+\begin{nexample}{Body mass index (BMI) is a measure of weight commonly used by health agencies to assess whether someone is overweight, and is calculated from height and weight.\footnotemark{} Describe the relationships shown in Figure~\ref{nhanesHeightWeightBmi}. Why is it helpful to use BMI as a measure of obesity, rather than weight?}
+
+Figure~\ref{nhanesHeightWeight}	shows a positive association between height and weight; taller individuals tend to be heavier. Figure~\ref{nhanesHeightBMI} shows that height and BMI do not seem to be associated; the range of BMI values observed is roughly consistent across height. 
+
+Weight itself is not a good measure of whether someone is overweight; instead, it is more reasonable to consider whether someone's weight is unusual relative to other individuals of a comparable height. An individual weighing 200 pounds who is 6 ft tall is not necessarily an unhealthy weight; however, someone who weighs 200 pounds and is 5 ft tall is likely overweight. It is not reasonable to classify individuals as overweight or obese based only on weight.
+
+BMI acts as a relative measure of weight that accounts for height. Specifically, BMI is used as an estimate of body fat. According to US National Institutes of Health (US NIH) and the World Health Organization (WHO), a BMI between 25.0 - 29.9 is considered overweight and a BMI over 30 is considered obese.\footnotemark{}
+\end{nexample}
+\end{examplewrap}
+\addtocounter{footnote}{-1}%
+\footnotetext{$BMI = \dfrac{weight_{kg}}{height^{2}_m} = \dfrac{weight_{lb}}{height^{2}_{in}} \times 703$}%
+\addtocounter{footnote}{1}%
+\footnotetext{\url{https://www.nhlbi.nih.gov/health/educational/lose\_wt/risk.htm}}
+
+\begin{figure}[h]
+	\centering
+	\subfigure[]{
+		\includegraphics[width=0.485\textwidth]
+		{ch_intro_to_data_oi_biostat/figures/nhanesHeightWeight/nhanesHeightWeight}
+		\label{nhanesHeightWeight}
+	}
+	\subfigure[]{
+		\includegraphics[width=0.485\textwidth]
+		{ch_intro_to_data_oi_biostat/figures/nhanesHeightBMI/nhanesHeightBMI}
+		\label{nhanesHeightBMI}
+	}
+	\caption{\subref{nhanesHeightWeight} A scatterplot showing height versus weight from the 500 individuals in the sample from \data{NHANES}. One participant 163.9 cm tall (about 5 ft, 4 in) and weighing 144.6 kg (about 319 lb) is highlighted. \subref{nhanesHeightBMI} A scatterplot showing height versus BMI from the 500 individuals in the sample from \data{NHANES}. The same individual highlighted in~\subref{nhanesHeightWeight} is marked here, with BMI 53.83.}
+	\label{nhanesHeightWeightBMI}
+\end{figure}
+
+\index{data!nhanes|)}
+
+\textD{\newpage}
+
+\index{data!life.expectancy|(}
+
+\begin{examplewrap}
+\begin{nexample}{Figure~\ref{incomeLifeExpectancy} is a scatterplot of life expectancy versus annual per capita income for 165 countries in 2011. Life expectancy is measured as the expected lifespan for children born in 2011 and income is adjusted for purchasing power in a country. Describe the relationship between life expectancy and annual per capita income; do they seem to be linearly associated?}
+
+Life expectancy and annual per capita income are positively associated; higher per capita income is associated with longer life expectancy. However, the two variables are not linearly associated. When income is low, small increases in per capita income are associated with relatively large increases in life expectancy. However, once per capita income exceeds approximately \$20,000 per year, increases in income are associated with smaller gains in life expectancy. 
+
+In a linear association, change in the $y$-variable for every unit of the $x$-variable is consistent across the range of the $x$-variable; for example, a linear association would be present if an increase in income of \$10,000 corresponded to an increase in life expectancy of 5 years, across the range of income.
+\end{nexample}
+\end{examplewrap}
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.8\textwidth]
+	{ch_intro_to_data_oi_biostat/figures/wdiIncomeLifeExpectancy/wdiIncomeLifeExpectancy.pdf}
+	\caption{A scatterplot of life expectancy (years) versus annual per capita income (US dollars) in the \data{wdi.2011} dataset.}
+	\label{incomeLifeExpectancy}
+\end{figure}
+
+\index{data!life.expectancy|)}	
+
+\subsubsection{Correlation}\label{subsectionCorrelation}
+
+\termsub{Correlation}{correlation} is a numerical summary statistic that measures the strength of a linear relationship between two variables. It is denoted by $r$, the \marginpar[\raggedright$r$\\\footnotesize correlation coefficient]{\raggedright$r$\\\footnotesize correlation coefficient} \term{correlation coefficient}, which takes on values between -1 and 1.
+
+If the paired values of two variables lie exactly on a line, $r = \pm 1$; the closer the correlation coefficient is to $\pm 1$, the stronger the linear association. When two variables are positively associated, with paired values that tend to lie on a line with positive slope, $r > 0$. If two variables are negatively associated, $r < 0$. A value of $r$ that is 0 or approximately 0 indicates no apparent association between two variables.\footnote{If paired values lie perfectly on either a horizontal or vertical line, there is no association and $r$ is mathematically undefined.}
+
+\textD{\newpage}
+
+The correlation coefficient quantifies the strength of a linear trend. Prior to calculating a correlation, it is advisable to confirm that the data exhibit a linear relationship. Although it is mathematically possible to calculate correlation for any set of paired observations, such as the life expectancy versus income data in Figure~\ref{incomeLifeExpectancy}, correlation cannot be used to assess the strength of a nonlinear relationship.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.8\textwidth]{ch_intro_to_data_oi_biostat/figures/posNegCorPlots/posNegCorPlots}
+	\caption{Scatterplots and their correlation coefficients. The first row shows positive associations and the second row shows negative associations. From left to right, strength of the linear association between $x$ and $y$ increases.}
+	\label{posNegCorPlots}
+\end{figure}
+                                                                                               
+\begin{onebox}{Correlation}%                                                                                                                 \marginpar[\raggedright$r$\\\footnotesize correlation coefficient]{\raggedright$r$\\\footnotesize correlation coefficient} The term \term{correlation coefficient}
+		The correlation between two variables $x$ and $y$ is given by:
+		\begin{align}
+		r &=  \frac{1}{n-1}\sum^{n}_{i=1}
+		\left(\frac{x_{i}-\overline{x}}
+		{s_{x}}\right)\left(\frac{y_{i}-\overline{y}}{s_{y}}\right)
+		\label{correlationEquation}
+		\end{align}
+		where $(x_1,y_1), (x_2,y_2), \ldots, (x_n, y_n)$ are the $n$ paired values of $x$ and $y$, and $s_x$ and $s_y$ are the sample standard deviations of the $x$ and $y$
+		variables, respectively.
+\end{onebox}
+
+\textD{\newpage}
+
+\begin{examplewrap}
+\begin{nexample}{Calculate the correlation coefficient of $x$ and $y$, plotted in Figure~\ref{fig:corCalcSimple}.} Calculate the mean and standard deviation for $x$ and $y$: $\overline{x} = 2$, $\overline{y} = 3$, $s_x = 1$, and $s_y = 2.65$. 
+
+\begin{align*}
+r &=  \frac{1}{n-1}\sum^{n}_{i=1}
+\left(\frac{x_{i}-\overline{x}}
+{s_{x}}\right)\left(\frac{y_{i}-\overline{y}}{s_{y}}\right) \\
+&= \frac{1}{3 - 1} \left[\left(\frac{1 - 2}
+{1}\right)\left(\frac{5 - 3}{2.65}\right) + \left(\frac{2 - 2}
+{1}\right)\left(\frac{4 - 3}{2.65}\right) + \left(\frac{3 - 2}
+{1}\right)\left(\frac{0 - 3}{2.65}\right)  \right] \\
+&= -0.94
+\end{align*}
+
+The correlation is -0.94, which reflects the negative association visible from the scatterplot in Figure~\ref{fig:corCalcSimple}.
+	
+\begin{comment}	
+	
+	\begin{figure}[h]
+		\centering
+		\begin{tabular}{crrrrrrcc}
+			\hline
+			$i$ &   $x_i$ & $y_i$ & $\overline{x}$ & $\overline{y}$ & $\text{sd}(x)$ & $\text{sd}(y)$  & $\left(\dfrac{x_i - \overline{x}}{\text{sd}(x)}\right)
+			\left(\dfrac{y_i - \overline{y}}{\text{sd}(y)}\right)$ & $r$\\
+			\hline
+			1 &  1 & 5 &  1 & 3 &  1 &  2.65 &  -0.76 &    \\
+			2 &  2 & 4 &  1 & 3 &  1 &  2.65 &  0.00 &        \\
+			3 &  3 & 0 &  1 & 3 &  1 &  2.65 &  -1.13 &    \\
+			&  &  &  &  &   &   &   &    -0.94  \\
+			\hline
+		\end{tabular}
+		\caption{Calculating a correlation coefficient $r$}
+		\label{table:corCalcSimple}
+	\end{figure}
+	
+\end{comment}
+\end{nexample}
+\end{examplewrap}
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.75\textwidth]
+	{ch_intro_to_data_oi_biostat/figures/corCalcSimple/corCalcSimple.pdf}
+	\caption{A scatterplot showing three points: (1, 5), (2, 4), and (3, 0).} 
+	\label{fig:corCalcSimple}
+\end{figure}
+
+\textD{\newpage}
+
+\begin{examplewrap}
+\begin{nexample}{Is it appropriate to use correlation as a numerical summary for the relationship between life expectancy and income after a log transformation is applied to both variables? Refer to Figure~\ref{incomeLifeExpectancyLog}.}
+	
+Figure~\ref{incomeLifeExpectancyLog} shows an approximately linear relationship; a correlation coefficient is a reasonable numerical summary of the relationship. As calculated from statistical software, $r = 0.79$, which is indicative of a strong linear relationship.
+\end{nexample}
+\end{examplewrap}
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.8\textwidth]
+	{ch_intro_to_data_oi_biostat/figures/wdiIncomeLifeExpectancyLog/wdiIncomeLifeExpectancyLog.pdf}
+	\caption{A scatterplot showing \var{log(income)} (horizontal axis) vs.  \var{log(life.expectancy)} (vertical axis).} 
+	\label{incomeLifeExpectancyLog}
+\end{figure}
+
+\textD{\ \\[5mm]}
+
+
+\subsection{Two categorical variables}
+
+\subsubsection{Contingency tables}
+
+A \term{contingency table} summarizes data for two categorical variables, with each value in the table representing the number of times a particular combination of outcomes occurs.\footnote{Contingency tables are also known as \term{two-way tables}.} Figure~\ref{famussContingencyTable} summarizes the relationship between race and genotype in the \data{famuss} data.
+
+The \term{row totals} provide the total counts across each row and the \term{column totals} are the total counts for each column; collectively, these are the \term{marginal totals}.
+
+% latex table generated in R 3.0.2 by xtable 1.7-4 package
+% Fri Aug 07 11:43:29 2015
+\begin{figure}[ht]
+	\centering
+	\begin{tabular}{rrrrr}
+		\hline
+		& CC & CT & TT & Sum \\ 
+		\hline
+		African Am & 16 & 6 & 5 & 27 \\ 
+		Asian & 21 & 18 & 16 & 55 \\ 
+		Caucasian & 125 & 216 & 126 & 467 \\ 
+		Hispanic & 4 & 10 & 9 & 23 \\ 
+		Other & 7 & 11 & 5 & 23 \\ 
+		Sum & 173 & 261 & 161 & 595 \\ 
+		\hline
+	\end{tabular}
+	\caption{A contingency table for \var{race} and \var{actn3.r577x}.} 
+	\label{famussContingencyTable}
+\end{figure}
+%library(xtable); data(famuss); genotype.by.race.table = addmargins(table(famuss$race, famuss$actn3.r577x)); xtable(genotype.by.race.table, digits = 0, caption = "A contingency table for race and actn3.r577x.", label = "famussContingencyTable")
+
+\textD{\newpage}
+
+Like relative frequency tables for the distribution of one categorical variable, contingency tables can also be converted to show proportions. Since there are two variables, it is necessary to specify whether the proportions are calculated according to the row variable or the column variable. 
+
+Figure~\ref{famussRowPropTable} shows the row proportions for Figure~\ref{famussContingencyTable}; these proportions indicate how genotypes are distributed within each race. For example, the value of 0.593 in the upper left corner indicates that of the African Americans in the study, 59.3\% have the CC genotype.
+
+%JV: xtable output modified to have sum rows
+
+% latex table generated in R 3.3.2 by xtable 1.8-2 package
+% Tue Jun 13 10:42:55 2017
+\begin{figure}[ht]
+	\centering
+	\begin{tabular}{rrrrr}
+		\hline
+		& CC & CT & TT & Sum \\ 
+		\hline
+		African Am & 0.593 & 0.222 & 0.185 & 1.000 \\ 
+		Asian & 0.382 & 0.327 & 0.291 & 1.000 \\ 
+		Caucasian & 0.268 & 0.463 & 0.270 & 1.000 \\ 
+		Hispanic & 0.174 & 0.435 & 0.391 & 1.000 \\ 
+		Other & 0.304 & 0.478 & 0.217 & 1.000 \\ 
+		\hline
+	\end{tabular}
+	\caption{A contingency table with row proportions for the \resp{race} and \resp{actn3.r577x} variables.} 
+	\label{famussRowPropTable}
+\end{figure}
+
+%library(xtable); data(famuss); famuss.race = table(famuss$race, famuss$actn3.r577x); famuss.race.row.prop = prop.table(famuss.race, 1); xtable(famuss.race.row.prop, digits = 3, caption = "A contingency table with row proportions for the race and actn3.r577x variables.")
+
+Figure~\ref{famussColPropTable} shows the column proportions for Figure~\ref{famussContingencyTable}; these proportions indicate the distribution of races within each genotype category. For example, the value of 0.092 indicates that of the CC individuals in the study, 9.2\% are African American. 
+
+%JV: xtable output modified to have sum columns
+
+% latex table generated in R 3.3.2 by xtable 1.8-2 package
+% Tue Jun 13 10:48:07 2017
+\begin{figure}[ht]
+	\centering
+	\begin{tabular}{rrrr}
+		\hline
+		& CC & CT & TT \\ 
+		\hline
+		African Am & 0.092 & 0.023 & 0.031 \\ 
+		Asian & 0.121 & 0.069 & 0.099 \\ 
+		Caucasian & 0.723 & 0.828 & 0.783 \\ 
+		Hispanic & 0.023 & 0.038 & 0.056 \\ 
+		Other & 0.040 & 0.042 & 0.031 \\ 
+		Sum & 1.000 & 1.000 & 1.000 \\
+		\hline
+	\end{tabular}
+	\caption{A contingency table with column proportions for the \resp{race} and \resp{actn3.r577x} variables.} 
+	\label{famussColPropTable}
+\end{figure}
+
+%library(xtable); data(famuss); famuss.race = table(famuss$race, famuss$actn3.r577x); famuss.race.col.prop = prop.table(famuss.race, 2); xtable(famuss.race.col.prop, digits = 3, caption = "A contingency table with column proportions for the race and actn3.r577x variables.")
+
+\begin{examplewrap}
+\begin{nexample}{For African Americans in the study, CC is the most common genotype and TT is the least common genotype. Does this pattern hold for the other races in the study? Do the observations from the study suggest that distribution of genotypes at r577x vary between populations?} 
+	The pattern holds for Asians, but not for other races. For the Caucasian individuals sampled in the study, CT is the most common genotype at 46.3\%. CC is the most common genotype for Asians, but in this population, genotypes are more evenly distributed: 38.2\% of Asians sampled are CC, 32.7\% are CT, and 29.1\% are TT. The distribution of genotypes at r577x seems to vary by population.
+\end{nexample}
+\end{examplewrap}
+
+
+%JV: tables with work shown in below comment block
+
+\begin{comment}
+
+% latex table generated in R 3.0.2 by xtable 1.7-4 package
+% Fri Aug 07 11:46:57 2015
+\begin{figure}[ht]
+	\centering
+	\begin{tabular}{rrrrr}
+		\hline
+		& CC & CT & TT & Sum \\ 
+		\hline
+		African Am & $16/27=0.593$ & $6/27=0.222$ & $5/27=0.185$ & $27/27=1.00$ \\ 
+		Asian & $21/55=0.382$ & $18/55=0.327$ & $16/55=0.291$ & $55/55=1.00$ \\ 
+		Caucasian & $125/467=0.267$ & $216/467=0.463$ & $126/467=0.270$ & $467/467=1.00$ \\ 
+		Hispanic & $4/23=0.174$ & $10/23=0.435$ & $9/23=0.391$ & $23/23=1.00$ \\ 
+		Other & $7/23=0.304$ & $11/23=0.478$ & $5/23=0.217$ & $23/23=1.00$ \\ 
+		Sum & $173/595=0.291$ & $261/595=0.438$ & $161/595=0.271$ & $595/595=1.00$ \\ 
+		\hline
+	\end{tabular}
+	\caption{A contingency table with row proportions for the \var{race} and \var{actn3.r577x} variables.} 
+	\label{famussRowPropTable}
+\end{figure}
+%library(xtable); data(famuss); row.prop.table = table(famuss$race, famuss$actn3.r577x)[1:5,]; row.prop.table / rep(rowSums(row.prop.table), 3); rowSums(row.prop.table); xtable(genotype.by.race.table, digits = 0, caption = "A contingency table with row proportions for the race and actn3.r577x variables.", label = "famussRowPropTable"); 173/595; 261/595; 161/595
+
+% latex table generated in R 3.0.2 by xtable 1.7-4 package
+% Fri Aug 07 12:13:27 2015
+\begin{figure}[ht]
+	\centering
+	\begin{tabular}{rrrrr}
+		\hline
+		& CC & CT & TT & Sum \\ 
+		\hline
+		African Am & $16/173=0.092$ & $6/261=0.037$ & $5/161=0.191$ & $27/595=0.045$ \\ 
+		Asian & $21/173=0.080$ & $18/261=0.104$ & $16/161=0.993$ & $55/595=0.092$ \\ 
+		Caucasian & $125/173=0.776$ & $216/261=0.828$ & $126/161=0.728$ & $467/595=0.785$ \\ 
+		Hispanic & $4/173=0.023$ & $10/261=0.062$ & $9/161=0.034$ & $23/595=0.038$ \\ 
+		Other & $7/173=0.027$ & $11/261=0.063$ & $5/161=0.031$ & $23/595=0.038$ \\ 
+		Sum & $173/173=1.000$ & $261/261=1.000$ & $161/161=1.000$ & $595/595=1.000$ \\ 
+		\hline
+	\end{tabular}
+	\caption{A contingency table with column proportions for the \var{race} and \var{actn3.r577x} variables.} 
+	\label{famussColPropTable}
+\end{figure}
+%library(xtable); data(famuss); col.prop.table = table(famuss$race, famuss$actn3.r577x)[1:5,]; col.prop.table / rep(colSums(col.prop.table), 3); colSums(col.prop.table); xtable(genotype.by.race.table, digits = 0, caption = "A contingency table with column proportions for the race and actn3.r577x variables.", label = "famussColPropTable"); 27/595; 55/595; 467/595; 23/595; 23/595
+
+\end{comment}
+
+
+\begin{exercisewrap}
+\begin{nexercise}
+As shown in Figure~\ref{famussColPropTable}, 72.3\% of CC individuals in the study are Caucasian. Do these data suggest that in the general population, people of CC genotype are highly likely to be Caucasian?\footnotemark{}
+\end{nexercise}
+\end{exercisewrap}
+\footnotetext{No, this is not a reasonable conclusion to draw from the data. The high proportion of Caucasians among CC individuals primarily reflects the large number of Caucasians sampled in the study -- 78.5\% of the people sampled are Caucasian. The uneven representation of different races is one limitation of the \data{famuss} data.}
+
+
+\textD{\newpage}
+
+
+\subsubsection{Segmented bar plots}
+
+A \termsub{segmented bar plot}{bar plot!segmented bar plot} is a way of visualizing the information from a contingency table. Figure~\ref{famussSegBarPlotA} graphically displays the data from Figure~\ref{famussContingencyTable}; each bar represents a level of \var{actn3.r577x} and is divided by the levels of \var{race}. Figure~\ref{famussSegBarStaA} uses the row proportions to create a standardized segmented bar plot. 
+
+
+\begin{figure}[h]
+	\centering
+	\subfigure[]{
+		\includegraphics[width=0.485\textwidth]{ch_intro_to_data_oi_biostat/figures/famussSegBar/famussSegBarA}
+		\label{famussSegBarA}
+	}
+	\subfigure[]{
+		\includegraphics[width=0.485\textwidth]{ch_intro_to_data_oi_biostat/figures/famussSegBar/famussSegBarStaA} 
+		\label{famussSegBarStaA}		
+	}
+	\caption{\subref{famussSegBarA} Segmented bar plot for individuals by genotype, with bars divided by race. \subref{famussSegBarStaA} Standardized version of Figure~\subref{famussSegBarA}.}
+	\label{famussSegBarPlotA}
+\end{figure}
+
+Alternatively, the data can be organized as shown in Figure~\ref{famussSegBarPlotB}, with each bar representing a level of \var{race}. The standardized plot is particularly useful in this case, presenting the distribution of genotypes within each race more clearly than in Figure~\ref{famussSegBarB}.
+
+\begin{figure}[h]
+	\centering
+	\subfigure[]{
+		\includegraphics[width=0.485\textwidth]{ch_intro_to_data_oi_biostat/figures/famussSegBar/famussSegBarB} 
+		\label{famussSegBarB}
+	}
+	\subfigure[]{
+		\includegraphics[width=0.485\textwidth]{ch_intro_to_data_oi_biostat/figures/famussSegBar/famussSegBarStaB} 
+		\label{famussSegBarStaB}	
+	}
+	\caption{\subref{famussSegBarB} Segmented bar plot for individuals by race, with bars divided by genotype. \subref{famussSegBarStaB} Standardized version of Figure~\subref{famussSegBarB}.}
+	\label{famussSegBarPlotB}
+\end{figure}
+
+
+\textD{\newpage}
+
+
+\subsubsection{Two-by-two tables: relative risk}
+\label{TwoWayTablesRelativeRisk}
+
+The results from medical studies are often presented in \term{two-by-two tables} (2 $\times$ 2 tables), contingency tables for categorical variables that have two levels. One of the variables defines two groups of participants, while the other represents the two possible outcomes. Figure~\ref{TwoByTwoTable} shows a hypothetical two-by-two table of outcome by group.
+
+\begin{figure}[h]
+	\centering
+	\begin{tabular}{r|rrr}
+		\hline
+		& Outcome A & Outcome B & Sum\\ 
+		\hline
+		Group 1 & $a$ & $b$ & $a + b$ \\ 
+		Group 2 & $c$ & $d$ & $c + d$ \\
+		Sum & $a + c$ & $b + d$ & $a + b + c + d = n$ \\
+		\hline
+	\end{tabular}	
+	\caption{A hypothetical two-by-two table of outcome by group.}
+	\label{TwoByTwoTable} 
+\end{figure}
+
+In the LEAP study, participants are divided into two groups based on treatment (peanut avoidance versus peanut consumption), while the outcome variable records whether an individual passed or failed the oral food challenge (OFC). The results of the LEAP study as shown in Figure~\ref{leapStudyResults} are in the form of a 2 $\times$ 2 table; the table is reproduced below as Figure~\ref{leapStudyResultsRR}.
+
+A statistic called the \term{relative risk} (RR) can be used to summarize the data in a 2 $\times$ 2 table; the relative risk is a measure of the risk of a certain event occurring in one group relative to the risk of the event occurring in another group.\footnote{Chapter~\ref{inferenceForCategoricalData} discusses another numerical summary for 2 $\times$ 2 tables, the \term{odds ratio}.}  
+
+
+% latex table generated in R 3.1.1 by xtable 1.7-4 package
+% Thu Jul 16 07:12:04 2015
+\begin{figure}[ht]
+	\centering
+	\begin{tabular}{rrrr}
+		\hline
+		& FAIL OFC & PASS OFC & Sum \\ 
+		\hline
+		Peanut Avoidance & 36 & 227 & 263 \\ 
+		Peanut Consumption & 5 & 262 & 267 \\ 
+		Sum & 41 & 489 & 530 \\ 
+		\hline
+	\end{tabular}
+	\caption{Results of the LEAP study, described in Section~\ref{leapCaseStudy}.}
+	\label{leapStudyResultsRR}
+\end{figure}
+%library(xtable); outcome.table = addmargins(table(LEAP$treatment.group, LEAP$overall.V60.outcome)); xtable(outcome.table, digits = 0, caption = "LEAP Study Results", caption  = "leapStudyResults")
+
+The question of interest in the LEAP study is whether the risk of developing peanut allergy (i.e., failing the OFC) differs between the peanut avoidance and consumption groups. The relative risk of failing the OFC equals the ratio of the proportion of individuals in the avoidance group who failed the OFC to the proportion of individuals in the consumption group who failed the OFC.
+
+\begin{examplewrap}
+\begin{nexample}{Using the results from the LEAP study, calculate and interpret the relative risk of failing the oral food challenge, comparing individuals in the avoidance group to individuals in the consumption group.}
+	
+\[RR_{\textrm{failing OFC}} = \dfrac{\textrm{proportion in avoidance group who failed OFC}}{\textrm{proportion in consumption group who failed OFC}} = \dfrac{36/263}{5/267} = 7.31 \]
+
+The relative risk is 7.31. The risk of failing the oral food challenge was more than 7 times greater for participants in the peanut avoidance group than for those in the peanut consumption group.
+\end{nexample}
+\end{examplewrap}
+
+\textD{\newpage}
+
+\begin{examplewrap}
+\begin{nexample}{An observational study is conducted to assess the association between smoking and cardiovascular disease (CVD), in which researchers identified a cohort of individuals and categorized them according to smoking and disease status. If the relative risk of CVD is calculated as the ratio of the proportion of smokers with CVD to the proportion of non-smokers with CVD, interpret the results of the study if the relative risk equals 1, is less than 1, or greater than 1.}
+	
+A relative risk of 1 indicates that the risk of CVD is equal for smokers and non-smokers.
+
+A relative risk less than 1 indicates that smokers are at a lower risk of CVD than non-smokers; i.e., the proportion of individuals with CVD among smokers is lower than the proportion among non-smokers.
+	
+A relative risk greater than 1 indicates that smokers are at a higher risk of CVD than non-smokers; i.e., the proportion of individuals with CVD among smokers is higher than the proportion among non-smokers.
+	
+\label{smokingStenosisRR}	
+\end{nexample}
+\end{examplewrap}
+
+\begin{exercisewrap}
+\begin{nexercise}
+For the study described in Example~\ref{smokingStenosisRR}, suppose that of the 231 individuals, 111 are smokers. 40 smokers and 32 non-smokers have cardiovascular disease. Calculate and interpret the relative risk of CVD.\footnotemark{}
+\end{nexercise}
+\end{exercisewrap}
+\footnotetext{The relative risk of CVD, comparing smokers to non-smokers, is $(40/111)/(32/120) = 1.35$. Smoking is associated with a 35\% increase in the probability of CVD; in other words, the risk of CVD is 35\% greater in smokers compared to non-smokers.}
+
+Relative risk relies on the assumption that the observed proportions of an event occurring in each group are representative of the risk, or incidence, of the event occurring within the populations from which the groups are sampled. For example, in the LEAP data, the relative risk assumes that the proportions $33/263$ and $5/267$ are estimates of the proportion of individuals who would fail the OFC among the larger population of infants who avoid or consume peanut products. 
+
+%JV: Not sure if this section is clear enough when case-control terminology is avoided.
+
+\begin{examplewrap}
+\begin{nexample}{Suppose another study to examine the association between smoking and cardiovascular disease is conducted, but researchers use a different study design than described in Example~\ref{smokingStenosisRR}. For the new study, 90 individuals with CVD and 110 individuals without CVD are recruited. 40 of the individuals with CVD are smokers, and 80 of the individuals without CVD are non-smokers. Should relative risk be used to summarize the observations from the new study?}
+	
+Relative risk should not be calculated for these observations. Since the number of individuals with and without CVD is fixed by the study design, the proportion of individuals with CVD within a certain group (smokers or non-smokers) as calculated from the data is not a measure of CVD risk for that population.
+\end{nexample}
+\end{examplewrap}
+
+\textD{\newpage}
+
+\begin{exercisewrap}
+\begin{nexercise}
+For a study examining the association between tea consumption and esophageal carcinoma, researchers recruited 300 patients with carcinoma and 571 without carcinoma and administered a questionnaire about tea drinking habits.\footnotemark{} Of the 47 individuals who reported that they regularly drink green tea, 17 had carcinoma. Of the 824 individuals who reported that they never, or very rarely, drink green tea, 283 had carcinoma. Evaluate whether the proportions $17/47$ and $283/824$ are representative of the incidence rate of carcinoma among individuals who drink green tea regularly and those who do not.\footnotemark{}
+\end{nexercise}
+\end{exercisewrap}
+\addtocounter{footnote}{-1}%
+\footnotetext{Tea drinking habits and oesophageal cancer in a high risk area in northern Iran: population based case­control study, Islami F, et al., BMJ (2009), doi \url{10.1136/bmj.b929}}%
+\addtocounter{footnote}{1}%
+\footnotetext{The proportions calculated from the study data should not be used as estimates of the incidence rate of esophageal carcinoma among individuals who drink green tea regularly and those who do not, since the study selected participants based on carcinoma status.}
+
+\begin{onebox}{Relative risk}%	
+		The relative risk of Outcome A in the hypothetical two-by-two table (Figure~\ref{TwoByTwoTable}) can be calculated using either Group 1 or Group 2 as the reference group:
+		\[RR_{\textrm{A, comparing Group 1 to Group 2}} = \dfrac{a/(a+b)}{c/(c+d)} \]
+		\[RR_{\textrm{A, comparing Group 2 to Group 1}} = \dfrac{c/(c+d)}{a/(a+b)} \]
+		
+		The relative risk should only be calculated for data where the proportions $a/(a+b)$ and $c/(c+d)$ represent the incidence of Outcome A within the populations from which Groups 1 and 2 are sampled.
+\end{onebox}
+
+\subsection{A numerical variable and a categorical variable}
+\label{comparingAcrossGroups}
+
+Methods for comparing numerical data across groups are based on the approaches introduced in Section~\ref{numericalData}. \termsub{Side-by-side boxplots}{side-by-side boxplots} and \termsub{hollow histograms}{histogram} are useful for directly comparing how the distribution of a numerical variable differs by category. 
+
+\index{data!famuss|(}
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.8\textwidth]{ch_intro_to_data_oi_biostat/figures/famussGenoMuscFunc/famussGenoMuscFunc}
+	\caption{Side-by-side boxplot and hollow histograms for \var{ndrm.ch}, split by levels of \var{actn3.r577x}.}
+	\label{famussGenoMuscFunc}
+\end{figure}
+
+Recall the question introduced in Section~\ref{variableRelations}: is ACTN3 genotype associated with variation in muscle function? Figure~\ref{famussGenoMuscFunc} visually shows the relationship between muscle function (measured as percent change in non-dominant arm strength) and ACTN3 genotype in the \data{famuss} data with side-by-side boxplots and hollow histograms. The hollow histograms highlight how the shapes of the distributions of \var{ndrm.ch} for each genotype are essentially similar, although the distribution for the CC genotype has less right skewing. The side-by-side boxplots are especially useful for comparing center and spread, and reveal that the T allele appears to be associated with greater muscle function; median percent change in non-dominant arm strength increases across the levels from CC to TT. 
+
+\index{data!famuss|)}
+
+\index{data!frog|(}
+
+\begin{exercisewrap}
+\begin{nexercise}
+Using Figure~\ref{frogClutchVolAlt}, assess how maternal investment varies with altitude.\footnotemark{}
+\end{nexercise}
+\end{exercisewrap}
+\footnotetext{As a general rule, clutches found at higher altitudes have greater volume; median clutch volume tends to increase as altitude increases. This suggests that increased altitude is associated with a higher level of maternal investment.}
+	
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.9\textwidth]{ch_intro_to_data_oi_biostat/figures/frogClutchVolAlt/frogClutchVolAlt}
+	\caption{Side-by-side boxplot comparing the distribution of \var{clutch.volume} for different altitudes.}
+	\label{frogClutchVolAlt}
+\end{figure} 
+
+\index{data!frog|)}
+
+
+%____________
+\section[Exploratory data analysis]{Exploratory data analysis}
+\label{exploratoryDataAnalysis}
+
+The simple techniques for summarizing and visualizing data that have been introduced in this chapter may not seem especially powerful, but when applied in practice, they can be instrumental for gaining insight into the interesting features of a dataset. This section provides three examples of data-driven research questions that can be investigated through exploratory data analysis.
+
+
+\subsection{Case study: discrimination in developmental disability support}
+\label{caseStudyDiscrimination}
+
+In the United States, individuals with developmental disabilities typically receive services and support from state governments. The State of California allocates funds to developmentally-disabled residents through the California Department of Developmental Services (DDS); individuals receiving DDS funds are referred to as 'consumers'. The dataset \data{dds.discr} represents a sample of 1,000 DDS consumers (out of a total population of approximately 250,000), and includes information about age, gender, ethnicity, and the amount of financial support per consumer provided by the DDS.\footnote{The dataset is based on actual attributes of consumers, but has been altered to maintain consumer privacy.} Figure~\ref{ddsDiscrDF} shows the first five rows of the dataset, and the variables are described in Figure~\ref{ddsVariables}.
+
+A team of researchers examined the mean annual expenditures on consumers by ethnicity, and found that the mean annual expenditures on Hispanic consumers was approximately one-third of the mean expenditures on White non-Hispanic consumers. As a result, an allegation of ethnic discrimination was brought against the California DDS. 
+
+Does this finding represent sufficient evidence of ethnic discrimination, or might there be more to the story? This section will illustrate the process behind conducting an exploratory analysis that not only investigates the relationship between two variables of interest, but also considers whether other variables might be influencing that relationship.
+
+% latex table generated in R 3.3.2 by xtable 1.8-2 package
+% Mon Aug 14 11:13:42 2017
+\begin{figure}[ht]
+	\centering
+	\begin{tabular}{rrlrlrl}
+		\hline
+		& id & age.cohort & age & gender & expenditures & ethnicity \\ 
+		\hline
+		1 & 10210 & 13-17 &  17 & Female & 2113 & White not Hispanic \\ 
+		2 & 10409 & 22-50 &  37 & Male & 41924 & White not Hispanic \\ 
+		3 & 10486 & 0-5 &   3 & Male & 1454 & Hispanic \\ 
+		4 & 10538 & 18-21 &  19 & Female & 6400 & Hispanic \\ 
+		5 & 10568 & 13-17 &  13 & Male & 4412 & White not Hispanic \\ 
+		\hline
+	\end{tabular}
+	\caption{Five rows from the \texttt{dds.discr} data matrix.} 
+	\label{ddsDiscrDF}
+\end{figure}
+
+\begin{figure}[h]
+	\centering\small
+	\begin{tabular}{lp{10.5cm}}
+		\hline
+		{\bf variable} & {\bf description} \\
+		\hline
+		\var{id} & Unique identification code for each resident \\
+		\var{age.cohort} & Age as sorted into six groups, 0-5 years, 6-12 years, 13-17 years, 18-21 years, 22-50 years, and 51+ years \\
+		\var{age} & Age, measured in years  \\
+		\var{gender} & Gender, either \texttt{Female} or \texttt{Male}\\
+		\var{expenditures} & Amount of expenditures spent by the State on an individual annually, measured in USD \\
+		\var{ethnicity} & Ethnic group, recorded as either \texttt{American Indian}, \texttt{Asian}, \texttt{Black}, \texttt{Hispanic}, \texttt{Multi Race}, \texttt{Native Hawaiian}, \texttt{Other}, or \texttt{White Not Hispanic} \\
+		\hline
+	\end{tabular}
+	\caption{Variables and their descriptions for the \data{dds.discr} dataset.\vspaceB{-3.5mm}}
+	\label{ddsVariables}
+\end{figure}
+
+
+\textD{\newpage}
+
+
+\subsubsection{Distributions of single variables}
+
+To begin understanding a dataset, start by examining the distributions of single variables using numerical and graphical summaries. This process is essential for developing a sense of context; in this case, examining variables individually addresses questions such as "What is the range of annual expenditures?", "Do consumers tend to be older or younger?", and "Are there more consumers from one ethnic group versus another?". 
+
+Figure~\ref{ddsExpHist} illustrates the right skew of \texttt{expenditures}, indicating that for the majority of consumers, expenditures are relatively low; most are within the \$0 - \$5,000 range. There are some consumers for which expenditures are much higher, such as within the \$60,000 - \$80,000 range. Precise numerical summaries can be calculated using statistical software: the quartiles for \texttt{expenditures} are \$2,899, \$7,026, and \$37,710. 
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.8\textwidth]{ch_intro_to_data_oi_biostat/figures/ddsExpHist/ddsExpHist}
+	\caption{A histogram of \texttt{expenditures}. }
+	\label{ddsExpHist}
+\end{figure}
+
+
+A consumer's age is directly recorded as the variable \var{age}; in the \var{age.cohort} variable, consumers are assigned to one of six age cohorts. The cohorts are indicative of particular life phases. In the first three cohorts, consumers are still living with their parents as they move through preschool age, elementary/middle school age, and high school age. In the 18-21 cohort, consumers are transitioning from their parents' homes to living on their own or in supportive group homes. From ages 22-50, individuals are mostly no longer living with their parents but may still receive some support from family. In the 51+ cohort, consumers often have no living parents and typically require the most amount of support.
+
+\textD{\newpage}
+
+Figure~\ref{ddsAge} reveals the right-skewing of \var{age}. Most consumers are younger than 30. The plot in Figure~\ref{ddsAgeCohortPlot} graphically shows the number of individuals in each age cohort. There are approximately 200 individuals in each of the middle four cohorts, while there are about 100 individuals in the other two cohorts.
+
+\begin{figure}[ht]
+	\centering
+	\subfigure[]{
+		\includegraphics[width=0.485\textwidth]
+		{ch_intro_to_data_oi_biostat/figures/ddsAgeHist/ddsAgeHist}
+		\label{ddsAgeHist}
+	}
+	\subfigure[]{
+		\includegraphics[width=0.485\textwidth]
+		{ch_intro_to_data_oi_biostat/figures/ddsAgeCohortPlot/ddsAgeCohortPlot}
+		\label{ddsAgeCohortPlot}
+	}
+	\caption{\subref{ddsAgeHist} Histogram of \texttt{age}. \subref{ddsAgeCohortPlot} Plot of \texttt{age.cohort}.}
+	\label{ddsAge}
+\end{figure}
+
+There are eight ethnic groups represented in \data{dds.discr}. The two largest groups, Hispanic and White non-Hispanic, together represent about 80\% of the consumers.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=\textwidth]{ch_intro_to_data_oi_biostat/figures/ddsEthnicityPlot/ddsEthnicityPlot}
+	\caption{A plot of \texttt{ethnicity}. }
+	\label{ddsEthnicityPlot}
+\end{figure}
+
+\begin{exercisewrap}
+\begin{nexercise}
+Using Figure~\ref{ddsGenderPlot}, does gender appear to be balanced in the \data{dds.discr} dataset?\footnotemark{}
+\end{nexercise}
+\end{exercisewrap}
+\footnotetext{Yes, approximately half of the individuals are female and half are male.}
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.7\textwidth]{ch_intro_to_data_oi_biostat/figures/ddsGenderPlot/ddsGenderPlot}
+	\caption{A plot of \texttt{gender}. }
+	\label{ddsGenderPlot}
+\end{figure}
+
+
+\textD{\newpage}
+
+
+\subsubsection{Relationships between two variables}
+
+After examining variables individually, explore how variables are related to each other. While there exist methods for summarizing more than two variables simultaneously, focusing on two variables at a time can be surprisingly effective for making sense of a dataset. It is useful to begin by investigating the relationships between the primary response variable of interest and the exploratory variables. In this case study, the response variable is \var{expenditures}, the amount of funds the DDS allocates annually to each consumer. How does \var{expenditures} vary by age, ethnicity, and gender?
+
+Figure~\ref{ddsExpAge} shows a side-by-side boxplot of \var{expenditures} by age cohort. There is a clear upward trend, in which older individuals tend to receive more DDS funds. This reflects the underlying context of the data. The purpose of providing funds to developmentally disabled individuals is to help them maintain a quality of life similar to those without disabilities; as individuals age, it is expected their financial needs will increase. Some of the observed variation in \var{expenditures} can be attributed to the fact that the dataset includes a wide range of ages. If the data included only individuals in one cohort, such as the 22-50 cohort, the distribution of \var{expenditures} would be less variable, and range between \$30,000 and \$60,000 instead of from \$0 and \$80,000.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=\textwidth]{ch_intro_to_data_oi_biostat/figures/ddsExpAge/ddsExpAge}
+	\caption{A plot of \texttt{expenditures} by \texttt{age.cohort}. }
+	\label{ddsExpAge}
+\end{figure}
+
+\textD{\newpage}
+
+How does the distribution of \var{expenditures} vary by ethnic group? Does there seem to be a difference in the amount of funding that a person receives, on average, between different ethnicities? A side-by-side boxplot of \var{expenditures} by \var{ethnicity} (Figure~\ref{ddsExpEthnicity}) reveals that the distribution of \var{expenditures} is quite different between ethnic groups. For example, there is very little variation in \var{expenditures} for the Multi Race, Native Hawaiian, and Other groups. Additionally, the median \var{expenditures} are not the same between groups; the medians for American Indian and Native Hawaiian individuals are about \$40,000, as compared to medians of approximately \$10,000 for Asian and Black consumers.   
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.99\textwidth]{ch_intro_to_data_oi_biostat/figures/ddsExpEthnicity/ddsExpEthnicity}
+	\caption{A plot of \texttt{expenditures} by \texttt{ethnicity}. }
+	\label{ddsExpEthnicity}
+\end{figure} 
+
+The trend visible in Figure~\ref{ddsExpEthnicity} seems potentially indicative of ethnic discrimination. Before proceeding with the analysis, however, it is important to take into account the fact that two of the groups, Hispanic and White non-Hispanic, comprise the majority of the data; some ethnic groups represent less than 10\% of the observations (Figure~\ref{ddsEthnicityPlot}). For ethnic groups with relatively small sample sizes, it is possible that the observed samples are not representative of the larger populations. The rest of this analysis will focus on comparing how \var{expenditures} varies between the two largest groups, White non-Hispanic and Hispanic. 
+
+\begin{exercisewrap}
+\begin{nexercise}
+Using Figure~\ref{ddsExpGender}, do annual expenditures seem to vary by gender?\footnotemark{}
+\end{nexercise}
+\end{exercisewrap}
+\footnotetext{No, the distribution of expenditures within males and females is very similar; both are right skewed, with approximately equal median and interquartile range.}
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.51\textwidth]{ch_intro_to_data_oi_biostat/figures/ddsExpGender/ddsExpGender}
+	\caption{A plot of \texttt{expenditures} by \texttt{gender}. }
+	\label{ddsExpGender}
+\end{figure}
+
+\textD{\newpage}
+
+Figure~\ref{ddsExpHispWhite} compares the distribution of \var{expenditures} between Hispanic and White non-Hispanic consumers. Most Hispanic consumers receive between about \$0 to \$20,000 from the California DDS; individuals receiving amounts higher than this are upper outliers. However, for White non-Hispanic consumers, median \var{expenditures} is at \$20,000, and the middle 50\% of consumers receive between \$5,000 and \$40,000. The precise summary statistics can be calculated from computing software, as shown in the corresponding \textsf{R} lab. The mean expenditures for Hispanic consumers is \$11,066, while the mean expenditures for White non-Hispanic consumers is over twice as large at \$24,698. On average, a Hispanic consumer receives less financial support from the California DDS than a White non-Hispanic consumer. Does this represent evidence of discrimination?
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.6\textwidth]{ch_intro_to_data_oi_biostat/figures/ddsExpHispWhite/ddsExpHispWhite}
+	\caption{A plot of \texttt{expenditures} by \texttt{ethnicity}, showing only Hispanics and White Non-Hispanics.}
+	\label{ddsExpHispWhite}
+\end{figure}
+
+Recall that expenditures is strongly associated with age\textemdash older individuals tend to receive more financial support. Is there also an association between age and ethnicity, for these two ethnic groups? When using data to investigate a question, it is important to explore not only how explanatory variables are related to the response variable(s), but also how explanatory variables influence each other. 
+
+Figures~\ref{ddsAgeCohortPlots} and~\ref{ddsEthAgeTable} show the distribution of age within Hispanics and White non-Hispanics. Hispanics tend to be younger, with most Hispanic consumers falling into the 6-12, 13-17, and 18-21 age cohorts. In contrast, White non-Hispanics tend to be older; most consumers in this group are in the 22-50 age cohort, and relatively more White non-Hispanic consumers are in the 51+ age cohort as compared to Hispanics.
+
+\begin{figure}[ht]
+	\centering
+	\subfigure[]{
+		\includegraphics[width=0.46\textwidth]
+		{ch_intro_to_data_oi_biostat/figures/ddsAgeCohortPlot/ddsHispAgeCohortPlot}
+		\label{ddsHispAgeCohortPlot}
+	}
+	\subfigure[]{
+		\includegraphics[width=0.46\textwidth]
+		{ch_intro_to_data_oi_biostat/figures/ddsAgeCohortPlot/ddsWhiteAgeCohortPlot}
+		\label{ddsWhiteAgeCohortPlot}
+	}
+	\caption{\subref{ddsHispAgeCohortPlot} Plot of \texttt{age.cohort} within Hispanics. \subref{ddsWhiteAgeCohortPlot} Plot of \texttt{age.cohort} within White non-Hispanics.}
+	\label{ddsAgeCohortPlots}
+\end{figure}
+
+\begin{figure}[ht]
+	\centering
+	\begin{tabular}{l|c|c}
+		\hline
+		Age Cohort & Hispanic & White Non-Hispanic \\ 
+		\hline
+		0-5 & 44/376 = 12\% & 20/401 = 5\% \\ 
+		6-12 & 91/376 = 24\% & 46/401 = 11\% \\ 
+		13-17 & 103/376 = 27\% & 67/401 = 17\% \\
+		18-21 & 78/376 = 21\% & 69/401 = 17\% \\
+		22-50 & 43/376 = 11\% & 133/401 = 33\% \\
+		51+ & 17/376 = 5\% & 66/401 = 16\% \\
+		\hline
+		Sum & 376/376 = 100\% & 401/401 = 100\% \\ 
+		\hline
+	\end{tabular}
+	\caption{Consumers by ethnicity and age cohort, shown both as counts and proportions.}
+	\label{ddsEthAgeTable}
+\end{figure}
+
+\textD{\newpage}
+
+Recall that a confounding variable is a variable that is associated with the response variable and the explanatory variable under consideration; confounding was initially introduced in the context of sunscreen use and incidence of skin cancer, where sun exposure is a confounder. In this setting, age is a confounder for the relationship between \var{expenditures} and \var{ethnicity}. Just as it would be incorrect to claim that sunscreen causes skin cancer, it is essential here to recognize that there is more to the story than the apparent association between \var{expenditures} and \var{ethnicity}.
+
+\begin{center}
+	\includegraphics[height=1.25in]{ch_intro_to_data_oi_biostat/figures/ddsConfounding/ddsConfounding.png}
+\end{center}
+
+For a closer look at the relationship between age, ethnicity, and expenditures, subset the data further to compare how \var{expenditures} differs by ethnicity within each age cohort. If age is indeed the primary source of the observed variation in \var{expenditures}, then there should be little difference in average \var{expenditures} between individuals in different ethnic groups but the same age cohort. 
+
+Figure~\ref{ddsAvgExpEthAge} shows the average expenditures within each age cohort, for Hispanics versus White non-Hispanics. The last column contains the difference between the two averages (calculated as White Non-Hispanics average - Hispanics average).
+
+% latex table generated in R 3.3.2 by xtable 1.8-2 package
+% Mon Aug 21 14:43:02 2017
+\begin{figure}[ht]
+	\centering
+	\begin{tabular}{|l|c|c|c|}
+		\hline
+		Age Cohort & Hispanics & White non-Hispanics & Difference \\ 
+		\hline
+		0-5 & 1,393 & 1,367 & -26 \\ 
+		6-12 & 2,312 & 2,052 & -260 \\ 
+		13-17 & 3,955 & 3,904 & -51 \\ 
+		\cellcolor{lightblue} 18-21 & \cellcolor{lightblue} 9,960 & \cellcolor{lightblue} 10,133 & \cellcolor{lightblue} 173 \\ 
+		22-50 & 40,924 & 40,188 & -736 \\ 
+		51+ & 55,585 & 52,670 & -2915 \\ 
+		\hline
+		Average & 11,066 & 24,698 & 13,632\\
+		\hline
+	\end{tabular}
+	\caption{Average expenditures by ethnicity and age cohort, in USD (\$). For all age cohorts except 18-21 years, average \var{expenditures} for White non-Hispanics is lower than for Hispanics.}
+	\label{ddsAvgExpEthAge}
+\end{figure}
+
+When \var{expenditures} is compared within age cohorts, there are not large differences between mean \var{expenditures} for White non-Hispanics versus Hispanics. Comparing individuals of similar ages reveals that the association between ethnicity and expenditures is not nearly as strong as it seemed from the initial comparison of overall averages. 
+
+\textD{\newpage}
+
+Instead, it is the difference in age distributions of the two populations that is driving the observed discrepancy in \var{expenditures}. The overall average of expenditures for the Hispanic consumers is lower because the population of Hispanic consumers is relatively young compared to the population of White non-Hispanic consumers, and the amount of expenditures for younger consumers tends to be lower than for older consumers. Based on an exploratory analysis that accounts for age as a confounding variable, there does not seem to be evidence of ethnic discrimination. 
+
+Identifying confounding variables is essential for understanding data. Confounders are often context-specific; for example, age is not necessarily a confounder for the relationship between ethnicity and expenditures in a different population. Additionally, it is rarely immediately obvious which variables in a dataset are confounders; looking for confounding variables is an integral part of exploring a dataset.
+
+Chapter~\ref{multipleLinearRegression} introduces multiple linear regression, a method that can directly summarize the relationship between ethnicity, expenditures, and age, in addition to the tools for evaluating whether the observed discrepancies within age cohorts are greater than would be expected by chance variation alone.
+
+\subsubsection{Simpson's paradox}
+
+These data represent an extreme example of confounding known as \term{Simpson's paradox}, in which an association observed in several groups may disappear or reverse direction once the groups are combined. In other words, an association between two variables $X$ and $Y$ may disappear or reverse direction once data are partitioned into subpopulations based on a third variable $Z$ (i.e., a confounding variable).
+
+Figure~\ref{ddsAvgExpEthAge} shows how mean \var{expenditures} is higher for Hispanics than White non-Hispanics in all age cohorts except one. Yet, once all the data are aggregated, the average expenditures for White non-Hispanics is over twice as large as the average for Hispanics. The paradox can be explored from a mathematical perspective by using weighted averages, where the average expenditure for each cohort is weighted by the proportion of the population in that cohort.
+
+\begin{examplewrap}
+\begin{nexample}{Using the proportions in Figure~\ref{ddsEthAgeTable} and the average expenditures for each cohort in Figure~\ref{ddsAvgExpEthAge}, calculate the overall weighted average expenditures for Hispanics and for White non-Hispanics.\footnotemark}
+
+For Hispanics:
+\[1,393(.12) + 2,312(.24) + 3,955(.27) + 9,960(.21) + 40,924(.11) + 55,585(.05) = \$11,162 \]
+
+For White non-Hispanics:
+\[1,367(0.05) + 2,052(.11) + 3,904(.17) + 10,133(.17) + 40,188(.33) + 52,760(.16) = \$24,384 \]	
+
+The weights for the youngest four cohorts, which have lower expenditures, are higher for the Hispanic population than the White non-Hispanic population; additionally, the weights for the oldest two cohorts, which have higher expenditures, are higher for the White non-Hispanic population. This leads to overall average expenditures for the White non-Hispanics being higher than for Hispanics.
+\end{nexample}
+\end{examplewrap}
+\footnotetext{Due to rounding, the overall averages calculated via this method will not exactly equal \$11,066 and \$24,698.}
+
+
+\textD{\newpage}
+
+
+\subsection{Case study: molecular cancer classification}
+
+The genetic code stored in DNA contains the necessary information for producing the proteins that ultimately determine an organism's observable traits (phenotype). Although nearly every cell in an organism contains the same genes, cells may exhibit different patterns of gene expression. Not only can genes be switched on or off in certain tissues, but they can also be expressed at varying levels. These variations in gene expression underlie the wide range of physical, biochemical, and developmental differences that characterize specific cells and tissues.
+
+Originally, scientists were limited to monitoring the expression of only a single gene at a time. The development of microarray technology in the 1990's made it possible to examine the expression of thousands of genes simultaneously. While newer genomic technologies have started to replace microarrays for gene expression studies, microarrays continue to remain clinically relevant as a tool for genetic diagnosis. For example, a 2002 study examined the effectiveness of gene expression profiling as a tool for predicting disease outcome in breast cancer patients, reporting that the expression data from 70 genes constituted a more powerful predictor of survival than standard systems based on clinical criteria.\footnote{van de Vijver MJ, He YD, van't Veer LJ, et al. A gene-expression sign as a predictor of survival in breast cancer. \textit{New England Journal of Medicine} 2002;347:1999-2009.} 
+
+This section introduces the principles behind DNA microarrays and discusses the 1999 Golub leukemia study, which represents one of the earliest applications of microarray technology for diagnostic purposes. 
+
+\subsubsection{DNA microarrays}
+
+
+Microarray technology is based on hybridization, a basic property of nucleic acids in which complementary nucleotide sequences specifically bind together. Each microarray consists of a glass or silicon slide dotted with a grid of short (25-40 base pairs long), single-stranded DNA fragments, known as probes. The probes in a single spot are present in millions of copies, and optimized to uniquely correspond to a gene. 
+
+To measure the gene expression profile of a sample, mRNA is extracted from the sample and converted into complementary-DNA (cDNA). The cDNA is then labeled with a fluorescent dye and added to a microarray. When cDNA from the sample encounters complementary DNA probes, the two strands will hybridize, allowing the cDNA to adhere to specific spots on the slide. Once the chip is illuminated (to activate the fluorescence) and scanned, the intensity of fluorescence detected at each spot corresponds to the amount of bound cDNA.
+
+Microarrays are commonly used to compare gene expression between an experimental sample and a reference sample. Suppose that the reference sample is taken from healthy cells and the experimental sample from cancer cells. First, the cDNA from the samples are differentially labeled, such as green dye for the healthy cells and red dye for the cancer cells. The samples are then mixed together and allowed to bind to the slide. If the expression of a particular gene is higher in the experimental sample than in the reference sample, then the corresponding spot on the microarray will appear red. In contrast, the spot will appear green if expression in the experimental sample is lower than in the reference sample. Equal expression levels result in a yellow spot, while no expression in either sample shows as a black dot. The fluorescence intensity data provide a relative measure of gene expression, showing which genes on the chip seem to be more or less active in relation to each other. 
+
+\textD{\newpage}
+
+The raw data produced by a microarray is messy, due to factors such as imperfections during chip manufacturing or unpredictable probe behavior. It is also possible for inaccuracies to be introduced from cDNA binding to probes that are not precise sequence matches; this nonspecific binding will contribute to observed intensity, but not reflect the expression level of a gene. Methods to improve microarray accuracy by reducing the frequency of nonspecific binding include using longer probes or multiple probes per gene that correspond to different regions of the gene sequence.\footnote{Chou, C.C. et al. Optimization of probe length and the number of probes per gene for optimal microarray analysis of gene expression. \textit{Nucleic Acids Research} 2004; \textbf{32}: e99.} The Affymetrix company developed a different strategy involving the use of probe pairs; one set of probes are a perfect match to the gene sequence (PM probes), while the mismatch probes contain a single base difference in the middle of the sequence (MM probes). The MM probes act as a control for any cDNA that exhibit nonspecific binding; subtracting the MM probe intensity from the PM intensity (PM - MM) provides a more accurate measure of fluorescence produced by specific hybridization.
+
+Considerable research has been done to develop methods for pre-processing microarray data to adjust for various errors and produce data that can be analyzed. When analyzing "cleaned" data from any experiment, it is important to be aware that the reliability of any conclusions drawn from the data depends, to a large extent, on the care that has been taken in collecting and processing the data.
+
+\subsubsection{Golub leukemia study}
+
+\index{data!Golub|(}
+
+Accurate cancer classification is critical for determining an appropriate course of therapy. The chemotherapy regimens for acute leukemias differs based on whether the leukemia affects blood-forming cells (acute myeloid leukemia, AML) or white blood cells (acute lymphoblastic leukemia, ALL). At the time of the Golub study, no single diagnostic test was sufficient for distinguishing between AML and ALL. To investigate whether gene expression profiling could be a tool for classifying acute leukemia type, Golub and co-authors used Affymetrix DNA microarrays to measure the expression level of 7,129 genes from children known to have either AML or ALL.\footnote{Golub, Todd R., et al. Molecular classification of cancer: class discovery and class prediction by gene expression monitoring. Science 286 (1999): 531-537.} 
+
+The original data (after some initial pre-processing) are available from the Broad Institute.\footnote{http://www-genome.wi.mit.edu/mpr/data\_set\_ALL\_AML.html} The version of the data presented in this text have undergone further processing; the expression levels have been normalized to adjust for the variability between the separate arrays used for each sampled individual.\footnote{John Maindonald, W. John Braun. \textit{Data Analysis and Graphics using R: An Example-Based Approach.}} Figure~\ref{golubVariables} describes the variables in the first six columns of the \data{Golub} data. The last 7,129 columns of the dataset contain the expression data for the genes examined in the study; each column is named after the probe corresponding to a specific gene.
+
+\begin{figure}[h]
+	\centering\small
+	\begin{tabular}{lp{10.5cm}}
+		\hline
+		{\bf variable} & {\bf description} \\
+		\hline
+		\var{Samples} & Sample number; unique to each patient. \\
+		\var{BM.PB} & Type of patient material.  BM for bone marrow; PB for peripheral blood. \\
+		\var{Gender} &  F for female, M for male.  \\
+		\var{Source} & Hospital where the patient was treated.\\
+		\var{tissue.mf} & Combination of \var{BM.PB} and \var{Gender}\\
+		\var{cancer} & Leukemia type; aml is acute myeloid leukemia, allB is acute lymphoblastic leukemia with B-cell origin, and allT is acute lymphoblastic leukemia with T-cell origin. \\
+		\hline
+	\end{tabular}
+	\caption{Variables and their descriptions for the patient descriptors in \data{Golub} dataset.\vspaceB{-3.5mm}}
+	\label{golubVariables}
+\end{figure}
+
+%modified from xtable to remove the index column
+
+\textD{\newpage}
+
+Figure~\ref{sampleGolubData} shows five rows and seven columns from the dataset. Each row corresponds to a patient. These five patients were all treated at the Dana Farber Cancer Institute (DFCI) (\var{Source}) for ALL with B-cell origin (\var{cancer}), and samples were taken from bone marrow (\var{BM.PB}). Four of the patients were female and one was male (\var{Gender}). The last row in the table shows the normalized gene expression level for the gene corresponding to the probe AFFX.BioB.5.at. 
+
+% latex table generated in R 3.3.2 by xtable 1.8-2 package
+% Fri Jun 16 15:24:05 2017
+\begin{figure}[h]
+	\centering
+	\begin{tabular}{ccccccc}
+		\hline
+		Samples & BM.PB & Gender & Source & tissue.mf & cancer & AFFX-BioB-5\_at \\ 
+		\hline
+		  39 & BM & F & DFCI & BM:f & allB & -1363.28 \\ 
+		  40 & BM & F & DFCI & BM:f & allB & -796.29 \\ 
+		  42 & BM & F & DFCI & BM:f & allB & -679.14 \\ 
+		  47 & BM & M & DFCI & BM:m & allB & -1164.40 \\ 
+		  48 & BM & F & DFCI & BM:f & allB & -1299.65 \\ 
+		\hline
+	\end{tabular}
+	\caption{Five rows and seven columns from the \data{Golub} data.} 
+	\label{sampleGolubData}
+\end{figure}
+
+The goal of the Golub study was to develop a procedure for distinguishing between AML and ALL based only on the gene expression levels of a patient. There are two major issues to be addressed:
+
+\begin{enumerate}
+	\item \textit{Which genes are the most informative for making a prediction?} If a gene is differentially expressed between individuals with AML versus ALL, then measuring the expression level of that gene may be informative for diagnosing leukemia type. For example, if a gene tends to be highly expressed in AML individuals, but only expressed at low levels in ALL individuals, it is more likely to be a good predictor of leukemia type than a gene that is expressed at similar levels in both AML and ALL patients.  
+	
+	\item \textit{How can leukemia type be predicted from expression data?} Suppose that a patient's expression profile is measured for a group of genes. In an ideal scenario, all the genes measured would exhibit AML-like expression, or ALL-like expression, making a prediction obvious. In reality, however, a patient's expression profile will not follow an idealized pattern. Some of the genes may have expression levels more typical of AML, while others may suggest ALL. It is necessary to clearly define a strategy for translating raw expression data into a prediction of leukemia type.
+	
+\end{enumerate}
+
+Even though the \data{golub} dataset is relatively small by modern standards, it is already too large to feasibly analyze without the use of statistical computing software. In this section, conceptual details will be demonstrated with a small version of the dataset (\data{golub.small}) that contains only the data for 10 patients and 10 genes. Figure~\ref{smallGolubData} shows the cancer type and expression data in \data{golub.small}; the expression values have been rounded to the nearest whole number, and the gene probes are labeled A-J for convenience.
+
+% latex table generated in R 3.3.2 by xtable 1.8-2 package
+% Wed Jun 21 16:18:21 2017
+\begin{figure}[ht]
+	\footnotesize
+	\centering
+	\begin{tabular}{lrrrrrrrrrr}
+		\hline
+		cancer & A & B & C & D & E & F & G & H & I & J \\ 
+		\hline
+		allB & 39308 & 35232 & 41171 & 35793 & -593 & -1053 & -513 & -537 & 1702 & 1120 \\ 
+		allT & 32282 & 41432 & 59329 & 49608 & -123 & -511 & 265 & -272 & 3567 & -489 \\ 
+		allB & 47430 & 35569 & 56075 & 42858 & -208 & -712 & 32 & -313 & 433 & 400 \\ 
+		allB & 25534 & 16984 & 28057 & 32694 & 89 & -534 & -24 & 195 & 3355 & 990 \\ 
+		allB & 35961 & 24192 & 27638 & 22241 & -274 & -632 & -488 & 20 & 2259 & 348 \\ 
+		aml & 46178 & 6189 & 12557 & 34485 & -331 & -776 & -551 & -48 & 4074 & -578 \\ 
+		aml & 43791 & 33662 & 38380 & 29758 & -47 & 124 & 1118 & 3425 & 7018 & 1133 \\ 
+		aml & 53420 & 26109 & 31427 & 23810 & 396 & 108 & 1040 & 1915 & 4095 & -709 \\ 
+		aml & 41242 & 37590 & 47326 & 30099 & 15 & -429 & 784 & -532 & 1085 & -1912 \\ 
+		aml & 41301 & 49198 & 66026 & 56249 & -418 & -948 & -340 & -905 & 877 & 745 \\ 
+		\hline
+	\end{tabular}
+	\caption{Leukemia type and expression data from \data{golub.small}.}
+	\label{smallGolubData}
+\end{figure}
+
+\textD{\newpage}
+
+To start understanding how gene expression differs by leukemia type, summarize the data separately for AML patients and for ALL patients, then make comparisons. For example, how does the expression of Gene A differ between individuals with AML versus ALL? Among the 5 individuals with AML, the mean expression for Gene A is 45,186; among the 5 ALL individuals, mean expression for Gene A is 36,103. 
+
+Figure~\ref{golubSmallAml} shows mean expression values for each gene among AML patients and Figure~\ref{golubSmallAll} among ALL patients. 
+
+% latex table generated in R 3.3.2 by xtable 1.8-2 package
+% Wed Jun 21 16:40:05 2017
+\begin{figure}[ht]
+	\small
+	\centering
+	\begin{tabular}{r|rrrrrrrrrr}
+		\hline
+		AML & A & B & C & D & E & F & G & H & I & J \\ 
+		\hline
+		& 46178 & 6189 & 12557 & 34485 & -331 & -776 & -551 & -48 & 4074 & -578 \\ 
+		& 43791 & 33662 & 38380 & 29758 & -47 & 124 & 1118 & 3425 & 7018 & 1133 \\ 
+		& 53420 & 26109 & 31427 & 23810 & 396 & 108 & 1040 & 1915 & 4095 & -709 \\ 
+		& 41242 & 37590 & 47326 & 30099 & 15 & -429 & 784 & -532 & 1085 & -1912 \\ 
+		& 41301 & 49198 & 66026 & 56249 & -418 & -948 & -340 & -905 & 877 & 745 \\ 
+		\hline
+		Mean & 45186 & 30550 & 39143 & 34880 & -77 & -384 & 410 & 771 & 3430 & -264 \\ 
+		\hline
+	\end{tabular}
+	\caption{Expression data for AML patients, where the last row contains mean expression value for each gene among the 5 AML patients. The first five rows are duplicated from the last five rows in Figure~\ref{smallGolubData}.}
+	\label{golubSmallAml}
+\end{figure}
+
+% latex table generated in R 3.3.2 by xtable 1.8-2 package
+% Wed Jun 21 16:40:17 2017
+\begin{figure}[ht]
+	\small
+	\centering
+	\begin{tabular}{r|rrrrrrrrrr}
+		\hline
+		ALL & A & B & C & D & E & F & G & H & I & J \\ 
+		\hline
+		& 39308 & 35232 & 41171 & 35793 & -593 & -1053 & -513 & -537 & 1702 & 1120 \\ 
+		& 32282 & 41432 & 59329 & 49608 & -123 & -511 & 265 & -272 & 3567 & -489 \\ 
+		& 47430 & 35569 & 56075 & 42858 & -208 & -712 & 32 & -313 & 433 & 400 \\ 
+		& 25534 & 16984 & 28057 & 32694 & 89 & -534 & -24 & 195 & 3355 & 990 \\ 
+		& 35961 & 24192 & 27638 & 22241 & -274 & -632 & -488 & 20 & 2259 & 348 \\ 
+		\hline
+		Mean & 36103 & 30682 & 42454 & 36639 & -222 & -689 & -146 & -181 & 2263 & 474 \\ 
+		\hline
+	\end{tabular}
+	\caption{Expression data for ALL patients, where the last row contains mean expression value for each gene among the 5 ALL patients. The first five rows are duplicated from the first five rows in Figure~\ref{smallGolubData}.}
+	\label{golubSmallAll}
+\end{figure}
+
+\begin{examplewrap}
+\begin{nexample}{On average, which genes are more highly expressed in AML patients? Which genes are more highly expressed in ALL patients?}
+
+For each gene, compare the mean expression value among ALL patients to the mean among AML patients. For example, the difference in mean expression levels for Gene A is
+\[\overline{x}_{AML} - \overline{x}_{ALL} = 45186 - 36103 = 9083. \]	
+
+The differences in means for each gene are shown in Figure~\ref{golubSmallDiffinMeans}. Due to the order of subtraction used, genes with a positive difference value are more highly expressed in AML patients: A, E, F, G, H, and I. Genes B, C, D, and J are more highly expressed in ALL patients. 
+\end{nexample}
+\end{examplewrap}
+
+% latex table generated in R 3.3.2 by xtable 1.8-2 package
+% Thu Jun 22 13:06:43 2017
+\begin{figure}[ht]
+	\centering
+	\footnotesize
+	\begin{tabular}{rrrrrrrrrrr}
+		\hline
+		& A & B & C & D & E & F & G & H & I & J \\ 
+		\hline
+		AML mean & 45186 & 30550 & 39143 & 34880 & -77 & -384 & 410 & 771 & 3430 & -264 \\ 
+		ALL mean & 36103 & 30682 & 42454 & 36639 & -222 & -689 & -146 & -181 & 2263 & 474 \\ 
+		\hline
+		Difference & 9083 & -132 & -3310 & -1758 & 145 & 304 & 556 & 952 & 1167 & -738 \\ 
+		\hline
+	\end{tabular}
+	\caption{The difference in mean expression levels by leukemia type for each gene in \data{golub.small}.}
+	\label{golubSmallDiffinMeans}
+\end{figure}
+
+\textD{\newpage}
+
+The most informative genes for predicting leukemia type are ones for which the difference in means seems relatively large, compared to the entire distribution of differences. Figure~\ref{golubSmallHistandBox} visually displays the distribution of differences; the boxplot indicates that there is one large outlier and one small outlier.  
+
+\begin{figure}[h]
+	\centering
+	\subfigure[]{
+		\includegraphics[width=0.65\textwidth]
+		{ch_intro_to_data_oi_biostat/figures/golubSmall/golubSmallHist}
+		\label{golubSmallHist}
+	}
+	\subfigure[]{
+		\includegraphics[width=0.3\textwidth]
+		{ch_intro_to_data_oi_biostat/figures/golubSmall/golubSmallBoxPlot}
+		\label{golubSmallBoxPlot}
+	}
+	\caption{A histogram and boxplot of the differences in mean expression level between AML and ALL in the \data{golub.small} data.}
+	\label{golubSmallHistandBox}
+\end{figure}
+
+It is possible to identify the outliers from simply looking at the list of differences, since the list is short: Genes A and C, with differences of 9,083 and -3,310, respectively.\footnote{For a numerical approach, calculate the outlier boundaries defined by $1.5 \times IQR$.} It is important to remember that Genes A and C are only outliers out of the specific 10 genes in \data{golub.small}, where mean expression has been calculated using data from 10 patients; these genes do not necessarily show outlier levels of expression relative to the complete dataset.
+
+\begin{figure}[h!]
+	\centering
+	\subfigure[]{
+		\includegraphics[width=0.8\textwidth]
+		{ch_intro_to_data_oi_biostat/figures/golubPlots/golubHist}
+		\label{golubHist}
+	}
+	\subfigure[]{
+		\includegraphics[width=0.65\textwidth]
+		{ch_intro_to_data_oi_biostat/figures/golubPlots/golubBoxPlot}
+		\label{golubBoxPlot}
+	}
+	\caption{A histogram and boxplot of the differences in mean expression level between AML and ALL, using information from 7,129 genes and 62 patients in the \data{Golub} data (\data{golub.train}).}
+	\label{golubHistandBox}
+\end{figure}
+
+With the use of computing software, the same process of calculating means, differences of means, and identifying outliers can easily be applied to the complete version of the data. Figure~\ref{golubHistandBox} shows the distribution of differences in mean expression level between AML and ALL patients for all 7,129 genes in the dataset, from 62 patients. The vast majority of genes are expressed at similar levels in AML and ALL patients; most genes have a difference in mean expression within -5,000 to 5,000. However, there are many genes that show extreme differences, as much as higher by 20,000 in AML or lower by 30,000 in ALL. These genes may be useful for differentiating between AML and ALL. The corresponding \textsf{R} lab illustrates the details of using \textsf{R} to identify these genes.\footnote{Lab 3, Chapter 1.}
+
+Note how Figure~\ref{golubHistandBox} uses data from only 62 patients out of the 72 in the \data{Golub} dataset; this subset is called \data{golub.train}. The remaining 10 patients have been set aside as a "test" dataset (\data{golub.test}). Based on what has been learned about expression patterns from the 62 patients in \data{golub.train}, how well can the leukemia type of the 10 patients in \data{golub.test} be predicted?\footnote{The original analysis used data from 38 patients to identify informative genes, then tested predictions on an independent collection of data from 34 patients.}
+
+\textD{\newpage}
+
+\begin{figure}[h]
+	\centering
+	{\includegraphics[width=\textwidth]{ch_intro_to_data_oi_biostat/figures/golubPrediction/golubPrediction.png}
+	\caption{Schematic of the prediction strategy used by the Golub team, reproduced with modifications from Fig. 1B of the original paper.
+		\label{golubPrediction}}
+	}
+\end{figure}
+
+Figure~\ref{golubPrediction} illustrates the main ideas behind the strategy developed by the Golub team to predict leukemia type from expression data. The vertical orange bars represent the gene expression levels of a patient for each gene, relative to the mean expression for AML patients and ALL patients from the training dataset (vertical blue bars). A gene will "vote" for either AML or ALL, depending on whether the patient's expression level is closer to $\mu_{AML}$ or $\mu_{ALL}$. In the example shown, three of the genes are considered to have ALL-like expression, versus the other two that are more AML-like. The votes are also weighted to account for how far an observation is from the midpoint between the two means (horizontal dotted blue line), i.e. the length of the dotted line shows the deviation from the midpoint. For example, the observed expression value for gene 2 is not as strong an indicator of ALL as the expression value for gene 1. The magnitude of the deviations ($v_1$, $v_2$, ...) are summed to obtain $V_{AML}$ and $V_{ALL}$, and a higher value indicates a prediction of either AML or ALL, respectively.
+
+The published analysis chose to use 50 informative genes; a decision about how many genes to use in a diagnostic panel typically involves considering factors such as the number of genes practical for a clinical setting. For simplicity, a smaller number of genes will be used in the analysis shown here. 
+
+Suppose that 10 genes are selected as predictors---the 5 largest outliers and 5 smallest outliers for the difference in mean expression between AML and ALL. Figure~\ref{golubTestData} shows expression data for these 10 genes from the 10 patients in \data{golub.test}, while Figure~\ref{golubTrainMeansMidpoints} contains the mean expression value for each gene among AML and ALL patients in \data{golub.train}.
+
+\textD{\newpage}
+
+% latex table generated in R 3.4.3 by xtable 1.8-2 package
+% Mon Feb 12 21:54:24 2018
+\begin{figure}[ht]
+	\tiny
+	\centering
+	\begin{tabular}{r|rrrrr|rrrrr}
+		\hline
+		& M19507\_at & M27891\_at & M11147\_at & M96326\_rna1\_at & Y00787\_s\_at & M14483\_rna1\_s\_at & X82240\_rna1\_at & X58529\_at & M33680\_at & U05259\_rna1\_at \\ 
+		\hline
+		1 & 4481 & 47532 & 56261 & 1785 & -77 & 7824 & -231 & 9520 & 7181 & 2757 \\ 
+		2 & 11513 & 2839 & 42469 & 5018 & 20831 & 27407 & -1116 & -221 & 6978 & -187 \\ 
+		3 & 21294 & 6439 & 30239 & 61951 & -187 & 19692 & -540 & 216 & 1741 & -84 \\ 
+		4 & -399 & 26023 & 40910 & 1271 & 26842 & 30092 & -1247 & 19033 & 13117 & -188 \\ 
+		5 & -147 & 29609 & 37606 & 20053 & 12745 & 26985 & -1104 & -273 & 8701 & -168 \\ 
+		6 & -1229 & -1206 & 16932 & 2250 & 360 & 38058 & 20951 & 12406 & 9927 & 8378 \\ 
+		7 & -238 & -610 & 21798 & -991 & -348 & 23986 & 6500 & 20451 & 8500 & 7005 \\ 
+		8 & -1021 & -792 & 17732 & 730 & 5102 & 17893 & 158 & 9287 & 7924 & 9221 \\ 
+		9 & 432 & -1099 & 9683 & -576 & -804 & 14386 & 7097 & 5556 & 9915 & 5594 \\ 
+		10 & -518 & -862 & 26386 & -2971 & -1032 & 30100 & 32706 & 21007 & 23932 & 14841 \\ 
+		\hline
+	\end{tabular}
+	\caption{Expression data from the 10 patients in \data{golub.test}, for the 10 genes selected as predictors. Each row represents a patient; the five right-most columns are the 5 largest outliers and the five left-most columns are the 5 smallest outliers.}
+	\label{golubTestData}
+\end{figure}
+
+
+% latex table generated in R 3.4.3 by xtable 1.8-2 package
+% Mon Feb 12 22:14:04 2018
+\begin{figure}[ht]
+	\centering
+	%\small
+	\begin{tabular}{r|r|r|r}
+		\hline
+		Probe & AML Mean & ALL Mean & Midpoint \\ 
+		\hline
+		M19507\_at & 20143 & 322 & 9910 \\ 
+		M27891\_at & 17395 & -262 & 8829 \\ 
+		M11147\_at & 32554 & 16318 & 8118 \\ 
+		M96326\_rna1\_at & 16745 & 830 & 7957 \\ 
+		Y00787\_s\_at & 16847 & 1002 & 7923 \\ 
+		M14483\_rna1\_s\_at & 22268 & 33561 & -5647 \\ 
+		X82240\_rna1\_at & -917 & 9499 & -5208 \\ 
+		X58529\_at & 598 & 10227 & -4815 \\ 
+		M33680\_at & 4151 & 13447 & -4648 \\ 
+		U05259\_rna1\_at & 74 & 8458 & -4192 \\ 
+		\hline
+	\end{tabular}
+		\caption{Mean expression value for each gene among AML patients and ALL patients in \data{golub.train}, and the midpoint between the means. \label{golubTrainMeansMidpoints}}
+\end{figure}
+
+
+\begin{examplewrap}
+\begin{nexample}{Consider the expression data for the patient in the first row of Figure~\ref{golubTestData}. For each gene, identify whether the expression level is more AML-like or more ALL-like.}
+	
+For the gene represented by the M19507\_at probe, the patient has a recorded expression level of 4,481, which is closer to the ALL mean of 322 than the AML mean of 20,143. However, for the gene represented by the M27891\_at probe, the expression level of 47,532 is closer to the AML mean of 17,395 than the ALL mean of -262. 
+
+Expression at genes represented by M19507\_at, M96326\_rna1\_at, Y00787\_s\_at, and X58529\_at are more ALL-like than AML-like. All other expression levels are closer to $\mu_{AML}$.
+\end{nexample}
+\end{examplewrap}
+
+\begin{examplewrap}
+\begin{nexample}{Use the information in Figures~\ref{golubTestData} and~\ref{golubTrainMeansMidpoints} to calculate the magnitude of the deviations $v_1$ and $v_{10}$ for the first patient.}
+	
+For the gene represented by the M19507\_at probe, the magnitude of the deviation is $v_1 = |4,481 - 20,143| = 15,662$.	
+
+For the gene represented by the U05259\_rna1\_at probe, the magnitude of the deviation is $v_{10} = |2,757 - 74| = 2.683$.
+\end{nexample}
+\end{examplewrap}	
+
+% latex table generated in R 3.4.3 by xtable 1.8-2 package
+% Tue Feb 13 01:28:10 2018
+\begin{figure}[ht]
+	\tiny
+	\centering
+	\begin{tabular}{r|rrrrr|rrrrr}
+		\hline
+		& M19507\_at & M27891\_at & M11147\_at & M96326\_rna1\_at & Y00787\_s\_at & M14483\_rna1\_s\_at & X82240\_rna1\_at & X58529\_at & M33680\_at & U05259\_rna1\_at \\ 
+		\hline
+		1 & 4481 \cellcolor{lightblue}& 47532 & 56261 & 1785 \cellcolor{lightblue}& 77 \cellcolor{lightblue}& 7824 & 231 & 9520 \cellcolor{lightblue} & 7181 & 2757 \\ 
+		2 & 11513 & 2839 \cellcolor{lightblue}& 42469 & 5018 \cellcolor{lightblue}& 20831 & 27407 & 1116 & 221 & 6978 & 187 \\ 
+		3 & 21294 & 6439 \cellcolor{lightblue}& 30239 & 61951 & 187 \cellcolor{lightblue} & 19692 & 540 & 216 & 1741 & 84 \\ 
+		4 & 399 \cellcolor{lightblue}& 26023 & 40910 & 1271 \cellcolor{lightblue} & 26842 & 30092 \cellcolor{lightblue} & 1247 & 19033 \cellcolor{lightblue}& 13117 \cellcolor{lightblue} & 188 \\ 
+		5 & 147 \cellcolor{lightblue}& 29609 & 37606 & 20053 & 12745 & 26985 & 1104 & 273 & 8701 & 168 \\ 
+		6 & 1229 \cellcolor{lightblue}& 1206 \cellcolor{lightblue}& 16932 \cellcolor{lightblue}& 2250 \cellcolor{lightblue}& 360 \cellcolor{lightblue}& 38058 \cellcolor{lightblue}& 20951 \cellcolor{lightblue}& 12406 \cellcolor{lightblue}& 9927 \cellcolor{lightblue}& 8378 \cellcolor{lightblue} \\ 
+		7 & 238 \cellcolor{lightblue}& 610 \cellcolor{lightblue}& 21798 \cellcolor{lightblue}& 991 \cellcolor{lightblue}& 348 \cellcolor{lightblue}& 23986 & 6500 \cellcolor{lightblue}& 20451 \cellcolor{lightblue} & 8500 & 7005 \cellcolor{lightblue}\\ 
+		8 & 1021 \cellcolor{lightblue}& 792 \cellcolor{lightblue}& 17732 \cellcolor{lightblue}& 730 \cellcolor{lightblue}& 5102 \cellcolor{lightblue}& 17893 & 158 & 9287 \cellcolor{lightblue}& 7924 & 9221 \cellcolor{lightblue}\\ 
+		9 & 432 \cellcolor{lightblue}& 1099 \cellcolor{lightblue}& 9683 \cellcolor{lightblue}& 576 \cellcolor{lightblue}& 804 \cellcolor{lightblue}& 14386 & 7097 \cellcolor{lightblue}& 5556 \cellcolor{lightblue}& 9915 \cellcolor{lightblue}& 5594 \cellcolor{lightblue}\\ 
+		10 & 518 \cellcolor{lightblue}& 862 \cellcolor{lightblue}& 26386 & 2971 \cellcolor{lightblue}& 1032 \cellcolor{lightblue}& 30100 \cellcolor{lightblue}& 32706 \cellcolor{lightblue} & 21007 \cellcolor{lightblue}& 23932 \cellcolor{lightblue}& 14841 \cellcolor{lightblue}\\ 
+		\hline
+	\end{tabular}
+	\caption{The magnitude of deviations from the midpoints. Cells for which the expression level is more ALL-like (closer to $\mu_{ALL}$ than $\mu_{AML}$) are highlighted in blue.}
+	\label{golubTestDataMagnitudes}
+\end{figure}
+
+\begin{examplewrap}
+\begin{nexample}{Using the information in Figure~\ref{golubTestDataMagnitudes}, make a prediction for the leukemia status of Patient 1.}
+	
+Calculate the total weighted votes for each category:
+\[V_{AML} = 47,532 + 56,261 + 7,824 + 231 + 7,181 + 2,757 = 121,786 \]
+\[V_{ALL} = 4,481 + 1,785 + 77 + 9,520 = 15,863 \]	
+
+Since $V_{AML} > V_{ALL}$, Patient 1 is predicted to have AML.
+\end{nexample}
+\end{examplewrap}
+
+\begin{exercisewrap}
+\begin{nexercise}
+Make a prediction for the leukemia status of Patient 10.\footnotemark{}
+\end{nexercise}
+\end{exercisewrap}
+\footnotetext{Since $V_{AML} = 26,386$ and $V_{ALL} = 127,968$, Patient 10 is predicted to have ALL.}
+
+Figure~\ref{golubActualPrediction} shows the comparison between actual leukemia status and predicted leukemia status based on the described prediction strategy. The prediction matches patient leukemia status for all patients. 
+
+% latex table generated in R 3.3.2 by xtable 1.8-2 package
+% Thu Jun 29 16:04:36 2017
+% modified Feb 13 2018
+\begin{figure}[ht]
+	\centering
+	%\small
+	\begin{tabular}{r|cc}
+		\hline
+		& Actual & Prediction \\ 
+		\hline
+		1 & aml & aml \\ 
+		2 & aml & aml \\ 
+		3 & aml & aml \\ 
+		4 & aml & aml \\ 
+		5 & aml & aml \\ 
+		6 & allB & all \\ 
+		7 & allB & all \\ 
+		8 & allB & all \\ 
+		9 & allB & all \\ 
+		10 & allB & all \\ 
+		\hline
+	\end{tabular}
+	\caption{Actual leukemia status versus predicted leukemia status for the patients in \data{golub.test} \label{golubActualPrediction}}
+\end{figure}
+
+The analysis presented here is meant to illustrate how basic statistical concepts such as the definition of an outlier can be leveraged to address a relatively complex scientific question. There are entirely different approaches possible for analyzing these data, and many other considerations that have not been discussed. For example, this method of summing the weighted votes for each gene assumes that each gene is equally informative; the analysis in the published paper incorporates an additional weighting factor when calculating $V_{AML}$ and $V_{ALL}$ that accounts for how correlated each gene is with leukemia type. The published analysis also calculates prediction strength based on the values of $V_{AML}$ and $V_{AML}$ in order to provide a measure of how reliable each prediction is. 
+
+\textD{\newpage}
+
+Finally, it is important to remember that the Golub analysis represented one of the earliest investigations into the use of gene expression data for diagnostic purposes. While the overall logical goals remain the same\textemdash identifying informative genes and developing a prediction strategy\textemdash the means of accomplishing them have become far more sophisticated. A modern study would have the benefit of referencing established, well-defined techniques for analyzing microarray data.
+
+\index{data!Golub|)}
+
+
+\subsection{Case study: cold-responsive genes in the plant \textit{Arabidopsis arenosa}}
+
+In contrast to hybridization-based approaches, RNA sequencing (RNA-Seq) allows for the entire transcriptome to be surveyed in a high-throughput, quantitative manner.\footnote{Wang, et al. RNA-Seq: a revolutionary tool for transcriptomics. \textit{Nature Genetics} 2009; \textbf{10}: 57-63.} Microarrays require gene-specific probes, which limits microarray experiments to detecting transcripts that correspond to known gene sequences. In contrast, RNA-Seq can still be used when genome sequence information is not available, such as for non-model organisms. RNA-Seq is an especially powerful tool for researchers interested in studying small-scale genetic variation, such as single nucleotide polymorphisms, which microarrays are not capable of detecting.\footnote{A single nucleotide polymorphism (SNP) represents variation at a single position in DNA sequence among individuals.} Compared to microarrays, RNA-Seq technology offers increased sensitivity for detecting genes expressed at either low or very high levels.
+
+This section introduces the concepts behind RNA-Seq technology and discusses a study that used RNA-Seq to explore the genetic basis of cold response in the plant \textit{Arabidopsis arenosa}.
+
+\subsubsection{RNA sequencing (RNA-Seq)}
+
+The first step in an RNA-Seq experiment is to prepare cDNA sequence libraries for each RNA sample being sequenced. RNA is converted into cDNA and sheared into short fragments; sequencing adapters and barcodes are added to each fragment that initiate the sequencing reaction and identify sequences that originate from different samples. Once all the cDNA fragments are sequenced, the resulting short sequence reads must be re-constructed to produce the transcriptome. At this point, even the simplest RNA-Seq experiment has generated a relatively large amount of data; the complexity involved in processing and analyzing RNA-Seq data represents a significant challenge to widespread adoption of RNA-Seq technology. While a number of programs are available to help researchers process RNA-Seq data, improving computational methods for working with RNA-Seq data remains an active area of research.
+
+A transcriptome can be assembled from the short sequence reads by either \textit{de novo} assembly or genome mapping. In \textit{de novo} assembly, sequencing data are run through computer algorithms that identify overlapping regions in the short sequence reads to gradually piece together longer stretches of continuous sequence.  Alternatively, the reads can be aligned to a reference genome, a genome sequence which functions as a representative template for a given species; in cases where a species has not been sequenced, the genome of a close relative can also function as a reference genome. By mapping reads against a genome, it is possible to identify the position (and thus, the gene) from which a given RNA transcript originated. It is also possible to use a combination of these two strategies, an approach that is especially advantageous when genomes have experienced major rearrangements, such as in the case of cancer cells.\footnote{Garber, et al. Computational methods for transcriptome annotation and quantification using RNA-seq. \textit{Nature Methods} 2011; \textbf{8}: 469-477.} Once the transcripts have been assembled, information stored in sequence databases such as those hosted by the National Center for Biotechnology (NCBI) can be used to identify gene sequences (i.e., annotate the transcripts).
+
+\textD{\newpage}
+
+Quantifying gene expression levels from RNA-Seq data is based on counting the number of sequence reads per gene. If a particular gene is highly expressed, there will be a relatively high number of RNA transcripts originating from that gene; thus, the probability that transcripts from this gene are sequenced multiple times is also relatively high, and the gene will have a high number of sequencing reads associated with it. The number of read counts for a given gene provides a measure of gene expression level, when normalized for transcript length. If a short transcript and long transcript are present in equal amounts, the long transcript will have more sequencing reads associated with it due to the fragmentation step in library construction. Additional normalization steps are necessary when comparing data between samples to account for factors such as differences in the starting amount of RNA or the total number of sequencing reads generated (sequencing depth, in the language of genomics). A variety of strategies have been developed to carry out such normalization procedures.
+
+\subsubsection{Cold-responsive genes in \textit{A. arenosa}}
+
+\textit{Arabidopsis arenosa} populations exist in different habitats, and exhibit a range of differences in flowering time, cold sensitivity, and perenniality. Sensitivity to cold is an important trait for perennials, plants that live longer than one year. It is common for perennials to require a period of prolonged cold in order to flower. This mechanism, known as vernalization, allows perennials to synchronize their life cycle with the seasons such that they flower only once winter is over. Plant response to low temperatures is under genetic control, and mediated by a specific set of cold-responsive genes.
+
+In a recent study, researchers used RNA-Seq to investigate how cold responsiveness differs in two populations of \textit{A. arenosa}: TBG (collected from Triberg, Germany) and KA (collected from Kasparstein, Austria).\footnote{Baduel P, et al. Habitat-Associated Life History and Stress-Tolerance Variation in \textit{Arabidopsis arenosa}. \textit{Plant Physiology} 2016; \textbf{171}: 437-451.} TBG grows in and around railway tracks, while KA is found on shaded limestone outcrops in wooded forests. As an annual, TBG has lost the vernalization response and does not required extended cold in order to flower; in the wild, TBG plants usually die before the onset of winter. In contrast, KA is a perennial plant, in which vernalization is known to greatly accelerate the onset of flowering.
+
+Winter conditions can be simulated by incubating plants at 4 $\degree$C for several weeks; a plant that has undergone cold treatment is considered vernalized, while plants that have not been exposed to cold treatment are non-vernalized. Expression data were collected for 1,088 genes known to be cold-responsive in TBG and KA plants that were either vernalized or non-vernalized. 
+
+Figure~\ref{sampleArenosaKA} shows the data collected for the KA plants analyzed in the study, while Figure~\ref{sampleArenosaTBG} shows the TBG expression data. Each row corresponds to a gene; the first column indicates gene name, while the rest correspond to expression measured in a plant sample. Three individuals of each population were exposed to cold (vernalized, denoted by V), and three were not (non-vernalized, denoted by NV). Expression was measured in gene counts (i.e. the number of RNA transcripts present in a sample); the data were then normalized between samples to allow for comparisons between gene counts. For example, a value of 288.20 for the \textit{PUX4} gene in KA NV 1 indicates that in one of the non-vernalized KA individuals, about 288 copies of \textit{PUX4} were detected.
+
+A high number of transcripts indicates a high level of gene expression. As seen by comparing the expression levels across the first rows of Figures~\ref{sampleArenosaKA} and \ref{sampleArenosaTBG}, the expression levels of \textit{PUX4} are higher in vernalized plants than non-vernalized plants.
+
+% latex table generated in R 3.2.4 by xtable 1.8-2 package
+% Fri May 27 17:26:09 2016
+\begin{figure}[h]
+	\centering
+	\begin{tabular}{rlrrrrrr}
+		\hline
+		& Gene Name & KA NV 1 & KA NV 2 & KA NV 3 & KA V 1 & KA V 2 & KA V 3 \\ 
+		\hline
+		1 & PUX4 & 288.20 & 322.55 & 305.35 & 1429.29 & 1408.25 & 1487.08 \\ 
+		2 & TZP & 79.36 & 93.34 & 73.44 & 1203.40 & 1230.49 & 1214.03 \\ 
+		3 & GAD2 & 590.59 & 492.69 & 458.02 & 2639.42 & 2645.05 & 2705.32 \\ 
+		4 & GAUT6 & 86.88 & 99.25 & 57.98 & 586.24 & 590.03 & 579.71 \\ 
+		5 & FB & 791.08 & 912.12 & 746.94 & 3430.03 & 3680.12 & 3467.06 \\ 
+		\hline
+	\end{tabular}
+	\caption{Five rows and seven columns from the \data{arenosa} dataset, showing expression levels in KA plants.} 
+	\label{sampleArenosaKA}
+\end{figure}
+
+% latex table generated in R 3.2.4 by xtable 1.8-2 package
+% Fri May 27 17:26:31 2016
+\begin{figure}[h]
+	\centering
+	\begin{tabular}{rlrrrrrr}
+		\hline
+		& Gene Name & TBG NV 1 & TBG NV 2 & TBG NV 3 & TBG V 1 & TBG V 2 & TBG V 3 \\ 
+		\hline
+		1 & PUX4 & 365.23 & 288.13 & 365.01 & 601.39 & 800.64 & 698.73 \\ 
+		2 & TZP & 493.23 & 210.27 & 335.33 & 939.72 & 974.36 & 993.14 \\ 
+		3 & GAD2 & 1429.14 & 1339.50 & 2215.27 & 1630.77 & 1500.36 & 1621.28 \\ 
+		4 & GAUT6 & 129.63 & 76.40 & 135.02 & 320.57 & 298.91 & 399.27 \\ 
+		5 & FB & 1472.35 & 1120.49 & 1313.14 & 3092.37 & 3230.72 & 3173.00 \\ 
+		\hline
+	\end{tabular}
+	\caption{Five rows and seven columns from the \data{arenosa} dataset, showing expression levels in TBG plants.} 
+	\label{sampleArenosaTBG}
+\end{figure}
+
+\textD{\newpage}
+
+The three measured individuals in a particular group represent biological replicates, individuals of the same type grown under identical conditions; collecting data from multiple individuals of the same group captures the inherent biological variability between organisms. Averaging expression levels across these replicates provides an estimate of the typical expression level in the larger population. Figure~\ref{sampleArenosaMeans} shows the mean expression levels for five genes. 
+
+% latex table generated in R 3.2.4 by xtable 1.8-2 package
+% Fri May 27 18:23:24 2016
+\begin{figure}[h]
+	\centering
+	\begin{tabular}{rlrrrr}
+		\hline
+		& Gene Name & KA NV & KA V & TBG NV & TBG V \\ 
+		\hline
+		1 & PUX4 & 305.36 & 1441.54 & 339.46 & 700.25 \\ 
+		2 & TZP & 82.05 & 1215.97 & 346.28 & 969.07 \\ 
+		3 & GAD2 & 513.77 & 2663.26 & 1661.30 & 1584.14 \\ 
+		4 & GAUT6 & 81.37 & 585.33 & 113.68 & 339.58 \\ 
+		5 & FB & 816.71 & 3525.74 & 1301.99 & 3165.36 \\ 
+		\hline
+	\end{tabular}
+	\caption{Mean gene expression levels of five cold-responsive genes, for non-vernalized and vernalized KA and TBG.} 
+	\label{sampleArenosaMeans}
+\end{figure}
+
+\begin{figure}[h]
+	\centering
+	\subfigure[]{
+		\includegraphics[width=0.485\textwidth]
+		{ch_intro_to_data_oi_biostat/figures/arenosaBoxplot/arenosaBoxplot.pdf}
+		\label{arenosaBoxplot}
+	}
+	\subfigure[]{
+		\includegraphics[width=0.485\textwidth]
+		{ch_intro_to_data_oi_biostat/figures/arenosaBoxplot/arenosaBoxplotLog.pdf}
+		\label{arenosaLogBoxplot}
+	}
+	\caption{\subref{arenosaBoxplot} Mean gene expression levels for non-vernalized KA, vernalized KA, non-vernalized TBG, and vernalized TBG plants. \subref{arenosaLogBoxplot} Log-transformed mean gene expression levels.}
+	\label{arenosaBoxplots}
+\end{figure}
+
+Figure~\ref{arenosaBoxplot} plots the mean gene expression levels of all 1,088 genes for each group. The expression levels are heavily right-skewed, with many genes present at unusually high levels relative to other genes. This is an example of a situation in which a transformation can be useful for clarifying the features of a distribution. In Figure~\ref{arenosaLogBoxplot}, it is easier to see that expression levels of vernalized plants are shifted upward relative to non-vernalized plants. Additionally, while median expression is slightly higher in non-vernalized TBG than non-vernalized KA, median expression in vernalized KA is higher than in vernalized TBG. Vernalization appears to trigger a stronger change in expression of cold-responsive genes in KA plants than in TBG plants.  
+
+Figure~\ref{arenosaBoxplots} is only a starting point for exploring how expression of cold-responsive genes differs between KA and TBG plants. Consider a gene-level approach, in which the responsiveness of a gene to vernalization is quantified as the ratio of expression in a vernalized sample to expression in a non-vernalized sample. 
+
+\textD{\newpage}
+
+Figure~\ref{arenosaRatios} shows responsiveness for five genes, calculated separately between V and NV TBG and V and NV KA, using the means in Figure~\ref{sampleArenosaMeans}. The ratios provide a measure of how much expression differs between vernalized and non-vernalized individuals. For example, the gene $TZP$ is expressed almost 15 times as much in vernalized KA than it is in non-vernalized KA. In contrast, the gene $GAD2$ is expressed slightly less in vernalized TBG than in non-vernalized TBG.
+
+As with the mean gene expression levels, it is useful to apply a log transformation (Figure~\ref{arenosaLogRatios}). On the log scale, values close to 0 are indicative of low responsiveness, while large values in either direction correspond to high responsiveness. Figure~\ref{arenosaResponseBoxplot} shows the log2-transformed expression ratios as a side-by-side boxplot.\footnote{One gene is omitted because the expression ratio in KA is 0, and the logarithm of 0 is undefined.}
+
+\begin{figure}[h]
+	\centering
+	\subfigure[]{
+			\begin{tabular}{rlrr}
+				\hline
+				& Gene Name & TBG & KA \\ 
+				\hline
+				1 & PUX4 & 2.06 & 4.72 \\ 
+				2 & TZP & 2.80 & 14.82 \\ 
+				3 & GAD2 & 0.95 & 5.18 \\ 
+				4 & GAUT6 & 2.99 & 7.19 \\ 
+				5 & FB & 2.43 & 4.32 \\ 
+				\hline
+			\end{tabular}
+			\label{arenosaRatios}
+		}
+	\subfigure[]{
+		\begin{tabular}{rlrr}
+			\hline
+			& Gene Name & TBG & KA \\ 
+			\hline
+			1 & PUX4 & 1.04 & 2.24 \\ 
+			2 & TZP & 1.48 & 3.89 \\ 
+			3 & GAD2 & -0.07 & 2.37 \\ 
+			4 & GAUT6 & 1.58 & 2.85 \\ 
+			5 & FB & 1.28 & 2.11 \\ 
+			\hline
+		\end{tabular}
+		\label{arenosaLogRatios}
+		}	
+	\caption{\subref{arenosaRatios} Ratio of mean expression in vernalized individuals to mean expression in non-vernalized individuals. \subref{arenosaLogRatios} Log2-transformation of expression ratios in Figure~\ref{arenosaRatios}.}
+	\label{arenosaRatioTables}
+\end{figure}
+
+\textD{\newpage}
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.7\textwidth]{ch_intro_to_data_oi_biostat/figures/arenosaResponseBoxplot/arenosaResponseBoxplot}
+	\caption{Responsiveness for 1,087 genes in \data{arenosa}, calculated as the log2 ratio of vernalized over non-vernalized expression levels.}
+	\label{arenosaResponseBoxplot}
+\end{figure}
+
+Figure~\ref{arenosaResponseBoxplot} directly illustrates how the magnitude of response to vernalization in TBG is smaller than in KA. The spread of responsiveness in KA is larger than for TBG, as indicated by the larger IQR and range of values; this indicates that more genes in KA are differentially expressed between vernalized and non-vernalized samples. Additionally, the median responsiveness in KA is higher than in TBG.
+
+There are several outliers for both KA and TBG, with large outliers representing genes that were much more highly expressed in vernalized plants than non-vernalized plants, and vice versa for low outliers. These highly cold-responsive genes likely play a role in how plants cope with colder temperatures; they could be involved in regulating freezing tolerance, or controlling how plants detect cold temperatures. With the help of computing software, it is a simple matter to identify the outliers and address questions such as whether particular genes are highly vernalization-responsive in both KA and TBG.
+
+
+\textD{\newpage}
+
+
+\subsubsection{Advanced data visualization}
+
+There are many ways to numerically and graphically summarize data that are not explicitly introduced in this chapter. Presentation-style graphics in published manuscripts can be especially complex, and may feature techniques specific to a certain field as well as novel approaches designed to highlight particular features of a dataset. This section discusses the figures generated by the Baduel, et al. research team to visualize the differences in vernalization response between KA and TBG \textit{A. arenosa} plants.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.48\textwidth]{ch_intro_to_data_oi_biostat/figures/arenosaVisFigs/Fig4_PB}
+	\caption{Figure 4 from the original manuscript. Plot A compares mean expression levels between non-vernalized KA and TBG;  Plot B compares mean expression levels between vernalized KA and TBG.}
+	\label{arenosaFig4PB}
+\end{figure}
+
+Each dot in Figure~\ref{arenosaFig4PB} represents a gene; each gene is plotted by its mean expression level in KA against its mean expression level in TBG. The overall trend can be summarized by a line fit to the points.\footnote{Lines of best fit are discussed in Chapter~\ref{linRegrForTwoVar}.} For the slope of the line to equal 1, each gene would have to be equally expressed in KA and TBG. In the upper plot, the slope of the line is less than 1, which indicates that for non-vernalized plants, cold-responsive genes have a higher expression in TBG than in KA. In the lower plot, the slope is greater than 1, indicating that the trend is reversed in vernalized plants: cold-responsive genes are more highly expressed in KA. This trend is also discernible from the side-by-side boxplot in Figure~\ref{arenosaBoxplots}. Using a scatterplot, however, makes it possible to directly compare expression in KA versus TBG on a gene-by-gene basis, and also locate particular genes of interest that are known from previous research (e.g., the labeled genes in Figure~\ref{arenosaFig4PB}.)\footnote{Only a subset of the 1,088 genes are plotted in Figure~\ref{arenosaFig4PB}.} The colors in the plot signify plot density, with warmer colors representing a higher concentration of points.
+
+\textD{\newpage}
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.5\textwidth]{ch_intro_to_data_oi_biostat/figures/arenosaVisFigs/Fig3_PB}
+	\caption{Figure 3 from the original manuscript. Each gene is plotted based on the values of the log2 expression ratio in KA versus TBG.}
+	\label{arenosaFig3PB}
+\end{figure}
+
+Figure~\ref{arenosaFig3PB}, like Figure~\ref{arenosaResponseBoxplot}, compares the cold-responsiveness in KA versus TBG, calculating responsiveness as the log2 ratio of vernalized over non-vernalized expression levels. As in Figure~\ref{arenosaFig4PB}, each dot represents a single gene. The slope of the best fitting line is greater than 1, indicating that the assayed genes typically show greater responsiveness in KA than in TBG.\footnote{These 608 genes are a subset of the ones plotted in Figure~\ref{arenosaFig4PB}; genes with expression ratio 0 are not included.}
+
+While presentation-style graphics may use relatively sophisticated approaches to displaying data that seem far removed from the simple plots discussed in this chapter, the end goal remains the same -- to effectively highlight key features of data. 
+
+
+\section{Notes}
+\label{notesChapterData}
+
+Introductory treatments of statistics often emphasize the value of formal methods of probability and inference, topics which are covered in the remaining chapters of this text. However, numerical and graphical summaries are essential for understanding the features of a dataset and should be applied before the process of inference begins. It is inadvisable to begin conducting tests or constructing models without a careful understanding of the strengths and weaknesses of a dataset. For example, are some measurements out of range, or the result of errors in data recording?
+
+The tools of descriptive statistics form the basis of exploratory data analysis; having the intuition for exploring and interpreting data in the context of a research question is an essential statistical skill. With computing software, it is a relatively simple matter to produce numerical and graphical summaries, even with large datasets. The challenge lies instead in understanding how to wade through a dataset, disentangle complex relationships between variables, and piece together the underlying story. 
+
+It is important to note that the graphical methods illustrated in the text are relatively simple, static graphs that, for instance, do not show changes dynamically over time. They will be surprisingly useful in the later chapters. But there has been considerable progress in the visual display of data in the last decade, and many wonderful displays exist that show complex, time dependent data.  For examples of sophisticated graphical displays, we especially recommend the bubble charts available at the Gapminder web site (\url{https://www.gapminder.org}) that show international trends in public health outcomes and the graphical displays of data in the Upshot section of the New York Times (\url{https://www.nytimes.com/section/upshot}).
+
+There are four labs associated with Chapter 1.  The first lab introduces basic commands for working with data in \textsf{R}, and shows how to produce the graphical and numerical summaries discussed in this chapter.  The exercises in Lab 1 rely heavily on the introduction to \textsf{R} and \textit{R Studio} in Lab 00 (Getting Started). The Lab Notes corresponding to Lab 1 provide a systematic introduction to \textsf{R} functions useful for getting started with applied data analysis.
+
+The remaining three labs explore the data presented in the case studies in Section~\ref{exploratoryDataAnalysis}, outlining analyses driven by questions similar to what one might encounter in practice.  Does the state of California discriminate in its distribution of funds for developmental disability support (Lab 2)?  Are particular genes associated with a subtype of pediatric leukemia (Lab 3)?  Is there a genetic basis to the cold weather response in the plant \textit{Arabidopsis arenosa} (Lab 4)? Labs 3 and 4 demonstrate how computing is essential for data analysis; even though the two datasets are relatively small by modern standards, they are already too large to feasibly analyze without statistical computing software. All three labs illustrate how important questions can be examined even with relatively simple statistical concepts.
+
+

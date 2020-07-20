@@ -1,0 +1,813 @@
+%!TEX root=../../main.tex
+\begin{chapterpage}{Simple linear regression}
+  \chaptertitle{Simple linear regression}
+  \label{linRegrForTwoVar}
+  \chaptersection{examiningScatterPlots}
+  \chaptersection{estimatingLeastSquaresLine}
+  \chaptersection{interpretingLeastSquaresLine}
+  \chaptersection{inferenceRegression}
+  \chaptersection{confidencePredictionIntervalsSimpleRegression}
+  \chaptersection{chSimpleLinearRegNotes}
+\end{chapterpage}
+\renewcommand{\chapterfolder}{ch_simple_linear_regression_oi_biostat}
+
+\index{simple linear regression|textbf}
+
+\chapterintro{The relationship between two numerical variables can be visualized using a scatterplot in the $xy$-plane. The \term{predictor} or \term{explanatory variable} is plotted on the horizontal axis, while the \term{response variable} is plotted on the vertical axis.\footnote{Sometimes, the predictor variable is referred to as the independent variable, and the response variable referred to as the dependent variable.} 
+
+This chapter explores simple linear regression, a technique for estimating a straight line that best fits data on a scatterplot.\footnote{Although the response variable in linear regression is necessarily numerical, the predictor variable can be numerical or categorical.} A line of best fit functions as a linear model that can not only be used for prediction, but also for inference. Linear regression should only be used with data that exhibit linear or approximately linear relationships.
+
+For example, scatterplots in Chapter~\ref{introductionToData} illustrated the linear relationship between height and weight in the NHANES data, with height as a predictor of weight. Adding a best-fitting line to these data using regression techniques would allow for prediction of an individual's weight based on their height. The linear model could also be used to investigate questions about the population-level relationship between height and weight, since the data are a random sample from the population of adults in the United States. 
+
+Not all relationships in data are linear.  For example, the scatterplot in Figure~\ref{incomeLifeExpectancy} of Chapter~\ref{introductionToData} shows a highly non-linear relationship between between annual per capita income and life expectancy for 165 countries in 2011.  Relationships are called \term{strong relationships} if the pattern of the dependence between the predictor and response variables is clear, even if it is nonlinear as in Figure~\ref{incomeLifeExpectancy}.  A \term{weak relationship} is one in which the points in the scatterplot are so diffuse as to make it difficult to discern any relationship.  Figure~\ref{posNegCorPlots} in Chapter~\ref{introductionToData} showed relationships progressing from weak to strong moving from left to right in the top and bottom panels.  Each of the relationships shown in the second panels from the left are \term{moderate relationships}.  Finally, changing the scale of measurement of one or both variables, such as changing age from age in years to age in months, simply stretches or compresses one or both axes and does not change the nature of the relationship.  If a relationship is linear it will remain so, and with a simple change of scale, a nonlinear relationship will remain nonlinear.
+
+\textD{\newpage}
+
+The next chapter covers multiple regression, a statistical model used to estimate the relationship between a single numerical response variable and several predictor variables.}
+
+
+%____________
+\section{Examining scatterplots}
+\label{examiningScatterPlots}
+
+\index{scatterplots|(}
+\index{data!PREVEND|(}
+
+
+Various demographic and cardiovascular risk factors were collected as a part of the Prevention of REnal and Vascular END-stage Disease (PREVEND) study, which took place in the Netherlands. The initial study population began as 8,592 participants aged 28-75 years who took a first survey in 1997-1998.\footnote{Participants were selected from the city of Groningen on the basis of their urinary albumin excretion; urinary albumin excretion is known to be associated with abnormalities in renal function.} Participants were followed over time; 6,894 participants took a second survey in 2001-2003, and 5,862 completed the third survey in 2003-2006. In the third survey, measurement of cognitive function was added to the study protocol. Data from 4,095 individuals who completed cognitive testing are in the \data{prevend} dataset, available in the \textsf{R} package  \texttt{oibiostat}. 
+
+As adults age, cognitive function changes over time, largely due to various cerebrovascular and neurodegenerative changes. It is thought that cognitive decline is a long-term process that may start as early as 45 years of age.\footnote{Joosten H, et al. Cardiovascular risk profile and cognitive function in young, middle-aged, and elderly subjects. Stroke. 2013;44:1543-1549, \url{https://doi.org/10.1161/STROKEAHA.111.000496} } The Ruff Figural Fluency Test (RFFT) is one measure of cognitive function that provides information about cognitive abilities such as planning and the ability to switch between different tasks. The test consists of drawing as many unique designs as possible from a pattern of dots, under timed conditions; scores range from 0 to 175 points (worst and best score, respectively).
+
+RFFT scores for a random sample of 500 individuals are shown in Figure~\ref{prevendAgeRFFT}, plotted against age at enrollment, which is measured in years. The variables \var{Age} and \var{RFFT} are negatively associated; older participants tend to have lower cognitive function. There is an approximately linear trend observable in the data, which suggests that adding a line could be useful for summarizing the relationship between the two variables.
+
+It is important to avoid adding straight lines to non-linear data, such as in  Figure~\ref{incomeLifeExpectancy}.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.8\textwidth]
+	{ch_simple_linear_regression_oi_biostat/figures/prevendAgeRFFTPlot/prevendAgeRFFTPlot}
+	\caption{A scatterplot showing \var{age} vs. \var{RFFT}. Age is the predictor variable, while RFFT score is the response variable.}
+	\label{prevendAgeRFFT}
+\end{figure}
+
+\textD{\newpage}
+
+The following conditions should be true in a scatterplot for a line to be considered a reasonable approximation to the relationship in the plot and for the application of the methods of inference discussed later in the chapter:
+
+\index{data!PREVEND|)}
+
+\index{simple linear regression!assumptions}
+
+
+\begin{description}
+\setlength{\itemsep}{0mm}
+\item[1 Linearity.] The data shows a linear trend. If there is a nonlinear trend, an advanced regression method should be applied; such methods are not covered in this text.  Occasionally, a transformation of the data will uncover a linear relationship in the transformed scale.
+\item[2 Constant variability.] The variability of the response variable about the line remains roughly constant as the predictor variable changes.
+\item[3 Independent observations.]  The $(x,y)$ pairs are independent; i.e., the value of one pair provides no information about other pairs. Be cautious about applying regression to sequential observations in time (\term{time series} data), such as height measurements taken over the course of several years. Time series data may have a complex underlying structure, and the relationship between the observations should be accounted for in a model. 
+\item[4 Residuals that are approximately normally distributed.] This condition can be checked only after a line has been fit to the data and will be explained in Section~\ref{checkingResiduals}, where the term residual is defined. In large datasets, it is sufficient for the residuals to be approximately symmetric with only a few outliers. This condition becomes particularly important when inferences are made about the line, as discussed in Section~\ref{inferenceRegression}.  
+\end{description}
+
+\begin{exercisewrap}
+\begin{nexercise}\label{nonConstantVariance}%
+Figure~\ref{frogClutchVolBodySizeRegress} shows the relationship between \var{clutch.volume} and \var{body.size} in the \data{frog} data.  The plot also appears as Figure~\ref{frogClutchVolBodySize} in Chapter~\ref{introductionToData}. Are the first three conditions met for linear regression?\footnotemark{}
+\end{nexercise}
+\end{exercisewrap}
+\footnotetext{No. While the relationship appears linear and it is reasonable to assume the observations are independent (based on information about the frogs given in Chapter~\ref{introductionToData}), the variability in \var{clutch.volume} is noticeably less for smaller values of \var{body.size} than for larger values.}
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.6\textwidth]
+	{ch_intro_to_data_oi_biostat/figures/frogClutchVolBodySize/frogClutchVolBodySize}
+	\caption{A plot of \var{clutch.volume} versus \var{body.size} in the \data{frog} data.}
+	\label{frogClutchVolBodySizeRegress}
+\end{figure}
+
+\index{scatter plots|)}
+\section{Estimating a regression line using least squares}
+\label{estimatingLeastSquaresLine}
+
+\index{least squares regression|(}
+
+\index{data!PREVEND|(}
+
+Figure~\ref{prevendResid} shows the scatterplot of age versus RFFT score, with the \term{least squares regression line} added to the plot; this line can also be referred to as a \term{linear model} for the data. An RFFT score can be predicted for a given age from the equation of the regression line:
+
+\[\widehat{\text{RFFT}} = 137.55 - 1.26(\text{age}). \]
+
+
+The vertical distance between a point in the scatterplot and the predicted value on the regression line is the \term{residual} for the observation represented by the point; observations below the line have negative residuals, while observations above the line have positive residuals. The size of a residual is usually discussed in terms of its absolute value; for example, a residual of $-13$ is considered larger than a residual of 5.
+
+For example, consider the predicted RFFT score for an individual of age 56. According to the linear model, this individual has a predicted score of $137.550 - 1.261(56) = 66.934$ points. In the data, however, there is a participant of age 56 with an RFFT score of 72; their score is about 5 points higher than predicted by the model (this observation is shown on the plot with a ``$\times$'').
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.8\textwidth]
+	{ch_simple_linear_regression_oi_biostat/figures/prevendResid/prevendResid.pdf}
+	\caption{A scatterplot showing \var{age} (horizontal axis) vs. \var{RFFT} (vertical axis) with the regression line added to the plot. Three observations are marked in the figure; the one marked by a ``$+$'' has a large residual of about +38, the one marked by a ``$\times$'' has a small residual of about +5, and the one marked by a ``$\triangle$'' has a moderate residual of about -13. The vertical dotted lines extending from the observations to the regression line represent the residuals.}
+	\label{prevendResid}
+\end{figure}
+
+\index{data!PREVEND|)}
+\index{residuals!regression}
+
+\textD{\newpage}
+
+\begin{onebox}{Residual: difference between observed and expected}
+The residual of the $i^{th}$ observation $(x_i, y_i)$ is the difference of the observed response ($y_i$) and the response predicted based on the model fit ($\widehat{y}_i$):
+\begin{eqnarray*}
+e_i = y_i - \widehat{y}_i
+\end{eqnarray*}
+The value $\widehat{y}_i$ is calculated by plugging $x_i$ into the model equation.
+\end{onebox}
+
+The \term{least squares regression line} is the line which minimizes the sum of the squared residuals for all the points in the plot.  Let $\hat{y}_i$ be the predicted value for an observation with value $x_i$ for the explanatory variable.  The value $e_i = y_i - \hat{y}_i$ is the residual for a data point $(x_i, y_i)$ in a scatterplot with $n$ pairs of points.  The least squares line is the line for which
+\begin{eqnarray}
+e_{1}^2 + e_{2}^2 + \dots + e_{n}^2
+\label{sumOfSquaresForResiduals}
+\end{eqnarray}
+is smallest. 
+
+For a general population of ordered pairs $(x,y)$, the \term{population regression model} is
+\[y = \beta_0 + \beta_1x + \varepsilon.
+\label{equation:generalRegressionModel}
+\]
+
+The term $\varepsilon$ is a normally distributed `error term' that has mean 0 and standard deviation $\sigma$. Since $E(\varepsilon) = 0$,  the model can also be written
+\begin{align*}
+	E(Y|x) = \beta_0 + \beta_1 x,
+\end{align*}
+where the notation $E(Y|x)$ denotes the expected value of $Y$ when the predictor variable has value $x$.\footnote{The error term $\varepsilon$ can be thought of as a population parameter for the residuals ($e$). While $\varepsilon$ is a theoretical quantity that refers to the deviation between an observed value and $E(Y|x)$, a residual is calculated as the deviation between an observed value and the prediction from the linear model.} For the PREVEND data, the population regression line can be written as
+\[\text{RFFT} = \beta_0 + \beta_{1}(\text{age}) + \varepsilon, \, \text{or as }
+ E (\text{RFFT}| \text{age}) = \beta_0 + \beta_{1}(\text{age}).\]
+
+The term $\beta_0$ is the vertical intercept for the line (often referred to simply as the intercept) and $\beta_1$ is the slope. The notation $b_0$ and $b_1$ are used to represent the point estimates of the parameters $\beta_0$ and $\beta_1$. The point estimates $b_0$ and $b_1$ are estimated from data; $\beta_0$ and $\beta_1$ are parameters from the population model for the regression line.
+\marginpar[\raggedright\vspace{0.5mm}
+
+$b_0, b_1$\vspace{0.5mm}\\\footnotesize Sample\\estimates\\ of $\beta_0$, $\beta_1$]{\raggedright\vspace{0.5mm}
+	
+$b_0, b_1$\vspace{0.5mm}\\\footnotesize Sample\\estimates\\ of $\beta_0$, $\beta_1$}
+
+The regression line can be written as $\hat{y} = b_0 + b_1(x)$, where $\hat{y}$ represents the predicted value of the response variable. The slope of the least squares line, $b_1$, is estimated by
+\begin{align}
+b_1 = \frac{s_y}{s_x} r,
+\label{slopeOfLSRLine}
+\end{align}
+where $r$ is the correlation between the two variables, and $s_x$ and $s_y$ are the sample standard deviations of the explanatory and response variables, respectively. The intercept for the regression line is estimated by
+\begin{align}
+b_0 = \overline{y} - b_1\overline{x}.
+\label{interceptOfLSRLine}
+\end{align}
+
+Typically, regression lines are estimated using statistical software.
+
+\textD{\newpage}
+
+\begin{examplewrap}
+\begin{nexample}{From the summary statistics displayed in Figure~\ref{summaryAgeRFFT} for \data{prevend.samp}, calculate the equation of the least-squares regression line for the PREVEND data.}
+
+\[b_1 = \frac{s_y}{s_x} r = \frac{27.40}{11.60}(-0.534) = -1.26\]
+
+\[b_0 = \overline{y} - b_1\overline{x} = 68.40 - (-1.26)(54.82) = 137.55. \]
+
+The results agree with the equation shown at the beginning of this section:
+\[\widehat{\text{RFFT}} = 137.55 - 1.26(\text{age}).\]
+\end{nexample}
+\end{examplewrap}
+
+\begin{figure}[ht]
+	\centering
+	\begin{tabular}{l rr}
+		\hline
+		\vspace{-4mm} & & \\
+		\vspace{0.4mm}	&	\ \ Age (yrs)	& \ \ RFFT score \\
+		\hline
+		\vspace{-3.9mm} & & \\
+		mean	& $\overline{x} = 54.82$		& $\overline{y} = 68.40$ \\
+		standard deviation		& $s_x = 11.60$		& $s_y = 27.40$\vspace{0.4mm} \\
+		\hline
+		\vspace{-4mm}\ &\\
+		& \multicolumn{2}{r}{$r=-0.534$} \\
+		\hline
+	\end{tabular}
+	\caption{Summary statistics for \var{age} and \var{RFFT} from \data{prevend.samp}.}
+	\label{summaryAgeRFFT}
+\end{figure}
+
+\index{data!nhanes|(}
+
+\begin{exercisewrap}
+\begin{nexercise}
+Figure~\ref{nhanesHeightWeightRegress} shows the relationship between \var{height} and \var{weight} in a sample from the NHANES dataset introduced in Chapter~\ref{introductionToData}. Calculate the equation of the regression line given the summary statistics: $\overline{x} = 168.78, \overline{y} = 83.83, s_{x} = 10.29, s_{y} = 21.04, r = 0.410$.\footnotemark{}
+\end{nexercise}
+\end{exercisewrap}
+\footnotetext{The equation of the line is $\widehat{weight} = -57.738 + 0.839(height)$, where height is in centimeters and weight is in kilograms.}
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.55\textwidth]
+	{ch_simple_linear_regression_oi_biostat/figures/nhanesHeightWeightRegress/nhanesHeightWeightRegress}
+	\caption{A plot of \var{Height} versus \var{Weight} in \data{nhanes.samp.adult.500}, with a least-squares regression line}
+	\label{nhanesHeightWeightRegress}
+\end{figure}
+
+\begin{exercisewrap}
+\begin{nexercise}\label{predictingNHANESWeightfrmHeightMetric}%
+Predict the weight in pounds for an adult who is 5 feet, 11 inches tall. 1 cm = .3937 in; 1 lb = 0.454 kg.\footnotemark{}
+\end{nexercise}
+\end{exercisewrap}
+\footnotetext{5 feet, 11 inches equals $71/.3937 = 180.34$ centimeters. From the regression equation, the predicted weight is $-57.738 + 0.839(180.34) = 93.567$ kilograms. In pounds, this weight is $93.567/0.454 = 206.280$.}
+
+\index{data!nhanes|)}
+\index{least squares regression|)}
+
+
+%___________
+\section{Interpreting a linear model}
+\label{interpretingLeastSquaresLine}
+
+\index{simple linear regression!interpretation}
+
+A least squares regression line functions as a statistical model that can be used to estimate the relationship between an explanatory and response variable. While the calculations for constructing a regression line are relatively simple, interpreting the linear model is not always straightforward. In addition to discussing the mathematical interpretation of model parameters, this section also addresses methods for assessing whether a linear model is an appropriate choice, interpreting categorical predictors, and identifying outliers.
+
+The slope parameter of the regression line specifies how much the line rises (positive slope) or declines (negative slope) for one unit of change in the explanatory variable. In the PREVEND data, the line decreases by 1.26 points for every increase of 1 year. However, it is important to clarify that RFFT score \textit{tends} to decrease as age increases, with \textit{average} RFFT score decreasing by 1.26 points for each additional year of age. As visible from the scatter of the data around the line, the line does not perfectly predict RFFT score from age; if this were the case, all the data would fall exactly on the line.
+
+When interpreting the slope parameter, it is also necessary to avoid phrasing indicative of a causal relationship, since the line describes an association from data collected in an observational study. From these data, it is not possible to conclude that increased age causes a decline in cognitive function.\footnote{Similarly, avoid language such as increased age \textit{leads to} or \textit{produces} lower RFFT scores.} 
+
+Mathematically, the intercept on the vertical axis is a predicted value on the line when the explanatory variable has value 0. In biological or medical examples, 0 is rarely a meaningful value of the explanatory variable. For example, in the PREVEND data, the linear model predicts a score of 137.55 when age is 0\textemdash however, it is nonsensical to predict an RFFT score for a newborn infant. 
+
+In fact, least squares lines should never be used to extrapolate values outside the range of observed values. Since the PREVEND data only includes participants between ages 36 and 81, it should not be used to predict RFFT scores for people outside that age range. The nature of a relationship may change for very small or very large values of the explanatory variable; for example, if participants between ages 15 and 25 were studied, a different relationship between age and RFFT scores might be observed. Even making predictions for values of the explanatory variable slightly larger than the minimum or slightly smaller than the maximum can be dangerous, since in many datasets, observations near the minimum or maximum values (of the explanatory variable) are sparse.
+
+Linear models are useful tools for summarizing a relationship between two variables, but it is important to be cautious about making potentially misleading claims based on a regression line. The following subsection discusses two commonly used approaches for examining whether a linear model can reasonably be applied to a dataset. 
+
+
+\subsection{Checking residuals from a linear model}
+\label{checkingResiduals}
+
+\index{residuals|(}
+
+Recall that there are four assumptions that must be met for a linear model to be considered reasonable: linearity, constant variability, independent observations, normally distributed residuals. In the PREVEND data, the relationship between RFFT score and age appears approximately linear, and it is reasonable to assume that the data points are independent. To check the assumptions of constant variability around the line and normality of the residuals, it is helpful to consult residual plots and normal probability plots (Section~\ref{assessingNormal}).\footnote{While simple arithmetic can be used to calculate the residuals, the size of most datasets makes hand calculations impractical. The plots here are based on calculations done in \textsf{R}.}
+
+
+\textD{\newpage}
+
+
+\subsubsection{Examining patterns in residuals}
+
+There are a variety of residual plots used to check the fit of a least squares line. The plots shown in this text are scatterplots in which the residuals are plotted on the vertical axis against predicted values from the model on the horizontal axis. Other residual plots may instead show values of the explanatory variable or the observed response variable on the horizontal axis. When a least squares line fits data very well, the residuals should scatter about the horizontal line $y = 0$ with no apparent pattern.
+
+Figure~\ref{sampleLinesAndResPlots} shows three residual plots from simulated data; the plots on the right show data plotted with the least squares regression line, and the plots on the left show residuals on the $y$-axis and predicted values on the $x$-axis. A linear model is a particularly good fit for the data in the first row, where the residual plot shows random scatter above and below the horizontal line. In the second row, the original data cycles below and above the regression line; this nonlinear pattern is more evident in the residual plot. In the last row, the variability of the residuals is not constant; the residuals are slightly more variable for larger predicted values.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.6\textwidth]
+{ch_simple_linear_regression_oi_biostat/figures/sampleLinesAndResPlots/sampleLinesAndResPlots.pdf}
+\caption{Sample data with their best fitting lines (left) and their corresponding residual plots (right).}
+\label{sampleLinesAndResPlots}
+\end{figure}
+
+\textD{\newpage}
+
+Figure~\ref{prevendResidualPlot} shows a residual plot from the estimated linear model $\widehat{\text{RFFT}} = 137.55 - 1.26(\text{age})$. While the residuals show scatter around the line, there is less variability for lower predicted RFFT scores. A data analyst might still decide to use the linear model, with the knowledge that predictions of high RFFT scores may not be as accurate as for lower scores. Reading a residual plot critically can reveal weaknesses about a linear model that should be taken into account when interpreting model results. More advanced regression methods beyond the scope of this text may be more suitable for these data.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.8\textwidth]{ch_simple_linear_regression_oi_biostat/figures/prevendResidPlot/prevendResidPlot}
+	\caption{Residual plot for the model in Figure~\ref{prevendResid} using \data{prevend.samp}.}
+	\label{prevendResidualPlot}
+\end{figure}
+
+\begin{examplewrap}
+\begin{nexample}{Figure~\ref{nhanesHeightWeightResidualPlot} shows a residual plot for the model predicting weight from height using the sample of 500 adults from the NHANES data, \data{nhanes.samp.adult.500}. Assess whether the constant variability assumption holds for the linear model.}
+
+The residuals above the line are more variable, taking on more extreme values than those below the line. Larger than expected residuals imply that there are many large weights that are under-predicted; in other words, the model is less accurate at predicting relatively large weights.
+\end{nexample}
+\end{examplewrap}
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.6\textwidth]
+	{ch_simple_linear_regression_oi_biostat/figures/nhanesHeightWeightResidualPlot/nhanesHeightWeightResidualPlot.pdf}
+	\caption{A residual plot from the linear model for height versus weight in \data{nhanes.samp.adult.500}.}
+	\label{nhanesHeightWeightResidualPlot}
+\end{figure}
+
+
+\textD{\newpage}
+
+
+\subsubsection{Checking normality of the residuals}
+
+\index{normal probability plot}
+
+The normal probability plot, introduced in Section~\ref{assessingNormal}, is best suited for checking normality of the residuals, since normality can be difficult to assess using histograms alone. Figure~\ref{prevendResidNormPlot} shows both the histogram and normal probability plot of the residuals after fitting a least squares regression to the age versus RFFT data.  
+ 
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.7\textwidth]
+	{ch_simple_linear_regression_oi_biostat/figures/prevendResidNormPlot/prevendResidNormPlot.pdf}
+	\caption{A histogram and normal probability plot of the residuals from the linear model for RFFT versus Age in \data{prevend.samp}.}
+	\label{prevendResidNormPlot}
+\end{figure}
+
+The normal probability plot shows that the residuals are nearly normally distributed, with only slight deviations from normality in the left and right tails.
+
+\begin{exercisewrap}
+\begin{nexercise}
+Figure~\ref{nhanesResidNormPlot} shows a histogram and normal probability plot for the linear model to predict weight from height in \data{nhanes.samp.adult.500}. Evaluate the normality of the residuals.\footnotemark{}
+\end{nexercise}
+\end{exercisewrap}
+\footnotetext{The data are roughly normal, but there are deviations from normality in the tails, particularly the upper tail. There are some relatively large observations, which is evident from the residual plot shown in Figure~\ref{nhanesHeightWeightResidualPlot}.}
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.7\textwidth]
+	{ch_simple_linear_regression_oi_biostat/figures/nhanesHeightWeightResiduals/nhanesHeightWeightResiduals.pdf}
+	\caption{A histogram and normal probability plot of the residuals from the linear model for height versus weight in \data{nhanes.samp.adult.500}. }
+	\label{nhanesResidNormPlot}
+\end{figure}
+
+\index{residuals|)}
+
+
+\textD{\newpage}
+
+
+\subsection{Using $R^2$ to describe the strength of a fit}
+\label{RSquaredLinearRegression}
+
+\index{simple linear regression!R-squared ($R^2$)|(}
+
+The correlation coefficient $r$ measures the strength of the linear relationship between two variables. However, it is more common to measure the strength of a linear fit using $r^2$, which is commonly written as $R^2$ in the context of regression.\footnote{In software output, $R^2$ is usually labeled \termsub{R-squared}{least squares regression!R-squared ($R^2$)}.} 
+
+The quantity $R^2$ describes the amount of variation in the response that is explained by the least squares line. While $R^2$ can be easily calculated by simply squaring the correlation coefficient, it is easier to understand the interpretation of $R^2$ by using an alternative formula:
+
+\[R^{2} = \dfrac{\text{variance of predicted $y$-values}}{\text{variance of observed $y$-values}}.\]
+It is possible to show that $R^2$ can also be written
+\[R^{2} = \dfrac{s^{2}_{y} - s_{\text{residuals}}^2}{s^{2}_{y}}.\]
+
+In the linear model predicting RFFT scores from age, the predicted values on the least squares line are the values of RFFT that are 'explained' by the linear model. The variability of the residuals about the line represents the remaining variability after the prediction; i.e., the variability unexplained by the model. For example, if a linear model perfectly captured all the data, then the variance of the predicted $y$-values would be equal to the variance of the observed $y$-values, resulting in $R^2 = 1$. In the linear model for $\widehat{RFFT}$, the proportion of variability explained is
+
+\[R^{2} = \dfrac{s^{2}_{RFFT} - s_{\text{residuals}}^2}{s^{2}_{RFFT}} = \dfrac{750.52 - 536.62}{750.52} = \dfrac{213.90}{750.52} = 0.285, \]
+about 29\%. This is equal to the square of the correlation coefficient, $r^2 = -0.534^{2} = 0.285$. 
+
+Since $R^2$ in simple linear regression is simply the square of the correlation coefficient between the predictor and the response, it does not add a new tool to regression.  It becomes much more useful in models with several predictors, where it has the same interpretation as the proportion of variability explained by a model but is no longer the square of any one of the correlation coefficients between the individual responses and the predictor.  Those models are discussed in Chapter~\ref{multipleLinearRegression}.
+
+\begin{exercisewrap}
+\begin{nexercise}
+In the NHANES data, the variance of \var{Weight} is $442.53$ $\text{kg}^2$ and the variance of the residuals is 368.1. What proportion of the variability in the data is explained by the model?\footnotemark{}
+\end{nexercise}
+\end{exercisewrap}
+\footnotetext{About 16.8\%: $\frac{s_{\text{weight}}^2 - s_{\text{residuals}}^2}{s_{\text{weight}}^2} = \frac{442.53 - 368.1}{442.53} = \frac{74.43}{442.53} = 0.168$}
+
+\begin{exercisewrap}
+\begin{nexercise}
+If a linear model has a very strong negative relationship with a correlation of -0.97, how much of the variation in the response is explained by the explanatory variable?\footnotemark{}
+\end{nexercise}
+\end{exercisewrap}
+\footnotetext{About $R^2 = (-0.97)^2 = 0.94$ or 94\% of the variation is explained by the linear model.}
+
+\index{simple linear regression!R-squared ($R^2$)|)}
+
+
+\textD{\newpage}
+
+
+\subsection{Categorical predictors with two levels}
+\label{categoricalPredictorsWithTwoLevels}
+
+\index{simple linear regression!categorical predictors}
+
+Although the response variable in linear regression is necessarily numerical, the predictor variable may be either numerical or categorical. This section explores the association between a country's infant mortality rate and whether or not 50\% of the population has access to adequate sanitation facilities. 
+
+The World Development Indicators (WDI) is a database of country-level variables (i.e., indicators) recording outcomes for a variety of topics, including economics, health, mortality, fertility, and education.\footnote{\url{http://data.worldbank.org/data-catalog/world-development-indicators}} The dataset \data{wdi.2011} contains a subset of variables on 165 countries from the year 2011.\footnote{The data were collected by a Harvard undergraduate in the Statistics department, and are accessible via the \data{oibiostat} package.} The infant mortality rate in a country is recorded as the number of deaths in the first year of life per 1,000 live births. Access to sanitation is recorded as the percentage of the population with adequate disposal facilities for human waste. Due to the availability of death certificates, infant mortality is measured reasonably accurately throughout the world. However, it is more difficult to obtain precise measurements of the percentage of a population with access to adequate sanitation facilities; instead, considering whether half the population has such access may be a more reliable measure. The analysis presented here is based on 163 of the 165 countries; the values for access to sanitation are missing for New Zealand and Turkmenistan.
+
+Figure~\ref{wdiHistReg} shows that infant mortality rates are highly right-skewed, with a relatively small number of countries having high infant mortality rates. In 13 countries, infant mortality rates are higher than 70 deaths per thousand live births. Figure~\ref{wdiHistLog} shows infant mortality after a log transformation; the following analysis will use the more nearly symmetric transformed version of \var{inf.mortality}.  
+
+\begin{figure}[h]
+	\centering
+	\subfigure[]{
+		\includegraphics[width=0.46\textwidth]
+		{ch_simple_linear_regression_oi_biostat/figures/wdiHistTransform/wdiHistReg}
+		\label{wdiHistReg}
+	}
+	\subfigure[]{
+		\includegraphics[width=0.46\textwidth]
+		{ch_simple_linear_regression_oi_biostat/figures/wdiHistTransform/wdiHistLog}
+		\label{wdiHistLog}
+	}
+	\caption{\subref{wdiHistReg} Histogram of infant mortality, measured in deaths per 1,000 live births in the first year of life. \subref{wdiHistLog} Histogram of the log-transformed infant mortality.}
+	\label{wdiHistTransform}
+\end{figure}
+
+\textD{\newpage}
+
+Figure~\ref{wdiPlotA} shows a scatterplot of log(\texttt{inf.mortality}) against the categorical variable for sanitation access, coded \texttt{1} if at least 50\% of the population has access to adequate sanitation, and \texttt{0} otherwise. Since there are only two values of the predictor, the values of infant mortality are stacked above the two predictor values 0 and 1.\footnote{Typically, side-by-side boxplots are used to display the relationship between a numerical variable and a categorical variable. In a regression context, it can be useful to use a scatterplot instead, in order to see the variability around the regression line.} 
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.6\textwidth]{ch_simple_linear_regression_oi_biostat/figures/wdiPlot/wdiPlotB}
+	\caption{Country-level infant mortality rates, divided into low access ($x=0$) and high access ($x=1$) to sanitation. The least squares regression line is also shown.}
+	\label{wdiPlotA}
+\end{figure}
+
+
+The least squares regression line has the form
+\begin{align}
+\widehat{\log(\texttt{inf.mortality})} = b_0 + b_1(\texttt{sanit.access}).
+\label{logInfMortalitySanitRegress}
+\end{align}
+
+The estimated least squares regression line has intercept and slope parameters of 4.018 and -1.681, respectively. While the scatterplot appears unlike those for two numerical variables, the interpretation of the parameters remains unchanged. The slope, -1.681, is the estimated change in the logarithm of infant mortality when the categorical predictor changes from low access to sanitation facilities to high access. The intercept term 4.018 is the estimated log infant mortality for the set of countries where less than 50\% of the population has access to adequate sanitation facilities (\var{sanit.access} = 0).
+
+\textD{\newpage}
+
+Using the model in Equation~\ref{logInfMortalitySanitRegress}, the prediction equation can be written
+\[
+    \widehat{\log(\texttt{inf.mortality})} = 4.018 -1.681(\texttt{sanit.access}).
+\]
+Exponentiating both sides of the equation yields
+\[
+    \widehat{\texttt{inf.mortality}} = e^{4.018 -1.681(\texttt{sanit.access})}.
+\]
+When \var{sanit.access} = 0, the equation simplifies to $e^{4.018} = 55.590$ deaths among 1,000 live births; this is the estimated infant mortality rate in the countries with low access to sanitation facilities.  When \var{sanit.access} = 1, the estimated infant mortality rate is $e^{4.018-1.681(1)}= e^{2.337} = 10.350$ deaths per 1,000 live births.  The infant mortality rate drops by a factor of $0.186$; i.e., the mortality rate in the high access countries is approximately 20\% of that in the low access countries.\footnote{When examining event rates in public health, associations are typically measured using rate ratios rather than rate differences.}
+
+
+\begin{examplewrap}
+\begin{nexample}{Check the assumptions of constant variability around the regression line and normality of the residuals in the model for the relationship between the transformed infant mortality variable and access to sanitation variable. Residual plots are shown in Figure~\ref{wdiResid}.}\label{wdiAssumptionsEx}%
+While the normal probability plot does show that the residuals are approximately normally distributed, the residual plot reveals that variability is far from constant around the two predictors. Another method for assessing the relationship between the two groups is advisable; this is discussed further in Section~\ref{categoricalTwoGroup}.
+\end{nexample}
+\end{examplewrap}
+
+\begin{figure}[h]
+	\centering
+	\subfigure[]{
+		\includegraphics[width=0.485\textwidth]
+		{ch_simple_linear_regression_oi_biostat/figures/wdiResid/wdiResidualPlot}
+		\label{wdiResidPlot}
+	}
+	\subfigure[]{
+		\includegraphics[width=0.485\textwidth]
+		{ch_simple_linear_regression_oi_biostat/figures/wdiResid/wdiResidNormPlot}
+		\label{wdiResidNormPlot}
+	}
+	\caption{\subref{wdiResidPlot} Residual plot of \texttt{log(inf.mortality)} and \texttt{sanit.access}. \subref{wdiHistLog} Histogram and normal probability plot of the residuals.}
+	\label{wdiResid}
+\end{figure}
+
+
+\subsection{Outliers in regression}
+\index{simple linear regression!outliers}
+
+Depending on their position, data points in a scatterplot have varying degrees of contribution to the estimated parameters of a regression line. Points that are at particularly low or high values of the predictor ($x$) variable are said to have \term{high leverage}, and have a large influence on the estimated intercept and slope of the regression line; observations with $x$ values closer to the center of the distribution of $x$ do not have a large effect on the slope. 
+
+\textD{\newpage}
+
+A data point in a scatterplot is considered an \term{outlier in regression} if its value for the response ($y$) variable does not follow the general linear trend in the data. Outliers that sit at extreme values of the predictor variable (i.e., have high leverage) have the potential to contribute disproportionately to the estimated parameters of a regression line. If an observation does have a strong effect on the estimates of the line, such that estimates change substantially when the point is omitted, the observation is \term{influential}. These terms are formally defined in advanced regression courses.
+
+This section examines the relationship between infant mortality and number of doctors, using data for each state and the District of Columbia.\footnote{Data are from the Statistical Abstract of the United States, published by the US Census Bureau. Data are for 2010, and available as \data{census.2010} in the \data{oibiostat} package.} Infant mortality is measured as the number of infant deaths in the first year of life per 1,000 live births, and number of doctors is recorded as number of doctors per 100,000 members of the population. Figure~\ref{infMortUS} shows scatterplots with infant mortality on the $y$-axis and number of doctors on the $x$-axis. 
+
+One point in Figure~\ref{infMortUSDC}, marked in red, is clearly distant from the main cluster of points. This point corresponds to the District of Columbia, where there were approximately 807.2 doctors per 100,000 members of the population, and the infant mortality rate was 11.3 per 1,000 live births. Since 807.2 is a high value for the predictor variable, this observation has high leverage. It is also an outlier; the other points exhibit a downward sloping trend as the number of doctors increases, but this point, with an unusually high $y$-value paired with a high $x$-value, does not follow the trend.
+
+Figure~\ref{infMortUSnoDC} illustrates that the DC observation is influential. Not only does the observation simply change the numerical value of the slope parameter, it reverses the direction of the linear trend; the regression line fitted with the complete dataset has a positive slope, but the line re-fitted without the DC observation has a negative slope. The large number of doctors per population is due to the presence of several large medical centers in an area with a population that is much smaller than a typical state.
+
+\begin{figure}[h]
+	\centering
+	\subfigure[]{
+		\includegraphics[width=0.65\textwidth]
+		{ch_simple_linear_regression_oi_biostat/figures/infMortUS/infMortUS}
+		\label{infMortUSDC}
+	}
+	\subfigure[]{
+		\includegraphics[width=0.65\textwidth]
+		{ch_simple_linear_regression_oi_biostat/figures/infMortUS/infMortUSnoDC}
+		\label{infMortUSnoDC}
+	}
+	\caption{\subref{infMortUSDC} Plot including District of Columbia data point. \subref{infMortUSnoDC} Plot without influential District of Columbia data point.}
+	\label{infMortUS}
+\end{figure}	
+
+It seems natural to ask whether or not an influential point should be removed from a dataset, but that may not be the right question. Instead, it is usually more important to assess whether the influential point might be an error in the data, or whether it belongs in the dataset. In this case, the District of Columbia has certain characteristics that may make comparisons with other states inappropriate; this is one argument in favor of excluding the DC observation from the data. 
+
+Generally speaking, if an influential point arises from random sampling from a large population and is not a data error, it should be left in the dataset, since it probably represents a small subset of the population from which the data were sampled. 
+
+\begin{exercisewrap}
+\begin{nexercise}\label{exampleInfantMortalityAssumptions}%
+Once the influential DC point is removed, assess whether it is appropriate to use linear regression on these data by checking the four assumptions behind least squares regression: linearity, constant variability, independent observations, and approximate normality of the residuals. Refer to the residual plots shown in Figure~\ref{infMortUSResid}.\footnotemark{}
+\end{nexercise}
+\end{exercisewrap}
+\footnotetext{The scatter plot in Figure~\ref{infMortUSnoDC} does not show any nonlinear trends. Similarly, Figure~\ref{infMortUSResidualPlot} does not indicate any nonlinear trends or noticeable difference in the variability of the residuals, although it does show that there are relatively few observations for low values of predicted infant mortality. From Figure~\ref{infMortUSResidNormPlot}, the residuals are approximately normally distributed. Infant mortality across the states reflects a complex mix of different levels of income, access to health care, and individual state initiatives in health care; these and other state-specific features probably act independently across the states, although there is some dependence from federal influence such as funding for pre-natal care. Overall, independence seems like a reasonable assumption.}
+
+\begin{figure}[h]
+	\centering
+	\subfigure[]{
+		\includegraphics[width=0.485\textwidth]
+		{ch_simple_linear_regression_oi_biostat/figures/infMortUSResid/infMortUSResidualPlot.pdf}
+		\label{infMortUSResidualPlot}
+	}
+	\subfigure[]{
+		\includegraphics[width=0.485\textwidth]
+		{ch_simple_linear_regression_oi_biostat/figures/infMortUSResid/infMortUSResidNormPlot.pdf}
+		\label{infMortUSResidNormPlot}
+	}
+	\caption{\subref{infMortUSResidualPlot} Residual plot of \texttt{inf.mortality} and \texttt{doctors}. \subref{infMortUSResidNormPlot} Histogram and normal probability plot of the residuals.}
+	\label{infMortUSResid}
+\end{figure}
+
+
+%____________
+\section{Statistical inference with regression}
+\label{inferenceRegression}
+
+The previous sections in this chapter have focused on linear regression as a tool for summarizing trends in data and making predictions. These numerical summaries are analogous to the methods discussed in Chapter~\ref{introductionToData} for displaying and summarizing data. Regression is also used to make inferences about a population. 
+
+The same ideas covered in Chapters~\ref{foundationsForInference} and \ref{inferenceForNumericalData} about using data from a sample to draw inferences about population parameters apply with regression. Previously, the goal was to draw inference about the population parameter $\mu$; in regression, the population parameter of interest is typically the slope parameter $\beta_1$. Inference about the intercept term is rare, and limited to the few problems where the vertical intercept has scientific meaning.\footnote{In some applications of regression, the predictor $x$ is replaced by $x^* = x - \overline{x}$.  In that case, the vertical intercept is the value of the line when $x^* = 0$, or $x = \overline{x}$.}
+
+Inference in regression relies on the population linear model for the relationship between an explanatory variable $X$ and a response variable $Y$ given by
+\begin{align}
+Y = \beta_0 + \beta_1 X + \varepsilon,
+\label{regressionPopulationModel}
+\end{align}
+where $\varepsilon$ is assumed to have a normal distribution with mean 0 and standard deviation $\sigma$ ($\varepsilon \sim N(0, \sigma)$).  This population model specifies that a response $Y$ has value $\beta_0 + \beta_1 X$ plus a random term that pushes $Y$ symmetrically above or below the value specified by the line.\footnote{Since $E(\varepsilon) = 0$, this model can also be written as $Y\sim N(\mu_x)$, with $ \mu_x = E(Y) = \beta_0 + \beta_1 X$.  The term $\varepsilon$ is the population model for the observed residuals $e_i$ in regression.} 
+\index{sampling distribution!regression coefficient}
+
+The set of ordered pairs $(x_i,y_i)$ used when fitting a least squares regression line are assumed to have been sampled from a population in which the relationship between the explanatory and response variables follows Equation~\ref{regressionPopulationModel}. Under this assumption, the slope and intercept values of the least squares regression line, $b_0$ and $b_1$, are estimates of the population parameters $\beta_0$ and $\beta_1$; $b_0$ and $b_1$ have sampling distributions, just as $\overline{X}$ does when thought of as an estimate of a population mean $\mu$. A more advanced treatment of regression would demonstrate that the sampling distribution of $b_1$ is normal with mean $E(b_1) = \beta_1$ and standard deviation
+\[\sigma_{b_1} = \frac{\sigma}{\sqrt{\sum(x_i -\overline{x})^2}}.\]
+
+The sampling distribution of $b_0$ has mean $E(b_0) = \beta_0$ and standard deviation 
+\[\sigma_{b_0} = \sigma \sqrt{\frac{1}{n} + \frac{\overline{x}^2}{\sum(x_i - \overline{x})^2}}.\]
+In both of these expressions, $\sigma$ is the standard deviation of $\varepsilon$.
+
+Hypothesis tests and confidence intervals for regression parameters have the same basic form as tests and intervals about population means. The test statistic for a null hypothesis $H_0: \beta_1 = \beta^0_1$ about a slope parameter is
+\[t = \frac{b_1 - \beta^0_1}{\text{s.e.}(b_1)},\]
+where the formula for $\text{s.e.}(b_1)$ is given below.
+In this setting, $t$ has a $t$-distribution with $n - 2$ degrees of freedom, where $n$ is the number of ordered pairs used to estimate the least squares line.  
+
+\textD{\newpage}
+
+Typically, hypothesis testing in regression involves tests of whether the $x$ and $y$ variables are associated; in other words, whether the slope is significantly different from 0. In these settings, the null hypothesis is that there is no association between the explanatory and response variables, or $H_0: \beta_1 = 0 = \beta^0_1$, in which case
+\[t = \frac{b_1}{\text{s.e.}(b_1)}.\]
+The hypothesis is rejected in favor of the two-sided alternative $H_A: \beta_1 \neq 0$ with significance level $\alpha$ when $|t| \ge t^\star_{\text{df}}$, where $t^\star_{\text{df}}$ is the point on a $t$-distribution with $n-2$ degrees of freedom that has $\alpha/2$ area to its right (i.e., when $p \leq \alpha$).
+
+\index{confidence interval!regression coefficient}
+
+A two-sided confidence interval for $\beta_1$ is given by 
+\[b_1 \pm \text{s.e.}(b_1) \times t^\star_{\text{df}}.\]
+Tests for one-sided alternatives and one-sided confidence intervals make the usual adjustments to the rejection rule and confidence interval, and $p$-values are interpreted just as in Chapters 4 and 5.
+
+\subsubsection{Formulas for calculating standard errors}
+
+\index{standard error (SE)!regression coefficient}
+
+Statistical software is typically used to obtain $t$-statistics and $p$-values for inference with regression, since using the formulas for calculating standard error can be cumbersome.
+
+The standard errors of $b_0$ and $b_1$ used in confidence intervals and hypothesis tests replace $\sigma$ with $s$, the standard deviation of the residuals from a fitted line. Formally, 
+\begin{align}
+ s = \sqrt{\frac{\sum e^{2}_{i}}{n-2}} =  \sqrt{\frac{\sum (y_{i}-\hat{y}_{i})^{2}}{n-2}}.
+  \label{equation:regressionMSE}
+\end{align}
+The term $s^2$ is often called the mean squared error from the regression, and $s$ the root mean squared error. 
+
+The two standard errors are
+\[\text{s.e.}(b_1) = \frac{s}{\sqrt{\sum(x_i -\overline{x})^2}}  \qquad \text{and} \qquad \text{s.e.}(b_0) = s \sqrt{\frac{1}{n} + \frac{\overline{x}^2}
+	{\sum(x_i - \overline{x})^2}}. \]
+
+\textD{\newpage}
+
+\begin{examplewrap}
+\begin{nexample}{Is there evidence of a significant association between number of doctors per 100,000 members of the population in a state and infant mortality rate? 
+		
+The numerical output that \textsf{R} returns is shown in Figure~\ref{infantMortalityInferenceOutput}.\footnote{Other software packages, such as Stata or Minitab, provide similar information but with slightly different labeling.}}\label{exampleInfantMortalityInference}%	
+The question implies that the District of Columbia should not be included in the analysis. The assumptions for applying a least squares regression have been verified in Exercise~\ref{exampleInfantMortalityAssumptions}. Whenever possible, formal inference should be preceded by a check of the assumptions for regression.
+
+The null and alternative hypotheses are $H_0:\beta_1 = 0$ and $H_A:\beta_1 \neq 0.$	
+
+
+The estimated slope of the least squares line is -0.0068, with standard error 0.0028. The $t$-statistic equals -2.40, and the probability that the absolute value of a $t$-statistic with $50-2=48$ degrees of freedom is smaller than $-2.40$ or larger than $2.40$ is 0.021. 
+
+Since $p = 0.021 < 0.05$, the data support the alternative hypothesis that the number of physicians is associated with infant mortality at the 0.05 significance level. The sign of the slope implies that the association is negative; states with more doctors tend to have lower rates of infant mortality.
+\end{nexample}
+\end{examplewrap}
+
+\begin{figure}[h]
+	\centering
+	\begin{tabular}{rrrrr}
+		\hline
+		& Estimate & Std. Error & t value & Pr($>$$|$t$|$) \\ 
+		\hline
+		(Intercept) & 8.5991 & 0.7603 & 11.31 & 0.0000 \\ 
+		Doctors Per 100,000 & -0.0068 & 0.0028 & -2.40 & 0.0206 \\ 
+		\hline
+	\end{tabular}
+	\caption{Summary of regression output from \textsf{R} for the model predicting infant mortality from number of doctors, using the \data{census.2010} dataset.}
+	\label{infantMortalityInferenceOutput}
+\end{figure}
+
+% xtable(lm(us.infant.mortality.2011$infant.mortality[a] ~us.infant.mortality.2011$doctors.per.100000[a]))
+% latex table generated in R 3.2.3 by xtable 1.8-0 package
+% Tue Oct 25 11:49:28 2016
+% variable names have  been edited
+
+Care should be taken in interpreting the above results. The $R^2$ for the model is 0.107; the model explains only about 10\% of the state-to-state variability in infant mortality, which suggests there are several other factors affecting infant mortality that are not accounted for in the model.\footnote{Calculations of the $R^2$ value are not shown here.} Additionally, an important implicit assumption being made in this example is that data from the year 2010 are representative; in other words, that the relationship between number of physicians and infant mortality is constant over time, and that the data from 2010 can be used to make inference about other years.
+
+Note that it would be incorrect to make claims of causality from these data, such as stating that an additional 100 physicians (per 100,000 residents) would lead to a decrease of 0.68 in the infant mortality rate.
+
+\begin{exercisewrap}
+\begin{nexercise}
+Calculate a 95\% two-sided confidence interval for the slope parameter $\beta_{1}$ in the state-level infant mortality data.\footnotemark{}
+\end{nexercise}
+\end{exercisewrap}
+\footnotetext{The $t^{\star}$ value for a $t$-distribution with 48 degrees of freedom is 2.01, and the standard error of $b_1$ is 0.0028. The 95\% confidence interval is $-0.0068 \pm 2.01(0.0028)$ = (-0.0124, -0.0012).}
+
+
+\textD{\newpage}
+
+
+\subsubsection{Connection to two-group hypothesis testing}
+\label{categoricalTwoGroup}
+
+Conducting a regression analysis with a numerical response variable and a categorical predictor with two levels is analogous to conducting a two-group hypothesis test. 
+
+For example, Section~\ref{categoricalPredictorsWithTwoLevels} shows a regression model that compares the average infant mortality rate in countries with low access to sanitation facilities versus high access.\footnote{Recall that a log transformation was used on the infant mortality rate.} In other words, the purpose of the analysis is to compare mean infant mortality rate between the two groups: countries with low access versus countries with high access. Recall that the slope parameter $b_1$ is the difference between the means of log(mortality rate). A test of the null hypothesis $H_0: \beta_1 = 0$ in the context of a categorical predictor with two levels is a test of whether the two means are different, just as for the two-group null hypothesis, $H_0: \mu_1 = \mu_2$. 
+
+When the pooled standard deviation assumption (Section~\ref{pooledStandardDeviations}) is used, the $t$-statistic and $p$-value from a two-group hypothesis test are equivalent to that returned from a regression model.
+
+Figure~\ref{regressLogInfMortAccess} shows the \textsf{R} output from a regression model in the \data{wdi.2011} data, in which \var{sanit.access} = 1 for countries where at least 50\% of the population has access to adequate sanitation and 0 otherwise. The abbreviated \textsf{R} output from two-group $t$-tests are shown in Figure~\ref{tTestSanitStd}. The version of the $t$-test that does not assume equal standard deviations and uses non-integer degrees of freedom is often referred to as the Welch test.
+
+\begin{figure}[ht]
+\centering
+\begin{tabular}{rrrrr}
+  \hline
+ & Estimate & Std. Error & t value & Pr($>$$|$t$|$) \\ 
+  \hline
+(Intercept) & 4.0184 & 0.1100 & 36.52 & < 0.001 \\ 
+  High Access & -1.6806 & 0.1322 & -12.72 & 0.001 \\ 
+   \hline
+\end{tabular}
+\caption{Regression of log(infant mortality) versus sanitation access.} 
+\label{regressLogInfMortAccess}
+\end{figure}
+
+%predictor name changed
+%access.log.inf.mort.regress = lm(log(wdi.2011$inf.mort) ~wdi.2011$sanit.access.factor)
+%xtable(access.log.inf.mort.regress, caption = "Regression of log(infant mortality) versus sanitation access", label = "regressLogInfMortAccess")
+
+% latex table generated in R 3.3.2 by xtable 1.8-2 package
+% Sun Nov 26 14:50:15 2017
+
+\begin{figure}[ht]
+	\centering
+	\begin{tabular}{llll}
+		\hline
+		Test & df & t value & Pr(>|t|) \\ 
+		\hline
+		Two-group $t$-test & 161 & 12.72 & $< 0.001$ \\ 
+		Welch two-group $t$-test & 155.82 & 17.36 & $< 0.001$ \\
+		\hline
+	\end{tabular}
+	\caption{Results from the independent two-group $t$-test, under differing assumptions about standard deviations between groups, for mean log(infant mortality) between sanitation access groups.} 
+	\label{tTestSanitStd}
+\end{figure}
+
+%equal.var.t.test <- t.test(log(wdi.2011$inf.mort) ~  wdi.2011$sanit.access.factor, var.equal = T)
+%xtable(t_out(toutput=equal.var.t.test, d.corr = FALSE, print = TRUE),caption = "T-test assuming equal st.dev",label = "tTestSanitEqualStd")
+% latex table generated in R 3.3.2 by xtable 1.8-2 package
+% Sun Nov 26 14:56:30 2017
+% dh edited the p-value in the regression output to match <0.001 in t-test.
+
+%unequal.var.t.test <- t.test(log(wdi.2011$inf.mort) ~  wdi.2011$sanit.access.factor)
+%xtable(t_out(toutput=unequal.var.t.test, d.corr = FALSE, print = TRUE))
+% latex table generated in R 3.3.2 by xtable 1.8-2 package
+% Sun Nov 26 14:58:35 2017
+% jv edited table formatting and combined into a single table
+
+The sign of the $t$-statistic differs because for the two-group test, the difference in mean log(infant mortality) was calculated by subtracting the mean in the high access group from the mean in the low access group; in the regression model, the negative sign reflects the reduction in mean log(infant mortality) when changing from low access to high access. Since the $t$-distribution is symmetric, the two-sided $p$-value is equal. In this case, $p$ is a small number less than 0.001, as calculated from a $t$-distribution with $163-2 = 161$ degrees of freedom (recall that 163 countries are represented in the dataset). The degrees of freedom for the pooled two-group test and linear regression are equivalent.
+
+Example~\ref{wdiAssumptionsEx} showed that the constant variability assumption does not hold for these data. As a result, it might be advisable for a researcher interested in comparing the infant mortality rates between these two groups to conduct a two-group hypothesis test without using the pooled standard deviation assumption. Since this test uses a different formula for calculating the standard error of the difference in means, the $t$-statistic is different; additionally, the degrees of freedom are not equivalent. In this particular example, there is not a noticeable effect on the $p$-value.
+
+
+\section{Interval estimates with regression (special topic)}
+\label{confidencePredictionIntervalsSimpleRegression}
+
+Section~\ref{inferenceRegression} introduced interval estimates for regression parameters, such as the population slope $\beta_1$. An estimated regression line can also be used to construct interval estimates for the regression line itself and to calculate prediction intervals for a new observation.
+
+\subsection{Confidence intervals}
+
+As initially discussed in Section~\ref{estimatingLeastSquaresLine}, the estimated regression line for the association between RFFT score and age from the 500 individuals in \texttt{prevend.samp} is
+\[\widehat{\text{RFFT}} = 137.55 - 1.26(\text{age}). \]
+
+Figure~\ref{table:ageRFFTLeastSquares} shows the summary output from \textsf{R} when the regression model is fit. \textsf{R} also provides the value of $R^2$ as 0.285 and the value of $s$, the estimated standard deviation of the residuals, as 23.2.
+
+\begin{figure}[h]
+	\begin{center}
+	\begin{tabular}{rrrrr}
+		\hline
+		& Estimate  & Std. Error    & t value   & Pr($>$$|$t$|$) \\ 
+		\hline
+		(Intercept)     & 137.55   & 5.02       & 27.42     & 0.000\\ 
+		Age  & -1.26    & 0.09      & -14.09    & 0.000 \\ 
+		\hline
+		\multicolumn{5}{r}{$df = 498$} \\
+	\end{tabular}
+  	\end{center}
+	\caption{Summary of regression output from \textsf{R} for the model predicting RFFT score from age, using the \texttt{prevend.samp} dataset.}
+	\label{table:ageRFFTLeastSquares}
+\end{figure}
+
+A confidence interval for the slope parameter $\beta_1$ is centered at the point estimate $b_1$, with a width based on the standard error for the slope. For this model, the 95\% confidence interval for age is  $-1.26 \pm (1.96)(0.09) = (-1.44, -1.09)$ years.\footnote{The critical value 1.96 is used here because at degrees of freedom 498, the $t$-distribution is very close to a normal distribution. From software, $t^\star_{0.975, df = 498} = 1.9647$.} With 95\% confidence, each additional year of age is associated with between a 1.1 and 1.4 point lower RFFT score.
+
+A confidence interval can also be calculated for a specific point on a least squares line. Consider a specific value of the predictor variable, $x^*$, such as 60 years of age. At age 60 years, the predicted value of RFFT score is $137.55 - 1.26(60) = 61.95$ points. The fitted line suggests that individuals from this population who are 60 years of age score, on average, about 62 points on the RFFT. Each point on the estimated regression line represents the predicted average RFFT score for a certain age.
+
+More generally, the population model for a regression line is $E(Y|x) = \beta_0 + \beta_1 x$, and at a value $x^*$ of the predictor $x$, the fitted regression line 
+\[ \widehat{E(Y|x^*)} = b_0 + b_1 x^* \]
+estimates the mean of $Y$ for members of the population with predictor value $x^*$.
+
+Thus, each point on a fitted regression line represents a point estimate for $E(Y|x^*)$. The corresponding interval estimate for $E(Y|x^*)$ measures the uncertainty in the estimated mean of $Y$ at predictor value $x^*$, just as how an interval estimate for the population slope $\beta_1$ represents the uncertainty around $b_1$. 
+
+\textD{\newpage}
+
+The confidence interval for $E(Y|x^*)$ is computed using the standard error of the estimated mean of the regression model at a value of the predictor:  
+\[\text{s.e.}(\widehat{E(Y|x^*)}) = \sqrt{s^2 \left( \frac{1}{n} + \dfrac{(x^*-\overline{x})^2}{\sum(x_i-\overline{x})^2}\right)} = s\sqrt{\frac{1}{n} + \dfrac{(x^*-\overline{x})^2}{\sum(x_i-\overline{x})^2}}.  \]
+In this expression, $s$ is given by Equation~\ref{equation:regressionMSE}, the usual estimate of $\sigma$, the standard deviation of the error term $\epsilon$ in the population linear model $Y = \beta_0 + \beta_1X + \epsilon$.
+
+The standard error of an estimated mean in regression is rarely calculated by hand; with all but the smallest datasets, the calculations are long and best left to software.  When necessary, it can be calculated from basic features of the data and summary statistics.  
+
+Consider computing a 95\% confidence interval for $E(RFFT|age = 60)$.
+\begin{itemize}
+  \item  The sample size is $n = 500$.
+
+  \item $s = 23.2$ appears in the regression output.
+
+  \item The sample mean $\overline{x}$ of the predictor is $\overline{age} = 54.8$ years.
+
+  \item $(x^* - \overline{x})^2 $ is the squared distance between the predictor value of interest and the sample mean of the predictors: $(60 - 54.8)^2 = 27.04$.
+
+  \item The sum $\sum(x_i-\overline{x})^2$ is the numerator in the calculation of the variance of the predictor, and equals $(n - 1)\text{Var}(x) = (499)(134.4445) = 67,088$. 
+   \end{itemize}
+
+Using these values, the standard error of the estimated mean RFFT score at age 60 is
+\[\text{s.e.}(\widehat{E(RFFT|age = 60)}) = 23.2 \sqrt{\frac{1}{500} + \frac{27.04}{67,088}} = 1.14.\]
+Thus, a 95\% confidence interval for the estimated mean is $61.95 \pm (1.96)(1.14) = (59.72, 64.18)$ points. With 95\% confidence, the interval (59.72, 64.18) points contains the average RFFT score of a 60-year-old individual.
+
+It is also possible to calculate approximate confidence intervals for the estimated mean at a specific value of a predictor. When $x^* = \overline{x}$, the second term in the square root will be 0, and the standard error of the estimated mean at the average value $\overline{x}$ will have the simple form $s/\sqrt{n}$. For values close to $\overline{x}$, approximating the standard error as $s/\sqrt{n}$ is often sufficient.  In the PREVEND data, 60 years is reasonably close to the average age 54.8 years, and the approximate value of the standard error is $23.2/\sqrt{500} = 1.03$.  For values $x^*$ that are more distant from the mean, the second term in the square root cannot be reasonably ignored.
+
+The approximate form of the standard error for the mean at a predictor value, $s/\sqrt{n}$, makes it easier to see that for large $n$, the standard error approaches 0; thus, the confidence interval narrows as sample size increases, allowing the estimates to become more precise. This behavior is identical to the confidence interval for a simple mean, as one would expect.  It is possible to show algebraically that the confidence intervals at any value of the predictor become increasingly narrow as the sample size increases.
+
+
+\textD{\newpage}
+
+
+\subsection{Prediction intervals}
+
+\index{simple linear regression!prediction intervals}
+
+After fitting a regression line, a \term{prediction interval} is used to estimate a range of values for a new observation of the response variable $Y$ with predictor value $x^*$; that is, an observation not in the data used to estimate the line. The point estimate $\widehat{Y|x^*} = b_0 + b_1x^*$ is the same as $\widehat{E(Y|x^*)}$, but the corresponding interval estimate is wider than a confidence interval for the mean.
+
+The width of the interval reflects both the uncertainty in the estimate of the mean, $\widehat{E(Y|x^*)}$, and the inherent variability of the response variable.  The standard error for a predicted value $\widehat{Y|x^*}$ at predictor $x^*$ is
+\[
+  \text{s.e.}(\widehat{Y|x^*}) = \sqrt{s^2 + s^2\left(\frac{1}{n} + \dfrac{(x^*-\overline{x})^2}{\sum(x_i-\overline{x})^2}\right)} = s\sqrt{1 + \frac{1}{n} + \dfrac{(x^*-\overline{x})^2}{\sum(x_i-\overline{x})^2}}.
+\]
+The increased variability when estimating $Y|x^*$ versus $E(Y|x^*)$ is accounted for by the additional $s^2$ term inside the square root.
+
+The standard error for a prediction can also be calculated from summary statistics; the calculation is similar to that for the standard error for a mean.  From the values of the summary statistics,
+\begin{align*}
+  \text{s.e.}(\widehat{RFFT|age = 60}) = 23.2 \sqrt{1 +  \frac{1}{500} + \frac{27.04}{67,088}} = 23.23.
+\end{align*}
+The 95\% prediction interval is $61.95 \pm (1.96)(23.23) = (16.42, 107.68)$ points. These data and the model suggest that with 95\% confidence, a newly selected 60-year-old will score between 16 and 108 points on the RFFT. This interval is wider than the confidence interval for the mean RFFT score (at age 60 years).
+
+Just as with confidence intervals, an approximate prediction interval for a predictor near the average of the predictors can be constructed by considering the case when $x^* = \overline{x}$ and the standard error reduces to $s\sqrt{1 + 1/n}$.  This approximate standard error shows why prediction intervals are wider than confidence intervals and do not become narrower as sample size increases.  For large sample sizes, the term $1/n$ is close to 0, and the standard error is close to $s$, the standard deviation of the residuals about the line.  Even when the mean is estimated perfectly, a prediction interval will reflect the variability in the data (specifically, the variability in the response variable).
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.8\textwidth]
+	{ch_simple_linear_regression_oi_biostat/figures/prevendPredictionIntervalsSimpleRegression/prevendPredictionIntervalsSimpleRegression.pdf}
+	\caption{A scatterplot showing RFFT versus age, with the regression line in blue. The confidence intervals are marked by solid red lines, while the prediction intervals are shown in dashed red lines.}
+	\label{prevendPredictionIntervalsSimpleRegression}
+\end{figure}
+
+\textD{\newpage}
+
+Figure~\ref{prevendPredictionIntervalsSimpleRegression} visually demonstrates confidence intervals and prediction intervals in the PREVEND example; the regression line is shown in blue, while the 95\% confidence intervals and prediction intervals for each value of age are shown in red. At any value of age, the width of the interval estimate at that value is represented by the vertical distance between the two red lines. For example, the width of the confidence interval at age 60 years is represented by the distance between the points (60, 59.72) and (60, 64.18); the solid red lines pass through the upper and lower confidence bounds calculated in the earlier example. Similarly, the dashed red lines that represent prediction intervals pass through (60, 16.42) and (60, 107.68), the 95\% upper and lower bounds for the predicted RFFT score of a 60-year-old.
+
+The plot shows how the confidence intervals are most narrow at the mean age, 54.8 years, and become wider at values of age further from the mean. The prediction intervals are always wider than the confidence intervals. While the mean can be estimated with relative precision along the regression line, prediction intervals reflect the scatter of RFFT scores about the line (which is directly related to the inherent variability of RFFT scores within the study participants). While larger sample sizes can lead to narrower confidence intervals, the width of the prediction intervals will remain essentially unchanged unless the sampling scheme is changed in a way that reduces the variability of the response. A sample of individuals restricted to ages 60 - 70 years, for example, would be expected to have less variable RFFT scores, which would allow for narrower prediction intervals.
+
+The distinction between confidence and prediction intervals is important and often overlooked.  A clinical practitioner interested in the expected outcomes of a test generally should rely on confidence intervals for the mean along a regression line.  The PREVEND data suggest that 60 year olds will score on average about 62 points on the test, and the average score is between 59.7 points and 62.2 points.  When the RFFT is administered to a new 60 year old, however, the likely range of responses will be between 16.4 and 107.7.  The prediction interval is wide because the scores on the test are quite variable.  
+
+
+%___________
+\section{Notes}
+\label{chSimpleLinearRegNotes}
+
+This chapter provides only an introduction to simple linear regression; the next chapter, Chapter~\ref{multipleLinearRegression}, expands on the principles of simple regression to models with more than one predictor variable. 
+
+When fitting a simple regression, be sure to visually assess whether the model is appropriate. Nonlinear trends or outliers are often obvious in a scatterplot with the least squares line plotted. If outliers are evident, the data source should be consulted when possible, since outliers may be indicative of errors in data collection. It is also important to consider whether observed outliers belong to the target population of inference, and assess whether the outliers should be included in the analysis.
+
+There are several variants of residual plots used for model diagnostics. The ones shown in Section~\ref{checkingResiduals}, which plot the predicted values on the horizontal axis, easily generalize to settings with multiple predictors, since there is always a single predicted value even when there is more than one predictor. If the only model used is a simple regression, plotting residuals against predictor values may make it easier to identify a case with a notable residual. Additionally, data analysts will sometimes plot residuals against case number of the predictor, since runs of large or small residuals may indicate that adjacent cases are correlated.
+
+The $R^2$ statistic is widely used in the social sciences, where the unexplained variability in the data is typically much larger than the variability captured or explained by a model. It is important to be aware of what information $R^2$ does and does not provide. Even though a model may have a low proportion of explained variability, regression coefficients in the model can still be highly statistically significant. The $R^2$ should not be interpreted as a measure of the quality of the fit of the model. It is possible for $R^2$ to be large even when the data do not show a linear relationship. 
+
+Linear regression models are often estimated after an investigator has noticed a linear relationship in data, and experienced investigators can often guess correctly that regression coefficients will be significant before calculating a $p$-value. Unlike with two-sample hypothesis tests, regression models are rarely specified in advance at the design stage. In practice, it is best to be skeptical about a small $p$-value in a regression setting, and wait to see whether the observed statistically significant relationship can be confirmed in an independent dataset. The issue of model validation and assessing whether results of a regression analysis will generalize to other datasets is often discussed at length in advanced courses.
+
+In more advanced texts, substantial attention is devoted to the subtleties of fitting straight line models. For instance, there are strategies for adjusting an analysis when one or more of the assumptions for regression do not hold. There are also specific methods to numerically assess the leverage or influence that each observation has on a fitted model.
+
+Lab 1 explores the relationship between cognitive function and age in adults by fitting and interpreting a straight line to these variables in the PREVEND dataset, in addition to discussing the statistical model for least squares regression and residual plots used to assess the assumptions for linear regression.  The lab is a useful reminder that least squares regression is much more than the mechanics of finding a line that best fits a dataset.  Lab 2 uses simulated data to explore the quantity $R^2$. Lab 3 explores the use of binary categorical predictor variables in regression and shows how two-sample $t$-tests can be calculated using linear regression, in addition to introducing inference in a regression context. Categorical predictor variables are common in medicine and the life sciences. 
+

@@ -1,0 +1,1220 @@
+%!TEX root=../../main.tex
+\begin{chapterpage}{Inference for numerical data}
+  \chaptertitle{Inference for\\[4mm]numerical data}
+  \label{inferenceForNumericalData}
+  \chaptersection{oneSampleMeansWithTDistribution}
+  \chaptersection{pairedData}
+  \chaptersection{differenceOfTwoMeans}
+  \chaptersection{PowerForDifferenceOfTwoMeans}
+  \chaptersection{anovaAndRegrWithCategoricalVariables}
+  \chaptersection{inferenceForNumericalDataNotes}
+\end{chapterpage}
+\renewcommand{\chapterfolder}{ch_inference_for_means_oi_biostat}
+
+\chapterintro{Chapter~\ref{foundationsForInference} introduced some primary tools of statistical inference\textemdash point estimates, interval estimates, and hypothesis tests. This chapter discusses settings where these tools are often used, including the analysis of paired observations and the comparison of two or more independent groups. The chapter also covers the important topic of estimating an appropriate sample size when a study is being designed.  The chapter starts with introducing a new distribution, the $t$-distribution, which can be used for small sample sizes.}
+
+
+%__________________
+\section{Inference for one-sample means with the $t$-distribution}
+\label{oneSampleMeansWithTDistribution}
+
+\noindent%
+The tools studied in Chapter~\ref{foundationsForInference} all made use of the $t$-statistic from a sample mean,
+\[t = \frac{\overline{x} - \mu}{s/\sqrt{n}},\]
+where the parameter $\mu$ is a population mean, $\overline{x}$ and $s$ are the sample mean and standard deviation, and $n$ is the sample size. Tests and confidence intervals were restricted to samples of at least 30 independent observations from a population where there was no evidence of strong skewness. This allowed for the Central Limit Theorem to be applied, justifying use of the normal distribution to calculate probabilities associated with the $t$-statistic. 
+
+In sample sizes smaller than 30, if the data are approximately symmetric and there are no large outliers, the $t$-statistic has what is called a $t$-distribution. When the normal distribution is used as the sampling distribution of the $t$-statistic, $s$ is essentially being treated as a good replacement for the unknown population standard deviation $\sigma$. However, the sample standard deviation $s$, as an estimate of $\sigma$, has its own inherent variability like $\overline{x}$. The $t$ density function adjusts for the variability in $s$ by having more probability in the left and right tails than the normal distribution.
+
+\subsection{The $t$-distribution}
+\label{introducingTheTDistribution}
+
+\index{t-distribution|(}
+\index{distribution!$t$|(}
+
+Figure~\ref{tDistCompareToNormalDist} shows a $t$-distribution and normal distribution. Like the standard normal distribution, the $t$-distribution is unimodal and symmetric about zero.  However, the tails of a $t$-distribution are thicker than for the normal, so observations are more likely to fall beyond two standard deviations from the mean than under the normal distribution.\footnote{The standard deviation of the $t$-distribution is actually a little more than 1. However, it is useful to think of the $t$-distribution as having a standard deviation of 1 in the context of using it to conduct inference.} While the estimate of the standard error will be less accurate with smaller sample sizes, the thick tails of the $t$-distribution correct for the variability in $s$.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.5\textwidth]{ch_inference_for_means_oi_biostat/figures/tDistCompareToNormalDist/tDistCompareToNormalDist}
+\caption{Comparison of a $t$-distribution (solid line) and a normal distribution (dotted line).}
+\label{tDistCompareToNormalDist}
+\end{figure}
+
+The $t$-distribution can be described as a family of symmetric distributions with a single parameter: degrees of freedom, which equals $n - 1$. Several $t$-distributions are shown in Figure~\ref{tDistConvergeToNormalDist}. When there are more degrees of freedom, the $t$-distribution looks very much like the standard normal distribution. With degrees of freedom of 30 or more, the $t$-distribution is nearly indistinguishable from the normal distribution. Since the $t$-statistics in Chapter~\ref{foundationsForInference} were associated with sample sizes of at least 30, the degrees of freedom for the corresponding $t$-distributions were large enough to justify use of the normal distribution to calculate probabilities.
+
+\textD{\newpage}
+
+\begin{figure}
+\centering
+\includegraphics[width=0.75\textwidth]{ch_inference_for_means_oi_biostat/figures/tDistConvergeToNormalDist/tDistConvergeToNormalDist}
+\caption{The larger the degrees of freedom, the more closely the $t$-distribution resembles the standard normal model.}
+\label{tDistConvergeToNormalDist}
+\end{figure}
+
+\begin{onebox}{Degrees of freedom (df)}
+The degrees of freedom characterize the shape of the $t$-distribution. The larger the degrees of freedom, the more closely the distribution approximates the normal model.
+\end{onebox}
+
+Probabilities for the $t$-distribution can be calculated either by using distribution tables or using statistical software. The use of software has become the preferred method because it is more accurate, allows for complete flexibility in the choice of $t$-values on the horizontal axis, and is not limited to a small range of degrees of freedom. The remainder of this section illustrates the use of a \term{t-table}, partially shown in Figure~\ref{tTableSample}, in place of the normal probability table. A larger $t$-table is in Appendix~\ref{tDistributionTable} on page~\pageref{tDistributionTable}.  The \textsf{R} labs illustrate the use of software to calculate probabilities for the $t$-distribution.  Readers intending to use software can skip to the next section.
+
+
+\begin{figure}[hht]
+\centering
+\begin{tabular}{r | rrr rr}
+one tail & \hspace{1.5mm}  0.100 & \hspace{1.5mm} 0.050 & \hspace{1.5mm} 0.025 & \hspace{1.5mm} 0.010 & \hspace{1.5mm} 0.005  \\
+two tails & 0.200 & 0.100 & 0.050 & 0.020 & 0.010 \\
+\hline
+{$df$} \hfill 1  &  {\normalsize  3.08} & {\normalsize  6.31} & {\normalsize 12.71} & {\normalsize 31.82} & {\normalsize 63.66}  \\ 
+2  &  {\normalsize  1.89} & {\normalsize  2.92} & {\normalsize  4.30} & {\normalsize  6.96} & {\normalsize  9.92}  \\ 
+3  &  {\normalsize  1.64} & {\normalsize  2.35} & {\normalsize  3.18} & {\normalsize  4.54} & {\normalsize  5.84}  \\ 
+$\vdots$ & $\vdots$ &$\vdots$ &$\vdots$ &$\vdots$ & \\
+17  &  {\normalsize  1.33} & {\normalsize  1.74} & {\normalsize  2.11} & {\normalsize  2.57} & {\normalsize  2.90}  \\ 
+\highlightO{18}  &  \highlightO{\normalsize  1.33} & \highlightO{\normalsize  1.73} & \highlightO{\normalsize  2.10} & \highlightO{\normalsize  2.55} & \highlightO{\normalsize  2.88}  \\ 
+19  &  {\normalsize  1.33} & {\normalsize  1.73} & {\normalsize  2.09} & {\normalsize  2.54} & {\normalsize  2.86}  \\ 
+20  &  {\normalsize  1.33} & {\normalsize  1.72} & {\normalsize  2.09} & {\normalsize  2.53} & {\normalsize  2.85}  \\ 
+$\vdots$ & $\vdots$ &$\vdots$ &$\vdots$ &$\vdots$ & \\
+400  &  {\normalsize  1.28} & {\normalsize  1.65} & {\normalsize  1.97} & {\normalsize  2.34} & {\normalsize  2.59}  \\ 
+500  &  {\normalsize  1.28} & {\normalsize  1.65} & {\normalsize  1.96} & {\normalsize  2.33} & {\normalsize  2.59}  \\ 
+$\infty$  &  {\normalsize  1.28} & {\normalsize  1.64} & {\normalsize  1.96} & {\normalsize  2.33} & {\normalsize  2.58}  \\ 
+\end{tabular}
+\caption{An abbreviated look at the $t$-table. Each row represents a different $t$-distribution. The columns describe the cutoffs for specific tail areas. The row with $df=18$ has been \highlightO{highlighted}.}
+\label{tTableSample}
+\end{figure}
+
+Each row in the $t$-table represents a $t$-distribution with different degrees of freedom. The columns correspond to tail probabilities. For instance, for a $t$-distribution with $df=18$, row 18 is used (highlighted in Figure~\ref{tTableSample}). The value in this row that identifies the cutoff for an upper tail of 5\% is found in the column where \emph{one tail} is 0.050. This cutoff is 1.73. The cutoff for the lower 5\% is -1.73; just like the normal distribution, all $t$-distributions are symmetric. If the area in each tail is 5\%, then the area in two tails is 10\%; thus, this column can also be described as the column where \emph{two tails} is 0.100.
+
+\textD{\newpage}
+
+\begin{examplewrap}
+\begin{nexample}{What proportion of the $t$-distribution with 18 degrees of freedom falls below -2.10?}
+Just like for a normal probability problem, it is advisable to start by drawing the distribution and shading the area below -2.10, as shown in Figure~\ref{tDistDF18LeftTail2Point10}. From the table, identify the column containing the absolute value of -2.10; it is the third column. Since this is just the probability in one tail, examine the top line of the table; a one tail area for a value in the third column corresponds to 0.025. About 2.5\% of the distribution falls below -2.10.	
+\end{nexample}
+\end{examplewrap}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.55\textwidth]{ch_inference_for_means_oi_biostat/figures/tDistDF18LeftTail2Point10/tDistDF18LeftTail2Point10}
+\caption{The $t$-distribution with 18 degrees of freedom. The area below -2.10 has been shaded.}
+\label{tDistDF18LeftTail2Point10}
+\end{figure}
+
+\begin{examplewrap}
+\begin{nexample}{A $t$-distribution with 20 degrees of freedom is shown in the left panel of Figure~\ref{tDistDF20RightTail1Point65}. Estimate the proportion of the distribution falling above 1.65 and below -1.65.}
+Identify the row in the $t$-table using the degrees of freedom: $df-20$. Then, look for 1.65; the value is not listed, and falls between the first and second columns. Since these values bound 1.65, their tail areas will bound the tail area corresponding to 1.65. The two tail area of the first and second columns is between 0.100 and 0.200. Thus, between 10\% and 20\% of the distribution is more than 1.65 standard deviations from the mean. The precise area can be calculated using statistical software: 0.1146.
+\end{nexample}
+\end{examplewrap}
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.55\textwidth]{ch_inference_for_means_oi_biostat/figures/tDistDF20RightTail1Point65/tDistDF20RightTail1Point65}
+	\caption{The $t$-distribution with 20 degrees of freedom, with the area further than 1.65 away from 0 shaded.}
+	\label{tDistDF20RightTail1Point65}
+\end{figure}
+
+\index{t-distribution|)}
+\index{distribution!$t$|)}
+
+
+\textD{\newpage}
+
+
+\subsection{Using the $t$-distribution for tests and confidence intervals for a population mean}
+
+\label{oneSampleTConfidenceIntervalsTests}
+
+\index{t-test!one-sample|(}
+
+Chapter~\ref{foundationsForInference} provided formulas for tests and confidence intervals for population means in random samples large enough for the $t$-statistic to have a nearly normal distribution.  In samples smaller than 30 from approximately symmetric distributions without large outliers, the $t$-statistic has a $t$-distribution with degrees of freedom equal to $n - 1$. Just like inference in larger samples, inference using the $t$-distribution also requires that the observations in the sample be independent.  Random samples from very large populations always produce independent observations;  in smaller populations, observations will be approximately independent as long as the size of the sample is no larger than 10\% of the population.
+
+Formulas for tests and intervals using the $t-$distribution are very similar to those using the normal distribution.  For a sample of size $n$ with sample mean $\overline{x}$ and standard deviation $s$, two-sided confidence intervals with confidence coefficient $100(1 - \alpha)$\% have the form
+\[
+    \overline{x} \pm t_{\text{df}}^{\star} \times \text{SE},
+\]
+where SE is the standard error of the sample mean ($s/\sqrt{n}$) and $t_{\text{df}}^{\star}$ is the point on a $t$-distribution with $n-1$ degrees of freedom and area $(1 - \alpha/2)$ to its left.
+
+A one-sided interval with the same confidence coefficient will have the form  
+\begin{align*}
+    \overline{x} &+ t_{\text{df}}^{\star} \times \text{SE} \text{   (one-sided upper confidence interval)}, \text{  or} \\
+    \overline{x} &- t_{\text{df}}^{\star} \times \text{SE} \text{   (one-sided lower confidence interval)},
+\end{align*}
+except that in this case $t_{\text{df}}^{\star}$ is the point on a $t$-distribution with $n-1$ degrees of freedom and  area $(1 - \alpha)$ to its left.
+
+With the ability to conveniently calculate $t^\star$ for any sample size or associated $\alpha$ via computing software, the $t$-distribution can be used by default over the normal distribution. The rule of thumb that $n > 30$ qualifies as a large enough sample size to use the normal distribution dates back to when it was necessary to rely on distribution tables.
+
+\index{data!dolphins and mercury|(}
+\begin{examplewrap}
+\begin{nexample}{Dolphins are at the top of the oceanic food chain; as a consequence, dangerous substances such as mercury tend to be present in their organs and muscles at high concentrations. In areas where dolphins are regularly consumed, it is important to monitor dolphin mercury levels. This example uses data from a random sample of 19 Risso's dolphins from the Taiji area in Japan.\footnote{Taiji is a significant source of dolphin and whale meat in Japan. Thousands of dolphins pass through the Taiji area annually; assume that these 19 dolphins represent a simple random sample. Data reference: Endo T and Haraguchi K. 2009. High mercury levels in hair samples from residents of Taiji, a Japanese whaling town. Marine Pollution Bulletin 60(5):743-747.} Calculate the 95\% confidence interval for average mercury content in Risso's dolphins from the Taiji area using the data in Figure~\ref{summaryStatsOfHgInMuscleOfRissosDolphins}.}
+
+The observations are a simple random sample consisting of less than 10\% of the population, so independence of the observations is reasonable. The summary statistics in Figure~\ref{summaryStatsOfHgInMuscleOfRissosDolphins} do not suggest any skew or outliers; all observations are within 2.5 standard deviations of the mean. Based on this evidence, the approximate normality assumption seems reasonable.
+
+Use the $t$-distribution to calculate the confidence interval:
+\begin{align*}
+\overline{x} \pm  t^{\star}_{\text{df}} \times \text{SE} &= \overline{x}  \pm  t^{\star}_{18}  \times s/\sqrt{n} \\
+&= 4.4 \pm  2.10 \times 2.3/\sqrt{19} \\
+&= (3.29, 5.51)\,\, \mu\text{g/wet g}.
+\end{align*}
+
+The $t^{\star}$ point can be read from the $t$-table on page~\pageref{tTableSample}, in the column with area totaling 0.05 in the two tails (third column) and the row with 18 degrees of freedom. Based on these data, one can be 95\% confident the average mercury content of muscles in Risso's dolphins is between 3.29 and 5.51 $\mu$g/wet gram.
+
+Alternatively, the $t^\star$ point can be calculated in \textsf{R} with the function \texttt{qt}, which returns a value of 2.1009.
+\end{nexample}
+\end{examplewrap}
+
+\begin{figure}[h]
+	\centering
+	\begin{tabular}{ccc cc}
+		\hline
+		$n$ & $\overline{x}$ & $s$ & minimum & maximum \\
+		19   & 4.4	  & 2.3  & 1.7	       & 9.2 \\
+		\hline
+	\end{tabular}
+	\caption{Summary of mercury content in the muscle of 19 Risso's dolphins from the Taiji area. Measurements are in $\mu$g/wet g (micrograms of mercury per wet gram of muscle).}
+	\label{summaryStatsOfHgInMuscleOfRissosDolphins}
+\end{figure}		
+		
+\index{data!dolphins and mercury|)}
+
+\textD{\newpage}
+
+\begin{exercisewrap}
+\begin{nexercise}\label{croakerWhiteFishPacificExerConditions}%
+\index{data!white fish and mercury|(}%
+The FDA's webpage provides some data on mercury content of various fish species.\footnotemark{} From a sample of 15 white croaker (Pacific), a sample mean and standard deviation were computed as 0.287 and 0.069 ppm (parts per million), respectively. The 15 observations ranged from 0.18 to 0.41 ppm. Assume that these observations are independent. Based on summary statistics, does the normality assumption seem reasonable? If so, calculate a 90\% confidence interval for the average mercury content of white croaker (Pacific).\footnotemark{}
+\end{nexercise}
+\end{exercisewrap}
+\addtocounter{footnote}{-1}%
+\footnotetext{\oiRedirect{textbook-fda_mercury_in_fish_2010}{www.fda.gov/food/foodborneillnesscontaminants/metals/ucm115644.htm}}%
+\addtocounter{footnote}{1}%
+\footnotetext{There are no obvious outliers; all observations are within 2 standard deviations of the mean. If there is skew, it is not evident. There are no red flags for the normal model based on this (limited) information. $\overline{x} \ \pm\ t^{\star}_{14} \times SE \ \to\  0.287 \ \pm\  1.76\times 0.0178\ \to\ (0.256, 0.318)$. We are 90\% confident that the average mercury content of croaker white fish (Pacific) is between 0.256 and 0.318 ppm.}
+
+\begin{examplewrap}
+\begin{nexample}{According to the EPA, regulatory action should be taken if fish species are found to have a mercury level of 0.5 ppm or higher. Conduct a formal significance test to evaluate whether the average mercury content of croaker white fish (Pacific) is different from 0.50 ppm. Use $\alpha = 0.05$.}
+
+The FDA regulatory guideline is a `one-sided' statement; fish should not be eaten if the mercury level is larger than a certain value. However, without prior information on whether the mercury in this species tends to be high or low, it is best to do a two-sided test.
+
+State the hypotheses: $H_0: \mu = 0.5$ vs $H_A: \mu \neq 0.5$. Let $\alpha = 0.05$.
+
+Calculate the $t$-statistic: 
+\[t = \frac{\overline{x} - \mu_0}{\text{SE}} = \frac{0.287 - 0.50}{0.069/\sqrt{15}} = -11.96\]
+
+The probability that the absolute value of a $t$-statistic with 14 df is smaller than -11.96 is smaller than 0.01. Thus, $p < 0.01$. There is evidence to suggest at the $\alpha = 0.05$ significance level that the average mercury content of this fish species is lower than 0.50 ppm, since $\overline{x}$ is less than 0.50.
+\end{nexample}
+\end{examplewrap}	
+
+\index{data!white fish and mercury|)}
+
+\index{t-test!one-sample|)}
+
+
+%___________
+\section{Two-sample test for paired data}
+\label{pairedData}
+
+\index{paired data|(}
+\index{t-test!paired data|(}
+
+In the 2000 Olympics, was the use of a new wetsuit design responsible for an observed increase in swim velocities? In a study designed to investigate this question, twelve competitive swimmers swam 1500 meters at maximal speed, once wearing a wetsuit and once wearing a regular swimsuit.\footnote{De Lucas et. al, The effects of wetsuits on physiological and biomechanical indices during swimming. \textit{Journal of Science and Medicine in Sport,} 2000; 3(1): 1-8} The order of wetsuit versus swimsuit was randomized for each of the 12 swimmers. Figure~\ref{swimSuitTimes} shows the average velocity recorded for each swimmer, measured in meters per second (m/s).\footnote{The data are available as \data{swim} in the \texttt{oibiostat} \textsf{R} package. The data are also used in Lock et. al \textit{Statistics, Unlocking the Power of Data}, Wiley, 2013.}
+
+\index{data!swim suit velocities}
+% latex table generated in R 3.4.3 by xtable 1.8-2 package
+% Wed Dec 27 11:57:13 2017
+\begin{figure}[ht]
+	\centering
+	\begin{tabular}{rrrrr}
+		\hline
+		& swimmer.number & wet.suit.velocity & swim.suit.velocity & velocity.diff \\ 
+		\hline
+		1 & 1 & 1.57 & 1.49 & 0.08 \\ 
+		2 & 2 & 1.47 & 1.37 & 0.10 \\ 
+		3 & 3 & 1.42 & 1.35 & 0.07 \\ 
+		4 & 4 & 1.35 & 1.27 & 0.08 \\ 
+		5 & 5 & 1.22 & 1.12 & 0.10 \\ 
+		6 & 6 & 1.75 & 1.64 & 0.11 \\ 
+		7 & 7 & 1.64 & 1.59 & 0.05 \\ 
+		8 & 8 & 1.57 & 1.52 & 0.05 \\ 
+		9 & 9 & 1.56 & 1.50 & 0.06 \\ 
+		10 & 10 & 1.53 & 1.45 & 0.08 \\ 
+		11 & 11 & 1.49 & 1.44 & 0.05 \\ 
+		12 & 12 & 1.51 & 1.41 & 0.10 \\ 
+		\hline
+	\end{tabular}
+	\caption{Paired Swim Suit Data} 
+	\label{swimSuitTimes}
+\end{figure}
+
+%wet.suit.velocity = c(1.57, 1.47, 1.42, 1.35, 1.22, 
+%                      1.75, 1.64, 1.57, 1.56, 1.53, 
+%                      1.49, 1.51 )
+%swim.suit.velocity = c(1.49, 1.37, 1.35, 1.27, 1.12, 
+%                       1.64, 1.59, 1.52, 1.50, 1.45, 
+%                       1.44, 1.41)
+%swimmer.number = c(1:12)
+%
+%velocity.diff = wet.suit.velocity - swim.suit.velocity
+%
+%swim.suit.study = as.data.frame(cbind(swimmer.number,
+%                   wet.suit.velocity, 
+%                   swim.suit.velocity,
+%					velocity.diff))
+
+%swim.suit.study
+
+%xtable(swim.suit.study, caption="Paired Swim Suit Data", 
+%       label="swimSuitTimes"
+%		digits = c(0, 0, 2, 2, 2))
+	
+The swimsuit velocity data are an example of \term{paired data}, in which two sets of observations  are uniquely paired so that an observation in one set matches an observation in the other; in this case, each swimmer has two measured velocities, one with a wetsuit and one with a swimsuit. A natural measure of the effect of the wetsuit on swim velocity is the difference between the measured maximum velocities (\texttt{velocity.diff = wet.suit.velocity - swim.suit.velocity}). Even though there are two measurements per swimmer, using the difference in velocities as the variable of interest allows for the problem to be approached like those in Section~\ref{oneSampleMeansWithTDistribution}.  Although it was not explicitly noted, the data used in Section~\ref{formalHypothesisTesting} were paired; each respondent had both an actual and desired weight.
+
+Suppose the parameter $\delta$ is the population average of the difference in maximum velocities during a 1500m swim if all competitive swimmers recorded swim velocities with each suit type. A hypothesis test can then be conducted with the null hypothesis that the mean population difference in swim velocities between suit types equals 0 (i.e., there is no difference in population average swim velocities), $H_0: \delta = 0$, against the alternative that the difference is non-zero, $H_A: \delta \neq 0$.
+
+\begin{onebox}{Stating hypotheses for paired data}
+When testing a hypothesis about paired data, compare the groups by testing whether the population mean of the differences between the groups equals 0.
+\begin{itemize}
+\item For a two-sided test, $H_0: \delta = 0$; $H_A: \delta \neq 0$.
+\item For a one-sided test, either $H_0: \delta = 0$; $H_A: \delta > 0$ or  $H_0: \delta = 0$; $H_A: \delta < 0$.
+\end{itemize}
+\end{onebox}
+
+Some important assumptions are being made. First, it is assumed that the data are a random sample from the population. While the observations are likely independent, it is more difficult to justify that this sample of 12 swimmers is randomly drawn from the entire population of competitive swimmers. Nevertheless, it is often assumed in problems such as these that the participants are reasonably representative of competitive swimmers. Second, it is assumed that the population of differences is normally distributed. This is a small sample, one in which normality would be difficult to confirm. The dot plot for the difference in velocities in Figure~\ref{swimDotPlot} shows approximate symmetry.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.9\textwidth]{ch_inference_for_means_oi_biostat/figures/swimDotPlot/swimDotPlot}
+	\caption{A dot plot of differences in swim velocities.}
+	\label{swimDotPlot}
+\end{figure}
+
+Let $\overline{x}_{\text{diff}}$ denote the sample average of the differences in maximum velocity, $s_{\text{diff}}$ the sample standard deviation of the differences, and $n$ the number of pairs in the dataset. The $t$-statistic used to test $H_0$ vs. $H_A$ is:
+\[\frac{\overline{x}_{\text{diff}} - \delta_0} {s_{\text{diff}}/\sqrt{n}},\]
+where in this case $\delta_0 = 0$.\footnote{This value is specified by the null hypothesis of no difference.}
+
+\begin{examplewrap}
+\begin{nexample}{Using the data in Figure~\ref{swimSuitTimes}, conduct a two-sided hypothesis test at $\alpha = 0.05$ to assess whether there is evidence to suggest that wetsuits have an effect on swim velocities during a 1500m swim.}
+
+The hypotheses are $H_0: \delta = 0$ and $H_A: \delta \neq 0$. Let $\alpha = 0.05$. 
+
+Calculate the $t$-statistic:
+\[t = \frac{\overline{x}_{\text{diff}} - \delta_0} {s_{\text{diff}}/\sqrt{n}} = \frac{0.078 - 0}{0.022/\sqrt{12}} = 12.32\]
+The two-sided $p$-value is
+$$ p = P(T < -\text{12.32}) + P(T > \text{12.32}), $$
+where $t$ has a $t$-distribution with $n-1 = 11$  degrees of freedom.
+The $t$-table shows that $p < 0.01$. Software can be used to show that $p = 2.3 \times 10^{-7}$, a very small value indeed.  
+	
+The data support the claim that the wetsuits changed swim velocity in a 1500m swim. The observed average increase of 0.078~m/s is significantly different than the null hypothesis of no change, and suggests that swim velocities are higher when swimmers wear wetsuits as opposed to swimsuits.	
+\end{nexample}
+\end{examplewrap}
+
+\index{t-test!paired data|)}
+
+Calculating confidence intervals for paired data is also based on the differences between the values in each pair; the same approach as for single-sample data can be applied on the differences. For example, a two-sided 95\% confidence interval for paired data has the form:
+\[ \left(
+  \overline{x}_{\text{diff}} - t^\star_{df} \times \frac{s_{\text{diff}}}{\sqrt{n}},
+  \:\: \overline{x}_{\text{diff}} + t^\star_{df} \times \frac{s_{\text{diff}}}{\sqrt{n}} \right), 
+\]
+where $t^\star$ is the point on a $t$-distribution with $df = n - 1$ for $n$ pairs, with area 0.025 to its right.
+
+\textD{\newpage}
+
+\begin{exercisewrap}
+\begin{nexercise} 
+Using the data in Figure~\ref{swimSuitTimes}, calculate a 95\% confidence interval for the average difference in swim velocities during a 1500m swim. Is the interval consistent with the results of the hypothesis test?\footnotemark{}
+\end{nexercise}
+\end{exercisewrap}
+\footnotetext{Use the values of $\overline{x}_{\text{diff}}$ and $s_{\text{diff}}$ as calculated previously: 0.078 and 0.022. The $t^\star$ value of 2.20 has $df = 11$ and 0.025 area to the right. The confidence interval is ($0.078 \pm \frac{0.022}{\sqrt{12}}$) $\to$ (0.064, 0.091) m/s. With 95\% confidence, $\delta$ lies between 0.064 m/s and 0.09 m/s. The interval does not include 0 (no change), which is consistent with the result of the hypothesis test.}
+
+The general approach when analyzing paired data is to first calculate the differences between the values in each pair, then use those differences in methods for confidence intervals and tests for a single sample.  Any conclusion from an analysis should be stated in terms of the original paired measurements.
+
+
+%__________________
+\section{Two sample test for independent data}
+\label{differenceOfTwoMeans}
+
+Does treatment using embryonic stem cells (ESCs) help improve heart function following a heart attack? New and potentially risky treatments are sometimes tested in animals before studies in humans are conducted.  In a 2005 paper in \textit{Lancet}, Menard, et al. describe an experiment in which 18 sheep with induced heart attacks were randomly assigned to receive cell transplants containing either ESCs or inert material.\footnote{Menard C, et al., Transplantation of cardiac-committed mouse embryonic stem cells to infarcted sheep myocardium: a preclinical 2005; 366:1005-12, doi \url{https://doi.org/10.1016/S0140-6736(05)67380-1}}  Various measures of cardiac function were measured 1 month after the transplant.
+
+This design is typical of an intervention study. The analysis of such an experiment is an example of drawing inference about the difference in two population means, $\mu_1 - \mu_2$, when the data are independent, i.e., not paired. The point estimate of the difference, $\overline{x}_1 - \overline{x}_2$, is used to calculate a $t$-statistic that is the basis of confidence intervals and tests.
+
+
+\subsection{Confidence interval for a difference of means}
+\label{confidenceIntervalDifferenceMeans}
+
+\index{data!stem cells, heart function|(}
+\index{point estimate!difference of two means|(}
+Figure~\ref{summaryStatsForSheepHeartDataWhoReceivedMiceESCs} contains summary statistics for the 18 sheep.\footnote{The data are accessible as the dataset \data{stem.cells} in the \texttt{openintro} \textsf{R} package.}  Percent change in heart pumping capacity was measured for each sheep. A positive value corresponds to increased pumping capacity, which generally suggests a stronger recovery from the heart attack.  Is there evidence for a potential treatment effect of administering stem cells?
+
+
+\begin{figure}[h]
+\centering
+\begin{tabular}{l rrrrr}
+\hline
+\hspace{10mm}	& $n$	& $\overline{x}$	& $s$  	 \\
+\hline
+ESCs		& 9		& 3.50		& 5.17  	\\
+control		& 9		& -4.33		& 2.76  	 \\
+\hline
+\end{tabular}
+\caption{Summary statistics of the embryonic stem cell study.}
+\label{summaryStatsForSheepHeartDataWhoReceivedMiceESCs}
+\end{figure}
+
+\textD{\newpage}
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.58\textwidth]{ch_inference_for_means_oi_biostat/figures/stemCellTherapyForHearts/stemCellTherapyForHearts}
+	\caption{Histograms for both the embryonic stem cell group and the control group. Higher values are associated with greater improvement.}
+	\label{stemCellTherapyForHearts}
+\end{figure}
+
+Figure~\ref{stemCellTherapyForHearts} shows that the distributions of percent change do not have any prominent outliers, which would indicate a deviation from normality; this suggests that each sample mean can be modeled using a $t$-distribution. Additionally, the sheep in the study are independent of each other, and the sheep between groups are also independent. Thus, the $t$-distribution can be used to model the difference of the two sample means.
+
+\begin{onebox}{Using the $t$-distribution for a difference in means}
+\label{ConditionsForTwoSampleTDist}The $t$-distribution can be used for inference when working with the standardized difference of two means if (1) each sample meets the conditions for using the $t$-distribution and (2) the samples are independent.
+\end{onebox}
+
+\index{point estimate!difference of two means|)}
+\index{confidence interval!difference of two means|(}
+
+A confidence interval for a difference of two means has the same basic structure as previously discussed confidence intervals:
+
+\[(\overline{x}_{1} - \overline{x}_{2}) \pm t^\star_{df} \times \text{ SE }. \]
+
+\index{standard error (SE)!difference in means}
+
+The following formula is used to calculate the standard error of $\overline{x}_{1} - \overline{x}_{2}$. Since $\sigma$ is typically unknown, the standard error is estimated by using $s$ in place of $\sigma$. 
+
+\[
+SE_{\overline{x}_{1} - \overline{x}_{2}} = \sqrt{\frac{\sigma_{1}^2}{n_{1}} + \frac{\sigma_{2}^2}{n_{2}}} \approx \sqrt{\frac{s_{1}^2}{n_{1}} + \frac{s_{2}^2}{n_{2}}}.
+\]
+
+In this setting, the $t$-distribution has a somewhat complicated formula for the degrees of freedom that is usually calculated with software.\footnote{See Section~\ref{inferenceForNumericalDataNotes} for the formula.} An alternative approach uses the smaller of $n_1 - 1$ and $n_2 - 1$ as the degrees of freedom.\footnote{This technique for degrees of freedom is conservative with respect to a Type~1 Error; it is more difficult to reject the null hypothesis using this approach for degrees of freedom.}
+
+\textD{\newpage}
+
+\begin{onebox}{Distribution of a difference of sample means}
+The sample difference of two means, $\overline{x}_1 - \overline{x}_2$, can be modeled using the $t$-distribution and the standard error
+\begin{eqnarray}
+\textstyle
+SE_{\overline{x}_{1} - \overline{x}_{2}} = \sqrt{\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2}}
+\label{seOfDifferenceInMeans}
+\end{eqnarray}
+when each sample mean can itself be modeled using a $t$-distribution and the samples are independent. To calculate the degrees of freedom without using software, use the smaller of $n_1 - 1$ and $n_2 - 1$.
+\end{onebox}
+
+\begin{examplewrap}
+\begin{nexample}{Calculate and interpret a 95\% confidence interval for the effect of ESCs on the change in heart pumping capacity of sheep following a heart attack.}
+	
+The point estimate for the difference is $\overline{x}_1 - \overline{x}_2 = \overline{x}_{\text{esc}} - \overline{x}_{\text{control}} = 7.83$.	
+	
+The standard error is:	
+\[\sqrt{\frac{s_{1}^2}{n_{1}} + \frac{s_{2}^2}{n_{2}}} = \sqrt{\frac{5.17^2}{9} + \frac{2.76^2}{9}} = 1.95\]
+	
+Since $n_1 = n_2 = 9$, use $df = 8$; $t^{\star}_{8} = 2.31$ for a 95\% confidence interval. Alternatively, computer software can provide more accurate values: $df = 12.225, t^\star = 2.174$.
+
+The confidence interval is given by:
+\[(\overline{x}_{1} - \overline{x}_{2}) \pm t^\star_{df} \times \text{ SE } \quad\rightarrow\quad
+7.83 \ \pm\ 2.31\times 1.95 \quad\rightarrow\quad (3.38, 12.38) \]
+
+With 95\% confidence, the average amount that ESCs improve heart pumping capacity lies between 3.38\% to 12.38\%.\footnotemark{} The data provide evidence for a treatment effect of administering stem cells.
+\end{nexample}
+\end{examplewrap}
+\footnotetext{From software, the confidence interval is (3.58, 12.08).}
+
+\index{data!stem cells, heart function|)}
+\index{confidence interval!difference of two means|)}
+
+\subsection{Hypothesis tests for a difference in means}
+\label{testingDifferenceMeans}
+
+
+\index{t-test!two independent groups|(}
+
+\index{data!births|(}
+
+Is there evidence that newborns from mothers who smoke have a different average birth weight than newborns from mothers who do not smoke? The dataset \data{births} contains data from a random sample of 150 cases of mothers and their newborns in North Carolina over a year; there are 50 cases in the smoking group and 100 cases in the nonsmoking group.\footnote{This dataset is available in the \texttt{openintro} \textsf{R} package. }
+
+\begin{figure}[h]
+\centering
+\begin{tabular}{rrrrrll}
+  \hline
+ & fAge & mAge & weeks & weight & sexBaby & smoke \\ 
+  \hline
+1 & NA & 13 &  37 & 5.00 & female & nonsmoker \\ 
+  2 & NA & 14 &  36 & 5.88 & female & nonsmoker \\ 
+  3 & 19 & 15 &  41 & 8.13 & male & smoker \\ 
+  $\vdots$ &   $\vdots$ &   $\vdots$ &   $\vdots$ &   $\vdots$ &   $\vdots$ \\
+  150 & 45 & 50 &  36 & 9.25 & female & nonsmoker \\ 
+   \hline
+\end{tabular}
+\caption{Four cases from the \data{births} dataset.}
+\label{babySmokeDF}
+\end{figure}
+
+\textD{\newpage}
+
+\begin{examplewrap}
+\begin{nexample} {Evaluate whether it is appropriate to apply the $t$-distribution to the difference in sample means between the two groups.}
+Since the data come from a simple random sample and consist of less than 10\% of all such cases, the observations are independent. While each distribution is strongly skewed, the large sample sizes of 50 and 100 allow for the use of the $t$-distribution to model each mean separately. Thus, the difference in sample means may be modeled using a $t$-distribution.	
+\end{nexample}
+\end{examplewrap}
+
+\begin{figure}[hhh]
+\centering
+\includegraphics[width=0.63\textwidth]{ch_inference_for_means_oi_biostat/figures/babySmokePlotOfTwoGroupsToExamineSkew/babySmokePlotOfTwoGroupsToExamineSkew}
+\caption{The top panel represents birth weights for infants whose mothers smoked. The bottom panel represents the birth weights for infants whose mothers who did not smoke. The distributions exhibit moderate-to-strong and strong~skew, respectively.\index{skew!example: strong}}
+\label{babySmokePlotOfTwoGroupsToExamineSkew}
+\end{figure}
+
+A hypothesis test can be conducted to evaluate whether there is a relationship between mother's smoking status and average newborn birth weight. The null hypothesis represents the case of no difference between the groups, $H_0: \mu_{ns} - \mu_{s} = 0$, where $\mu_{ns}$ represents the population mean of newborn birthweight for infants with mothers who did not smoke, and $\mu_s$ represents mean newborn birthweight for infants with mothers who smoked. Under the alternative hypothesis, there is some difference in average newborn birth weight between the groups, $H_A: \mu_{ns} - \mu_{s} \neq 0$. The hypotheses can also be written as $H_0: \mu_{ns} = \mu_{s}$ and $H_A: \mu_{ns} \neq \mu_{s}$.
+
+\begin{onebox}{Stating hypotheses for two-group data}
+When testing a hypothesis about two independent groups, directly compare the two population means and state hypotheses in terms of $\mu_1$ and $\mu_2$.
+\begin{itemize}
+	\item For a two-sided test, $H_0: \mu_{1} = \mu_{2}$; $H_A: \mu_{1} \neq \mu_{2}$.
+	\item For a one-sided test, either $H_0: \mu_{1} = \mu_{2}$; $H_A: \mu_{1} > \mu_{2}$ or  $H_0: \mu_{1} = \mu_{2}$; $H_A: \mu_{1} < \mu_{2}$.
+\end{itemize}
+\end{onebox}
+
+
+\textD{\newpage}
+
+In this setting, the formula for a $t$-statistic is:
+\[t = \dfrac{(\overline{x}_1 - \overline{x}_2) - (\mu_1 - \mu_2)}{SE_{\overline{x}_{1} - \overline{x}_{2}}} = \dfrac{(\overline{x}_1 - \overline{x}_2) - (\mu_1 - \mu_2)}{\sqrt{\dfrac{s_{1}^{2}}{n_1} + \dfrac{s_{2}^{2}}{n_2}}} \]
+
+Under the null hypothesis of no difference between the groups, $H_0: \mu_{1} - \mu_{2} = 0$, the formula simplifies to
+\[t = \dfrac{(\overline{x}_1 - \overline{x}_2)}{\sqrt{\dfrac{s_{1}^{2}}{n_1} + \dfrac{s_{2}^{2}}{n_2}}}\]
+
+\begin{examplewrap}
+\begin{nexample}{Using Figure~\ref{summaryStatsBabySmoke}, conduct a hypothesis test to evaluate whether there is evidence that newborns from mothers who smoke have a different average birth weight than newborns from mothers who do not smoke.}
+
+The hypotheses are $H_0: \mu_{1} = \mu_{2}$ and $H_A: \mu_{1} \neq \mu_{2}$, where $\mu_{1}$ represents the average newborn birth weight for nonsmoking mothers and $\mu_{2}$ represents average newborn birth weight for mothers who smoke. Let $\alpha = 0.05$. 	
+
+Calculate the $t$-statistic:
+
+\[t = \dfrac{(\overline{x}_1 - \overline{x}_2)}{\sqrt{\dfrac{s_{1}^{2}}{n_1} + \dfrac{s_{2}^{2}}{n_2}}} = \dfrac{7.18 - 6.78}{\sqrt{\frac{1.60^2}{100} + \frac{1.43^2}{50}}} = 1.54\]
+
+Approximate the degrees of freedom as $50 - 1 = 49$. The $t$-score of 1.49 falls between the first and second columns in the $df = 49$ row of the $t$-table, so the two-sided $p$-value is between 0.10 and 0.20.\footnote{From \textsf{R}, $df = 89.277$ and $p = 0.138$.}
+
+This $p$-value is larger than the significance value, 0.05, so the null hypothesis not rejected. There is insufficient evidence to state there is a difference in average birth weight of newborns from North Carolina mothers who did smoke during pregnancy and newborns from North Carolina mothers who did not smoke during pregnancy.
+\end{nexample}
+\end{examplewrap}
+
+\begin{figure}[hhh]
+	\centering
+	\begin{tabular}{lrr}
+		& smoker & nonsmoker \\
+		\hline
+		mean & 6.78 & 7.18 \\
+		st. dev. & 1.43 & 1.60 \\
+		samp. size & 50 & 100 \\
+		\hline
+	\end{tabular}
+	\caption{Summary statistics for the \data{births} dataset.}
+	\label{summaryStatsBabySmoke}
+\end{figure}		
+
+\index{data!births|)}
+
+\index{t-test!two independent groups|)}
+
+
+\textD{\newpage}
+
+
+\subsection{The paired test vs. independent group test}
+\label{pairedVsTwoGroups}
+
+In the two-sample setting, students often find it difficult to determine whether a paired test or an independent group test should be used.  The paired test applies only in situations where there is a natural pairing of observations between groups, such as in the \data{swim} data. Pairing can be obvious, such as the two measurements for each swimmer, or more subtle, such as measurements of respiratory function in twins, where one member of the twin pair is treated with an experimental treatment and the other with a control. In the case of two independent groups, there is no natural way to pair observations.
+
+A common error is to overlook pairing in data and assume that two groups are independent. The swimsuit data can be used to illustrate the possible harm in conducting an independent group test rather than a paired test. In Section~\ref{pairedData}, the paired $t$-test showed a significant difference in the swim velocities between swimmers wearing wetsuits versus regular swimsuits. Suppose the analysis had been conducted without accounting for the fact that the measurements were paired.
+
+%JV: resolve discrepancy with swim suit data.  Text is correct, data package is not
+
+The mean and standard deviation for the 12 wet suit velocities are 1.51 and 0.14 (m/sec), respectively, and 1.43 and 0.14 (m/sec) for the 12 swim suit velocities. A two-group test statistic is:
+\[t = \frac{1.52 - 1.43}{\sqrt{0.14^2/12 + 0.14^2/12}} = 1.37 \]
+
+If the degrees of freedom are approximated as $11 = 12 - 1$, the two-sided $p$-value as calculated from software is 0.20. According to this method, the null hypothesis of equal mean velocities for the two suit types would not be rejected.
+
+It is not difficult to show that the numerator of the paired test (the average of the within swimmer differences) and the numerator of the two-group test (the difference of the average times for the two groups) are identical. The values of the test statistics differ because the denominators are different\textemdash specifically, the standard errors associated with each statistic are different.  For the paired test statistic, the standard error uses the standard deviation of the within pair differences (0.22) and has value $0.022/\sqrt{12} = 0.006$. The two-group test statistic combines the standard deviations for the original measurements and has value $\sqrt{0.14^2/12 + 0.14^2/12} = 0.06$.  The standard error for the two-group test is 10-fold larger than for the paired test.  
+
+This striking difference in the standard errors is caused by the much lower variability of the individual velocity differences compared to the variability of the original measurements. Due to the correlation between swim velocities for a single swimmer, the differences in the two velocity measurements for each swimmer are consistently small, resulting in low variability. Pairing has allowed for increased precision in estimating the difference between groups.
+
+The swim suit data illustrates the importance of context, which distinguishes a statistical problem from a purely mathematical one. While both the paired and two-group tests are numerically feasible to calculate, without an apparent error, the context of the problem dictates that the correct approach is to use a paired test.
+
+\begin{exercisewrap}
+\begin{nexercise}
+Propose an experimental design for the embryonic stem cell study in sheep that would have required analysis with a paired $t$-test.\footnotemark{}
+\end{nexercise}
+\end{exercisewrap}
+\footnotetext{The experiment could have been done on pairs of siblings, with one assigned to the treatment group and one assigned to the control group. Alternatively, sheep could be matched up based on particular characteristics relevant to the experiment; for example, sheep could be paired based on similar weight or age. Note that in this study, a design involving two measurements taken on each sheep would be impractical.}
+
+
+\textD{\newpage}
+
+
+\subsection{Case study: discrimination in developmental disability support}
+
+\index{data!developmental disability support|(}
+
+Section~\ref{caseStudyDiscrimination} presented an analysis of the relationship between age, ethnicity, and amount of expenditures for supporting developmentally disabled residents in the state of California, using the \data{dds.discr} dataset. When the variable \var{age} is ignored, the expenditures per consumer is larger on average for White non-Hispanics than Hispanics, but Figure~\ref{ddsAvgExpEthAge} showed that average differences by ethnicity were much smaller within age cohorts. This section demonstrates the use of $t$-tests to conduct a more formal analysis of possible differences in expenditure by ethnicity, both overall (i.e., ignoring age) and within age cohorts. 
+
+\subsubsection{Comparing expenditures overall}
+
+When ignoring age, expenditures within the ethnicity groups Hispanic and White non-Hispanic show substantial right-skewing (Figure~\ref{ddsEthnicityPlot}). A transformation is advisable before conducting a $t$-test. As shown in Figure~\ref{ddsLogExpenditureEthnicityPlot)}, a natural log transformation effectively eliminates skewing. 
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.85\textwidth]{ch_inference_for_means_oi_biostat/figures/ddsLogExpEthnicityPlot/ddsLogExpEthnicityPlot.pdf}
+	\caption{A plot of \texttt{log(expenditures)} by \texttt{ethnicity}.}
+	\label{ddsLogExpEthnicityPlot}
+\end{figure} 
+
+Is there evidence of a difference in mean expenditures by ethnic group? Conduct a $t$-test of the null hypothesis $H_0: \mu_1 = \mu_2$ versus the two-sided alternative $H_A: \mu_1 \neq \mu_2$, where $\mu_1$ is the population mean log expenditure in Hispanics and $\mu_2$ is the population mean log expenditure in White non-Hispanics.
+
+
+% dt = data.frame(dds.hisp.white$ethnicity, dds.hisp.white$log.expenditures)
+% dt$ethnicity = dt$dds.hisp.white.ethnicity
+% dt$log.expenditures = dt$dds.hisp.white.log.expenditures
+% xtable(ddply(dt, ~ethnicity, summarise, Cases = length(log.expenditures), Mean = mean(log.expenditures),StdDev = sd(log.expenditures)))
+% latex table generated in R 3.3.2 by xtable 1.8-2 package
+% Wed Oct 25 10:51:17 2017
+
+\begin{figure}[ht]
+\centering
+\begin{tabular}{rlrrr} \hline
+ & Ethnicity & $n$ & $\overline{x}$ & $s$ \\  \hline
+1 & Hispanic & 376 & 8.56 & 1.17 \\ 
+2 & White non Hispanic & 401 & 9.47 & 1.35 \\  \hline
+\end{tabular}
+\caption{Summary statistics for the transformed variable \var{log(expenditures)} in the \data{dds.discr} data.} 
+\label{ddsLogExpenditureSummaryByEthnicity}
+\end{figure}
+
+The summary statistics required to calculate the $t$-statistic are shown in Figure~\ref{ddsLogExpenditureSummaryByEthnicity}. The $t$-statistic for the test is 
+\[t = \frac{9.47 - 8.56}{\sqrt{1.35^2/401 + 1.17^2/376}} = 10.1.\]
+
+\textD{\newpage}
+
+The degrees of freedom of the test can be approximated as $376 - 1 = 375$; the $p$-value can be calculated using a normal approximation. Regardless of whether a $t$ or normal distribution is used, the probability of a test statistic with absolute value larger than 10 is vanishingly small\textemdash the $p$-value is less than 0.001. When ignoring age, there is significant evidence of a difference in mean expenditures between Hispanics and White non-Hispanics. It appears that on average, White non-Hispanics receive a higher amount of developmental disability support from the state of California ($\overline{x}_1 < \overline{x}_2$).
+
+However, as indicated in Section~\ref{caseStudyDiscrimination}, this is a misleading result. The analysis as conducted does not account for the confounding effect of age, which is associated with both expenditures and ethnicity. As individuals age, they typically require more support from the government. In this dataset, White non-Hispanics tend to be older than Hispanics; this difference in age distribution contributes to the apparent difference in expenditures between two groups.
+
+\subsubsection{Comparing expenditures within age cohorts}
+
+One way to account for the effect of age is to compare mean expenditures within age cohorts. When comparing individuals of similar ages but different ethnic groups, are the differences in mean expenditures larger than would be expected by chance alone? 
+
+Figure~\ref{ddsEthAgeTable} shows that the age cohort 13-17 is the largest among the Hispanic consumers, while the cohort 22-50 is the largest among White non-Hispanics. This section will examine the evidence against the null hypothesis of no difference in mean expenditures within these two cohorts.
+
+Figure~\ref{ddsExpEthnicityAge} shows that within both the age cohorts of 13-17 years and 22-50 years, the distribution of \var{expenditures} is reasonably symmetric; there is no need to apply a transformation before conducting a $t$-test. The skewing evident when age was ignored is due to the differing distributions of age within ethnicities. 
+
+\begin{figure}[h]
+	\centering
+	\subfigure[]{
+		\includegraphics[width=0.485\textwidth]{ch_inference_for_means_oi_biostat/figures/ddsExpEthnicityAge13/ddsExpEthnicityAge13}
+		\label{ddsExpEthnicityAge13}
+	}
+	\subfigure[]{
+		\includegraphics[width=0.485\textwidth]{ch_inference_for_means_oi_biostat/figures/ddsExpEthnicityAge22/ddsExpEthnicityAge22} 
+		\label{ddsExpEthnicityAge22}		
+	}
+	\caption{\subref{ddsExpEthnicityAge13}A plot of \texttt{expenditures} by \texttt{ethnicity} in the age cohort 13 - 17.  \subref{ddsExpEthnicityAge22} A plot of \texttt{expenditures} by \texttt{ethnicity} in the age cohort 22 - 50.}
+	\label{ddsExpEthnicityAge}
+\end{figure}
+
+\textD{\newpage}
+
+Figure~\ref{ddsExpenditureSummaryByEthnicityAge13Table} contains the summary statistics for computing the test statistic to compare expenditures in the two groups within this age cohort.  The test statistic has value $t = 0.318$, with degrees of freedom 66. The two-sided $p$-value is 0.75. There is not evidence of a difference between mean expenditures in Hispanics and White non-Hispanics ages 13-17.
+
+% dt.13$Ethnicity = dt.13$ethnicity
+% dt.13$Ethnicity = dt.13$ethnicity
+% xtable(ddply(dt.13, ~ethnicity, summarise, Cases = length(expenditures), Mean =
+% mean(expenditures),StdDev = sd(expenditures)),+       caption = ``Summary statistics for Expenditures,
+% Age 13-17'',`label = ``ddsExpenditureSummaryByEthnicity.Age13'')
+% latex table generated in R 3.3.2 by xtable 1.8-2` package
+% Mon Oct 30 11:16:30 2017
+\begin{figure}[h]
+  \centering
+  \begin{tabular}{rlrrr}  \hline
+& Ethnicity & $n$ & $\overline{x}$ & $s$ \\   \hline
+1 & Hispanic & 103 & 3955.28 & 938.82 \\ 
+2 & White not Hispanic &  67 & 3904.36 & 1071.02 \\    
+\hline
+\end{tabular}
+\caption{Summary statistics for \var{expenditures}, Ages 13-17}
+\label{ddsExpenditureSummaryByEthnicityAge13Table}
+\end{figure}
+
+The analysis of the age cohort 22 - 50 years shows the same qualitative result. The $t$-statistic calculated from the summary statistics in Figure~\ref{ddsExpEthnicityAge22Table} has value $t = 0.659$ and $p$-value 0.51. Just as in the 13-17 age cohort, there is insufficient evidence to reject the null hypothesis of no difference between the means.
+
+%dt.22 = subset(dds.hisp.white, age.cohort == "22-50", select = c(ethnicity, expenditures))
+% xtable(ddply(dt.22, ~ethnicity, summarise, Cases = length(expenditures),Mean = mean(expenditures), StdDev = sd(expenditures)),caption = "Summary statistics for Expenditures, Age 22 - 50", label = "ddsExpenditureSummaryByEthnicity.Age22")
+% latex table generated in R 3.3.2 by xtable 1.8-2 package
+% Mon Oct 30 11:50:18 2017
+\begin{figure}[h]
+\centering
+\begin{tabular}{rlrrr}
+  \hline
+ & Ethnicity & $n$ & $\overline{x}$ & $s$ \\ 
+  \hline
+1 & Hispanic &  43 & 40924.12 & 6467.09 \\ 
+  2 & White not Hispanic & 133 & 40187.62 & 6081.33 \\ 
+   \hline
+\end{tabular}
+\caption{Summary statistics for \var{expenditures}, Ages 22 - 50} 
+\label{ddsExpEthnicityAge22Table}
+\end{figure}
+
+The inference-based analyses for these two age cohorts support the conclusions reached through the exploratory approach used in Section~\ref{caseStudyDiscrimination}\textemdash comparing individuals of similar ages shows that there are not large differences between mean expenditures for White non-Hispanics versus Hispanics. An analysis that accounts for age as a confounding variable does not suggest there is evidence of ethnic discrimination in developmental disability support provided by the State of California.
+
+\index{data!developmental disability support|)}
+
+
+\textD{\newpage}
+
+
+\subsection{Pooled standard deviation estimate (special topic)}
+\label{pooledStandardDeviations}
+
+Occasionally, two populations will have standard deviations that are so similar that they can be treated as identical. For example, historical data or a well-understood biological mechanism may justify this strong assumption. In such cases, it can be more precise to use a pooled standard deviation to make inferences about the difference in population means.
+
+The \term{pooled standard deviation} of two groups uses data from both samples to estimate the common standard deviation and standard error. If there are good reasons to believe that the population standard deviations are equal, an improved estimate of the group variances can be obtained by pooling the data from the two groups:
+\begin{align*}
+s_{\text{pooled}}^2 = \frac{s_1^2 (n_1-1) + s_2^2 (n_2-1)}{n_1 + n_2 - 2},
+\end{align*}
+where $n_1$ and $n_2$ are the sample sizes, and $s_1$ and $s_2$ represent the sample standard deviations. In this setting, the $t$-statistic uses $s_{\text{pooled}}^2$ in place of $s_1^2$ and $s_2^2$ in the standard error formula, and the degrees of freedom for the $t-$statistic is the sum of the degrees of freedom for the two sample variances:
+\[
+\text{df} = (n_1 - 1) + (n_2 - 1) = n_1 + n_2 - 2.
+\]
+The $t$-statistic for testing the null hypothesis of no difference between population means becomes 
+\[
+ t = \frac{\overline{x}_1 - \overline{x}_2}{s_{\text{pooled}}\sqrt{\frac{1}{n_1} + \frac{1}{n_2}}}. 
+\]
+
+The formula for the two-sided confidence interval for the difference in population means is
+\[
+(\overline{x}_1 - \overline{x}_2) \pm t^{\star} \times s_p \sqrt{\frac{1}{n_1} + \frac{1}{n_2}},
+\]
+where $t^{\star}$ is the point on a $t$-distribution with $n_1 + n_2 -2$ degrees of freedom chosen according to the confidence coefficient.
+
+The benefits of pooling the standard deviation are realized through obtaining a better estimate of the standard deviation for each group and using a larger degrees of freedom parameter for the $t$-distribution. Both of these changes may permit a more accurate model of the sampling distribution of $\overline{x}_1 - \overline{x}_2$, if the standard deviations of the two groups are indeed equal.  In most applications, however, it is difficult to verify the assumption of equal population standard deviations, and thus safer to use the methods discussed in Sections~\ref{confidenceIntervalDifferenceMeans} and \ref{testingDifferenceMeans}.
+
+
+
+%__________________
+\section[Power calculations for a difference of means (special topic)]{Power calculations for a difference of means (special topic)}
+\label{PowerForDifferenceOfTwoMeans}
+
+Designing a study often involves many complex issues; perhaps the most important statistical issue in study design is the choice of an appropriate sample size. The \termsub{power}{power of a test} of a statistical test is the probability that the test will reject the null hypothesis when the alternative hypothesis is true; sample sizes are chosen to make that probability sufficiently large, typically between 80\% and 90\%. 
+
+Two competing considerations arise when choosing a sample size. The sample size should be sufficiently large to allow for important group differences to be detected in a hypothesis test. Practitioners often use the term `detecting a difference' to mean correctly rejecting a null hypothesis, i.e., rejecting a null hypothesis when the alternative is true. If a study is so small that detecting a statistically significant difference is unlikely even when there are potentially important differences, enrolling participants might be unethical, since subjects could potentially be exposed to a dangerous experimental treatment. However, it is also unethical to conduct studies with an overly large sample size, since more participants than necessary would be exposed to an intervention with uncertain value. Additionally, collecting data is typically expensive and time consuming; it would be a waste of valuable resources to design a study with an overly large sample size.
+
+This section begins by illustrating relevant concepts in the context of a hypothetical clinical trial, where the goal is to calculate a sufficient sample size for being 80\% likely to detect practically important effects.\footnote{While sample size planning is also important for observational studies, those techniques are not discussed here.} Afterwards, formulas are provided for directly calculating sample size, as well as references to software that can perform the calculations.
+
+
+\subsection{Reviewing the concepts of a test}
+
+\begin{examplewrap}
+\begin{nexample}{A company would like to run a clinical trial with participants whose systolic blood pressures are between 140 and 180 mmHg. Suppose previously published studies suggest that the standard deviation of patient blood pressures will be about 12 mmHg, with an approximately symmetric distribution.\footnotemark{} What would be the approximate standard error for $\overline{x}_{ \text{trmt}} - \overline{x}_{ \text{ctrl}}$ if 100 participants were enrolled in each treatment group?}
+The standard error is calculated as follows:
+\begin{align*}
+SE_{\overline{x}_{ \text{trmt}} - \overline{x}_{ \text{ctrl}}}
+  = \sqrt{\frac{s_{ \text{trmt}}^2}{n_{ \text{trmt}}} + \frac{s_{ \text{ctrl}}^2}{n_{ \text{ctrl}}}}
+  = \sqrt{\frac{12^2}{100} + \frac{12^2}{100}}
+  = 1.70.
+\end{align*}
+This may be an imperfect estimate of $SE_{\overline{x}_{ \text{trmt}} - \overline{x}_{\text{ctrl}}}$, since the standard deviation estimate of 12 mmHg from prior data may not be correct. However, it is sufficient for getting started, and making an assumption like this is often the only available option. 
+\end{nexample}
+\end{examplewrap}
+\footnotetext{In many studies like this one, each participant's blood pressure would be measured at the beginning and end of the study, and the outcome measurement for the study would be the average difference in blood pressure in each of the treatment groups. For this hypothetical study, we assume for simplicity that blood pressure is measured at only the end of the study, and that the randomization ensures that blood pressures at the beginning of the study are equal (on average) between the two groups.}
+
+\textD{\newpage}
+
+Since the degrees of freedom are greater than 30, the distribution of $\overline{x}_{ \text{trmt}} - \overline{x}_{ \text{ctrl}}$ will be approximately normal. Under the null hypothesis, the mean is 0 and the standard deviation is 1.70 (from the standard error).
+
+\begin{center}
+	\includegraphics[width=0.85\textwidth]{ch_inference_for_means_oi_biostat/figures/power_null_0_1-7/power_null_A_0_1-7}
+\end{center}
+
+
+\begin{examplewrap}
+\begin{nexample}{For what values of $\overline{x}_{\text{trmt}} - \overline{x}_{\text{ctrl}}$ would the null hypothesis be rejected, using $\alpha = 0.05$?}
+If the observed difference is in the far left or far right tail of the null distribution, there is sufficient evidence to reject the null hypothesis.
+For $\alpha = 0.05$, $H_0$ is rejected if the difference is in the lower 2.5\% or upper 2.5\% tail:
+\begin{description}
+\setlength{\itemsep}{0mm}
+\item[Lower 2.5\%:] For the normal model, this is 1.96 standard errors below 0, so any difference smaller than $-1.96 \times 1.70 = -3.332$~mmHg.
+\item[Upper 2.5\%:] For the normal model, this is 1.96 standard errors above 0, so any difference larger than $1.96 \times 1.70 = 3.332$~mmHg.
+\end{description}
+The boundaries of these \termsub{rejection regions}{rejection region} are shown below. Note that if the new treatment is effective, mean blood pressure should be lower in the treatment group than in the control group; i.e., the difference should be in the lower tail.
+\begin{center}
+\includegraphics[width=0.85\textwidth]{ch_inference_for_means_oi_biostat/figures/power_null_0_1-7/power_null_B_0_1-7_with_rejection_region}
+\end{center}
+\end{nexample}
+\end{examplewrap}
+
+The next step is to perform some hypothetical calculations to determine the probability of rejecting the null hypothesis if the alternative hypothesis were true.
+
+
+\textD{\newpage}
+
+
+\subsection{Computing the power for a 2-sample test}
+
+If there is a real effect from an intervention, and the effect is large enough to have practical value, the probability of detecting that effect is referred to as the \termsub{power}{power of a test}. Power can be computed for different sample sizes or different effect sizes. 
+
+There is no easy way to define when an effect size is large enough to be of value; this is not a statistical issue. For example, in a clinical trial, the scientifically significant effect is the incremental value of the intervention that would justify changing current clinical recommendations from an existing intervention to a new one. In such a setting, the effect size is usually determined from long discussions between the research team and study sponsors. 
+
+Suppose that for this hypothetical blood pressure medication study, the researchers are interested in detecting any effect on blood pressure that is 3 mmHg or larger than the standard medication. Here, 3 mmHg is the minimum \term{population effect size} of interest. 
+
+\begin{examplewrap}
+\begin{nexample}{Suppose the study proceeded with 100 patients per treatment group and the new drug does reduce average blood pressure by an additional 3~mmHg relative to the standard medication. What is the probability of detecting this effect?}\label{PowerFor100AtNeg3}%
+Determine the sampling distribution for $\overline{x}_{\text{trmt}} - \overline{x}_{\text{ctrl}}$ when the true difference is $-3$~mmHg; this has the same standard deviation of 1.70 as the null distribution, but the mean is shifted 3 units to the left. Then, calculate the fraction of the distribution for $\overline{x}_{\text{trmt}} - \overline{x}_{\text{ctrl}}$ that falls within the rejection region for the null distribution, as shown in Figure~\ref{power_null_D_0_1-7_with_alt_at_3_and_shaded}.
+
+The probability of being in the left side of the rejection region ($x < -3.332$) can be calculated by converting to a $Z$-score and using either the normal probability table or statistical software.\footnote{The probability of being in the right side of the rejection region is negligible and can be ignored.}
+
+\[
+	Z = \frac{-3.332 - (-3)}{1.7}= -0.20 \quad \to \quad P(Z \leq -0.20) = 0.4207
+\]
+
+The power for the test is about 42\% when $\mu_{\text{trmt}} - \mu_{\text{ctrl}} = -3$~mm/Hg and each group has a sample size of 100.
+\end{nexample}
+\end{examplewrap}
+
+\begin{figure}[h]
+\begin{center}
+	\includegraphics[width=0.87\textwidth]{ch_inference_for_means_oi_biostat/figures/power_null_0_1-7/power_null_D_0_1-7_with_alt_at_3_and_shaded}
+	\caption{The rejection regions are outside of the dotted lines. Recall that the boundaries for $\alpha = 0.05$ were calculated to be $\pm 3.332$ mmHg.}
+	\label{power_null_D_0_1-7_with_alt_at_3_and_shaded}
+\end{center}	
+\end{figure}
+
+
+\textD{\newpage}
+
+
+\subsection{Determining a proper sample size}
+
+The last example demonstrated that with a sample size of 100 in each group, there is a probability of about 0.42 of detecting an effect size of 3~mmHg. If the study were conducted with this sample size, even if the new medication reduced blood pressure by 3~mmHg compared to the control group, there is a less than 50\% chance of concluding that the medication is beneficial. Studies with low power are often inconclusive, and there are important reasons to avoid such a situation:
+
+\begin{itemize}
+	\setlength{\itemsep}{0mm}
+	\item Participants were subjected to a drug for a study that may have little scientific value. 
+	
+	\item The company may have invested hundreds of millions of dollars in developing the new drug, and may now be left with uncertainty about its potential. 
+	
+	\item Another clinical trial may need to be conducted to obtain a more conclusive answer as to whether the drug does hold any practical value, and that would require substantial time and expense. 
+\end{itemize}
+
+To ensure a higher probability of detecting a clinically important effect, a larger sample size should be chosen. What about a study with 500 patients per group?
+
+\begin{exercisewrap}
+\begin{nexercise}
+Calculate the power to detect a change of -3~mmHg  using a sample size of 500 per group. Recall that the standard deviation of patient blood pressures was expected to be about 12 mmHg.\footnotemark{}
+\begin{enumerate}[(a)]
+\setlength{\itemsep}{0mm}
+\item Determine the standard error.
+\item Identify the null distribution and rejection regions, as well as the alternative distribution when $\mu_{trmt} - \mu_{ctrl} = -3$.
+\item Compute the probability of rejecting the null hypothesis.
+\end{enumerate}
+\end{nexercise}
+\end{exercisewrap}
+\footnotetext{(a) The standard error will now be $SE = \sqrt{\frac{12^2}{500} + \frac{12^2}{500}} = 0.76$.\\
+(b) The null distribution, rejection boundaries, and alternative distribution are shown below. The rejection regions are the areas outside the two dotted lines at $\overline{x}_{trmt} - \overline{x}_{ctrl} \pm 0.76 \times 1.96 = \pm 1.49$. \\
+\includegraphics[width=0.8\textwidth]{ch_inference_for_means_oi_biostat/figures/power_null_0_0-76/power_null_0_0-76_with_alt_at_3_and_shaded} \\
+(c) Compute the $Z$-score and find the tail area, $Z = \frac{-1.49 - (-3)}{0.76} = 1.99 \to P(Z \leq 1.99) = 0.9767$, which is the power of the test for a difference of 3 mmHg. With 500 patients per group, the study would be 97.7\% likely to detect an effect size of 3~mmHg.}
+
+With a sample size of 500 per group, the power of the test is much larger than necessary. Not only does this lead to a study that would be overly expensive and time consuming, it also exposes more patients than necessary to the experimental drug. 
+
+Sample sizes are generally chosen such that power is around 80\%, although in some cases 90\% is the target. Other values may be reasonable for a specific context, but 80\% and 90\% are most commonly chosen as a good balance between high power and limiting the number of patients exposed to a new treatment (as well as reducing experimental costs). 
+
+\textD{\newpage}
+
+\begin{examplewrap}
+\begin{nexample}{Identify the sample size that would lead to a power of 80\%.}
+
+The $Z$-score that defines a lower tail area of 0.80 is about $Z = 0.84$. In other words, 0.84 standard errors from -3, the mean of the alternative distribution. 
+
+\begin{center}
+\includegraphics[width=0.93\textwidth]{ch_inference_for_means_oi_biostat/figures/power_best_sample_size/power_best_sample_size}
+\end{center}
+
+For $\alpha = 0.05$, the rejection region always extends 1.96 standard errors from 0, the center of the null distribution. 
+
+The distance between the centers of the null and alternative distributions can be expressed in terms of the standard error:
+\begin{align*}
+(0.84 \times SE) + (1.96 \times SE) = 2.8 \times SE.
+\end{align*}
+
+This quantity necessarily equals the minimum effect size of interest, 3 mmHg, which is the distance between -3 and 0. It is then possible to solve for $n$:
+\begin{align*}
+3 &= 2.8 \times SE \\
+3 &= 2.8 \times \sqrt{\frac{12^2}{n} + \frac{12^2}{n}} \\
+% 3^2 &= 2.8^2 \times \left( \frac{12^2}{n} + \frac{12^2}{n} \right) \\
+n &= \frac{2.8^2}{3^2} \times \left( 12^2 + 12^2 \right) = 250.88 \\
+\end{align*}
+The study should enroll at least 251 patients per group for 80\% power. Note that sample size should always be rounded up in order to achieve the desired power. Even if the calculation had yielded a number closer to 250 (e.g., 250.25), the study should still enroll 251 patients per grou, since having 250 patients per group would result in a power lower than 80\%.
+\end{nexample}
+\end{examplewrap}
+
+\begin{exercisewrap}
+\begin{nexercise}
+Suppose the targeted power is 90\% and $\alpha = 0.01$. How many standard errors should separate the centers of the null and alternative distributions, where the alternative distribution is centered at the minimum effect size of interest? Assume the test is two-sided.\footnotemark{}
+\end{nexercise}
+\end{exercisewrap}
+\footnotetext{Find the $Z$-score such that 90\% of the distribution is below it: $Z = 1.28$. Next, find the cutoffs for the rejection regions: $\pm 2.58$. Thus, the centers of the null and alternative distributions should be about $1.28 + 2.58 = 3.86$ standard errors apart.}
+
+\textD{\newpage}
+
+Figure~\ref{power_curve_neg-3} shows the power for sample sizes from 20~participants to 5,000~participants when $\alpha = 0.05$ and the true difference is -3 mmHg. While power increases with sample size, having more than 250-300 participants provides little additional value towards detecting an effect. 
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.80\textwidth]{ch_inference_for_means_oi_biostat/figures/power_curve/power_curve_neg-3}
+\caption{The curve shows the power for different sample sizes in the context of the blood pressure example when the true difference is -3.}
+\label{power_curve_neg-3}
+\end{figure}
+
+
+
+\subsection{Formulas for power and sample size}
+
+The previous sections have illustrated how power and sample size can be calculated from first principles, using the fundamental ideas behind distributions and testing. In practice, power and sample size calculations are so important that statistical software should be the method of choice; there are many commercially available and public domain programs for performing such calculations. However, hand calculations using formulas can provide quick estimates in the early stages of planning a study.
+
+Use the following formula to calculate sample size for comparing two means, assuming each group will have $n$ participants:
+\[
+n = \frac{(\sigma_1^2 + \sigma_2^2)( z_{1-\alpha/2} + z_{1-\beta})^2}
+{\Delta^2}.
+\]
+In this formula: 
+\begin{itemize}
+\setlength{\itemsep}{0mm}
+	
+	\item $\mu_1, \mu_2, \sigma_1, \text{ and } \sigma_2$ are the population means and standard deviations of the two groups.
+	
+	\item $\Delta = \mu_1 - \mu_2$ is the minimally important difference that investigators wish to detect.
+	
+	\item The null and alternative hypotheses are $H_0: \Delta = 0$ (i.e., no difference between the means) and $H_A: \Delta \neq 0$, i.e., a two-sided alternative.
+	
+	\item The two-sided significance level is $\alpha$, and $z_{1-\alpha/2}$ is the point on a standard normal distribution with area $1-\alpha/2$ to its left and $\alpha/2$ area to its right.
+	
+	\item $\beta$ is the probability of incorrectly failing to reject $H_0$ for a specified value of $\Delta$; $1- \beta$ is the power.  The value $z_{1-\beta}$ is the point on a standard normal distribution with area $1 - \beta$ to its left.
+\end{itemize}
+
+\textD{\newpage}
+
+For a study with sample size $n$ per group, where $Z$ is a normal random variable with mean 0 and standard deviation 1, power is given by:
+\[
+	\text{Power } = P\left(  Z <-z_{1 - \alpha/2} + \frac{\Delta}
+	{\sqrt{\sigma_1^2/n + \sigma_2^2/n}}\right).
+\]
+
+These formulas could have been used to do the earlier power and sample size calculations for the hypothetical study of blood pressure lowering medication. To calculate the sample size needed for 80\% power in detecting a change of 3 mmHg, $\alpha = 0.05$, $1 - \beta = 0.80$, $\Delta = 3$ mmHg, and $\sigma_1 = \sigma_2 = 12$ mmHg. The formula yields a sample size $n$ per group of 
+\[n = \frac{(12^2 + 12^2)(1.96 + 0.84)^2}{(-3.0)^2} = 250.88, \]
+which can be rounded up to 251.
+
+The formula for power can be used to verify the sample size of 251:
+\begin{align*}
+	\text{Power } &= P\left(Z < -1.96 + \frac{3}
+	{\sqrt{12^2/251 + 12^2/251}}\right) \\
+	&= P(Z < 1.25) \\
+	&= 0.85.
+\end{align*}
+The calculated power is slightly larger than 80\% because of the rounding to 251.
+
+The sample size calculations done before any data are collected are one of the most critical aspects of conducting a study. If an analysis is done incorrectly, it can be redone once the error is discovered. However, if data were collected for a sample size that is either too large or too small, it can be impossible to correct the error, especially in studies with human subjects. As a result, sample size calculations are nearly always done using software. For two-sample $t$-tests, the \textsf{R} function \texttt{power.t.test} is both freely available and easy to use.
+
+
+%_____________
+\section{Comparing means with ANOVA (special topic)}
+\label{anovaAndRegrWithCategoricalVariables}
+
+\index{analysis of variance (ANOVA)|(}
+
+In some settings, it is useful to compare means across several groups. It might be tempting to do pairwise comparisons between groups; for example, if there are three groups ($A, B, C$), why not conduct three separate $t$-tests ($A$ vs. $B$, $A$ vs. $C$, $B$ vs. $C$)? Conducting multiple tests on the same data increases the rate of Type I error, making it more likely that a difference will be found by chance, even if there is no difference among the population means. Multiple testing is discussed further in Section~\ref{multipleComparisonsAndControllingTheType1ErrorRate}.
+
+Instead, the methodology behind a $t$-test can be generalized to a procedure called \term{analysis of variance (ANOVA)}, which uses a single hypothesis test to assess whether the means across several groups are equal. Strong evidence favoring the alternative hypothesis in ANOVA is described by unusually large differences among the group means.
+
+\begin{itemize}
+	\setlength{\itemsep}{0mm}
+	\item[$H_0$:] The mean outcome is the same across all $k$ groups. In statistical notation, $\mu_1 = \mu_2 = \cdots = \mu_k$ where $\mu_i$ represents the mean of the outcome for observations in category $i$.
+	\item[$H_A$:] At least one mean is different.
+\end{itemize}
+
+There are three conditions on the data that must be checked before performing ANOVA: 1) observations are independent within and across groups, 2) the data within each group are nearly normal, and 3) the variability across the groups is about equal.
+
+\begin{examplewrap}
+\begin{nexample}{Examine Figure~\ref{toyANOVA}. Compare groups I, II, and III. Is it possible to visually determine if the differences in the group centers is due to chance or not? Now compare groups IV, V, and VI. Do the differences in these group centers appear to be due to chance?}		
+It is difficult to discern a difference in the centers of groups I, II, and III, because the data within each group are quite variable relative to any differences in the average outcome. However, there appear to be differences in the centers of groups IV, V, and VI. For instance, group V appears to have a higher mean than that of the other two groups. The differences in centers for groups IV, V, and VI are noticeable because those differences are large relative to the variability in the individual observations within each group.
+\end{nexample}
+\end{examplewrap}
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.68\textwidth]{ch_inference_for_means_oi_biostat/figures/toyANOVA/toyANOVA}
+	\caption{Side-by-side dot plot for the outcomes for six groups.}
+	\label{toyANOVA}
+\end{figure}		
+
+
+\textD{\newpage}
+
+
+\subsection{Analysis of variance (ANOVA) and the $F$-test}
+\label{ANOVASection}
+
+\noindent%
+The \data{famuss} dataset was introduced in Chapter~\ref{introductionToData}, Section~\ref{variableTypes}. In the FAMuSS study, researchers examined the relationship between muscle strength and genotype at a location on the ACTN3 gene. The measure for muscle strength is percent change in strength in the non-dominant arm (\var{ndrm.ch}). Is there a difference in muscle strength across the three genotype categories (\texttt{CC}, \texttt{CT},~\texttt{TT})?
+
+\begin{exercisewrap}
+\begin{nexercise}\label{nullHypForFamuss}%
+The null hypothesis under consideration is the following: $\mu_{\resp{CC}} = \mu_{\resp{CT}} = \mu_{\resp{TT}}$.
+Write the null and corresponding alternative hypotheses in plain language.\footnotemark{}
+\end{nexercise}
+\end{exercisewrap}
+\footnotetext{$H_0$: The average percent change in non-dominant arm strength is equal across the three genotypes. $H_A$: The average percent change in non-dominant arm strength varies across some (or all) groups.}
+
+Figure~\ref{famussSummaryTable} provides summary statistics for each group. A side-by-side boxplot for the change in non-dominant arm strength is shown in Figure~\ref{famussBoxPlot}; Figure~\ref{famussNormal} shows the Q-Q plots by each genotype. Notice that the variability appears to be approximately constant across groups; nearly constant variance across groups is an important assumption that must be satisfied for using ANOVA. Based on the Q-Q plots, there is evidence of moderate right skew; the data does not follow a normal distribution very closely, but could be considered to 'loosely' follow a normal distribution.\footnote{In a more advanced course, it can be shown that the ANOVA procedure still holds with deviations from normality when sample sizes are moderately large. Additionally, a more advanced course would discuss appropriate transformations to induce normality.} It is reasonable to assume that the observations are independent within and across groups; it is unlikely that participants in the study were related, or that data collection was carried out in a way that one participant's change in arm strength could influence another's. 
+
+\begin{figure}[ht]
+	\centering\small
+	\begin{tabular}{lrrr}
+		\hline
+		& \resp{CC} & \resp{CT} & \resp{TT} \\
+		\hline
+		Sample size ($n_i$)	& 173 & 261 & 161 \\
+		Sample mean ($\bar{x}_i$)	& 48.89 & 53.25 & 58.08 \\
+		Sample SD ($s_i$)	& 29.96 & 33.23 & 35.69 \\
+		\hline
+	\end{tabular}
+	\caption{Summary statistics of change in non-dominant arm strength, split by genotype.}
+	\label{famussSummaryTable}
+\end{figure}
+
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.475\textwidth]{ch_inference_for_means_oi_biostat/figures/famussBoxPlot/famussBoxPlot}
+	\caption{Side-by-side box plot of the change in non-dominant arm strength for 595 participants across three groups.}
+	\label{famussBoxPlot}
+\end{figure}
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=\textwidth]{ch_inference_for_means_oi_biostat/figures/famussNormal/famussNormal}
+	\caption{Q-Q plots of the change in non-dominant arm strength for 595 participants across three groups.}
+	\label{famussNormal}
+\end{figure}
+
+
+\begin{examplewrap}
+\begin{nexample}{The largest difference between the sample means is between the \texttt{CC} and \texttt{TT} groups. Consider again the original hypotheses:
+		\begin{itemize}
+			\setlength{\itemsep}{0mm}
+			\item[$H_0$:] $\mu_{\resp{CC}} = \mu_{\resp{CT}} = \mu_{\resp{TT}}$
+			\item[$H_A$:] The average percent change in non-dominant arm strength ($\mu_i$) varies across some (or all) groups.
+		\end{itemize}
+		Why might it be inappropriate to run the test by simply estimating whether the difference of $\mu_{\var{CC}}$ and $\mu_{\resp{TT}}$ is statistically significant at a 0.05 significance level?}\label{multipleComparisonExample}%	
+It is inappropriate to informally examine the data and decide which groups to formally test. This is a form of \term{data fishing}; choosing the groups with the largest differences for the formal test will lead to an increased chance of incorrectly rejecting the null hypothesis (i.e., an inflation in the Type~I error rate). Instead, all the groups should be tested using a single hypothesis test.
+\end{nexample}
+\end{examplewrap}
+
+Analysis of variance focuses on answering one question: is the variability in the sample means large enough that it seems unlikely to be from chance alone? The variation between groups is referred to as the \term{mean square between groups ($MSG$)}; the $MSG$ is a measure of how much each group mean varies from the overall mean. Let $\overline{x}$ represent the mean of outcomes across all groups, where $\overline{x}_i$ is the mean of outcomes in a particular group $i$ and $n_i$ is the sample size of group $i$. The mean square between groups is:
+\[MSG = \frac{1}{k-1}\sum_{i=1}^{k} n_{i}\left(\overline{x}_{i} - \overline{x}\right)^{2} = \frac{1}{\textrm{df}_{G}}SSG,\] 
+where $SSG$ is the \term{sum of squares between groups}, $\sum_{i=1}^{k} n_{i}\left(\overline{x}_{i} - \overline{x}\right)^{2}$, and $\textrm{df}_{G}=k-1$ is the degrees of freedom associated with the $MSG$ when there are $k$ groups.
+
+\textD{\newpage}
+
+Under the null hypothesis, any observed variation in group means is due to chance and there is no real difference between the groups. In other words, the null hypothesis assumes that the groupings are non-informative, such that all observations can be thought of as belonging to a single group. If this scenario is true, then it is reasonable to expect that the variability between the group means should be equal to the variability observed within a single group. The \term{mean square error ($MSE$)} is a pooled variance estimate with associated degrees of freedom $\textrm{df}_E=n-k$ that provides a measure of variability within the groups. The mean square error is computed as:
+\[MSE = \frac{1}{n-k}\sum_{i=1}^{k} (n_i-1)s_i^{2} = \frac{1}{\textrm{df}_{E}}SSE, \]
+where the $SSE$ is the \term{sum of squared errors}, $n_i$ is the sample size of group $i$, and $s_i$ is the standard deviation of group $i$.
+
+Under the null hypothesis that all the group means are equal, any differences among the sample means are only due to chance; thus, the $MSG$ and $MSE$ should also be equal. ANOVA is based on comparing the $MSG$ and $MSE$. The test statistic for ANOVA, the \term{F-statistic}, is the ratio of the between-group variability to the within-group variability:
+\begin{align}
+\label{formulaForTheFStatistic}%
+F = \frac{MSG}{MSE}
+\end{align}
+
+\begin{examplewrap}
+\begin{nexample}{Calculate the $F$-statistic for the \data{famuss} data summarized in Figure~\ref{famussSummaryTable}. The overall mean $\overline{x}$ across all observations is 53.29.}
+ 
+First, calculate the $MSG$ and $MSE$. 
+\vspace{0mm}
+\begin{align*}
+MSG =& \frac{1}{k-1}\sum_{i=1}^{k} n_{i}\left(\bar{x}_{i} - \bar{x}\right)^{2} \\
+=& \frac{1}{3-1} [(173)(48.89 - 53.29)^{2} + (261)(53.25 - 53.29)^{2} + (161)(58.08 - 53.29)^{2} ]\\
+=& 3521.69 \\
+MSE =& \frac{1}{n-k}\sum_{i=1}^{k} (n_i-1)s_i^{2} \\
+=& \frac{1}{595-3}[(173-1)(29.96^2) + (261-1)(33.23^2) + (161-1)(35.69^2)] \\
+=& 1090.02
+\end{align*}
+
+The $F$-statistic is the ratio:
+
+\[\dfrac{MSG}{MSE} = \dfrac{3521.69}{1090.02} = 3.23 \]
+\end{nexample}
+\end{examplewrap} 
+
+\textD{\newpage}
+
+A $p$-value can be computed from the $F$-statistic using an $F$-distribution, which has two associated parameters: $\textrm{df}_{1}$ and $\textrm{df}_{2}$. For the $F$-statistic in ANOVA, $\textrm{df}_{1} = \textrm{df}_{G}$ and $\textrm{df}_{2}= \textrm{df}_{E}$. An $F$ distribution with 2 and 592 degrees of freedom, corresponding to the $F$-statistic for the genotype and muscle strength hypothesis test, is shown in Figure~\ref{fDist2And592Shaded}.
+
+\begin{figure}[ht]
+	\centering
+\includegraphics[width=0.65\textwidth]{ch_inference_for_means_oi_biostat/figures/fDist2And592/fDist2And592Shaded}
+	\caption{An $F$-distribution with $\textrm{df}_1=2$ and $\textrm{df}_2=592$. The tail area greater than $F = 3.23$ is shaded.}
+	\label{fDist2And592Shaded}
+\end{figure}
+
+The larger the observed variability in the sample means ($MSG$) relative to the within-group variability ($MSE$), the larger $F$ will be. Larger values of $F$ represent stronger evidence against the null hypothesis. The upper tail of the distribution is used to compute a $p$-value, which is typically done using statistical software.
+
+\begin{examplewrap}
+\begin{nexample}{The $p$-value corresponding to the test statistic is equal to about 0.04. Does this provide strong evidence against the null hypothesis at significance level $\alpha = 0.05$?}
+The $p$-value is smaller than 0.05, indicating the evidence is strong enough to reject the null hypothesis at a significance level of 0.05. The data suggest that average change in strength in the non-dominant arm varies by participant genotype.	
+\end{nexample}
+\end{examplewrap}
+
+\begin{onebox}{The $F$-statistic and the $F$-test}
+		Analysis of variance (ANOVA) is used to test whether the mean outcome differs across two or more groups. ANOVA uses a test statistic $F$, which represents a standardized ratio of variability in the sample means relative to the variability within the groups. If $H_0$ is true and the model assumptions are satisfied, the statistic $F$ follows an $F$ distribution with parameters $\textrm{df}_{1}=k-1$ and $\textrm{df}_{2}=n-k$. The upper tail of the $F$-distribution is used to calculate the $p$-value.
+\end{onebox}
+
+
+\textD{\newpage}
+
+
+\subsection{Reading an ANOVA table from software}
+
+The calculations required to perform an ANOVA by hand are tedious and prone to human error. Instead, it is common to use statistical software to calculate the $F$-statistic and associated $p$-value. The results of an ANOVA can be summarized in a table similar to that of a regression summary, which will be discussed in Chapters~\ref{linRegrForTwoVar} and~\ref{multipleLinearRegression}.
+
+Figure~\ref{anovaSummaryTableForFamuss} shows an ANOVA summary to test whether the mean change in non-dominant arm strength varies by genotype. Many of these values should look familiar; in particular, the $F$-statistic and $p$-value can be retrieved from the last two columns.
+\textD{\vspace{5mm}}
+
+\begin{figure}[ht]
+	\centering
+	\begin{tabular}{lrrrrr}
+		\hline
+		& Df & Sum Sq & Mean Sq & F value & Pr($>$F) \\ 
+		\hline
+		famuss\$actn3.r577x & 2 & 7043 & 3522 & 3.231 & 0.0402 \\ 
+		Residuals & 592 & 645293 & 1090 &  &  \\    \hline
+	\end{tabular}
+	\caption{ANOVA summary for testing whether the mean change in non-dominant arm strength varies by genotype at the \texttt{actn3.r577x} location on the ACTN3 gene.}
+	\label{anovaSummaryTableForFamuss}
+\end{figure}
+
+
+\subsection{Multiple comparisons and controlling Type~I Error rate}
+\label{multipleComparisonsAndControllingTheType1ErrorRate}
+
+\index{significance level!multiple comparisons|(}
+
+Rejecting the null hypothesis in an ANOVA analysis only allows for a conclusion that there is evidence for a difference in group means. In order to identify the groups with different means, it is necessary to perform further testing. For example, in the \data{famuss} analysis, there are three comparisons to make: \resp{CC} to \resp{CT}, \resp{CC} to \resp{TT}, and \resp{CT} to \resp{TT}. While these comparisons can be made using two sample $t$-tests, it is important to control the Type I error rate. One of the simplest ways to reduce the overall probability of identifying a significant difference by chance in a multiple comparisons setting is to use the Bonferroni correction procedure.
+
+In the Bonferroni correction procedure, the $p$-value from a two-sample $t$-test is compared to a modified significance level, $\alpha^\star$; $\alpha^\star = \alpha/K$, where $K$ is the total number of comparisons being considered. For $k$ groups, $K=\frac{k(k-1)}{2}$. When calculating the $t$-statistic, use the pooled estimate of standard deviation between groups (which equals $\sqrt{MSE}$); to calculate the $p$-value, use a $t$-distribution with $\textrm{df}_2$. It is typically more convenient to do these calculations using software. 
+
+\begin{onebox}{Bonferroni correction}
+The \term{Bonferroni correction} suggests that a more stringent significance level is appropriate when conducting multiple tests:
+\begin{align*}
+\alpha^\star = \alpha / K
+\end{align*}
+where $K$ is the number of comparisons being considered. For $k$ groups, $K=\frac{k(k-1)}{2}$.
+\end{onebox}
+
+\begin{examplewrap}
+\begin{nexample}{The ANOVA conducted on the \data{famuss} dataset showed strong evidence of differences in the mean strength change in the non-dominant arm between the three genotypes. Complete the three possible pairwise comparisons using the Bonferroni correction and report any differences.}
+
+Use a modified significance level of $\alpha^\star = 0.05/3 = 0.0167$. The pooled estimate of the standard deviation is $\sqrt{MSE} = \sqrt{1090.02} = 33.02$.
+
+Genotype \resp{CC} versus Genotype \resp{CT}: 
+
+\[
+t = \frac{\overline{x}_1 - \overline{x}_2}{s_{\text{pooled}}\sqrt{\frac{1}{n_1} + \frac{1}{n_2}}} 
+ = \dfrac{48.89 - 53.25}{33.02 \sqrt{\frac{1}{173} + \frac{1}{261}}} = -1.35\]
+ 
+This results in a $p$-value of 0.18 on $df =592$. This $p$-value is larger than $\alpha^\star = 0.0167$, so there is not evidence of a difference in the means of genotypes \resp{CC} and \resp{CT}.
+
+Genotype \resp{CC} versus Genotype \resp{TT}: 
+ 
+ \[
+ t = \frac{\overline{x}_1 - \overline{x}_2}{s_{\text{pooled}}\sqrt{\frac{1}{n_1} + \frac{1}{n_2}}}
+ = \dfrac{48.89 - 58.08}{33.02 \sqrt{\frac{1}{173} + \frac{1}{161}}} = -2.54\]
+
+This results in a $p$-value of 0.01 on $df =592$. This $p$-value is smaller than $\alpha^\star = 0.0167$, so there is evidence of a difference in the means of genotypes \resp{CC} and \resp{TT}.
+ 
+Genotype \resp{CT} versus Genotype \resp{TT}:  
+ 
+ \[
+ t = \frac{\overline{x}_1 - \overline{x}_2}{s_{\text{pooled}}\sqrt{\frac{1}{n_1} + \frac{1}{n_2}}}
+ = \dfrac{53.25 - 58.08}{33.02 \sqrt{\frac{1}{261} + \frac{1}{161}}} = -1.46\]
+
+This results in a $p$-value of 0.14 on $df =592$. This $p$-value is larger than $\alpha^\star = 0.0167$, so there is not evidence of a difference in the means of genotypes \resp{CT} and \resp{TT}.
+
+In summary, the mean percent strength change in the non-dominant arm for genotype \resp{CT} individuals is not statistically distinguishable from those of genotype \resp{CC} and \resp{TT} individuals. However, there is evidence that mean percent strength change in the non-dominant arm differs between individuals of genotype \resp{CC} and \resp{TT} are different. 
+\end{nexample}
+\end{examplewrap}
+
+\index{significance level!multiple comparisons|)}
+\index{analysis of variance (ANOVA)|)}
+
+
+\textD{\newpage}
+
+
+\subsection{Reading the results of pairwise $t$-tests from software}
+
+Statistical software can be used to calculate the $p$-values associated with each possible pairwise comparison of the groups in ANOVA. The results of the pairwise tests are summarized in a table that shows the $p$-value for each two-group test. 
+
+Figure~\ref{posthocTestsForFamussUnadjusted} shows the $p$-values from the three possible two-group $t$-tests comparing change in non-dominant arm strengths between individuals with genotypes \texttt{CC}, \texttt{CT}, and \texttt{TT}. For example, the table indicates that when comparing mean change in non-dominant arm strength between \texttt{TT} and \texttt{CC} individuals, the $p$-value is 0.01. This coheres with the calculations above, and these unadjusted $p$-values should be compared to $\alpha^\star = 0.0167$.
+
+% latex table generated in R 3.6.2 by xtable 1.8-4 package
+% Tue Jun 09 12:34:41 2020
+\begin{figure}[ht]
+	\centering
+	\begin{tabular}{rrr}
+		\hline
+		& CC & CT \\ 
+		\hline
+		CT & 0.18 &  - \\ 
+		TT & 0.01 & 0.14 \\ 
+		\hline
+	\end{tabular}
+	\caption{Unadjusted $p$-values for pairwise comparisons testing whether the mean change in non-dominant arm strength varies by genotype at the \texttt{actn3.r577x} location on ACTN3 gene.} 
+	\label{posthocTestsForFamussUnadjusted}
+\end{figure}
+
+The use of statistical software makes it easier to apply corrections for multiple testing, such that it is not necessary to explicitly calculate the value of $\alpha^\star$. Figure~\ref{posthocTestsForFamussAdjusted} shows the Bonferroni-adjusted $p$-values from the three possible tests. When statistical software applies the Bonferroni correction, the unadjusted $p$-value is multiplied by $K$, the number of comparisons, allowing for the values to be directly compared to $\alpha$, not $\alpha^\star$. Comparing an unadjusted $p$-value to $\alpha/K$ is equivalent to comparing the quantity $(K \times p\text{-value})$ to $\alpha$.
+
+\begin{figure}[ht]
+	\centering
+	\begin{tabular}{rrr}
+		\hline
+		& CC & CT \\ 
+		\hline
+		CT & 0.54 &  - \\ 
+		TT & 0.03 & 0.43 \\ 
+		\hline
+	\end{tabular}
+	\caption{Bonferroni-adjusted $p$-values for pairwise comparisons testing whether the mean change in non-dominant arm strength varies by genotype at the \texttt{actn3.r577x} location on ACTN3 gene.} 
+	\label{posthocTestsForFamussAdjusted}
+\end{figure}
+
+
+\section{Notes}
+\label{inferenceForNumericalDataNotes}
+
+
+The material in this chapter is particularly important.  For many applications, $t$-tests and Analysis of Variance (ANOVA) are an essential part of the core of statistics in medicine and the life sciences.  The comparison of two or more groups is often the primary aim of experiments both in the laboratory and in studies with human subjects. More generally, the approaches to interpreting and drawing conclusions from testing demonstrated in this chapter are used throughout the rest of the text and, indeed, in much of statistics.  
+
+While it is important to master the details of the techniques of testing for differences in two or more groups, it is even more critical to not lose sight of the fundamental principles behind the tests.  A statistically significant difference in group means does not necessarily imply that group membership is the reason for the observed association. A significant association does not necessarily imply causation, even if it is highly significant; confounding variables may be involved. In most cases, causation can only be inferred in controlled experiments when interventions have been assigned randomly. It is also essential to carefully consider the context of a problem. For instance, students often find the distinction between paired and independent group comparisons confusing; understanding the problem context is the only reliable way to choose the correct approach.
+
+It is generally prudent to use the form of the $t$-test that does not assume equal standard deviations, but the power calculations described in Section~\ref{PowerForDifferenceOfTwoMeans} assume models with equal standard deviations.  The formulas are simpler when standard deviations are equal, and software is more widely available for that case.  The differences in sample sizes are usually minor and less important than assumptions about target differences or the values of the standard deviations.  If the standard deviations are expected to be very different, then more specialized software for computing sample size and power should be used. The analysis done after the study has been completed should then use the $t$-test for unequal standard deviations.
+
+Tests for significant differences are sometimes overused in science, with not enough attention paid to estimates and confidence intervals.  Confidence intervals for the difference of two population means show a range of underlying differences in means that are consistent with the data, and often lead to insights not possible from only the test statistic and $p$-value.  Wide confidence intervals may show that a non-significant test is the result of high variability in the test statistic, perhaps caused by a sample size that was too small.  Conversely, a highly significant $p$-value may be the result of such a large sample size that the observed differences are not scientifically meaningful; that may be evident from confidence intervals with very narrow width.
+
+\textD{\newpage}
+
+Finally, the formula used to approximate degrees of freedom $\nu$ for the independent two-group $t$-test that does not assume equal variance is 
+\[\nu = \dfrac{\left[(s_1^2/n_1) + (s_2^2/n_2)\right]^2}{\left[(s_1^2/n_1)^2/(n_1 - 1) + (s_2^2/n_2)^2/(n_2 - 1)\right]}, \]
+where $n_1, s_1$ are the sample size and standard deviation for the first sample, and $n_2, s_2$ are the corresponding values for the second sample.
+Since $\nu$ is routinely provided in the output from statistical software, there is rarely any need to calculate it by hand.  The approximate formula $\text{df} = \min(n_1 - 1, n_2 - 1)$ always produces a smaller value for degrees of freedom and hence a larger $p$-value.
+
+The labs for this chapter are structured around particularly important problems in practice: comparing two groups, such as a treatment and control group (Lab 1);  assessing before starting a study whether a sample size is large enough to make it likely that important differences will be detected (Lab 2); comparing more than two groups using analysis of variance (Lab 3); controlling error rates when looking at many comparisons in a dataset (Lab 4); and thinking about hypothesis testing in the larger context of reproducibility (Lab 5). The first four labs provide guidance on how to conduct and interpret specific types of analyses.  Students may find the last lab particularly useful in understanding the distinction between a $p$-value and other probabilities relevant in an inferential setting, such as power.
+

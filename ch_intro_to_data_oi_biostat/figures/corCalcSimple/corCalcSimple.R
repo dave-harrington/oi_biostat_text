@@ -1,0 +1,26 @@
+library(openintro)
+data(COL)
+
+x = c(1, 2, 3)
+y = c(5, 4, 0)
+
+plot(x,y)
+
+myPDF("corCalcSimple.pdf",
+      6,
+      3.3,
+      mar = c(3.5, 4, 0.5, 1.2),
+      mgp = c(2, 0.5, 0))
+plot(x, y,
+     pch = 19,
+     cex = 1.3,
+     col = COL[1, 3],
+     ylab = "y",
+     xlab = "x",
+     xlim = range(x) + c(-1, 1) * .1 * diff(range(x)),
+     ylim = range(y) + c(-1, 1) * .1 * diff(range(y)))
+points(x, y,
+       cex = 1.3,
+       col = COL[1])
+
+dev.off()
