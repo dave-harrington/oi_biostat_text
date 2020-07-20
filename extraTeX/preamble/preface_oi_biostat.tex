@@ -8,7 +8,7 @@ This text is intended for undergraduate and graduate students interested in care
 
 Statistics has become an integral part of research in medicine and biology, and the tools for summarizing data and drawing inferences from data are essential both for understanding the outcomes of studies and for incorporating measures of uncertainty into that understanding.  An introductory text in statistics for students who will work in medicine, public health, or the life sciences should be more than simply the usual introduction, supplemented with an occasional example from biology or medical science. By drawing the majority of examples and exercises in this text from published data, we hope to convey the value of statistics in medical and biological research. In cases where examples draw on important material in biology or medicine, the problem statement contains the necessary background information. 
 
-Computing is an essential part of the practice of statistics.  Nearly everyone entering the biomedical sciences will need to interpret the results of analyses conducted in software; many will also need to be capable of conducting such analyses. The text and associated materials separate those two activities to allow students and instructors to emphasize either or both skills. The text discusses the important features of figures and tables used to support an interpretation, rather than the process of generating such material from data. This allows students whose main focus is understanding statistical concepts not to be distracted by the details of a particular software package. In our experience, however, we have found that many students enter a research setting after only a single course in statistics. These students benefit from a practical introduction to data analysis that incorporates the use of a statistical computing language. There are self-paced learning labs associated with the text provide such an introduction; these are described in more detail later in this preface. The datasets used in this book are available via the \textsf{R} \texttt{openintro} package available on CRAN\footnote{Diez DM, Barr CD, \c{C}etinkaya-Rundel M. 2012. \texttt{openintro}: OpenIntro data sets and supplement functions. \urlwofont{http://cran.r-project.org/web/packages/openintro}.}  and the \textsf{R} \texttt{oibiostat} package available via \href{<https://github.com/OI-Biostat/oi_biostat_data>}{GitHub}.
+Computing is an essential part of the practice of statistics.  Nearly everyone entering the biomedical sciences will need to interpret the results of analyses conducted in software; many will also need to be capable of conducting such analyses. The text and associated materials separate those two activities to allow students and instructors to emphasize either or both skills. The text discusses the important features of figures and tables used to support an interpretation, rather than the process of generating such material from data. This allows students whose main focus is understanding statistical concepts not to be distracted by the details of a particular software package. In our experience, however, we have found that many students enter a research setting after only a single course in statistics. These students benefit from a practical introduction to data analysis that incorporates the use of a statistical computing language. The` self-paced learning labs associated with the text provide such an introduction; these are described in more detail later in this preface. The datasets used in this book are available via the \textsf{R} \texttt{openintro} package available on CRAN\footnote{Diez DM, Barr CD, \c{C}etinkaya-Rundel M. 2012. \texttt{openintro}: OpenIntro data sets and supplement functions. \urlwofont{http://cran.r-project.org/web/packages/openintro}.}  and the \textsf{R} \texttt{oibiostat} package available via \href{https://github.com/OI-Biostat/oi_biostat_data}{GitHub}.
 
 \subsection*{Textbook overview}
 
@@ -30,20 +30,32 @@ The chapters of this book are as follows:
 
 \subsection*{Examples, exercises, and appendices}
 
-Examples and within-chapter exercises throughout the textbook may be identified by their distinctive bullets: {\Large\color{red}Design update makes this last sentence a bit off. Sample language for what might be used instead is in OS4.}
+\noindent%
+Examples in the text help with  an understanding of how
+to apply methods:
 
 \begin{examplewrap}
-\begin{nexample}{Large filled bullets signal the start of an example.}
-Full solutions to examples are provided within the main text and often include an accompanying table or figure.
+\begin{nexample}{This is an example.
+    When a question is asked here, where can the answer be found?}
+  The answer can be found here, in the solution section
+  of the example!
 \end{nexample}
 \end{examplewrap}
 
+\noindent%
+When we think the reader would benefit from working out 
+the solution to an example, we frame it as Guided Practice.
+
 \begin{exercisewrap}
 \begin{nexercise}
-Empty bullets signal readers that an exercise has been inserted into the text for additional practice and guidance. Solutions are provided for all within-chapter exercises in footnotes.\footnotemark
+The reader may check or learn the answer to any Guided Practice
+problem by reviewing the full solution in a footnote.\footnotemark{}
+%Readers are strongly encouraged to attempt these practice problems.
 \end{nexercise}
 \end{exercisewrap}
-\footnotetext{Full solutions are located in the footnotes.}
+\footnotetext{Guided Practice problems are intended to stretch
+  your thinking, and you can check yourself by reviewing the
+  footnote solution for any Guided Practice.}
 
 There are exercises at the end of each chapter that are useful for practice or homework assignments. Solutions to odd numbered problems can be found in Appendix~\ref{eoceSolutions}. Readers will notice that there are fewer end of chapter exercises in the last three chapters.  The more complicated methods, such as multiple regression, do not always lend themselves to hand calculation, and computing is increasingly important both to gain practical experience with these methods and to explore complex datasets. For students more interested in concepts than computing, however, we have included useful end of chapter exercises that emphasize the interpretation of output from statistical software.
 
@@ -66,7 +78,8 @@ We encourage anyone learning or teaching statistics to visit \textbf{openintro.o
 
 \subsection*{Acknowledgements}
 
-The \emph{OpenIntro} project would not have been possible without the dedication and volunteer hours of all those involved.  The authors of \textit{OpenIntro Statistics} would like to thank Andrew Bray, Meenal Patel, Yongtao Guan, Filipp Brunshteyn, Rob Gould, and Chris Pope for their involvement and contributions.  Dalene Stangl, Dave Harrington, Jan de Leeuw, Kevin Rader, and Philippe Rigollet provided valuable feedback on early editions of the text.
+The \emph{OpenIntro} project would not have been possible without the dedication of many people, including the authors of \textit{OpenIntro Statistics}, the 
+\oiRedirect{textbook-openintro_about}{OpenIntro Staff} and the many faculty, students and readers who commented on all the editions of \textit{OpenIntro Statistics}.
 
 This text has benefited from feedback from Andrea Foulkes, Raji Balasubramanian, Curry Hilton, Michael Parzen, Kevin Rader and the many excellent teaching fellows at Harvard College who assisted in courses using the book.  The cover design was provided by Pierre Baduel.
 
