@@ -843,7 +843,7 @@ As expected, clutch volume and body size are positively associated; larger frogs
 The National Health and Nutrition Examination Survey (NHANES) consists of a set of surveys and measurements conducted by the US CDC to assess the health and nutritional status of adults and children in the United States. The following example uses data from a sample of 500 adults (individuals ages 21 and older) from the \data{NHANES} dataset.\footnote{The sample are available as \data{nhanes.samp.adult.500} in the \textsf{R} \texttt{oibiostat} package.}
 
 \begin{examplewrap}
-\begin{nexample}{Body mass index (BMI) is a measure of weight commonly used by health agencies to assess whether someone is overweight, and is calculated from height and weight.\footnotemark{} Describe the relationships shown in Figure~\ref{nhanesHeightWeightBmi}. Why is it helpful to use BMI as a measure of obesity, rather than weight?}
+\begin{nexample}{Body mass index (BMI) is a measure of weight commonly used by health agencies to assess whether someone is overweight, and is calculated from height and weight.\footnotemark{} Describe the relationships shown in Figure~\ref{hanesHeightWeightBmi}. Why is it helpful to use BMI as a measure of obesity, rather than weight?}
 
 Figure~\ref{nhanesHeightWeight}	shows a positive association between height and weight; taller individuals tend to be heavier. Figure~\ref{nhanesHeightBMI} shows that height and BMI do not seem to be associated; the range of BMI values observed is roughly consistent across height. 
 
@@ -869,8 +869,7 @@ BMI acts as a relative measure of weight that accounts for height. Specifically,
 		{ch_intro_to_data_oi_biostat/figures/nhanesHeightBMI/nhanesHeightBMI}
 		\label{nhanesHeightBMI}
 	}
-	\caption{\subref{nhanesHeightWeight} A scatterplot showing height versus weight from the 500 individuals in the sample from \data{NHANES}. One participant 163.9 cm tall (about 5 ft, 4 in) and weighing 144.6 kg (about 319 lb) is highlighted. \subref{nhanesHeightBMI} A scatterplot showing height versus BMI from the 500 individuals in the sample from \data{NHANES}. The same individual highlighted in~\subref{nhanesHeightWeight} is marked here, with BMI 53.83.}
-	\label{nhanesHeightWeightBMI}
+    \caption{\subref{nhanesHeightWeight} A scatterplot showing height versus weight from the 500 individuals in the sample from \data{NHANES}. One participant 163.9 cm tall (about 5 ft, 4 in) and weighing 144.6 kg (about 319 lb) is highlighted. \subref{nhanesHeightBMI} A scatterplot showing height versus BMI from the 500 individuals in the sample from \data{NHANES}. The same individual highlighted in~\subref{nhanesHeightWeight} is marked here, with BMI 53.83.}\label{hanesHeightWeightBmi} 
 \end{figure}
 
 \index{data!nhanes|)}
