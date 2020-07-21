@@ -1,14 +1,15 @@
 library(openintro)
+library(oibiostat)
 data(COL)
-
+data("census.2010")
 dc = 9
 
 myPDF('infMortUSResidualPlot.pdf', 6.51, 3.786,
       mar = c(3, 3, 0.5, 1),
       mgp = c(1.8, 0.6, 0))
 
-predicted = predict(lm(infant.mortality$inf.mort[-dc] ~ infant.mortality$doctors[-dc]))
-residuals = residuals(lm(infant.mortality$inf.mort[-dc] ~ infant.mortality$doctors[-dc]))
+predicted = predict(lm(census.2010$inf.mort[-dc] ~ census.2010$doctors[-dc]))
+residuals = residuals(lm(census.2010$inf.mort[-dc] ~ census.2010$doctors[-dc]))
 
 plot(predicted,
      residuals,
@@ -33,7 +34,7 @@ NormalHist <- function(obs, hold, M, SD, col) {
        axes = FALSE,
        main = '',
        xlim = M + c(-3, 3) * SD,
-       ylim = 1.1 * c(0, max(hold$density)))
+       ylim = 1.1 * c(0, 0.0005 + max(hold$density)))
   for (i in 1:length(hold$counts)) {
     rect(hold$breaks[i], 0,
          hold$breaks[i + 1], hold$density[i],
@@ -47,7 +48,7 @@ NormalHist <- function(obs, hold, M, SD, col) {
 
 # source("famussHeightWeightHelpers.R")
 
-obs = residuals(lm(infant.mortality$inf.mort[-dc] ~ infant.mortality$doctors[-dc]))
+obs = residuals(lm(census.2010$inf.mort[-dc] ~ census.2010$doctors[-dc]))
 hold <- hist(obs, plot = FALSE)
 
 myPDF("infMortUSResidNormPlot.pdf", 6, 3,
@@ -73,3 +74,4 @@ axis(2)
 qqline(obs)
 
 dev.off()
+

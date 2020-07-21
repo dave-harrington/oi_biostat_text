@@ -1,7 +1,8 @@
 library(openintro)
 library(oibiostat)
 data(COL)
-data(prevend)
+data("prevend")
+data("prevend.samp")
 
 NormalHist <- function(obs, hold, M, SD, col) {
   plot(0, 0,
@@ -11,7 +12,7 @@ NormalHist <- function(obs, hold, M, SD, col) {
        axes = FALSE,
        main = '',
        xlim = M + c(-3, 3) * SD,
-       ylim = 1.1 * c(0, max(hold$density)))
+       ylim = 1.1 * c(0, 0.0005 + max(hold$density)))
   for (i in 1:length(hold$counts)) {
     rect(hold$breaks[i], 0,
          hold$breaks[i + 1], hold$density[i],
@@ -50,3 +51,4 @@ axis(2)
 qqline(obs)
 
 dev.off()
+

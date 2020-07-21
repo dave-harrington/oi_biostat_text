@@ -679,9 +679,9 @@ Residuals with a large magnitude contribute the most to the $\chi^2$ statistic. 
 \index{data!famuss|(}
 
 \begin{examplewrap}
-\begin{nexample}{In the FAMuSS study introduced in Chapter~\ref{introductionToData}, researchers measured a variety of demographic and genetic characteristics for about 1,300 participants, including data on race and genotype at a specific locus on the ACTN3 gene. Is there evidence of an association between genotype and race? {\LARGE\color{red}2 (3?) floating tables were removed from within this example. It doesn't look like they were all explicitly referenced. These references should be added.}}
-
-First, check the assumptions for applying a $\chi^2$ test. It is reasonable to assume independence, since it is unlikely that any participants were related to each other. None of the expected counts, as shown in Figure~\ref{famussExpected}, are less than 5.
+  \begin{nexample}
+    {In the FAMuSS study introduced in Chapter~\ref{introductionToData}, researchers measured a variety of demographic and genetic characteristics for about 1,300 participants, including data on race and genotype at a specific locus on the ACTN3 gene (Figure~\ref{famussObservedCountsRaceGenotype}).
+    Is there evidence of an association between genotype and race?} First, check the assumptions for applying a $\chi^2$ test. It is reasonable to assume independence, since it is unlikely that any participants were related to each other. None of the expected counts, as shown in Figure~\ref{famussExpectedRaceGenotype}, are less than 5.
 
 $H_0$: Race and genotype are independent.
 
@@ -698,10 +698,9 @@ Calculate the $\chi^2$ statistic:
 
 Calculate the $p$-value: for a table with 3 rows and 5 columns, the $\chi^2$ statistic is distributed with $(3-1)(5-1) = 8$ degrees of freedom. From the table, a $\chi^2$ value of 19.4 corresponds to a tail area between 0.01 and 0.02. Thus, there is sufficient evidence to reject the null hypothesis of independence between race and genotype.
 
-The exact $p$-value can be obtained using the \textsf{R} function \texttt{pchisq}, which returns a value of 0.012861.\footnote{\texttt{
-pchisq(19.4, df = 8, lower.tail = FALSE)}}
+The $p$-value can be obtained using the \textsf{R} function \texttt{pchisq} (\texttt{pchisq(19.4, df = 8, lower.tail = FALSE)}), which returns a value of 0.012861. %\footnote{\texttt{pchisq(19.4, df = 8, lower.tail = FALSE)}}
 
-To further explore the differences in genotype distribution between races, calculate residuals for each cell. The largest residuals are in the first row; there are many more African Americans with the CC genotype than expected under independence, and fewer with the CT genotype than expected. The residuals in the second row indicate a similar trend for Asians, but with a less pronounced difference. These results suggest further directions for research; a future study could enroll a larger number of African American and Asian participants to examine whether the observed trend holds with a more representative sample. Geneticists might also be interested in exploring whether this genetic difference between populations has an observable phenotypic effect.
+To further explore the differences in genotype distribution between races, calculate residuals for each cell (Figure~\ref{famussResidualsRaceGenotype}). The largest residuals are in the first row; there are many more African Americans with the CC genotype than expected under independence, and fewer with the CT genotype than expected. The residuals in the second row indicate a similar trend for Asians, but with a less pronounced difference. These results suggest further directions for research; a future study could enroll a larger number of African American and Asian participants to examine whether the observed trend holds with a more representative sample. Geneticists might also be interested in exploring whether this genetic difference between populations has an observable phenotypic effect.
 \end{nexample}
 \end{examplewrap}
 
@@ -723,6 +722,7 @@ To further explore the differences in genotype distribution between races, calcu
 		\hline
 	\end{tabular}
 	\caption{Observed counts for race and genotype data from the FAMuSS study.}
+    \label{famussObservedCountsRaceGenotype}
 \end{figure}
 %labels modified from xtable
 
@@ -744,7 +744,7 @@ To further explore the differences in genotype distribution between races, calcu
 		\hline
 	\end{tabular}
 	\caption{Expected counts for race and genotype data from the FAMuSS study.}
-	\label{famussExpected}
+	\label{famussExpectedRaceGenotype}
 \end{figure}
 %labels and formatting modified
 
@@ -766,16 +766,17 @@ To further explore the differences in genotype distribution between races, calcu
 		\hline
 	\end{tabular}
 	\caption{Residuals for race and genotype data from the FAMuSS study}
+     \label{famussResidualsRaceGenotype}
 \end{figure}
 
 \index{data!famuss|)}
 \index{data!hiv}
 
 \begin{examplewrap}
-\begin{nexample}{In Guided Practice~\ref{hivDataPValue}, the $p$-value was found to be smaller than 0.001, suggesting that treatment is not independent of outcome. Does the evidence suggest that infants should be given nevirapine or lopinarvir? {\LARGE\color{red} The floating table (\ref{observedAndExpectedCountsForTheHivStudy}) that was within this example is not explicitly referenced. Add an explicit ref.}}\label{HIVDirectionEx}%
+\begin{nexample}{In Guided Practice~\ref{hivDataPValue}, the $p$-value was found to be smaller than 0.001, suggesting that treatment is not independent of outcome. Does the evidence suggest that infants should be given nevirapine or lopinarvir?}\label{HIVDirectionEx}%
 
 In a $2 \times 2$ table, it is relatively easy to directly compare observed and expected counts. 
-For nevirapine, more infants than expected experienced virologic failure (60 > 44.6), while fewer than expected reached a stable disease state (87 < 102.4). For lopinarvir, fewer infants than expected experienced virologic failure (27 < 42.4), and more infants than expected reached a stable disease state (113 > 97.6). The outcomes for infants on lopinarvir are better than for those on nevirapine; combined with the results of the significance test, the data suggest that lopinarvir is associated with better treatment outcomes.
+For nevirapine, more infants than expected experienced virologic failure (60 > 44.6), while fewer than expected reached a stable disease state (87 < 102.4). For lopinarvir, fewer infants than expected experienced virologic failure (27 < 42.4), and more infants than expected reached a stable disease state (113 > 97.6) (Figure~\ref{observedAndExpectedCountsForTheHivStudy}). The outcomes for infants on lopinarvir are better than for those on nevirapine; combined with the results of the significance test, the data suggest that lopinarvir is associated with better treatment outcomes.
 \end{nexample}
 \end{examplewrap}
 
