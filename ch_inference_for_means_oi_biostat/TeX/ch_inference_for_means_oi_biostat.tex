@@ -494,7 +494,7 @@ Calculate the $t$-statistic:
 
 Approximate the degrees of freedom as $50 - 1 = 49$. The $t$-score of 1.49 falls between the first and second columns in the $df = 49$ row of the $t$-table, so the two-sided $p$-value is between 0.10 and 0.20.\footnote{From \textsf{R}, $df = 89.277$ and $p = 0.138$.}
 
-This $p$-value is larger than the significance value, 0.05, so the null hypothesis not rejected. There is insufficient evidence to state there is a difference in average birth weight of newborns from North Carolina mothers who did smoke during pregnancy and newborns from North Carolina mothers who did not smoke during pregnancy.
+This $p$-value is larger than the significance value, 0.05, so the null hypothesis is not rejected. There is insufficient evidence to state there is a difference in average birth weight of newborns from North Carolina mothers who did smoke during pregnancy and newborns from North Carolina mothers who did not smoke during pregnancy.
 \end{nexample}
 \end{examplewrap}
 
@@ -691,7 +691,7 @@ The $t$-statistic for testing the null hypothesis of no difference between popul
 
 The formula for the two-sided confidence interval for the difference in population means is
 \[
-(\overline{x}_1 - \overline{x}_2) \pm t^{\star} \times s_p \sqrt{\frac{1}{n_1} + \frac{1}{n_2}},
+  (\overline{x}_1 - \overline{x}_2) \pm t^{\star} \times s_{\text{pooled}} \sqrt{\frac{1}{n_1} + \frac{1}{n_2}},
 \]
 where $t^{\star}$ is the point on a $t$-distribution with $n_1 + n_2 -2$ degrees of freedom chosen according to the confidence coefficient.
 
