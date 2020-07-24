@@ -406,13 +406,13 @@ when each sample mean can itself be modeled using a $t$-distribution and the sam
 The point estimate for the difference is $\overline{x}_1 - \overline{x}_2 = \overline{x}_{\text{esc}} - \overline{x}_{\text{control}} = 7.83$.	
 	
 The standard error is:	
-\[\sqrt{\frac{s_{1}^2}{n_{1}} + \frac{s_{2}^2}{n_{2}}} = \sqrt{\frac{5.17^2}{9} + \frac{2.76^2}{9}} = 1.95\]
+\[\sqrt{\frac{s_{1}^2}{n_{1}} + \frac{s_{2}^2}{n_{2}}} = \sqrt{\frac{5.17^2}{9} + \frac{2.76^2}{9}} = 1.95.\]
 	
 Since $n_1 = n_2 = 9$, use $df = 8$; $t^{\star}_{8} = 2.31$ for a 95\% confidence interval. Alternatively, computer software can provide more accurate values: $df = 12.225, t^\star = 2.174$.
 
 The confidence interval is given by:
 \[(\overline{x}_{1} - \overline{x}_{2}) \pm t^\star_{df} \times \text{ SE } \quad\rightarrow\quad
-7.83 \ \pm\ 2.31\times 1.95 \quad\rightarrow\quad (3.38, 12.38) \]
+7.83 \ \pm\ 2.31\times 1.95 \quad\rightarrow\quad (3.38, 12.38). \]
 
 With 95\% confidence, the average amount that ESCs improve heart pumping capacity lies between 3.38\% to 12.38\%.\footnotemark{} The data provide evidence for a treatment effect of administering stem cells.
 \end{nexample}
@@ -478,10 +478,10 @@ When testing a hypothesis about two independent groups, directly compare the two
 \textD{\newpage}
 
 In this setting, the formula for a $t$-statistic is:
-\[t = \dfrac{(\overline{x}_1 - \overline{x}_2) - (\mu_1 - \mu_2)}{SE_{\overline{x}_{1} - \overline{x}_{2}}} = \dfrac{(\overline{x}_1 - \overline{x}_2) - (\mu_1 - \mu_2)}{\sqrt{\dfrac{s_{1}^{2}}{n_1} + \dfrac{s_{2}^{2}}{n_2}}} \]
+\[t = \dfrac{(\overline{x}_1 - \overline{x}_2) - (\mu_1 - \mu_2)}{SE_{\overline{x}_{1} - \overline{x}_{2}}} = \dfrac{(\overline{x}_1 - \overline{x}_2) - (\mu_1 - \mu_2)}{\sqrt{\dfrac{s_{1}^{2}}{n_1} + \dfrac{s_{2}^{2}}{n_2}}}. \]
 
 Under the null hypothesis of no difference between the groups, $H_0: \mu_{1} - \mu_{2} = 0$, the formula simplifies to
-\[t = \dfrac{(\overline{x}_1 - \overline{x}_2)}{\sqrt{\dfrac{s_{1}^{2}}{n_1} + \dfrac{s_{2}^{2}}{n_2}}}\]
+\[t = \dfrac{(\overline{x}_1 - \overline{x}_2)}{\sqrt{\dfrac{s_{1}^{2}}{n_1} + \dfrac{s_{2}^{2}}{n_2}}}.\]
 
 \begin{examplewrap}
 \begin{nexample}{Using Figure~\ref{summaryStatsBabySmoke}, conduct a hypothesis test to evaluate whether there is evidence that newborns from mothers who smoke have a different average birth weight than newborns from mothers who do not smoke.}
@@ -490,7 +490,7 @@ The hypotheses are $H_0: \mu_{1} = \mu_{2}$ and $H_A: \mu_{1} \neq \mu_{2}$, whe
 
 Calculate the $t$-statistic:
 
-\[t = \dfrac{(\overline{x}_1 - \overline{x}_2)}{\sqrt{\dfrac{s_{1}^{2}}{n_1} + \dfrac{s_{2}^{2}}{n_2}}} = \dfrac{7.18 - 6.78}{\sqrt{\frac{1.60^2}{100} + \frac{1.43^2}{50}}} = 1.54\]
+\[t = \dfrac{(\overline{x}_1 - \overline{x}_2)}{\sqrt{\dfrac{s_{1}^{2}}{n_1} + \dfrac{s_{2}^{2}}{n_2}}} = \dfrac{7.18 - 6.78}{\sqrt{\frac{1.60^2}{100} + \frac{1.43^2}{50}}} = 1.54.\]
 
 Approximate the degrees of freedom as $50 - 1 = 49$. The $t$-score of 1.49 falls between the first and second columns in the $df = 49$ row of the $t$-table, so the two-sided $p$-value is between 0.10 and 0.20.\footnote{From \textsf{R}, $df = 89.277$ and $p = 0.138$.}
 
@@ -527,11 +527,8 @@ In the two-sample setting, students often find it difficult to determine whether
 
 A common error is to overlook pairing in data and assume that two groups are independent. The swimsuit data can be used to illustrate the possible harm in conducting an independent group test rather than a paired test. In Section~\ref{pairedData}, the paired $t$-test showed a significant difference in the swim velocities between swimmers wearing wetsuits versus regular swimsuits. Suppose the analysis had been conducted without accounting for the fact that the measurements were paired.
 
-%JV: resolve discrepancy with swim suit data.  Text is correct, data package is not
-
 The mean and standard deviation for the 12 wet suit velocities are 1.51 and 0.14 (m/sec), respectively, and 1.43 and 0.14 (m/sec) for the 12 swim suit velocities. A two-group test statistic is:
-\[t = \frac{1.52 - 1.43}{\sqrt{0.14^2/12 + 0.14^2/12}} = 1.37 \]
-
+\[t = \frac{1.52 - 1.43}{\sqrt{0.14^2/12 + 0.14^2/12}} = 1.37. \]
 If the degrees of freedom are approximated as $11 = 12 - 1$, the two-sided $p$-value as calculated from software is 0.20. According to this method, the null hypothesis of equal mean velocities for the two suit types would not be rejected.
 
 It is not difficult to show that the numerator of the paired test (the average of the within swimmer differences) and the numerator of the two-group test (the difference of the average times for the two groups) are identical. The values of the test statistics differ because the denominators are different\textemdash specifically, the standard errors associated with each statistic are different.  For the paired test statistic, the standard error uses the standard deviation of the within pair differences (0.22) and has value $0.022/\sqrt{12} = 0.006$. The two-group test statistic combines the standard deviations for the original measurements and has value $\sqrt{0.14^2/12 + 0.14^2/12} = 0.06$.  The standard error for the two-group test is 10-fold larger than for the paired test.  
@@ -639,7 +636,7 @@ Figure~\ref{ddsExpenditureSummaryByEthnicityAge13Table} contains the summary sta
 2 & White not Hispanic &  67 & 3904.36 & 1071.02 \\    
 \hline
 \end{tabular}
-\caption{Summary statistics for \var{expenditures}, Ages 13-17}
+\caption{Summary statistics for \var{expenditures}, Ages 13-17.}
 \label{ddsExpenditureSummaryByEthnicityAge13Table}
 \end{figure}
 
@@ -659,7 +656,7 @@ The analysis of the age cohort 22 - 50 years shows the same qualitative result. 
   2 & White not Hispanic & 133 & 40187.62 & 6081.33 \\ 
    \hline
 \end{tabular}
-\caption{Summary statistics for \var{expenditures}, Ages 22 - 50} 
+\caption{Summary statistics for \var{expenditures}, Ages 22 - 50.} 
 \label{ddsExpEthnicityAge22Table}
 \end{figure}
 
@@ -773,7 +770,7 @@ Determine the sampling distribution for $\overline{x}_{\text{trmt}} - \overline{
 The probability of being in the left side of the rejection region ($x < -3.332$) can be calculated by converting to a $Z$-score and using either the normal probability table or statistical software.\footnote{The probability of being in the right side of the rejection region is negligible and can be ignored.}
 
 \[
-	Z = \frac{-3.332 - (-3)}{1.7}= -0.20 \quad \to \quad P(Z \leq -0.20) = 0.4207
+	Z = \frac{-3.332 - (-3)}{1.7}= -0.20 \quad \to \quad P(Z \leq -0.20) = 0.4207.
 \]
 
 The power for the test is about 42\% when $\mu_{\text{trmt}} - \mu_{\text{ctrl}} = -3$~mm/Hg and each group has a sample size of 100.
@@ -973,7 +970,7 @@ Write the null and corresponding alternative hypotheses in plain language.\footn
 \end{exercisewrap}
 \footnotetext{$H_0$: The average percent change in non-dominant arm strength is equal across the three genotypes. $H_A$: The average percent change in non-dominant arm strength varies across some (or all) groups.}
 
-Figure~\ref{famussSummaryTable} provides summary statistics for each group. A side-by-side boxplot for the change in non-dominant arm strength is shown in Figure~\ref{famussBoxPlot}; Figure~\ref{famussNormal} shows the Q-Q plots by each genotype. Notice that the variability appears to be approximately constant across groups; nearly constant variance across groups is an important assumption that must be satisfied for using ANOVA. Based on the Q-Q plots, there is evidence of moderate right skew; the data does not follow a normal distribution very closely, but could be considered to 'loosely' follow a normal distribution.\footnote{In a more advanced course, it can be shown that the ANOVA procedure still holds with deviations from normality when sample sizes are moderately large. Additionally, a more advanced course would discuss appropriate transformations to induce normality.} It is reasonable to assume that the observations are independent within and across groups; it is unlikely that participants in the study were related, or that data collection was carried out in a way that one participant's change in arm strength could influence another's. 
+Figure~\ref{famussSummaryTable} provides summary statistics for each group. A side-by-side boxplot for the change in non-dominant arm strength is shown in Figure~\ref{famussBoxPlot}; Figure~\ref{famussNormal} shows the Q-Q plots by each genotype. Notice that the variability appears to be approximately constant across groups; nearly constant variance across groups is an important assumption that must be satisfied for using ANOVA. Based on the Q-Q plots, there is evidence of moderate right skew; the data do not follow a normal distribution very closely, but could be considered to 'loosely' follow a normal distribution.\footnote{In a more advanced course, it can be shown that the ANOVA procedure still holds with deviations from normality when sample sizes are moderately large. Additionally, a more advanced course would discuss appropriate transformations to induce normality.} It is reasonable to assume that the observations are independent within and across groups; it is unlikely that participants in the study were related, or that data collection was carried out in a way that one participant's change in arm strength could influence another's. 
 
 \begin{figure}[ht]
 	\centering\small
@@ -1031,7 +1028,7 @@ where the $SSE$ is the \term{sum of squared errors}, $n_i$ is the sample size of
 Under the null hypothesis that all the group means are equal, any differences among the sample means are only due to chance; thus, the $MSG$ and $MSE$ should also be equal. ANOVA is based on comparing the $MSG$ and $MSE$. The test statistic for ANOVA, the \term{F-statistic}, is the ratio of the between-group variability to the within-group variability:
 \begin{align}
 \label{formulaForTheFStatistic}%
-F = \frac{MSG}{MSE}
+F = \frac{MSG}{MSE}.
 \end{align}
 
 \begin{examplewrap}
@@ -1050,7 +1047,7 @@ MSE =& \frac{1}{n-k}\sum_{i=1}^{k} (n_i-1)s_i^{2} \\
 
 The $F$-statistic is the ratio:
 
-\[\dfrac{MSG}{MSE} = \dfrac{3521.69}{1090.02} = 3.23 \]
+\[\dfrac{MSG}{MSE} = \dfrac{3521.69}{1090.02} = 3.23. \]
 \end{nexample}
 \end{examplewrap} 
 
@@ -1125,26 +1122,23 @@ where $K$ is the number of comparisons being considered. For $k$ groups, $K=\fra
 Use a modified significance level of $\alpha^\star = 0.05/3 = 0.0167$. The pooled estimate of the standard deviation is $\sqrt{MSE} = \sqrt{1090.02} = 33.02$.
 
 Genotype \resp{CC} versus Genotype \resp{CT}: 
-
 \[
 t = \frac{\overline{x}_1 - \overline{x}_2}{s_{\text{pooled}}\sqrt{\frac{1}{n_1} + \frac{1}{n_2}}} 
- = \dfrac{48.89 - 53.25}{33.02 \sqrt{\frac{1}{173} + \frac{1}{261}}} = -1.35\]
+ = \dfrac{48.89 - 53.25}{33.02 \sqrt{\frac{1}{173} + \frac{1}{261}}} = -1.35.\]
  
 This results in a $p$-value of 0.18 on $df =592$. This $p$-value is larger than $\alpha^\star = 0.0167$, so there is not evidence of a difference in the means of genotypes \resp{CC} and \resp{CT}.
 
 Genotype \resp{CC} versus Genotype \resp{TT}: 
- 
  \[
  t = \frac{\overline{x}_1 - \overline{x}_2}{s_{\text{pooled}}\sqrt{\frac{1}{n_1} + \frac{1}{n_2}}}
- = \dfrac{48.89 - 58.08}{33.02 \sqrt{\frac{1}{173} + \frac{1}{161}}} = -2.54\]
+ = \dfrac{48.89 - 58.08}{33.02 \sqrt{\frac{1}{173} + \frac{1}{161}}} = -2.54.\]
 
 This results in a $p$-value of 0.01 on $df =592$. This $p$-value is smaller than $\alpha^\star = 0.0167$, so there is evidence of a difference in the means of genotypes \resp{CC} and \resp{TT}.
  
 Genotype \resp{CT} versus Genotype \resp{TT}:  
- 
  \[
  t = \frac{\overline{x}_1 - \overline{x}_2}{s_{\text{pooled}}\sqrt{\frac{1}{n_1} + \frac{1}{n_2}}}
- = \dfrac{53.25 - 58.08}{33.02 \sqrt{\frac{1}{261} + \frac{1}{161}}} = -1.46\]
+ = \dfrac{53.25 - 58.08}{33.02 \sqrt{\frac{1}{261} + \frac{1}{161}}} = -1.46.\]
 
 This results in a $p$-value of 0.14 on $df =592$. This $p$-value is larger than $\alpha^\star = 0.0167$, so there is not evidence of a difference in the means of genotypes \resp{CT} and \resp{TT}.
 

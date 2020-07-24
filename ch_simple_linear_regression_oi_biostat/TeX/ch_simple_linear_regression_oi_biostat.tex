@@ -91,7 +91,6 @@ Figure~\ref{frogClutchVolBodySizeRegress} shows the relationship between \var{cl
 \index{data!PREVEND|(}
 
 Figure~\ref{prevendResid} shows the scatterplot of age versus RFFT score, with the \term{least squares regression line} added to the plot; this line can also be referred to as a \term{linear model} for the data. An RFFT score can be predicted for a given age from the equation of the regression line:
-
 \[\widehat{\text{RFFT}} = 137.55 - 1.26(\text{age}). \]
 
 
@@ -340,7 +339,6 @@ Figure~\ref{nhanesResidNormPlot} shows a histogram and normal probability plot f
 The correlation coefficient $r$ measures the strength of the linear relationship between two variables. However, it is more common to measure the strength of a linear fit using $r^2$, which is commonly written as $R^2$ in the context of regression.\footnote{In software output, $R^2$ is usually labeled \termsub{R-squared}{least squares regression!R-squared ($R^2$)}.} 
 
 The quantity $R^2$ describes the amount of variation in the response that is explained by the least squares line. While $R^2$ can be easily calculated by simply squaring the correlation coefficient, it is easier to understand the interpretation of $R^2$ by using an alternative formula:
-
 \[R^{2} = \dfrac{\text{variance of predicted $y$-values}}{\text{variance of observed $y$-values}}.\]
 It is possible to show that $R^2$ can also be written
 \[R^{2} = \dfrac{s^{2}_{y} - s_{\text{residuals}}^2}{s^{2}_{y}}.\]
@@ -495,7 +493,7 @@ Generally speaking, if an influential point arises from random sampling from a l
 Once the influential DC point is removed, assess whether it is appropriate to use linear regression on these data by checking the four assumptions behind least squares regression: linearity, constant variability, independent observations, and approximate normality of the residuals. Refer to the residual plots shown in Figure~\ref{infMortUSResid}.\footnotemark{}
 \end{nexercise}
 \end{exercisewrap}
-\footnotetext{The scatter plot in Figure~\ref{infMortUSnoDC} does not show any nonlinear trends. Similarly, Figure~\ref{infMortUSResidualPlot} does not indicate any nonlinear trends or noticeable difference in the variability of the residuals, although it does show that there are relatively few observations for low values of predicted infant mortality. From Figure~\ref{infMortUSResidNormPlot}, the residuals are approximately normally distributed. Infant mortality across the states reflects a complex mix of different levels of income, access to health care, and individual state initiatives in health care; these and other state-specific features probably act independently across the states, although there is some dependence from federal influence such as funding for pre-natal care. Overall, independence seems like a reasonable assumption.}
+\footnotetext{The scatterplot in Figure~\ref{infMortUSnoDC} does not show any nonlinear trends. Similarly, Figure~\ref{infMortUSResidualPlot} does not indicate any nonlinear trends or noticeable difference in the variability of the residuals, although it does show that there are relatively few observations for low values of predicted infant mortality. From Figure~\ref{infMortUSResidNormPlot}, the residuals are approximately normally distributed. Infant mortality across the states reflects a complex mix of different levels of income, access to health care, and individual state initiatives in health care; these and other state-specific features probably act independently across the states, although there is some dependence from federal influence such as funding for pre-natal care. Overall, independence seems like a reasonable assumption.}
 
 \begin{figure}[h]
 	\centering
@@ -580,7 +578,6 @@ The numerical output that \textsf{R} returns is shown in Figure~\ref{infantMorta
 The question implies that the District of Columbia should not be included in the analysis. The assumptions for applying a least squares regression have been verified in Exercise~\ref{exampleInfantMortalityAssumptions}. Whenever possible, formal inference should be preceded by a check of the assumptions for regression.
 
 The null and alternative hypotheses are $H_0:\beta_1 = 0$ and $H_A:\beta_1 \neq 0.$	
-
 
 The estimated slope of the least squares line is -0.0068, with standard error 0.0028. The $t$-statistic equals -2.40, and the probability that the absolute value of a $t$-statistic with $50-2=48$ degrees of freedom is smaller than $-2.40$ or larger than $2.40$ is 0.021. 
 

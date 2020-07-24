@@ -82,9 +82,7 @@ When using the normal approximation to the sampling distribution of $\hat{p}$, a
 The independence and success-failure assumptions should be checked first.  Since the outcome of one patient is unlikely to influence that of other patients, the observations are independent.  The success-failure condition is satisfied since $n\hat{p} = (52)(.404) = 21  > 10$ and $n\hat{p}(1 - \hat{p}) = (52)(.596) = 31  > 10$.
 
 The point estimate for the response probability, based on a sample of size $n = 52$, is $\hat{p} = 0.404$. For a 95\% confidence interval, $z^{\star} = 1.96$. The standard error is estimated as: $\sqrt{\frac{\ \hat{p}(1-\hat{p})\ }{n}} = \sqrt{\frac{(0.404)(1-0.404)}{52}} = 0.068$.  The confidence interval is
-
 \[0.404 \pm 1.96 (0.068) \rightarrow (0.27, 0.54) \]
-
 The approximate 95\% confidence interval for $p$, the population response probability of melanoma patients to the combination of these new drugs, is (0.27, 0.54) or (27\%, 54\%).  
 \end{nexample}
 \end{examplewrap}
@@ -128,9 +126,7 @@ The test statistic $z$ for the null hypothesis $H_0: p = p_0$ based on a sample 
 \begin{nexample}{Suppose that out of a cohort of 120 patients with stage 1 lung cancer at the Dana-Farber Cancer Institute (DFCI) treated with a new surgical approach, 80 of the patients survive at least 5 years, and suppose that National Cancer Institute statistics indicate that the 5-year survival probability for stage 1 lung cancer patients nationally is 0.60. Do the data collected from 120 patients support the claim that the DFCI population treated with this new form of surgery has a different 5-year survival probability than the national population? Let $\alpha = 0.10$, since this is an early study of the new surgery.}
 
 Test the hypothesis $H_0: p = 0.60$ versus the alternative, $H_A:  p \neq 0.60$, using $\alpha = 0.10$. If we assume that the outcome of one patient at DFCI does not influence the outcome of other patients, the independence condition is met, and the success-failure condition is satisfied since $(120)(0.60) = 80 > 5$ and $(120)(1-0.60) = 40 > 5.$ The test statistic is the $z$-score of the point estimate: 
-
 \[z = \dfrac{\text{point estimate - null value}}{SE} = \dfrac{0.67 - 0.60}{\sqrt{\frac{(0.60)(1-0.60)}{120}}} = 1.57. \]
-
 The $p$-value is the probability that a standard normal variable is larger than 1.57 or smaller than -1.57, $P(|Z| > 1.57) = 0.12$ ; since the $p$-value is greater than 0.10, there is insufficient evidence to reject $H_0$ in favor of $H_A$. There is not convincing evidence that the survival probability at DFCI differs from the national survival probability.  Had a more traditional 0.05 significance level been used, the data would be even less convincing. 
 \end{nexample}
 \end{examplewrap}
@@ -142,7 +138,6 @@ The test statistic has value
 \[
 z = (0.404 - 0.30)/\sqrt{(0.30)(0.70)/52} = 1.64. 
 \] 
-
 The one-sided $p$-value is $P(Z \geq 1.64) = 0.05$; there is sufficient evidence to reject the null hypothesis at $\alpha = 0.10$. This is an example of where a two-sided test and a one-sided test yield different conclusions.
 \end{nexample}
 \end{examplewrap}
@@ -219,7 +214,6 @@ In some settings a preliminary estimate for $p$ can be used to calculate $n$.  W
 
 A confidence interval no wider than 20\% has a margin of error of 10\%, or 0.10.  Using the conservative value p = 0.50,
 \[n = \frac{(1.96)^2}{(4)(0.10^2)} =  96.04.\]
-
 Sample sizes are always rounded up, so the study should have 97 patients.  
 
 Since the study will likely yield a value $\hat{p}$ different from 0.50, the final margin of error will be smaller than $\pm 0.10$.
@@ -244,7 +238,7 @@ A 2015 estimate of Congress' approval rating was 19\%.\footnote{\oiRedirect{text
 \footnotetext{Apply the formula \\
 \begin{align*}
 1.96\times \sqrt{\frac{p(1-p)}{n}} \approx
-1.96\times \sqrt{\frac{0.19(1-0.19)}{n}} &\leq 0.04 \qquad\to\qquad n \geq 369.5
+1.96\times \sqrt{\frac{0.19(1-0.19)}{n}} &\leq 0.04 \qquad\to\qquad n \geq 369.5.
 \end{align*}
 A sample size of 370 or more would be reasonable.}
 
@@ -306,7 +300,7 @@ $$\hat{p}_{1} - \hat{p}_{2} = 0.47 - 0.34 = 0.13.$$
 The standard error can be computed from Equation~\eqref{seForDiffOfProp} using the sample proportions:
 $$SE \approx \sqrt{\frac{0.47(1-0.47)}{771} + \frac{0.34(1-0.34)}{732}} = 0.025.$$
 For a 90\% confidence interval, $z^{\star} = 1.65$:
-$$\text{point estimate} \ \pm\ z^{\star} \times SE \quad \to \quad 0.13 \ \pm\ 1.65 \times  0.025 \quad \to \quad (0.09, 0.17)$$
+$$\text{point estimate} \ \pm\ z^{\star} \times SE \quad \to \quad 0.13 \ \pm\ 1.65 \times  0.025 \quad \to \quad (0.09, 0.17).$$
 With 90\% confidence, the proportion approving the 2010 health care law ranged between 9\% and 17\% depending on the phrasing of the question. The Pew Research Center interpreted this modestly large difference as an indication that for most of the public, opinions were still fluid on the health insurance mandate.  The law eventually passed as the Affordable Health Care Act (ACA).
 \index{data!health care|)}
 \end{nexample}
@@ -367,7 +361,6 @@ Checking the success-failure condition for each group:
 \hat{p} \times n_{ctrl} &= 0.0112 \times \text{44,910} = 503
 & (1 - \hat{p}) \times n_{ctrl} &= 0.9888 \times \text{44,910} = \text{44,407}
 \end{align*}
-
 All values are at least 10. 
 
 The normal model can be used to analyze the study results.
@@ -397,12 +390,9 @@ The normal model can be used to analyze the study results.
 The null hypothesis is that the probability of a breast cancer death is the same for the women in the two groups. If group 1 represents the mammogram group and group 2 the control group, $H_0: p_1 = p_2$ and $H_A: p_1 \neq p_2$.  Let $\alpha = 0.05$.
 
 Calculate the test statistic $z$:
-
 \[z = \dfrac{0.01113 - 0.01125}{\sqrt{(0.0112)(1-0.0112)\left(\frac{1}{44,925} + \frac{1}{44,910} \right)}} = -0.17.
 \]	
-	
 The two-sided $p$-value is $P|Z| \ge 0.17 = 0.8650$,  which is greater than 0.05. There is insufficient evidence to reject the null hypothesis; the observed difference in breast cancer death rates is reasonably explained by chance. 	
-
 
 Evaluating medical treatments typically requires accounting for additional evidence that cannot be evaluated from a statistical test. For example, if mammograms are much more expensive than a standard screening and do not offer clear benefits, there is reason to recommend standard screenings over mammograms. This study also found that a higher proportion of diagnosed breast cancer cases in the mammogram screening arm (3250 in the mammogram group vs 3133 in the physical exam group), despite the nearly equal number of breast cancer deaths.  The investigators inferred that mammograms may cause over-diagnosis of breast cancer, a phenomenon in which a breast cancer diagnosed with mammogram and subsequent biopsy may never become symptomatic. The possibility of over-diagnosis is one of the reasons mammogram screening remains controversial.
 \end{nexample}
@@ -414,11 +404,10 @@ Evaluating medical treatments typically requires accounting for additional evide
 The independence and random sampling conditions have already been discussed.  The success failure condition should be checked for each sample, since this is not a hypothesis testing context (i.e., there is no null hypothesis). For the mammogram group, $\hat{p}_1 = 0.01113$; $n_1 \hat{p}_1 = (0.1113)(44,925) = 500$ and $n_1 (1 - \hat{p}_1) = 39,925.$ It is easy to show that the success failure condition is holds for the control group as well.
 
 The point estimate for the difference in the probability of death is
-
 $$\hat{p}_{1} - \hat{p}_{2} = 0.01113 - 0.01125 = -0.00012,$$ or 0.012\%.
 
 The standard error for the estimated difference uses the individual estimates of the probability of a death:
-$$SE \approx \sqrt{\frac{0.01113(1-0.01113)}{44,925} + \frac{0.01125(1-0.01125)}{44,910}} = 0.0007 $$
+$$SE \approx \sqrt{\frac{0.01113(1-0.01113)}{44,925} + \frac{0.01125(1-0.01125)}{44,910}} = 0.0007. $$
 
 The 95\% confidence interval is given by 
 $$ -0.00012 \pm (1.96) (0.0007) = (-0.0015, 0.0013).$$
@@ -471,7 +460,6 @@ Formulate hypotheses for a contingency-table approach to analyzing the mammogram
 If type of breast cancer screening had no effect on outcome in the mammogram data, what would the expected results be? 
 
 Recall that if two events $A$ and $B$ are independent, then $P(A \cap B) = P(A)P(B)$. Let $A$ represent assignment to the mammogram group and $B$ the event of death from breast cancer. Under independence, the number of individuals out of 89,835 that are expected to be in the mammogram screening group and die from breast cancer equals:
-
 \[(89,835) P(A)P(B) = (89,835) \left(\frac{44,925}{89,835}\right) \left(\frac{1,005}{89,835} \right) = 502.6. \]
 
 Note that the quantities 44,925 and 1,005 are the row and column totals corresponding to the upper left cell of Figure~\ref{mammogramStudySummaryTableWithTotals}, and 89,835 is the total number $n$ of observations in the table. A general formula for computing expected counts for any cell can be written from the marginal totals and the total number of observations.
@@ -514,7 +502,6 @@ $$\text{Expected Count}_{\text{row }i,\text{ col }j} = \frac{(\text{row $i$ tota
 Convert the proportions to count data: 41\% of 147 is approximately 60, and 19\% of 140 is approximately 27. The observed results are given in Figure~\ref{violariHivStudyObsCounts}.
 
 Calculate the expected counts for each cell:
-
 \[E_{1, 1} = \dfrac{87 \times 147}{287} = 44.6 \qquad E_{1, 2} = \dfrac{87 \times 140}{287} = 42.4 \]
 \[E_{2, 1} = \dfrac{200 \times 147}{287} = 102.4 \qquad E_{2, 2} = \dfrac{200 \times 140}{287} = 97.6 \]
 
@@ -536,7 +523,7 @@ DOI: 10.1056/NEJMoa1113249}
 	Total & 147 & 140 & 287 \\
 	\hline
 	\end{tabular}
-	\caption{Observed counts for the HIV study}
+	\caption{Observed counts for the HIV study.}
 	\label{violariHivStudyObsCounts}
 \end{figure}
 
@@ -552,7 +539,7 @@ DOI: 10.1056/NEJMoa1113249}
 		Total & 147 & 140 & 287 \\
 		\hline
 	\end{tabular}
-	\caption{Expected counts for the HIV study}
+	\caption{Expected counts for the HIV study.}
 	\label{violariHivStudyExpCounts}
 \end{figure}
 
@@ -593,7 +580,7 @@ Independence is a reasonable assumption, since individuals have been randomized 
 \begin{align*}
 \chi^2 &= \sum_{\text{all cells}} \frac{(\text{observed} - \text{expected})^2}{\text{expected}} \\
 &= \dfrac{(500 - 502.6)^2}{502.6} + \dfrac{(44,425 - 44,422.4)^2}{44,422.4} + \dfrac{(505 - 502.4)^2}{502.4} + \dfrac{(44,405 - 44,407.6)^2}{44,407.6} \\
-&=0.02
+&=0.02.
 \end{align*}	
 \end{nexample}
 \end{examplewrap}
@@ -673,7 +660,7 @@ If the $p$-value from a $\chi^2$ test is small enough to provide evidence to rej
 \index{residuals!contingency table}
 
 For each cell in a table, the residual equals:
-\[\dfrac{\text{observed} - \text{expected}}{\sqrt{\text{expected}}} \]
+\[\dfrac{\text{observed} - \text{expected}}{\sqrt{\text{expected}}}. \]
 Residuals with a large magnitude contribute the most to the $\chi^2$ statistic. If a residual is positive, the observed value is greater than the expected value, and vice versa for a negative residual.
 
 \index{data!famuss|(}
@@ -693,7 +680,7 @@ Calculate the $\chi^2$ statistic:
 \begin{align*}
 \chi^2 &= \sum_{\text{all cells}} \frac{(\text{observed} - \text{expected})^2}{\text{expected}} \\
 &= \dfrac{(16-7.85)^2}{7.85} + \dfrac{(6-11.84)^2}{11.84} + ... + \dfrac{(5 - 6.22)^2}{6.22} \\
-&=19.4
+&=19.4.
 \end{align*}	
 
 Calculate the $p$-value: for a table with 3 rows and 5 columns, the $\chi^2$ statistic is distributed with $(3-1)(5-1) = 8$ degrees of freedom. From the table, a $\chi^2$ value of 19.4 corresponds to a tail area between 0.01 and 0.02. Thus, there is sufficient evidence to reject the null hypothesis of independence between race and genotype.
@@ -765,7 +752,7 @@ To further explore the differences in genotype distribution between races, calcu
 		Sum & 0.00 & 0.00 & 0.00 & 0.00 \\ 
 		\hline
 	\end{tabular}
-	\caption{Residuals for race and genotype data from the FAMuSS study}
+	\caption{Residuals for race and genotype data from the FAMuSS study.}
      \label{famussResidualsRaceGenotype}
 \end{figure}
 
@@ -825,7 +812,7 @@ Chapter~\ref{introductionToData} started with the discussion of a study examinin
 		Sum & 41 & 489 & 530 \\ 
 		\hline
 	\end{tabular}
-	\caption{LEAP Study Results} 
+	\caption{LEAP Study Results.} 
 	\label{leapStudyResultsTest}
 \end{figure}
 %library(xtable); outcome.table = addmargins(table(LEAP$treatment.group, LEAP$overall.V60.outcome)); xtable(outcome.table, digits = 0, caption = "LEAP Study Results", caption  = "leapStudyResults")
@@ -854,7 +841,7 @@ Under the null hypothesis, the probabilities of cure in the fecal infusion and v
 		Sum & 17 & 12 & 29 \\ 
 		\hline
 	\end{tabular}
-	\caption{Fecal Infusion Study Results} 
+	\caption{Fecal Infusion Study Results.} 
 	\label{fecalStudyResultsTest}
 \end{figure}
 
@@ -931,13 +918,13 @@ Suppose that researchers were interested in testing the null hypothesis against 
 		Sum & $a+c$ & $b+d$ & $n$ \\ 
 		\hline
 	\end{tabular}
-	\caption{General Layout of Data in Fecal Infusion Study} 
+	\caption{General Layout of Data in Fecal Infusion Study.} 
 	\label{fecalStudyGeneral}
 \end{figure}
 
 The probability of observing a table with cells $a, b, c, d$ given fixed marginal totals $a+b$, $c+d$, $a + c$, and $b +d$ follows the hypergeometric distribution.  The hypergeometric distribution was introduced in Section~\ref{hypergeometric}.
 
-\[P(a,b,c,d) = \text{HGeom}(a+b, c+d, a+c) = \dfrac{ {a+b \choose a} {c+d \choose c}}{{n \choose a+c}} = \dfrac{(a+b)! \text{ } (c+d)! \text{ } (a+c)! \text{ } (b+d)!}{a! \text{ } b! \text{ } c! \text{ } d! \text{ } n!}\]
+\[P(a,b,c,d) = \text{HGeom}(a+b, c+d, a+c) = \dfrac{ {a+b \choose a} {c+d \choose c}}{{n \choose a+c}} = \dfrac{(a+b)! \text{ } (c+d)! \text{ } (a+c)! \text{ } (b+d)!}{a! \text{ } b! \text{ } c! \text{ } d! \text{ } n!}.\]
 
 \begin{examplewrap}
 \begin{nexample}{Calculate the probability of observing Figure~\ref{fecalStudyResultsTest}, assuming the margin totals are fixed.}
@@ -1053,7 +1040,7 @@ Since each expected count is greater than or equal to 5,  the $\chi^2$ distribut
 \begin{align*}
 \chi^2 &= \sum_{\text{all cells}} \frac{(\text{observed} - \text{expected})^2}{\text{expected}} \\
 &= \dfrac{(27-76.16)^2}{76.16} + \dfrac{(55-5.95)^2}{5.95} + \dfrac{(467-478.38)^2}{478.38} + \dfrac{(46-34.51)^2}{34.51} \\
-&=440.18
+&=440.18.
 \end{align*}	
 
 There are 3 degrees of freedom, since $k = 4$. The $\chi^2$ statistic is extremely large, and the associated tail area is smaller than 0.001. There is more than sufficient evidence to reject the null hypothesis that the sample is representative of the general population. A comparison of the observed and expected values (or the residuals) indicates that the largest discrepancy is with the over-representation of Asian participants.
@@ -1106,9 +1093,8 @@ The Mendelian proportions are 25\%, 50\%, and 25\%. Thus, the expected counts in
 \begin{align*}
 \chi^2 &= \sum_{\text{all cells}} \frac{(\text{observed} - \text{expected})^2}{\text{expected}} \\
 &= \dfrac{(84-112.75)^2}{112.75} + \dfrac{(233-225.50)^2}{225.50} + \dfrac{(134-112.75)^2}{112.75}\\
-&=11.59
+&=11.59.
 \end{align*}
-
 There are 2 degrees of freedom, since $k = 3$. The $p$-value is between 0.005 and 0.001, which is greater than $\alpha = 0.0001$. There is insufficient evidence to reject the null hypothesis that the offspring ratios correspond to expected Mendelian frequencies; i.e., there is not evidence of segregation distortion at this locus.
 \end{nexample}
 \end{examplewrap}
@@ -1222,7 +1208,7 @@ The odds of SSRI exposure among the controls are given by the fraction
 
 The ratio of the odds, the odds ratio, compares the odds of exposure among the cases to the odds of exposure among the controls. 
 
-\[OR_{\text{exposure, cases vs. controls}} = \frac{\text{odds$_\text{cases}$}}{\text{odds$_\text{controls}$}} = \frac{14/323}{6/830} = \frac{(14)(830)}{(323)(6)} =  6.00 \]
+\[OR_{\text{exposure, cases vs. controls}} = \frac{\text{odds$_\text{cases}$}}{\text{odds$_\text{controls}$}} = \frac{14/323}{6/830} = \frac{(14)(830)}{(323)(6)} =  6.00. \]
 
 \textD{\newpage}
 
@@ -1230,7 +1216,7 @@ A population odds ratio of, for example, 1.5, implies that the odds of exposure 
 
 Surprisingly, the odds ratio of exposure comparing cases to controls is equivalent to the odds ratio of disease comparing exposed to unexposed.\footnote{This result can be shown through Bayes' rule.} With a specific example, it is easy to see how the fraction for the odds ratios are numerically equivalent:
 
-\[OR_{\text{disease, exposed versus unexposed}} = \frac{\text{odds$_\text{exposed}$}}{\text{odds$_\text{unexposed}$}} = \frac{14/6}{323/830} = \frac{(14)(830)}{(6)(323)} = 6.00 \]
+\[OR_{\text{disease, exposed versus unexposed}} = \frac{\text{odds$_\text{exposed}$}}{\text{odds$_\text{unexposed}$}} = \frac{14/6}{323/830} = \frac{(14)(830)}{(6)(323)} = 6.00. \]
 
 Despite the apparently restrictive nature of the case-control sampling design, the odds ratio of interest, the odds ratio for disease given exposure, can be estimated from case-control data.
 
@@ -1248,7 +1234,7 @@ In a general $2 \times 2$ table of exposure versus disease status (Figure~\ref{g
         Total & & $a + c$ & $b + d$ & & $n$ \\
 		\hline
 	\end{tabular}
-    \caption{Exposure vs Disease Status}
+    \caption{Exposure vs Disease Status.}
     \label{generalTwoByTwoTable}
 \end{figure}	
 

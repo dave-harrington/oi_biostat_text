@@ -368,13 +368,14 @@ Random sampling is the best way to ensure that a sample reflects a population. I
 	\label{sampleRandomHealthPlan}
 \end{figure}
 
-Even when a simple random sample is taken, it is not guaranteed that the sample is representative of the population. If the \term{non-response} rate \index{sample!non-response} for a survey is high, that may be indicative of a biased sample. Perhaps a majority of participants did not respond to the survey because only a certain group within the population is being reached; for example, if questions assume that participants are fluent in English, then a high non-response rate would be expected if the population largely consists of individuals who are not fluent in English (Figure~\ref{sampleNonResponseHealthPlan}). Such \term{non-response bias} \index{sample!non-response bias} can skew results; generalizing from an unrepresentative sample may likely lead to incorrect conclusions about a population. 
+Even when a simple random sample is taken, it is not guaranteed that the sample is representative of the population. If the \term{non-response} rate \index{sample!non-response} for a survey is high, that may be indicative of a biased sample. Perhaps a majority of participants did not respond to the survey because only a certain group within the population is being reached; for example, if questions assume that participants are fluent in English, then a high non-response rate would be expected if the population largely consists of individuals who are not fluent in English 
+(Figure~\ref{sampleNonResponseHealthPlan}). Such \term{non-response bias} \index{sample!non-response bias} can skew results; generalizing from an unrepresentative sample may likely lead to incorrect conclusions about a population. 
 
 \begin{figure}[h]
 	\centering
 	{\includegraphics[width=0.55\textwidth]{ch_intro_to_data_oi_biostat/figures/sampleHealthPlan/sampleNonResponseHealthPlan.png}
-	\caption{Surveys may only reach a certain group within the population, which leads to non-response bias. For example, a survey written in English may only result in responses from health plan members fluent in English.}}
-	\label{sampleNonResponseHealthPlan}
+	\caption{Surveys may only reach a certain group within the population, which leads to non-response bias. For example, a survey written in English may only result in responses from health plan members fluent in English.}
+	\label{sampleNonResponseHealthPlan}}
 \end{figure}
 
 \begin{exercisewrap}
@@ -516,14 +517,14 @@ This section discusses techniques for exploring and summarizing numerical variab
 
 The \term{mean}, sometimes called the \indexthis{average}{mean!average}, is a measure of center for a \term{distribution} of data. To find the average clutch volume for the observed egg clutches, add all the clutch volumes and divide by the total number of clutches.\footnote{For computational convenience, the volumes are rounded to the first~decimal.}
 \begin{align*}
-\overline{x} =& \frac{177.8 + 257.0 + \cdots + 933.3}{431} = 882.5\ \textrm{mm}^{3}
+\overline{x} =& \frac{177.8 + 257.0 + \cdots + 933.3}{431} = 882.5\ \textrm{mm}^{3}.
 \end{align*}
 The sample mean is often labeled $\overline{x}$\marginpar[\raggedright$\overline{x}$\\\footnotesize sample\\ mean]{\raggedright$\overline{x}$\\\footnotesize sample\\ mean}, to distinguish it from $\mu$,\marginpar[\raggedright$\mu$\\\footnotesize population\\ mean]{\raggedright$\mu$\\\footnotesize population\\ mean} the mean of the entire population from which the sample is drawn. The letter $x$ is being used as a generic placeholder for the variable of interest, \var{clutch.volume}.
 
 \begin{onebox}{Mean}
 		The sample mean of a numerical variable is the sum of the values of all observations divided by the number of observations:
 		\begin{align}
-		\overline{x} =& \frac{x_1+x_2+\cdots+x_n}{n}
+		\overline{x} =& \frac{x_1+x_2+\cdots+x_n}{n},
 		\label{samplemeanEquation}
 		\end{align}
 		where $x_1, x_2, \dots, x_n$ represent the $n$ observed values.
@@ -560,12 +561,12 @@ The sample \term{variance}\label{varianceFirstDiscussed}, the average of the squ
 \begin{align*}
 s^2 &= \frac{(-704.7)^2 + (-625.5)^2 + (-731.1)^2 + \cdots + (50.7)^2}{431-1} \\
 &= \frac{496,602.09 + 391,250.25 + 534,507.21 + \cdots + 2570.49}{430} \\
-&= 143,680.9
+&= 143,680.9.
 \end{align*}
 The denominator is $n-1$ rather than $n$; this mathematical nuance accounts for the fact that sample mean has been used to estimate the population mean in the calculation. Details on the statistical theory can be found in more advanced texts. 
 
 The sample \term{standard deviation} $s$ is the square root of the variance:
-$$s=\sqrt{143,680.9} = 379.05 \textrm{mm}^{3}$$
+$$s=\sqrt{143,680.9} = 379.05 \textrm{mm}^{3}.$$
 \marginpar[\raggedright\vspace{-10mm}
 
 $s$\\\footnotesize sample standard deviation]{\raggedright\vspace{-10mm}
@@ -579,7 +580,7 @@ $\sigma_{}^2$\marginpar[\raggedright$\sigma_{}^2$\\\footnotesize population vari
 \begin{onebox}{Standard Deviation}
 		The sample standard deviation of a numerical variable is computed as the square root of the variance, which is the sum of squared deviations divided by the number of observations minus 1.
 		\begin{eqnarray}
-		s = \sqrt{\frac{({x_1 - \overline{x})}^{2}+({x_2 - \overline{x})}^{2}+\cdots+({x_n - \overline{x})}^{2}}{n-1}}
+		s = \sqrt{\frac{({x_1 - \overline{x})}^{2}+({x_2 - \overline{x})}^{2}+\cdots+({x_n - \overline{x})}^{2}}{n-1}},
 		\label{SDEquation}
 		\end{eqnarray}
 		where $x_1, x_2, \dots, x_n$ represent the $n$ observed values.
@@ -840,7 +841,7 @@ As expected, clutch volume and body size are positively associated; larger frogs
 \index{data!frog|)}
 \index{data!nhanes|(}
 
-The National Health and Nutrition Examination Survey (NHANES) consists of a set of surveys and measurements conducted by the US CDC to assess the health and nutritional status of adults and children in the United States. The following example uses data from a sample of 500 adults (individuals ages 21 and older) from the \data{NHANES} dataset.\footnote{The sample are available as \data{nhanes.samp.adult.500} in the \textsf{R} \texttt{oibiostat} package.}
+The National Health and Nutrition Examination Survey (NHANES) consists of a set of surveys and measurements conducted by the US CDC to assess the health and nutritional status of adults and children in the United States. The following example uses data from a sample of 500 adults (individuals ages 21 and older) from the \data{NHANES} dataset.\footnote{The sample is available as \data{nhanes.samp.adult.500} in the \textsf{R} \texttt{oibiostat} package.}
 
 \begin{examplewrap}
 \begin{nexample}{Body mass index (BMI) is a measure of weight commonly used by health agencies to assess whether someone is overweight, and is calculated from height and weight.\footnotemark{} Describe the relationships shown in Figure~\ref{hanesHeightWeightBmi}. Why is it helpful to use BMI as a measure of obesity, rather than weight?}
@@ -853,7 +854,7 @@ BMI acts as a relative measure of weight that accounts for height. Specifically,
 \end{nexample}
 \end{examplewrap}
 \addtocounter{footnote}{-1}%
-\footnotetext{$BMI = \dfrac{weight_{kg}}{height^{2}_m} = \dfrac{weight_{lb}}{height^{2}_{in}} \times 703$}%
+\footnotetext{$BMI = \dfrac{weight_{kg}}{height^{2}_m} = \dfrac{weight_{lb}}{height^{2}_{in}} \times 703$.}%
 \addtocounter{footnote}{1}%
 \footnotetext{\url{https://www.nhlbi.nih.gov/health/educational/lose\_wt/risk.htm}}
 
@@ -919,7 +920,7 @@ The correlation coefficient quantifies the strength of a linear trend. Prior to 
 		\begin{align}
 		r &=  \frac{1}{n-1}\sum^{n}_{i=1}
 		\left(\frac{x_{i}-\overline{x}}
-		{s_{x}}\right)\left(\frac{y_{i}-\overline{y}}{s_{y}}\right)
+		{s_{x}}\right)\left(\frac{y_{i}-\overline{y}}{s_{y}}\right),
 		\label{correlationEquation}
 		\end{align}
 		where $(x_1,y_1), (x_2,y_2), \ldots, (x_n, y_n)$ are the $n$ paired values of $x$ and $y$, and $s_x$ and $s_y$ are the sample standard deviations of the $x$ and $y$
@@ -939,7 +940,7 @@ r &=  \frac{1}{n-1}\sum^{n}_{i=1}
 {1}\right)\left(\frac{5 - 3}{2.65}\right) + \left(\frac{2 - 2}
 {1}\right)\left(\frac{4 - 3}{2.65}\right) + \left(\frac{3 - 2}
 {1}\right)\left(\frac{0 - 3}{2.65}\right)  \right] \\
-&= -0.94
+&= -0.94.
 \end{align*}
 
 The correlation is -0.94, which reflects the negative association visible from the scatterplot in Figure~\ref{fig:corCalcSimple}.
@@ -1233,7 +1234,7 @@ The question of interest in the LEAP study is whether the risk of developing pea
 \begin{examplewrap}
 \begin{nexample}{Using the results from the LEAP study, calculate and interpret the relative risk of failing the oral food challenge, comparing individuals in the avoidance group to individuals in the consumption group.}
 	
-\[RR_{\textrm{failing OFC}} = \dfrac{\textrm{proportion in avoidance group who failed OFC}}{\textrm{proportion in consumption group who failed OFC}} = \dfrac{36/263}{5/267} = 7.31 \]
+\[RR_{\textrm{failing OFC}} = \dfrac{\textrm{proportion in avoidance group who failed OFC}}{\textrm{proportion in consumption group who failed OFC}} = \dfrac{36/263}{5/267} = 7.31. \]
 
 The relative risk is 7.31. The risk of failing the oral food challenge was more than 7 times greater for participants in the peanut avoidance group than for those in the peanut consumption group.
 \end{nexample}
@@ -1594,10 +1595,10 @@ Figure~\ref{ddsAvgExpEthAge} shows how mean \var{expenditures} is higher for His
 \begin{nexample}{Using the proportions in Figure~\ref{ddsEthAgeTable} and the average expenditures for each cohort in Figure~\ref{ddsAvgExpEthAge}, calculate the overall weighted average expenditures for Hispanics and for White non-Hispanics.\footnotemark}
 
 For Hispanics:
-\[1,393(.12) + 2,312(.24) + 3,955(.27) + 9,960(.21) + 40,924(.11) + 55,585(.05) = \$11,162 \]
+\[1,393(.12) + 2,312(.24) + 3,955(.27) + 9,960(.21) + 40,924(.11) + 55,585(.05) = \$11,162. \]
 
 For White non-Hispanics:
-\[1,367(0.05) + 2,052(.11) + 3,904(.17) + 10,133(.17) + 40,188(.33) + 52,760(.16) = \$24,384 \]	
+\[1,367(0.05) + 2,052(.11) + 3,904(.17) + 10,133(.17) + 40,188(.33) + 52,760(.16) = \$24,384. \]	
 
 The weights for the youngest four cohorts, which have lower expenditures, are higher for the Hispanic population than the White non-Hispanic population; additionally, the weights for the oldest two cohorts, which have higher expenditures, are higher for the White non-Hispanic population. This leads to overall average expenditures for the White non-Hispanics being higher than for Hispanics.
 \end{nexample}

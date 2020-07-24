@@ -37,7 +37,7 @@ If a coin is tossed three times, the outcome is the sequence of observed heads a
 	\centering
 	\includegraphics[width=0.70\textwidth]
 	{ch_distributions_oi_biostat/figures/coinToss/coinToss.png}
-	\caption{Possible outcomes for number of heads in three tosses of a coin}
+	\caption{Possible outcomes for number of heads in three tosses of a coin.}
 	\label{coinToss}
 \end{figure}
 
@@ -93,7 +93,7 @@ Just like distributions of data, distributions of random variables also have mea
 If $X$ takes on outcomes $x_1$, ..., $x_k$ with probabilities $P(X=x_1)$, ..., $P(X=x_k)$, the expected value of $X$ is the sum of each outcome multiplied by its corresponding probability:
 \begin{align}
 E(X) 	&= x_1 P(X=x_1) + \cdots + x_k P(X=x_k) \notag \\
-&= \sum_{i=1}^{k}x_iP(X=x_i)
+&= \sum_{i=1}^{k}x_iP(X=x_i).
 \end{align}
 The Greek letter $\mu$\index{Greek!mu ($\mu$)} may be used in place of the notation $E(X)$.
 \end{onebox}
@@ -107,7 +107,7 @@ The Greek letter $\mu$\index{Greek!mu ($\mu$)} may be used in place of the notat
 E(X) &= x_1 P(X = x_1) + \dots + x_k P(X = x_k)\\
 &= (0)(P(X=0)) + (1)(P(X=1)) + (2)(P(X=2)) + (3)(P(X = 3)) \\
 &= (0)(1/8) + (1)(3/8) + (2)(3/8) + (3)(1/8) = 12/8 \\
-&= 1.5
+&= 1.5.
 \end{align*}
 
 The expected value of $X$ is 1.5.
@@ -147,7 +147,7 @@ In the case of a random variable, the squared deviations from the mean of the ra
 If $X$ takes on outcomes $x_1$, ..., $x_k$ with probabilities $P(X=x_1)$, \dots, $P(X=x_k)$ and expected value $\mu=E(X)$, then the variance of $X$, denoted by $\text{Var}(X)$ or $\sigma^2$, is
 \begin{align}
 Var(X) &= (x_1-\mu)^2 P(X=x_1) + \cdots \notag + (x_k-\mu)^2 P(X=x_k) \notag \\
-&= \sum_{i=1}^{k} (x_i - \mu)^2 P(X=x_i)
+&= \sum_{i=1}^{k} (x_i - \mu)^2 P(X=x_i).
 \end{align}
 The standard deviation of $X$, labeled $SD(X)$ or $\sigma$\index{Greek!sigma ($\sigma$)}, is the square root of the variance.
 \end{onebox}%
@@ -168,7 +168,7 @@ The variance of a random variable can be interpreted as the expectation of the t
 	\sigma_X^2 &= (x_1-\mu_X)^2P(X=x_1) + \cdots \notag + (x_4-\mu)^2 P(X=x_4) \notag \\
 	&= (0- 1.5)^2(1/8) + (1 - 1.5)^2 (3/8) + 
 	(2 -1.5)^2 (3/8) + (3-1.5)^2 (1/8) \notag \\
-	&= 3/4
+	&= 3/4.
 	\end{align*}
 	
 	The variance is $3/4 = 0.75$ and the standard deviation is $\sqrt{3/4} = 0.866$.  
@@ -238,13 +238,13 @@ Sums of random variables represent a special case of linear combinations of vari
 
 \begin{onebox}{Linear combinations of random variables and their expected values}
 If $X$ and $Y$ are random variables, then a linear combination of the random variables is given by
-\[aX + bY\] \label{linComboOfRandomVariablesXAndY}
+\[aX + bY,\] \label{linComboOfRandomVariablesXAndY}
 where $a$ and $b$ are constants.  The mean of a linear combination of random variables is 
-\[E(aX + bY) = aE(X) + bE(Y) = a\mu_X + b\mu_Y\]
+\[E(aX + bY) = aE(X) + bE(Y) = a\mu_X + b\mu_Y.\]
 \end{onebox}
 
-The formula easily generalizes to a sum of any number of random variables. For example, the average health care cost for 5 years, given that the cost for services remains the same, would be: 
-\[E(X_1 + X_2 + X_3 + X_4 + X_5) = E(5 X_1) = 5E(X_1) =(5)(1010) = \$5,050\]
+The formula easily generalizes to a sum of any number of random variables. For example, the average health care cost for 5 years, given that the cost for services remains the same, is
+\[E(X_1 + X_2 + X_3 + X_4 + X_5) = E(5 X_1) = 5E(X_1) =(5)(1010) = \$5,050.\]
 
 The formula implies that for a random variable $Z$, $E(a + Z) = a + E(Z)$.  This could have been used when calculating the average health costs for the employee by defining $a$ as the fixed cost of the premium ($a=\$948$) and $Z$ as the cost of the physician visits. Thus, the total annual cost for a year could be calculated as: $E(a + Z) = a + E(Z) = \$948 + E(Z) = \$948 + .30(1 \times \$20) + .40(3 \times \$20) + .20(4 \times \$20) + 0.10(8 \times \$20)= \$1,010.00$. 
 
@@ -260,7 +260,7 @@ Calculating the variance and standard deviation of a linear combination of rando
 \textD{\newpage}
 
 \begin{onebox}{Variability of linear combinations of random variables}
-\[\text{Var}(aX + bY) = a^2 \text{Var}(X) + b^2\text{Var}(Y)\]
+\[\text{Var}(aX + bY) = a^2 \text{Var}(X) + b^2\text{Var}(Y).\]
 This equation is valid only if the random variables are independent of each other.
 \end{onebox}
 
@@ -307,21 +307,21 @@ When an individual trial only has two possible outcomes, it is called a \termsub
 
 Bernoulli random variables are often denoted as \resp{1} for a success and \resp{0} for a failure. Suppose that ten trials are observed, of which 6 are successes and 4 are failures:
 \begin{center}
-	\resp{0} \resp{1} \resp{1} \resp{1} \resp{1} \resp{0} \resp{1} \resp{1} \resp{0} \resp{0}
+	\resp{0} \resp{1} \resp{1} \resp{1} \resp{1} \resp{0} \resp{1} \resp{1} \resp{0} \resp{0}.
 \end{center}
 The \term{sample proportion}, $\hat{p}$, is the sample mean of these observations:
 \begin{eqnarray*}
-	\hat{p} = \frac{\text{\# of successes}}{\text{\# of trials}} = \frac{0+1+1+1+1+0+1+1+0+0}{10} = 0.6
+	\hat{p} = \frac{\text{\# of successes}}{\text{\# of trials}} = \frac{0+1+1+1+1+0+1+1+0+0}{10} = 0.6.
 \end{eqnarray*}%
 Since \resp{0} and \resp{1} are numerical outcomes, the {mean} and {standard deviation} of a Bernoulli random variable can be defined. If ${p}$ is the true probability of a success, then the mean of a Bernoulli random variable $X$ is given by
 \begin{align*}
 \mu = E[X] &= P(X=0)\times0 + P(X=1)\times1 \\
-&= (1-p)\times0 + p\times 1 = 0+p = p
+&= (1-p)\times0 + p\times 1 = 0+p = p.
 \end{align*}
 Similarly, the variance of $X$ can be computed:
 \begin{align*}
 \sigma^2 &= {P(X=0)(0-p)^2 + P(X=1)(1-p)^2} \\
-&= {(1-p)p^2 + p(1-p)^2} = {p(1-p)}
+&= {(1-p)p^2 + p(1-p)^2} = {p(1-p).}
 \end{align*}
 The standard deviation is $\sigma=\sqrt{p(1-p)}$.
 
@@ -349,7 +349,7 @@ $\textrm{Bern}(p)$\vspace{1mm}\\\footnotesize Bernoulli dist.\\with $p$ prob. of
 	\begin{align*}
 	&P(A=\text{\resp{refuse}},\text{ }B=\text{\resp{shock}},\text{ }C=\text{\resp{shock}},\text{ }D=\text{\resp{shock}}) \\
 	&\quad =  P(A=\text{\resp{refuse}})\ P(B=\text{\resp{shock}})\ P(C=\text{\resp{shock}})\ P(D=\text{\resp{shock}}) \\
-	&\quad =  (0.35)  (0.65)  (0.65)  (0.65) = (0.35)^1 (0.65)^3 = 0.096
+	&\quad =  (0.35)  (0.65)  (0.65)  (0.65) = (0.35)^1 (0.65)^3 = 0.096.
 	\end{align*}
 	
 	However, there are three other possible scenarios: either $B$, $C$, or $D$ could have been the one to refuse. In each of these cases, the probability is also $(0.35)^1(0.65)^3$. These four scenarios exhaust all the possible ways that exactly one of these four people could refuse to administer the most severe shock, so the total probability of one success is $(4)(0.35)^1(0.65)^3 = 0.38$.
@@ -368,26 +368,26 @@ Like the Bernoulli distribution, the binomial is a discrete distribution, and ca
 
 A general formula for the binomial distribution can be developed from re-examining Example~\ref{oneRefuser}. There were four individuals who could have been the one to refuse, and each of these four scenarios had the same probability. Thus, the final probability can be written as:
 \begin{eqnarray}
-[\text{\# of scenarios}] \times P(\text{single scenario})
+[\text{\# of scenarios}] \times P(\text{single scenario}.)
 \label{genBinomialFormula}
 \end{eqnarray}
 The first component of this equation is the number of ways to arrange the $k=1$ successes among the $n=4$ trials. The second component is the probability of any of the four (equally probable) scenarios.
 
 Consider $P($single scenario$)$ under the general case of $k$ successes and $n-k$ failures in the $n$ trials. In any such scenario, the Multiplication Rule for independent events can be applied:
 \begin{eqnarray*}
-	p^k(1-p)^{n-k}
+	p^k(1-p)^{n-k}.
 \end{eqnarray*}
 
 Secondly, there is a general formula for the number of ways to choose $k$ successes in $n$ trials, i.e. arrange $k$ successes and $n-k$ failures:
 \begin{eqnarray*}
-	{n\choose k} = \frac{n!}{k!(n-k)!}
+	{n\choose k} = \frac{n!}{k!(n-k)!}.
 \end{eqnarray*}
 The quantity ${n\choose k}$ is read \term{n choose k}.\footnote{Other notation for $n$ choose $k$ includes $_nC_k$, $C_n^k$, and $C(n,k)$.} The exclamation point notation (e.g. $k!$) denotes a \term{factorial}\label{factorialDefinitionInTheBinomialSection} expression.\footnote{$0! = 1$ \label{zeroFactorial}, $1! = 1$, $2! = 2 \times 1 = 2$, $\dots$, $n! = n\times (n-1) \times \dots 2 \times 1$.}
 
 Using the formula, the number of ways to choose $k=1$ successes in $n=4$ trials can be computed as:
 \begin{eqnarray*}
 	{4 \choose 1} = \frac{4!}{1!(4-1)!} =  \frac{4!}{1!3!} 
-	= \frac{4\times3\times2\times1}{(1)(3\times2\times1)} = 4
+	= \frac{4\times3\times2\times1}{(1)(3\times2\times1)} = 4.
 \end{eqnarray*}
 
 Substituting $n$ choose $k$ for the number of scenarios and $p^k(1-p)^{n-k}$ for the single scenario probability in Equation~(\ref{genBinomialFormula}) yields the general binomial formula. 
@@ -397,14 +397,14 @@ Substituting $n$ choose $k$ for the number of scenarios and $p^k(1-p)^{n-k}$ for
 \begin{onebox}{Binomial distribution}
 Suppose the probability of a single trial being a success is $p$. The probability of observing exactly $k$ successes in $n$ independent trials is given by\vspace{-1mm}
 \begin{eqnarray}
-P(X = k) = {n\choose k}p^k(1-p)^{n-k} = \frac{n!}{k!(n-k)!}p^k(1-p)^{n-k}
+P(X = k) = {n\choose k}p^k(1-p)^{n-k} = \frac{n!}{k!(n-k)!}p^k(1-p)^{n-k}.
 \label{binomialFormula}
 \end{eqnarray}
-Additionally, the mean, variance, and standard deviation of the number of observed successes are\vspace{-2mm}
+Additionally, the mean, variance, and standard deviation of the number of observed successes are, respectively\vspace{-2mm}
 \begin{align}
 \mu &= np
   &\sigma^2 &= np(1-p)
-  &\sigma &= \sqrt{np(1-p)}
+  &\sigma &= \sqrt{np(1-p)}.
 \label{binomialStats}
 \end{align}
 A binomial random variable $X$ can be expressed as $X \sim \textrm{Bin}(n, p)$.
@@ -433,7 +433,7 @@ $\textrm{Bin}(n, p)$\vspace{1mm}\\\footnotesize Binomial dist.\\with $n$ trials\
 		P(X =3) = { 8 \choose 3}(0.35)^3(1-0.35)^{8-3}
 		&=& \frac{8!}{3!(8-3)!}(0.35)^3(1-0.35)^{8-3} \\
 		&=& (56)(0.35)^3(0.65)^5 \\
-		&=& 0.28
+		&=& 0.28.
 	\end{eqnarray*}
 \end{nexample}
 \end{examplewrap}
@@ -448,7 +448,7 @@ $\textrm{Bin}(n, p)$\vspace{1mm}\\\footnotesize Binomial dist.\\with $n$ trials\
 	& \qquad + { 8 \choose 2}(0.35)^2(1-0.35)^{8-2} + { 8 \choose 3}(0.35)^3(1-0.35)^{8-3} \\
 	&= (1)(0.35)^0(1-0.35)^{8} + (8)(0.35)^1(1-0.35)^{7} \\
 	& \qquad + (28)(0.35)^2(1-0.35)^{6} + (56)(0.35)^3(1-0.35)^{5}\\
-	&= 0.706
+	&= 0.706.
 	\end{align*}
 \end{nexample}
 \end{examplewrap}
@@ -517,7 +517,7 @@ $Z$\vspace{1mm}\\\footnotesize Z-score, the\\standardized\\observation]{\raggedr
 	
 	$Z$\vspace{1mm}\\\footnotesize Z-score, the\\standardized\\observation}\index{Z@$Z$} of an observation quantifies how far the observation is from the mean, in units of standard deviation(s). If $x$ is an observation from a distribution $N(\mu, \sigma)$, the Z-score is mathematically defined as:
 \begin{align*}
-	Z = \frac{x-\mu}{\sigma}
+	Z = \frac{x-\mu}{\sigma}.
 \end{align*}
 
 An observation equal to the mean has a Z-score of 0. Observations above the mean have positive Z-scores, while observations below the mean have negative Z-scores. For example, if an observation is one standard deviation above the mean, it has a Z-score of 1; if it is 1.5 standard deviations below the mean, its Z-score is -1.5. 
@@ -531,12 +531,12 @@ Calculate a Z-score for each student; i.e., convert $x$ to Z.
 		
 Using $\mu_{SAT}=1500$, $\sigma_{SAT}=300$, and $x_{A}=1800$, find Student A's Z-score:
 \begin{align*}
-	Z_{A} = \frac{x_{A} - \mu_{SAT}}{\sigma_{SAT}} = \frac{1800-1500}{300} = 1
+	Z_{A} = \frac{x_{A} - \mu_{SAT}}{\sigma_{SAT}} = \frac{1800-1500}{300} = 1.
 \end{align*}
 
 For Student B:
 \begin{align*}
-	Z_{B} = \frac{x_{B} - \mu_{ACT}}{\sigma_{ACT}} = \frac{24 - 21}{5} = 0.6
+	Z_{B} = \frac{x_{B} - \mu_{ACT}}{\sigma_{ACT}} = \frac{24 - 21}{5} = 0.6.
 \end{align*}
 
 Student A's score is 1 standard deviation above average on the SAT, while Student B's score is 0.6 standard deviations above the mean on the ACT. As illustrated in Figure~\ref{satActNormals}, Student A's score is more extreme, indicating that Student A has scored higher with respect to other scores than Student B.
@@ -553,7 +553,7 @@ Student A's score is 1 standard deviation above average on the SAT, while Studen
 \begin{onebox}{The Z-score}
 The Z-score of an observation quantifies how far the observation is from the mean, in units of standard deviation(s). The Z-score for an observation $x$ that follows a distribution with mean $\mu$ and standard deviation $\sigma$ can be calculated using
 \begin{align*}
-Z = \frac{x-\mu}{\sigma}
+Z = \frac{x-\mu}{\sigma}.
 \end{align*}
 \end{onebox}
 
@@ -565,7 +565,7 @@ Z = \frac{x-\mu}{\sigma}
 As shown in Example~\ref{satActNormals}, a score of 1800 on the SAT is 1 standard deviation above the mean. ACT scores are normally distributed with mean 21 and standard deviation 5. To convert a value from the standard normal curve (Z) to one on a normal distribution $N(\mu, \sigma)$:
 
 \begin{align*}
-x = \mu + Z\sigma
+x = \mu + Z\sigma.
 \end{align*}
 
 Thus, a student would need a score of $21 + 1(5) = 26$ on the ACT to have a score equivalent to 1800 on the SAT. 
@@ -686,7 +686,7 @@ For any normal probability problem, it can be helpful to start out by drawing th
 \end{center}
 To find the shaded area under the curve, convert 1630 to a Z-score:
 \begin{align*}
-Z = \frac{x - \mu}{\sigma} = \frac{1630 - 1500}{300} = \frac{130}{300} = 0.43
+Z = \frac{x - \mu}{\sigma} = \frac{1630 - 1500}{300} = \frac{130}{300} = 0.43.
 \end{align*}
 Look up the percentile of $Z=0.43$ in the normal probability table shown in Figure~\ref{zTableShort} or in Appendix~\vref{normalProbabilityTable}: 0.6664. However, note that the percentile describes those who had a Z-score \emph{lower} than 0.43, or in other words, the area below 0.43. To find the area \emph{above} $Z=0.43$, subtract the area of the lower tail from the total area under the curve, 1:
 \begin{center}
@@ -730,7 +730,7 @@ Systolic blood pressure for adults 60 years of age and older in the United State
 	First, convert to Z-scores:
 	
 	\begin{align*}
-	Z_{74} = \dfrac{x-\mu}{\sigma} = \dfrac{74-70}{3.3} = 1.21 \qquad Z_{62} = \dfrac{x-\mu}{\sigma} = \dfrac{69-70}{3.3} = -0.30
+	Z_{74} = \dfrac{x-\mu}{\sigma} = \dfrac{74-70}{3.3} = 1.21, \qquad Z_{62} = \dfrac{x-\mu}{\sigma} = \dfrac{69-70}{3.3} = -0.30.
 	\end{align*}
 	
 	From the normal probability table, the areas are respectively, $0.8868$ and $0.3821$. The middle area is $0.8868 - 0.3821 = 0.5048$. The probability of being between heights 5'9'' and 6'2'' is 0.5048.
@@ -760,7 +760,7 @@ Determine the Z-score associated with the $40^{th}$ percentile. Because the perc
 
 Convert the Z-score to $X$, where $X \sim N(70, 3.3)$. 
 \begin{align*}
-X = \mu + \sigma Z = 70 + (-0.25)(3.3) = 69.18
+X = \mu + \sigma Z = 70 + (-0.25)(3.3) = 69.18.
 \end{align*}
 A man with height in the 40$^{th}$ percentile is 69.18 inches tall, or about 5' 9''. 
 \end{nexample}
@@ -806,13 +806,13 @@ The binomial distribution with probability of success $p$ is nearly normal when 
 The desired probability is equivalent to the sum of the individual probabilities of observing $k=0$, 1, ..., 58, or 59 smokers in a sample of $n=400$: $P(X \leq 59)$. Confirm that the normal approximation is valid: $np=400\times 0.20=80$, $n(1-p)=400\times 0.8=320$. To use the normal approximation, calculate the mean and standard deviation from the binomial model:
 \begin{align*}
 		\mu &= np = 80
-		&\sigma &= \sqrt{np(1-p)} = 8
+		&\sigma &= \sqrt{np(1-p)} = 8.
 \end{align*}
 		
 Convert 59 to a Z-score: $Z = \dfrac{59-80}{8} = -2.63$. Use the normal probability table to identify the left tail area, which is 0.0043. 
 		
 This estimate is very close to the answer derived from the exact binomial calculation:
-\[P(k=0\text{ or }k=1\text{ or }\cdots\text{ or } k=59) = P(k=0) + P(k=1) + \cdots + P(k=59) = 0.0041 \]
+\[P(k=0\text{ or }k=1\text{ or }\cdots\text{ or } k=59) = P(k=0) + P(k=1) + \cdots + P(k=59) = 0.0041. \]
 \end{nexample}
 \end{examplewrap}
 	
@@ -953,7 +953,7 @@ The \termsub{Poisson distribution}{distribution!Poisson} is a discrete distribut
 \begin{onebox}{Poisson distribution}
 The Poisson distribution is a probability model for the number of events that occur in a population.  The probability that exactly $k$ events occur is given by 
 \begin{align*}
-P(X = k) = \frac{e^{-\lambda}(\lambda)^{k}}{k!}
+P(X = k) = \frac{e^{-\lambda}(\lambda)^{k}}{k!},
 \end{align*}
 where $k$ may take a value 0, 1, 2, \dots The mean and standard deviation of this distribution are $\lambda$ and $\sqrt{\lambda}$, respectively.
 A Poisson random variable $X$ can be expressed as $X \sim \textrm{Pois}(\lambda)$.
@@ -983,7 +983,7 @@ The histogram in Figure~\ref{amiIncidencesOver100Days} approximates a Poisson di
 From the given information, $\lambda = 4.4$, $k = 2$, and $t = 7$. 
 \begin{align*}
 P(X = k) =& \frac{e^{-\lambda t}(\lambda t)^{k}}{k!} \\
-P(X = 2) =& \frac{e^{-4.4 \times 7}(4.4 \times 7)^{2}}{2!} = 1.99 \times 10^{-11}
+P(X = 2) =& \frac{e^{-4.4 \times 7}(4.4 \times 7)^{2}}{2!} = 1.99 \times 10^{-11}.
 \end{align*}
 \end{nexample}
 \end{examplewrap}
@@ -1001,7 +1001,6 @@ A rigorous set of conditions for the Poisson distribution is not discussed here.
 \begin{nexample}{For children ages 0 - 14, the incidence rate of acute lymphocytic leukemia (ALL) was approximately 30 diagnosed cases per million children per year in 2010. Approximately 20\% of the US population of 319,055,000 are in this age range. What is the expected number of cases of ALL in the US over five years?}
 
 The incidence rate for one year can be expressed as $30/1,000,000 = 0.00003$; for five years, the rate is $(5)(0.00003) = 0.00015$. The number of children age 0-14 in the population is $(0.20)(319,055,000) \approx 63,811,000$. 
-
 \begin{align*}
 \lambda &= \text{(relevant population size)(rate per child)} \\
 &= 63,811,000 \times 0.00015 \\
@@ -1052,7 +1051,7 @@ The geometric distribution from Example~\ref{waitForShocker} is shown in Figure~
 \begin{onebox}{Geometric Distribution}\index{distribution!geometric|textbf}
 If the probability of a success in one trial is $p$ and the probability of a failure is $1-p$, then the probability of finding the first success in the $k^{th}$ trial is given by
 \begin{eqnarray*}
-P(X = k) = (1-p)^{k-1}p
+P(X = k) = (1-p)^{k-1}p.
 \end{eqnarray*}
 The mean (i.e. expected value), variance, and standard deviation of this wait time are given by
 \begin{align*}
@@ -1084,7 +1083,7 @@ This is the probability it is the first ($k=1$), second ($k=2$), third ($k=3$), 
 &&P(X=1, 2, 3,\text{ or }4) \\
 	&& \quad = P(X=1)+P(X=2)+P(X=3)+P(X=4) \\
 	&& \quad = (0.65)^{1-1}(0.35) + (0.65)^{2-1}(0.35) + (0.65)^{3-1}(0.35) + (0.65)^{4-1}(0.35) \\
-	&& \quad = 0.82
+	&& \quad = 0.82.
 \end{eqnarray*}
 
 Alternatively, find the complement of P(X = 0), since the described event is the complement of no success in 4 trials: $1 - (0.65)^{4}(0.35)^{0} = 0.82$.
@@ -1143,12 +1142,12 @@ If the probability of a successful extraction is $p=0.8$, what is the probabilit
 
 \textD{\newpage}
 
-A general formula for computing a negative binomial probability can be generated using similar logic as for binomial probability. The probability is comprised of two pieces: the probability of a single sequence of events, and then the number of possible sequences. The probability of observing $r$ successes out of $k$ attempts can be expressed as $(1-p)^{k-r} p^{r}$. Next, identify the number of possible sequences. In the above example, 10 sequences were identified by fixing the last observation as a success and looking for ways to arrange the other observations. In other words, the goal is to arrange $r-1$ successes in $k-1$ trials. This can be expressed as: \[{k-1 \choose r-1} = \frac{(k-1)!}{(r-1)! \left((k-1) - (r-1)\right)!} = \frac{(k-1)!}{(r-1)! \left(k - r\right)!}\]
+A general formula for computing a negative binomial probability can be generated using similar logic as for binomial probability. The probability is comprised of two pieces: the probability of a single sequence of events, and then the number of possible sequences. The probability of observing $r$ successes out of $k$ attempts can be expressed as $(1-p)^{k-r} p^{r}$. Next, identify the number of possible sequences. In the above example, 10 sequences were identified by fixing the last observation as a success and looking for ways to arrange the other observations. In other words, the goal is to arrange $r-1$ successes in $k-1$ trials. This can be expressed as: \[{k-1 \choose r-1} = \frac{(k-1)!}{(r-1)! \left((k-1) - (r-1)\right)!} = \frac{(k-1)!}{(r-1)! \left(k - r\right)!}.\]
 
 \begin{onebox}{Negative binomial distribution}
 The negative binomial distribution describes the probability of observing the $r^{th}$ success on the $k^{th}$ trial, for independent trials:
 \begin{eqnarray}
-P(X = k) = {k-1 \choose r-1} p^{r}(1-p)^{k-r}
+P(X = k) = {k-1 \choose r-1} p^{r}(1-p)^{k-r},
 \label{negativeBinomialEquation}
 \end{eqnarray}
 where $p$ is the probability an individual trial is a success.
@@ -1182,7 +1181,7 @@ The probability of a single success is $p=0.8$, the number of successes is $r=4$
 {k-1 \choose r-1}p^r(1-p)^{k-r}\ 
 	=\ \frac{4!}{3!1!} (0.8)^4 (0.2)\ 
 	=\ 4 \times 0.08192\ 
-	=\ 0.328
+	=\ 0.328.
 \end{align*}
 \end{nexample}
 \end{examplewrap}
@@ -1197,7 +1196,7 @@ Assume that each extraction attempt is independent. What is the probability that
 \footnotetext{If the fourth success ($r=4$) is within five attempts, it either took four or five tries ($k=4$ or $k=5$):
 \begin{align*}
 & P(k=4\text{ OR }k=5) = P(k=4) + P(k=5) \\
-&\quad = {4-1 \choose 4-1} 0.8^4 + {5-1 \choose 4-1} (0.8)^4(1-0.8) = 1\times 0.41 + 4\times 0.082 = 0.41 + 0.33 = 0.74
+&\quad = {4-1 \choose 4-1} 0.8^4 + {5-1 \choose 4-1} (0.8)^4(1-0.8) = 1\times 0.41 + 4\times 0.082 = 0.41 + 0.33 = 0.74.
 \end{align*}}
 
 \begin{onebox}{Binomial versus negative binomial}
@@ -1254,7 +1253,7 @@ Suppose that out of 9 deer, 4 are marked. What is the probability of observing 1
 \begin{onebox}{Hypergeometric distribution}
 The hypergeometric distribution describes the probability of observing $k$ successes in a sample of size $n$, from a population of size $N$, where there are $m$ successes, and individuals are sampled without replacement:
 \begin{align*}
-P(X = k) = \dfrac{{m \choose k} {N - m \choose n-k}}{{N \choose n}}
+P(X = k) = \dfrac{{m \choose k} {N - m \choose n-k}}{{N \choose n}}.
 \label{hypergeometricEquation}
 \end{align*}
 
@@ -1277,7 +1276,7 @@ A hypergeometric random variable $X$ can be written as $X \sim \textrm{HGeom}(m,
 A small clinic would like to draw a random sample of 10 individuals from their patient list of 120, of which 30 patients are smokers. (a) What is the probability of 6 individuals in the sample being smokers? (b) What is the probability that at least 2 individuals in the sample smoke?\footnotemark{}
 \end{nexercise}
 \end{exercisewrap}
-\footnotetext{(a) Let $X$ represent the number of smokers in the sample. $P(X = 6) = \dfrac{{30 \choose 6}{90 \choose 4}}{{120 \choose 10}} = 0.013$. (b) $P(X \geq 2) = 1 - P(X \leq 1) = 1 - P(X = 0) - P(X = 1) = 1 - \dfrac{{30 \choose 0}{90 \choose 10}}{{120 \choose 10}} - \dfrac{{30 \choose 1}{90 \choose 9}}{{120 \choose 10}} = 0.768$ }
+\footnotetext{(a) Let $X$ represent the number of smokers in the sample. $P(X = 6) = \dfrac{{30 \choose 6}{90 \choose 4}}{{120 \choose 10}} = 0.013$. (b) $P(X \geq 2) = 1 - P(X \leq 1) = 1 - P(X = 0) - P(X = 1) = 1 - \dfrac{{30 \choose 0}{90 \choose 10}}{{120 \choose 10}} - \dfrac{{30 \choose 1}{90 \choose 9}}{{120 \choose 10}} = 0.768$. }
 
 \index{distribution!hypergeometric|)}
 
@@ -1456,7 +1455,7 @@ When two random variables are positively correlated, they tend to increase or de
 \begin{align}
 r &=  \frac{1}{n-1}\sum^{n}_{i=1}
 \left(\frac{x_{i}-\overline{x}}
-{s_{x}}\right)\left(\frac{y_{i}-\overline{y}}{s_{y}}\right)
+{s_{x}}\right)\left(\frac{y_{i}-\overline{y}}{s_{y}}\right).
 \end{align} 
 The correlation coefficient $r$ is an average of products, with each term in the product measuring the distance between $x$ and its mean $\overline{x}$ and the distance between $y$ and its mean $\overline{y}$, after the distances have been scaled by respective standard deviations.
 
@@ -1470,7 +1469,7 @@ where $\rho_{X,Y}$ is the correlation between the two variables, and $\mu_X, \mu
 Equation~\ref{eq:specificFormulaCorrelation} is an expansion of Equation~\ref{eq:generalFormulaCorrelation}. The double summation adds up terms over all combinations of the indices $i$ and $j$.
 
 \begin{equation}
-\rho_{X,Y} = \sum_{i} \sum_{j} p(i,j)\frac{(x_i - \mu_X)}{\textrm{sd}(X)}\frac{(y_j - \mu_Y)}{\textrm{sd}(Y)}
+\rho_{X,Y} = \sum_{i} \sum_{j} p(i,j)\frac{(x_i - \mu_X)}{\textrm{sd}(X)}\frac{(y_j - \mu_Y)}{\textrm{sd}(Y)}.
 \label{eq:specificFormulaCorrelation}
 \end{equation}
 
@@ -1485,7 +1484,7 @@ As calculated previously, $E(X) = \$1010$, $\textrm{Var}(X) = 1556$, $E(Y) = \$9
 	&= (0.18) \frac{(968 - 1010)}{39.45}\frac{(968 - 980)}{9.8} 
 	+ (0.12)\frac{(968 - 1010)}{39.45}\frac{(988 - 980)}{9.8}  \\
 	&\phantom{{}=1} + \cdots + (0.03)\frac{(1108 - 1010)}{39.45}\frac{(968 - 980)}{9.8} + (0.07)\frac{(1108 - 1010)}{39.45}\frac{(988 - 980)}{9.8} \\
-	&= 0.22
+	&= 0.22.
 	\end{align*} 
 	The correlation between annual health care costs for these two individuals is positive. It is reasonable to expect that there might be a positive correlation in health care costs for two individuals in a relationship; for example, if one person contracts the flu, then it is likely the other person will also contract the flu, and both may need to see a doctor.
 \end{nexample}
@@ -1506,7 +1505,7 @@ When two random variables $X$ and $Y$ are correlated:
 \end{equation}
 \begin{equation}
 \text{Variance}(X - Y) = \text{Variance}(X) + \text{Variance}(Y) - 
-2 \sigma_X \sigma_Y\text{Correlation}(X,Y) 
+2 \sigma_X \sigma_Y\text{Correlation}(X,Y). 
 \label{eq:generalVarianceDiffRVs}
 \end{equation}
 

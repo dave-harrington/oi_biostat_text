@@ -123,7 +123,7 @@ Two outcomes are \termsub{disjoint}{disjoint events} or \termsub{mutually exclus
 
 What is the probability of rolling a \resp{1} or a \resp{2}? When rolling a die, the outcomes \resp{1} and \resp{2} are disjoint. The probability that one of these outcomes will occur is computed by adding their separate probabilities:
 \begin{eqnarray*}
-P(\text{\resp{1} or \resp{2}}) = P(\text{\resp{1}})+P(\text{\resp{2}}) = 1/6 + 1/6 = 1/3
+P(\text{\resp{1} or \resp{2}}) = P(\text{\resp{1}})+P(\text{\resp{2}}) = 1/6 + 1/6 = 1/3.
 \end{eqnarray*}
 What about  the probability of rolling a \resp{1}, \resp{2}, \resp{3}, \resp{4}, \resp{5}, or \resp{6}? Here again, all of the outcomes are disjoint, so add the individual probabilities:
 \begin{eqnarray*}
@@ -134,11 +134,11 @@ What about  the probability of rolling a \resp{1}, \resp{2}, \resp{3}, \resp{4},
 
 \begin{onebox}{Addition Rule of disjoint outcomes} If $A_1$ and $A_2$ represent two disjoint outcomes, then the probability that either one of them occurs is given by
 \begin{eqnarray*}
-P(A_1\text{ or } A_2) = P(A_1) + P(A_2)
+P(A_1\text{ or } A_2) = P(A_1) + P(A_2).
 \end{eqnarray*}
 If there are $k$ disjoint outcomes $A_1$, ..., $A_k$, then the probability that either one of these outcomes will occur is
 \begin{eqnarray}
-P(A_1) + P(A_2) + \cdots + P(A_k)
+P(A_1) + P(A_2) + \cdots + P(A_k).
 \end{eqnarray}
 \end{onebox}
 
@@ -164,7 +164,7 @@ Probability problems often deal with \indexthis{\emph{sets}}{sets} or \indexthis
 
 The Addition Rule applies to both disjoint outcomes and disjoint events. The probability that one of the disjoint events $A$ or $B$ occurs is the sum of the separate probabilities:
 \begin{align*}
-P(A\text{ or }B) = P(A) + P(B) = 1/3 + 1/3 = 2/3
+P(A\text{ or }B) = P(A) + P(B) = 1/3 + 1/3 = 2/3.
 \end{align*}
 
 \begin{exercisewrap}
@@ -232,7 +232,7 @@ Let $A$ represent the event that a randomly selected card is a diamond and $B$ r
 
 As a result, adding the probabilities of the two events together is not sufficient to calculate $P(A \ \text{or} \ B)$:
 \begin{eqnarray*}
-	P(A) + P(B) = P({\color{redcards}\diamondsuit}) + P(\text{face card}) = 12/52 + 13/52
+	P(A) + P(B) = P({\color{redcards}\diamondsuit}) + P(\text{face card}) = 12/52 + 13/52.
 	\label{overCountFaceDiamond}
 \end{eqnarray*}
 Instead, a small modification is necessary. The three cards that are in both events were counted twice. To correct the double counting, subtract the probability that both events occur:
@@ -241,14 +241,14 @@ Instead, a small modification is necessary. The three cards that are in both eve
 P(A\text{ or } B) &=&P(\text{face card or }{\color{redcards}\diamondsuit})  \notag \\
  &=& P(\text{face card}) + P({\color{redcards}\diamondsuit}) - P(\text{face card and }{\color{redcards}\diamondsuit}) \label{diamondFace} \\
  &=& 13/52 + 12/52 - 3/52 \notag \\
- &=& 22/52 = 11/26 \notag
+ &=& 22/52 = 11/26. \notag
 \end{eqnarray}
 Equation~(\ref{diamondFace}) is an example of the \term{General Addition Rule}. 
 
 \begin{onebox}{General Addition Rule}
 If $A$ and $B$ are any two events, disjoint or not, then the probability that at least one of them will occur is
 \begin{eqnarray}
-P(A\text{ or }B) = P(A) + P(B) - P(A\text{ and }B)
+P(A\text{ or }B) = P(A) + P(B) - P(A\text{ and }B),
 \label{generalAdditionRule}
 \end{eqnarray}
 where $P(A$ and $B)$ is the probability that both events occur.
@@ -318,7 +318,7 @@ The graph shows that while most babies born weighed between 2000 and 5000 grams 
 
 \begin{figure}[h]
 	\includegraphics[width=\textwidth]{ch_probability_oi_biostat/figures/birthwtMarginalDist/birthwtMarginalDist.pdf}
-	\caption{Distribution of birth weights (in grams) of babies born in the US in 2010}
+	\caption{Distribution of birth weights (in grams) of babies born in the US in 2010.}
 	\label{fig:birthwtMarginalDist}
 \end{figure}
 
@@ -348,14 +348,14 @@ Just as in the discrete case, the probabilities of all possible outcomes must st
 Find the proportion of the histogram's area that falls in the range \resp{180} cm and \resp{185}: add the heights of the bins in the range and divide by the sample size:
 
 \begin{align*}                                                    
-\frac{195,307+156,239}{\text{3,000,000}} = 0.1172                
+\frac{195,307+156,239}{\text{3,000,000}} = 0.1172.               
 \end{align*}
 
 The probability can be calculated precisely with the use of computing software, by finding the area of the shaded region under the curve between \resp{180} and \resp{185}:
 \begin{align*}
 P(\text{\var{height} between \resp{180} and \resp{185}})
 = \text{area between \resp{180} and \resp{185}}
-= 0.1157
+= 0.1157.
 \end{align*}
 \end{nexample}
 \end{examplewrap}
@@ -443,7 +443,7 @@ Combining Equations~(\ref{complementSumTo1}) and~(\ref{complementDisjointEquatio
 \begin{onebox}{Complement}
 The complement of event $A$ is denoted $A^c$, and $A^c$ represents all outcomes not in~$A$. $A$ and $A^c$ are mathematically related: \vspace{-2mm}
 \begin{eqnarray}\label{complement}
-P(A) + P(A^c) = 1, \quad\text{i.e.}\quad P(A) = 1-P(A^c)
+P(A) + P(A^c) = 1, \quad\text{i.e.}\quad P(A) = 1-P(A^c).
 \end{eqnarray}
 \end{onebox}
 
@@ -502,7 +502,7 @@ What if there were also a red die independent of the other two? What is the prob
 P(blue=\text{\small\resp{1} and } green=\text{\small\resp{1} and } red=\text{\small\resp{1}})
 	&= P(blue=\text{\small\resp{1}}) P(green=\text{\small\resp{1}}) P(red=\text{\small\resp{1}}) \\
 	&= (1/6) (1/6) (1/6)
-	= 1/216
+	= 1/216.
 \end{align*}}}
 
 \begin{exercisewrap}
@@ -515,7 +515,7 @@ Three US adults are randomly selected. The probability the height of a single ad
 	\end{enumerate}
 \end{nexercise}
 \end{exercisewrap}
-\footnotetext{Brief answers: (a) $0.1157 \times 0.1157 \times 0.1157 = 0.0015$. (b) $(1-0.1157)^3 = 0.692$}
+\footnotetext{Brief answers: (a) $0.1157 \times 0.1157 \times 0.1157 = 0.0015$. (b) $(1-0.1157)^3 = 0.692$.}
 
 \textD{\newpage}
 
@@ -523,11 +523,11 @@ Three US adults are randomly selected. The probability the height of a single ad
 \index{Multiplication Rule|textbf}%
 If $A$ and $B$ represent events from two different and independent processes, then the probability that both $A$ and $B$ occur is given by: \vspace{-1.5mm}
 \begin{eqnarray}\label{eqForIndependentEvents}
-P(A \text{ and }B) = P(A)  P(B)
+P(A \text{ and }B) = P(A)  P(B).
 \end{eqnarray}
 Similarly, if there are $k$ events $A_1$, ..., $A_k$ from $k$ independent processes, then the probability they all occur is\vspace{-1.5mm}
 \begin{eqnarray*}
-P(A_1) P(A_2) \cdots P(A_k)
+P(A_1) P(A_2) \cdots P(A_k).
 \end{eqnarray*}
 \end{onebox}
 
@@ -590,7 +590,7 @@ The probability the card is a heart is $1/4$ ($13/52=1/4$) and the probability t
 
 \begin{align*}
 P({\color{redcards}\heartsuit}) P(\text{\resp{A}}) = \left(\frac{1}{4} \right) \left( \frac{1}{13} \right) = \frac{1}{52} 
-= P({\color{redcards}\heartsuit}\text{ and \resp{A}})
+= P({\color{redcards}\heartsuit}\text{ and \resp{A}}).
 \end{align*}
 Since the equation holds, the event that the card is a heart and the event that the card is an ace are independent events.
 \end{nexample}
@@ -602,7 +602,7 @@ Since the equation holds, the event that the card is a heart and the event that 
 
 Assume that the population is 50\% male, 50\% female; it is given in the problem that hypertension occurs about 15\% of the time in adults between ages 25 and 40. 
 
-\[P(\text{hypertension}) \times P(\text{male}) = (0.15)(0.50) = 0.075 \neq 0.18\] 
+\[P(\text{hypertension}) \times P(\text{male}) = (0.15)(0.50) = 0.075 \neq 0.18.\] 
 
 Equation~\ref{eqForIndependentEvents} is not satisfied, therefore hypertension is not independent of sex. In other words, knowing whether an individual is male or female is informative as to whether they are hypertensive. If hypertension and sex were independent, then we would expect hypertension to occur at an equal rate in males as in females.
 \end{nexample}
@@ -643,7 +643,7 @@ Figures~\ref{DiabetesAgeContTable} and \ref{DiabetesAgeProbTable} provide additi
 		Sum & 29,100 & 284,220 & 313,320 \\ 
 		\hline
 	\end{tabular}
-	\caption{Contingency table showing type 2 diabetes status and age group, in thousands}
+	\caption{Contingency table showing type 2 diabetes status and age group, in thousands.}
 	\label{DiabetesAgeContTable}
 \end{figure}
 % can xtable insert comma separators automatically?  If not, I will add them by hand. JV: apparently R can do this, but I didn't manage to get it working http://stackoverflow.com/questions/1581232/adding-commas-into-number-for-output
@@ -679,7 +679,7 @@ The entries in Figure~\ref{DiabetesAgeProbTable} show the proportions of the pop
 		Sum & 0.093 & 0.907 & 1.000 \\ 
 		\hline
 	\end{tabular}
-	\caption{Probability table summarizing diabetes status and age group}
+	\caption{Probability table summarizing diabetes status and age group.}
 	\label{DiabetesAgeProbTable}
 \end{figure}
 %   xtable(diabetes.age.table.prop, digits = 3)
@@ -728,7 +728,7 @@ This leads to the mathematical definition of conditional probability.
 \begin{onebox}{Conditional probability}
 The conditional probability of an event $A$ given an event or condition $B$ is:
 \begin{align}
-P(A | B) = \frac{P(A\text{ and }B)}{P(B)}
+P(A | B) = \frac{P(A\text{ and }B)}{P(B)}.
 \label{condProbEq}
 \end{align}
 \end{onebox}
@@ -754,11 +754,11 @@ Conditional probabilities have similar properties to regular (unconditional) pro
 \begin{onebox}{Sum of conditional probabilities}
 Let $A_1$, ..., $A_k$ represent all the disjoint outcomes for a variable or process. Then if $B$ is an event, possibly for another variable or process, we have: \vspace{-1mm}
 \begin{align*}
-P(A_1|B)+\cdots+P(A_k|B) = 1
+P(A_1|B)+\cdots+P(A_k|B) = 1.
 \end{align*}\vspace{-5.5mm} \par
 The rule for complements also holds when an event and its complement are conditioned on the same information: \vspace{-1.5mm}
 \begin{align*}
-P(A | B) = 1 - P(A^c | B)
+P(A | B) = 1 - P(A^c | B).
 \end{align*}
 \end{onebox}
 
@@ -780,7 +780,7 @@ Section~\ref{probabilityIndependence} introduced the Multiplication Rule for ind
 \begin{onebox}{General Multiplication Rule}
 If $A$ and $B$ represent two outcomes or events, then \vspace{-1.5mm}
 \begin{eqnarray*}
-P(A\text{ and }B) = P(A | B) P(B)
+P(A\text{ and }B) = P(A | B) P(B).
 \end{eqnarray*} \vspace{-6.5mm} \par
 It is useful to think of $A$ as the outcome of interest and $B$ as the condition.
 \end{onebox}
@@ -800,7 +800,7 @@ If two events are independent, knowing the outcome of one should provide no info
 
 \begin{examplewrap}
 \begin{nexample}{Let $X$ and $Y$ represent the outcomes of rolling two dice. Use the formula for conditional probability to compute $P(Y =$ \resp{1}$\ |\ X = $ \resp{1}$)$. What is $P(Y=1)$? Is this different from $P(Y =$ \resp{1}$\ |\ X = $ \resp{1}$)$?}\label{condProbOfRollingA1AfterOne1}%
-\[\frac{P(Y = \text{ \resp{1} and }X=\text{ \resp{1}})}{P(X=\text{ \resp{1}})} = \frac{1/36}{1/6} = 1/6\]
+\[\frac{P(Y = \text{ \resp{1} and }X=\text{ \resp{1}})}{P(X=\text{ \resp{1}})} = \frac{1/36}{1/6} = 1/6.\]
 
 The probability $P(Y=1) = 1/6$ is the same as the conditional probability. The probability that $Y=1$ was unchanged by knowledge about $X$, since the events $X$ and $Y$ are independent.
 \end{nexample}
@@ -814,14 +814,14 @@ Using the Multiplication Rule for independent events allows for a mathematical i
 P(Y=\text{\resp{1}}\ |\ X=\text{\resp{1}})
 	&=& \frac{P(Y=\text{\resp{1} and }X=\text{\resp{1}})}{P(X=\text{\resp{1}})} \\
 	&=& \frac{P(Y=\text{\resp{1}}) \color{oiGB}P(X=\text{\resp{1}})}{\color{oiGB}P(X=\text{\resp{1}})} \\
-	&=& P(Y=\text{\resp{1}}) \\
+	&=& P(Y=\text{\resp{1}}). \\
 \end{eqnarray*}
 
 This is a specific instance of the more general result that if two events $A$ and $B$ are independent, $P(A |B) = P(A)$ as long as $P(B) > 0$:
 \begin{eqnarray*}
 	P(A | B) &= \dfrac{P(A \text{ and } B)}{P(B)} \\
 	     &= \dfrac{P(A) P(B)}{P(B)} \\
-		 &= P(A)
+		 &= P(A).
 \end{eqnarray*} 
 
 \begin{exercisewrap}
@@ -873,7 +873,7 @@ Joint probabilities can be constructed at the end of each branch by multiplying 
 
 \begin{align*}
 P(\text{BC and mammogram$^+$}) &= P(\text{mammogram$^+$ } |\ \text{BC}) \times  P(\text{BC}) \\
-	&= (0.89) (0.0035) = 0.00312
+	&= (0.89) (0.0035) = 0.00312.
 \end{align*}
 
 \textD{\newpage}
@@ -884,14 +884,13 @@ The probability of a positive test result is the sum of the two corresponding sc
 \begin{align*}
 P(\text{mammogram$^+$}) =&  P(\text{mammogram$^+$ and has BC}) + P(\text{mammogram$^+$ and no BC}) \\
 =&[P(\text{mammogram$^+$ } | \text{ has BC}) \times P(\text{has BC})] + [P(\text{mammogram$^+$ } | \text{ no BC}) \times P(\text{no BC})] \\
-=& (0.0035)(0.89) + (0.9965)(0.07) = 0.07288
+=& (0.0035)(0.89) + (0.9965)(0.07) = 0.07288.
 \end{align*}
-
 Thus, if the mammogram screening is positive for a patient, the probability that the patient has breast cancer is given by: 
 \begin{align*}
 P(\text{has BC } | \text{ mammogram$^+$})
 	&= \frac{P(\text{has BC and mammogram$^+$})}{P(\text{mammogram$^+$})}\\
-	&= \frac{0.00312}{0.07288} \approx 0.0428
+	&= \frac{0.00312}{0.07288} \approx 0.0428.
 \end{align*}
 
 Even with a positive mammogram, there is still only a~4\%~chance of breast cancer! It may seem surprising that even when the false negative and false positive probabilities of the test are small (0.11 and 0.07, respectively), the conditional probability of disease given a positive test could also be so small. In this population, the probability that a woman does not have breast cancer is high (1 - 0.0035 = 0.9965), which results in a relatively high number of false positives in comparison to true positives.
@@ -918,7 +917,7 @@ The process used to solve the problem via the tree diagram can be condensed into
 P(\text{has BC } | \text{ mammogram$^+$})
 &= \frac{P(\text{has BC and mammogram$^+$})}{P(\text{mammogram$^+$})} \\
 &= \frac{P(\text{mammogram$^+$ } | \text{ has BC}) \times P(\text{has BC})}
-{[P(\text{mammogram$^+$ } | \text{ has BC}) \times P(\text{has BC})] + [P(\text{mammogram$^+$ } | \text{ no BC}) \times P(\text{no BC})]}
+{[P(\text{mammogram$^+$ } | \text{ has BC}) \times P(\text{has BC})] + [P(\text{mammogram$^+$ } | \text{ no BC}) \times P(\text{no BC})]}.
 \end{align*}
 \end{small}
 
@@ -927,7 +926,7 @@ The expression can also be written in terms of diagnostic testing language, wher
 \begin{align*}
 P(D|T^{+}) &= \dfrac{P(D \text{ and } T^{+})}{P(T^{+})} \\
 &= \dfrac{P(T^{+}|D) \times P(D)}{[P(T^{+}|D) \times P(D)] + [P(T^{+}|D^c) \times P(D^c)]} \\
-\text{PPV} &= \dfrac{\text{sensitivity } \times \text{ prevalence}}{[\text{sensitivity } \times \text{ prevalence}] + [\text{(1 - specificity) } \times \text{ (1 - prevalence)}]}
+\text{PPV} &= \dfrac{\text{sensitivity } \times \text{ prevalence}}{[\text{sensitivity } \times \text{ prevalence}] + [\text{(1 - specificity) } \times \text{ (1 - prevalence)}]}.
 \end{align*}
 
 The generalization of this formula is known as Bayes' Theorem or Bayes' Rule.
@@ -935,12 +934,12 @@ The generalization of this formula is known as Bayes' Theorem or Bayes' Rule.
 \begin{onebox}{Bayes' Theorem}
 Consider the following conditional probability for variable 1 and variable 2:\vspace{-1.5mm}
 \begin{align*}
-P(\text{outcome $A_1$ of variable 1 } | \text{ outcome $B$ of variable 2})
+P(\text{outcome $A_1$ of variable 1 } | \text{ outcome $B$ of variable 2}).
 \end{align*}
 Bayes' Theorem states that this conditional probability can be identified as the following fraction:\vspace{-1.5mm}
 \begin{align}
 \frac{P(B | A_1) P(A_1)}
-	{P(B | A_1) P(A_1) + P(B | A_2) P(A_2) + \cdots + P(B | A_k) P(A_k)}
+	{P(B | A_1) P(A_1) + P(B | A_2) P(A_2) + \cdots + P(B | A_k) P(A_k)},
 	\label{equationOfBayesTheorem}
 \end{align}
 where $A_2$, $A_3$, ..., and $A_k$ represent all other possible outcomes of the first variable.\index{Bayes' Theorem|textbf}
@@ -1006,7 +1005,7 @@ Continue populating the table, using the provided information about the prevalen
 	
 	\item Finally, calculate the PPV of the mammogram by using the ratio of the number of true positives to the total number of positive mammograms. This estimate is more than accurate enough, with the calculated value differing only in the third decimal place from the exact calculation, 
 	
-	\[\dfrac{\text{ true "+" results}}{\text{ "+" mammograms}} = \dfrac{311.5}{7,287} = 0.0427 \]
+	\[\dfrac{\text{ true "+" results}}{\text{ "+" mammograms}} = \dfrac{311.5}{7,287} = 0.0427. \]
 	
 \end{enumerate}
 
@@ -1030,7 +1029,7 @@ Continue populating the table, using the provided information about the prevalen
 Some congenital disorders are caused by errors that occur during cell division, resulting in the presence of additional chromosome copies. Trisomy 21 occurs in approximately 1 out of 800 births. Cell-free fetal DNA (cfDNA) testing is one commonly used way to screen fetuses for trisomy 21. The test sensitivity is 0.98 and the specificity is 0.995. Calculate the PPV and NPV of the test.\footnotemark{}
 \end{nexercise}
 \end{exercisewrap}
-\footnotetext{PPV = $\dfrac{P(T^{+}|D) \times P(D)}{[P(T^{+}|D) \times P(D)] + [P(T^{+}|D^c) \times P(D^c)]} = \dfrac{(0.98)(1/800)}{(0.98)(1/800) + (1 - 0.995)(799/800)} = 0.197$ \\ NPV = $\dfrac{P(T^{-}|D^c) \times P(D^c)}{[P(T^{-}|D) \times P(D)] + [P(T^{-}|D^c) \times P(D^c)]} = \dfrac{(0.995)(799/800)}{(1-0.98)(1/800) + (0.995)(799/800)} = 0.999975$}
+\footnotetext{PPV = $\dfrac{P(T^{+}|D) \times P(D)}{[P(T^{+}|D) \times P(D)] + [P(T^{+}|D^c) \times P(D^c)]} = \dfrac{(0.98)(1/800)}{(0.98)(1/800) + (1 - 0.995)(799/800)} = 0.197$. \\ NPV = $\dfrac{P(T^{-}|D^c) \times P(D^c)}{[P(T^{-}|D) \times P(D)] + [P(T^{-}|D^c) \times P(D^c)]} = \dfrac{(0.995)(799/800)}{(1-0.98)(1/800) + (0.995)(799/800)} = 0.999975$.}
 
 \index{Bayes' Theorem|)}
 \index{tree diagram|)}
@@ -1095,17 +1094,17 @@ While it is not difficult to recognize that the second and third sentences provi
 \end{examplewrap}
 
 Consider that there are three possible ways to partition the event $D$, that a white cat is deaf: a cat could be deaf and have two blue eyes, be deaf and have one blue eye (and one non-blue eye), or be deaf and have two non-blue eyes. Thus, by the addition rule of disjoint outcomes: 
-\[P(D) = P(D \textrm{ and } B_2 ) + P(D \textrm{ and } B_1 ) + P(D \textrm{ and } B_0 )\]
+\[P(D) = P(D \textrm{ and } B_2 ) + P(D \textrm{ and } B_1 ) + P(D \textrm{ and } B_0 ).\]
 
 Although the joint probabilities of being deaf and having particular eye colors are not given in the problem, these can be solved for based on the given information. The definition of conditional probability $P(A|B)$ relates the joint probability $P(A \textrm{ and } B)$ with the marginal probability $P(B)$.\footnote{This rearrangement of the definition of conditional probability, $P(A \textrm{ and } B) = P(A|B)P(B)$, is also known as the general multiplication rule.}  
-\[P(A|B) = \dfrac{P(A \textrm{ and } B)}{P(B)} \qquad P(A \textrm{ and } B) = P(A|B)P(B) \]
+\[P(A|B) = \dfrac{P(A \textrm{ and } B)}{P(B)} \qquad P(A \textrm{ and } B) = P(A|B)P(B). \]
 
 Thus, the probability $P(D)$ is given by:
 \begin{align*}
 P(D) =& P(D \textrm{ and } B_2 ) + P(D \textrm{ and } B_1 ) + P(D \textrm{ and } B_0 ) \\
 =& P(D|B_2)P(B_2) + P(D|B_1)P(B_1) + P(D|B_0)P(B_0) \\
 =& (0.73)(0.10) + (0.40)(0.30) + (0.19)(0.60) \\
-=& 0.307
+=& 0.307.
 \end{align*}
 
 The prevalence of deafness among white cats is 0.307.
@@ -1121,14 +1120,14 @@ The probability that a white cat has two blue eyes, given that it is deaf, can b
 \begin{examplewrap}
 \begin{nexample}{Using the definition of conditional probability, solve for $P(B_2|D)$.}
 	
-\[P(B_2|D) = \dfrac{P(D \textrm{ and } B_2)}{P(D)} = \dfrac{P(D|B_2)P(B_2)}{P(D)} = \dfrac{(0.73)(0.10)}{0.307} = 0.238 \]
+\[P(B_2|D) = \dfrac{P(D \textrm{ and } B_2)}{P(D)} = \dfrac{P(D|B_2)P(B_2)}{P(D)} = \dfrac{(0.73)(0.10)}{0.307} = 0.238. \]
 
 The probability that a white cat has two blue eyes, given that it is deaf, is 0.238.
 \end{nexample}
 \end{examplewrap}
 
 It is also possible to think of this as a Bayes' Rule problem, where there are three possible partitions of the event of deafness, $D$. In this problem, it is possible to directly solve from the definition of conditional probability since $P(D)$  was solved for in part a); note that the expanded denominator below matches the earlier work to calculate $P(D)$.
-\[P(B_2|D) = \dfrac{P(D \textrm{ and } B_2)}{P(D)} = \dfrac{P(D|B_2)P(B_2)}{P(D|B_2)P(B_2) + P(D|B_1)P(B_1) + P(D|B_0)P(B_0)} \]
+\[P(B_2|D) = \dfrac{P(D \textrm{ and } B_2)}{P(D)} = \dfrac{P(D|B_2)P(B_2)}{P(D|B_2)P(B_2) + P(D|B_1)P(B_1) + P(D|B_0)P(B_0)}. \]
 
 
 \subsubsection{Part c) Blindness, deafness, and eye color}
@@ -1144,7 +1143,7 @@ The second sentence gives probabilities of blindness, conditional on eye color a
 \end{examplewrap}
 
 Part i. asks for the prevalence of blindness among deaf, white cats: $P(L|D)$. As in part a), the event of blindness given deafness can be partitioned by eye color:
-\[P(L|D) = P(L \textrm{ and } B_0|D) + P(L \textrm{ and } B_1 | D) + P(L \textrm{ and } |D)\]
+\[P(L|D) = P(L \textrm{ and } B_0|D) + P(L \textrm{ and } B_1 | D) + P(L \textrm{ and } |D).\]
 
 \begin{examplewrap}
 \begin{nexample}{Expand the previous expression using the general multiplication rule, $P(A \textrm{ and } B) = P(A|B)P(B)$.}
@@ -1155,10 +1154,10 @@ Part i. asks for the prevalence of blindness among deaf, white cats: $P(L|D)$. A
 	\[P(L \textrm{ and } B_0) = P(L|B_0)P(B_0) \]
 	
 	Now, recall that for this part of the problem, the sample space is restricted to deaf (and white) cats. Thus, all of the terms in the expansion should include conditioning on deafness:
-	\[P(L \textrm{ and } B_0|\textcolor{red}{D}) = P(L|\textcolor{red}{D}, B_0)P(B_0|\textcolor{red}{D}) \]
+	\[P(L \textrm{ and } B_0|\textcolor{red}{D}) = P(L|\textcolor{red}{D}, B_0)P(B_0|\textcolor{red}{D}). \]
 	
 	Thus, 
-	\[P(L|D) = P(L|D, B_0)P(B_0|D) + P(L|D, B_1)P(B_1|D) + P(L|D, B_2)P(B_2|D)\]
+	\[P(L|D) = P(L|D, B_0)P(B_0|D) + P(L|D, B_1)P(B_1|D) + P(L|D, B_2)P(B_2|D).\]
 \end{nexample}
 \end{examplewrap}
 
@@ -1169,14 +1168,14 @@ Although $P(L|D, B_0)$, $P(L|D, B_1)$, and $P(L|D, B_2)$ are given from the prob
 Calculate $P(B_0|D)$ and $P(B_1|D)$.\footnotemark{}
 \end{nexercise}
 \end{exercisewrap}
-\footnotetext{\[P(B_0|D) = \dfrac{P(D \textrm{ and } B_0)}{P(D)} = \dfrac{P(D|B_0)P(B_0)}{P(D)} = \dfrac{(0.19)(0.60)}{0.307} = 0.371 \] \[P(B_1|D) = \dfrac{P(D \textrm{ and } B_1)}{P(D)} = \dfrac{P(D|B_1)P(B_1)}{P(D)} = \dfrac{(0.40)(0.30)}{0.307} = 0.391 \]}
+\footnotetext{\[P(B_0|D) = \dfrac{P(D \textrm{ and } B_0)}{P(D)} = \dfrac{P(D|B_0)P(B_0)}{P(D)} = \dfrac{(0.19)(0.60)}{0.307} = 0.371. \] \[P(B_1|D) = \dfrac{P(D \textrm{ and } B_1)}{P(D)} = \dfrac{P(D|B_1)P(B_1)}{P(D)} = \dfrac{(0.40)(0.30)}{0.307} = 0.391. \]}
 
 There is now sufficient information to calculate $P(L|D)$: 
 \begin{align*}
 P(L|D) =& P(L \textrm{ and } B_0|D) + P(L \textrm{ and } B_1 | D) + P(L \textrm{ and } |D) \\
 =& P(L|D, B_0)P(B_0|D) + P(L|D, B_1)P(B_1|D) + P(L|D, B_2)P(B_2|D) \\
 =& (0.20)(0.371) + (0.40)(0.391) + (0.20)(0.238) \\
-=& 0.278
+=& 0.278.
 \end{align*}
 The prevalence of blindness among deaf, white cats is 0.278.
 
@@ -1190,7 +1189,7 @@ Part ii. asks for the prevalence of blindness among white cats, $P(L)$. Again, p
 P(L) =& P(L \textrm{ and } D) + P(L \textrm{ and } D^C) \\
 =& P(L|D)P(D) + P(L|D^C)P(D^C) \\
 =& (0.278)(0.307) + (0.10)(1 - 0.307) \\
-=& 0.155
+=& 0.155.
 \end{align*}	
 	
 $P(D)$ was calculated in part a), while $P(L|D)$ was calculated in part c, i. The conditioning probability of blindness given a white cat is not deaf is 0.10, as given in the question statement. By the definition of the complement, $P(D^C) = 1 - P(D)$. 
@@ -1202,11 +1201,11 @@ The prevalence of blindness among white cats is 0.155.
 Part iii. asks for the probability that a cat has two blue eyes, given that it is white and blind. This probability can be expressed as $P(B_2|L)$. Recall that since all cats being discussed in the problem are white, it is not necessary to condition on coat color.
 
 Start out with the definition of conditional probability:
-\[P(B_2|L) = \dfrac{P(B_2 \textrm{ and } L)}{P(L)} \]
+\[P(B_2|L) = \dfrac{P(B_2 \textrm{ and } L)}{P(L)}. \]
 
 The key to calculating $P(B_2|L)$ relies on recognizing that the event a cat is blind and has two blue eyes can be partitioned by whether or not the cat is also deaf:
 \begin{align}
-P(B_2|L) &= \dfrac{P(B_2 \textrm{ and } L \textrm{ and } D) + P(B_2 \textrm{ and } L \textrm{ and } D^C)}{P(L)}
+P(B_2|L) &= \dfrac{P(B_2 \textrm{ and } L \textrm{ and } D) + P(B_2 \textrm{ and } L \textrm{ and } D^C)}{P(L)}.
 \label{pB2GivenL}
 \end{align}
 
@@ -1241,7 +1240,7 @@ It is not immediately obvious whether it will be more efficient to start with de
 \begin{align*}
 P(B_2|L) &= \dfrac{P(B_2 \textrm{ and } L \textrm{ and } D) + P(B_2 \textrm{ and } L \textrm{ and } D^C)}{P(L)} \\
 &= \dfrac{P(L|B_2, D)P(B_2|D)P(D) + P(L|B_2, D^C)P(B_2|D^C)P(D^C)}{P(L)} \\
-&= \dfrac{(0.20)(0.238)(0.307) + (0.10)P(B_2|D^C)P(D^C)}{0.155}
+&= \dfrac{(0.20)(0.238)(0.307) + (0.10)P(B_2|D^C)P(D^C)}{0.155}.
 \end{align*}
 
 Two of the probabilities have not been calculated previously: $P(B_2|D^C)$ and $P(D^C)$. From the definition of the complement, $P(D^C) = 1 - P(D) = 0.693$; $P(D)$ was calculated in part a). To calculate $P(B_2|D^C)$, apply the definition of conditional probability as in part b), where $P(B_2|D)$ was calculated:
@@ -1261,7 +1260,7 @@ The probability that a white cat has two blue eyes, given that it is blind, is 0
 Expand Equation~\ref{pB2GivenL} according to the tree shown in Figure~\ref{catGeneticsTreesB}, and solve for $P(B_2|L)$.\footnotemark{}
 \end{nexercise}
 \end{exercisewrap}
-\footnotetext{\[P(B_2|L) = \frac{P(L|B_2, D)P(D|B_2)P(B_2) + P(L|B_2, D^C)P(D^C|B_2)P(B_2)}{P(L)} = \frac{(0.20)(0.73)(0.10) + (0.10)(1-0.73)(0.10)}{0.155} = 0.112\]}
+\footnotetext{\[P(B_2|L) = \frac{P(L|B_2, D)P(D|B_2)P(B_2) + P(L|B_2, D^C)P(D^C|B_2)P(B_2)}{P(L)} = \frac{(0.20)(0.73)(0.10) + (0.10)(1-0.73)(0.10)}{0.155} = 0.112.\]}
 
 A tree diagram is useful for visualizing the different possible ways that a certain set of outcomes can occur. Although conditional probabilities can certainly be calculated without the help of tree diagrams, it is often easy to make errors with a strictly algebraic approach. Once a tree is constructed, it can be used to solve for several probabilities of interest. The following example shows how one of the previous trees can be applied to answer a different question than the one posed in part c), iii.
 
@@ -1272,7 +1271,7 @@ A tree diagram is useful for visualizing the different possible ways that a cert
 
 Calculate $P(B_1|L^C)$. Start with the definition of conditional probability, then expand.
 
-\[P(B_1|L^C) = \dfrac{P(B_1 \textrm{ and } L^C)}{P(L^C)} = \frac{P(B_1 \textrm{ and } L^C \textrm{ and } D) + P(B_1 \textrm{ and } L^C \textrm{ and } D^C)}{P(L^C)} \]
+\[P(B_1|L^C) = \dfrac{P(B_1 \textrm{ and } L^C)}{P(L^C)} = \frac{P(B_1 \textrm{ and } L^C \textrm{ and } D) + P(B_1 \textrm{ and } L^C \textrm{ and } D^C)}{P(L^C)}. \]
 
 
 Figure~\ref{catGeneticsTreesC} is a reproduction of the earlier tree diagram (Figure~\ref{catGeneticsTreesB}), with yellow arrows showing the two paths of interest.
@@ -1282,7 +1281,7 @@ Figure~\ref{catGeneticsTreesC} is a reproduction of the earlier tree diagram (Fi
 	\begin{align*}
 	P(B_1|L^C) =& \frac{P(B_1 \textrm{ and } L^C \textrm{ and } D) + P(B_1 \textrm{ and } L^C \textrm{ and } D^C)}{P(L^C)}\\
 	=& \frac{P(L^C|D, B_1)P(D|B_1)P(B_1) + P(L^C|D^C, B_1)P(D^C|B_1)P(B_1)}{P(L^C)} \\
-	=& \frac{\textcolor{red}{P(L^C|D, B_1)}(0.40)(0.30) + \textcolor{red}{P(L^C|D^C, B_1)P(D^C|B_1)}(0.30)}{\textcolor{red}{P(L^C)}}
+	=& \frac{\textcolor{red}{P(L^C|D, B_1)}(0.40)(0.30) + \textcolor{red}{P(L^C|D^C, B_1)P(D^C|B_1)}(0.30)}{\textcolor{red}{P(L^C)}}.
 	\end{align*} 
 	
 	The probabilities in red are not known. Apply the definition of the complement; recall that the rule for complements holds when an event and its complement are conditioned on the same information: $P(A|B) = 1 - P(A^C|B)$.
@@ -1299,7 +1298,7 @@ Figure~\ref{catGeneticsTreesC} is a reproduction of the earlier tree diagram (Fi
 	P(B_1|L^C) =& \frac{P(B_1 \textrm{ and } L^C \textrm{ and } D) + P(B_1 \textrm{ and } L^C \textrm{ and } D^C)}{P(L^C)}\\
 	=& \frac{P(L^C|D, B_1)P(D|B_1)P(B_1) + P(L^C|D^C, B_1)P(D^C|B_1)P(B_1)}{P(L^C)} \\
 	=& \frac{(0.60)(0.40)(0.30) + (0.90)(0.60)(0.30)}{0.845} \\
-	=& 0.277 
+	=& 0.277.
 	\end{align*} 
 	
 	The probability that a white cat has one blue eye and one non-blue eye, given that it is not blind, is 0.277.
