@@ -12,6 +12,8 @@
   \chaptersection{modelSelection}
   \chaptersection{ANOVAandRegression}
   \chaptersection{multLinRegrNotes}
+  \chaptersection{multLinRegrExercises}%
+  \vspace{-20mm}
 \end{chapterpage}
 \renewcommand{\chapterfolder}{ch_multiple_linear_regression_oi_biostat}
 
@@ -240,7 +242,9 @@ are shown in Figure~\ref{ddsAgeEthnicityResidNormPlot}. From these plots, assess
 
 The model assumptions are clearly violated. The residual versus fitted plot	shows obvious patterns; the residuals do not scatter randomly about the $y = 0$ line. Additionally, the variance of the residuals is not constant around the $y = 0$ line. As shown in the normal probability plot, the residuals show marked departures from normality, particularly in the upper tail; although this skewing may be partially resolved with a log transformation, the patterns in the residual versus fitted plot are more problematic.
 
-Recall that a residual is the difference between an observed value and expected value; for an observation $i$, the residual equals $y_i - \hat{y}_i$. Positive residuals occur when a model's predictions are larger than the observed value, and vice versa for negative residuals. In the residual versus fitted plot, it can be seen that in the middle range of predicted values, the model consistently under-predicts expenditures; on the upper and lower ends, the model over-predicts. This is a particularly serious issue with the model fit. 
+Recall that a residual is the difference between an observed value and expected value; for an observation $i$, the residual equals $y_i - \hat{y}_i$.
+Positive residuals occur when a model’s predictions are smaller that the observed values, and vice versa for negative residuals.
+In the residual versus fitted plot, it can be seen that in the middle range of predicted values, the model consistently under-predicts expenditures; on the upper and lower ends, the model over-predicts. This is a particularly serious issue with the model fit. 
 
 A single linear regression model is not appropriate for these data. For a more detailed examination of the model residuals, refer to Chapter 7, Lab 2. With some subsetting according to age cohort, it can be reasonable to use linear regression for modeling these data.
 \end{nexample}
@@ -260,7 +264,7 @@ A single linear regression model is not appropriate for these data. For a more d
 \textD{\newpage}
 
 
-\subsection{Using $R^2$ and adjusted $R^2$ with multiple regression}
+\subsection{Using $\pmb{R^2}$ and adjusted $\pmb{R^2}$ with multiple regression}
 \index{adjusted r squared@adjusted $R^2$ ($R_{adj}^2$)|(}
 
 Section~\ref{RSquaredLinearRegression} provided two definitions of the $R^2$ statistic\textemdash it is the square of the correlation coefficient $r$ between a response and the single predictor in simple linear regression, and equivalently, it is the proportion of the variation in the response variable explained by the model.  In statistical terms, the second definition can be written as 
@@ -442,7 +446,7 @@ The formula is not used for calculation, since the numerical value of the $F$-st
 
 \textD{\newpage}
 
-\begin{onebox}{The $F$-statistic in regression}
+\begin{onebox}{The $\pmb{F}$-statistic in regression}
 The $F$-statistic in regression is used to test the null hypothesis 
 \[
   H_0:\, \beta_1 = \beta_2 = \cdots = \beta_p = 0

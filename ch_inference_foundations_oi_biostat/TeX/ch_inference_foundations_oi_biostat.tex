@@ -6,6 +6,7 @@
   \chaptersection{confidenceIntervals}
   \chaptersection{hypothesisTesting}
   \chaptersection{ch4Summary}
+  \chaptersection{ch4Exercises}
 \end{chapterpage}
 \renewcommand{\chapterfolder}{ch_inference_foundations_oi_biostat}
 
@@ -14,6 +15,8 @@
 As stated in its mission statement, the United States Centers for Disease Control and Prevention (US CDC) "serves as the national focus for developing and applying disease prevention and control, environmental health, and health promotion and health education activities designed to improve the health of the people of the United States".\footnote{\url{https://www.cdc.gov/maso/pdf/cdcmiss.pdf}} Since it is not feasible to measure the health status and outcome of every single US resident, the CDC estimates features of health from samples taken from the population, via large surveys that are repeated periodically. These surveys include the National Health Interview Survey (NHIS), the National Health and Nutrition Examination Survey (NHANES), the Youth Risk Behavior Surveillance System (YRBSS) and the Behavior Risk Factor Surveillance System (BRFSS).  In the language of statistics, the average weight of all US adults is a \term{population parameter}; the mean weight in a sample or survey is an \term{estimate} of population average weight.  The principles of statistical inference provide not only estimates of population parameters, but also measures of uncertainty that account for the fact that different random samples will produce different estimates because of the variability of random sampling; i.e., two different random samples will not include exactly the same people.
 
 This chapter introduces the important ideas in drawing estimates from samples by discussing methods of inference for a population mean, $\mu$, including three widely used tools: point estimates for a population mean, interval estimates that include both a point estimate and a margin of error, and a method for testing scientific hypotheses about $\mu$. The concepts used in this chapter will appear throughout the rest of the book, which discusses inference for other settings. While particular equations or formulas may change to reflect the details of a problem at hand, the fundamental ideas will not.
+
+\textD{\newpage}
 
 \index{data!cdc|(}
 
@@ -243,7 +246,7 @@ There are 31 females in the sample of 60 US adults, and the average and standard
 
 \begin{figure}[hht]
    \centering
-   \includegraphics[width=0.65\textwidth]
+   \includegraphics[width=0.7\textwidth]
 {ch_inference_foundations_oi_biostat/figures/cdcFemaleWeightHistogram/cdcFemaleWeightHistogram.pdf}
 \caption{Histogram of \var{weight} for the 31 females in \data{cdc.samp}.}
 \label{cdcFemaleWeightHist}
@@ -340,7 +343,7 @@ The correct interpretation of an XX\% confidence interval is, "We are XX\% confi
 The conditions regarding the validity of the normal approximation can be checked using the numerical and graphical summaries discussed in Chapter 1. However, the condition that data should be from a random sample is sometimes overlooked. If the data are not from a random sample, then the confidence interval no longer has interpretive value, since there is no population mean to which the confidence interval applies. For example, while only simple arithmetic is needed to calculate a confidence interval for BMI from the \data{famuss} dataset in Chapter 1, the participants in the study are almost certainly not a random sample from some population; thus, a confidence interval should not be calculated in this setting.
 
 \begin{examplewrap}
-\begin{nexample}{Body mass index (BMI) is one measure of body weight that adjusts for height. The National Health and Nutrition Examination Survey (NHANES) consists of a set of surveys and measurements conducted by the US CDC to assess the health and nutritional status of adults and children in the United States. The dataset \data{nhanes.samp} contains 76 variables and is a random sample of 200 individuals from the measurements collected in the years 2009-2010 and 2012-2013.\footnote{The sample was drawn from a larger sample of 20,293 participants in the \textbf{NHANES} package, available from The Comprehensive R Archive Network (CRAN). The CDC uses a complex sampling design that samples some demographic subgroups with larger probabilities, but \data{nhanes.samp} has been adjusted so that it can be viewed as a random sample of the US population.} Use \data{nhanes.samp} to calculate a 95\% confidence interval for adult BMI in the US population, and assess whether the data suggest Americans tend to be overweight. \label{exNhanesBmi}}
+\begin{nexample}{Body mass index (BMI) is one measure of body weight that adjusts for height. The National Health and Nutrition Examination Survey (NHANES) consists of a set of surveys and measurements conducted by the US CDC to assess the health and nutritional status of adults and children in the United States. The dataset \data{nhanes.samp} contains 76 variables and is a random sample of 200 individuals from the measurements collected in the years 2009-2010 and 2012-2013.\footnotemark{} Use \data{nhanes.samp} to calculate a 95\% confidence interval for adult BMI in the US population, and assess whether the data suggest Americans tend to be overweight. \label{exNhanesBmi}}
 	
 	In the random sample of 200 participants, BMI is available for all 135 of the participants that are 21 years of age or older. As shown in the histogram (Figure~\ref{nhanesAdultBmiHist}), the data are right-skewed, with one large outlier. The outlier corresponds to an implausibly extreme BMI value of 69.0; since it seems likely that the value represents an error from when the data was recorded, this data point is excluded from the following analysis. 
 	
@@ -359,6 +362,7 @@ The World Health Organization (WHO) and other agencies use BMI to set normative 
 The confidence interval (27.7, 29.9) $\text{kg}/\text{m}{^2}$ certainly suggests that the average BMI in the US population is higher than 21.7, the middle of the range for normal BMIs, and even higher than 24.99, the upper limit of the normal weight category. These data indicate that Americans tend to be overweight. 
 \end{nexample}
 \end{examplewrap}
+\footnotetext{The sample was drawn from a larger sample of 20,293 participants in the \textbf{NHANES} package, available from The Comprehensive R Archive Network (CRAN). The CDC uses a complex sampling design that samples some demographic subgroups with larger probabilities, but \data{nhanes.samp} has been adjusted so that it can be viewed as a random sample of the US population.}
 
 \begin{figure}[h]
 		\centering
@@ -465,9 +469,9 @@ The observed sample mean is 4.22 standard deviations to the right of $\mu_0 = 0$
 \textD{\newpage}
 
 
-\subsubsection{Step 4: Calculating the $p$-value}
+\subsubsection{Step 4: Calculating the $\pmb{\MakeLowercase{p}}$-value}
 
-The \termsub{$p$-value}{p-value} is the probability of observing a sample mean as or more extreme than the observed value, under the assumption that the null hypothesis is true. In samples of size 40 or more, the $t$-statistic will have a standard normal distribution unless the data are strongly skewed or extreme outliers are present. Recall that a standard normal distribution has mean 0 and standard deviation 1.
+The \termsub{$\pmb{\MakeLowercase{p}}$-value}{p-value} is the probability of observing a sample mean as or more extreme than the observed value, under the assumption that the null hypothesis is true. In samples of size 40 or more, the $t$-statistic will have a standard normal distribution unless the data are strongly skewed or extreme outliers are present. Recall that a standard normal distribution has mean 0 and standard deviation 1.
 
 For two-sided tests, with $H_A: \mu \neq \mu_0$, the $p$-value is the sum of the area of the two tails defined by the $t$-statistic: $2 P(Z \geq |t|) = P(Z \leq -|t|) + P(Z \geq |t|)$ (Figure~\ref{pValueTwoSided}).
 
@@ -594,10 +598,10 @@ From these data, is there sufficient evidence at the $\alpha = 0.10$ significanc
 
 \subsection{Hypothesis testing and confidence intervals}
 
-The relationship between a hypothesis test and the corresponding confidence interval is defined by the significance level $\alpha$; the two approaches are based on the same inferential logic, and differ only in perspective. The hypothesis testing approach asks whether $\overline{x}$ is far enough away from $\mu_0$ to be considered extreme, while the confidence interval approach asks whether $\mu_0$ is close enough to $\overline{x}$ to be plausible. In both cases, "far enough" and "close enough" are defined by $\alpha$, which determines the $t^{\star}$ used to calculate the margin of error $m = t^{\star} (s/\sqrt{n}) $.\footnote{If the normal distribution is used, then $m = z^{\star} (s/\sqrt{n})$.}
+The relationship between a hypothesis test and the corresponding confidence interval is defined by the significance level $\alpha$; the two approaches are based on the same inferential logic, and differ only in perspective. The hypothesis testing approach asks whether $\overline{x}$ is far enough away from $\mu_0$ to be considered extreme, while the confidence interval approach asks whether $\mu_0$ is close enough to $\overline{x}$ to be plausible. In both cases, "far enough" and "close enough" are defined by $\alpha$, which determines the $z^{\star}$ used to calculate the margin of error $m = z^{\star} (s/\sqrt{n}) $.
 
 \begin{list}{}{}
-	\item \textit{Hypothesis Test}. For a two-sided test,  $\overline{x}$ needs to be at least $m$ units away from $\mu_0$ in either direction to be considered extreme. The $t$-points marking off the rejection region are equal to the $t^\star$ value used in the confidence interval, with the positive and negative $t$-points accounting for the $\pm$ structure in the confidence interval.
+	\item \textit{Hypothesis Test}. For a two-sided test,  $\overline{x}$ needs to be at least $m$ units away from $\mu_0$ in either direction to be considered extreme. The $t$-points marking off the rejection region are equal to the $z^\star$ value used in the confidence interval, with the positive and negative $t$-points accounting for the $\pm$ structure in the confidence interval.
 	
 	\item \textit{Confidence Interval}. The plausible range of values for $\mu_0$ around $\overline{x}$ is defined as $(\overline{x} - m, \ \overline{x} + m)$. If $\mu_0$ is plausible, it can at most be $m$ units away in either direction from $\overline{x}$. If the interval does not contain $\mu_0$, then $\mu_0$ is implausible according to $\alpha$ and there is sufficient evidence to reject $H_0$.
 \end{list}
@@ -730,7 +734,7 @@ The conclusion of the test is different: since $p < \alpha$, there is sufficient
 
 \begin{figure}[h]
 	\centering
-	\includegraphics[width=0.8\textwidth]
+	\includegraphics[width=0.9\textwidth]
 	{ch_inference_foundations_oi_biostat/figures/twoSidedTestConservative/twoSidedTestConservative}
 	\caption{Under a one-sided test at significance level $\alpha$ = 0.05, a $t$-statistic of 1.80 is within the rejection region (shaded light blue). However, it would not be within the rejection region under a two-sided test with $\alpha$ = 0.05 (darker blue).}
 	\label{twoSidedTestConservative}
@@ -760,7 +764,7 @@ The decision as to whether to use a one-sided or two-sided test must be made bef
 \textD{\newpage}
 
 
-\subsection{The informal use of $p$-values}
+\subsection{The informal use of $\pmb{\MakeLowercase{p}}$-values}
 \label{informalUseOfp-values}
 
 Formal hypothesis tests are designed for settings where a decision or a claim about a hypothesis follows a test, such as in scientific publications where an investigator wishes to claim that an intervention changes an outcome.  However, progress in science is usually based on a collection of studies or experiments, and it is often the case that the results of one study are used as a guide for the next study or experiment. 

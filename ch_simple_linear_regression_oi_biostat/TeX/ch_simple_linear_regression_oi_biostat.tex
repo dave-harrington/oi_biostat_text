@@ -8,6 +8,7 @@
   \chaptersection{inferenceRegression}
   \chaptersection{confidencePredictionIntervalsSimpleRegression}
   \chaptersection{chSimpleLinearRegNotes}
+  \chaptersection{chSimpleLinearRegExercises}
 \end{chapterpage}
 \renewcommand{\chapterfolder}{ch_simple_linear_regression_oi_biostat}
 
@@ -83,7 +84,7 @@ Figure~\ref{frogClutchVolBodySizeRegress} shows the relationship between \var{cl
 \end{figure}
 
 \index{scatter plots|)}
-\section{Estimating a regression line using least squares}
+\section[Estimating a regression line using least squares]{\hspace{-1.5mm}Estimating a regression line using least squares}
 \label{estimatingLeastSquaresLine}
 
 \index{least squares regression|(}
@@ -156,7 +157,6 @@ where $r$ is the correlation between the two variables, and $s_x$ and $s_y$ are 
 b_0 = \overline{y} - b_1\overline{x}.
 \label{interceptOfLSRLine}
 \end{align}
-
 Typically, regression lines are estimated using statistical software.
 
 \textD{\newpage}
@@ -211,7 +211,7 @@ Figure~\ref{nhanesHeightWeightRegress} shows the relationship between \var{heigh
 
 \begin{exercisewrap}
 \begin{nexercise}\label{predictingNHANESWeightfrmHeightMetric}%
-Predict the weight in pounds for an adult who is 5 feet, 11 inches tall. 1 cm = .3937 in; 1 lb = 0.454 kg.\footnotemark{}
+Predict the weight in pounds for an adult who is 5 feet, 11 inches tall. 1 cm = .3937 in; 1 lb = 0.454~kg.\footnotemark{}
 \end{nexercise}
 \end{exercisewrap}
 \footnotetext{5 feet, 11 inches equals $71/.3937 = 180.34$ centimeters. From the regression equation, the predicted weight is $-57.738 + 0.839(180.34) = 93.567$ kilograms. In pounds, this weight is $93.567/0.454 = 206.280$.}
@@ -384,16 +384,16 @@ Figure~\ref{wdiHistReg} shows that infant mortality rates are highly right-skewe
 \begin{figure}[h]
 	\centering
 	\subfigure[]{
-		\includegraphics[width=0.46\textwidth]
+		\includegraphics[width=0.485\textwidth]
 		{ch_simple_linear_regression_oi_biostat/figures/wdiHistTransform/wdiHistReg}
 		\label{wdiHistReg}
 	}
 	\subfigure[]{
-		\includegraphics[width=0.46\textwidth]
+		\includegraphics[width=0.485\textwidth]
 		{ch_simple_linear_regression_oi_biostat/figures/wdiHistTransform/wdiHistLog}
 		\label{wdiHistLog}
 	}
-	\caption{\subref{wdiHistReg} Histogram of infant mortality, measured in deaths per 1,000 live births in the first year of life. \subref{wdiHistLog} Histogram of the log-transformed infant mortality.}
+	\caption{\subref{wdiHistReg} Histogram of infant mortality, measured in deaths per 1,000 live births in the first year of life. \subref{wdiHistLog} Histogram of the log-transformed infant \mbox{mortality}.}
 	\label{wdiHistTransform}
 \end{figure}
 
@@ -574,7 +574,7 @@ The two standard errors are
 \begin{examplewrap}
 \begin{nexample}{Is there evidence of a significant association between number of doctors per 100,000 members of the population in a state and infant mortality rate? 
 		
-The numerical output that \textsf{R} returns is shown in Figure~\ref{infantMortalityInferenceOutput}.\footnote{Other software packages, such as Stata or Minitab, provide similar information but with slightly different labeling.}}\label{exampleInfantMortalityInference}%	
+The numerical output that \textsf{R} returns is shown in Figure~\ref{infantMortalityInferenceOutput}.\footnotemark{}}\label{exampleInfantMortalityInference}%	
 The question implies that the District of Columbia should not be included in the analysis. The assumptions for applying a least squares regression have been verified in Exercise~\ref{exampleInfantMortalityAssumptions}. Whenever possible, formal inference should be preceded by a check of the assumptions for regression.
 
 The null and alternative hypotheses are $H_0:\beta_1 = 0$ and $H_A:\beta_1 \neq 0.$	
@@ -584,6 +584,7 @@ The estimated slope of the least squares line is -0.0068, with standard error 0.
 Since $p = 0.021 < 0.05$, the data support the alternative hypothesis that the number of physicians is associated with infant mortality at the 0.05 significance level. The sign of the slope implies that the association is negative; states with more doctors tend to have lower rates of infant mortality.
 \end{nexample}
 \end{examplewrap}
+\footnotetext{Other software packages, such as Stata or Minitab, provide similar information but with slightly different labeling.}
 
 \begin{figure}[h]
 	\centering

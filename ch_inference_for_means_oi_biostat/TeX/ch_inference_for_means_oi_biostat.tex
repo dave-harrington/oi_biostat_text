@@ -8,6 +8,7 @@
   \chaptersection{PowerForDifferenceOfTwoMeans}
   \chaptersection{anovaAndRegrWithCategoricalVariables}
   \chaptersection{inferenceForNumericalDataNotes}
+  \chaptersection{inferenceForNumericalDataExercises}
 \end{chapterpage}
 \renewcommand{\chapterfolder}{ch_inference_for_means_oi_biostat}
 
@@ -15,7 +16,7 @@
 
 
 %__________________
-\section{Single-sample inference with the $t$-distribution}
+\section[{Single-sample inference with the $t$-distribution}]{Single-sample inference with the $\pmb{\MakeLowercase{t}}$-distribution}
 \label{oneSampleMeansWithTDistribution}
 
 \noindent%
@@ -25,7 +26,7 @@ where the parameter $\mu$ is a population mean, $\overline{x}$ and $s$ are the s
 
 In sample sizes smaller than 30, if the data are approximately symmetric and there are no large outliers, the $t$-statistic has what is called a $t$-distribution. When the normal distribution is used as the sampling distribution of the $t$-statistic, $s$ is essentially being treated as a good replacement for the unknown population standard deviation $\sigma$. However, the sample standard deviation $s$, as an estimate of $\sigma$, has its own inherent variability like $\overline{x}$. The $t$ density function adjusts for the variability in $s$ by having more probability in the left and right tails than the normal distribution.
 
-\subsection{The $t$-distribution}
+\subsection{The $\pmb{\MakeLowercase{t}}$-distribution}
 \label{introducingTheTDistribution}
 
 \index{t-distribution|(}
@@ -118,7 +119,7 @@ Identify the row in the $t$-table using the degrees of freedom: $df-20$. Then, l
 \textD{\newpage}
 
 
-\subsection{Using the $t$-distribution for tests and confidence intervals for a population mean}
+\subsection{Using the $\pmb{\MakeLowercase{t}}$-distribution for tests and confidence intervals for a population mean}
 
 \label{oneSampleTConfidenceIntervalsTests}
 
@@ -143,7 +144,7 @@ With the ability to conveniently calculate $t^\star$ for any sample size or asso
 
 \index{data!dolphins and mercury|(}
 \begin{examplewrap}
-\begin{nexample}{Dolphins are at the top of the oceanic food chain; as a consequence, dangerous substances such as mercury tend to be present in their organs and muscles at high concentrations. In areas where dolphins are regularly consumed, it is important to monitor dolphin mercury levels. This example uses data from a random sample of 19 Risso's dolphins from the Taiji area in Japan.\footnote{Taiji is a significant source of dolphin and whale meat in Japan. Thousands of dolphins pass through the Taiji area annually; assume that these 19 dolphins represent a simple random sample. Data reference: Endo T and Haraguchi K. 2009. High mercury levels in hair samples from residents of Taiji, a Japanese whaling town. Marine Pollution Bulletin 60(5):743-747.} Calculate the 95\% confidence interval for average mercury content in Risso's dolphins from the Taiji area using the data in Figure~\ref{summaryStatsOfHgInMuscleOfRissosDolphins}.}
+\begin{nexample}{Dolphins are at the top of the oceanic food chain; as a consequence, dangerous substances such as mercury tend to be present in their organs and muscles at high concentrations. In areas where dolphins are regularly consumed, it is important to monitor dolphin mercury levels. This example uses data from a random sample of 19 Risso's dolphins from the Taiji area in Japan.\footnotemark{} Calculate the 95\% confidence interval for average mercury content in Risso's dolphins from the Taiji area using the data in Figure~\ref{summaryStatsOfHgInMuscleOfRissosDolphins}.}
 
 The observations are a simple random sample consisting of less than 10\% of the population, so independence of the observations is reasonable. The summary statistics in Figure~\ref{summaryStatsOfHgInMuscleOfRissosDolphins} do not suggest any skew or outliers; all observations are within 2.5 standard deviations of the mean. Based on this evidence, the approximate normality assumption seems reasonable.
 
@@ -159,6 +160,7 @@ The $t^{\star}$ point can be read from the $t$-table on page~\pageref{tTableSamp
 Alternatively, the $t^\star$ point can be calculated in \textsf{R} with the function \texttt{qt}, which returns a value of 2.1009.
 \end{nexample}
 \end{examplewrap}
+\footnotetext{Taiji is a significant source of dolphin and whale meat in Japan. Thousands of dolphins pass through the Taiji area annually; assume that these 19 dolphins represent a simple random sample. Data reference: Endo T and Haraguchi K. 2009. High mercury levels in hair samples from residents of Taiji, a Japanese whaling town. Marine Pollution Bulletin 60(5):743-747.}
 
 \begin{figure}[h]
 	\centering
@@ -367,7 +369,7 @@ control		& 9		& -4.33		& 2.76  	 \\
 
 Figure~\ref{stemCellTherapyForHearts} shows that the distributions of percent change do not have any prominent outliers, which would indicate a deviation from normality; this suggests that each sample mean can be modeled using a $t$-distribution. Additionally, the sheep in the study are independent of each other, and the sheep between groups are also independent. Thus, the $t$-distribution can be used to model the difference of the two sample means.
 
-\begin{onebox}{Using the $t$-distribution for a difference in means}
+\begin{onebox}{Using the $\pmb{\MakeLowercase{t}}$-distribution for a difference in means}
 \label{ConditionsForTwoSampleTDist}The $t$-distribution can be used for inference when working with the standardized difference of two means if (1) each sample meets the conditions for using the $t$-distribution and (2) the samples are independent.
 \end{onebox}
 
@@ -478,8 +480,9 @@ When testing a hypothesis about two independent groups, directly compare the two
 \textD{\newpage}
 
 In this setting, the formula for a $t$-statistic is:
-\[t = \dfrac{(\overline{x}_1 - \overline{x}_2) - (\mu_1 - \mu_2)}{SE_{\overline{x}_{1} - \overline{x}_{2}}} = \dfrac{(\overline{x}_1 - \overline{x}_2) - (\mu_1 - \mu_2)}{\sqrt{\dfrac{s_{1}^{2}}{n_1} + \dfrac{s_{2}^{2}}{n_2}}}. \]
-
+\[
+t = \dfrac{(\overline{x}_1 - \overline{x}_2) - (\mu_1 - \mu_2)}{SE_{\overline{x}_{1} - \overline{x}_{2}}} = \dfrac{(\overline{x}_1 - \overline{x}_2) - (\mu_1 - \mu_2)}{\sqrt{\dfrac{s_{1}^{2}}{n_1} + \dfrac{s_{2}^{2}}{n_2}}}.
+\]
 Under the null hypothesis of no difference between the groups, $H_0: \mu_{1} - \mu_{2} = 0$, the formula simplifies to
 \[t = \dfrac{(\overline{x}_1 - \overline{x}_2)}{\sqrt{\dfrac{s_{1}^{2}}{n_1} + \dfrac{s_{2}^{2}}{n_2}}}.\]
 
@@ -492,11 +495,12 @@ Calculate the $t$-statistic:
 
 \[t = \dfrac{(\overline{x}_1 - \overline{x}_2)}{\sqrt{\dfrac{s_{1}^{2}}{n_1} + \dfrac{s_{2}^{2}}{n_2}}} = \dfrac{7.18 - 6.78}{\sqrt{\frac{1.60^2}{100} + \frac{1.43^2}{50}}} = 1.54.\]
 
-Approximate the degrees of freedom as $50 - 1 = 49$. The $t$-score of 1.49 falls between the first and second columns in the $df = 49$ row of the $t$-table, so the two-sided $p$-value is between 0.10 and 0.20.\footnote{From \textsf{R}, $df = 89.277$ and $p = 0.138$.}
+Approximate the degrees of freedom as $50 - 1 = 49$. The $t$-score of 1.49 falls between the first and second columns in the $df = 49$ row of the $t$-table, so the two-sided $p$-value is between 0.10 and 0.20.\footnotemark{}
 
 This $p$-value is larger than the significance value, 0.05, so the null hypothesis is not rejected. There is insufficient evidence to state there is a difference in average birth weight of newborns from North Carolina mothers who did smoke during pregnancy and newborns from North Carolina mothers who did not smoke during pregnancy.
 \end{nexample}
 \end{examplewrap}
+\footnotetext{From \textsf{R}, $df = 89.277$ and $p = 0.138$.}
 
 \begin{figure}[hhh]
 	\centering
@@ -556,7 +560,7 @@ Section~\ref{caseStudyDiscrimination} presented an analysis of the relationship 
 
 \subsubsection{Comparing expenditures overall}
 
-When ignoring age, expenditures within the ethnicity groups Hispanic and White non-Hispanic show substantial right-skewing (Figure~\ref{ddsEthnicityPlot}). A transformation is advisable before conducting a $t$-test. As shown in Figure~\ref{ddsLogExpenditureEthnicityPlot)}, a natural log transformation effectively eliminates skewing. 
+When ignoring age, expenditures within the ethnicity groups Hispanic and White non-Hispanic show substantial right-skewing (Figure~\ref{ddsEthnicityPlot}). A transformation is advisable before conducting a $t$-test. As shown in Figure~\ref{ddsLogExpEthnicityPlot}, a natural log transformation effectively eliminates skewing. 
 
 \begin{figure}[h]
 	\centering
@@ -730,11 +734,13 @@ Since the degrees of freedom are greater than 30, the distribution of $\overline
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=0.85\textwidth]{ch_inference_for_means_oi_biostat/figures/power_null_0_1-7/power_null_A_0_1-7}
-\end{figure} 
-
+	\caption{Null distribution for the t-statistic in Example~\ref{example-power_null_A_0_1-7}.}
+	\label{power_null_A_0_1-7}
+\end{figure}
 
 \begin{examplewrap}
-\begin{nexample}{For what values of $\overline{x}_{\text{trmt}} - \overline{x}_{\text{ctrl}}$ would the null hypothesis be rejected, using $\alpha = 0.05$?}
+\begin{nexample}{For what values of $\overline{x}_{\text{trmt}} - \overline{x}_{\text{ctrl}}$ would the null hypothesis be rejected, using $\alpha = 0.05$?}%
+\label{example-power_null_A_0_1-7}%
 If the observed difference is in the far left or far right tail of the null distribution, there is sufficient evidence to reject the null hypothesis.
 For $\alpha = 0.05$, $H_0$ is rejected if the difference is in the lower 2.5\% or upper 2.5\% tail:
 \begin{description}
@@ -767,7 +773,7 @@ Suppose that for this hypothetical blood pressure medication study, the research
 \begin{nexample}{Suppose the study proceeded with 100 patients per treatment group and the new drug does reduce average blood pressure by an additional 3~mmHg relative to the standard medication. What is the probability of detecting this effect?}\label{PowerFor100AtNeg3}%
 Determine the sampling distribution for $\overline{x}_{\text{trmt}} - \overline{x}_{\text{ctrl}}$ when the true difference is $-3$~mmHg; this has the same standard deviation of 1.70 as the null distribution, but the mean is shifted 3 units to the left. Then, calculate the fraction of the distribution for $\overline{x}_{\text{trmt}} - \overline{x}_{\text{ctrl}}$ that falls within the rejection region for the null distribution, as shown in Figure~\ref{power_null_D_0_1-7_with_alt_at_3_and_shaded}.
 
-The probability of being in the left side of the rejection region ($x < -3.332$) can be calculated by converting to a $Z$-score and using either the normal probability table or statistical software.\footnote{The probability of being in the right side of the rejection region is negligible and can be ignored.}
+The probability of being in the left side of the rejection region ($x < -3.332$) can be calculated by converting to a $Z$-score and using either the normal probability table or statistical software.\footnotemark{}
 
 \[
 	Z = \frac{-3.332 - (-3)}{1.7}= -0.20 \quad \to \quad P(Z \leq -0.20) = 0.4207.
@@ -776,6 +782,7 @@ The probability of being in the left side of the rejection region ($x < -3.332$)
 The power for the test is about 42\% when $\mu_{\text{trmt}} - \mu_{\text{ctrl}} = -3$~mm/Hg and each group has a sample size of 100.
 \end{nexample}
 \end{examplewrap}
+\footnotetext{The probability of being in the right side of the rejection region is negligible and can be ignored.}
 
 \begin{figure}[h]
 \begin{center}
@@ -956,7 +963,7 @@ It is difficult to discern a difference in the centers of groups I, II, and III,
 \textD{\newpage}
 
 
-\subsection{Analysis of variance (ANOVA) and the $F$-test}
+\subsection{Analysis of variance (ANOVA) and the $\pmb{F}$-test}
 \label{ANOVASection}
 
 \noindent%
@@ -970,7 +977,7 @@ Write the null and corresponding alternative hypotheses in plain language.\footn
 \end{exercisewrap}
 \footnotetext{$H_0$: The average percent change in non-dominant arm strength is equal across the three genotypes. $H_A$: The average percent change in non-dominant arm strength varies across some (or all) groups.}
 
-Figure~\ref{famussSummaryTable} provides summary statistics for each group. A side-by-side boxplot for the change in non-dominant arm strength is shown in Figure~\ref{famussBoxPlot}; Figure~\ref{famussNormal} shows the Q-Q plots by each genotype. Notice that the variability appears to be approximately constant across groups; nearly constant variance across groups is an important assumption that must be satisfied for using ANOVA. Based on the Q-Q plots, there is evidence of moderate right skew; the data do not follow a normal distribution very closely, but could be considered to 'loosely' follow a normal distribution.\footnote{In a more advanced course, it can be shown that the ANOVA procedure still holds with deviations from normality when sample sizes are moderately large. Additionally, a more advanced course would discuss appropriate transformations to induce normality.} It is reasonable to assume that the observations are independent within and across groups; it is unlikely that participants in the study were related, or that data collection was carried out in a way that one participant's change in arm strength could influence another's. 
+Figure~\ref{famussSummaryTable} provides summary statistics for each group. A side-by-side boxplot for the change in non-dominant arm strength is shown in Figure~\ref{famussBoxPlot_2nd}; Figure~\ref{famussNormal} shows the Q-Q plots by each genotype. Notice that the variability appears to be approximately constant across groups; nearly constant variance across groups is an important assumption that must be satisfied for using ANOVA. Based on the Q-Q plots, there is evidence of moderate right skew; the data do not follow a normal distribution very closely, but could be considered to 'loosely' follow a normal distribution.\footnote{In a more advanced course, it can be shown that the ANOVA procedure still holds with deviations from normality when sample sizes are moderately large. Additionally, a more advanced course would discuss appropriate transformations to induce normality.} It is reasonable to assume that the observations are independent within and across groups; it is unlikely that participants in the study were related, or that data collection was carried out in a way that one participant's change in arm strength could influence another's. 
 
 \begin{figure}[ht]
 	\centering\small
@@ -992,7 +999,7 @@ Figure~\ref{famussSummaryTable} provides summary statistics for each group. A si
 	\centering
 	\includegraphics[width=0.475\textwidth]{ch_inference_for_means_oi_biostat/figures/famussBoxPlot/famussBoxPlot}
 	\caption{Side-by-side box plot of the change in non-dominant arm strength for 595 participants across three groups.}
-	\label{famussBoxPlot}
+	\label{famussBoxPlot_2nd}
 \end{figure}
 
 \begin{figure}[h]
@@ -1070,7 +1077,7 @@ The $p$-value is smaller than 0.05, indicating the evidence is strong enough to 
 \end{nexample}
 \end{examplewrap}
 
-\begin{onebox}{The $F$-statistic and the $F$-test}
+\begin{onebox}{The $\pmb{F}$-statistic and the $\pmb{F}$-test}
 		Analysis of variance (ANOVA) is used to test whether the mean outcome differs across two or more groups. ANOVA uses a test statistic $F$, which represents a standardized ratio of variability in the sample means relative to the variability within the groups. If $H_0$ is true and the model assumptions are satisfied, the statistic $F$ follows an $F$ distribution with parameters $\textrm{df}_{1}=k-1$ and $\textrm{df}_{2}=n-k$. The upper tail of the $F$-distribution is used to calculate the $p$-value.
 \end{onebox}
 
@@ -1153,7 +1160,7 @@ In summary, the mean percent strength change in the non-dominant arm for genotyp
 \textD{\newpage}
 
 
-\subsection{Reading the results of pairwise $t$-tests from software}
+\subsection{Reading the results of pairwise $\pmb{\MakeLowercase{t}}$-tests from software}
 
 Statistical software can be used to calculate the $p$-values associated with each possible pairwise comparison of the groups in ANOVA. The results of the pairwise tests are summarized in a table that shows the $p$-value for each two-group test. 
 

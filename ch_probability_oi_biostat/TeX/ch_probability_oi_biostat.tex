@@ -6,6 +6,7 @@
   \chaptersection{conditionalProbabilitySection}
   \chaptersection{sectionExtendedExampleCatGenetics}
   \chaptersection{notesChapterProbability}
+  \chaptersection{exercisesChapterProbability}
 \end{chapterpage}
 \renewcommand{\chapterfolder}{ch_probability_oi_biostat}
 
@@ -91,12 +92,14 @@ This definition of probability can be illustrated by simulation. Suppose a die i
 
 \begin{figure}[h]
 	\centering
-	\includegraphics[width=0.85\textwidth]{ch_probability_oi_biostat/figures/dieProp/dieProp}
+	\includegraphics[width=0.8\textwidth]{ch_probability_oi_biostat/figures/dieProp/dieProp}
 	\caption{The fraction of die rolls that are \resp{1} at each stage in a simulation. The proportion tends to get closer to the probability $1/6 \approx 0.167$ as the number of rolls increases.}
 	\label{fig:dieProp}
 \end{figure}
 
 Occasionally the proportion veers off from the probability and appear to defy the Law of Large Numbers, as $\hat{p}_n$ does many times in Figure~\ref{fig:dieProp}. However, the likelihood of these large deviations becomes smaller as the number of rolls increases.
+
+\textD{\newpage}
 
 \begin{onebox}{Law of Large Numbers}
 As more observations are collected, the proportion $\hat{p}_n$ of occurrences with a particular outcome converges to the probability $p$ of that outcome.
@@ -169,7 +172,7 @@ P(A\text{ or }B) = P(A) + P(B) = 1/3 + 1/3 = 2/3.
 
 \begin{exercisewrap}
 \begin{nexercise}
-(a) Verify the probability of event $A$, $P(A)$, is $1/3$ using the Addition Rule. (b) Do the same for event $B$.\footnotemark{}
+(a) Verify the probability of event $A$, $P(A)$, is $1/3$ using the Addition Rule. (b) Do the same for event~$B$.\footnotemark{}
 \end{nexercise}
 \end{exercisewrap}
 \footnotetext{(a) $P(A) = P($\resp{1} or \resp{2}$) = P($\resp{1}$) + P($\resp{2}$) = \frac{1}{6} + \frac{1}{6} = \frac{2}{6} = \frac{1}{3}$. (b) Similarly, $P(B) = 1/3$.}
@@ -478,13 +481,15 @@ Consider again the probabilities from Figure~\ref{diceProb} and rolling two dice
 \subsection{Independence}
 \label{probabilityIndependence}
 
-Just as variables and observations can be independent, random phenomena can also be independent. Two processes are \term{independent} if knowing the outcome of one provides no information about the outcome of the other. For instance, flipping a coin and rolling a die are two independent processes -- knowing that the coin lands heads up does not help determine the outcome of the die roll. On the other hand, stock prices usually move up or down together, so they are not independent. 
+Just as variables and observations can be independent, random phenomena can also be independent. Two processes are \term{independent} if knowing the outcome of one provides no information about the outcome of the other. For instance, flipping a coin and rolling a die are two independent processes -- knowing that the coin lands heads up does not help determine the outcome of the die roll. On the other hand, stock prices usually move up or down together, so they are not independent.
+
+\textD{\newpage}
 
 Example~\ref{probOf2Ones} provides a basic example of two independent processes: rolling two dice. What is the probability that both will be \resp{1}? Suppose one of the dice is blue and the other green. If the outcome of the blue die is a \resp{1}, it provides no information about the outcome of the green die. This question was first encountered in Example~\ref{probOf2Ones}: $1/6^{th}$ of the time the blue die is a \resp{1}, and $1/6^{th}$ of \emph{those} times the green die will also be \resp{1}. This is illustrated in Figure~\ref{fig:indepForRollingTwo1s}. Because the rolls are independent, the probabilities of the corresponding outcomes can be multiplied to obtain the final answer: $(1/6)(1/6)=1/36$. This can be generalized to many independent processes. 
 
 \begin{figure}[hht]
 \centering
-\includegraphics[width=0.5\textwidth]{ch_probability_oi_biostat/figures/indepForRollingTwo1s/indepForRollingTwo1s.png}
+\includegraphics[width=0.475\textwidth]{ch_probability_oi_biostat/figures/indepForRollingTwo1s/indepForRollingTwo1s.png}
 \caption{$1/6^{th}$ of the time, the first roll is a \resp{1}. Then $1/6^{th}$ of \emph{those} times, the second roll will also be a \resp{1}.}
 \label{fig:indepForRollingTwo1s}
 \end{figure}
@@ -1267,7 +1272,7 @@ A tree diagram is useful for visualizing the different possible ways that a cert
 \textD{\newpage}
 
 \begin{examplewrap}
-\begin{nexample}{What is the probability that a white cat has one blue eye and one non-blue eye, given that it is not blind?}
+\begin{nexample}{What is the probability that a white cat has one blue eye and one non-blue eye, given that it is not~blind?}
 
 Calculate $P(B_1|L^C)$. Start with the definition of conditional probability, then expand.
 
@@ -1281,10 +1286,10 @@ Figure~\ref{catGeneticsTreesC} is a reproduction of the earlier tree diagram (Fi
 	\begin{align*}
 	P(B_1|L^C) =& \frac{P(B_1 \textrm{ and } L^C \textrm{ and } D) + P(B_1 \textrm{ and } L^C \textrm{ and } D^C)}{P(L^C)}\\
 	=& \frac{P(L^C|D, B_1)P(D|B_1)P(B_1) + P(L^C|D^C, B_1)P(D^C|B_1)P(B_1)}{P(L^C)} \\
-	=& \frac{\textcolor{red}{P(L^C|D, B_1)}(0.40)(0.30) + \textcolor{red}{P(L^C|D^C, B_1)P(D^C|B_1)}(0.30)}{\textcolor{red}{P(L^C)}}.
+	=& \frac{\textcolor{red}{\mathbf{P(L^C|D, B_1)}}(0.40)(0.30) + \textcolor{red}{\mathbf{P(L^C|D^C, B_1)P(D^C|B_1)}}(0.30)}{\textcolor{red}{\mathbf{P(L^C)}}}.
 	\end{align*} 
 	
-	The probabilities in red are not known. Apply the definition of the complement; recall that the rule for complements holds when an event and its complement are conditioned on the same information: $P(A|B) = 1 - P(A^C|B)$.
+	The probabilities in \textbf{\color{red}bold} are not known. Apply the definition of the complement; recall that the rule for complements holds when an event and its complement are conditioned on the same information: $P(A|B) = 1 - P(A^C|B)$.
 	
 	\begin{itemize}
 		\item $P(L^C) = 1 - P(L) = 1 - 0.155 = 0.845$
@@ -1301,13 +1306,13 @@ Figure~\ref{catGeneticsTreesC} is a reproduction of the earlier tree diagram (Fi
 	=& 0.277.
 	\end{align*} 
 	
-	The probability that a white cat has one blue eye and one non-blue eye, given that it is not blind, is 0.277.
+	The probability that a white cat has one blue eye and one non-blue eye, given that it is not blind, is~0.277.
 \end{nexample}
 \end{examplewrap}
 
 \begin{figure}[h]
 \centering
-\includegraphics[width=0.5\textwidth]{ch_probability_oi_biostat/figures/catGeneticsTrees/catGeneticsTreesC}
+\includegraphics[width=0.65\textwidth]{ch_probability_oi_biostat/figures/catGeneticsTrees/catGeneticsTreesC}
 \caption{The two possible paths for a white cat to both have one blue eye (and one non-blue eye) and to not be blind are shown in yellow.}
 \label{catGeneticsTreesC}
 \end{figure}

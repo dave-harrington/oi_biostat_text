@@ -9,6 +9,7 @@
   \chaptersection{distRelatedToBernoulli}
   \chaptersection{correlatedRVs}
   \chaptersection{sectionDistOfRVNotes}
+  \chaptersection{sectionDistOfRVExercises}
 \end{chapterpage}
 \renewcommand{\chapterfolder}{ch_distributions_oi_biostat}
 
@@ -161,7 +162,7 @@ The variance of a random variable can be interpreted as the expectation of the t
 
 
 \begin{examplewrap}
-\begin{nexample}{Compute the variance and standard deviation of $X$, the number of heads in three tosses of a fair coin.}
+\begin{nexample}{Compute the variance and standard deviation of $X$, the number of heads in three tosses of a fair~coin.}
 	
 	In the formula for the variance, $k = 4$ and $\mu_X = E(X) = 1.5$. 
 	\begin{align*}
@@ -222,9 +223,10 @@ In 2015, Harvard University offered several alternative plans to its employees. 
 			\hline
 		\end{tabular}
 	\end{center}
-	The variance of $X$, $\sum_i (x_i - \mu)^2 P(X = x_i)$,  is $\sigma^2 = 1556.00$, and the standard deviation is $\sigma = \$39.45$.\footnote{Note that the standard deviation always has the same units as the original measurements.}
+	The variance of $X$, $\sum_i (x_i - \mu)^2 P(X = x_i)$,  is $\sigma^2 = 1556.00$, and the standard deviation is $\sigma = \$39.45$.\footnotemark{}
 \end{nexample}
 \end{examplewrap}
+\footnotetext{Note that the standard deviation always has the same units as the original measurements.}
 
 
 \textD{\newpage}
@@ -232,7 +234,7 @@ In 2015, Harvard University offered several alternative plans to its employees. 
 
 \subsection{Linear combinations of random variables}
 
-Sums of random variables arise naturally in many problems. In the health insurance example, the amount spent by the employee during her next five years of employment can be represented as $X_1 + X_2 + X_3 + X_4 + X_5$, where $X_1$ is the cost of the first year, $X_2$ the second year, etc. If the employee's domestic partner has health insurance with another employer, the total annual cost to the couple would be the sum of the costs for the employee ($X$) and for her partner ($Y$), or $X + Y$. In each of these examples, it is intuitively clear that the average cost would be the sum of the average of each term.
+Sums of random variables arise naturally in many problems. In the health insurance example, the amount spent by the employee during her next five years of employment can be represented as $X_1 + X_2 + X_3 + X_4 + X_5$, where $X_1$ is the cost of the first year, $X_2$ the second year, etc. If the employee's domestic partner has health insurance with another employer, the total annual cost to the couple would be the sum of the costs for the employee ($X$) and for her partner ($Y$), or $X + Y$. In~each of these examples, it is intuitively clear that the average cost would be the sum of the average of each~term.
 
 Sums of random variables represent a special case of linear combinations of variables.  
 
@@ -333,9 +335,9 @@ If $X$ is a random variable that takes value 1 with probability of success $p$ a
 
 Suppose $X$ represents the outcome of a single toss of a fair coin, where heads is labeled success. $X$ is a Bernoulli random variable with probability of success $p = 0.50$; this can be expressed as $X \sim \textrm{Bern}(p)$, or specifically, $X \sim \textrm{Bern}(0.50)$. It is essential to specify the probability of success when characterizing a Bernoulli random variable. For example, although the outcome of a single toss of an unfair coin can also be represented by a Bernoulli, it will have a different probability distribution since $p$ does not equal 0.50 for an unfair coin. 
 
-The success probability $p$ is the \term{parameter} of the distribution, and identifies a specific Bernoulli distribution out of the entire family of Bernoulli distributions where $p$ can be any value between 0 and 1 (inclusive). \marginpar[\raggedright\vspace{-5mm}
+The success probability $p$ is the \term{parameter} of the distribution, and identifies a specific Bernoulli distribution out of the entire family of Bernoulli distributions where $p$ can be any value between 0 and 1 (inclusive). \marginpar[\raggedright\vspace{-12mm}
 
-$\textrm{Bern}(p)$\vspace{1mm}\\\footnotesize Bernoulli dist.\\with $p$ prob. of success]{\raggedright\vspace{-5mm}
+$\textrm{Bern}(p)$\vspace{1mm}\\\footnotesize Bernoulli dist.\\with $p$ prob. of success]{\raggedright\vspace{-12mm}
 	
 	$\textrm{Bern}(p)$\vspace{1mm}\\\footnotesize Bernoulli dist.\\with $p$ prob. of success} 
 
@@ -720,7 +722,7 @@ Systolic blood pressure for adults 60 years of age and older in the United State
 \textD{\newpage}
 
 \begin{examplewrap}
-\begin{nexample}{The height of adult males in the United States between the ages of 20 and 62 is nearly normal, with mean 70 inches and standard deviation 3.3 inches.\footnote{As based on a sample of 100 men, from the USDA Food Commodity Intake Database.} What is the probability that a random adult male is between 5'9'' and 6'2''?}
+\begin{nexample}{The height of adult males in the United States between the ages of 20 and 62 is nearly normal, with mean 70 inches and standard deviation 3.3 inches.\footnotemark{} What is the probability that a random adult male is between 5'9'' and 6'2''?}
 	These heights correspond to 69 inches and 74 inches. First, draw the figure. The area of interest is an interval, rather than a tail area.
 	\begin{center}
 		\includegraphics[width=0.43\textwidth]{ch_distributions_oi_biostat/figures/between59And62/between59And62}
@@ -739,6 +741,7 @@ Systolic blood pressure for adults 60 years of age and older in the United State
 	\end{center}
 \end{nexample}
 \end{examplewrap}
+\footnotetext{As based on a sample of 100 men, from the USDA Food Commodity Intake Database.}
 
 \begin{exercisewrap}
 \begin{nexercise}
@@ -822,7 +825,7 @@ The cause of this discrepancy is illustrated in Figure~\ref{normApproxToBinomFai
 	
 \begin{figure}[h]
 		\centering
-		\includegraphics[width=0.70\textwidth]{ch_distributions_oi_biostat/figures/normApproxToBinomFail/normApproxToBinomFail}
+		\includegraphics[width=0.77\textwidth]{ch_distributions_oi_biostat/figures/normApproxToBinomFail/normApproxToBinomFail}
 		\caption{A normal curve with the area between 69 and 71 shaded. The outlined area represents the exact binomial probability.}
 		\label{normApproxToBinomFail}
 \end{figure}
@@ -872,10 +875,11 @@ When assessing the normal approximation in real data, it will be rare to observe
 \textD{\newpage}
 
 \begin{examplewrap}
-\begin{nexample}{Would it be reasonable to use the normal distribution to accurately calculate percentiles of heights of NBA players? Consider all 435 NBA players from the 2008-9 season presented in Figure~\ref{nbaNormal}.\footnote{These data were collected from \oiRedirect{textbook-nba_com}{www.nba.com}.}}
+\begin{nexample}{Would it be reasonable to use the normal distribution to accurately calculate percentiles of heights of NBA players? Consider all 435 NBA players from the 2008-9 season presented in Figure~\ref{nbaNormal}.\footnotemark{}}
 The histogram in the left panel is slightly left skewed, and the points in the normal probability plot do not closely follow a straight line, particularly in the upper quantiles. The normal model is not an accurate approximation of NBA player heights.
 \end{nexample}
 \end{examplewrap}
+\footnotetext{These data were collected from \oiRedirect{textbook-nba_com}{www.nba.com}.}
 
 \begin{figure}[h]
 	\centering
@@ -1044,7 +1048,7 @@ The geometric distribution from Example~\ref{waitForShocker} is shown in Figure~
 \begin{figure}[h]
 \centering
 \includegraphics[width=0.8\textwidth]{ch_distributions_oi_biostat/figures/geometricDist35/geometricDist35}
-\caption{The geometric distribution when the probability of success is $p=0.35$.}
+\caption{The geometric distribution when the probability of success is \mbox{$p=0.35$}.}
 \label{geometricDist35}
 \end{figure}
 
@@ -1063,9 +1067,9 @@ The mean (i.e. expected value), variance, and standard deviation of this wait ti
 A geometric random variable $X$ can be expressed as $X \sim \textrm{Geom}(p)$.
 \end{onebox}
 
-\marginpar[\raggedright\vspace{-5mm}
+\marginpar[\raggedright\vspace{-45mm}
 
-$\textrm{Geom}(p)$\vspace{1mm}\\\footnotesize Geometric dist.\\with $p$ prob. of success]{\raggedright\vspace{-5mm}
+$\textrm{Geom}(p)$\vspace{1mm}\\\footnotesize Geometric dist.\\with $p$ prob. of success]{\raggedright\vspace{-45mm}
 	
 	$\textrm{Geom}(p)$\vspace{1mm}\\\footnotesize Geometric dist.\\with $p$ prob. of success} 
 
@@ -1235,7 +1239,7 @@ Suppose that out of 9 deer, 4 are marked. What is the probability of observing 1
 
 \begin{figure}[h]
 	\centering
-	\includegraphics[width=0.850\textwidth]
+	\includegraphics[width=0.880\textwidth]
 	{ch_distributions_oi_biostat/figures/hGeomSchematic/hGeomSchematic.png}
 	\caption{Possible samples of marked and unmarked deer in a sample $n = 3$, where $m = 4$ and $N - m = 5$. Striped circles represent marked deer, and empty circles represent unmarked deer.}
 	\label{hGeomSchematic}
@@ -1334,7 +1338,8 @@ Joint distributions are often displayed in tabular form as in Figure~\ref{table:
 		$x_1$ &   $p(x_1, y_1)$ &   $p(x_1, y_2)$  & $\cdots$  & $p(x_1, y_{k_2})$  \\
 		$x_2$ &  $p(x_2, y_1)$   &  $p(x_2, y_2)$  & $\cdots$ &   $p(x_2, y_{k_2})$ \\
 		$\vdots$ &   $\cdots$  &  $\cdots$  &  $\cdots$ &   $\cdots$ \\
-		$x_{k_1}$ & $p(x_{k_1}, y_1)$ &  $p(x_{k_1}, y_2)$  &  $\cdots$ & $p(x_{k_1}, y_{k_2})$ \\
+		$x_{k_1}$ & $p(x_{k_1}, y_1)$ &  $p(x_{k_1}, y_2)$  &  $\cdots$ & $p(x_{k_1}, y_{k_2})$\vspace{1.5mm} \\
+		\hline
 	\end{tabular}
 	\caption{Table for a joint distribution. Entries are probabilities for pairs ($x_i, y_j$). These probabilities can be written as $p(x_i, y_j)$ or more specifically, $p_{X, Y}(x_i, y_j)$.}
 	\label{table:generalJointDistribution}

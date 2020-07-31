@@ -8,6 +8,7 @@
   \chaptersection{oneWayChiSquare}
   \chaptersection{caseControStudies}
   \chaptersection{infForPropNotes}
+  \chaptersection{infForPropExercises}
 \end{chapterpage}
 \renewcommand{\chapterfolder}{ch_multiple_linear_regression_oi_biostat}
 
@@ -44,7 +45,7 @@ The distribution of $\hat{p}$ is nearly normal when the distribution of successe
 
 \index{sampling distribution!sample proportion}
 
-\begin{onebox}{Conditions for the sampling distribution of $\hat{p}$ being nearly normal}
+\begin{onebox}{Conditions for the sampling distribution of $\pmb{\hat{\MakeLowercase{p}}}$ being nearly normal}
 The sampling distribution for $\hat{p}$, calculated from a sample of size $n$ from a population with a success proportion $p$, is nearly normal when
 \begin{enumerate}
 \item the sample observations are independent and
@@ -91,9 +92,12 @@ The approximate 95\% confidence interval for $p$, the population response probab
 
 \begin{exercisewrap}
 \begin{nexercise}
-In New York City on October 23rd, 2014, a doctor who had recently been treating Ebola patients in Guinea went to the hospital with a slight fever and was subsequently diagnosed with Ebola. Soon after, a survey conducted by the Marist Poll, an organization with a carefully designed methodology for drawing random samples from identified populations, found that 82\% of New Yorkers favored a "mandatory 21-day quarantine for anyone who has come in contact with an Ebola patient."\footnote{\oiRedirect{textbook-maristpoll_ebola_201410}{Poll ID NY141026 on maristpoll.marist.edu}.} a) Verify that the sampling distribution of $\hat{p}$ is nearly normal. b) Construct a 95\% confidence interval for $p$, the proportion of New York adults who supported a quarantine for anyone who has come into contact with an Ebola patient.\footnotemark{}
+In New York City on October 23rd, 2014, a doctor who had recently been treating Ebola patients in Guinea went to the hospital with a slight fever and was subsequently diagnosed with Ebola. Soon after, a survey conducted by the Marist Poll, an organization with a carefully designed methodology for drawing random samples from identified populations, found that 82\% of New Yorkers favored a "mandatory 21-day quarantine for anyone who has come in contact with an Ebola patient."\footnotemark{} a) Verify that the sampling distribution of $\hat{p}$ is nearly normal. b) Construct a 95\% confidence interval for $p$, the proportion of New York adults who supported a quarantine for anyone who has come into contact with an Ebola patient.\footnotemark{}
 \end{nexercise}
 \end{exercisewrap}
+\addtocounter{footnote}{-1}%
+\footnotetext{\oiRedirect{textbook-maristpoll_ebola_201410}{Poll ID NY141026 on maristpoll.marist.edu}.}%
+\addtocounter{footnote}{1}%
 \footnotetext{a) The poll is based on a simple random sample and consists of fewer than 10\% of the adult population of New York, which makes independence a reasonable assumption. The success-failure condition is satisfied since, $1042(0.82) > 5$ and $1042(1-0.82) > 5$. b) $0.82 \pm 1.96\sqrt{\frac{0.82(1-0.82)}{1042}} \rightarrow (0.796, 0.844)$.}
 
 Did the participants in the melanoma trial constitute a random sample?  Patients who participate in clinical trials are unlikely to be a random sample of patients with the disease under study since the patients or their physicians must be aware of the trial, and patients must be well enough to travel to a major medical center and be willing to receive an experimental therapy that may have serious side effects.  
@@ -232,9 +236,12 @@ This remarkably simple formula is often used by practitioners for a quick estima
 
 \begin{exercisewrap}
 \begin{nexercise}
-A 2015 estimate of Congress' approval rating was 19\%.\footnote{\oiRedirect{textbook-congress_at_19_in_May2015}{www.gallup.com/poll/183128/five-months-gop-congress-approval-remains-low.aspx}} Using this estimate, how large should an additional survey be to produce a margin of error of 0.04 with 95\% confidence?\footnotemark{}
+A 2015 estimate of Congress' approval rating was 19\%.\footnotemark{} Using this estimate, how large should an additional survey be to produce a margin of error of 0.04 with 95\% confidence?\footnotemark{}
 \end{nexercise}
 \end{exercisewrap}
+\addtocounter{footnote}{-1}%
+\footnotetext{\oiRedirect{textbook-congress_at_19_in_May2015}{www.gallup.com/poll/183128/five-months-gop-congress-approval-remains-low.aspx}}%
+\addtocounter{footnote}{1}%
 \footnotetext{Apply the formula \\
 \begin{align*}
 1.96\times \sqrt{\frac{p(1-p)}{n}} \approx
@@ -283,7 +290,7 @@ where $p_1$ and $p_2$ are the population proportions, and $n_1$ and $n_2$ are th
 \textD{\newpage}
 
 
-\subsection{Confidence intervals for $p_1 - p_2$}
+\subsection{Confidence intervals for $\pmb{\MakeLowercase{p_1 - p_2}}$}
 \label{confidenceIntervalsDifferenceProportions}
 \index{confidence interval!difference of two proportions}
 
@@ -324,7 +331,7 @@ Reversed ordering & 732	& 34	& 63	& 3 \\
 \textD{\newpage}
 
 
-\subsection{Hypothesis testing for $p_1 -p_2$}
+\subsection{Hypothesis testing for $\pmb{\MakeLowercase{p_1 - p_2}}$}
 
 %\index{hypothesis test!difference of two proportions}
 
@@ -549,7 +556,7 @@ DOI: 10.1056/NEJMoa1113249}
 \textD{\newpage}
 
 
-\subsection{The $\chi^2$ test statistic}
+\subsection{The $\pmb{\chi^2}$ test statistic}
 
 Previously, test statistics have been constructed by calculating the difference between a point estimate and a null value, then dividing by the standard error of the point estimate to standardize the difference. The $\chi^2$ statistic is based on a different idea.  In each cell of a table, the difference \emph{observed} - \emph{expected} is a measure of the discrepancy between what was observed in the data and what should have been observed under the null hypothesis of no association. If the row and column variables are highly associated, that difference will be large.  Two adjustments are made to the differences before the final statistic is calculated.  First, since both positive and negative differences suggest a lack of independence, the differences are squared to remove the effect of the sign.  Second, cells with larger counts may have larger discrepancies by chance alone, so the squared differences in each cell are scaled by the number expected in the cell under the hypothesis of independence.  The final $\chi^2$ statistic is the sum of these standardized squared differences, where the sum has one term for each cell in the table.
 
@@ -563,7 +570,7 @@ $\chi^2$\vspace{0.5mm}\\\footnotesize chi-square\\test statistic]{\raggedright\v
 
 The theory behind the $\chi^2$ test and its sampling distribution relies on the same normal approximation to the binomial distribution that was introduced earlier.  The cases in the dataset must be independent and each expected cell count should be at least 10.  The second condition can be relaxed in tables with more than 4 cells.
 
-\begin{onebox}{Conditions for the $\chi^2$ test}
+\begin{onebox}{Conditions for the $\pmb{\chi^2}$ test}
 Two conditions that must be checked before performing a $\chi^2$ test:
 \begin{description}
 \setlength{\itemsep}{0mm}
@@ -593,7 +600,7 @@ For the HIV data, check the conditions for the $\chi^2$ test and calculate the $
 \footnotetext{Independence holds, since this is a randomized study. The expected counts are greater than 10. $\chi^2 = \frac{(60-44.6)^2}{44.6} + \frac{(27-42.4)^2}{42.4} + \frac{(87-102.4)^2}{102.4} + \frac{(113-97.6)^2}{97.6} = 14.7.$}
 
 
-\subsection{Calculating $p$-values for a $\chi^2$ distribution}
+\subsection{Calculating $\pmb{\MakeLowercase{p}}$-values for a $\pmb{\chi^2}$ distribution}
 
 The \term{chi-square distribution} is often used with data and statistics that are positive and right-skewed.  The distribution is characterized by a single parameter, the degrees of freedom. Figure~\ref{chiSquareDistributionWithInceasingDF} demonstrates three general properties of chi-square distributions as the degrees of freedom increases: the distribution becomes more symmetric, the center moves to the right, and the variability increases.
 
@@ -637,7 +644,7 @@ The degrees of freedom in a $2 \times 2$ table is 1, so refer to the values in t
 
 \begin{figure}[h]
 	\centering
-	\includegraphics[width=0.55\textwidth]{ch_inference_for_props_oi_biostat/figures/mammogramPValue/mammogramPValue}
+	\includegraphics[width=0.6\textwidth]{ch_inference_for_props_oi_biostat/figures/mammogramPValue/mammogramPValue}
 	\caption{The $p$-value for the mammogram data is shaded on the $\chi^2$ distribution with $df=1$.The shaded area is to the right of x = 0.02.}
 	\label{mammogramPValue}
 \end{figure}
@@ -653,7 +660,7 @@ Calculate an approximate $p$-value for the HIV data. Assess whether the data pro
 \textD{\newpage}
 
 
-\subsection{Interpreting the results of a $\chi^2$ test}
+\subsection{Interpreting the results of a $\pmb{\chi^2}$ test}
 
 If the $p$-value from a $\chi^2$ test is small enough to provide evidence to reject the null hypothesis of no association, it is important to explore the results further to understand direction of the observed association. This is done by examining the residuals, the standardized differences of the \emph{observed} - \emph{expected}, for each cell. Instead of using squared differences, the residuals are based on the differences themselves, and the standardizing or scaling factor is $\sqrt{\text{expected}}$.  Calculating residuals can be particularly helpful for understanding the results from large tables.
 
@@ -687,7 +694,7 @@ Calculate the $p$-value: for a table with 3 rows and 5 columns, the $\chi^2$ sta
 
 The $p$-value can be obtained using the \textsf{R} function \texttt{pchisq} (\texttt{pchisq(19.4, df = 8, lower.tail = FALSE)}), which returns a value of 0.012861. %\footnote{\texttt{pchisq(19.4, df = 8, lower.tail = FALSE)}}
 
-To further explore the differences in genotype distribution between races, calculate residuals for each cell (Figure~\ref{famussResidualsRaceGenotype}). The largest residuals are in the first row; there are many more African Americans with the CC genotype than expected under independence, and fewer with the CT genotype than expected. The residuals in the second row indicate a similar trend for Asians, but with a less pronounced difference. These results suggest further directions for research; a future study could enroll a larger number of African American and Asian participants to examine whether the observed trend holds with a more representative sample. Geneticists might also be interested in exploring whether this genetic difference between populations has an observable phenotypic effect.
+To further explore the differences in genotype distribution between races, calculate residuals for each cell (Figure~\ref{famussResidualsRaceGenotype}). The largest residuals are in the first row; there are many more African Americans with the CC genotype than expected under independence, and fewer with the CT genotype than expected. The residuals in the second row indicate a similar trend for Asians, but with a less pronounced difference. These results suggest further directions for research; a future study could enroll a larger number of African American and Asian participants to examine whether the observed trend holds with a more representative sample. Geneticists might also be interested in exploring whether this genetic difference between populations has an observable phenotypic \mbox{effect}.
 \end{nexample}
 \end{examplewrap}
 
@@ -845,6 +852,8 @@ Under the null hypothesis, the probabilities of cure in the fecal infusion and v
 	\label{fecalStudyResultsTest}
 \end{figure}
 
+\textD{\newpage}
+
 The $p$-value is the probability of observing results as or more extreme than those observed in the study under  the assumption that the null hypothesis is true. Previously discussed methods for significance testing have relied on calculating a test statistic associated with a defined sampling distribution, then obtaining $p$-values from tail areas on the distribution.  Fisher's exact test uses a similar approach, but introduces a new sampling distribution.  
 
 The $p$-value for Fisher's exact test is calculated by adding together the individual conditional probabilities of obtaining each table that is as or more extreme than the one observed, under the null hypothesis and given that the marginal totals are considered fixed.
@@ -903,7 +912,7 @@ The observed results show a case of $\hat{p}_1 > \hat{p}_2$; results that are mo
 \end{examplewrap}
 
 
-\subsubsection{Calculating a one-sided $p$-value}
+\subsubsection{Calculating a one-sided $\pmb{\MakeLowercase{p}}$-value}
 
 Suppose that researchers were interested in testing the null hypothesis against the one-sided alternative, $H_A: p_1 > p_2$. To calculate the one-sided $p$-value, sum the probabilities of each table representing results as or more extreme than those observed; specifically, sum the probabilities of observing Figure~\ref{fecalStudyResultsTest} and the tables in Example~\ref{fecalStudyExtreme}.
 
@@ -956,7 +965,7 @@ The results are significant at the $\alpha = 0.05$ significance level. There is 
 \end{examplewrap}
 
 
-\subsubsection{Calculating a two-sided $p$-value}
+\subsubsection{Calculating a two-sided $\pmb{\MakeLowercase{p}}$-value}
 
 There are various methods for calculating a two-sided $p$-value in the Fisher's exact test setting. When the test is calculated by hand, the most common way to calculate a two-sided $p$-value is to double the smaller of the one-sided $p$-values. One other common method used by various statistical computing packages such as \textsf{R} is to classify "more extreme" tables as all tables with probabilities less than that of the observed table, in both directions. The two-sided $p$-value is the sum of probabilities for the qualifying tables.  That approach is illustrated in the next example.
 
@@ -1124,7 +1133,7 @@ An alternative design for studies like this reverses the sampling scheme so that
 \textD{\newpage}
 
 
-\subsection{$\chi^2$ tests of association in case-control studies}
+\subsection{$\pmb{\chi^2}$ tests of association in case-control studies}
 \label{caseControlTests}
 
 \index{case-control studies!tests for association}
