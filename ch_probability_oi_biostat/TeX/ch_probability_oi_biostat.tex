@@ -874,7 +874,7 @@ A \term{tree diagram} is a tool to organize outcomes and probabilities around th
 
 In Figure~\ref{BreastCancerTreeDiagram}, the primary branches split the population by cancer status, and show the marginal probabilities 0.0035 and 0.9965 of having cancer or not, respectively. The secondary branches are conditioned on the primary branch and show conditional probabilities; for example, the top branch is the probability that a mammogram is positive given that an individual has cancer. The problem provides enough information to compute the probability of testing positive if breast cancer is present, since this probability is the complement of the probability of a false negative: $1 - 0.11 = 0.89$.
 
-Joint probabilities can be constructed at the end of each branch by multiplying the numbers from right to left, such as the probability that a woman tests positive given that she has breast cancer (abbreviated as BC):
+Joint probabilities can be constructed at the end of each branch by multiplying the numbers from right to left, such as the probability that a woman tests positive and that she has breast cancer (abbreviated as BC):
 
 \begin{align*}
 P(\text{BC and mammogram$^+$}) &= P(\text{mammogram$^+$ } |\ \text{BC}) \times  P(\text{BC}) \\
