@@ -998,11 +998,11 @@ Continue populating the table, using the provided information about the prevalen
 	
 	\item Calculate the two numbers in the first column: the number of women who have breast cancer and tested either negative (false negative) or positive (true positive).
 	\[\text{ women with BC} \times P(\text{false "-"}) = 350 \times .11 = 38.5 \text{ false "-" results}\]
-	\[\text{ women with BC} \times [1 - P(\text{true "+"})] = 350 \times [1 - .11] = 311.5 \text{ true "+" results}\]
+	\[\text{ women with BC} \times [1 - P(\text{false "-"})] = 350 \times [1 - .11] = 311.5 \text{ true "+" results}\]
 	
 	\item Calculate the two numbers in the second column: the number of women who do not have breast cancer and tested either positive (false positive) or negative (true negative). 
 	\[\text{ women without BC} \times P(\text{false "+"}) = 99,650 \times .07 = 6,975.5 \text{ false "+" results}\]
-	\[\text{ women without BC} \times [1 - P(\text{true "-"})] = 99,650 \times [1 - .07] = 92,674.5 \text{ true "-" results}\]
+	\[\text{ women without BC} \times [1 - P(\text{false "+"})] = 99,650 \times [1 - .07] = 92,674.5 \text{ true "-" results}\]
 	
 	\item Complete the table by calculating the two row totals: the number of positive and negative mammograms out of 100,000.
 	\[(\text{true "+" results}) + (\text{false "+" results}) = 311.5 + 6,975.5 = 7,287 \text{ "+" mammograms}\]
