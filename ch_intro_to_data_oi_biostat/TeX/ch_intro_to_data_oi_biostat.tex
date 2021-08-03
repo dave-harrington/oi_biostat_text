@@ -1884,31 +1884,28 @@ Suppose that 10 genes are selected as predictors---the 5 largest outliers and 5 
 	\label{golubTestData}
 \end{figure}
 
-
-% latex table generated in R 3.4.3 by xtable 1.8-2 package
-% Mon Feb 12 22:14:04 2018
-\begin{figure}[h]
+% latex table generated in R 4.0.2 by xtable 1.8-4 package
+% Tue Aug 03 11:49:06 2021
+\begin{table}[h]
 	\centering
-	%\small
 	\begin{tabular}{r|r|r|r}
 		\hline
 		Probe & AML Mean & ALL Mean & Midpoint \\ 
 		\hline
-		M19507\_at & 20143 & 322 & 9910 \\ 
-		M27891\_at & 17395 & -262 & 8829 \\ 
-		M11147\_at & 32554 & 16318 & 8118 \\ 
-		M96326\_rna1\_at & 16745 & 830 & 7957 \\ 
-		Y00787\_s\_at & 16847 & 1002 & 7923 \\ 
-		M14483\_rna1\_s\_at & 22268 & 33561 & -5647 \\ 
-		X82240\_rna1\_at & -917 & 9499 & -5208 \\ 
-		X58529\_at & 598 & 10227 & -4815 \\ 
-		M33680\_at & 4151 & 13447 & -4648 \\ 
-		U05259\_rna1\_at & 74 & 8458 & -4192 \\ 
+		M19507\_at & 20143 & 322 & 10232 \\ 
+		M27891\_at & 17395 & -262 & 8567 \\ 
+		M11147\_at & 32554 & 16318 & 24436 \\ 
+		M96326\_rna1\_at & 16745 & 830 & 8787 \\ 
+		Y00787\_s\_at & 16847 & 1002 & 8924 \\ 
+		M14483\_rna1\_s\_at & 22268 & 33561 & 27914 \\ 
+		X82240\_rna1\_at & -917 & 9499 & 4291 \\ 
+		X58529\_at & 598 & 10227 & 5413 \\ 
+		M33680\_at & 4151 & 13447 & 8799 \\ 
+		U05259\_rna1\_at & 74 & 8458 & 4266 \\ 
 		\hline
 	\end{tabular}
-		\caption{Mean expression value for each gene among AML patients and ALL patients in \data{golub.train}, and the midpoint between the means. \label{golubTrainMeansMidpoints}}
-\end{figure}
-
+	\caption{Mean expression value for each gene among AML patients and ALL patients in \data{golub.train}, and the midpoint between the means. \label{golubTrainMeansMidpoints}}
+\end{table}
 
 \begin{examplewrap}
 \begin{nexample}{Consider the expression data for the patient in the first row of Figure~\ref{golubTestData}. For each gene, identify whether the expression level is more AML-like or more ALL-like.}
@@ -1922,43 +1919,43 @@ Expression at genes represented by M19507\_at, M96326\_rna1\_at, Y00787\_s\_at, 
 \begin{examplewrap}
 \begin{nexample}{Use the information in Figures~\ref{golubTestData} and~\ref{golubTrainMeansMidpoints} to calculate the magnitude of the deviations $v_1$ and $v_{10}$ for the first patient.}
 	
-For the gene represented by the M19507\_at probe, the magnitude of the deviation is $v_1 = |4,481 - 20,143| = 15,662$.	
+For the gene represented by the M19507\_at probe, the magnitude of the deviation is $v_1 = |4,481 - 10,232| = 5,751$.	
 
-For the gene represented by the U05259\_rna1\_at probe, the magnitude of the deviation is $v_{10} = |2,757 - 74| = 2.683$.
+For the gene represented by the U05259\_rna1\_at probe, the magnitude of the deviation is $v_{10} = |2,757 - 4,266| = 1,509$.
 \end{nexample}
 \end{examplewrap}	
 
-% latex table generated in R 3.4.3 by xtable 1.8-2 package
-% Tue Feb 13 01:28:10 2018
-\begin{figure}[ht]
+% latex table generated in R 4.0.2 by xtable 1.8-4 package
+% Tue Aug 03 11:55:53 2021
+\begin{table}[ht]
 	\tiny
 	\centering
 	\begin{tabular}{r|rrrrr|rrrrr}
 		\hline
 		& M19507\_at & M27891\_at & M11147\_at & M96326\_rna1\_at & Y00787\_s\_at & M14483\_rna1\_s\_at & X82240\_rna1\_at & X58529\_at & M33680\_at & U05259\_rna1\_at \\ 
 		\hline
-		1 & 4481 \cellcolor{lightblue}& 47532 & 56261 & 1785 \cellcolor{lightblue}& 77 \cellcolor{lightblue}& 7824 & 231 & 9520 \cellcolor{lightblue} & 7181 & 2757 \\ 
-		2 & 11513 & 2839 \cellcolor{lightblue}& 42469 & 5018 \cellcolor{lightblue}& 20831 & 27407 & 1116 & 221 & 6978 & 187 \\ 
-		3 & 21294 & 6439 \cellcolor{lightblue}& 30239 & 61951 & 187 \cellcolor{lightblue} & 19692 & 540 & 216 & 1741 & 84 \\ 
-		4 & 399 \cellcolor{lightblue}& 26023 & 40910 & 1271 \cellcolor{lightblue} & 26842 & 30092 \cellcolor{lightblue} & 1247 & 19033 \cellcolor{lightblue}& 13117 \cellcolor{lightblue} & 188 \\ 
-		5 & 147 \cellcolor{lightblue}& 29609 & 37606 & 20053 & 12745 & 26985 & 1104 & 273 & 8701 & 168 \\ 
-		6 & 1229 \cellcolor{lightblue}& 1206 \cellcolor{lightblue}& 16932 \cellcolor{lightblue}& 2250 \cellcolor{lightblue}& 360 \cellcolor{lightblue}& 38058 \cellcolor{lightblue}& 20951 \cellcolor{lightblue}& 12406 \cellcolor{lightblue}& 9927 \cellcolor{lightblue}& 8378 \cellcolor{lightblue} \\ 
-		7 & 238 \cellcolor{lightblue}& 610 \cellcolor{lightblue}& 21798 \cellcolor{lightblue}& 991 \cellcolor{lightblue}& 348 \cellcolor{lightblue}& 23986 & 6500 \cellcolor{lightblue}& 20451 \cellcolor{lightblue} & 8500 & 7005 \cellcolor{lightblue}\\ 
-		8 & 1021 \cellcolor{lightblue}& 792 \cellcolor{lightblue}& 17732 \cellcolor{lightblue}& 730 \cellcolor{lightblue}& 5102 \cellcolor{lightblue}& 17893 & 158 & 9287 \cellcolor{lightblue}& 7924 & 9221 \cellcolor{lightblue}\\ 
-		9 & 432 \cellcolor{lightblue}& 1099 \cellcolor{lightblue}& 9683 \cellcolor{lightblue}& 576 \cellcolor{lightblue}& 804 \cellcolor{lightblue}& 14386 & 7097 \cellcolor{lightblue}& 5556 \cellcolor{lightblue}& 9915 \cellcolor{lightblue}& 5594 \cellcolor{lightblue}\\ 
-		10 & 518 \cellcolor{lightblue}& 862 \cellcolor{lightblue}& 26386 & 2971 \cellcolor{lightblue}& 1032 \cellcolor{lightblue}& 30100 \cellcolor{lightblue}& 32706 \cellcolor{lightblue} & 21007 \cellcolor{lightblue}& 23932 \cellcolor{lightblue}& 14841 \cellcolor{lightblue}\\ 
+		1 & 5751 \cellcolor{lightblue} & 38966 & 31825 & 7003 \cellcolor{lightblue} & 9001 \cellcolor{lightblue} & 20090 & 4522 & 4108 \cellcolor{lightblue} & 1618 & 1509 \\ 
+		2 & 1281 & 5727 \cellcolor{lightblue} & 18032 & 3769 \cellcolor{lightblue} &  11906 & 507 & 5408 & 5634 & 1821 & 4453 \\ 
+		3 & 11061 & 2128 \cellcolor{lightblue} & 5803 & 53164 & 9111 \cellcolor{lightblue} & 8222 & 4831 & 5196 & 7058 & 4350 \\ 
+		4 & 10632 \cellcolor{lightblue} & 17457 & 16474 & 7516 \cellcolor{lightblue} & 17918 & 2178 \cellcolor{lightblue} & 5538 & 13621 \cellcolor{lightblue} & 4318 \cellcolor{lightblue} & 4454 \\ 
+		5 & 10379 \cellcolor{lightblue}& 21042 & 13169 & 11265 & 3820 & 929 & 5395 & 5685 & 98 & 4434 \\ 
+		6 & 11461 \cellcolor{lightblue}& 9773 \cellcolor{lightblue}& 7504 \cellcolor{lightblue} & 6537 \cellcolor{lightblue} & 8564 \cellcolor{lightblue} & 10144 \cellcolor{lightblue} & 16660 \cellcolor{lightblue} & 6994 \cellcolor{lightblue} & 1128 \cellcolor{lightblue} & 4112 \cellcolor{lightblue} \\ 
+		7 & 10470 \cellcolor{lightblue}& 9176 \cellcolor{lightblue} & 2638 \cellcolor{lightblue} & 9778 \cellcolor{lightblue} & 9272 \cellcolor{lightblue} & 3928 & 2209 \cellcolor{lightblue} & 15038 \cellcolor{lightblue} & 300 & 2739 \cellcolor{lightblue} \\ 
+		8 & 11254 \cellcolor{lightblue}& 9358 \cellcolor{lightblue} & 6704 \cellcolor{lightblue} & 8057 \cellcolor{lightblue} & 3823 \cellcolor{lightblue} & 10021 & 4133 & 3875 \cellcolor{lightblue} & 875 & 4955 \cellcolor{lightblue} \\ 
+		9 & 9800 \cellcolor{lightblue}& 9666 \cellcolor{lightblue} & 14754 \cellcolor{lightblue} & 9363 \cellcolor{lightblue} & 9728 \cellcolor{lightblue} & 13529  & 2806 \cellcolor{lightblue} & 144 \cellcolor{lightblue} & 1116 \cellcolor{lightblue} & 1328 \cellcolor{lightblue} \\ 
+		10 & 10750 \cellcolor{lightblue}& 9428 \cellcolor{lightblue} & 1949 & 11759 \cellcolor{lightblue} & 9956 \cellcolor{lightblue} & 2186 \cellcolor{lightblue} & 28415 \cellcolor{lightblue} & 15594 \cellcolor{lightblue} & 15133 \cellcolor{lightblue} & 10575 \cellcolor{lightblue} \\ 
 		\hline
 	\end{tabular}
 	\caption{The magnitude of deviations from the midpoints. Cells for which the expression level is more ALL-like (closer to $\mu_{ALL}$ than $\mu_{AML}$) are highlighted in blue.}
 	\label{golubTestDataMagnitudes}
-\end{figure}
+\end{table}
 
 \begin{examplewrap}
 \begin{nexample}{Using the information in Figure~\ref{golubTestDataMagnitudes}, make a prediction for the leukemia status of Patient 1.}
 	
 Calculate the total weighted votes for each category:
-\[V_{AML} = 47,532 + 56,261 + 7,824 + 231 + 7,181 + 2,757 = 121,786 \]
-\[V_{ALL} = 4,481 + 1,785 + 77 + 9,520 = 15,863 \]	
+\[V_{AML} = 38,966 + 31,825 + 20,090 + 4,522 + 1,618 + 1,509 = 98,530 \]
+\[V_{ALL} = 5,571 + 7,003 + 9,001 + 4,108 = 25,863 \]	
 
 Since $V_{AML} > V_{ALL}$, Patient 1 is predicted to have AML.
 \end{nexample}
@@ -1969,7 +1966,7 @@ Since $V_{AML} > V_{ALL}$, Patient 1 is predicted to have AML.
 Make a prediction for the leukemia status of Patient 10.\footnotemark{}
 \end{nexercise}
 \end{exercisewrap}
-\footnotetext{Since $V_{AML} = 26,386$ and $V_{ALL} = 127,968$, Patient 10 is predicted to have ALL.}
+\footnotetext{Since $V_{AML} = 1,949$ and $V_{ALL} = 113,796$, Patient 10 is predicted to have ALL.}
 
 Figure~\ref{golubActualPrediction} shows the comparison between actual leukemia status and predicted leukemia status based on the described prediction strategy. The prediction matches patient leukemia status for all patients. 
 
