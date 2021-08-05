@@ -10,7 +10,7 @@
   \chaptersection{infForPropNotes}
   \chaptersection{infForPropExercises}
 \end{chapterpage}
-\renewcommand{\chapterfolder}{ch_multiple_linear_regression_oi_biostat}
+\renewcommand{\chapterfolder}{ch_inference_for_props_oi_biostat}
 
 \chapterintro{{\large Previous chapters discussed methods of inference for numerical data; in this chapter, those methods are extended to categorical data, such as binomial proportions or data in two-way tables. While various details of the methods may change, such as the calculations for a test statistic or the distributions used to find a $p$-value, the core ideas and principles behind inference remain the same.  
 
@@ -34,6 +34,7 @@ The data from this study are binomial data, with success defined as a response t
 Inference about $p$ is based on the sample proportion $\hat{p}$, where $\hat{p} = X/n$. In this case, $\hat{p} = 21/52 = 0.404$. If the sample proportion is nearly normally distributed, the normal approximation to the binomial distribution can be used to conduct inference; this method is commonly used.  When $X$ does not have an approximately normal distribution, exact inference can  based on the binomial distribution for $X$.  Both the normal approximation and exact methods are covered in this chapter.
 
 \subsection{Inference using the normal approximation}
+\label{normalApproxSingleBinomial}
 
 A \term{sample proportion} can be described as a sample mean. If each success in the melanoma data  is represented as a \texttt{1} and each failure as a \texttt{0}, then the sample proportion is the mean of the 52 numerical outcomes:
 \begin{eqnarray*}
@@ -159,6 +160,7 @@ One of the questions on the National Health and Nutrition Examination Survey (in
 
 
 \subsection{Inference using exact methods}
+\label{exactMethodsSingleBinomial}
 
 When the normal approximation to the distribution of $\hat{p}$ may not be accurate, inference is based on exact binomial probabilities. Calculating confidence intervals and $p$-values based on the binomial distribution can be done by hand, with tables of the binomial distribution, or (more easily and accurately) with statistical software. The logic behind computing a $p$-value is discussed here, but the formulas for a confidence interval are complicated and are not shown.
 
@@ -261,6 +263,7 @@ A sample size of 370 or more would be reasonable.}
 Just as inference can be done for the difference of two population means, conclusions can also be drawn about the difference of two population proportions: $p_1 - p_2$. 
 
 \subsection{Sampling distribution of the difference of two proportions}
+\label{samplingDistributionDiffTwoProps}
 
 \index{sampling distribution!difference of two proportions}
 \index{point estimate!difference of two proportions}
