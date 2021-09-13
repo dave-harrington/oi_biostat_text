@@ -6,7 +6,7 @@
   \chaptersection{differenceOfTwoProportions}
   \chaptersection{twoWayTablesAndChiSquare}
   \chaptersection{oneWayChiSquare}
-  \chaptersection{caseControStudies}
+  \chaptersection{caseControlStudies}
   \chaptersection{infForPropNotes}
   \chaptersection{infForPropExercises}
 \end{chapterpage}
@@ -169,8 +169,7 @@ The $p$-value for a hypothesis test corresponds to the sum of the probabilities 
 \index{data!glioblastoma}
 
 \begin{examplewrap}
-\begin{nexample}{In 2009, the FDA Oncology Drug Advisory Committee (ODAC) recommended that the drug Avastin be approved for use in glioblastoma, a form of brain cancer. Tumor shrinkage after taking a drug is called a response; out of 85 patients, 24 exhibited a response. Historically, response probabilities for brain cancer drugs were approximately 0.05, or about 5\%. Assess whether there is evidence that the response probability for Avastin is different from previous drugs. 		
-}	
+\begin{nexample}{In 2009, the FDA Oncology Drug Advisory Committee (ODAC) recommended that the drug Avastin be approved for use in glioblastoma, a form of brain cancer. Tumor shrinkage after taking a drug is called a response; out of 85 patients, 24 exhibited a response. Historically, response probabilities for brain cancer drugs were approximately 0.05, or about 5\%. Assess whether there is evidence that the response probability for Avastin is different from previous drugs. } \label{avastinFDAApproval}	
 
 $H_0: p = 0.05$; $H_A: p \neq 0.05$. Let $\alpha = 0.05$. 
 
@@ -560,6 +559,7 @@ DOI: 10.1056/NEJMoa1113249}
 
 
 \subsection{The $\pmb{\chi^2}$ test statistic}
+\label{theChiSquaredTestStatistic}
 
 Previously, test statistics have been constructed by calculating the difference between a point estimate and a null value, then dividing by the standard error of the point estimate to standardize the difference. The $\chi^2$ statistic is based on a different idea.  In each cell of a table, the difference \emph{observed} - \emph{expected} is a measure of the discrepancy between what was observed in the data and what should have been observed under the null hypothesis of no association. If the row and column variables are highly associated, that difference will be large.  Two adjustments are made to the differences before the final statistic is calculated.  First, since both positive and negative differences suggest a lack of independence, the differences are squared to remove the effect of the sign.  Second, cells with larger counts may have larger discrepancies by chance alone, so the squared differences in each cell are scaled by the number expected in the cell under the hypothesis of independence.  The final $\chi^2$ statistic is the sum of these standardized squared differences, where the sum has one term for each cell in the table.
 
@@ -829,6 +829,7 @@ Chapter~\ref{introductionToData} started with the discussion of a study examinin
 	
 
 \subsection{Fisher's exact test}
+\label{fisherExactTest}
 
 If sample sizes are too small, the $\chi^2$ distribution does not yield accurate $p$-values for  assessing  independence of the row and column variables in a table.  When expected counts in a table are less than 10, \term{Fisher's exact test} is often  used to calculate exact levels of significance. This test is usually applied to $2 \times 2$ tables. It can be applied to larger tables, but the logic behind the test is complex and the calculations involved are computationally intensive,  so this section covers only $2 \times 2$ tables. 
 
@@ -1114,7 +1115,7 @@ There are 2 degrees of freedom, since $k = 3$. The $p$-value is between 0.005 an
 
 %___________
 \section{Outcome-based sampling: case-control studies}
-\label{caseControStudies}
+\label{caseControlStudies}
 
 \index{case-control studies|(}
 
