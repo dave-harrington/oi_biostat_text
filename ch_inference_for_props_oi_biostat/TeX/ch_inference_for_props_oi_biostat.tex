@@ -1256,7 +1256,7 @@ It can be shown that the $p$-value used in a test of no association (between exp
 
 \section{Inference for two samples of binary data} \label{inferenceBinaryData}
 
-Methods for summarizing data from two samples of binary data were introduced in    Sections~\ref{twoCategoricalVariables} and \ref{caseControlStudies}, where relative risk and odds ratios were introduced.  Methods for inference for the difference of two proportions were discussed in Sections~\ref{differenceOfTwoProportions}, and \ref{twoWayTablesAndChiSquare}.  This supplement provides more details about those measures when used to compare two-groups, adding information about terminology, interpretation, hypothesis tests and confidence intervals for relative risk and odds ratios.  For convenience, some of the earlier material on inference for the difference in two proportions is reviewed in this supplement.  
+Methods for summarizing data from two samples of binary data were introduced in    Sections~\ref{twoCategoricalVariables} and \ref{caseControlStudies}, where relative risk and odds ratios were introduced.  Methods for inference for the difference of two proportions were discussed in Sections~\ref{differenceOfTwoProportions} and \ref{twoWayTablesAndChiSquare}.  This supplement provides more details about those measures when used to compare two groups, adding information about terminology, interpretation, hypothesis tests, and confidence intervals for relative risk and odds ratios.  For convenience, some of the earlier material on inference for the difference in two proportions is reviewed in this supplement.  
 
 %____________________
 
@@ -1269,9 +1269,9 @@ Epidemiologists use the term risk when discussing the prevalence of a disease or
 
 For non-Hispanic white Americans, the prevalence of T2D is 11.9\% (absolute risk 0.119). The risk difference between the groups, comparing non-Hispanic Asian to non-Hispanic white adults, is 0.149 - 0.119 = 0.03; there is a 0.03 difference in the absolute risk of T2D, with the risk being 3\% higher among non-Hispanic Asian adults. Another way to compare the absolute risks is the relative risk, also referred to as the risk ratio. The relative risk comparing Asian to white non-Hispanics is 0.149/0.119 = 1.252.  The risk for Asians is 1.252 times as large as that for white adults, or 25.2\% larger on a multiplicative scale. 
 
-In the diabetes example, the risk ratio uses the non-Hispanic white adults as the baseline group, with the absolute risk of 0.119 in the denominator of the relative risk calculation. The prevalence of 0.149 for Asians could just as easily have been used as the denominator. The reciprocal of the risk ratio computed earlier is 0.119/0.149 = 0.799; the risk of T2D among non-Hispanic white adults is 0.799 times the risk of among non-Hispanic Asian adults.  Epidemiologists say that the risk is reduced by 21.1\% on a multiplicative scale.  While there is no set convention, the baseline group is often chosen to be the group with the smaller absolute risk in order to obtain a relative risk greater than 1; the interpretation of relative risks greater than 1 is often easier to understand for non-statisticians. 
+In the diabetes example, the risk ratio uses the non-Hispanic white adults as the baseline group, with the absolute risk of 0.119 in the denominator of the relative risk calculation. The prevalence of 0.149 for Asians could just as easily have been used as the denominator. The reciprocal of the risk ratio computed earlier is 0.119/0.149 = 0.799; the risk of T2D among non-Hispanic white adults is 0.799 times the risk among non-Hispanic Asian adults.  Epidemiologists say that the risk is reduced by 21.1\% on a multiplicative scale.  While there is no set convention, the baseline group is often chosen to be the group with the smaller absolute risk in order to obtain a relative risk greater than 1; the interpretation of relative risks greater than 1 is often easier to understand for non-statisticians. 
 
-If $P(E)$ is the probability of an event $E$, the odds of $E$ are $P(E)/(1 - P(E))$.  Equivalently, it is the proportion of times the event happens divided by the proportion of times it does not.   In a data set, the observed odds of an event is the number of times the event happens divided by the number of times it does not. When the odds of an event are 3, the event occurs 3 times as often as not.  The probability of the event will be 3/4, since for every 4 opportunities to observe the event, it will occur 3 of those 4 times (on average).   Odds can be larger than 1, while probabilities can never be larger than 1; both are never less than 0.  Two groups are often compared using the ratio of the odds for the two groups, denoted by OR for odds ratio. An OR is also referred to as the relative odds.  
+If $P(E)$ is the probability of an event $E$, the odds of $E$ are $P(E)/(1 - P(E))$.  Equivalently, it is the proportion of times the event happens divided by the proportion of times it does not.   In a dataset, the observed odds of an event is the number of times the event happens divided by the number of times it does not. When the odds of an event are 3, the event occurs 3 times as often as not.  The probability of the event will be 3/4, since for every 4 opportunities to observe the event, it will occur 3 of those 4 times (on average).   Odds can be larger than 1, while probabilities can never be larger than 1; both are never less than 0.  Two groups are often compared using the ratio of the odds for the two groups, denoted by OR for odds ratio. An OR is also referred to as the relative odds.  
 
 Figure~\ref{ssriPPHNObserved} in Section~\ref{caseControlStudies} summarizes the results of a study examining the association of persistent pulmonary hypertension of a newborn (PPHN) with exposure to maternal use of a selective serotonin reuptake inhibitor (SSRI) during pregnancy. For convenience, the figure is repeated here as Figure~\ref{ssriPPHNObservedRepeated}.
 
@@ -1341,9 +1341,8 @@ There are two widely-used methods for testing the null hypothesis of no differen
 where $\hat{p}_1$ and $\hat{p}_2$ are the two estimated proportions based on group sizes $n_1$ and $n_2$, and $\hat{p}$ is a pooled estimate of the outcome probability $p$ under the hypothesis of no difference,
 \[\hat{p} = \dfrac{n_{1}\hat{p}_1 + n_{2}\hat{p}_2}{n_{1} + n_{2}} = \dfrac{x_{1} + x_{2}}{n_{1} + n_{2}}. \]
 
-
 \begin{examplewrap}
-  \begin{nexample}{Guimar\~{a}es, et al.\footfullcite{tofacitinib_covid19}  reported the results of a randomized trial comparing tofacitinib to placebo in patients in Brazil hospitalized with Covid-19 pneumonia.  Since there were no known effective treatments for Covid-19 pneumonia when the trial was conducted, a placebo control group was considered ethical.  Of the 145 participants assigned to placebo, 42 experienced the outcome of interest, death or respiratory failure during the 28 day follow-up period; 26 out of the 144 assigned to tofacitinib experienced the outcome. Calculate a 95\% confidence interval for the between group difference in the risk of death or respiratory failure, and conduct a test of the hypothesis of no difference between the groups.}
+  \begin{nexample}{Guimar\~{a}es, et al.\footfullcite{tofacitinib_covid19}  reported the results of a randomized trial comparing tofacitinib to placebo in patients in Brazil hospitalized with Covid-19 pneumonia.  Since there were no known effective treatments for Covid-19 pneumonia when the trial was conducted, a placebo control group was considered ethical.  Of the 145 participants assigned to placebo, 42 experienced the outcome of interest, death or respiratory failure during the 28 day follow-up period; 26 out of the 144 assigned to tofacitinib experienced the outcome. Calculate a 95\% confidence interval for the between group difference in the risk of death or respiratory failure and conduct a test of the hypothesis of no difference between the groups.}
 \label{tofacitinibVsPlacebo}
 The 95\% confidence interval for the difference in the risk of respiratory failure or death is 
 \begin{align*}
@@ -1360,7 +1359,7 @@ The two-sided $p$-value is $P(|Z| > 2.19) = 0.029$. There is evidence of a diffe
   \end{nexample}
 \end{examplewrap}
 
-The data from the tofacitinib trial can be summarized in a $2 \times 2$ contingency table as shown in Figure~\ref{tofacitinibVsPlaceboTable}, and a $\chi^2$-statistic can be used to test the null hypothesis of no difference between the groups in the distribution of the outcome.  The calculation of the $\chi^2$-test is described in detail in the subsections of Section~\ref{twoWayTablesAndChiSquare} using data from a large Canadian randomized trial examining the value of mammogram screening for breast cancer.
+The data from the tofacitinib trial can be summarized in a $2 \times 2$ contingency table as shown in Figure~\ref{tofacitinibVsPlaceboTable}, and a $\chi^2$-statistic can be used to test the null hypothesis of no difference between the groups in the distribution of the outcome.  The calculation of the $\chi^2$-test is described in detail in the subsections of Section~\ref{twoWayTablesAndChiSquare}.
 
 % latex table generated in R 4.1.0 by xtable 1.8-4 package
 % Tue Aug 10 14:27:03 2021
@@ -1375,7 +1374,7 @@ Tofacitinib & 26 & 118 & 144 \\
   Sum & 68 & 221 & 289 \\ 
    \hline
 \end{tabular}
-\caption{Tofacitinib vs placebo for Covid-19 pneumonia} 
+\caption{Tofacitinib vs placebo for Covid-19 pneumonia.} 
 \label{tofacitinibVsPlaceboTable}
 \end{figure}
 
@@ -1411,21 +1410,21 @@ Tofacitinib & 33.88 & 110.12 & 144.00 \\
 \label{tofacitinibVsPlaceboExpected}
 \end{figure}   
 
-The $\chi^2$ and $z$-tests are equivalent in that both will either reject or fail to reject the null hypothesis together---both provide the same $p$-value---but the details they provide about the data are different.  The $\chi^2$-test is based on a data summary that is compact and easy to understand (i.e., a $2 \times 2$ table).  The $z$-statistic provides a confidence interval for the risk difference is not available from the $\chi^2$ test.  Sometimes a confidence interval is the main tool for inference.  In Example~\ref{jointInfectionNonInferiority}, there was no null hypothesis of equality of risk of persistent infection; this is a case in which the $\chi^2$ test would not have answered the scientific question of interest.
+The $\chi^2$ and $z$-tests are equivalent in that both will either reject or fail to reject the null hypothesis together---both provide the same $p$-value---but the details they provide about the data are different.  The $\chi^2$-test is based on a data summary that is compact and easy to understand (i.e., a $2 \times 2$ table).  The $z$-statistic provides a confidence interval for the risk difference that is not available from the $\chi^2$ test.  Sometimes a confidence interval is the main tool for inference.  In Example~\ref{jointInfectionNonInferiority}, there was no null hypothesis of equality of risk of persistent infection; this is a case in which the $\chi^2$ test would not have answered the scientific question of interest.
 
 The standard normal and $\chi^2$-distributions for these test statistics are continuous distributions that only approximate the sampling distributions of the statistic; there are alternative versions of these test statistics that either attempt to improve the approximation with small adjustments (continuity corrections), or avoid the approximation altogether by using a theoretically exact sampling distribution (exact methods).  These alternatives are discussed in Section~\ref{alternativeTestStatisticsBinaryData}.
 
 \subsection{Inference for relative risk}
 \label{infereneRelativeRisk}
 
-Relative risk (RR) is another way to summarize the treatment effect in the tofacitinib trial, since participants were randomized to a treatment and followed for the outcome. Relative risk is particularly appropriate in this setting since it estimates how many times more likely a participant on placebo would experience respiratory failure or death than a participant assigned to the study drug. The estimates of the risk of death or respiratory failure in the two groups are 42/145 = 0.29 (placebo) and 26/144 = 0.18 (tofacitinib), so the estimated relative risk is $\widehat{\text{RR}} = 0.29/0.18 = 1.61$. Participants assigned to placebo were approximately 1.6 times more likely to experience the respiratory failure or death within 28 days, a 60\% increased risk on a multiplicative scale.
+Relative risk (RR) is another way to summarize the treatment effect in the tofacitinib trial. Relative risk is particularly appropriate in this setting since it estimates the extent to which a participant on placebo is more likely to experience respiratory failure or death than a participant taking the study drug. The risk estimates within groups are 42/145 = 0.29 (placebo) and 26/144 = 0.18 (tofacitinib), so $\widehat{\text{RR}} = 0.29/0.18 = 1.61$. Participants assigned to placebo were approximately 1.6 times more likely to experience respiratory failure or death within 28 days, a 60\% increased risk on a multiplicative scale.
 
 The null hypothesis of no effect is equivalent to a population RR of 1. Since this hypothesis is equivalent to an additive difference of 0 in the probability of the outcome, the $p$-value for a test of the null hypothesis that RR = 1 is identical to the $p$-value calculated in either Example~\ref{tofacitinibVsPlacebo} or Example~\ref{tofacitinibVsPlaceboChiSq}.  A complete analysis based in relative risk, however, adds a confidence interval.
  
 Confidence intervals for a RR are calculated in a two-step process, starting with a confidence interval for the natural log of the RR, then exponentiating the upper and lower bounds to obtain upper and lower bounds for the RR.
 
 \begin{onebox}{Confidence intervals for log relative risk}
-  Suppose $E$ is an event that has two possible outcomes, labeled \textit{yes, no}. Let $y_1$ and $y_2$ be the observed count of the value \textit{yes} in two groups of size $n_1$ and $n_2$, let the estimated proportions of \textit{yes} outcomes be $\hat{p}_1 = y_1/n_1$ and $\hat{p}_2 y_2/n_2$, and let $\widehat{\text{RR}} = \hat{p}_1/\hat{p}_2$ be the estimated relative risk comparing group 1 to group 2.  If the two groups can be viewed as random samples from a larger population and the conditions described in Section~\ref{samplingDistributionDiffTwoProps} are met,  $\log(\widehat{\text{RR}})$ is approximately normally distributed with mean  $\log(RR)$ and standard error (SE)
+  Suppose $E$ is an event that has two possible outcomes, labeled \textit{yes, no}. Let $y_1$ and $y_2$ be the observed counts of the value \textit{yes} in two groups of size $n_1$ and $n_2$, let the estimated proportions of \textit{yes} outcomes be $\hat{p}_1 = y_1/n_1$ and $\hat{p}_2 y_2/n_2$, and let $\widehat{\text{RR}} = \hat{p}_1/\hat{p}_2$ be the estimated relative risk comparing group 1 to group 2.  If the two groups can be viewed as random samples from a larger population and the conditions described in Section~\ref{samplingDistributionDiffTwoProps} are met,  $\log(\widehat{\text{RR}})$ is approximately normally distributed with mean  $\log(RR)$ and standard error (SE)
   \begin{align*}
   \text{SE}_{\log(\widehat{\text{RR}})} = \sqrt{\frac{1 - \hat{p}_1}{y_1} + \frac{1 - \hat{p}_2}{y_2}}. 
   \end{align*}
@@ -1457,9 +1456,15 @@ where $z^{\star}$ is the point on a $z$-distribution with area $(1 - \alpha/2)$ 
 \subsection{Inference for odds ratios}
 \label{InferenceOddsRatios}
 
-The odds of the event $E$ are $P(E)/(1 - P(E))$; odds are the proportion of times an event occurs divided by the proportion it does not.  The concept of odds was widely used in gambling before medical research, and the use of odds to set fair return on a bet is discussed in Section~\ref{notesTwoSamplesBinaryData}.
+The odds of the event $E$ are $P(E)/(1 - P(E))$; odds are the proportion of times an event occurs divided by the proportion it does not.  Figure ~\ref{figure:probVsOdds} shows that probabilities and odds increase or decrease together; thus, a factor that is associated with a change in the probability of an event will also be associated with a change in the odds of the event and vice versa.  The figure also demonstrates that while probabilities always have values between 0 and 1, odds can be much larger than 1; odds should not be interpreted as probabilities.
 
-Figure ~\ref{figure:probVsOdds} shows that probabilities and odds increase or decrease together, so a factor that is associated with a change in the probability of an event will also be associated with a change in the odds of the event and vice versa.  The figure also demonstrates that while probabilities always have values between 0 and 1, odds can be much larger than 1; odds should not be interpreted as probabilities.
+\begin{comment}
+%JV: can't find this reference anymore
+
+The concept of odds was widely used in gambling before medical research, and the use of odds to set fair return on a bet is discussed in Section~\ref{notesTwoSamplesBinaryData}.
+\end{comment}
+
+
 
 \begin{figure}[ht]
 \centering
@@ -1594,7 +1599,7 @@ Agresti\footnote{A Agresti Categorical Data Analysis, 3rd ed, Example 3.1.2} cit
  \[
       \widehat{\text{OR}} = \dfrac{(54/10,325)}{(25/51,790)} = 10.83.
  \]
- The estimated odds of a fatality in a child under 18 not wearing a seat belt is more than 10 times that of a fatality when a seat belt is worn.  The conditions for the $\chi^2$ are met (Exercise\ref{xx}), and the $\chi^2$-statistic for the table has value 148.17 with 1 df ($p$ < 0.001).  This large estimated OR and highly statistically significant result suggest a strong association between seat belt use and fatality in children under age 18 involved in traffic accidents in Florida.
+ The estimated odds of a fatality in a child under 18 not wearing a seat belt is more than 10 times that of a fatality when a seat belt is worn.  The conditions for the $\chi^2$ are met (Exercise~\ref{xx}), and the $\chi^2$-statistic for the table has value 148.17 with 1 df ($p$ < 0.001).  This large estimated OR and highly statistically significant result suggest a strong association between seat belt use and fatality in children under age 18 involved in traffic accidents in Florida.
   \end{nexample}
 \end{examplewrap}
 
@@ -1647,23 +1652,24 @@ It is important to be aware of these continuity corrections but they are not hig
 
 \subsubsection{Exact Methods}
 
-Exact methods are based on the actual sampling distribution of a summary statistic, at least under some assumptions, instead of the normal approximation.  Exact sampling distributions are often complicated so these methods are almost always performed with software rather than by hand. Example~\ref{avastinFDAApproval} illustrates an exact calculation of a $p$-value in a single sample of binomial observations, using data considered by the US FDA when giving approval to use Avastin for treating a form of brain cancer; Section~\ref{fisherExactTest} describes the use of Fisher's exact test in a small study examining the use of fecal infusion to treat an infection.
+Exact methods are based on the actual sampling distribution of a summary statistic (under some assumptions) instead of the normal approximation.  Exact sampling distributions are often complicated so these methods are almost always performed with software rather than by hand. Example~\ref{avastinFDAApproval} illustrates an exact calculation of a $p$-value in a single sample of binomial observations, using data considered by the US FDA when giving approval to use Avastin for treating a form of brain cancer; Section~\ref{fisherExactTest} describes the use of Fisher's exact test in a small study examining the use of fecal infusion to treat an infection.
  
 Fisher's exact test is used for the null hypothesis of independence of row and column variables in a table, under the assumption that the row and column totals in the table can be considered known in advance.  Under that assumption, the conditional distribution of the count in any particular cell (of the 4 table cells) has an exact hypergeometric distribution. In case-control studies it is used to test the null hypothesis $H_0: \text{OR} = 1$.    In exposure based sampling designs, such as randomized trials, Fisher's test is used for the equivalent null hypothesis $H_0: \text{RR} = 1$ or $H_0: p_1 = p_2$, where $p_1$ and $p_2$ are outcome probabilities for two groups. In the fecal infusion study discussed in Section~\ref{fisherExactTest}, participants were randomized to either the infusion or standard antibiotic therapy (vancomycin). Fisher's exact test was used to test the null hypothesis that the probability of cure did not differ between the two randomized groups.  The dataset in this study was small enough such that the $p$-value corresponding to Fisher's test could be calculated by hand, but the calculation in Section~\ref{fisherExactTest} is shown primarily for instructional purposes. In important analyses, Fisher's test should always be calculated using software.  The second lab for Chapter~\ref{inferenceForCategoricalData} illustrates how to use the $\textsf{R}$ function \texttt{fisher.test} to calculate both one- and two-sided p-values.
 
 Leung, et al.\footfullcite{leung2020respiratory} report a series of experiments testing the effectiveness of surgical masks in reducing viral shedding, i.e. the addition of viral particles to the nearby environment from the breathing of infected individuals.  Individuals infected with one of seasonal coronavirus, influenza, or rhinovirus were randomly assigned to either wear a surgical mask or not.  The study team measured viral shedding through the presence of droplet particles larger than 5 micrometers ($> 5\mu m$) and aerosol particles $\leq 5\mu m$; figure~\ref{figure:influenzaAerosolViralShedding} contains the data from the experiment measuring shedding by participants infect with with influenza. 
 \begin{figure}[h]
 	\centering
-	\begin{tabular}{ll rrr r}
+	\begin{tabular}{ll rrr |r}
 		\hline
 		Particles Present	& \hspace{2mm} & Yes & No & \hspace{2mm} & Total \\
 		\hline
         No mask & & 8 & 15 & & 23    \\
         Mask &	& 6 & 21 & & 27    \\
+        \hline
         Total & & 14 & 36 & & 50 \\
 		\hline
 	\end{tabular}
-	\caption{Surgical mask wearing versus aerosol viral shedding, influenza}
+	\caption{Surgical mask wearing versus aerosol viral shedding, influenza.}
     \label{figure:influenzaAerosolViralShedding}
 \end{figure}	
 
@@ -1676,12 +1682,85 @@ Leung, et al.\footfullcite{leung2020respiratory} report a series of experiments 
 
 Fisher's test was originally proposed by Ronald Fisher in 1934 and its use was initially limited to very small experiments where $p$-values could be calculated by hand.  Data analysts often used the continuity correction to the $\chi^2$ statistic to try to produce analyses similar to exact methods, since exact methods were computationally unavailable. As software for the test became available, Fisher's test was used more often in studies like the fecal infusion study.  With current computational power, the test is now used in all but the largest data sets.  
 
-Despite its widespread use, Fisher's exact test does have drawbacks, some theoretical, some practical.  Some statisticians have questioned the validity of conditioning on the row and column totals, treating them as if they were known in advance.  In randomized experiments like the viral shedding study, the numbers of participants in each group (the row totals) are known, once the randomization has been conducted. The numbers of outcomes in the columns will not be known in advance, but research and experience has shown this has little practical impact.
+Despite its widespread use, Fisher's exact test does have drawbacks: some theoretical, some practical.  Some statisticians have questioned the validity of conditioning on the row and column totals;i.e, treating them as if they were known in advance.  In randomized experiments like the viral shedding study, the numbers of participants in each group (the row totals) are known once the randomization has been conducted. The numbers of outcomes in the columns will not be known in advance, but research and experience has shown this has little practical impact.
+
+%JV: unclear what is meant by "research and experience has shown this has little practical impact"
 
 More practically, the discreteness of the hypergeometric distribution may make it impossible to achieve a pre-specified value of $\alpha$ for the test, such as 0.05.  An artificial but constructive example illustrates this aspect of the exact test.
 
 \begin{examplewrap}
-  \begin{nexample}{Assume the data in Figure~\ref{figure:smallSampleFisher} summarize the results of a small randomized trial, where 9 participants have been randomly assigned to one of two treatments, 5 to treatment A and 4 to a placebo. A response to treatment is considered a good outcome.  Calculate the relative risk for a response, comparing treatment A to Placebo and conduct a one-sided test of the null hypothesis of no treatment effect versus the one-sided alternative that A is superior, using $\alpha = 0.05$.}\label{ex:fisherTestSmallSample} 
+	\begin{nexample}{Suppose the data in the following table summarize the results of a small randomized trial with 10 participants, in which half are assigned to control and half to treatment. Of those in the treatment group, 3 respond to treatment; only 1 patient in the control group responds to treatment.
+			\vspace{0.2cm}
+			
+			\centering
+			\begin{tabular}{l rr |r}
+				\hline
+				 & Response & No Response & Total \\
+				\hline
+				Treatment &  3 & 2 & 5    \\
+				Control & 1 & 4 &  5    \\
+				\hline
+				Total & 4 & 6 & 10 \\
+				\hline
+			\end{tabular}
+			\flushleft
+			
+			\vspace{0.1cm}
+			
+			Suppose researchers are interested in understanding whether treatment is superior to control. Enumerate all possible sets of results that favor treatment over control and identify the sets of results that reject the null hypothesis of no association at $\alpha = 0.05$.}\label{ex:fisherTestSmallSample} 
+		
+		\begin{comment}
+		Under the condition that the marginal totals are considered fixed, the value of any one particular cell in the $2 \times 2$ table determines the value of the other three cells. For example, if there is a 3 in the upper left table cell, the values of the other three cells can be determined based on subtraction using the marginal totals; if 3 individuals in the treatment group showed a response, then $5 - 3$ individuals in the treatment group did not show a response, etc.
+		\end{comment}
+		
+		The table above favors treatment over control, since the relative risk comparing treatment to control is $(3/5)/(1/5) = 3.00$. The only other possible table that favors treatment is the one with a 4 in the upper left table cell. It is not possible to have a table with 5 in the upper left, since the total of individuals who have a response is fixed at 4.
+		
+		\centering
+		\begin{tabular}{l rr |r}
+			\hline
+			& \textcolor{gray}{Response} & \textcolor{gray}{No Response} & \textcolor{gray}{Total} \\
+			\hline
+			\textcolor{gray}{Treatment} &  4 & 1 & \textcolor{gray}{5}    \\
+			\textcolor{gray}{Control} & 0 & 5 &  \textcolor{gray}{5}    \\
+			\hline
+			\textcolor{gray}{Total} & \textcolor{gray}{4} & \textcolor{gray}{6} & \textcolor{gray}{10} \\
+			\hline
+		\end{tabular}
+		\flushleft
+		
+		First, calculate the probability of the observed table under the null hypothesis of independence between treatment and outcome. There are ${10 \choose 5} = 252$ ways to draw 5 individuals out of 10 individuals; i.e., ways to select 5 individuals out of 10 to be in the treatment group. Given the marginal totals, there are  ${4 \choose 3} {6 \choose 2} = 60$ ways to observe 5 individuals of which 3 individuals show a response and 2 individuals do not show a response. Thus, the probability of the observed table is $60/252 = 0.238$.
+		
+		Using similar logic, the probability of the table with 4 in the upper left cell is $\frac{{4 \choose 4} {6 \choose 1}}{252} = 0.0238$.
+		
+		The one-sided $p$-value for the observed set of results equals $0.238 + 0.0238 = 0.262$, which is greater than 0.05 and fails to reject the null hypothesis.
+		
+		The table with 4 in the upper left cell results in a significant $p$-value, $p = 0.0238$.
+		
+		There is no outcome that produces a $p$-value between 0.0262 and 0.0238, due to the discrete nature of the data. Since 0.0238 is the largest $p$-value smaller than 0.05 that can occur for these data, Fisher's test is actually testing at the 0.0238 significance level rather than 0.05.
+	\end{nexample}
+\end{examplewrap}
+
+
+\begin{comment}
+\begin{examplewrap}
+  \begin{nexample}{Suppose the data in the following table summarize the results of a small randomized trial, in which 9 participants have been randomly assigned to one of two treatments: 5 to treatment A and 4 to placebo. 
+	\vspace{0.2cm}
+	
+	\centering
+	\begin{tabular}{l rr |r}
+		\hline
+		Response to Treatment & Yes & No & Total \\
+		\hline
+		Treatment A &  4 & 1 & 5    \\
+		Placebo &	 1 & 3 &  4    \\
+		\hline
+		Total & 5 & 4 & 9 \\
+		\hline
+	\end{tabular}
+	\flushleft
+
+	\vspace{0.1cm}
+	Calculate the relative risk for a response, comparing treatment A to Placebo and conduct a one-sided test of the null hypothesis of no treatment effect versus the one-sided alternative that A is superior, using $\alpha = 0.05$.}\label{ex:fisherTestSmallSample} 
 
     The relative risk comparing A to Placebo is (4/5)/(1/4) = 3.20, a point estimate that clearly favors A. 
 
@@ -1703,28 +1782,13 @@ The only outcome that would have yielded a significant result is 5 responders as
   \end{nexample}
 \end{examplewrap}
 
+\end{comment}
 
-\begin{figure}[h]
-	\centering
-	\begin{tabular}{ll rrr r}
-		\hline
-        & & \multicolumn{2}{c}{\textbf{Response to treatment}} &  \\
-        & \hspace{2mm} & Yes & No &
-        \hspace{2mm} & Total \\
-        \textbf{Treatment} & & & & & \\
-        \hline
-        A & & 4 & 1 & & 5    \\
-        Placebo &	& 1 & 3 & & 4    \\
-        Total & & 5 & 4 & & 9 \\
-		\hline
-	\end{tabular}
-	\caption{Data from a hypothetical, small randomized trial}
-    \label{figure:smallSampleFisher}
-\end{figure}	
+	
 
-A test that does not reject often enough  under the null hypothesis will not reject often enough under the alternative -- its power will be less than intended.  The test is widely used, however, because despite the reduction in power, its significance level is guaranteed to be less than 0.05 (or any chosen value of $\alpha$).  When a test has this property, statisticians call it conservative.
+A test that does not reject often enough under the null hypothesis will not reject often enough under the alternative; its power will be less than intended. Fisher's test is widely used, however, because despite the reduction in power, its significance level is guaranteed to be less than 0.05 (or any chosen value of $\alpha$).  When a test has this property, statisticians call it conservative.
 
-There are two reasons for the non-significant result even with a relative risk of 3.2.  Because of the small sample size there is considerable uncertainty in the estimated relative risk, and the discreteness of distribution of the test statistic is such that only the most extreme result favoring A would have been significant.  An increase in the sample size helps with both issues, but the discreteness of the distribution for the exact test continues to have an effect, even as that effect diminishes with increasing sample size.
+There are two reasons for the non-significant result even with a relative risk of 3.00.  Because of the small sample size there is considerable uncertainty in the estimated relative risk, and the discreteness of the distribution of the test statistic is such that only the most extreme result favoring treatment would have been significant.  An increase in the sample size helps with both issues, but the discreteness of the distribution for the exact test continues to have an effect, even as that effect diminishes with increasing sample size.
 
 
 
@@ -1772,7 +1836,7 @@ Students of statistics are often surprised by the variety of methods applied to 
 
 %JV: Perhaps important here to also highlight that only reporting RR without baseline risk can also be misleading, if in fact risk in both groups is small.
 
-If the study randomized participants to one of two interventions or sampled participants according to exposure to a risk factor, relative risk or risk difference is the preferred summary statistic.  There is no widespread agreement on the choice between relative risk and risk difference, so in many instances it is appropriate to calculate both and provide carefully worded interpretations. When absolute risk is small, a small risk difference may imply that the differences between groups is unimportant. In these settings, relative risk may show that a member of a group is substantially more likely to experience an outcome when compared to a member of the other group, such as in the T2D data discussed in the introduction.  Whenever relative risk is reported, it is important to give the baseline risk.  If the absolute risk in both groups is small, the relative risk without the baseline can be misleading.
+If the study randomized participants to one of two interventions or sampled participants according to exposure to a risk factor, relative risk or risk difference is the preferred summary statistic.  There is no widespread agreement on the choice between relative risk and risk difference, so in many instances it is appropriate to calculate both and provide carefully worded interpretations. When absolute risk is small, a small risk difference may imply that the difference between groups is unimportant. In these settings, relative risk may show that a member of a group is substantially more likely to experience an outcome when compared to a member of the other group, such as in the T2D data discussed in the introduction.  Whenever relative risk is reported, it is important to give the baseline risk.  If the absolute risk in both groups is small, the relative risk without the baseline can be misleading.
 
 In randomized experiments or exposure-based sampling, the odds ratio should not be used as the primary summary statistic for at least two reasons.  People unfamiliar with statistics tend to mistakenly interpret the OR as the ratio of probabilities and so think of it as relative risk.  
 
@@ -1781,9 +1845,9 @@ Odds ratios tend to be larger than relative risk, sometimes strikingly so.  In t
 
 \subsubsection{Case-control studies}
 
-In case-control studies, an OR should be used as the primary summary statistic; relative risk and risk difference should not be calculated. Case-control studies enroll participants according to outcome and can estimate the probability of exposure given observed outcome but not the probability/risk of outcome given exposure -- neither absolute nor relative risk can be estimated. Using Figure~\ref{figure:helmetUseBicycleAccidents}  it would be tempting (but incorrect) to estimate the risk of a fatal accident for cyclists wearing helmets as 31/678 = 4.6\%.  It may not be far off, but that risk can be estimated reliably only in studies that enroll cyclists who wear helmets, then follow the cyclists longitudinally for accidents and fatalities.
+In case-control studies, an OR should be used as the primary summary statistic; relative risk and risk difference should not be calculated. Case-control studies enroll participants according to outcome and can estimate the probability of exposure given observed outcome but not the probability of outcome given exposure -- neither absolute nor relative risk can be estimated. Using Figure~\ref{figure:helmetUseBicycleAccidents}  it would be tempting (but incorrect) to estimate the risk of a fatal accident for cyclists wearing helmets as 31/678 = 4.6\%.  It may not be far off, but that risk can be estimated reliably only in studies that enroll cyclists who wear helmets then follow the cyclists longitudinally for accidents and fatalities.
 
-When outcomes are rare, the estimated OR in a case-control study can be a useful approximation to a RR.  Epidemiologists call this the rare disease assumption.  In Figure~\ref{figure:generalTwoByTwoTable} suppose Outcome A is the outcome of interest (perhaps the presence of a disease), and let 
+When outcomes are rare, the estimated OR in a case-control study can be a useful approximation to a RR. In Figure~\ref{figure:generalTwoByTwoTable} suppose Outcome A is the outcome of interest (perhaps the presence of a disease), and let 
 \[
   p_1 = P(\text{Outcome A} | \text{Exposure 1})
 \]
@@ -1806,11 +1870,11 @@ Persistent pulmonary hypertension (PPHN) discussed in Section~\ref{caseControlSt
 
 \subsubsection{The potential for confounding}
 
-Observational studies should never be used to draw causal conclusions.  Even when estimating an association, the potential for confounding is substantial, and if the all the data from a study can be summarized in a simple $2 \times 2$ table, nothing can be done to adjust for confounders.  Students should keep in mind that even when the proper method of analysis is applied to a $2 \times 2$ table and all the calculations are done correctly, an observed association (either in the form of a statistically significant result or confidence interval for OR/RR that does not include 1) may well be due to unmeasured confounders.  
+Observational studies should never be used to draw causal conclusions.  Even when estimating an association, the potential for confounding is substantial; if the all the data from a study can be summarized in a simple $2 \times 2$ table, nothing can be done to adjust for confounders.  Students should keep in mind that even when the proper method of analysis is applied to a $2 \times 2$ table and all the calculations are done correctly, an observed association (either in the form of a statistically significant result or confidence interval for OR/RR that does not include 1) may well be due to unmeasured confounders.  
 
-Care should be taken not to assume confounding is at work only when an estimated association contradicts intuition, as in the example of the use of helmets and cycling fatalities.  The OR of 6 in the PPHN study and its interpretation as an approximate RR of 6 is striking, and may seem to confirm suspicions that SSRI use during pregnancy is potentially risky.  What can be learned from the study is more nuanced, however. Statistically, there is a strong association between SSRI use and PPHN when the only data available are those summarized in Figure~\ref{ssriPPHNObservedRepeated}. But scientifically, the data are far from explanatory.   There are many reasons for physicians prescribing an antidepressant in the SSRI class, and there  may be underlying conditions in a pregnancy that may lead to both depression and higher risk of PPHN in the newborn.   Even with additional data, this observed association should never be used in support of a claim that SSRI use causes PPHN.  
+The potential for confounding should be kept in mind even for results that do not seem to contradict intuition. For example, the OR of 6 in the PPHN study is striking and may seem to confirm suspicions that SSRI use during pregnancy is potentially risky, since statistically, there is a strong association between SSRI use and PPHN when the only data available are those summarized in Figure~\ref{ssriPPHNObservedRepeated}. However, it is important to consider the scientific context. There may be underlying conditions in a pregnancy that are associated with both depression and higher risk of PPHN in a newborn.
 
-With additional data, logistic regression can be used to estimate odds ratios after adjustment for other predictors. Links to labs, lecture slides and a supplement on logistic regression can be found on the website for this text (https://www.openintro.org/book/biostat/).
+With additional data, logistic regression can be used to estimate odds ratios after adjustment for other predictors. Links to labs, lecture slides and a supplement on logistic regression can be found on the website for this text (\url{https://www.openintro.org/book/biostat/}).
 
 
 \section{Notes}
