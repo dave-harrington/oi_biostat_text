@@ -1254,7 +1254,7 @@ It can be shown that the $p$-value used in a test of no association (between exp
 
 \index{case-control studies|)}
 
-\section{Inference for two samples of binary data} \label{inferenceBinaryData}
+\section{DRAFT: Inference for two samples of binary data} \label{inferenceBinaryData}
 
 Methods for summarizing data from two samples of binary data were introduced in    Sections~\ref{twoCategoricalVariables} and \ref{caseControlStudies}, where relative risk and odds ratios were introduced.  Methods for inference for the difference of two proportions were discussed in Sections~\ref{differenceOfTwoProportions} and \ref{twoWayTablesAndChiSquare}.  This supplement provides more details about those measures when used to compare two groups, adding information about terminology, interpretation, hypothesis tests, and confidence intervals for relative risk and odds ratios.  For convenience, some of the earlier material on inference for the difference in two proportions is reviewed in this supplement.  
 
@@ -1415,7 +1415,7 @@ The $\chi^2$ and $z$-tests are equivalent in that both will either reject or fai
 The standard normal and $\chi^2$-distributions for these test statistics are continuous distributions that only approximate the sampling distributions of the statistic; there are alternative versions of these test statistics that either attempt to improve the approximation with small adjustments (continuity corrections), or avoid the approximation altogether by using a theoretically exact sampling distribution (exact methods).  These alternatives are discussed in Section~\ref{alternativeTestStatisticsBinaryData}.
 
 \subsection{Inference for relative risk}
-\label{infereneRelativeRisk}
+\label{inferenceRelativeRisk}
 
 Relative risk (RR) is another way to summarize the treatment effect in the tofacitinib trial. Relative risk is particularly appropriate in this setting since it estimates the extent to which a participant on placebo is more likely to experience respiratory failure or death than a participant taking the study drug. The risk estimates within groups are 42/145 = 0.29 (placebo) and 26/144 = 0.18 (tofacitinib), so $\widehat{\text{RR}} = 0.29/0.18 = 1.61$. Participants assigned to placebo were approximately 1.6 times more likely to experience respiratory failure or death within 28 days, a 60\% increased risk on a multiplicative scale.
 
@@ -1507,12 +1507,14 @@ In 2009, the state of Florida recorded all known bicycle-related accidents in 20
 \end{figure}	
 
 \begin{examplewrap}
-  \begin{nexample}{Calculate the OR comparing the use of helmets in fatal accidents to the helmet use in non-fatal accidents.} \label{orHelmetUseFatalAccident}
+  \begin{nexample}{Calculate the OR comparing the use of helmets in fatal accidents to the helmet use in non-fatal accidents.} \label{ex:orHelmetUseFatalAccident}
     The odds of helmet use (no vs yes) among the fatal accidents are 85/31 = 2.74, and the corresponding odds among the non-fatal accidents are 5.75, so OR = 2.74/5.75 = 0.48.  The odds of a cyclist  wearing a helmet in a fatal accident are approximately half that of a cyclist wearing a helmet in a non-fatal accident. 
 \end{nexample}
 \end{examplewrap}
 
-Since the Florida data are from an outcome-based sampling design, the relative risk of a fatal accident comparing cyclists using a helmet and cyclists not using a helmet cannot be estimated from these data. However, it is valid to estimate the odds of a fatal accident given helmet use even with an outcome-based sampling design, not just the odds of helmet use given whether a fatal accident occurred.
+Since the Florida data are from an outcome-based sampling design, the relative risk of a fatal accident comparing cyclists using a helmet and cyclists not using a helmet cannot be estimated from these data. However, the OR comparing the odds of a fatal accident given helmet use to the odds of fatal accident given no helmet use can be calculated -- it is, in fact, identical the OR calculated in Example~\ref{ex:orHelmetUseFatalAccident}, 0.48.\begin{enumerate}
+  \item 
+\end{enumerate} 
 
 The general structure of a $2 \times 2$ table can be used to show that the OR for outcome given exposure is identical to the OR for exposure given outcome.  Typically, epidemiologists organize tables so that the row variable is the exposure and the column variable is the outcome, as shown in Figure~\ref{figure:generalTwoByTwoTable}.
 \begin{figure}[h!]
@@ -1790,41 +1792,6 @@ A test that does not reject often enough under the null hypothesis will not reje
 
 There are two reasons for the non-significant result even with a relative risk of 3.00.  Because of the small sample size there is considerable uncertainty in the estimated relative risk, and the discreteness of the distribution of the test statistic is such that only the most extreme result favoring treatment would have been significant.  An increase in the sample size helps with both issues, but the discreteness of the distribution for the exact test continues to have an effect, even as that effect diminishes with increasing sample size.
 
-
-
-\begin{comment}
-
-A well-known example from the history of statistics, described by Fisher in 1935\footfullcite{fisher:1935} illustrates the difficulty.  Fisher tested the claim that a colleague (Dr. Muriel Bristol) could distinguish whether milk or tea had been added to a cup of tea first.  Fisher asked the colleague to test 8 cups of tea, four of which had milk added first and four had tea added first.  The data from the experiment are shown in Figure~\ref{figure:fisherTeaTasting}
-
-\begin{figure}[h]
-	\centering
-	\begin{tabular}{ll rrr r}
-		\hline
-        & & \multicolumn{2}{c}{\textbf{Guess poured first}} &  \\
-        & \hspace{2mm} & Milk & Tea &
-        \hspace{2mm} & Total \\
-        \textbf{Actual poured first} & & & & & \\
-        \hline
-        Milk & & 3 & 1 & & 4    \\
-        Tea &	& 1 & 3 & & 4    \\
-        Total & & 4 & 4 & & 8 \\
-		\hline
-	\end{tabular}
-	\caption{Outcome in Fisher's tea tasting experiment}
-    \label{figure:fisherTeaTasting}
-\end{figure}	
-
-A test of the hypothesis that Bristol cannot tell the difference is a test $H_0:\text{OR} = 1$ against either a one- or two-sided alternative.  For the one-sided alternative $H_1: \text{OR} > 1$ (favoring Bristol's claim), the $p$-value for the test is the sum of the probabilities of tables that are as or more extreme than the one observed: the two tables with either a 3 or 4 in the upper right cell. Conditional on the row and column totals, there are $\binom{8}{4}$ total tables that could describe the outcome. A 3 in the upper left cell arises when Bristol chooses 3 of the 4 choices correctly and 1 of the 4 incorrectly. The value 3 in the upper left has conditional probability
-\[
-  \frac{\binom{4}{3} \binom{4}{1}} {\binom{8}{4}} = 0.229.
-\]
-Using a similar argument the more extreme table with a 4 in the upper left cell has probability
-\[
-  \frac{\binom{4}{4} \binom{4}{0}} {\binom{8}{4}} = 0.014.
-\]
-If Bristol guessed 3 out of 4 correctly, a one sided $p$-value is 0.229 + 0.014 = 0.243 and the hypothesis is not rejected.  The null hypothesis would only be rejected if she had guessed all 4 correctly, with $p$-value 0.014.  In a dataset this small, the null hypothesis would be rejected much less than 5\% of the time.
-
-\end{comment}
 
 \subsection{Design versus the method of analysis}
 \label{designVsAnalysisBinaryData}
