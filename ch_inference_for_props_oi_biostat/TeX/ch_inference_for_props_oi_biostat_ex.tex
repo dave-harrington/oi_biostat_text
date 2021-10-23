@@ -1101,3 +1101,174 @@ they used. Of the 126 students, 71 said they bought a hard copy of the book,
 	\end{parts}
 
 }{}
+
+\subsection{Inference for two samples of binary data}
+
+% these exercises are not currently in the q-bank
+
+\eoce{\qt{Prevalence difference versus prevalence ratio, I.} 
+
+  \begin{parts}
+
+  \item Assume that the prevalence for a particular disease in two groups
+    is 40.4\% and 42\%.  Calculate the prevalence difference and ratio for the disease, comparing the group with the higher prevalence to the one with the lower prevalence.
+
+  \item Now assume that the prevalence for a particular disease in two groups is 1.2\% and 2.8\%.  Calculate the prevalence difference and ratio for the disease, comparing the group with the higher prevalence to the one with the lower prevalence.
+
+  \item Which measure for comparing prevalence do you think is the more informative in each of the these two situations?
+
+  \end{parts}
+
+}{}
+
+\eoce{\qt{Prevalence difference versus prevalence ratio, II.} 
+
+  \begin{parts}
+
+  \item Assume that the prevalence for a particular disease in two groups
+    is 10\% and 15\$.  Calculate the prevalence difference and ratio for the disease, comparing the group with the higher prevalence to the one with the lower prevalence.
+
+  \item Now assume that the prevalence for a particular disease in two groups is 40\% and 45\%.  Calculate the prevalence difference and ratio for the disease, comparing the group with the higher prevalence to the one with the lower prevalence.
+
+  \item Which measure for comparing prevalence do you think is the more informative in each of the these two situations?
+
+  \end{parts}
+}{}
+
+\eoce{\qt{Birth defects and paternal alcohol consumption.} A 2021 study by Zhou et. al\footfullcite{zhou:2021}in JAMA Pediatrics discussed the possible association of congenital heart defects in a newborn and paternal alcohol consumption.  The study was described as a prospective study in  which the study team recruited more than 529,090 couples who were planning to become pregnant in the next 6 months, then recorded alcohol consumption and birth defects.  Of the participating couples, 364,939 fathers did not drink alcohol before conception (defined as at least one time drinking a week) and 164,151 did.  Among the fathers who consumed alcohol, there were 363 birth defects. Among the fathers who did not consume alcohol, there were 246 birth defects.
+
+  \begin{parts}
+
+  \item Should the analysis of this study use risk  or odds ratio as summary statistic for the association of paternal alcohol consumption and fetal birth defects.  Why?
+
+  \item Calculate the statistic you have recommended in part (a).
+    
+  \item Calculate a 95\% confidence interval for the measure of association in part (a).
+
+  \end{parts}
+}{}
+
+\eoce{\qt{High salt diet and cardiovascular disease related death.} Suppose a retrospective study is done in a specific county of Massachusetts; data are collected on men ages 50-54 who died over a 1-month period. Of 35 men who died from CVD, 5 had a diet with high salt intake before they died, while of the 25 men who died from other causes, 2 had a diet with high salt intake. These data are summarized in the following table.
+
+    \begin{figure}[h!]
+\begin{center}
+\begin{tabular}{l|cc|c} 
+   & \textbf{CVD Death} & \textbf{Non-CVD Death} & \textbf{Total} \\ \hline
+  \textbf{High Salt Diet} & 5 & 2 & 7  \\
+  \textbf{Low Salt Diet} & 30 & 23 & 53 \\ \hline
+  \textbf{Total} & 35 & 25 & 60  \\ 
+\end{tabular}\\
+\end{center}
+\end{figure}
+
+\begin{parts}
+\item In this study sample, what are the estimated odds that a male had a high salt diet?  A low salt diet?
+\item Among the men where the recorded death was due to CVD, what are the odds that the male had a high salt diet?  What are the odds of a low salt diet in the same group?
+\item What is the OR for a CVD related death, comparing a high  to a low salt diet?
+\item What is the OR for a death not related to CVD, comparing a high to a low salt diet?
+\end{parts}
+}{}
+
+
+% copied from logistic regression exercises
+\eoce{\qt{Diabetes.} In the United States, approximately 9\% of the population have diabetes.
+  \begin{parts}
+  \item What are the odds that a randomly selected member of the US population has diabetes?
+  \item Suppose that in a primary care clinic, the prevalence of diabetes among the patients seen in the clinic is 12\%.  What is the probability that a randomly selected patient in the clinic has diabetes?  What are the odds of diabetes for that patient?
+  \item If in a particular population the probability of diabetes is twice what it is in the general population, does the odds of diabetes double?
+  \end{parts}
+}{}
+
+\eoce{\qt{Treatment for COVID-19, I. \label{tofacitinibPlaceboRR}}
+  Guimar\~{a}es, et al.\footfullcite{tofacitinib_covid19}  reported the results of a randomized trial comparing tofacitinib to placebo in patients in Brazil hospitalized with Covid-19 pneumonia.  Since there were no known effective treatments for Covid-19 pneumonia when the trial was conducted, a placebo control group was considered ethical.  Of the 145 participants assigned to placebo, 42 experienced the outcome of interest, death or respiratory failure during the 28 day follow-up period; 26 out of the 144 assigned to tofacitinib experienced the outcome. 
+
+ \begin{parts}
+
+\item Calculate a 95\% confidence interval for the between group difference in the risk of death or respiratory failure.  
+
+\item Conduct a test of the hypothesis of no difference between the groups.
+
+\item Calculate a 95\% confidence interval for the risk ratio, comparing tofacitinib to placebo.
+
+\end{parts}
+
+}{}
+
+
+\eoce{\qt{Treatment for COVID-19, II. \label{tofacitinibPlaceboChiSq}} Using the data in Problem~\ref{tofacitinibPlaceboRR}:
+
+\begin{parts}
+
+ \item Construct a $2 \times 2$ table summarizing the data, with the treatment variable in the rows and outcome in the columns.
+
+ \item Calculate the expected cell counts under the null hypothesis of no treatment effect.  Are the conditions for the $\chi^2$-test met?
+
+ \item Verify that the $\chi^2$-statistic has value 9.77.
+
+\end{parts}
+}{}
+
+
+\eoce{\qt{Fisher's exact test, I.}
+Suppose the partial data in the following table summarize the results of a small randomized trial with 11 participants, in which 6 are assigned to control and 5 to treatment. Of those in the treatment group, 3 respond to treatment.
+      \vspace{0.2cm}
+      
+      \centering
+      \begin{tabular}{l rr |r}
+        \hline
+         & Response & No Response & Total \\
+        \hline
+        Treatment &  4 &  & 5    \\
+        Control &  &  &  6   \\
+        \hline
+        Total & 5& 6 & 11 \\
+        \hline
+      \end{tabular}
+      \flushleft
+\begin{parts}
+
+\item Show that the 4 in the upper left cell determines the counts in the rest of the table.
+
+\item What is the relative risk for a response, comparing treatment  to control?
+
+\item What are the tables that are as or more extreme whose results favor treatment?
+
+\item Calculate the Fisher's exact test one-sided $p$-value for a test of the null hypothesis of no treatment effect on response.
+
+\end{parts}
+}{}
+
+\eoce{\qt{Fisher's exact test, II.}
+Suppose the partial data in the following table summarize the results of a small randomized trial with 11 participants, in which 6 are assigned to control and 5 to treatment. Of those in the treatment group, 3 respond to treatment.
+      \vspace{0.2cm}
+      
+      \centering
+      \begin{tabular}{l rr |r}
+        \hline
+         & Response & No Response & Total \\
+        \hline
+        Treatment &  3 &  & 5    \\
+        Control &  &  &  6   \\
+        \hline
+        Total & 5& 6 & 11 \\
+        \hline
+      \end{tabular}
+      \flushleft
+\begin{parts}
+
+\item Show that the 3 in the upper left cell determines the counts in the rest of the table.
+
+\item What is the relative risk for a response, comparing treatment  to control?
+
+\item What are the tables that are as or more extreme whose results favor treatment?
+
+\item Calculate the Fisher's exact test one-sided $p$-value for a test of the null hypothesis of no treatment effect on response.
+
+\end{parts}
+}{}
+
+      
+     
+
+
+
