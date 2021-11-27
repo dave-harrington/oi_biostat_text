@@ -1,0 +1,14 @@
+PWD C:/Users/Julie Vu/Documents/GitHub/oi_biostat_text/extraTeX/eoce_solutions
+INPUT c:/texlive/2020/texmf.cnf
+INPUT c:/texlive/2020/texmf-dist/web2c/texmf.cnf
+INPUT c:/texlive/2020/texmf-var/web2c/pdftex/pdflatex.fmt
+INPUT eoce_solutions.tex
+OUTPUT eoce_solutions.log
+OUTPUT eoce_solutions.pdf
+INPUT c:/texlive/2020/texmf-var/fonts/map/pdftex/updmap/pdftex.map
+INPUT c:/texlive/2020/texmf-dist/fonts/map/fontname/texfonts.map
+INPUT c:/texlive/2020/texmf-dist/fonts/tfm/public/cm/cmti10.tfm
+INPUT c:/texlive/2020/texmf-dist/fonts/tfm/jknappen/ec/tcrm1000.tfm
+INPUT c:/texlive/2020/texmf-dist/fonts/tfm/public/cm/cmbx10.tfm
+INPUT c:/texlive/2020/texmf-dist/fonts/tfm/jknappen/ec/tcbx1000.tfm
+INPUT c:/texlive/2020/texmf-dist/fonts/tfm/public/cm/cmtt10.tfm
