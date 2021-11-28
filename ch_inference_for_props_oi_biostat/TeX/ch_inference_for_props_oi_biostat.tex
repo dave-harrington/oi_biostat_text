@@ -1283,7 +1283,7 @@ The calculation of risk ratio in the LEAP study used the peanut consumption grou
 
 \subsubsection{Prevalence ratio and prevalence difference}
 
-The calculations for prevalence ratios and differences mirror those for risk ratios and differences, but the different terminology reflects an important difference in interpretation.  The prevalence of a disease is the proportion of a population experiencing the disease.  Cross-sectional studies sample a population and can be used to estimate the prevalence of a disease and features of the population that may be associated with the disease. Since a cross-sectional study does not measure an outcome occurring subsequent to an exposure, it cannot estimate risk of the outcome from the exposure.  Cross-sectional studies can, however, provide important information about the association between outcome and features of a population.
+The calculations for prevalence ratios and differences mirror those for risk ratios and differences, but the different terminology reflects an important difference in interpretation.  The prevalence of a disease is the proportion of a population experiencing the disease.  Cross-sectional studies sample a population during a pre-set, usually short time interval and can be used to estimate the prevalence of a disease and features of the population that may be associated with the disease. Since a cross-sectional study does not measure an outcome occurring subsequent to an exposure, it cannot estimate risk of the outcome from the exposure.  Cross-sectional studies can, however, provide important information about the association between outcome and features of a population.
 
 The US CDC estimates that approximately 14.9\% of non-Hispanic Asian adults in the United States have Type 2 diabetes (T2D);\footnote{Centers for Disease Control and Prevention. National Diabetes Statistics Report, 2020.}  the prevalence of T2D in this population is 0.149.  For non-Hispanic white Americans, the prevalence of T2D is 0.119 (11.9\%). The prevalence difference between the groups, comparing non-Hispanic Asian to non-Hispanic white adults, is 0.149 - 0.119 = 0.03.  The prevalence ratio comparing Asian to white non-Hispanics is 0.149/0.119 = 1.252.  The prevalence of T2D for Asians is 1.252 times as large as that for white adults.
 
@@ -1318,7 +1318,7 @@ Among the 337 cases, 14 were exposed to an SSRI and 323 were not, so the estimat
 An algebraic calculation in Section~\ref{inferenceOddsRatios} shows that
 \[
 \widehat{\text{OR}}_{\text{exposure, cases vs. controls}} =
-\widehat{\text{OR}}_{\text{cases, exposed vs. unexposed}}.
+\widehat{\text{OR}}_{\text{cases, exposed vs. unexposed}},
 \]
 so infants exposed to SSRI during maternal pregnancy have 6 times the odds of PPHN than unexposed infants.
 
@@ -1358,7 +1358,7 @@ where $\hat{p}_1$ and $\hat{p}_2$ are the two estimated proportions based on gro
 
 The National Health and Nutrition Examination Survey (NHANES), introduced in Section~\ref{relationshipsBetweenTwoVariables}, is a cross-sectional study conducted by the US CDC designed to assess the health and nutritional status of adults and children in the United States.  The survey began in 1960 and was conducted approximately every 5 years until 1994, when the CDC began conducting the survey continuously. A random sample of 500 adults from the dataset NHANES was used in Example~\ref{ex:nhanesHeightWeightBmi} to illustrate scatterplots of height versus BMI and height versus weight.
 
-The random sample also contains responses to the questions of whether the participant has smoked at least 100 cigarettes in their lifetime and whether the participant uses marijuana regularly, with the responses shown in Figure~\ref{figure:smoke100RegMarijuana}.  The data are used here to illustrate confidence intervals and tests for prevalence differences.  These data come from a survey conducted between 2009 and 2012, and only 309 of the 500 participants responded to both questions, so the data provide no information about current marijuana use.
+The NHANES sample also contains responses to the questions of whether the participant has smoked at least 100 cigarettes in their lifetime and whether the participant uses marijuana regularly, with the responses shown in Figure~\ref{figure:smoke100RegMarijuana}.  The data are used here to illustrate confidence intervals and tests for prevalence differences.  These data come from a survey conducted between 2009 and 2012, and only 309 of the 500 participants responded to both questions, so the data provide no information about current marijuana use.
 
 \begin{figure}[h]
   \centering
@@ -1377,7 +1377,7 @@ The random sample also contains responses to the questions of whether the partic
 
 \begin{examplewrap}
 \begin{nexample}{Calculate a 95\% confidence interval for the difference in the prevalence of regular marijuana use between individuals who have smoked at least 100 cigarettes in a lifetime versus have not. Use a $z$-test to assess the evidence against the null hypothesis that the prevalence difference is 0.}
-The estimated prevalences of regular marijuana use are 57/135 = 0.422 and 23/174 = 0.132, respectively, for a prevalence difference of 0.422 - 0.132 = 0.29.  The 95\% confidence interval for the prevalence use is
+The estimated prevalences of regular marijuana use are 57/135 = 0.422 and 23/174 = 0.132, respectively, for a prevalence difference of 0.422 - 0.132 = 0.29, and the 95\% confidence interval for the prevalence of regular use is
 \begin{align*}
    \left( \frac{57}{135} - \frac{23}{174} \right) \pm 1.96  \sqrt{\frac{(\frac{57}{135} )
    (1 - \frac{57}{135} )}{135}
@@ -1430,7 +1430,7 @@ The conditions for the test are easily met -- the participants were sampled and 
     \label{figure:smoke100RegMarijuanaExpected}
 \end{figure}
 
-The $\chi^2$ and $z$-tests are equivalent in that both will either reject or fail to reject the null hypothesis together---both provide the same $p$-value---but the details they provide about the data are different.  The $\chi^2$-test is based on a data summary that is compact and easy to understand (i.e., a $2 \times 2$ table).  The approach based on inference for a difference of two proportions ($z$-test) provides a confidence interval for the difference that is not available from the $\chi^2$ test. Sometimes a confidence interval is the main tool for inference.  In Example~\ref{ex:jointInfectionNonInferiority}, there was no null hypothesis of equality of risk of persistent infection; this is a case in which the $\chi^2$ test would not have answered the scientific question of interest. The $\chi^2$-test is inherently two-sided, since it assess evidence that the rows and columns are not independent, while the $z$-statistic can be used for either one- or two-sided tests.
+The $\chi^2$ and $z$-tests are equivalent in that both will either reject or fail to reject the null hypothesis together---both provide the same $p$-value---but the details they provide about the data are different.  The $\chi^2$-test is based on a data summary that is compact and easy to understand (i.e., a $2 \times 2$ table).  The approach based on inference for a difference of two proportions ($z$-test) provides a confidence interval for the difference that is not available from the $\chi^2$ test. Sometimes a confidence interval is the main tool for inference.  In Example~\ref{ex:jointInfectionNonInferiority}, there was no null hypothesis of equality of risk of persistent infection; this is a case in which the $\chi^2$ test would not have answered the scientific question of interest. The $\chi^2$-test is inherently two-sided, since it assesses evidence that the rows and columns are not independent, while the $z$-statistic can be used for either one- or two-sided tests.
 
 The standard normal and $\chi^2$-distributions for these test statistics are continuous distributions that only approximate the sampling distributions of the statistic; there are alternative versions of these test statistics that either attempt to improve the approximation with small adjustments (i.e., continuity corrections), or avoid the approximation altogether by using theoretically exact sampling distribution (exact methods).  These alternatives are discussed in Section~\ref{alternativeTestStatisticsBinaryData}.
 
@@ -1439,7 +1439,7 @@ The standard normal and $\chi^2$-distributions for these test statistics are con
 
 % make sure the intro is clear about terminology
 
-Prevalence and risk ratios can also be used to summarize the differences between two groups in cross-sectional studies and studies in which an exposure or intervention precedes an outcome.  In the NHANES data used in Figure~\ref{figure:smoke100RegMarijuana}, the prevalence ratio for regular marijuana use, comparing smokers to non-smokers, is
+Prevalence and risk ratios can also be used to summarize the differences between two groups in cross-sectional studies and studies in which an exposure or intervention precedes an outcome.  In the NHANES data in Figure~\ref{figure:smoke100RegMarijuana}, the prevalence ratio for regular marijuana use, comparing smokers to non-smokers, is
 \begin{align*}
       \widehat{\text{PR}} = \frac{(57/135)}{(23/174)} = 3.19.
 \end{align*}
@@ -1452,7 +1452,7 @@ Since confidence intervals for a RR or PR use the same calculation, the steps fo
 
 
 \begin{onebox}{Confidence interval for log risk ratio}
-  Suppose $E$ is an event that has two possible outcomes, labeled \textit{yes, no}. Let $y_1$ and $y_2$ be the observed counts of the value \textit{yes} in two groups of size $n_1$ and $n_2$, let the estimated proportions of \textit{yes} outcomes be $\hat{p}_1 = y_1/n_1$ and $\hat{p}_2 = y_2/n_2$, and let $\widehat{\text{RR}} = \hat{p}_1/\hat{p}_2$ be the estimated RR comparing group 1 to group 2.  If the two groups can be viewed as random samples from a larger population and the conditions described in Section~\ref{samplingDistributionDiffTwoProps} are met,  $\log(\widehat{\text{RR}})$ is approximately normally distributed with mean  $\log(RR)$ and standard error (SE)
+  Suppose $E$ is an event that has two possible outcomes, labeled \textit{yes, no}. Let $y_1$ and $y_2$ be the observed counts of the value \textit{yes} in two groups of size $n_1$ and $n_2$, let the estimated proportions of \textit{yes} outcomes be $\hat{p}_1 = y_1/n_1$ and $\hat{p}_2 = y_2/n_2$, and let $\widehat{\text{RR}} = \hat{p}_1/\hat{p}_2$ be the estimated RR comparing group 1 to group 2.  If the two groups can be viewed as random samples from a larger population and the conditions described in Section~\ref{samplingDistributionDiffTwoProps} are met,  $\log(\widehat{\text{RR}})$ is approximately normally distributed with mean  $\log(\text{RR})$ and standard error (SE)
   \begin{align*}
   \text{SE}_{\log(\widehat{\text{RR}})} = \sqrt{\frac{1 - \hat{p}_1}{y_1} + \frac{1 - \hat{p}_2}{y_2}}.
   \end{align*}
@@ -1481,9 +1481,8 @@ The 95\% interval for RR is $(e^{0.468}, e^{0.841}) = (1.597, 2.318)$. The risk 
 \end{nexample}
 \end{examplewrap}
 
-Examples~\ref{ex:jointInfectionNonInferiority} and \ref{ex:jointInfectionRRCI} illustrate the use of both risk difference and ratio for the same study.   The study was designed to estimate the treatment effect on risk difference, so the investigators presented that as their primary analysis.  The upper bound of the confidence interval for the risk difference showed that the difference in the risk of persistent infection could be as much as 16\%.  Since the overall risk is relatively low (approximately 9\% on the 12 week treatment), the upperbound of the risk difference of approximately 16\% translates into a upperbound for the RR of approximately 2.3.  The 6 week therapy could lead to more than 2 times the risk of persistent infection as on the 12 week therapy.
+Examples~\ref{ex:jointInfectionNonInferiority} and \ref{ex:jointInfectionRRCI} illustrate the use of both risk difference and ratio for the same study.   The study was designed to estimate the treatment effect on risk difference, so the investigators presented that as their primary analysis.  The upper bound of the confidence interval for the risk difference showed that the difference in the risk of persistent infection could be as much as 16\%.  Since the overall risk is relatively low (approximately 9\% on the 12 week treatment), the upper bound of the risk difference of approximately 16\% translates into a upper bound for the RR of approximately 2.3.  The 6 week therapy could lead to more than 2 times the risk of persistent infection as on the 12 week therapy.
 
-% should we do more with this?
 
 \subsection{Inference for odds ratios}
 \label{inferenceOddsRatios}
@@ -1515,7 +1514,6 @@ The odds of the event $E$ are $P(E)/(1 - P(E))$; odds are the proportion of time
 \end{figure}
 
 In a 2019 paper in the journal \textit{Headache}, Togha et al.\footfullcite{pmid31471907} report a case-control study examining the association between migraine headaches and vitamin D levels.  The investigators enrolled 70 healthy individuals (the controls) and 70 age- and sex-matched individuals with either chronic or episodic migraine headaches, and measured vitamin D levels (the exposure) in both cases and controls.  Figure~\ref{figure:migraineVitD} shows the number of participants classified by vitamin D levels and the presence of migraines. In this table participants were categorized as having low vitamin D if they were either vitamin D deficient or insufficient using standard definitions given in the paper.
-% need some definitions here
 
 \begin{figure}[h]
 	\centering
@@ -1538,7 +1536,7 @@ In a 2019 paper in the journal \textit{Headache}, Togha et al.\footfullcite{pmid
 \end{nexample}
 \end{examplewrap}
 
-Since the migraine data are from an outcome-based sampling design, the relative risk of a migraine comparing participants with low versus normal vitamin D levels cannot be estimated from these data. However, the OR comparing the odds of a migraine given low vitamin D levels to the odds of a migraine given normal levels can be calculated -- it is, in fact, identical to the OR calculated in Example~\ref{ex:orMigraineVitD}, 3.06. The data from the migraine study suggest that low vitamin D levels may triple the odds of a chronic or episodic migraines; however, it is important to note that these data are from a small study and that the observed association may be a result of unmeasured confounding.
+Since the migraine data are from an outcome-based sampling design, the relative risk of a migraine comparing participants with low versus normal vitamin D levels cannot be estimated from these data. However, the OR comparing the odds of a migraine given low vitamin D levels to the odds of a migraine given normal levels can be calculated -- it is, in fact, identical to the OR calculated in Example~\ref{ex:orMigraineVitD}, 3.06. The data from the migraine study suggest that low vitamin D levels may be associated with a tripling of the odds of a chronic or episodic migraines; however, it is important to note that these data are from a small study and that the observed association may be a result of unmeasured confounding.
 
 The general structure of a $2 \times 2$ table can be used to show that the OR for outcome given exposure is identical to the OR for exposure given outcome.  Typically, $2 \times 2$ tables are organized with the exposure as the row variable and the column variable as the outcome, as shown in Figure~\ref{figure:generalTwoByTwoTable}.
 \begin{figure}[h!]
@@ -1583,12 +1581,7 @@ Figure~\ref{figure:generalTwoByTwoTableReversed} interchanges the rows in Figure
   \end{figure}
 
 
-%JV: how to transition here?
-
-% should we add something about reversing rows and columns?
-% DH:  I don't think so, since we are implicitly encouraging exposure on the rows, outcome on the columns.  Better to keep things relatively simple
-
-When there is no association between an outcome and an exposure (i.e., the outcome and exposure are independent) the population odds ratio is 1. The null hypothesis of no association $H_0:\text{OR} = 1$ can be tested against the two-sided alternative $H_A:\text{OR} \neq 1$ with the $\chi^2$ test for the independence of row and column variables in a $2 \times 2$ table (provided that the conditions for using the $\chi^2$ test are satisfied). A test of the null hypothesis of no association between vitamin D exposure and migraine  headaches uses the same approach described in Example~\ref{ex:smoke100RegMarijChiSquared}.  The conditions for $\chi^2$-test are met in this example, as shown in the end of chapter exercise~\ref{xxx}.  The value of the statistic is 9.77 with one degree of freedom; the p-value for the test is 0.002.  This case-control study suggests a significant association between vitamin D and migraine headaches, but it is a small case-control study and definitive evidence of a causal relationship would require a prospective randomized study.
+When there is no association between an outcome and an exposure (i.e., the outcome and exposure are independent) the population odds ratio is 1. The null hypothesis of no association $H_0:\text{OR} = 1$ can be tested against the two-sided alternative $H_A:\text{OR} \neq 1$ with the $\chi^2$ test for the independence of row and column variables in a $2 \times 2$ table (provided that the conditions for using the $\chi^2$ test are satisfied). A test of the null hypothesis of no association between vitamin D exposure and migraine  headaches uses the same approach described in Example~\ref{ex:smoke100RegMarijChiSquared}.  The conditions for $\chi^2$-test are met in this example (calculations not shown), and the value of the statistic is 9.77 with one degree of freedom; the $p$-value for the test is 0.002.  This case-control study suggests a significant association between vitamin D and migraine headaches, but it is a small observational study and definitive evidence of a causal relationship would require a prospective randomized trial.
 
 As with relative risks, two steps are used to calculate a confidence interval for an OR: begin with a confidence interval for log(OR), then exponentiate the upper and lower bounds to obtain a confidence interval for OR.
 
@@ -1619,7 +1612,7 @@ A 95\% confidence interval for the log(OR) is
 \[
       1.118 \pm 1.96(0.363) \quad \to \quad (0.406, 1.830).
 \]
-The corresponding confidence interval for the OR is $(e^{0.406}, e^{1.830}) = (1.501, 6.234)$
+The corresponding confidence interval for the OR is $(e^{0.406}, e^{1.830}) = (1.501, 6.234).$
 \end{nexample}
 \end{examplewrap}
 
@@ -1631,12 +1624,12 @@ The corresponding confidence interval for the OR is $(e^{0.406}, e^{1.830}) = (1
 Confidence intervals and $p$-values usually rely on a result from theoretical statistics that the sampling distributions of nearly all test statistics are approximately normal in moderate to large sample sizes.  The result follows from the Central Limit Theorem, introduced in Section~\ref{samplingDistributionForMean} in the special case of the sample mean. Perhaps surprisingly, the use of the $\chi^2$-distribution in the test for independence in a $2 \times 2$ table also relies on the Central Limit Theorem.
 
 The normal distribution is a continuous distribution -- an infinite set values are possible. In contrast, the possible values of the $\chi^2$-statistic correspond to all the ways the counts in 4 cells of a table can be rearranged; there are a finite number of such rearrangements, and each rearrangement yields a value of the statistic. Continuity corrections have been proposed to improve the accuracy of using a continuous distribution to approximate a discrete one when sample size is small, and many texts discuss these modifications. The continuity correction for the $\chi^2$-statistic, for instance, reduces the absolute value of each difference between observed and expected counts by 0.5 before squaring the difference:
-\[
-\chi^2_{\text{cc}} = \sum_{\text{all cells}} \frac{(|\text{observed} - \text{expected}| - 0.5)^2}{\text{expected}}.
-\]
+\begin{align}
+  \chi^2_{\text{cc}} = \sum_{\text{all cells}} \frac{(|\text{observed} - \text{expected}| - 0.5)^2}{\text{expected}}. \label{eqn:fisherYatesTest}
+\end{align}
 Similar modifications can be made to the test for the difference of two proportions.
 
-It is important to be aware of these continuity corrections but they are not highlighted in this supplement or in the main text. The exact methods outlined in the next section provide a better alternative in small samples, where, for instance, some of the expected cell counts in a $2 \times 2$ table are close to or less than 10.  Exact methods are now implemented in all major software packages and are easy to use.   The general consensus is that using the continuity correction in small samples tends to result in $p$-values that are too large, so that, for instance, a test being conducted using $\alpha = 0.05$ fails to reject the null hypothesis as often as it should.
+It is important to be aware of these continuity corrections but they are not highlighted in this supplement or in the main text. The exact methods outlined in the next section provide a better alternative in small samples, where, for instance, some of the expected cell counts in a $2 \times 2$ table are close to or less than 10.  Exact methods are now implemented in all major software packages and are easy to use.   The general consensus is that using the continuity correction in small samples tends to result in $p$-values that are too large, so that a test being conducted using $\alpha = 0.05$ fails to reject the null hypothesis as often as it should.
 
 \subsubsection{Exact Methods}
 
@@ -1644,9 +1637,9 @@ Exact methods are based on the actual sampling distribution of a summary statist
 
 % leaving this as it is, but I still prefer deriving FE from scratch in this section without referring to hypergeomtric.
 
-Fisher's exact test is used when row and column totals in the table can be considered known in advance.  Under that assumption and the null hypothesis of independence of the row and column variables, the conditional distribution of the count in any particular cell (of the 4 table cells) has the hypergeometric distribution discussed in Section~\ref{hypergeometric}. In case-control studies it is used to test the null hypothesis $H_0: \text{OR} = 1$.    In exposure based sampling designs, such as randomized trials, Fisher's test is used for the equivalent null hypothesis $H_0: \text{RR} = 1$ or $H_0: p_1 = p_2$, where $p_1$ and $p_2$ are outcome probabilities for two groups. In the fecal infusion study discussed in Section~\ref{fisherExactTest}, participants were randomized to either the infusion or standard antibiotic therapy (vancomycin). Fisher's exact test was used to test the null hypothesis that the probability of cure did not differ between the two randomized groups.  The dataset in this study was small enough such that the $p$-value corresponding to Fisher's test could be calculated by hand, but the calculation in Section~\ref{fisherExactTest} is shown primarily for instructional purposes. In important analyses, Fisher's test should always be calculated using software.  The second lab for Chapter~\ref{inferenceForCategoricalData} illustrates how to use the $\textsf{R}$ function \texttt{fisher.test} to calculate both one- and two-sided p-values.
+Fisher's exact test is used when row and column totals in the table can be considered known in advance.  Under that assumption and the null hypothesis of independence of the row and column variables, the conditional distribution of the count in any particular cell (of the 4 table cells) has the hypergeometric distribution discussed in Section~\ref{hypergeometric}. In case-control studies it is used to test the null hypothesis $H_0: \text{OR} = 1$.    In exposure based sampling designs, such as randomized trials, Fisher's test is used for the equivalent null hypothesis $H_0: \text{RR} = 1$ or $H_0: p_1 = p_2$, where $p_1$ and $p_2$ are outcome probabilities for two groups. In the fecal infusion study discussed in Section~\ref{fisherExactTest}, participants were randomized either to the infusion or standard antibiotic therapy (vancomycin). Fisher's exact test was used to test the null hypothesis that the probability of cure did not differ between the two randomized groups.  The dataset in this study was small enough that the $p$-value corresponding to Fisher's test could be calculated by hand, but the calculation in Section~\ref{fisherExactTest} is shown primarily for instructional purposes. In important analyses, Fisher's test should always be calculated using software.  The second lab for Chapter~\ref{inferenceForCategoricalData} illustrates how to use the $\textsf{R}$ function \texttt{fisher.test} to calculate both one- and two-sided p-values.
 
-Leung, et al.\footfullcite{leung2020respiratory} report a series of experiments testing the effectiveness of surgical masks in reducing viral shedding, i.e. the addition of viral particles to the nearby environment from the breathing of infected individuals.  Individuals infected with one of seasonal coronavirus, influenza, or rhinovirus were randomly assigned to either wear or not wear a surgical mask.  The study team measured viral shedding through the presence of droplet particles larger than 5 micrometers ($> 5\mu m$) and aerosol particles $\leq 5\mu m$; figure~\ref{figure:influenzaAerosolViralShedding} contains the data from the experiment measuring shedding of aerosol particles by participants infected with with influenza.
+Leung, et al.\footfullcite{leung2020respiratory} report a series of experiments testing the effectiveness of surgical masks in reducing viral shedding, i.e. the addition of viral particles to the nearby environment from the breathing of infected individuals.  Individuals infected with one of seasonal coronavirus, influenza, or rhinovirus were randomly assigned either to wear or not wear a surgical mask.  The study team measured viral shedding through the presence of droplet particles larger than 5 micrometers ($> 5\mu m$) and aerosol particles $\leq 5\mu m$; figure~\ref{figure:influenzaAerosolViralShedding} contains the data from the experiment measuring shedding of aerosol particles by participants infected with with influenza.
 \begin{figure}[h]
 	\centering
 	\begin{tabular}{ll rrr |r}
@@ -1672,7 +1665,7 @@ Leung, et al.\footfullcite{leung2020respiratory} report a series of experiments 
 
 Fisher's test was originally proposed by Ronald Fisher in 1934 and its use was initially limited to very small experiments where $p$-values could be calculated by hand.  Data analysts often used the continuity correction to the $\chi^2$ statistic to try to produce analyses similar to exact methods, since exact methods were computationally unavailable. As software for the test became available, Fisher's test was used more often in studies like the fecal infusion study.  With current computational power, the test is now used in all but the largest data sets.
 
-Despite its widespread use, Fisher's exact test does have drawbacks: some theoretical, some practical.  Some statisticians have questioned the validity of conditioning on the row and column totals; i.e, treating them as if they were known in advance.  In randomized experiments like the viral shedding study, the numbers of participants in each group (the row totals) are known once the randomization has been conducted. The numbers of outcomes in the columns will not be known in advance, but research has shown this has little practical impact.
+Despite its widespread use, Fisher's exact test does have drawbacks, some theoretical, some practical.  Some statisticians have questioned the validity of conditioning on the row and column totals, i.e, treating them as if they were known in advance.  In randomized experiments like the viral shedding study, the numbers of participants in each group (the row totals) are known once the randomization has been conducted. The numbers of outcomes in the columns will not be known in advance, but research has shown this has little practical impact.
 
 %JV: unclear what is meant by "research and experience has shown this has little practical impact"
 
@@ -1718,63 +1711,15 @@ More practically, the discreteness of the hypergeometric distribution may make i
 		\end{tabular}
 		\flushleft
 
-		In a table with small cell counts, it is possible to calculate exact test $p$-values directly instead of relying on the hypergeometric distribution. First, calculate the probability of the observed table under the null hypothesis of independence between treatment and outcome. There are ${10 \choose 5} = 252$ ways to draw 5 individuals out of 10 individuals; i.e., ways to select 5 individuals out of 10 to be in the treatment group. Given the marginal totals, there are  ${4 \choose 3} {6 \choose 2} = 60$ ways to observe 5 individuals of which 3 individuals show a response and 2 individuals do not show a response. Thus, the probability of the observed table is $60/252 = 0.238$.
+		In a table with small cell counts, it is possible to calculate exact test $p$-values directly instead of relying on the hypergeometric distribution. First, calculate the probability of the observed table under the null hypothesis of independence between treatment and outcome. There are ${10 \choose 5} = 252$ ways to draw 5 individuals out of 10 individuals; i.e., 252 ways to select 5 individuals out of 10 to be in the treatment group. Given the marginal totals, there are  ${4 \choose 3} {6 \choose 2} = 60$ ways to observe 5 individuals of which 3 individuals show a response and 2 individuals do not show a response. Thus, the probability of the observed table is $60/252 = 0.238$.
 
 		Using similar logic, the probability of the table with 4 in the upper left cell is $\frac{{4 \choose 4} {6 \choose 1}}{252} = 0.024$.
 
-		The one-sided $p$-value for the observed set of results equals $0.238 + 0.024 = 0.262$, which is greater than 0.05 and fails to reject the null hypothesis.
+		The one-sided $p$-value for the observed set of results equals $0.238 + 0.024 = 0.262$, which is greater than 0.05 and fails to reject the null hypothesis.  
 
-		The table with 4 in the upper left cell results in a significant $p$-value, $p = 0.024$.
-
-		There is no outcome that produces a $p$-value between 0.262 and 0.024, due to the discrete nature of the data. Since 0.024 is the largest $p$-value smaller than 0.05 that can occur for these data, Fisher's test is actually testing at the 0.024 significance level rather than 0.05.
+        A table with 4 in the upper left cell would result in a significant $p$-value, $p = 0.024$.There is no outcome that produces a $p$-value between 0.262 and 0.024, due to the discrete nature of the data. Since 0.024 is the largest $p$-value smaller than 0.05 that can occur for these data, Fisher's test is actually testing at the 0.024 significance level rather than 0.05.
 	\end{nexample}
 \end{examplewrap}
-
-% I have rounded the smaller p-value so that we di dnot have two p-values 0.0238 and 0.238.
-
-\begin{comment}
-\begin{examplewrap}
-  \begin{nexample}{Suppose the data in the following table summarize the results of a small randomized trial, in which 9 participants have been randomly assigned to one of two treatments: 5 to treatment A and 4 to placebo.
-	\vspace{0.2cm}
-
-	\centering
-	\begin{tabular}{l rr |r}
-		\hline
-		Response to Treatment & Yes & No & Total \\
-		\hline
-		Treatment A &  4 & 1 & 5    \\
-		Placebo &	 1 & 3 &  4    \\
-		\hline
-		Total & 5 & 4 & 9 \\
-		\hline
-	\end{tabular}
-	\flushleft
-
-	\vspace{0.1cm}
-	Calculate the relative risk for a response, comparing treatment A to Placebo and conduct a one-sided test of the null hypothesis of no treatment effect versus the one-sided alternative that A is superior, using $\alpha = 0.05$.}\label{ex:fisherTestSmallSample}
-
-    The relative risk comparing A to Placebo is (4/5)/(1/4) = 3.20, a point estimate that clearly favors A.
-
-    Under the condition that the row and column totals are considered known, the value of any one particular cell in the $2 \times 2$ table determines the value of the other three cells.  So conditional on the marginal totals, only one cell count can be considered random. The possible values for the upper left cell are 0, 1, 2, 3, 4, and 5.  Tables with either a 4 or a 5 in the upper left cell are those that are as or more extreme that favor of A.  The $p$-value for Fisher's test is the sum of the conditional probabilities for these two tables.
-
-    The experiment has randomized 9 patients (5 responders and 4 non-responders) to two treatments, 5 to A and 4 to Placebo.  Under the null hypothesis of no treatment effect, the treatment assignment can be viewed as simply assigning labels (the treatments) to 9 participants that have no effect on outcome.   There are
-\[
-  \binom{9}{5} = 126
-\]
-total ways to assign 5 of the 9 participants to treatment A, and there are
-    \[
-      \binom{5}{4} \binom{4}{1} = 20
-    \]
-ways to assign 4 of the 5 responders to A  and 1 of the 4 non-responders to Placebo.  So the probability of the observed table is 20/126 = 0.159.
-
-A similar argument can be used to show that the probability of the table where all individual labeled A are responders (a 5 in the upper left cell) is 0.008.  The $p$-value for Fisher's test will be $0.159 + 0.008 = 0.167$, a non-significant result.
-
-The only outcome that would have yielded a significant result is 5 responders assigned to A, and it would have been highly significant. There is no outcome that would have produced a p-value less than but close to 0.05.
-  \end{nexample}
-\end{examplewrap}
-
-\end{comment}
-
 
 A test that does not reject often enough under the null hypothesis will not reject often enough under the alternative; its power will be less than intended. Fisher's test is widely used, however, because despite the reduction in power, its significance level is guaranteed to be less than 0.05 (or any chosen value of $\alpha$).  When a test has this property, statisticians call it conservative.
 
@@ -1790,7 +1735,7 @@ Students of statistics are often surprised by the variety of methods applied to 
 \subsubsection{Exposure-based sampling}
 
 
-If the study randomized participants to one of two interventions or sampled participants according to exposure to a risk factor, risk ratio or risk difference is the preferred summary statistic.  There is no widespread agreement on the choice between risk ratio and risk difference, so in many instances it is appropriate to calculate both and provide carefully worded interpretations. When absolute risk is small, a small risk difference may imply that the difference between groups is unimportant. In these settings, a risk ratio may show that a member of a group is substantially more likely to experience an outcome when compared to a member of the other group, such as in the LEAP study discussed in Section~\ref{introAndTerminologyForRisk}, where a risk difference of 0.118 for a peanut allergy at age 5 years corresponded to a risk ratio of 7.21.  Whenever a risk ratio is reported, however it is important to give the baseline risk.  If the absolute risk in both groups is small, the risk ratio without the baseline can be misleading.
+If the study randomized participants to one of two interventions or sampled participants according to exposure to a risk factor, a risk ratio or risk difference is the preferred summary statistic.  There is no widespread agreement on the choice between risk ratio and risk difference, so in many instances it is appropriate to calculate both and provide carefully worded interpretations. When absolute risk is small, a small risk difference may imply that the difference between groups is unimportant. In these settings, a risk ratio may show that a member of a group is substantially more likely to experience an outcome when compared to a member of the other group, such as in the LEAP study discussed in Section~\ref{introAndTerminologyForRisk}, where a risk difference of 0.118 for a peanut allergy at age 5 years corresponded to a risk ratio of 7.21.  Whenever a risk ratio is reported, however, it is important to give the baseline risk.  If the absolute risk in both groups is small, the risk ratio without the baseline can be misleading.
 
 An odds ratio is always a valid measure of association in a $2 \times 2$ table, but in randomized experiments or exposure-based sampling, the odds ratio should not be used as the primary summary statistic for at least two reasons.  People unfamiliar with statistics tend to mistakenly interpret the OR as the ratio of probabilities and so think of it as a risk ratio.  Odds ratios also tend to be larger than risk ratios, sometimes strikingly so.  In the viral shedding experiment, the OR should not be used as a primary summary statistic. The estimated RR is 1.56; the odds of viral shedding among those without masks are 8/15 and is 6/21 for those wearing masks, so the estimated the OR is 1.87, substantially larger than 1.56. Reporting the OR instead of the RR could lead to a news account claiming that not wearing a mask led to viral shedding at almost twice the rate of viral shedding when wearing a mask.
 
@@ -1825,7 +1770,7 @@ The odds ratio for the table is
             &= \text{RR} \frac{1 - p_2}{1 - p_1}.
 \end{align*}
 
-The rare disease assumption is satisfied when the probability of Outcome A is small for either exposure; i.e., both $p_1$ and $p_2$ are near 0. When this is true, the OR and RR are approximately equal. Since neither $p_1$ nor $p_2$ can be estimated from a case-control study, the rare disease assumption must be justified from additional data external to the study.
+The rare disease assumption is satisfied when the probability of Outcome A is small for both exposures; i.e., both $p_1$ and $p_2$ are near 0. When this is true, the OR and RR are approximately equal. Since neither $p_1$ nor $p_2$ can be estimated from a case-control study, the rare disease assumption must be justified from additional data external to the study.  It is important to remember that $p_1$ and $p_2$ must be estimated from another study; they cannot be estimated from a case-control study.
 
 Persistent pulmonary hypertension (PPHN) discussed in Section~\ref{caseControlStudies} is a rare condition; CDC data on birth outcomes show that it occurs in approximately 1.9 per 1,000 live births, so the risk of PPHN in a live birth has probability 0.0019. Section~\ref{introAndTerminologyForRisk} shows that the OR for the condition is 6.00, comparing women who used an SSRI during pregnancy to those who did not.  Because it is a rare condition, the RR for PPHN, comparing women who did with those who did not use an SSRI, is also approximately 6.  The 95\% confidence interval for the OR returned by \texttt{fisher.test}, (2.14, 19.17), can be viewed as an approximate 95\% confidence interval for RR.
 
@@ -1841,14 +1786,12 @@ With additional data, logistic regression can be used to estimate odds ratios af
 \section{Notes}
 \label{infForPropNotes}
 
-Two-way tables are often used to summarize data from medical research studies, and entire texts have been written about methods of analysis for these tables.  This chapter covers only the most basic of those methods.
+Two-way tables are often used to summarize data from medical research and public health studies, and entire texts have been written about methods of analysis for these tables.  This chapter covers only the most basic of those methods.
 
-Until recently, Fisher's exact test could only be calculated for $2 \times 2$ tables with small cell counts. Research has produced faster algorithms for enumerating tables and calculating $p$-values, and the computational power of recent desktop and laptop computers now make it possible to calculate the Fisher test on nearly any $2 \times 2$ table.  There are also versions of the test that can be calculated on tables with more than 2 rows and/or columns.  The practical result for data analysts is that the sample size condition for the validity of the $\chi^2$ test can be made more restrictive.  This chapter recommends using the $\chi^2$ test only when cell counts in a $2 \times 2$ table are greater than 10; some approaches recommend cell counts larger than 10.
+Until recently, Fisher's exact test could only be calculated for $2 \times 2$ tables with small cell counts. Research has produced faster algorithms for enumerating tables and calculating $p$-values, and the computational power of recent desktop and laptop computers now make it possible to calculate the Fisher test on nearly any $2 \times 2$ table.  There are also versions of the test that can be calculated on tables with more than 2 rows and/or columns.  The practical result for data analysts is that the sample size condition for the validity of the $\chi^2$ test can be made more restrictive.  Some guidelines still recommend that expected cell counts should be at least 5.  This chapter recommends using the $\chi^2$ test only when cell counts in a $2 \times 2$ table are greater than 10 since there are no computational barriers to Fisher's test when the smallest expected counts are between 5 and 10.
 
-For many years, introductory textbooks recommended using a modified version of the $\chi^2$ test, called the Fisher-Yates test, which adjusted the value of the statistic in small sample sizes to increase the accuracy of the $\chi^2$ sampling distribution in calculating $p$-values.  The Fisher-Yates version of the test is no longer used as often because of the widespread availability of the Fisher test.
+For many years, introductory textbooks recommended using a modified version of the $\chi^2$ test, called the Fisher-Yates test, which adjusted the value of the statistic in small sample sizes to increase the accuracy of the $\chi^2$ sampling distribution in calculating $p$-values using the formula in Equation~\ref{eqn:fisherYatesTest}. The Fisher-Yates version of the test is no longer used as often because of the widespread availability of Fisher's exact test.
 
 The Fisher test is not without controversy, at least in the theoretical literature.  Conditioning on the row and column totals allows the calculation of a $p$-value from the hypergeometric distribution, but in principle restricts inference to the set of tables with the same row and column values.  In practice, this is less serious than it may seem. For tables of moderate size, the $p$-values from the $\chi^2$ and Fisher tests are nearly identical and for tables with small counts, the Fisher test guarantees that the Type I error will be no larger than the specified value of $\alpha$.   In small sample sizes, some statisticians argue that the Fisher-Yates correction is preferable to the Fisher test because of the discrete nature of the hypergeometric distribution.  In small tables, for example, an observed $p$-value of 0.04 may be the largest value that is less than 0.05, such that the Type I error of the test in that situation is 0.04, not 0.05.
-
-Section~\ref{caseControlStudiesEstimates} does not show the derivation that the odds ratio estimated from a case-control is the same as that from a cohort study. It is long and algebraically more complex than other derivations shown in the text, but it is a direct application of Bayes' rule, applied to each term in the fraction that defines population odds ratio.
 
 The two labs for this chapter examine methods of inference for the success probability in binomial data then generalizes inference for binomial proportions to two-way contingency tables.  Lab 2 also discusses measures of association in two-by-two tables.  The datasets in the labs are similar to datasets that arise frequently in medical statistics.  Lab 1 assesses the evidence for a treatment effect in a single uncontrolled trial of a new drug for melanoma and whether outcomes in stage 1 lung cancer are different among patients treated at Dana-Farber Cancer Institute compared to population based statistics. In Lab 2, students analyze a dataset from a published clinical trial examining the benefit of using a more expensive but potentially more effective drug to treat HIV-positive infants.
