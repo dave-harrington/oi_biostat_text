@@ -484,7 +484,7 @@ $$\text{Expected Count}_{\text{row }i,\text{ col }j} = \frac{(\text{row $i$ tota
 \begin{examplewrap}
 \begin{nexample}{Calculate expected counts for the data in Figure~\ref{mammogramStudySummaryTableWithTotals}.}
 \[E_{1,1} = \dfrac{44,925 \times 1,005}{89,835} = 502.6 \qquad E_{1,2} = \dfrac{44,925 \times 88,830}{89,835} = 44,422.4\]
-\[E_{2,1} = \dfrac{2,922 \times 1,005}{89,835} = 502.4 \qquad E_{2,2} = \dfrac{7,078 \times 88,830}{89,835} = 44,407.6\]
+\[E_{2,1} = \dfrac{44,910 \times 1,005}{89,835} = 502.4 \qquad E_{2,2} = \dfrac{44,910 \times 88,830}{89,835} = 44,407.6\]
 \end{nexample}
 \end{examplewrap}
 
@@ -601,7 +601,7 @@ Independence is a reasonable assumption, since individuals have been randomized 
 For the HIV data, check the conditions for the $\chi^2$ test and calculate the $\chi^2$ test statistic.\footnotemark{}
 \end{nexercise}
 \end{exercisewrap}
-\footnotetext{Independence holds, since this is a randomized study. The expected counts are greater than 10. $\chi^2 = \frac{(60-44.6)^2}{44.6} + \frac{(27-42.4)^2}{42.4} + \frac{(87-102.4)^2}{102.4} + \frac{(113-97.6)^2}{97.6} = 14.7.$}
+\footnotetext{Independence holds, since this is a randomized study. The expected counts are greater than 10. $\chi^2 = \frac{(60-44.6)^2}{44.6} + \frac{(27-42.4)^2}{42.4} + \frac{(87-102.4)^2}{102.4} + \frac{(113-97.6)^2}{97.6} = 15.7.$}
 
 
 \subsection{Calculating $\pmb{\MakeLowercase{p}}$-values for a $\pmb{\chi^2}$ distribution}
@@ -799,7 +799,7 @@ For nevirapine, more infants than expected experienced virologic failure (60 > 4
 Confirm the conclusions reached in Example~\ref{HIVDirectionEx} by analyzing the residuals.\footnotemark{}
 \end{nexercise}
 \end{exercisewrap}
-\footnotetext{$R_{1, 1} = \frac{(44.6-60)}{\sqrt{44.6}} = 2.31$; $R_{1, 2} = \frac{(42.4-27)}{\sqrt{27}} = -2.37$; $R_{2, 1} = \frac{(87-102.4)}{\sqrt{102.4}} = -1.53$; $R_{2, 2} = \frac{(113-97.6)}{\sqrt{97.6}} = 1.56$. The positive residuals for the upper left and lower right cells indicate that more infants than expected experienced virologic failure on NVP and stable disease on LPV; vice versa for the upper right and lower left cells. The larger magnitude of the residuals for the two NVP cells indicates that most of the discrepancy between observed and expected counts is for outcomes related to NVP.}
+\footnotetext{$R_{1, 1} = \frac{(60 - 44.6)}{\sqrt{44.6}} = 2.31$; $R_{1, 2} = \frac{(27-42.4)}{\sqrt{42.4}} = -2.37$; $R_{2, 1} = \frac{(87-102.4)}{\sqrt{102.4}} = -1.53$; $R_{2, 2} = \frac{(113-97.6)}{\sqrt{97.6}} = 1.56$. The positive residuals for the upper left and lower right cells indicate that more infants than expected experienced virologic failure on NVP and stable disease on LPV; vice versa for the upper right and lower left cells. The larger magnitude of the residuals for the two NVP cells indicates that most of the discrepancy between observed and expected counts is for outcomes related to NVP.}
 
 \index{data!LEAP}
 
