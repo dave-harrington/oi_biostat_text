@@ -915,14 +915,17 @@ amount of caffeinated coffee consumption.\footfullcite{Lucas:2011}
 
 	Suppose a retrospective study is done in a specific county of Massachusetts; data are collected on men ages 50-54 who died over a 1-month period. Of 35 men who died from CVD, 5 had a diet with high salt intake before they died, while of the 25 men who died from other causes, 2 had a diet with high salt intake. These data are summarized in the following table.
 
-	\begin{center}
+	\begin{figure}[h]
+	\centering
+	%\begin{center}
 		\begin{tabular}{l|cc|c}
 			& \textbf{CVD Death} & \textbf{Non-CVD Death} & \textbf{Total} \\ \hline
 			\textbf{High Salt Diet} & 5 & 2 & 7  \\
 			\textbf{Low Salt Diet} & 30 & 23 & 53 \\ \hline
 			\textbf{Total} & 35 & 25 & 60  \\
-		\end{tabular}\\
-	\end{center}
+		\end{tabular}
+	%\end{center}
+	\end{figure}
 
 	\begin{parts}
 
@@ -1150,17 +1153,21 @@ they used. Of the 126 students, 71 said they bought a hard copy of the book,
   \end{parts}
 }{}
 
-% 49
+% 49  This problem may be a duplicate of q38. Have not checked details
 
 \eoce{\qt{High salt diet and cardiovascular disease related death} Suppose a retrospective study is done in a specific county of Massachusetts; data are collected on men ages 50-54 who died over a 1-month period. Of 35 men who died from CVD, 5 had a diet with high salt intake before they died, while of the 25 men who died from other causes, 2 had a diet with high salt intake. These data are summarized in the following table.
+
 \vspace{0.2cm}
+\begin{figure}[h]
+\centering
 \begin{tabular}{l|cc|c}
    & \textbf{CVD Death} & \textbf{Non-CVD Death} & \textbf{Total} \\ \hline
   \textbf{High Salt Diet} & 5 & 2 & 7  \\
   \textbf{Low Salt Diet} & 30 & 23 & 53 \\ \hline
   \textbf{Total} & 35 & 25 & 60  \\
 \end{tabular}
-\\
+\end{figure}
+
 
 \begin{parts}
 \item In this study sample, what are the estimated odds that a male had a high salt diet?  A low salt diet?
@@ -1218,7 +1225,7 @@ they used. Of the 126 students, 71 said they bought a hard copy of the book,
 \eoce{\qt{Fisher's exact test, I}
 Suppose the partial data in the following table summarize the results of a small randomized trial with 11 participants, in which 6 are assigned to control and 5 to treatment. Of those in the treatment group, 3 respond to treatment.
       \vspace{0.2cm}
-
+      \begin{figure}[h]
       \centering
       \begin{tabular}{l rr |r}
         \hline
@@ -1230,7 +1237,8 @@ Suppose the partial data in the following table summarize the results of a small
         Total & 5& 6 & 11 \\
         \hline
       \end{tabular}
-      \flushleft
+      %\flushleft
+      \end{figure}
 \begin{parts}
 
 \item Show that the 4 in the upper left cell determines the counts in the rest of the table.
