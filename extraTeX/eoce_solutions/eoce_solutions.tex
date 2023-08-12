@@ -2326,10 +2326,10 @@ statistically inaccurate.}
 %% 9.1 Introduction to simple logistic regression
 
 % Numbering is temporary since more problems will be added
-% solutions to even numbered problems currently in comments
-% to keep numbering correct
+% solutions to all problems in dropbox file eoce_logisitic_sols.tex
+% solutions to even problems only in that file
 
-% 1  odds and probabilities
+% 1  odds and probabilities, odd problem
 
 \eocesol{
 (a)~Odds of rolling a six are $(1/6)/(5/6) = 1/5$.
@@ -2338,4 +2338,223 @@ statistically inaccurate.}
 }
 
 
+% Diabetes, even problem
+
+
+% Hyperuricemia and BMI odd problem,  not a great problem; eliminate? 
+
+\eocesol{
+(a)~The estimated conditional log odds are  $\exp[-6.054 + (0.185)(25.93)] = 0.285$.  The estimated probability is $0.221$.
+(b)~Both the odds and the probability calculated from the model lie above the tabulated values in Figure~\ref{figure:huBMIQuintiles}.
+}
+
+
+% Interpreting model parameters I, even problem
+
+
+% Interpreting model parameters II, odd problem
+
+\eocesol{
+(a)~The odds ratio can be calculated directly and is $\exp[-(0.6)(6 - 4)] = \exp[-(.6)(2)] = 0.301$.
+(b)~Relative risk is the ratio of the two probabilities, which depend on individual odds.  The two odds are $\exp[3.0 - (0.6)(6)] = 0.549$ and $\exp[3.0 - (0.6)(4)] = 1.822$; the two probabilities are $0.549/(1.0 + 0.549) = 0.354$ and $1.822/(1 + 1.822) = 0.646$.  The relative risk is $0.254/0.646 = 0.393$.  
+(c) The odds ratio does not depend on the intercept, but the probabilities and hence the relative risk does.
+}
+
+ % CPR and survival to discharge, I, even problem
+
+% CPR and survival to discharge, II, odd problem part (d) correct?
+
+\eocesol{
+(a)~The odds of survival are $\exp[1.44 -(0.065)(10)] = 2.203$.
+(b)~The odds of survival for someone requiring 20 minutes of CPR are 
+$\exp[1.44 -(0.065)(20)] = 1.15$.  The OR is $2.203/1.15 = 1.916$.
+(c)~The two estimated probabilities for survival to discharge are $2.203/(1 + 2.203) = 0.688$ and $1.15/(1 + 1.15) = 0.535$.
+(d)~The relative risk is given by $RR = 0.688/0.535 = 1.286$.
+(e)~A relative risk of $1.286$ means that patients requiring 10 minutes of CPR have a chance of surviving to discharge that is approximately 1.3 times that of patients requiring 20 minutes, or approximately 30\% larger.
+} 
+
+% Hyperuricemia and dietary magnesium, I, even problem
+
+% Hyperuricemia and Age, odd problem
+
+\eocesol{
+(a)~The algebraic form of the model is 
+\[
+  \log(\widehat{\text{odds}}_\text{E}(\text{Mg})) = -1.089 - 0.007 (\text{age}),
+\]  
+where $E$ is the event of being hyperuricemic.
+(b)~Because the coefficient of age is negative, increasing age is associated with an decrease in the odds of hyperuricemia.
+(c)~The predicted odds are $\exp[-1.089 - 0.007(50)] = 0.237$.
+(d)~The OR comparing a 50 to a 30 year old is $\exp[-0.007(50 - 30)] = 0.869$.  The odds of hyperuricemia in a 50 year old is $0.869$ times that of a 30 year old; odds are decreased by $13\%$.
+(e)~The predicted probability of hyperuricemia for a 50 year old is $0.237/(1 + 0.237) = 0.192$.
+(f)~The odds of hyperuricemia for 30 year old are $\exp[-1.089 - 0.007(30)] = 0.273$, so the estimated probability is $0.273/(1 + 0.273) = 0.215$. The risk ratio is $0.192/0.215 = 0.893$.  The probability will be decreased by approximately $11\%$.
+}
+
+% Inference for simple logistic regression
+
+% Logistic regression short answer, I, even problem
+
+
+% Logistic regression short answer, II
+
+\eocesol{
+(a)~False.  Logistic regression models should be fit only when there are at least  10 cases with the less frequent yes/no outcome.
+(b)~Increased risk.  Since the log(odds) is positive, increasing values of the predictor will be associated with increases in log(odds) and odds. Probabilities increase whenever odds do. 
+(c)~No. Estimated probabilities also depend on the intercept in a logistic regression.
+(d)~No.  The $z$-score for the estimate is $0.750/0.650 = 1.154$, smaller than 1.96 for a traditional $0.05$ level test. 
+}
+
+% TB treatment interruption and secondary education, even problem
+% needs solution
+
+% Hyperuricemia and dietary magnesium, II, odd problem
+
+\eocesol{
+(a)~The $z$ statistic is the estimate divided by its standard error, $0.033/0.526 = 0.063$.
+(b)~No, the data do not show a statistically significant association, since $p = 2P(Z > 0.063) = 0.950$.
+(c)~A $95\%$ confidence interval for the estimate is $0.033 \pm (1.96)(0.526) = (-0.998, 1.064)$.   With 95\% confidence, a 1gm change in magnesium is associated with a change in log odds from $-0.998$ to $1.064$.
+(d)~First construct the confidence interval on the log odds scale.  The estimated model coefficient $b_1$ is the change in log odds corresponding to a one unit change in magnesium.  When magnesium increases from $0.25$gm to $0.75$gm, the change in log odds will be $(0.75 - 0.25)b_1 = (0.50)(0.033) = 0.017$.  On the log odds scale, the $95\%$ interval for the change will be the confidence interval for $0.50b_1$.  Since the standard error of $0.50b_1 = (0.50)(0.526) = 0.263$, the $95\%$ interval for the change in log odds is  $0.017 \pm 1.96 (0.263) = (-0.499, 0.532)$.  The 95\% interval for the odds ratio is $\exp(-0.499), \exp(0.532) = 0.607, 1.702$.  The confidence interval on the log odds scale could also have been calculated by multiplying the upper and lower bounds for the confidence interval for $b_1$ by $0.50$.
+} 
+
+% Hyperuricemia and age, II} even problem
+
+\begin{comment}
+
+\eocesol{
+  (a)~The $z$ statistic is the estimate divided by its standard error, $-0.007/0.015 = -0.467$.
+(b)~No, the data do not show a statistically significant association, since $p = 2P(Z < -0.467) = 0.641$.
+(c)~A $95\%$ confidence interval for the estimate is $-0.007 \pm (1.96)(0.015) = (-0.036, 0.022)$.   With 95\% confidence, a 1 year change in age is associated with a change in log odds from $-0.036$ to $0.022$.
+(d)~First construct the confidence interval on the log odds scale.  The estimated model coefficient $b_1$ is the change in log odds corresponding to a one year change in age.  When age increases from $50$ to $75$, the change in log odds will be $(75 - 50)b_1 = (25)(-0.007) = -0.175$.  On the log odds scale, the $95\%$ interval for the change will be the confidence interval for $25b_1$.  Since the standard error of $25b_1 = (25)(0.015) = 0.375$, the $95\%$ interval for the change in log odds is  $-0.175 \pm 1.96 (0.375) = (-0.910, 1.175)$.  With $95\%$ confidence the odds ratio is between $ \exp(-0.910), \exp(0.560) = (0.403, 1.751)$.  The confidence interval on the log odds scale could also have been calculated by multiplying the upper and lower bounds for the confidence interval for $b_1$ by 25.
+}
+
+\end{comment}
+
+% Radon and leukemia, odd problem
+
+\eocesol{
+(a)~No.  The number of recorded leukemia cases will be $(1500)(0.0025) = 3.75$, much less than the minimum of 10 events in the lower prevalence outcome.
+(b)~Since $10/3.75 = 2.67$, the number of surveyed homes should be larger by at least a factor of $2.67$, or $(10,000)(2.67) = 27,600$ homes.
+(c)~It might be reasonable to use a $95\%$ lower confidence bound for the proportion of observed leukemia cases, using the observed proportion $3.75/10,000 = 0.000375$.  Rounding 3.75 to 4, the $95\%$ confidence interval for a binomial proportion with 4 events in 10,000 observations is $(0.000128, 0.001010)$.  Using $0.000128$, 10 events would be expected in a sample size of $10/0.000128 = 78,125$ homes.
+}
+
+
+% Hyperuricemia and BMI, II
+
+\eocesol{
+(a)~The two individuals differ by 4 units of BMI, so find the $95\%$ interval for $4\beta_1$.  The estimate $4b_1 = 4(0.185) = 0.740$, with standard error $4(0.037) = 0.148$.  The confidence interval is given by 
+\[
+0.740 \pm (1.96)(0.148) \longrightarrow (0.450, 1.03).
+\] 
+(b)~No, the $95\%$ confidence interval includes 1.	
+}
+
+
+% Challenger disaster, II. Even problem
+% figure is in logistic regression draft folder under figures,  until I figure out where it should go
+
+\begin{comment}
+
+\eocesol{
+% solution from OI Q Bank 
+%\begin{parts}
+(a)~The calculation of the probabilities are as follows:
+\begin{align*}
+log\left(\frac{\hat{p}_{51}}{1 - \hat{p}_{51}}\right) 
+= 11.6630 - 0.2162 \times 51 
+&\longrightarrow \hat{p}_{51} 
+= \frac{e^{11.6630 - 0.2162 \times 51}}{1 + e^{11.6630 - 0.2162 \times 51}} 
+= 0.654 \\
+log\left(\frac{\hat{p}_{53}}{1 - \hat{p}_{53}}\right) 
+= 11.6630 - 0.2162 \times 53 &\longrightarrow \hat{p}_{53} 
+= \frac{e^{11.6630 - 0.2162 \times 53}}{1 + e^{11.6630 - 0.2162 \times 53}} 
+= 0.551 \\
+log\left(\frac{\hat{p}_{55}}{1 - \hat{p}}_{55}\right) 
+= 11.6630 - 0.2162 \times 55 
+&\longrightarrow \hat{p}_{55} 
+= \frac{e^{11.6630 - 0.2162 \times 55}}{1 + e^{11.6630 - 0.2162 \times 55}} 
+= 0.443
+\end{align*}
+(b)~The plot is shown below:
+\begin{center}
+\includegraphics[width=0.6\textwidth]{figures/challenger_disaster_pred_damage_temp.pdf} 
+\end{center}
+(c)~ For logistic regression to be appropriate in this case, each O-ring must 
+be independent of the others. We must assume independence is true (or very 
+nearly so) if we are to believe the model. For example, if the O-ring 
+manufacturing process has changed dramatically over the time of the different 
+shuttle launches, then we should be skeptical of independence and therefore 
+also of the model.
+
+}
+
+\end{comment}
+
+% prevalence differences and ratios, odd problem
+
+\eocesol{
+	Prevalence ratios and differences. Solution needed
+}
+
+\begin{comment}
+% even problem, HIV test status and TB int
+\eocesol{
+HIV test status and TB int, need solution
+}
+\end{comment}
+
+% odd problem, female horseshoe crabs
+\eocesol{
+female horse shoe crabs, needs solution
+}{}
+
+\begin{comment}
+% even problem, emergency room outcomes, I
+\eocesol{Emergency room outcomes in Denmark, I.  Need solution.
+}{}
+\end{comment}
+
+% odd problem, emergency room outcomes, II
+\eocesol{Emergency room outcomes in Denmark, II.  Needs solution.
+}
+
+\begin{comment}
+% even problem, emergency room outcomes, III
+\eocesol{Emergency room outcomes in Denmark, III.  Needs solution.
+}{}
+\end{comment}
+
+% odd problem, interaction in regression I
+
+\eocesol{
+(a)~For males, Equation~\ref{eqn:huBmiSexInteractionLogReg} reduces to 
+\begin{align*}
+  \log(\text{odds}_E) = -5.006 + (0.152)\text{bmi},
+\end{align*}
+    since \texttt{sex} has the reference value "male". The difference between the two values of BMI is $33.2 - 30.0 = 3.2$ so the difference between the log(odds) is $(0.152)(3.2) = 0.486$.  The estimated $\text{OR} = e^{0.486} = 1.626$.
+  (b)~For females, Equation~\ref{eqn:huBmiSexInteractionLogReg}  becomes
+\begin{align*}
+  \log(\text{odds}_E) &= -5.006 + (0.152)\text{bmi} 
+  -1.652 + (0.046)\text{bmi} \\
+  &= -(5.006 + 1.652) + (0.152 + 0.046)\text{bmi} \\
+  &= -6.658 + (0.198)\text{bmi}.  
+\end{align*}
+    The difference in estimated log odds is $(0.198)(3.2) = 0.634$, and the estimated OR is $e^{0.634} = 1.885$.  Females with a BMI = $33.2$ have an estimated odds of hyperuricemia that is approximately 1.88 times higher ($88\%$ higher) than females with BMI = $30$, while for males the OR is $1.63$ times higher ($63\%$ higher).
+(c)~Using the model in Figure~\ref{huBmiSexLogReg}, the estimated OR for hyperuricemia for BMI = 33.2 versus 30 $\text{kg/m}^2$ is $\exp[(3.2)(0.171)] = 1.728$, a value that is different from the two ORs calculated above.
+}{}
+
+\begin{comment}
+\eocesol{
+	Even problem. Interaction in regression, II.  Needs a solution
+}
+\end{comment}
+
+\eocesol{
+Odd problem.  Smoking and marijuana use, I	
+}{}
+
+\begin{comment}
+\eocesol{
+Even problem.  Smoking and marijuana use, II
+}{}
+\end{comment}
 

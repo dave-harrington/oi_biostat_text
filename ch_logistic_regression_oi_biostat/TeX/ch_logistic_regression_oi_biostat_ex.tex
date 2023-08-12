@@ -39,7 +39,7 @@ Possible additional exercises
 }{}
 
 
-\eoce{\qt{Hyperuricemia and BMI} The fourth quintile of BMI in 
+\eoce{\qt{Hyperuricemia and BMI, I} The fourth quintile of BMI in 
 Figure~\ref{figure:huBMIQuintiles} ranges from $25.02$ to $26.64$ meters per $\text{(kg)}^2$ and has median value $25.93$.  
     \begin{parts}
     \item Calculate the estimated conditional odds and probability of hyperuricemia for the value \texttt{bmi} = $25.93$ using the model shown in
@@ -48,7 +48,7 @@ Figure~\ref{figure:bmiHyperuricemiaLogRegCoeff}.
     \end{parts}
 }{}
 
-\eoce{\qt{Interpreting model parameters, Part I.} The curve with the solid line in Figure~\ref{figure:probVsPredictor} corresponds to $\beta_0 = -3.0$ and $\beta_1 = 0.6$.
+\eoce{\qt{Interpreting model parameters, Part I} The curve with the solid line in Figure~\ref{figure:probVsPredictor} corresponds to $\beta_0 = -3.0$ and $\beta_1 = 0.6$.
 \begin{parts}
 \item Using the formula for the curve, calculate the odds ratio for $E$ comparing $x = 6$ to $x = 4$.
 \item Using this curve, calculate the relative risk of the event $E$ comparing the value of the predictor $x = 6$ versus $x = 4$.
@@ -57,7 +57,7 @@ Figure~\ref{figure:bmiHyperuricemiaLogRegCoeff}.
 \end{parts}
 }{}
 
-\eoce{\qt{Interpreting model parameters, Part II.} The curve with the dotted line in Figure~\ref{figure:probVsPredictor} corresponds to $\beta_0 = 3.0$ and $\beta_1 = -0.6$.
+\eoce{\qt{Interpreting model parameters, Part II} The curve with the dotted line in Figure~\ref{figure:probVsPredictor} corresponds to $\beta_0 = 3.0$ and $\beta_1 = -0.6$.
 \begin{parts}
 \item Using the formula for this curve, calculate the odds ratio for $E$ comparing $x = 6$ to $x = 4$.
 \item Calculate the relative risk of the event $E$ comparing the value of the predictor $x = 6$ versus $x = 4$.
@@ -67,7 +67,7 @@ Figure~\ref{figure:bmiHyperuricemiaLogRegCoeff}.
 }{}
 
 
-\eoce{\qt{CPR and survival to discharge, Part I.} Suppose a logistic regression  model is used to estimate the association of the odds of surviving to discharge and the number of minutes  cardiopulmonary resuscitation (CPR) was given to patients admitted to an emergency room following cardiac arrest.  The response variable is survival to hospital discharge and the predictor is length of CPR in minutes.  In the model the coefficient of CPR time is -0.065.
+\eoce{\qt{CPR and survival to discharge, Part I} Suppose a logistic regression  model is used to estimate the association of the odds of surviving to discharge and the number of minutes  cardiopulmonary resuscitation (CPR) was given to patients admitted to an emergency room following cardiac arrest.  The response variable is survival to hospital discharge and the predictor is length of CPR in minutes.  In the model the coefficient of CPR time is -0.065.
 
   \begin{parts}
 
@@ -162,9 +162,7 @@ magnesium in their daily diet.
 \subsection{Inference for Simple Logistic Regression}
 
 
-\eoce{\qt{Logistic Regression short answer, I} 
-
-For the true/false questions, provide a reason for you answer.  The short answer questions can usually be answered in 2 - 3 sentences.
+\eoce{\qt{Logistic Regression short answer, I} For the true/false questions, provide a reason for you answer.  The short answer questions can usually be answered in 2 - 3 sentences.
 
 \begin{parts}
 
@@ -180,9 +178,7 @@ For the true/false questions, provide a reason for you answer.  The short answer
 
 }{}  
 
-\eoce{\qt{Logistic Regression short answer, II} 
-
-For the true/false questions, provide a reason for you answer.  The short answer questions can usually be answered in 2 - 3 sentences.
+\eoce{\qt{Logistic Regression short answer, II} For the true/false questions, provide a reason for you answer.  The short answer questions can usually be answered in 2 - 3 sentences.
 
 \begin{parts}
 
@@ -190,7 +186,7 @@ For the true/false questions, provide a reason for you answer.  The short answer
 
 \item Suppose a logistic regression has been fit to a dataset and the estimated slope parameter for the log(odds) is $0.750$.  Are increasing values of the predictor associate with increased or decreased risk of the outcome?
 
-\item  Suppose the dataset was gathered in a prospective study with exposure based sampling.  Is the information part~(b) sufficient to estimate the probability of the outcome, given a value of the exposure variable?
+\item  Suppose the dataset was gathered in a prospective study with exposure based sampling.  Is the information in part~(b) sufficient to estimate the probability of the outcome, given a value of the exposure variable?
 
 \item If the standard error of the estimate in part~(b) is $0.650$, does the study provide strong evidence for the association of the predictor with outcome? 
 
@@ -198,19 +194,16 @@ For the true/false questions, provide a reason for you answer.  The short answer
 
 }{}
 
-\eoce{\qt{TB treatment interruption and secondary education}
-
-% no  solution yet in draft sol folder
-
-The two-way table in Figure~\ref{figure:tbInterruptionEduExample} summarizes the data
-used to estimate the model in Figure~\ref{figure:tbInterruptionEduLogReg} in Example~\ref{example:tbInterruptionEducation}.
-
+\eoce{\qt{TB treatment interruption and secondary education} The two-way table in Figure~\ref{figure:tbInterruptionEduExample} summarizes the data
+used to estimate the model in Figure~\ref{figure:tbInterruptionEduLogReg} in Example~\ref{example:tbInterruptionEducation}. \textbf{replace this problem; it duplicates later material}
 
 \begin{parts}
 
 \item Use the methods outlined in Section~\ref{inferenceOddsRatios} to calculate a  $95\%$ confidence interval for the OR in part~(a).
 
 \item  Conduct a test of $H_0:\text{OR} = 1$ using the confidence interval in part~(a).
+
+\item  Explain why the results of this problem are similar to those obtained in Example~\ref{example:tbInterruptionEducation}.
 
 \end{parts}
 
@@ -249,7 +242,7 @@ used to estimate the model in Figure~\ref{figure:tbInterruptionEduLogReg} in Exa
 \end{parts}
 }{}
 
-\eoce{\qt{Hyperuricemia and age, Part II}The table below shows additional details of the logistic regression model for the association between hyperuricemia and age.  
+\eoce{\qt{Hyperuricemia and age, II}The table below shows additional details of the logistic regression model for the association between hyperuricemia and age.  
 
 % latex table generated in R 4.1.0 by xtable 1.8-4 package
 % Tue Aug 31 14:22:08 2021
@@ -279,6 +272,23 @@ used to estimate the model in Figure~\ref{figure:tbInterruptionEduLogReg} in Exa
 \item Find a 95\% confidence interval for the odds ratio for hyperuricemia comparing a 75 versus a 50 year old individual.
 \end{parts}
 }{}
+
+\eoce{\qt{Rare events \label{rare_event_sample_size}}
+Public health research often involves the study of the association between an exposure and rare events. Radiation of certain wavelengths, called ionizing radiation, may have sufficient energy to damage DNA in a way that may lead to cancer.  Radon is a form of ionizing radiation that is found in many homes and is known to cause lung cancer.  It is produced from a natural breakdown of uranium in soil, rock and water.  Radon is  measured in in picocuries per liter, (pCI/L), and the US Environmental Protection Agency considers an average exposure of 4 pCI/L a safe level for adults.
+
+Suppose a team is studying the possibility that pediatric leukemia may be associated with a low dose of radon exposure during pregnancy. In $10,000$ randomly selected homes in a metropolitan area, the team records radon levels (in picocuries per liter, pCI/L) and whether or not a woman in the home is pregnant. One year later the team records whether or not the recorded pregnancies led to a successful birth and, if so, the health status of the infant.  
+
+\begin{parts}
+
+\item Suppose $1,500$ of the women in the homes successfully delivered infants (all singleton births) and of those infants, $0.25\%$ of the infants were diagnosed with a from of leukemia.  Does the team have sufficient data to study the association of the dose of radon and the diagnosis of leukemia in an infant using logistic regression?
+
+\item Assume that the estimated proportions of successful pregnancies and a subsequent diagnosis of leukemia in an infant are accurate in this metropolitan area.  What is the minimum number of homes the team should sample to reliably use logistic regression to study a dose-response relationship between infant leukemia and radon?
+
+\item Suggest a way that the data from the original study be used to calculate a larger sample size that would be more likely to yield enough events to use logistic regression in this setting, and calculate that sample size using your suggestion.
+
+\end{parts}
+}{}
+
 \eoce{\qt{Challenger disaster, Part I\label{challenger_disaster_model_select}} 
 On January 28, 1986, a routine launch was anticipated for the Challenger space 
 shuttle. Seventy-three seconds into the flight, disaster happened: the shuttle 
@@ -337,6 +347,18 @@ parameters.
 Explain.
 \end{parts}
 }{}
+
+\eoce{\qt{Hyperuricemia and BMI, II}
+
+\begin{parts}
+
+\item  Use the entries in Figure~\ref{figure:bmiHyperuricemiaLogReg} to calculate a 95\% confidence interval for the odds ratio for hyperuricemia comparing two individuals with BMI 27 and 23.
+
+\item Ignoring issues of multiple testing, can the interval be used to support the claim that the data show that a BMI of 27 puts someone at significantly higher risk of hyperuricemia that someone with a BMI of 23? 
+
+\end{parts}
+}{}
+
 
 \eoce{\qt{Challenger disaster, Part II\label{challenger_disaster_predict}} 
 Exercise~\ref{challenger_disaster_model_select} introduced us to O-rings that 
@@ -409,7 +431,7 @@ Show that the conditions for a $\chi^2$ test are met for the data displayed in F
 
 }{}
 
-\eoce{\qt{Emergency room outcomes in Denmark, Part I.
+\eoce{\qt{Emergency room outcomes in Denmark, I
    \label{exercise:mort1000Triage}}
 
 An important problem in emergency medicine is the prioritization of high-risk patients. Traditional triage algorithms classify patients into categories based on vital signs (such as heart rate and level of consciousness) in addition to the patient's reason for seeking medical care: "red" (life-threatening), "orange" (seriously ill), "yellow" (ill), "green" (needs assessment), and "blue" (minor complaints). A study in Denmark\footfullcite{kristensen2017routine} studied the association of triage score and other variables with 30 day mortality in a dataset of 12,661 individuals\footfullcite{Data available at DOI:10.5061/dryad.m2bq5} treated in the Emergency Department (ED) of  Nordsj{\ae}lland University Hospital in Denmark.  
@@ -456,7 +478,7 @@ Individuals classified as category blue were not included in the study.
 
 }{}
 
-\eoce{\qt{Emergency room outcomes in Denmark, Part II.
+\eoce{\qt{Emergency room outcomes in Denmark, II
 \label{exercise:mortTriageColorTable}}
 
 Figure\ref{figure:tableTriageMort30Sample1000} is a contingency table showing the association between 30 day mortality and triage classification for the data used in Exercise\ref{exercise:mort1000Triage}.
@@ -493,7 +515,7 @@ red & 33 & 7 & 40 \\
 
 }{}
 
-\eoce{\qt{Emergency room outcomes in Denmark, Part III.
+\eoce{\qt{Emergency room outcomes in Denmark, III
    \label{exercise:mortTriageAgeSex1000}}
 
 The dataset used in Exercise~\ref{exercise:mort1000Triage} also contains the age and sex of the participants.  Figure~\ref{figure:mort30TriageAgeSexSample1000} shows the logistic model in which age in years and sex have been added to the traditional triage coding.
@@ -536,7 +558,7 @@ The dataset used in Exercise~\ref{exercise:mort1000Triage} also contains the age
 
 }{}
 
-\eoce{\qt{Interaction in logistic regression, Part I.
+\eoce{\qt{Interaction in logistic regression, I
    \label{exercise:BMISexInteractionModel}}
 
 The interaction term in the model given in Equation~\ref{eqn:huBmiSexInteractionLogReg} would not be retained in a model with BMI and sex, but it is instructive to explore the implications of an interaction when estimating ORs.
@@ -553,7 +575,7 @@ The interaction term in the model given in Equation~\ref{eqn:huBmiSexInteraction
 
 }{}    
 
-\eoce{\qt{Interaction in logistic regression, Part II.
+\eoce{\qt{Interaction in logistic regression, II
    \label{exercise:BMISexInteractionDirect}}
 
 Adding a term to a logistic regression is the preferred method for examining interactions.  In some settings it is possible to compare the separate estimates of log odds ratios from subsets without imposing a model. 
@@ -573,10 +595,10 @@ Adding a term to a logistic regression is the preferred method for examining int
 }{}
 
 
-\eoce{\qt{Smoking and marijuana use, Part I.
+\eoce{\qt{Smoking and marijuana use, I
    \label{exercise:smokingMarij}}
 
-Figure~\ref{} shows the association between smoking at least 100 cigarettes a year and regular marijuana use and sample of 500 participants from the NHANES data in the package \texttt{oibiostat}.  Figure~\ref{} below shows a logistic model fit to the same data, with response regular marijuana use and the smoking variable (\texttt{Smoke100}) as the predictor.
+Figure~\ref{figure:smoke100RegMarijuana} shows the association between smoking at least 100 cigarettes a year and regular marijuana use in a sample of 500 participants from the NHANES data in the package \texttt{oibiostat}.  Figure~\ref{figure:marijSmokelogreg} below shows a logistic model fit to the same data, with response regular marijuana use and the smoking variable (\texttt{Smoke100}) as the predictor.
 
 % latex table generated in R 4.1.2 by xtable 1.8-4 package
 % Wed Jun 29 14:28:14 2022
@@ -630,11 +652,10 @@ Figure~\ref{figure:marijSmokeAgeGenderWorklogreg} expands the logistic regressio
 \end{parts}
 
 }{}
-\eoce{\qt{Smoking and marijuana use, Part II.
+\eoce{\qt{Smoking and marijuana use, II
    \label{exercise:smokingMarijSrvYr}}
 
-
-When  survey data are collected in different time  periods,  it is  important to know if any estimated associations might differ according to the data collection period.  The NHANES data was collected in two surveys, one in 2009 - 2010 and a second in 2011 - 2012.  The dataset used to fit the model in Exercise~\ref{exercise:smokingMarij} includes a categorical variable \var{SurveyYr} with two levels denoting year of the participant's data.  
+When survey data are collected in different time  periods,  it is  important to know if any estimated associations might differ according to the data collection period.  The NHANES data was collected in two surveys, one in 2009 - 2010 and a second in 2011 - 2012.  The dataset used to fit the model in Exercise~\ref{exercise:smokingMarij} includes a categorical variable \var{SurveyYr} with two levels denoting year of the participant's data.  
 
 Write down a logistic regression model that can be used to check whether the association between regular marijuana use and smoking differed the survey period.
 
