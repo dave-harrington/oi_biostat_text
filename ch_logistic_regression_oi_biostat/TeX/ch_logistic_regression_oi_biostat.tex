@@ -493,7 +493,7 @@ The World Health Organization (WHO) and other health care organizations have use
 A 2015 cross-sectional study by Lackey, et. al \footfullcite{lackey2015patient}  examined patient characteristics associated with interrupted treatment in a section of Lima, Peru where the incidence of TB was 213 cases per 100,000 persons at the time the study was conducted. For comparison, the incidence of TB in the United States is approximately 2.8 cases per 100,000.\footfullcite{world2020global}   The study enrolled 1,294 participants and reported results based on data from 1,233 participants for whom there were no missing data on outcome and patient characteristics. \term{Complete case analysis} is the term used to refer to an analysis using only the cases without any missing observations; while this is usually not the best way to adjust for missing data, alternative methods are beyond the scope of this text. The dataset \texttt{tb} in the \texttt{oibiostat} package contains a subset of the variables for the complete case data analyzed by the study authors.
 
 
-\begin{examplewrap} \label{example:tbInterruptionEducation}
+\begin{examplewrap} 
   \begin{nexample}  {Figure~\ref{figure:tbInterruptionEduLogReg} shows a logistic regression model estimating the association of a two-month treatment interruption with the presence of a secondary school education in the participant. (Decimals from the output have been rounded to 3 significant figures for readability.) Interruption (the variable \texttt{two.mo.interruption} in the dataset) is a binary variable coded \texttt{0} for individuals who completed therapy and 1 for those who did not. The predictor \texttt{education} is a factor variable, with levels {"Yes"} and {"No"} for participants with and without secondary school education, respectively.  Among the $1,233$ cases in the dataset, $127 (10.3\%)$ experienced a treatment interruption and $719$ had a secondary school education. Compute the odds ratio for ending TB therapy prematurely, comparing participants with to those without a secondary school education, along with a 95\% confidence interval for the odds ratio.}
 
 The assumptions for the logistic model are reasonable in this example. The participants were sampled independently, the predictor is binary, and there are more than 10 cases with either outcome.  The coefficient of \texttt{educationYes} indicates that participants with secondary school education have a log(odds) that is reduced additively by $0.785$ compared to those without secondary school education.  The odds ratio comparing someone with secondary school education to someone without is $e^{-0.785}=0.456.$  The odds of a premature treatment interruption among participants with a secondary school education are $0.456$ times the odds of those without a secondary education.  The odds are reduced by more than $50\%$.
@@ -508,6 +508,7 @@ The confidence interval for the odds ratio is
 \end{align*}
     Individuals with secondary school education have a lower relative odds of treatment interruption than those without; with 95\% confidence, the odds of interruption may be from $0.314$ to $0.663$ times lower in individuals with a secondary education.  This is sometimes summarized as an odds that is $34\%$ to $69\%$ $((100 - 66.3)\% \text{ to } (100 - 31.4\%))$ lower.
 
+\label{example:tbInterruptionEducation}
 \end{nexample}
 \end{examplewrap}
 
@@ -674,7 +675,7 @@ All statistical software packages provide standard errors (s.e.) of coefficients
 A logistic regression model is not useful for estimating odds ratios or probabilities if a model with predictors is not significantly better than a model with only the intercept term, that is, if there is not strong evidence against the hypothesis that coefficients of the predictors are all 0.  A test of the null hypothesis that all model coefficients are 0  uses a statistic called the deviance. Multiple logistic regression models are estimated by the method of maximum likelihood, the same approach that is used for simple logistic regression, and the deviance is a function of the maximized likelihood function.  Its mathematical definition is beyond the scope of this book; it is enough to know that the deviance decreases as as the fit of a model improves.
 
 \begin{onebox}{The deviance statistic for overall model fit}
-  In logistic regression, the \term{residual deviance} is a measure of the fit of an estimated model and the null deviance is a measure of fit of a model with only an intercept term. A test of the hypothesis $H_0:\beta_1 = \beta_2 = \cdots = \beta_p = 0$ versus the alternative that at least one coefficient is not zero can be based on the statistic
+  In logistic regression, the \term{residual deviance} is a measure of the fit of an estimated model and term{null deviance} is a measure of fit of a model with only an intercept term. A test of the hypothesis $H_0:\beta_1 = \beta_2 = \cdots = \beta_p = 0$ versus the alternative that at least one coefficient is not zero can be based on the statistic
   \[
     D =  \text{null deviance} - \text{residual deviance}.
   \]
@@ -808,7 +809,7 @@ Does the intercept have scientific meaning in this model? \footnotemark{}
 
 Since the hyperuricemia study had a cross-sectional design, the probability of hyperuricemia for values of the predictors can be estimated from the model.
 
-\begin{examplewrap}\label{example:huBMISexProbabilities}
+\begin{examplewrap} 
 \begin{nexample}{Calculate the estimated probability of hyperuricemia for a female with BMI~28.}
 The log(odds) are
 \[
@@ -819,12 +820,14 @@ so the odds are $e^{-1.195} = 0.303$.  The estimated probability of hyperuricemi
    \text{exp}  \left[ \frac{0.303}{1 + 0.303} \right] = 0.232.
 \]
 A female with BMI~28 has an estimated chance of 23\% of being hyperuricemic.
+
+\label{example:huBMISexProbabilities}
 \end{nexample}
 \end{examplewrap}
 
 The OR for hyperuricemia comparing males to females is the same, regardless of BMI, as long as BMI does not change. When both predictors change, the full model must be used to calculate odds ratios.
 
-\begin{examplewrap}\label{example:ORBMI3032}
+\begin{examplewrap}
 \begin{nexample}{What is the OR for hyperuricemia, comparing a woman with BMI~32 to a male with BMI~30?}
 The log(odds) of hyperuricemia for a woman with BMI 32 is
 \begin{align*}
@@ -840,17 +843,19 @@ so the odds of hyperuricemia are $0.689$.
 The OR comparing the female to the male is $0.600/0.689 = 0.871$.
 
 A woman whose BMI is 2$\text{kg/m}^2$ higher than a male still has a lower estimated odds of hyperuricemia.
+\label{example:ORBMI3032}
 \end{nexample}
 \end{examplewrap}
 
 In the model for hyperuricemia the change in log odds when when one predictor changes does not depend on the other predictor.  The same is not true for estimated probabilities.
 
-\begin{examplewrap}\label{example:probsDependOnOtherVars}
+\begin{examplewrap}
 \begin{nexample}{For males, use the estimated probabilities of hyperuricemia for individuals with BMI~28 and BMI~30 to calculate estimated prevalence differences and ratios.  Repeat the calculation for females. }
 For a male with BMI~28 the estimated log odds and odds of hyperuricemia are $-5.503 + (0.171)(28) = -0.715$ and  $e^{-0.715} = 0.489$.  The estimated prevalence (probability) of hyperuricemia is $0.489/(1 + 0.489) = 0.328$.  The estimated odds of hyperuricemia for a male with BMI~30 were calculated in Example~\ref{example:ORBMI3032} and are $0.689$, so the estimated prevalence is $0.408$.  The estimated prevalence difference and ratio are, respectively, $0.080$ and $1.229$.
 
 The prevalence difference and ratio for females are calculated similarly and are, respectively, $0.066$ and $1.290$. (See Exercise~\ref{exercise:prevDifferencesRatiosMalesFemales}.)  The prevalence differences and ratios associated with a change in BMI from 28 to 30 are different for males than for females, and must be calculated using all the coefficients in the model.  This result is another reason why an estimated OR from a logistic regression should not be interpreted as a prevalence or risk ratio.
 
+\label{example:probsDependOnOtherVars}
 \end{nexample}
 \end{examplewrap}
 
@@ -1012,7 +1017,7 @@ The interpretation of logistic regression with a categorical predictor with four
 
 The algebraic form of the model is
 \begin{align}
-\log\left[\text{odds}_{y}(\text{color})\right] = -0.762 + 1.130\texttt{colorMedDark}
+\log\left[\text{odds}_{y}(\text{color})\right] = -0.762 + (1.130)\texttt{colorMedDark}
  + (1.738)\texttt{colorMedLight} + (1.861)\texttt{colorLight}.
  \label{eqn:satellitesColorCrabsLogReg}
 \end{align}
@@ -1030,6 +1035,8 @@ Calculating ORs for two categories that do not include "Dark" requires more care
       &= 0.123.
 \end{align*}
 Since the coefficient for the intercept cancels in the subtraction, the odds ratio comparing "MedLight" to "Light" is $\exp(b_4 - b_3) = \exp(0.123) = 0.131$.  This argument easily generalizes to any two categories when predictors have more than 4 levels.
+
+The calculation of a confidence interval for the OR comparing two categories that are not the reference category is a more difficult calculation, since it requires the standard error of the difference of two estimated log(OR)s, a topi not covered here.
 
 Since the $\chi^2$ test based on Figure~\ref{figure:colorSatelliteCrabs} and the deviance based test for model are both used to test the null hypothesis of no relationship between the response and the predictor, both should yield approximately the same statistic and $p$-value. The null and residual deviances for the model are $225.76$ and $212.06$.  The difference $13.7$ yields $p = 0.003$ for a $\chi^2$ with 3 degrees of freedom.  Both approaches support the conclusion that, when other factors are not accounted for, color is associated with the tendency for a female crab to have at least one satellite.  (The two $\chi^2$ values are slightly different because they are calculated using different formulas.)
 

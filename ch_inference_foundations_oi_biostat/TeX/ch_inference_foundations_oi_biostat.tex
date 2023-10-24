@@ -556,7 +556,7 @@ From these data, there is not statistically significant evidence to either recom
 \end{figure}
 
 \begin{examplewrap}
-\begin{nexample}{In 2015, the National Sleep Foundation published new guidelines for the amount of sleep recommended for adults: 7-9 hours of sleep per night.\footnotemark{} The NHANES survey includes a question asking respondents about how many hours per night they sleep; the responses are available in \data{nhanes.samp}. In the sample of 134 adults used in the BMI example, the average reported hours of sleep is 6.90, with standard deviation 1.39. Is there evidence that American adults sleep less than 7 hours per night?}
+\begin{nexample}{In 2015, the National Sleep Foundation published new guidelines for the amount of sleep recommended for adults: 7-9 hours of sleep per night.\footnotemark{} The NHANES survey includes a question asking respondents about how many hours per night they sleep; the responses are available in \data{nhanes.samp}. In the sample of 135 adults used in the BMI example, the average reported hours of sleep is 6.90, with standard deviation 1.39. Is there evidence that American adults sleep less than 7 hours per night?}
 
 Let $\mu$ be the population average of hours of sleep per night for US adults. Conduct a one-sided test, since the question asks whether the average amount of sleep per night might be less than 7 hours. 
 
@@ -565,14 +565,14 @@ Let $\mu$ be the population average of hours of sleep per night for US adults. C
 \textit{Specify the significance level, $\alpha$}.  Let $\alpha = 0.05$, since the question does not reference a different value. 
 
 \textit{Calculate the test statistic}. The $t$-statistic has value
-\[t = \frac{\overline{x}-\mu_0}{s/\sqrt{n}} = \frac{6.90 - 7.00} {1.33/\sqrt{134}} = -0.864.\]
+\[t = \frac{\overline{x}-\mu_0}{s/\sqrt{n}} = \frac{6.90 - 7.00} {1.39/\sqrt{135}} = -0.836.\]
 
 \textit{Calculate the $p$-value}.
 
 For this one-sided alternative $H_A: \mu < 7$, the $p$-value is
-\[P(Z \leq t) = P(Z < -0.864) = 0.19.\]
+\[P(Z \leq t) = P(Z < -0.836) = 0.201.\]
 
-Since the alternative states that $\mu_0$ is less than 7, the $p$-value is represented by the area to the left of $t = -0.864$, as shown in Figure~\ref{pValueSleep}.
+Since the alternative states that $\mu_0$ is less than 7, the $p$-value is represented by the area to the left of $t = -0.836$, as shown in Figure~\ref{pValueSleep}.
 
 \textit{Draw a conclusion}.  The $p$-value is larger than the specified significance level $\alpha$. The null hypothesis is not rejected since the data do not represent sufficient evidence to support the claim that American adults sleep less than 7 hours per night.
 \end{nexample}
@@ -584,7 +584,7 @@ Since the alternative states that $\mu_0$ is less than 7, the $p$-value is repre
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=0.85\textwidth]{ch_inference_foundations_oi_biostat/figures/pValueSleep/pValueSleep}
-	\caption{The large blue shaded region represents the $p$-value, the area to the left of $t = -0.864$. The smaller grey shaded region represents the rejection region of area 0.05 in the left tail.}
+	\caption{The large blue shaded region represents the $p$-value, the area to the left of $t = -0.836$. The smaller grey shaded region represents the rejection region of area 0.05 in the left tail.}
 	\label{pValueSleep}
 \end{figure}
 

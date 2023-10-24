@@ -30,7 +30,7 @@ plot(X, Y,
      ylim = c(0, 0.622))
 
 AddShadedPlot(X, Y, 0, -8, 1.21)
-AddText(0, format(0.8868 , scientific = FALSE)[1])
+AddText(0, format(0.8869 , scientific = FALSE)[1])
 
 AddShadedPlot(X, Y, 8, -8, -0.3)
 AddText(8, format(0.3821, scientific = FALSE)[1])
@@ -45,4 +45,6 @@ text(12, 0.549283,
      ' = ')
 segments(rep(11, 2), c(0.17, 0.23), rep(13, 2), lwd = 3)
 dev.off()
+
+
 

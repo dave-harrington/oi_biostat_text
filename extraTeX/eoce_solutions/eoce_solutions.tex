@@ -2435,7 +2435,7 @@ where $E$ is the event of being hyperuricemic.
 (a)~No.  The number of recorded leukemia cases will be $(1500)(0.0025) = 3.75$, much less than the minimum of 10 events in the lower prevalence outcome.
 (b)~Since $10/3.75 = 2.67$, the number of surveyed homes should be larger by at least a factor of $2.67$, or $(10,000)(2.67) = 27,600$ homes.
 (c)~It might be reasonable to use a $95\%$ lower confidence bound for the proportion of observed leukemia cases, using the observed proportion $3.75/10,000 = 0.000375$.  Rounding 3.75 to 4, the $95\%$ confidence interval for a binomial proportion with 4 events in 10,000 observations is $(0.000128, 0.001010)$.  Using $0.000128$, 10 events would be expected in a sample size of $10/0.000128 = 78,125$ homes.
-}
+}{}
 
 
 % Hyperuricemia and BMI, II
@@ -2446,7 +2446,7 @@ where $E$ is the event of being hyperuricemic.
 0.740 \pm (1.96)(0.148) \longrightarrow (0.450, 1.03).
 \] 
 (b)~No, the $95\%$ confidence interval includes 1.	
-}
+}{}
 
 
 % Challenger disaster, II. Even problem
@@ -2485,36 +2485,57 @@ manufacturing process has changed dramatically over the time of the different
 shuttle launches, then we should be skeptical of independence and therefore 
 also of the model.
 
-}
+}{}
 
 \end{comment}
 
-% prevalence differences and ratios, odd problem
+%  Fracture study, odd problem
 
 \eocesol{
-	Prevalence ratios and differences. Solution needed
-}
+(a)~ The OR does not depend on the age the participant.  From the data in the Figure~\ref{glowFracAge}, the log odds ratio comparing women with and without a prior fracture is 0.839, so the estimated $\text{OR} = \exp(0.839) = 2.314$.  A woman with a prior fracture has more than double the odds of experiencing a fracture during the study than one without a prior fracture.
+(b)~ The OR does not depend on whether or not the woman has experienced a prior fracture. There is a 10 year difference in the ages of the two women, so $\text{log(OR)} = 10(0.041) = 0.140$.  The $\text{OR} = \exp(0.140) = 0.15$.  The older women has an estimated OR that is 15\% larger than the younger woman.
+(c)~The design of the study was exposure based, so in the full data of approximately 60,000 women both odds and prevalence ratios could have been estimated.  Since the sample of 500 was outcome based, it still allows estimates of ORs.
+(d)~Because the sample of 500 was outcome based, prevalence ratios cannot be estimated from the data.
+
+}{}
 
 \begin{comment}
 % even problem, HIV test status and TB int
 \eocesol{
-HIV test status and TB int, need solution
+The conditions for the $\chi^2$ test are discussed in Section~\ref{theChiSquaredTestStatistic}. The formulas for expected cell counts under the assumption of independence are given in Section~\ref{twoWayTablesExpectedCounts}.  The validity if of a $\chi^2$ in a $2\times2$ table are both met in this example.  The data from the participating subjects can is independent between subjects, and all the expected cell counts are at least 10.  The smallest observed cell count is 52, and the expected count for that cell is ($127 \times 719)/1233 = 74.06$.  The other expected cell counts are all at least 10.  
 }
 \end{comment}
 
 % odd problem, female horseshoe crabs
 \eocesol{
-female horse shoe crabs, needs solution
+The conditions for the $\chi^2$ test are discussed in Section~\ref{theChiSquaredTestStatistic}. The formulas for expected cell counts under the assumption of independence are given in Section~\ref{twoWayTablesExpectedCounts}. All of the cases in the dataset contribute independent data.  In a two-way table with more than 4 cells, no more than 1/5 of the expected cell counts should be less than 5 and all expected cell counts should be greater than 1.  Since there are 8 cells in the table the two lowest expected cell counts should be at least 5.  There are no cell counts less than 1.  Only one expected cell count is less than 5 (calculations not shown).  The expected cell count for the number crabs with a light colored carapace and no satellites is 4.30.  The conditions are satisfied.
+
 }{}
+
+% 23 Oct ended at part d
 
 \begin{comment}
 % even problem, emergency room outcomes, I
-\eocesol{Emergency room outcomes in Denmark, I.  Need solution.
+\eocesol{
+(a)~The reference category is "red".
+(b)~Yes, the pattern is consistent with the original coding.  Because the log(OR) is negative for each predictor, each color is associated with a lower OR than "red", the category denoted as life-threatening.  Moreover, the descreasing pattern of the predicted log(OR)s (compared to the color red) is consistent with lower risk as the color coding changes from "orange" to "green".
+(c)~The algebraic form of the model is
+\begin{align}
+\log\left[\text{odds}_{\text{mortality}}(\text{triage score})\right] = -1.551 -0.958\texttt{triageorange}
+ - 1.290\texttt{triageyelow}  - 1.585\texttt{triagegreen}.
+ (d)~Yes.  In this model -1.551 is the log(odds) of 30-day mortality among participants coded "red".  The odds of 30-day mortality is $\exp(-1.551) = 0.212$.  
+ (e)~The estimated OR is $\exp(-1.290) = 0.275$.  The 95\% confidence interval for the log(OR) is $-1.290 \pm (1.95)(0.468) = (-2.207,-0.373)$.  The confidence interval for the OR is $(\exp(-2.207, -0.373) = (0.110, 0.689).
+ (f)~The log(OR) comparing "yellow" to "orange" is the difference of the two log(OR)s, $-1.290 - (-1.585) = 0.295$, so $\text{OR} = exp(0.295) = 1.343$.  The odds of 30-day mortality for a participant coded "yellow" are approximately 34\% larger than for someone coded "green".
+\end{align}
+
 }{}
 \end{comment}
 
 % odd problem, emergency room outcomes, II
-\eocesol{Emergency room outcomes in Denmark, II.  Needs solution.
+\eocesol{
+(a)~The estimate of the intercept is $log(7/33) = -1.551$.
+(b)~The estimate for the triage category "green" is the log of the estimated OR comparing "green" to "red", $\text(log((11/253)/(7/33)) = -1.585$.
+(c)~The estimates of the standard errors in the table are the same as those calculated for estimates of log(OR)s in a two-way table discussed in
 }
 
 \begin{comment}
@@ -2539,7 +2560,7 @@ female horse shoe crabs, needs solution
   &= -6.658 + (0.198)\text{bmi}.  
 \end{align*}
     The difference in estimated log odds is $(0.198)(3.2) = 0.634$, and the estimated OR is $e^{0.634} = 1.885$.  Females with a BMI = $33.2$ have an estimated odds of hyperuricemia that is approximately 1.88 times higher ($88\%$ higher) than females with BMI = $30$, while for males the OR is $1.63$ times higher ($63\%$ higher).
-(c)~Using the model in Figure~\ref{huBmiSexLogReg}, the estimated OR for hyperuricemia for BMI = 33.2 versus 30 $\text{kg/m}^2$ is $\exp[(3.2)(0.171)] = 1.728$, a value that is different from the two ORs calculated above.
+(c)~Using the model in Figure~\ref{figure:huBmiSexLogReg}, the estimated OR for hyperuricemia for BMI = 33.2 versus 30 $\text{kg/m}^2$ is $\exp[(3.2)(0.171)] = 1.728$, a value that is different from the two ORs calculated above.
 }{}
 
 \begin{comment}

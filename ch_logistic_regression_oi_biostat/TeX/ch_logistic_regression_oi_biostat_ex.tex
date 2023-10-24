@@ -405,23 +405,54 @@ model's validity.
 \subsection{Multiple logistic regression}
 
 
-\eoce{\qt{Prevalence differences and ratios from logistic regression.
-\label{exercise:prevDifferencesRatiosMalesFemales}}
+%\begin{comment}
+
+
+\eoce{\qt{Risk of fracture\label{exercise:fractureRiskGlow}}
+
+Osteoporosis a bone disease characterized by decreasing bone mineral density and bone mass and is associated with a higher risk of fractures (broken bones) after falls.  The Global Longitudinal Study of Osteoporosis in Women (GLOW) collected data on over 60,000 women over 55 years of age diagnosed with osteoporosis. This exercise uses data from the study provided in Hosmer, Lemeshow and Sturdivant\footfullcite{hosmer2013applied}, which contains additional information about the study. Briefly, the study followed the participants during the study period, recording potential predictors of fracture at enrollment and the first occurrence of a fracture during the follow-up period.  The GLOW data can be found in the \textsf{R} package APLORE.
+
+The data in this exercise contains information from 500 participants and includes the occurrence of a fracture and selected possible risk factors.  This sample was drawn by Hosmer, Lemeshow and Sturdivant from the full dataset by oversampling participants with fractures and undersampling those without fractures, since only approximately 4\% of the participants experienced fractures.
+
+Figure~\ref{glowFracAge} shows a logistic regression model with response variable whether or not the participant experienced a fracture during the study and predictors the factor variable the presence of a prior fracture (coded Yes, No) and age of the participant, in years.
+
+
+% Tue Oct 17 13:58:34 2023
+\begin{figure}[ht]
+\centering
+\begin{tabular}{rrrrr}
+  \hline
+ & Estimate & Std. Error & z value & Pr($>$$|$z$|$) \\ 
+  \hline
+(Intercept) & -4.214 & 0.848 & -4.97 & 0.000 \\ 
+  priorfracYes & 0.839 & 0.234 & 3.58 & 0.000 \\ 
+  age & 0.041 & 0.012 & 3.38 & 0.001 \\ 
+   \hline
+\end{tabular}
+\caption{Logistic Regression for fracture with predictors age 
+       and presence of prior fracture} 
+\label{glowFracAge}
+\end{figure}
 
 \begin{parts}
 
-\item Calculate the estimated prevalence of hyperuricemia for a female with BMI~28 and for one with BMI~30 used in Example~\ref{example:probsDependOnOtherVars}.
+\item For a 60 year old women use the model to estimate the odds ratio for the occurrence  of a fracture comparing women with a prior fracture to those without a prior fracture.
 
-\item Calculate the estimated prevalence difference and ratio for the same two females.
+\item For a woman who has not had a prior fracture, estimate the odds ratio for the occurrence of a fracture, comparing a 75 year old woman with one who is 65.
+
+\item Does the design of the study and this sample of 500 participants support the estimates of ORs in parts~(a) and (b)?  Justify your answer.
+
+\item Can the data from the study be used to estimate prevalence differences and ratios in parts~(a) and (b)? Justify your answer.
 
 \end{parts}
+
 }{}
 
+%\end{comment}
 
+\eoce{\qt{HIV test status and TB treatment interruption. \label{exerise:tbInterruption}}
 
-\eoce{\qt{HIV test status and TB treatment interruption. \label{exerise:HIVTestStatusInterruption}}
-
-Show that the conditions for a $\chi^2$ test are met for the data displayed in Figure~\ref{figure:hivInterruption}.
+Show that the conditions for a $\chi^2$ test are met for the data displayed in Figure~\ref{figure:tbInterruptionEduExample}.
 
 }{}
 
@@ -468,11 +499,11 @@ Individuals classified as category blue were not included in the study.
 
 \item Write the equation for the model.
 
-\item Does the intercept have an interpretation in this model?  If so, what is its interpretation.
+\item Does the intercept have an interpretation in this model?  If so, what is its interpretation?
 
 \item What is the estimated OR and 95\% confidence interval for 30 day mortality, comparing category "yellow" with "red"?
 
-\item What is the OR for 30 day mortality, comparing category "yellow" with "orange".
+\item What is the OR for 30 day mortality, comparing category "yellow" with "orange"?
 
 \end{parts}
 
