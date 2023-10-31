@@ -2447,8 +2447,6 @@ where $E$ is the event of being hyperuricemic.
 \] 
 (b)~No, the $95\%$ confidence interval includes 1.	
 }{}
-
-
 % Challenger disaster, II. Even problem
 % figure is in logistic regression draft folder under figures,  until I figure out where it should go
 
@@ -2484,7 +2482,6 @@ nearly so) if we are to believe the model. For example, if the O-ring
 manufacturing process has changed dramatically over the time of the different 
 shuttle launches, then we should be skeptical of independence and therefore 
 also of the model.
-
 }{}
 
 \end{comment}
@@ -2496,7 +2493,6 @@ also of the model.
 (b)~ The OR does not depend on whether or not the woman has experienced a prior fracture. There is a 10 year difference in the ages of the two women, so $\text{log(OR)} = 10(0.041) = 0.140$.  The $\text{OR} = \exp(0.140) = 0.15$.  The older women has an estimated OR that is 15\% larger than the younger woman.
 (c)~The design of the study was exposure based, so in the full data of approximately 60,000 women both odds and prevalence ratios could have been estimated.  Since the sample of 500 was outcome based, it still allows estimates of ORs.
 (d)~Because the sample of 500 was outcome based, prevalence ratios cannot be estimated from the data.
-
 }{}
 
 \begin{comment}
@@ -2509,11 +2505,7 @@ The conditions for the $\chi^2$ test are discussed in Section~\ref{theChiSquared
 % odd problem, female horseshoe crabs
 \eocesol{
 The conditions for the $\chi^2$ test are discussed in Section~\ref{theChiSquaredTestStatistic}. The formulas for expected cell counts under the assumption of independence are given in Section~\ref{twoWayTablesExpectedCounts}. All of the cases in the dataset contribute independent data.  In a two-way table with more than 4 cells, no more than 1/5 of the expected cell counts should be less than 5 and all expected cell counts should be greater than 1.  Since there are 8 cells in the table the two lowest expected cell counts should be at least 5.  There are no cell counts less than 1.  Only one expected cell count is less than 5 (calculations not shown).  The expected cell count for the number crabs with a light colored carapace and no satellites is 4.30.  The conditions are satisfied.
-
 }{}
-
-% 23 Oct ended at part d
-
 \begin{comment}
 % even problem, emergency room outcomes, I
 \eocesol{
@@ -2527,20 +2519,24 @@ The conditions for the $\chi^2$ test are discussed in Section~\ref{theChiSquared
  (e)~The estimated OR is $\exp(-1.290) = 0.275$.  The 95\% confidence interval for the log(OR) is $-1.290 \pm (1.95)(0.468) = (-2.207,-0.373)$.  The confidence interval for the OR is $(\exp(-2.207, -0.373) = (0.110, 0.689).
  (f)~The log(OR) comparing "yellow" to "orange" is the difference of the two log(OR)s, $-1.290 - (-1.585) = 0.295$, so $\text{OR} = exp(0.295) = 1.343$.  The odds of 30-day mortality for a participant coded "yellow" are approximately 34\% larger than for someone coded "green".
 \end{align}
-
 }{}
 \end{comment}
-
 % odd problem, emergency room outcomes, II
 \eocesol{
 (a)~The estimate of the intercept is $log(7/33) = -1.551$.
 (b)~The estimate for the triage category "green" is the log of the estimated OR comparing "green" to "red", $\text(log((11/253)/(7/33)) = -1.585$.
-(c)~The estimates of the standard errors in the table are the same as those calculated for estimates of log(OR)s in a two-way table discussed in
+(c)~Yes.  Each of the log odds ratios comparing a category with "red" can be thought of as coming from a $2 \times 2$ table with the two rows consisting of counts from "red" and the category of interest.  In those tables, the standard errors of the log(OR) can be calculated using the formulas in Section~\ref{section:inferenceOddsRatios}.  For instance for the category "green" the standard error of the log(OR), the standard error is given by $\sqrt(1/253 + 1/11 + 1/33 + 1/7) = 0.518$.  Because the calculations of standard errors in logistic regression and 2-way tables are different the standard errors from the two methods may differ slightly.
+(d)~By splitting the data into two smaller groups, estimates of coefficients will be less precise (have larger standard error) so hypothesis tests will have smaller power. For these data, the evidence for an interaction is weak using both this approach and using a model for the interaction term as in Figure~\ref{eqn:huBmiSexInteractionLogReg}.  The advantage of this approach is that it does not assume a model for the interaction and may be more reliable when the association of the interaction is not linear on the log(odds) scale.
 }
+
 
 \begin{comment}
 % even problem, emergency room outcomes, III
-\eocesol{Emergency room outcomes in Denmark, III.  Needs solution.
+\eocesol{
+(a)~No.  The intercept would correspond to the log(odds) of death within 30 days for a participant with all predictors at baseline value, so age would have value 0.
+(b)~Increased risk. 
+(c)~The observed difference between the residual variances is 56.02.  The difference has a $\chi^2$ distribution with $5 - 3 = 2$ degrees of freedom so is highly significant.
+(d)  While the pair of variables \texttt{age} and \texttt{sex} is important, the model suggests that \texttt{sex} adds little information.  Before adding both variables a deviance statistic should be used to check the whether \texttt{sex} is useful when added to a mode with color score and age. 
 }{}
 \end{comment}
 
@@ -2565,17 +2561,12 @@ The conditions for the $\chi^2$ test are discussed in Section~\ref{theChiSquared
 
 \begin{comment}
 \eocesol{
-	Even problem. Interaction in regression, II.  Needs a solution
+(a)~The two variances are $0.059^2 = 0.0035$ (females) and $0.049^2 = 0.0024$ (males).
+(b)~Since the two estimates are based on separate and independent groups, the variance of the difference of the estimates is the sum of the variances, $0.0059$.  The standard deviation of the difference is $\sqrt(0.0059) = 0.077$.  This is the standard error of the estimate of the difference.
+(c)~A test of the null hypothesis that the difference of the population parameters is 0 can be based on the difference divided by its standard error, $(0.198 - 0.152)/0.077 = 0.594$.  Under the assumption that the individual estimates are approximately normally distributed, the difference will have a normal distribution with mean 0 and standard error $0.077$.  Since the standardized difference is less than 1.96, the difference is not significantly different from 0.
+(d)~
 }
 \end{comment}
 
-\eocesol{
-Odd problem.  Smoking and marijuana use, I	
-}{}
 
-\begin{comment}
-\eocesol{
-Even problem.  Smoking and marijuana use, II
-}{}
-\end{comment}
 

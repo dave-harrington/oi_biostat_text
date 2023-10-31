@@ -38,7 +38,7 @@ Possible additional exercises
   \end{parts}
 }{}
 
-
+% 3 Odd
 \eoce{\qt{Hyperuricemia and BMI, I} The fourth quintile of BMI in 
 Figure~\ref{figure:huBMIQuintiles} ranges from $25.02$ to $26.64$ meters per $\text{(kg)}^2$ and has median value $25.93$.  
     \begin{parts}
@@ -48,6 +48,7 @@ Figure~\ref{figure:bmiHyperuricemiaLogRegCoeff}.
     \end{parts}
 }{}
 
+% 4 EVEN
 \eoce{\qt{Interpreting model parameters, Part I} The curve with the solid line in Figure~\ref{figure:probVsPredictor} corresponds to $\beta_0 = -3.0$ and $\beta_1 = 0.6$.
 \begin{parts}
 \item Using the formula for the curve, calculate the odds ratio for $E$ comparing $x = 6$ to $x = 4$.
@@ -543,7 +544,6 @@ red & 33 & 7 & 40 \\
 \item Can the estimates of the standard errors in Figure~\ref{figure:mort30TriageSample1000} be calculated directly from the table?
 
 \end{parts}
-
 }{}
 
 \eoce{\qt{Emergency room outcomes in Denmark, III
@@ -579,11 +579,9 @@ The dataset used in Exercise~\ref{exercise:mort1000Triage} also contains the age
 
 \item Is increasing age associated with in increase or decrease in the risk of 30 day mortality?
 
-\item The residual deviance for the model in Figures~\ref{figure:mort30TriageAgeSexSample1000} and \ref{figure:mortTriage1000} are, respectively, $407.58$ and $463.6$.  Conduct a test of the hypothesis that the pair of variables \var{age} and \var{sex} do not any information to a model based on triage score alone.
+\item The residual deviance for the model in Figures~\ref{figure:mort30TriageAgeSexSample1000} and \ref{figure:mortTriage1000} are, respectively, $407.58$ and $463.60$.  Conduct a test of the null hypothesis that the pair of variables \var{age} and \var{sex} do not add useful information to a model based on triage score alone.  
 
-\item Does the AIC increase or decrease if \var{age} and \var{sex} are added to the model with triage?
-
-\item Based on your answer to the above, do you believe that both age and sex should be retained in the model?  Explain your answer.
+\item Based on the estimated model and your answers to the above, do you believe that both age and sex should be retained in the model?  Explain your answer.
 
 \end{parts}
 
@@ -613,7 +611,7 @@ Adding a term to a logistic regression is the preferred method for examining int
 
 \begin{parts}
 
-\item Use the information in Figures~\ref{figure:bmiHyperuricemiaFemalesLogReg} and \ref{figure:bmiHyperuricemiaMalesLogReg} to calculate the two variances of the log odds estimates of BMI for females and males. 
+\item Use the information in Figures~\ref{figure:bmiHyperuricemiaFemalesLogReg} and \ref{figure:bmiHyperuricemiaMalesLogReg} to calculate the two variances of the log odds estimates of hyperuricemia for females and males. 
 
 \item Calculate the variance and standard deviation of the difference between the two estimates of log odds.
 
@@ -624,6 +622,10 @@ Adding a term to a logistic regression is the preferred method for examining int
 \end{parts}
 
 }{}
+
+\begin{comment}
+
+*** removing this and the next exercise for now.  Not very good, not sure whether they ***  can be improved.
 
 
 \eoce{\qt{Smoking and marijuana use, I
@@ -675,7 +677,7 @@ Figure~\ref{figure:marijSmokeAgeGenderWorklogreg} expands the logistic regressio
 
 \item  Show that the OR for regular marijuana use comparing smokers to non-smokers from the logistic regression in Figure~\ref{figure:marijSmokelogreg} is the same as the one that can be calculated from the two-way table.
 
-\item Show that a 95\% confidence interval for the log(OR) comparing smokers to non-smokers calculated from the logistic regression is approximately equal to the interval calculated from the contingency table using the formula in Section~\ref{figure:marijSmokeAgeGenderWorklogreg}.
+\item Show that a 95\% confidence interval for the log(OR) comparing smokers to non-smokers calculated from the logistic regression in Figure~\ref{figure:marijSmokelogreg} is approximately equal to the interval calculated from the contingency table using the formula in Section~\ref{section:inferenceOddsRatios}.
 
 \item Write a brief description of what can be learned from the two regression models for someone who has not studied statistics.
 
@@ -691,6 +693,8 @@ When survey data are collected in different time  periods,  it is  important to 
 Write down a logistic regression model that can be used to check whether the association between regular marijuana use and smoking differed the survey period.
 
 }{}
+
+\end{comment}
 
 \begin{comment}
 

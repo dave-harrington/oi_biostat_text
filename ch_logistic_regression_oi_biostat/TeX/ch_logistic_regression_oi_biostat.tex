@@ -951,7 +951,7 @@ Figure~\ref{figure:huBmiSexInteractionLogReg} shows the estimated model, and Equ
   \label{eqn:huBmiSexInteractionLogReg}
 \end{align}
 
-The $p$-value for the interaction term is $0.544$, so the evidence against the null hypothesis $\beta_3 = 0$ is weak.  In this model, there is no support for the claim that the relationship between hyperuricemia and BMI differs by sex.  Exercise~\ref{exercise:BMISexInteraction} explores the interpretation of a model with an interaction term.
+The $p$-value for the interaction term is $0.544$, so the evidence against the null hypothesis $\beta_3 = 0$ is weak.  In this model, there is no support for the claim that the relationship between hyperuricemia and BMI differs by sex.  Exercise~\ref{exercise:BMISexInteractionModel} explores the interpretation of a model with an interaction term.
 
 The presence of the interaction term has caused the coefficient of \var{sex} to be non-significant because the estimated association by sex is now split between the predictor \var{sex} and the interaction term.  A data analyst starting with the interaction model might mistakenly conclude that neither \var{sex} nor the interaction of \var{sex} with \var{bmi} should be retained, clearly a wrong conclusion.  Analyses should always begin without interaction terms and add them only there is a scientific reason to suspect that the nature of a relationship between a response and a predictor varies across the levels of another variable.
 
