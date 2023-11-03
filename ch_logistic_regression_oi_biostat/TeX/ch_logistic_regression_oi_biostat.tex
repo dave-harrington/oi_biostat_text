@@ -1,6 +1,7 @@
 %!TEX root=../../main.tex
 \begin{chapterpage}{Logistic Regression}
   \chaptertitle{Logistic Regression} \label{LogisticRegression}
+  \chaptersection{chapterOverview}
   \chaptersection{introSimpleLogisticRegression}
   \chaptersection{inferenceSimpleLogisticRegression}
   \chaptersection{generalMultipleLogistic}
@@ -17,13 +18,21 @@
 
 \noindent{\textit{NOTE: This supplement to the first edition is being released online as supplemental Chapter 9. Its pagination corresponds to the printed first edition text. This supplement includes a set of exercises and solutions to the odd-numbered exercises.}}
 
-\chapterintro{Logistic regression is used to explore relationships between a response variable with two possible values (e.g., yes/no, success/failure, 0/1, etc.) and one or more predictor variables. The logistic regression model estimates the odds of an outcome given a predictor, and the odds ratio (OR) associated with change in the value of a predictor; in certain cases, the model also estimates the probability of an outcome given a predictor.   This chapter focuses on traditional methods of inference for logistic regression that are commonly used in epidemiology and public health.  Chapter 9 of \textit{OpenIntro Statistics, 4th ed.} examines building a logistic regression explanatory model for possible bias in the review of resumes submitted for a listed job opening.}
-
+\chapterintro{Logistic regression is used to explore relationships between a response variable with two possible values (e.g., yes/no, success/failure, 0/1, etc.) and one or more predictor variables. The logistic regression model estimates the odds of an outcome given a predictor, and the odds ratio (OR) associated with change in the value of a predictor; in certain cases, the model also estimates the probability of an outcome given a predictor.}   
 %____________________
 
 \setlength\parindent{20pt}
-%  the above should not be needed, but the paragraphs were not being indented when
-% the file was moved from dropbox.  The problem is being caused by something in chapter 8. Suspect exercise 8.49 may be the source -- it has a table that will not center and appears to be a duplicate exercis, repeating an earlier one.  Centering fixed
+
+\section{Chapter overview}
+\label{chapterOverview}
+
+This chapter focuses on traditional methods of inference for logistic regression that are commonly used in epidemiology and public health, with emphases on both inference for model parameters and prediction.  The interpretation and use of logistic models for inference is contained in the three sections following this overview; these sections contain the core material used in many applications in medical research, epidemiology and public health.  Logistic regression is still widely used in those fields, so the core material is likely to be particularly useful to students in those disciplines.
+
+The last two sections before the end-of-chapter notes describe methods for assessing the fit of a logistic model, both for inference and for prediction, and present an extended case study using logistic regression to modify and evaluate a triage system in hospital emergency departments.  The section on assessing fit is longer than most sections in the book, but the material is necessary for understanding the behavior of the  proposed triage system. Since model predictions are sometimes used as diagnostic tools, it is particularly important to understand the strengths and weaknesses of a model, as well as methods for estimating error rates.
+
+Logistic regression relies heavily on software.  Even the simplest models cannot be fit by hand; direct formulas for parameter estimates and standard errors do not exist.  Consistent with earlier chapters, the treatment here emphasizes interpretation of both models and computer output for estimated models.  For students interested in working directly with data the chapter labs contain \textsf{R}-based exercises that illustrate how to fit and interpret models to data.
+
+Logistic regression has also become an important tool in data exploration and detecting patterns in data and is now widely used in machine learning.  There is not space here to explore those ideas, but Chapter 9 of \textit{OpenIntro Statistics, 4th ed.} examines building a logistic regression explanatory model for possible bias in the review of resumes submitted for a listed job opening.  That material can serve as an introduction to the data exploration with logistic regression.
 
 \section{Introduction to simple logistic regression}
 \label{introSimpleLogisticRegression}
@@ -1079,7 +1088,7 @@ The residual deviances for the regression with just \var{width} and with \var{wi
 \section{Assessing model fit}
 \label{assessingModelFitMultipleLogisticRegression}
 
-There are two general approaches to checking the fit of a logistic regression, one based on goodness-of-fit statistics and another on statistics that estimate the accuracy of predictions. Regardless of whether one is examining goodness-of-fit or predictive accuracy, probabilities calculated from an estimated logistic model are referred to as predicted probabilities.
+There are two general approaches to checking the fit of a logistic regression, one based on goodness-of-fit statistics and another on statistics that estimate the accuracy of predictions. Regardless of whether one is examining goodness-of-fit or predictive accuracy, probabilities calculated from an estimated  model are referred to as predicted probabilities.  Predicted numbers of events are sometimes called expected number of events.
 
 \subsection{Goodness-of-Fit}
 
@@ -1145,13 +1154,13 @@ The first column labels each of the $4$ profiles, and columns $2-4$ show the val
 
 \item \textit{Observed Responses:} The observed number of treatment interruptions.
 
-\item \textit{Pred.\ prob.:}  The predicted probability $\hat{p}$ of a treatment interruption from the logistic model.  Since the participants in a profile all have the same values for the predictor, there is a single predicted probability for a profile.
+\item \textit{Pred.\ prob.:}  The predicted probability $\hat{p}$ of a treatment interruption from the model.  Since the participants in a profile all have the same values for the predictor, there is a single predicted probability for a profile.
 
 \item \textit{N:} The number of participants who match the profile.
 
-\item \textit{Predicted Responses}: The expected number of treatment interruptions from the model.
+\item \textit{Predicted Responses}: The predicted number of treatment interruptions from the model, calculated below.
 
-\item \textit{Pearson resid.:}  The Pearson residual $r$, a measure of the discrepancy between the observed and expected number of treatment interruptions.  The definition of the Pearson residual is given below.
+\item \textit{Pearson resid.:}  The Pearson residual $r$, a measure of the discrepancy between the observed and predicted number of treatment interruptions.  The definition of the Pearson residual is given below.
 
 \end{itemize}
 
@@ -1161,14 +1170,14 @@ The predicted probability of a treatment interruption can calculated directly fr
        {1 + \exp(-1.89 - 0.793[1] + 0.861[0])} \\
        &= 0.06709.
 \end{align*}
-The value in the table $(0.067)$ has been rounded from the more precise $0.06709$.  Using the more precise value, the expected number of responses for profile 1 is
+The value in the table $(0.067)$ has been rounded from the more precise $0.06709$.  Using the more precise value, the predicted number of responses for profile 1 is
 \begin{align*}
     (n_1)(\hat{p}_1) &= (671)(0.06709) \\
     & 45.02,
 \end{align*}
 close to the observed number of responses $44$.
 
-The Pearson residual $r$ is a standardized version of the observed - expected number of responses, using the formula for the standard error of a binomial variate.  For profile 1,
+The Pearson residual $r$ is a standardized version of the observed - predicted number of responses, using the formula for the standard error of a binomial variate.  For profile 1,
 \begin{align*}
    r_1 &=  \frac{44 - 45.02}{\sqrt(n_1[\hat{p}_1][1 - \hat{p}_1])} \\
        &= \frac{-1.02}{\sqrt(671[0.06709][0.93290])} \\
@@ -1272,30 +1281,32 @@ Figure~\ref{figure:HLTestHyperuricemiaBMISex} shows a table summarizing the fit 
 \label{figure:HLTestHyperuricemiaBMISex}
 \end{figure}
 
-The hyperuricemia example highlights an important aspect of testing model fit.  The Hosmer-Lemeshow tests suggest that neither the one nor two variable model fit poorly. Since the models are nested, the deviance statistic can be used to test whether sex should be added to a model with BMI alone.  The difference between the residual deviances for the models is 3.90 and has an approximate $\chi^2$ distribution with 1df.  The $p$-value for the statistic is 0.048, but the AIC statistic for both models is 461.6, suggesting that adding the predictor sex to the model may not be worth the gain in model complexity.  Neither the model with BMI alone or the one with BMI and sex fit poorly, but the evidence is weak that the two variable model is better than the model with one variable.
+The hyperuricemia example highlights an important aspect of testing model fit.  The Hosmer-Lemeshow tests suggest that neither the one nor two variable model fit poorly. Since the models are nested, the deviance statistic can be used to test whether sex should be added to a model with BMI alone.  The difference between the residual deviances for the models is 3.90 and has an approximate $\chi^2$ distribution with 1df.  The $p$-value for the statistic is 0.048, but the AIC statistic for both models is 461.6, suggesting that adding the predictor sex to the model may not be worth the gain in model complexity.  Neither the model with BMI alone or the one with BMI and sex fit poorly, but the evidence is weak that the two variable model is better than the model with one variable.  
 
-The Hosmer-Lemeshow test has some weaknesses, and several alternatives have been proposed, all with their own advantages and disadvantages.  Grouping cases by deciles of probabilities has no theoretical justification, a $\chi^2$  distribution with $g - 2$ degrees of freedom does not always provide a good approximation to the sampling distribution, and the test has been shown to have low power in some situations.  These shortcomings of the test, however, are largely about the statistical properties of the test statistic.  It is important to keep in mind that statistical tests for goodness-of-ft have limited value generally.  A statistical test for goodness-of-fit will reject the null hypothesis of adequate fit only when there is strong evidence of lack of fit.  Many models fit poorly but not so badly that a goodness-of-fit statistic is significant.  The table associated with the Hosmer-Lemeshow statistic is at least as valuable than its $p$-value, since it may show regions of the data where the fit is either adequate or particularly poor. Users of the test should pay more attention to the table than to the $p$-value.
+The Hosmer-Lemeshow test has some weaknesses, and several alternatives have been proposed, all with their own advantages and disadvantages.  Grouping cases by deciles of probabilities has no theoretical justification, a $\chi^2$  distribution with $g - 2$ degrees of freedom does not always provide a good approximation to the sampling distribution, and the test has been shown to have low power in some situations.  These shortcomings of the test, however, are largely about the statistical properties of the test statistic.  It is important to keep in mind that statistical tests for goodness-of-ft have limited value generally.  A statistical test for goodness-of-fit will reject the null hypothesis of adequate fit only when there is strong evidence of lack of fit.  Many models fit poorly but not so badly that a goodness-of-fit statistic is significant.  The table associated with the Hosmer-Lemeshow statistic is at least as valuable as its $p$-value, since it may show regions of the data where the fit is either adequate or particularly poor. Users of the test should pay more attention to the table than to the $p$-value.
 
  Advanced texts explore a wider range of alternative goodness-of-fit statistics that are beyond the level of this text, such as those described in Section 5.2 of Hosmer, et.\ al\footfullcite{hosmer2013applied} and Section 10.5 of Harrell\footfullcite{harrell2015regression}.
+
+% 31 oct 2023: exercises?
 
 \subsection{Estimating the accuracy of predictions}
 \label{section:predictiveAccuracy}
 
  \subsubsection{The Brier score}
 
-The \term{Brier score} $B$ estimates prediction accuracy by comparing the predicted probability of an outcome to the outcome itself:
+The \term{Brier score} $B$ estimates prediction accuracy by comparing the predicted probability of an outcome to the observation of the outcome:
        \[ B = \dfrac{1}{n}\sum_{i = 1}^n (y_i - \hat{p})^2,  \]
 where $\hat{p}$ is the predicted probability of an event occurring, $y_i$ is the observed response, and $n$ is the sample size. Like mean square prediction error in linear regression, it assess fit by estimating the squared distance between observed and predicted values.
 
-An observation $y_i$ can only take on only two values, 0 or 1, and $\hat{p_i}$ 1 will be a number in the interval $(0,1)$ since predicted probabilities are never exactly 0 or 1.  When $y_i = 1$ and $\hat{p}_i$ is close to 1 or when $y_i = 0$ and  $\hat{p}_i$ is close to 0, $\hat{p}_i$ is an accurate predictor for case $i$ and the contribution to the Brier score will be close to 0.  When the reverse happens ($\hat{p}_i$ is very different from $y_i$) the contribution to the Brier score will be close to 1.  A Brier score close to 0 indicates that predictions are generally accurate; if it is close to 1, predictions are generally poor.  When evaluating fit a low Brier score indicates a good prediction model.
+An observation $y_i$ can take on only two values, 0 or 1, and $\hat{p_i}$ will be a number in the interval $(0,1)$ since predicted probabilities are never exactly 0 or 1.  When $y_i = 1$ and $\hat{p}_i$ is close to 1 or when $y_i = 0$ and  $\hat{p}_i$ is close to 0, $\hat{p}_i$ is an accurate predictor for case $i$ and the contribution to the Brier score will be close to 0.  When the reverse happens ($\hat{p}_i$ is very different from $y_i$) the contribution to the Brier score will be close to 1.  A Brier score close to 0 indicates that predictions are generally accurate; if it is close to 1, predictions are generally poor.  When evaluating fit a low Brier score indicates a good prediction model.
 
-There is no universal definition of a good Brier score, but a simple example helps.  If all predicted probabilities are 0.50 (essentially, coin flips), the contribution of each case to the Brier score will always be 0.25, since $y_i - \hat{p}_i$ is always 0.5.  So a Brier score of 0.25 is no better than guessing an outcome with probability 0.5.  In most cases, investigators want a Brier score smaller than $0.20$ or $0.15$.  In the hyperuricemia data, the Brier score for the model with predictor BMI (Equation~\ref{eqn:bmiHyperuricemiaModel}) is $0.146$, suggesting reasonably accurate predictions overall.  As will be seen in the methods for evaluating discrimination discussed later,  a model may make reasonably accurate predictions overall, but be a poor predictor in subsets of cases with a particular outcome.
+There is no universal definition of a good Brier score, but a simple example helps.  If all predicted probabilities are 0.50 (essentially, coin flips), the contribution of each case to the Brier score will always be 0.25, since $y_i - \hat{p}_i$ is always 0.5.  So a Brier score of 0.25 is no better than guessing an outcome with probability 0.5.  In most cases, investigators want a Brier score smaller than $0.20$ or $0.15$.  In the hyperuricemia data, the Brier score for the model with predictor BMI (Equation~\ref{eqn:bmiHyperuricemiaModel}) is $0.1459$, suggesting reasonably accurate predictions overall; the Brier score when both BMI and sex are used is $0.1447$, a very small improvement.  As will be seen in the methods for evaluating discrimination discussed later,  a model may make reasonably accurate predictions overall, but be a poor predictor in subsets of cases with a particular outcome.
 
 There are analogues to $R^2$ from linear models not covered here and can be found in more advanced texts, such as Agresti\footfullcite{agresti2013categorical} and Hosmer, Lemeshow and Sturdivant\footfullcite{hosmer2013applied}.
 
 \subsubsection{Calibration plots}
 
-Calibration plots provide a visual display of the match between predicted probabilities and observed outcomes.  Figure~\ref{figure:calibrationHuBMISex} shows calibration plots for the logistic models for hyperuricemia with predictor BMI (blue) and with predictors BMI and Sex.  Because the outcome is binary, the agreement between predicted probabilities and outcomes is difficult to see using just a scatterplot of observed versus predicted values, so calibration plots typically add a best fitting smooth curve, using \texttt{loess} or a similar function in \textsf{R}.  If a model is well-calibrated, the smooth curve should lie close to the $45$-degree line $y = x$ (the dotted line in the curve).  The figures shows that the model using BMI alone is well-calibrated for predicted probabilities between 0.0 and 0.3, less so for probabilities larger than 0.4, where the data are sparse.  The model including BMI and sex is closer to the $45$-degree line and shows that model is a better fit to the data.  The largest values on the horizontal axis for the two curves are different to avoid extrapolation; the largest predicted probability is 0.722 for the model with BMI alone and 0.624 for the model that adds sex.
+Calibration plots provide a visual display of the match between predicted probabilities and observed outcomes.  Figure~\ref{figure:calibrationHuBMISex} shows calibration plots for the logistic models for hyperuricemia with predictor BMI (blue) and with predictors BMI and sex.  Because the outcome is binary, the agreement between predicted probabilities and outcomes is difficult to in a scatterplot of observed versus predicted values, so calibration plots typically add a best fitting smooth curve, using \texttt{loess} or a similar function in \textsf{R}.  If a model is well-calibrated, the smooth curve should lie close to the $45$-degree line $y = x$ (the dotted line in the curve).  The figure shows that the model using BMI alone is well-calibrated for predicted probabilities between 0.0 and 0.3, less so for probabilities larger than 0.4, where the data are sparse.  The model including BMI and sex is closer to the $45$-degree line and shows that model is a better fit to the data.  The largest values on the horizontal axis for the two curves are different to avoid extrapolation; the largest predicted probability is 0.722 for the model with BMI alone and 0.624 for the model that adds sex.
 
 \begin{figure}[!tbh]
   \centering
@@ -1353,7 +1364,7 @@ The error rates of a prediction rule change when the threshold value changes.  I
 
 Figure~\ref{figure:fprFNRByCutoffHuBMISex} shows how the FPR and FNR change with the threshold value for the prediction rule.  Choosing a threshold is not a statistical problem; it involves assessing which of the two error rates should be kept small, and that will depend on the clinical situation.  In many settings it is reasonable to keep the false negative rate small if missed cases lead to bad outcomes, but if the intervention after a positive prediction has serious side effects, it might be better to keep false positive rates small.   
 
-Figure~\ref{figure:fprFNRByCutoffHuBMISex} shows that the FPR and FNR are approximately $0.40$ at a threshold of approximately $\hat{p} = 0.20$.  Any threshold value that yields an FNR lower than $0.40$ will lead to an FPR larger than $0.40$;  correspondingly, reducing the FPR by changing the threshold will increase the FNR\@. The figure reinforces the conclusion that the predictors BMI and sex do not provide enough information to accurately predict hyperuricemia, even though the calibration plot in Figure~\ref{figure:calibrationHuBMISex} indicates that the model is a good fit to the data.  There is more variability in the outcome than is captured by the model.  This is analogous to linear regression where residual plots indicate that a model is a reasonable fit to data but the $R^2$ is low.
+Figure~\ref{figure:fprFNRByCutoffHuBMISex} shows that the FPR and FNR are approximately $0.40$ at a threshold of approximately $\hat{p} = 0.20$.  Any threshold value that yields an FNR lower than $0.40$ will lead to an FPR larger than $0.40$;  correspondingly, reducing the FPR by changing the threshold will increase the FNR. The figure reinforces the conclusion that the predictors BMI and sex do not provide enough information to accurately predict hyperuricemia, even though the calibration plot in Figure~\ref{figure:calibrationHuBMISex} indicates that the model is a good fit to the data.  There is more variability in the outcome than is captured by the model.  This is analogous to linear regression where residual plots indicate that a model is a reasonable fit to data but the $R^2$ is low.
 
 \begin{figure}[!tbh]
   \centering
@@ -1387,7 +1398,7 @@ If the prediction rule in an ROC curve is thought of as a diagnostic test (i.e, 
 
 Each point on the 45-degree line corresponds to a prediction rule using a threshold that is a random value of the prediction probability between 0 and 1. The point $(0.50, 0.50)$ corresponds to guessing disease is present when the random number is less than $0.50$.  In a large sample, given that the disease is not present, this rule will guess incorrectly that it is present $50\%$ of the the time (FPR = $0.50$).  When the disease is present, it will also guess it is present $50\%$ of the time (TPR = $0.50$). If the rule guesses present when the random number is less than $0.25$, it leads to incorrect guesses $25\%$ of the time when disease not is present (FPR = 0.25), and correct guesses $25\%$ of the time when disease is present (TPR = $0.25$), so the point $(0.25, 0.25)$ will be on the ROC curve.  
 
-In models for the presence/absence of a disease (with presence labeled success), the area under an ROC curve (labeled \term{AUC},  \term{AUC-ROC} or the \term{c-statistic}) is the probability that a randomly selected case from the observations with a success has a higher predicted probability success than a randomly selected failure observation (details not shown).  The area under the 45-degree line (random guessing) is $0.50$.  ROC curves with an area larger than 0.50 are better than random guessing; if the area is less than $0.50$ corresponds to a model that is worse than random guessing.  
+In models for the presence/absence of a disease (with presence labeled success), the area under an ROC curve (labeled \term{AUC},  \term{AUC-ROC} or the \term{c-statistic}) is the probability that a randomly selected case from the observations with  success has a higher predicted probability success than a randomly selected failure observation (derivation not shown).  The area under the 45-degree line (random guessing) is $0.50$.  ROC curves with an area larger than 0.50 are better than random guessing; if the area is less than $0.50$ corresponds to a model that is worse than random guessing.  
 
 How much better than random guessing is a prediction rule for hyperuricemia based on BMI and sex? The AUC for Figure~\ref{figure:ROCHuBMISex} is 0.678 -- the model has a $68\%$ chance of correctly distinguishing between an individual with versus  without hyperuricemia.  There is no single definition of a good AUC; there are only rules of thumb that may be useful in some settings but have no theoretical basis.  For biomedical data, Hosmer, et.\ al.\footfullcite{hosmer2013applied}, recommend the following guidelines:
 \begin{figure}[ht]
@@ -1439,17 +1450,16 @@ The randomly chosen subsets i.e., the folds, use training datasets that may refl
 
 Cross-validated Brier scores for the hyperuricemia data can be calculated using the \textsf{R} program \texttt{cv.glm} in the package \texttt{boot} or using the code in the lab for this chapter. For the model with just BMI, the 5-fold cross-validated Brier score is $0.1484$, larger than the apparent Brier score $0.1459$.  The cross-validated Brier score for the model with BMI and sex is $0.1474$.  Adding sex to the model with BMI reduces the Brier score by only $0.001$.  
 
-\textbf{should we add more detail here,  showing the estimates from each fold?}
-
 Cross-validation can be used for more complicated estimates, such as a calibration curve, but the principle is the same.  For each fold, a model is re-estimated and the calibration curve is constructed using the data held out from the fold.  For 5-fold calibration, the resulting graph might show the 5 calibration curves as well as a curve constructed using the average value at each point on the 5 estimated curves. 
-
-\textbf{we should show an example of this, especially because I have not tested his.  I think we will have to code it ourselves.  The Harrell function validate  might be useful.}
 
 Cross-validation has some drawbacks -- the best choice of $k$ for a given dataset is not always clear, the test sets are relatively small, and unlike using an external dataset, estimates of error rates do not generalize to populations that might differ in  important ways from the study sample.  It has some strengths, however, the most being that validation datasets large enough to be useful are rarely available.  Cross-validation is available in software such as \textsf{R}, it does not require an additional dataset, the training sets are relatively large, and averaging the $k$ estimated prediction error rates mitigates the small size of the test sets.  When a validation dataset is not available, cross-validation is the preferred method of estimating out-of-sample prediction error.
 
-% summarize what was learned about the hyperuricemia models from all these gof statistics
+As noted earlier, prediction from statistical models is something that should be done with great care, especially in a clinical situation where prediction may be a diagnostic tool leading to an intervention.  In this setting is important to examine a statistical model from several perspectives.  
 
-% edits to here, 25 May 2023
+What do these tools tell us about the relatively simple model for predicting hyperuricemia from BMI and sex along with the initial look at significance levels for predictors and changes in AIC? earlier in the chapter?.  Although the significant $p$-values for BMI and sex did not have the interpretation tests of predefined hypotheses, the suggested an potentially important association between the predictors and hyperuricemia.  The AIC statistic did not provide a clear answer about the value of adding the predictor sex to BMI, calibration plots showed that the two variable model was a better fit to the data.  Brier scores indicate that the two predictors may provide acceptably accurate predictions overall, but predictions within subsets of individuals either with or without underlying hyperuricemia were not always accurate, even after adjusting the thresh hold probability for predicting presence or absence.  In summary, a logistic regression with BMI and sex fits a model for the log(odds) of hyperuricemia reasonably well, but not well enough to be used as a diagnostic tool.
+
+The hyperuricemia data is useful for exploring how logistic regression might describe the association between an outcome and predictors, but it is a simple example that does not reflect the complexity of many clinical situations.  The next section presents a case study on improving a triage strategy in an hospital emergency department based on a published paper.
+
 
 \section{Case study: Triage in an emergency department}
 \label{caseStudy}
@@ -1893,13 +1903,9 @@ The ROC curves discussed in Section~\ref{section:predictiveAccuracy} quantify th
 
 The ED triage model explored in this case study illustrates the steps that might be used in building and evaluating a prediction model.   The analysis makes compromises, however, that limit its practical value.  A more complete modification of the DEPT scoring should start by using the predictors used to construct DEPT, add age and sex to those predictors and construct a model based on the full set of predictors.   The analysis has not used any of the biochemical variables used in the Kristensen paper, many of which are strongly associated with 30-day mortality. The analysis here is dropped individuals older than 100, rather than explore transformations of the age variable that might have led to  better fit with the full dataset and to a model that could be applied to all age groups.  Incorporating an age-sex interaction led to a better fitting model, but it is possible that a model without the interaction term would have made accurate predictions and be easier to interpret. 
 
-A full analysis would explore some questions suggested by even just the data used here.  What is the reason for the surprisingly low mortality among the oldest members of the study population. Are they truly more hardy, or are very old patients referred to the ED for different, perhaps less serious conditions?  What might explain the age-sex interaction?
+A full analysis would explore some questions suggested by even just the data used here.  What is the reason for the surprisingly low mortality among the oldest members of the study population. Are they truly more hardy, or are very old patients referred to the ED for different, perhaps less serious conditions?  What might explain the age-sex interaction? 
 
 Despite the caveats, the analysis illustrates aspects that readers should look for in similar analyses. The source of the data should be clearly articulated; steps in model building should be clearly explained; model evaluation should incorporate diagnostic plots when even possible and not rely on only numerical  measures of fit.  The predictive ability in models for binary outcome data should always include ROC curves and estimates of AUC.
-
-\textbf{add ref to calibration plots in Kristensen} 
-
-
 
 \textD{\newpage}
 
@@ -1908,110 +1914,7 @@ Despite the caveats, the analysis illustrates aspects that readers should look f
 
 This and other chapters use body mass index (BMI) in several examples and analyses because it is widely available and has been measured and recorded in many studies of human populations. Despite its widespread use, BMI is now increasingly questioned because of its potential bias in when applied to certain populations.
 
-BMI was first proposed in 1832 by Adolphe Quetelet based on data from Caucasian western Europeans and was originally known as the Quetelet Index. The category labels for BMI were set in 1995 by an expert panel sponsored by WHO but their applicability in Asian and other populations have been questioned and studied.  Several large studies have confirmed that high and low values of BMI in Asians confer an elevated risk of death just as in European populations (for example Lin, et al.\footfullcite{lin2011body}) but did not find evidence that the WHO cutpoints should be adjusted for Chinese populations, so the analysis here retains the current WHO categories when analyzing the hyperuricemia dataset.  In general, labeled categories associated with cutpoints in a continuous predictor should be interpreted with caution.
-
-Chapter 2 of Wiggins and Jones\footnote{Wiggins C and Jones ML.  How Data Happened.  A History from the Age of Reason to the Age of Algorithms (2023).  WW Norton and Company.} describe some of Quetelet's work on BMI and his place in the history of statistics.
-
-\begin{comment}
-At the June 2023 annual meeting of the American Medical Association (AMA), the AMA Council and Science and Public Health counseled against it use as a single predictor of outcome.
-
-I have not been able to find the printed versuib of the Council report -- still hunting for that.
-
-\end{comment} 
-
-Other possible topics
-
-\begin{itemize}
-
-\item We have not shown confidence interval for the odds -- explain why not
-
-\item Discuss the origin of the term effect modification.
-
-\item Emphasize the possibility of confounding in case-control studies.  This is at least as serious as analysis matching design.
-
-\item Add a math definition of the deviance and AIC.  Why is it used in model selection, overfitting, out of sample prediction error.  We could refer here to the resume data example in OI 4.
-
-\item The possibility of infinite estimates.  Motivate through OR or log(OR)
-
-\item Note that the Danish paper used KM to estimate probabilities in risk strata, we used simple observed proportions
-
-
-\end{itemize}
+BMI was first proposed in 1832 by Adolphe Quetelet based on data from Caucasian western Europeans and was originally known as the Quetelet Index. The category labels for BMI were set in 1995 by an expert panel sponsored by WHO but their applicability in Asian and other populations have been questioned and studied.  Several large studies have confirmed that high and low values of BMI in Asians confer an elevated risk of death just as in European populations (for example Lin, et al.\footfullcite{lin2011body}) but did not find evidence that the WHO cutpoints should be adjusted for Chinese populations, so the analysis here retains the current WHO categories when analyzing the hyperuricemia dataset.  In general, labeled categories associated with cutpoints in a continuous predictor should be interpreted with caution.  Chapter 2 of Wiggins and Jones\footnote{Wiggins C and Jones ML.  How Data Happened.  A History from the Age of Reason to the Age of Algorithms (2023).  WW Norton and Company.} describe some of Quetelet's work on BMI and his place in the history of statistics.
 
 
 
-\begin{comment}
-
-See notes file for refs not in bibtex format
-
-bibtex entries now in eoce_logistic_regression.bib
-
-Look up the following
-
-8. Liu Y, Chen P, Krause J, Peng L. How to read articles that use machine learning: Users’ Guides to the Medical Literature. JAMA 2019;322:1806-16.
-
-@misc{sohil2022introduction,
-  title={An introduction to statistical learning with applications in R: by Gareth James, Daniela Witten, Trevor Hastie, and Robert Tibshirani, New York, Springer Science and Business Media, 2013, $41.98, eISBN: 978-1-4614-7137-7},
-  author={Sohil, Fariha and Sohali, Muhammad Umair and Shabbir, Javid},
-  year={2022},
-  publisher={Taylor \& Francis}
-}
-
-@article{liu2019read,
-  title={How to read articles that use machine learning: users’ guides to the medical literature},
-  author={Liu, Yun and Chen, Po-Hsuan Cameron and Krause, Jonathan and Peng, Lily},
-  journal={Jama},
-  volume={322},
-  number={18},
-  pages={1806--1816},
-  year={2019},
-  publisher={American Medical Association}
-}
-
-@article{chen2021ethical,
-  title={Ethical machine learning in healthcare},
-  author={Chen, Irene Y and Pierson, Emma and Rose, Sherri and Joshi, Shalmali and Ferryman, Kadija and Ghassemi, Marzyeh},
-  journal={Annual Review of Biomedical Data Science},
-  volume={4},
-  pages={123--144},
-  year={2021},
-  publisher={Annual Reviews}
-}
-
-@article{collins2015transparent,
-  title={Transparent reporting of a multivariable prediction model for individual prognosis or diagnosis (TRIPOD): the TRIPOD statement},
-  author={Collins, Gary S and Reitsma, Johannes B and Altman, Douglas G and Moons, Karel GM},
-  journal={Journal of British Surgery},
-  volume={102},
-  number={3},
-  pages={148--158},
-  year={2015},
-  publisher={Oxford University Press}
-}
-
-@article{zheng2011association,
-  title={Association between body-mass index and risk of death in more than 1 million Asians},
-  author={Zheng, Wei and McLerran, Dale F and Rolland, Betsy and Zhang, Xianglan and Inoue, Manami and Matsuo, Keitaro and He, Jiang and Gupta, Prakash Chandra and Ramadas, Kunnambath and Tsugane, Shoichiro and others},
-  journal={New England Journal of Medicine},
-  volume={364},
-  number={8},
-  pages={719--729},
-  year={2011},
-  publisher={Mass Medical Soc}
-}
-
-@article{lin2011body,
-  title={Body mass index and all-cause mortality in a large Chinese cohort},
-  author={Lin, Wen-Yuan and Tsai, Shin-Li and Albu, Jeanine B and Lin, Cheng-Chieh and Li, Tsai-Chung and Pi-Sunyer, F Xavier and Sung, Pei-Kun and Huang, Kuo-Chin},
-  journal={Cmaj},
-  volume={183},
-  number={6},
-  pages={E329--E336},
-  year={2011},
-  publisher={Can Med Assoc}
-}
-
-https://www.equator-network.org/reporting-guidelines/tripod-statement/
-
-
-\end{comment}

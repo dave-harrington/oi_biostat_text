@@ -1,23 +1,23 @@
 \begin{theindex}
 
-  \item $k$-fold cross-validation, \hyperindexformat{\textbf}{497}
+  \item $k$-fold cross-validation, \hyperindexformat{\textbf}{498}
 
   \indexspace
 
   \item $A^c$, \hyperpage{102}
-  \item additive model, \hyperindexformat{\textbf}{481}
+  \item additive model, \hyperindexformat{\textbf}{482}
   \item adjusted $R^2$ ($R_{adj}^2$), \hyperindexformat{\textbf}{343}, 
 		\hyperpage{343}
   \item adjusted R-squared, \hyperindexformat{\textbf}{343}
-  \item AIC, \hyperindexformat{\textbf}{478}
-  \item Akaike Information Criterion, \hyperindexformat{\textbf}{478}
+  \item AIC, \hyperindexformat{\textbf}{479}
+  \item Akaike Information Criterion, \hyperindexformat{\textbf}{479}
   \item alternative hypothesis ($H_A$), \hyperindexformat{\textbf}{214}
   \item analysis of variance (ANOVA), \hyperindexformat{\textbf}{266}, 
 		\hyperpage{266--272}
-  \item apparent prediction error, \hyperindexformat{\textbf}{496}
+  \item apparent prediction error, \hyperindexformat{\textbf}{497}
   \item association, \hyperindexformat{\textbf}{40}
-  \item AUC, \hyperindexformat{\textbf}{495}
-  \item AUC-ROC, \hyperindexformat{\textbf}{495}
+  \item AUC, \hyperindexformat{\textbf}{496}
+  \item AUC-ROC, \hyperindexformat{\textbf}{496}
 
   \indexspace
 
@@ -29,12 +29,12 @@
   \item blocks, \hyperindexformat{\textbf}{28}
   \item Bonferroni correction, \hyperindexformat{\textbf}{271}
   \item boxplot, \hyperindexformat{\textbf}{36}
-  \item Brier score, \hyperindexformat{\textbf}{491}
+  \item Brier score, \hyperindexformat{\textbf}{492}
 
   \indexspace
 
-  \item c-statistic, \hyperindexformat{\textbf}{495}
-  \item calibration plot, \hyperindexformat{\textbf}{467}
+  \item c-statistic, \hyperindexformat{\textbf}{496}
+  \item calibration plot, \hyperindexformat{\textbf}{468}
   \item case-control studies, \hyperpage{418--421}
     \subitem tests for association, \hyperpage{419}
   \item categorical variable, \hyperindexformat{\textbf}{18}
@@ -49,7 +49,7 @@
   \item collections, \hyperpage{96}
   \item column totals, \hyperindexformat{\textbf}{45}
   \item complement, \hyperindexformat{\textbf}{102}
-  \item Complete case analysis, \hyperindexformat{\textbf}{472}
+  \item Complete case analysis, \hyperindexformat{\textbf}{473}
   \item conditional distribution, \hyperindexformat{\textbf}{180, 181}
   \item conditional distribution for random variables, 
 		\hyperpage{179--185}
@@ -75,7 +75,7 @@
   \item correlated random variables, \hyperindexformat{\textbf}{182}
   \item correlation, \hyperindexformat{\textbf}{42}
   \item correlation coefficient, \hyperindexformat{\textbf}{42}
-  \item cross-validation, \hyperindexformat{\textbf}{496}
+  \item cross-validation, \hyperindexformat{\textbf}{497}
 
   \indexspace
 
@@ -140,8 +140,8 @@
 
   \indexspace
 
-  \item effect modification, \hyperindexformat{\textbf}{482}
-  \item effect modifier, \hyperindexformat{\textbf}{481}
+  \item effect modification, \hyperindexformat{\textbf}{483}
+  \item effect modifier, \hyperindexformat{\textbf}{482}
   \item effect size, \hyperpage{237}
   \item empirical rule, \hyperindexformat{\textbf}{38}
   \item estimate, \hyperindexformat{\textbf}{201}
@@ -161,12 +161,12 @@
   \item factorial, \hyperindexformat{\textbf}{151}
   \item failure, \hyperindexformat{\textbf}{149}
   \item false negative, \hyperindexformat{\textbf}{114}
-  \item false negative rate, \hyperindexformat{\textbf}{493}
+  \item false negative rate, \hyperindexformat{\textbf}{494}
   \item false positive, \hyperindexformat{\textbf}{114}
-  \item false positive rate, \hyperindexformat{\textbf}{493}
+  \item false positive rate, \hyperindexformat{\textbf}{494}
   \item Fisher's exact test, \hyperindexformat{\textbf}{411}
-  \item FNR, \hyperindexformat{\textbf}{493}
-  \item FPR, \hyperindexformat{\textbf}{493}
+  \item FNR, \hyperindexformat{\textbf}{494}
+  \item FPR, \hyperindexformat{\textbf}{494}
   \item frequency table, \hyperindexformat{\textbf}{39}
 
   \indexspace
@@ -191,14 +191,14 @@
 
   \indexspace
 
-  \item in-sample prediction error, \hyperindexformat{\textbf}{496}
+  \item in-sample prediction error, \hyperindexformat{\textbf}{497}
   \item independent, \hyperindexformat{\textbf}{40}, 
 		\hyperindexformat{\textbf}{103}
   \item independent random variables, \hyperindexformat{\textbf}{182}
   \item influential, \hyperindexformat{\textbf}{308}
   \item interaction, \hyperindexformat{\textbf}{354}, 
-		\hyperindexformat{\textbf}{482}
-  \item interaction effects, \hyperindexformat{\textbf}{483}
+		\hyperindexformat{\textbf}{483}
+  \item interaction effects, \hyperindexformat{\textbf}{484}
   \item interquartile range, \hyperindexformat{\textbf}{34}
 
   \indexspace
@@ -223,7 +223,7 @@
 
   \indexspace
 
-  \item main effects, \hyperindexformat{\textbf}{483}
+  \item main effects, \hyperindexformat{\textbf}{484}
   \item margin of error, \hyperindexformat{\textbf}{207}, 
 		\hyperindexformat{\textbf}{395}, \hyperpage{395--396}
   \item marginal distribution, \hyperindexformat{\textbf}{180}
@@ -233,7 +233,7 @@
   \item marginal probability, \hyperindexformat{\textbf}{109}, 
 		\hyperpage{108--109}
   \item marginal totals, \hyperindexformat{\textbf}{45}
-  \item maximum likelihood, \hyperindexformat{\textbf}{462}
+  \item maximum likelihood, \hyperindexformat{\textbf}{463}
   \item mean, \hyperindexformat{\textbf}{32}
     \subitem average, \hyperpage{32}
   \item mean square between groups ($MSG$), 
@@ -289,7 +289,7 @@
   \item odds ratio, \hyperindexformat{\textbf}{48}, 
 		\hyperindexformat{\textbf}{420}
     \subitem case-control studies, \hyperpage{420}
-  \item Out-of-sample, \hyperindexformat{\textbf}{496}
+  \item Out-of-sample, \hyperindexformat{\textbf}{497}
   \item outlier, \hyperindexformat{\textbf}{37}
   \item outlier in regression, \hyperindexformat{\textbf}{308}
 
@@ -336,7 +336,7 @@
   \item random variable, \hyperindexformat{\textbf}{141}, 
 		\hyperpage{141--148}
   \item receiver operating characteristic curve, 
-		\hyperindexformat{\textbf}{494}
+		\hyperindexformat{\textbf}{495}
   \item rejection region, \hyperindexformat{\textbf}{219}, 
 		\hyperindexformat{\textbf}{260}
   \item relative frequency table, \hyperindexformat{\textbf}{39}
@@ -345,7 +345,7 @@
   \item replication, \hyperindexformat{\textbf}{28}
   \item residual, \hyperindexformat{\textbf}{297}
   \item residual confounders, \hyperindexformat{\textbf}{353}
-  \item residual deviance, \hyperindexformat{\textbf}{477}
+  \item residual deviance, \hyperindexformat{\textbf}{478}
   \item residuals, \hyperpage{300--303}
     \subitem contingency table, \hyperpage{408}
     \subitem regression, \hyperpage{297}, \hyperpage{340}
@@ -353,7 +353,7 @@
 		\hyperindexformat{\textbf}{293}
   \item retrospective study, \hyperindexformat{\textbf}{31}
   \item robust estimates, \hyperindexformat{\textbf}{34}
-  \item ROC curve, \hyperindexformat{\textbf}{494}
+  \item ROC curve, \hyperindexformat{\textbf}{495}
   \item row totals, \hyperindexformat{\textbf}{45}
 
   \indexspace
@@ -440,10 +440,10 @@
     \subitem one-sample, \hyperpage{243--245}
     \subitem paired data, \hyperpage{246--247}
     \subitem two independent groups, \hyperpage{251--253}
-  \item test data, \hyperindexformat{\textbf}{496}
-  \item threshold probability, \hyperindexformat{\textbf}{493}
+  \item test data, \hyperindexformat{\textbf}{497}
+  \item threshold probability, \hyperindexformat{\textbf}{494}
   \item time series, \hyperindexformat{\textbf}{296}
-  \item training data, \hyperindexformat{\textbf}{496}
+  \item training data, \hyperindexformat{\textbf}{497}
   \item transformation, \hyperindexformat{\textbf}{38}
   \item tree diagram, \hyperindexformat{\textbf}{114}, 118
   \item trial, \hyperindexformat{\textbf}{149}
@@ -460,7 +460,7 @@
 
   \indexspace
 
-  \item validation data, \hyperindexformat{\textbf}{496}
+  \item validation data, \hyperindexformat{\textbf}{497}
   \item variables, \hyperindexformat{\textbf}{16}
   \item variance, \hyperindexformat{\textbf}{33}, \hyperpage{145}
   \item Venn diagrams, \hyperindexformat{\textbf}{97}
@@ -468,7 +468,7 @@
   \indexspace
 
   \item weak relationship, \hyperindexformat{\textbf}{293}
-  \item well-calibrated model, \hyperindexformat{\textbf}{504}
+  \item well-calibrated model, \hyperindexformat{\textbf}{506}
   \item whiskers, \hyperindexformat{\textbf}{37}
 
   \indexspace
