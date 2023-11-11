@@ -2326,10 +2326,10 @@ statistically inaccurate.}
 %% 9.1 Introduction to simple logistic regression
 
 % Numbering is temporary since more problems will be added
-% solutions to all problems in dropbox file eoce_logisitic_sols.tex
+% solutions to all problems in dropbox file eoce_logistic_sols.tex
 % solutions to even problems only in that file
 
-% 1  odds and probabilities, odd problem
+% 1  ODD odds and probabilities
 
 \eocesol{
 (a)~Odds of rolling a six are $(1/6)/(5/6) = 1/5$.
@@ -2338,10 +2338,10 @@ statistically inaccurate.}
 }
 
 
-% Diabetes, even problem
+% EVEN Diabetes
 
 
-% Hyperuricemia and BMI odd problem,  not a great problem; eliminate? 
+% ODD Hyperuricemia and BMI odd problem  
 
 \eocesol{
 (a)~The estimated conditional log odds are  $\exp[-6.054 + (0.185)(25.93)] = 0.285$.  The estimated probability is $0.221$.
@@ -2349,10 +2349,10 @@ statistically inaccurate.}
 }
 
 
-% Interpreting model parameters I, even problem
+% EVEN Interpreting model parameters I
 
 
-% Interpreting model parameters II, odd problem
+% ODD Interpreting model parameters II
 
 \eocesol{
 (a)~The odds ratio can be calculated directly and is $\exp[-(0.6)(6 - 4)] = \exp[-(.6)(2)] = 0.301$.
@@ -2360,9 +2360,9 @@ statistically inaccurate.}
 (c) The odds ratio does not depend on the intercept, but the probabilities and hence the relative risk does.
 }
 
- % CPR and survival to discharge, I, even problem
+ % EVEN CPR and survival to discharge, I
 
-% CPR and survival to discharge, II, odd problem part (d) correct?
+% ODD CPR and survival to discharge, II, part (d) correct?
 
 \eocesol{
 (a)~The odds of survival are $\exp[1.44 -(0.065)(10)] = 2.203$.
@@ -2373,9 +2373,9 @@ $\exp[1.44 -(0.065)(20)] = 1.15$.  The OR is $2.203/1.15 = 1.916$.
 (e)~A relative risk of $1.286$ means that patients requiring 10 minutes of CPR have a chance of surviving to discharge that is approximately 1.3 times that of patients requiring 20 minutes, or approximately 30\% larger.
 } 
 
-% Hyperuricemia and dietary magnesium, I, even problem
+% EVEN Hyperuricemia and dietary magnesium, I
 
-% Hyperuricemia and Age, odd problem
+% ODD Hyperuricemia and Age
 
 \eocesol{
 (a)~The algebraic form of the model is 
@@ -2390,12 +2390,11 @@ where $E$ is the event of being hyperuricemic.
 (f)~The odds of hyperuricemia for 30 year old are $\exp[-1.089 - 0.007(30)] = 0.273$, so the estimated probability is $0.273/(1 + 0.273) = 0.215$. The risk ratio is $0.192/0.215 = 0.893$.  The probability will be decreased by approximately $11\%$.
 }
 
-% Inference for simple logistic regression
+%%% Inference for simple logistic regression
 
-% Logistic regression short answer, I, even problem
+% EVEN Logistic regression short answer, I
 
-
-% Logistic regression short answer, II
+% ODD Logistic regression short answer, II
 
 \eocesol{
 (a)~False.  Logistic regression models should be fit only when there are at least  10 cases with the less frequent yes/no outcome.
@@ -2404,10 +2403,10 @@ where $E$ is the event of being hyperuricemic.
 (d)~No.  The $z$-score for the estimate is $0.750/0.650 = 1.154$, smaller than 1.96 for a traditional $0.05$ level test. 
 }
 
-% TB treatment interruption and secondary education, even problem
-% needs solution
+% EVEN TB treatment interruption and secondary education
+% needs solution, but should probably be replaced
 
-% Hyperuricemia and dietary magnesium, II, odd problem
+% ODD Hyperuricemia and dietary magnesium, II
 
 \eocesol{
 (a)~The $z$ statistic is the estimate divided by its standard error, $0.033/0.526 = 0.063$.
@@ -2416,20 +2415,9 @@ where $E$ is the event of being hyperuricemic.
 (d)~First construct the confidence interval on the log odds scale.  The estimated model coefficient $b_1$ is the change in log odds corresponding to a one unit change in magnesium.  When magnesium increases from $0.25$gm to $0.75$gm, the change in log odds will be $(0.75 - 0.25)b_1 = (0.50)(0.033) = 0.017$.  On the log odds scale, the $95\%$ interval for the change will be the confidence interval for $0.50b_1$.  Since the standard error of $0.50b_1 = (0.50)(0.526) = 0.263$, the $95\%$ interval for the change in log odds is  $0.017 \pm 1.96 (0.263) = (-0.499, 0.532)$.  The 95\% interval for the odds ratio is $\exp(-0.499), \exp(0.532) = 0.607, 1.702$.  The confidence interval on the log odds scale could also have been calculated by multiplying the upper and lower bounds for the confidence interval for $b_1$ by $0.50$.
 } 
 
-% Hyperuricemia and age, II} even problem
+% EVEN Hyperuricemia and age, II 
 
-\begin{comment}
-
-\eocesol{
-  (a)~The $z$ statistic is the estimate divided by its standard error, $-0.007/0.015 = -0.467$.
-(b)~No, the data do not show a statistically significant association, since $p = 2P(Z < -0.467) = 0.641$.
-(c)~A $95\%$ confidence interval for the estimate is $-0.007 \pm (1.96)(0.015) = (-0.036, 0.022)$.   With 95\% confidence, a 1 year change in age is associated with a change in log odds from $-0.036$ to $0.022$.
-(d)~First construct the confidence interval on the log odds scale.  The estimated model coefficient $b_1$ is the change in log odds corresponding to a one year change in age.  When age increases from $50$ to $75$, the change in log odds will be $(75 - 50)b_1 = (25)(-0.007) = -0.175$.  On the log odds scale, the $95\%$ interval for the change will be the confidence interval for $25b_1$.  Since the standard error of $25b_1 = (25)(0.015) = 0.375$, the $95\%$ interval for the change in log odds is  $-0.175 \pm 1.96 (0.375) = (-0.910, 1.175)$.  With $95\%$ confidence the odds ratio is between $ \exp(-0.910), \exp(0.560) = (0.403, 1.751)$.  The confidence interval on the log odds scale could also have been calculated by multiplying the upper and lower bounds for the confidence interval for $b_1$ by 25.
-}
-
-\end{comment}
-
-% Radon and leukemia, odd problem
+% ODD Radon and leukemia
 
 \eocesol{
 (a)~No.  The number of recorded leukemia cases will be $(1500)(0.0025) = 3.75$, much less than the minimum of 10 events in the lower prevalence outcome.
@@ -2438,7 +2426,9 @@ where $E$ is the event of being hyperuricemic.
 }{}
 
 
-% Hyperuricemia and BMI, II
+% EVEN challenger disaster I
+
+% ODD Hyperuricemia and BMI, II
 
 \eocesol{
 (a)~The two individuals differ by 4 units of BMI, so find the $95\%$ interval for $4\beta_1$.  The estimate $4b_1 = 4(0.185) = 0.740$, with standard error $4(0.037) = 0.148$.  The confidence interval is given by 
@@ -2447,46 +2437,10 @@ where $E$ is the event of being hyperuricemic.
 \] 
 (b)~No, the $95\%$ confidence interval includes 1.	
 }{}
-% Challenger disaster, II. Even problem
-% figure is in logistic regression draft folder under figures,  until I figure out where it should go
 
-\begin{comment}
+%  EVEN Challenger disaster, II
 
-\eocesol{
-% solution from OI Q Bank 
-%\begin{parts}
-(a)~The calculation of the probabilities are as follows:
-\begin{align*}
-log\left(\frac{\hat{p}_{51}}{1 - \hat{p}_{51}}\right) 
-= 11.6630 - 0.2162 \times 51 
-&\longrightarrow \hat{p}_{51} 
-= \frac{e^{11.6630 - 0.2162 \times 51}}{1 + e^{11.6630 - 0.2162 \times 51}} 
-= 0.654 \\
-log\left(\frac{\hat{p}_{53}}{1 - \hat{p}_{53}}\right) 
-= 11.6630 - 0.2162 \times 53 &\longrightarrow \hat{p}_{53} 
-= \frac{e^{11.6630 - 0.2162 \times 53}}{1 + e^{11.6630 - 0.2162 \times 53}} 
-= 0.551 \\
-log\left(\frac{\hat{p}_{55}}{1 - \hat{p}}_{55}\right) 
-= 11.6630 - 0.2162 \times 55 
-&\longrightarrow \hat{p}_{55} 
-= \frac{e^{11.6630 - 0.2162 \times 55}}{1 + e^{11.6630 - 0.2162 \times 55}} 
-= 0.443
-\end{align*}
-(b)~The plot is shown below:
-\begin{center}
-\includegraphics[width=0.6\textwidth]{figures/challenger_disaster_pred_damage_temp.pdf} 
-\end{center}
-(c)~ For logistic regression to be appropriate in this case, each O-ring must 
-be independent of the others. We must assume independence is true (or very 
-nearly so) if we are to believe the model. For example, if the O-ring 
-manufacturing process has changed dramatically over the time of the different 
-shuttle launches, then we should be skeptical of independence and therefore 
-also of the model.
-}{}
-
-\end{comment}
-
-%  Fracture study, odd problem
+%  ODD Fracture study
 
 \eocesol{
 (a)~ The OR does not depend on the age the participant.  From the data in the Figure~\ref{glowFracAge}, the log odds ratio comparing women with and without a prior fracture is 0.839, so the estimated $\text{OR} = \exp(0.839) = 2.314$.  A woman with a prior fracture has more than double the odds of experiencing a fracture during the study than one without a prior fracture.
@@ -2495,33 +2449,20 @@ also of the model.
 (d)~Because the sample of 500 was outcome based, prevalence ratios cannot be estimated from the data.
 }{}
 
-\begin{comment}
-% even problem, HIV test status and TB int
-\eocesol{
-The conditions for the $\chi^2$ test are discussed in Section~\ref{theChiSquaredTestStatistic}. The formulas for expected cell counts under the assumption of independence are given in Section~\ref{twoWayTablesExpectedCounts}.  The validity if of a $\chi^2$ in a $2\times2$ table are both met in this example.  The data from the participating subjects can is independent between subjects, and all the expected cell counts are at least 10.  The smallest observed cell count is 52, and the expected count for that cell is ($127 \times 719)/1233 = 74.06$.  The other expected cell counts are all at least 10.  
-}
-\end{comment}
 
-% odd problem, female horseshoe crabs
+% EVEN  HIV test status and TB int
+
+
+% ODD , female horseshoe crabs
 \eocesol{
 The conditions for the $\chi^2$ test are discussed in Section~\ref{theChiSquaredTestStatistic}. The formulas for expected cell counts under the assumption of independence are given in Section~\ref{twoWayTablesExpectedCounts}. All of the cases in the dataset contribute independent data.  In a two-way table with more than 4 cells, no more than 1/5 of the expected cell counts should be less than 5 and all expected cell counts should be greater than 1.  Since there are 8 cells in the table the two lowest expected cell counts should be at least 5.  There are no cell counts less than 1.  Only one expected cell count is less than 5 (calculations not shown).  The expected cell count for the number crabs with a light colored carapace and no satellites is 4.30.  The conditions are satisfied.
 }{}
-\begin{comment}
-% even problem, emergency room outcomes, I
-\eocesol{
-(a)~The reference category is "red".
-(b)~Yes, the pattern is consistent with the original coding.  Because the log(OR) is negative for each predictor, each color is associated with a lower OR than "red", the category denoted as life-threatening.  Moreover, the descreasing pattern of the predicted log(OR)s (compared to the color red) is consistent with lower risk as the color coding changes from "orange" to "green".
-(c)~The algebraic form of the model is
-\begin{align}
-\log\left[\text{odds}_{\text{mortality}}(\text{triage score})\right] = -1.551 -0.958\texttt{triageorange}
- - 1.290\texttt{triageyelow}  - 1.585\texttt{triagegreen}.
- (d)~Yes.  In this model -1.551 is the log(odds) of 30-day mortality among participants coded "red".  The odds of 30-day mortality is $\exp(-1.551) = 0.212$.  
- (e)~The estimated OR is $\exp(-1.290) = 0.275$.  The 95\% confidence interval for the log(OR) is $-1.290 \pm (1.95)(0.468) = (-2.207,-0.373)$.  The confidence interval for the OR is $(\exp(-2.207, -0.373) = (0.110, 0.689).
- (f)~The log(OR) comparing "yellow" to "orange" is the difference of the two log(OR)s, $-1.290 - (-1.585) = 0.295$, so $\text{OR} = exp(0.295) = 1.343$.  The odds of 30-day mortality for a participant coded "yellow" are approximately 34\% larger than for someone coded "green".
-\end{align}
-}{}
-\end{comment}
-% odd problem, emergency room outcomes, II
+
+% EVEN, emergency room outcomes, I
+
+
+% ODD  emergency room outcomes II
+
 \eocesol{
 (a)~The estimate of the intercept is $log(7/33) = -1.551$.
 (b)~The estimate for the triage category "green" is the log of the estimated OR comparing "green" to "red", $\text(log((11/253)/(7/33)) = -1.585$.
@@ -2529,18 +2470,9 @@ The conditions for the $\chi^2$ test are discussed in Section~\ref{theChiSquared
 (d)~By splitting the data into two smaller groups, estimates of coefficients will be less precise (have larger standard error) so hypothesis tests will have smaller power. For these data, the evidence for an interaction is weak using both this approach and using a model for the interaction term as in Figure~\ref{eqn:huBmiSexInteractionLogReg}.  The advantage of this approach is that it does not assume a model for the interaction and may be more reliable when the association of the interaction is not linear on the log(odds) scale.
 }
 
+% EVEN Emergency room outcomes III
 
-\begin{comment}
-% even problem, emergency room outcomes, III
-\eocesol{
-(a)~No.  The intercept would correspond to the log(odds) of death within 30 days for a participant with all predictors at baseline value, so age would have value 0.
-(b)~Increased risk. 
-(c)~The observed difference between the residual variances is 56.02.  The difference has a $\chi^2$ distribution with $5 - 3 = 2$ degrees of freedom so is highly significant.
-(d)  While the pair of variables \texttt{age} and \texttt{sex} is important, the model suggests that \texttt{sex} adds little information.  Before adding both variables a deviance statistic should be used to check the whether \texttt{sex} is useful when added to a mode with color score and age. 
-}{}
-\end{comment}
-
-% odd problem, interaction in regression I
+% ODD interaction in regression I
 
 \eocesol{
 (a)~For males, Equation~\ref{eqn:huBmiSexInteractionLogReg} reduces to 
@@ -2559,15 +2491,8 @@ The conditions for the $\chi^2$ test are discussed in Section~\ref{theChiSquared
 (c)~Using the model in Figure~\ref{figure:huBmiSexLogReg}, the estimated OR for hyperuricemia for BMI = 33.2 versus 30 $\text{kg/m}^2$ is $\exp[(3.2)(0.171)] = 1.728$, a value that is different from the two ORs calculated above.
 }{}
 
-% even problem, interaction in regression
-\begin{comment}
-\eocesol{
-(a)~The two variances are $0.059^2 = 0.0035$ (females) and $0.049^2 = 0.0024$ (males).
-(b)~Since the two estimates are based on separate and independent groups, the variance of the difference of the estimates is the sum of the variances, $0.0059$.  The standard deviation of the difference is $\sqrt(0.0059) = 0.077$.  This is the standard error of the estimate of the difference.
-(c)~A test of the null hypothesis that the difference of the population parameters is 0 can be based on the difference divided by its standard error, $(0.198 - 0.152)/0.077 = 0.594$.  Under the assumption that the individual estimates are approximately normally distributed, the difference will have a normal distribution with mean 0 and standard error $0.077$.  Since the standardized difference is less than 1.96, the difference is not significantly different from 0.
+% EVEN  interaction in regression II
 
-}
-\end{comment}
 
 
 
