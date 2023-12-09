@@ -2,8 +2,8 @@ This is makeindex, version 2.15 [TeX Live 2020] (kpathsea + Thai support).
 Scanning input file main.idx....
 !! Input index error (file = main.idx, line = 17):
    -- Illegal null field.
-done (496 entries accepted, 1 rejected).
-Sorting entries.......done (4752 comparisons).
+done (497 entries accepted, 1 rejected).
+Sorting entries.......done (5100 comparisons).
 Generating output file main.ind....
 ## Warning (input = main.idx, line = 384; output = main.ind, line = 9):
    -- Inconsistent page encapsulator hyperindexformat{\textbf} within range.
@@ -68,35 +68,35 @@ Generating output file main.ind....
 ## Warning (input = main.idx, line = 212; output = main.ind, line = 277):
    -- Inconsistent page encapsulator hyperindexformat{\textbf} within range.
 
-## Warning (input = main.idx, line = 295; output = main.ind, line = 299):
+## Warning (input = main.idx, line = 295; output = main.ind, line = 300):
    -- Inconsistent page encapsulator hyperindexformat{\textbf} within range.
 
-## Warning (input = main.idx, line = 292; output = main.ind, line = 299):
+## Warning (input = main.idx, line = 292; output = main.ind, line = 300):
    -- Unmatched range opening operator (.
 
-## Warning (input = main.idx, line = 249; output = main.ind, line = 303):
+## Warning (input = main.idx, line = 249; output = main.ind, line = 304):
    -- Inconsistent page encapsulator hyperindexformat{\textbf} within range.
 
-## Warning (input = main.idx, line = 22; output = main.ind, line = 310):
+## Warning (input = main.idx, line = 22; output = main.ind, line = 311):
    -- Inconsistent page encapsulator hyperindexformat{\textbf} within range.
 
-## Warning (input = main.idx, line = 126; output = main.ind, line = 322):
+## Warning (input = main.idx, line = 126; output = main.ind, line = 323):
    -- Inconsistent page encapsulator hyperindexformat{\textbf} within range.
 
-## Warning (input = main.idx, line = 128; output = main.ind, line = 335):
+## Warning (input = main.idx, line = 128; output = main.ind, line = 336):
    -- Unmatched range closing operator ).
 
-## Warning (input = main.idx, line = 175; output = main.ind, line = 336):
+## Warning (input = main.idx, line = 175; output = main.ind, line = 337):
    -- Inconsistent page encapsulator hyperindexformat{\textbf} within range.
 
-## Warning (input = main.idx, line = 340; output = main.ind, line = 391):
+## Warning (input = main.idx, line = 340; output = main.ind, line = 392):
    -- Unmatched range closing operator ).
 
-## Warning (input = main.idx, line = 335; output = main.ind, line = 394):
+## Warning (input = main.idx, line = 335; output = main.ind, line = 395):
    -- Unmatched range opening operator (.
 
-## Warning (input = main.idx, line = 171; output = main.ind, line = 448):
+## Warning (input = main.idx, line = 171; output = main.ind, line = 449):
    -- Unmatched range closing operator ).
-done (479 lines written, 31 warnings).
+done (480 lines written, 31 warnings).
 Output written in main.ind.
 Transcript written in main.ilg.

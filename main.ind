@@ -14,7 +14,7 @@
   \item alternative hypothesis ($H_A$), \hyperindexformat{\textbf}{214}
   \item analysis of variance (ANOVA), \hyperindexformat{\textbf}{266}, 
 		\hyperpage{266--272}
-  \item apparent prediction error, \hyperindexformat{\textbf}{497}
+  \item apparent prediction error, \hyperindexformat{\textbf}{498}
   \item association, \hyperindexformat{\textbf}{40}
   \item AUC, \hyperindexformat{\textbf}{496}
   \item AUC-ROC, \hyperindexformat{\textbf}{496}
@@ -75,7 +75,7 @@
   \item correlated random variables, \hyperindexformat{\textbf}{182}
   \item correlation, \hyperindexformat{\textbf}{42}
   \item correlation coefficient, \hyperindexformat{\textbf}{42}
-  \item cross-validation, \hyperindexformat{\textbf}{497}
+  \item cross-validation, \hyperindexformat{\textbf}{498}
 
   \indexspace
 
@@ -140,7 +140,7 @@
 
   \indexspace
 
-  \item effect modification, \hyperindexformat{\textbf}{483}
+  \item effect modification, \hyperindexformat{\textbf}{482}
   \item effect modifier, \hyperindexformat{\textbf}{482}
   \item effect size, \hyperpage{237}
   \item empirical rule, \hyperindexformat{\textbf}{38}
@@ -161,12 +161,12 @@
   \item factorial, \hyperindexformat{\textbf}{151}
   \item failure, \hyperindexformat{\textbf}{149}
   \item false negative, \hyperindexformat{\textbf}{114}
-  \item false negative rate, \hyperindexformat{\textbf}{494}
+  \item false negative rate, \hyperindexformat{\textbf}{495}
   \item false positive, \hyperindexformat{\textbf}{114}
-  \item false positive rate, \hyperindexformat{\textbf}{494}
+  \item false positive rate, \hyperindexformat{\textbf}{495}
   \item Fisher's exact test, \hyperindexformat{\textbf}{411}
-  \item FNR, \hyperindexformat{\textbf}{494}
-  \item FPR, \hyperindexformat{\textbf}{494}
+  \item FNR, \hyperindexformat{\textbf}{495}
+  \item FPR, \hyperindexformat{\textbf}{495}
   \item frequency table, \hyperindexformat{\textbf}{39}
 
   \indexspace
@@ -191,7 +191,7 @@
 
   \indexspace
 
-  \item in-sample prediction error, \hyperindexformat{\textbf}{497}
+  \item in-sample prediction error, \hyperindexformat{\textbf}{498}
   \item independent, \hyperindexformat{\textbf}{40}, 
 		\hyperindexformat{\textbf}{103}
   \item independent random variables, \hyperindexformat{\textbf}{182}
@@ -277,6 +277,7 @@
   \item normal probability plot, \hyperindexformat{\textbf}{165}, 
 		\hyperpage{165--169}, \hyperpage{303}, \hyperpage{341}
   \item normal probability table, \hyperindexformat{\textbf}{158}
+  \item null deviance, \hyperindexformat{\textbf}{478}
   \item null hypothesis ($H_0$), \hyperindexformat{\textbf}{214}
   \item numerical variable, \hyperindexformat{\textbf}{17}
     \subitem continuous, \hyperindexformat{\textbf}{17}
@@ -289,7 +290,7 @@
   \item odds ratio, \hyperindexformat{\textbf}{48}, 
 		\hyperindexformat{\textbf}{420}
     \subitem case-control studies, \hyperpage{420}
-  \item Out-of-sample, \hyperindexformat{\textbf}{497}
+  \item Out-of-sample, \hyperindexformat{\textbf}{498}
   \item outlier, \hyperindexformat{\textbf}{37}
   \item outlier in regression, \hyperindexformat{\textbf}{308}
 
@@ -440,10 +441,10 @@
     \subitem one-sample, \hyperpage{243--245}
     \subitem paired data, \hyperpage{246--247}
     \subitem two independent groups, \hyperpage{251--253}
-  \item test data, \hyperindexformat{\textbf}{497}
+  \item test data, \hyperindexformat{\textbf}{498}
   \item threshold probability, \hyperindexformat{\textbf}{494}
   \item time series, \hyperindexformat{\textbf}{296}
-  \item training data, \hyperindexformat{\textbf}{497}
+  \item training data, \hyperindexformat{\textbf}{498}
   \item transformation, \hyperindexformat{\textbf}{38}
   \item tree diagram, \hyperindexformat{\textbf}{114}, 118
   \item trial, \hyperindexformat{\textbf}{149}
@@ -460,7 +461,7 @@
 
   \indexspace
 
-  \item validation data, \hyperindexformat{\textbf}{497}
+  \item validation data, \hyperindexformat{\textbf}{498}
   \item variables, \hyperindexformat{\textbf}{16}
   \item variance, \hyperindexformat{\textbf}{33}, \hyperpage{145}
   \item Venn diagrams, \hyperindexformat{\textbf}{97}
