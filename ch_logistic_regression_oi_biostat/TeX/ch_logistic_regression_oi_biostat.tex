@@ -1108,9 +1108,9 @@ The section on ROC curves is particularly week.  Best to fix it when the overal 
 
 \end{comment}
 
-There are two general approaches to checking the fit of a logistic regression, one based on goodness-of-fit statistics and another on statistics that estimate the accuracy of predictions. The two approaches serve different purposes.  When the primary goal of an analysis is inference about an explanatory model for an outcome, goodness-of-fit statistics should be used to check whether the model fits the data reasonably well.  A reasonable model that does not have substantial deviation from the model assumptions is usually sufficient for inference about parameters.  Assessing the association between hyperuricemia and BMI and sex was an example of an explanatory model.
+There are two general approaches to checking the fit of a logistic regression, one based on goodness-of-fit statistics and another on statistics that estimate the accuracy of predictions. The two approaches serve different purposes.  When the primary goal of an analysis is drawing inferential conclusions about the relationship between an outcome variable and predictors, goodness-of-fit statistics should be used to check whether the model fits the data reasonably well.  A reasonable model that does not substantially deviate from the model assumptions is usually sufficient for inference about parameters. The explanatory model fit to assess the association between hyperuricemia and the predictors BMI and sex is an example of an analysis conducted to draw inference about parameters.
 
-Predictive accuracy of a model should be checked when the purpose of an analysis is to predict individual outcomes or classify individuals according to predicted outcomes for individuals not in the original study population.  The case study in the next section explores models for classifying patients admitted to a hospital emergency department according to the risk of death within 30 days of admission (30-day mortality).  In this analysis it is more important to know the likelihood of classification errors arising from inaccurate predictions of the outcome variable 30-day mortality.
+Predictive accuracy of a model should be checked when the purpose of an analysis is to predict individual outcomes or classify individuals according to predicted outcomes for individuals not in the original study population.  The case study in the next section explores models for classifying patients admitted to a hospital emergency department according to the risk of death within 30 days of admission (30-day mortality).  In this analysis, the main goal is to assess the likelihood of classification errors arising from inaccurate predictions of 30-day mortality, rather than understand what variables might be strongly associated with higher risk of 30-day mortality.
 
 Some model diagnostics, such as calibration plots, are useful both for checking the fit of a model and predictive accuracy.  Regardless of whether one is examining goodness-of-fit or predictive accuracy, probabilities calculated from an estimated  model are referred to as predicted probabilities.  Predicted numbers of events are sometimes also called expected number of events.
 
@@ -1146,7 +1146,7 @@ Treatment for multidrug-resistant tuberculosis (MDR-TB) lasts longer than standa
 \end{figure}
 The data suggest that education and treatment for MDR-TB may be important predictors of interruption.
 
-Each of the predictors has two values, so each participant falls into 1 of 4 profiles.  The rows of Figure~\ref{figure:tbInterruptProfiles} show summary statistics for the 4 profiles, defined by the values of \texttt{education} and \texttt{mdr.tb}, using 1 to denote the level "Yes" and 0 for "No". Since the intercept is always present in the model The figure is an abbreviated version of a table produced by the function \texttt{dx} in the \textsf{R} package \texttt{LogisticDx}.
+Each of the predictors has two values, so each participant falls into 1 of 4 profiles.  The rows of Figure~\ref{figure:tbInterruptProfiles} show summary statistics for the 4 profiles, defined by the values of \texttt{education} and \texttt{mdr.tb}, using 1 to denote the level "Yes" and 0 for "No". The figure is an abbreviated version of a table produced by the function \texttt{dx} in the \textsf{R} package \texttt{LogisticDx}.
 
 % latex table generated in R 4.1.2 by xtable 1.8-4 package
 % Tue Apr 19 13:59:26 2022
@@ -1154,8 +1154,8 @@ Each of the predictors has two values, so each participant falls into 1 of 4 pro
 \centering
 \begin{tabular}{rrrrrrrrr}
   \hline
- &  \texttt{educationYes} & \texttt{mdr.tbYes} & Observed & \multicolumn{1}{c}{Predicted}  &
- \multicolumn{1}{c}{$N$} & Predicted & Pearson residual \\
+ Profile &  \texttt{educationYes} & \texttt{mdr.tbYes} & Observed & \multicolumn{1}{c}{Predicted}  &
+ \multicolumn{1}{c}{$n$} & Predicted & Pearson residual \\
  & & &  responses & \multicolumn{1}{c}{probability} & & responses & \multicolumn{1}{c}{$r$} \\
   \hline
 1 & \multicolumn{1}{c}{1} & \multicolumn{1}{c}{0} &
@@ -1180,7 +1180,7 @@ The first column labels the $4$ profiles, and columns $2-3$ show the values pred
 
 \item \textit{Predicted Probability}:  The predicted probability of a treatment interruption from the model.  Since the participants in a profile all have the same values for the predictor, there is a single predicted probability for a profile.
 
-\item \textit{N:} The number of participants who match the profile.
+\item \textit{n:} The number of participants who match the profile.
 
 \item \textit{Predicted responses}: The predicted number of treatment interruptions from the model, calculated below.
 
@@ -1197,28 +1197,28 @@ The predicted probability of a treatment interruption can calculated directly fr
 The value in the table $(0.067)$ has been rounded from the more precise $0.06709$.  Using the more precise value, the predicted number of responses for profile 1 is
 \begin{align*}
     (n_1)(\hat{p}_1) &= (671)(0.06709) \\
-    & 45.02,
+    & 45.02.
 \end{align*}
-close to the observed number of responses $44$.
 
-The Pearson residual $r$ is a standardized version of the observed - predicted number of responses, using the formula for the standard error of a binomial variate.  For profile 1,
+The Pearson residual $r$ is a standardized version of the observed - predicted number of responses, using the formula for the standard error of a binomial variable.  For profile 1,
 \begin{align*}
-   r_1 &=  \frac{44 - 45.02}{\sqrt(n_1[\hat{p}_1][1 - \hat{p}_1])} \\
-       &= \frac{-1.02}{\sqrt(671[0.06709][0.93290])} \\
+   r_1 &=  \frac{44 - 45.02}{\sqrt{n_1[\hat{p}_1][1 - \hat{p}_1]}} \\
+       &= \frac{-1.02}{\sqrt{671[0.06709][0.93290]}} \\
        &= -1.57.
 \end{align*}
+The residual is small because the predicted value $45.02$ is close to the observed number of responses $44$.
 
  A $\chi^2$ goodness of fit is based on $\sum_i r_i^2$, with degrees of freedom equal to the number of profiles minus the total number of parameters (including the intercept).  For the TB data, the $\chi^2$ statistic $X^2$ is
 \begin{align*}
-   X^2 &= \sum_{i - 1}^4 r_i^2 \\
+   \chi^2 &= \sum_{i - 1}^4 r_i^2 \\
        &= (-0.157)^2 + (0.135)^2 + (0.418)^2 + (-.398)^2 \\
        &= 0.376.
 \end{align*}
 Since there are $4$ profiles and $3$ parameters in the model, the $p$-value is $P(\chi^2_{1df} > 0.376) = 0.540$.
 
-The logistic model with predictors \texttt{education} and \texttt{mdr.tb}  fits the data reasonably well -- the observed and expected numbers of responses are similar, and the goodness-of-ft test is non-significant.  Even when a model seems to fit data, it is important to remember that it is not necessarily the best model. The TB dataset contains additional predictors not examined here that may provide a better model for predicted probabilities.
+The logistic model with predictors \texttt{education} and \texttt{mdr.tb}  fits the data reasonably well -- the observed and expected numbers of responses are similar, and the goodness-of-fit test is non-significant.  However, even when a model seems to fit data, it is not necessarily the best model. The TB dataset contains additional predictors not examined here that may provide a better model for predicted probabilities.
 
-The $\chi^2$ goodness-of-fit discussed above cannot be used when some profiles have a small number of observations or when one or more predictors are continuous.  Profiles may have only one case if a continuous predictor has different values for each case, causing the number of profiles to be the number of cases.  The validity of the test depends on the number of observations within each profile being reasonably large, just as in the usual $\chi^2$ goodness-of-fit test.  While it might be tempting to collapse profiles into a small number, using the data to create profiles post hoc may also violate the assumptions for the test.  In fact, even when all predictors are categorical but there are a large number of profiles, some with small numbers of observations, the $\chi^2$ test may not be reliable.
+The $\chi^2$ goodness-of-fit test discussed above cannot be used when some profiles have a small number of observations or when one or more predictors are continuous.  Profiles may have only one case if a continuous predictor has different values for each case, causing the number of profiles to be the number of cases.  The validity of the test depends on the number of observations within each profile being reasonably large, just as in the usual $\chi^2$ goodness-of-fit test.  While it might be tempting to create a smaller number of profiles by combining categories of some categorical variables, creating profiles post hoc may also violate the assumptions for the test.  In fact, even when all predictors are categorical but there are a large number of profiles, some with small numbers of observations, the $\chi^2$ test may not be reliable.
 
 \subsubsection{The Hosmer-Lemeshow goodness-of-fit test}
 %\label{section:HosmerLemeshowGoF}
@@ -1226,7 +1226,7 @@ The $\chi^2$ goodness-of-fit discussed above cannot be used when some profiles h
  When the data cannot be grouped into profiles, Hosmer and Lemeshow have proposed a significance test for goodness-of-fit that uses groupings according to predicted probabilities.   The test is described in more detail in Hosmer, Lemeshow and Sturdivant\footfullcite{hosmer2013applied} and is outlined here, using the logistic model for the association of hyperuricemia and BMI in Figure~\ref{figure:bmiHyperuricemiaLogRegCoeff}.
 
 \begin{enumerate}
-  \item Let $n$ be the number of cases in the dataset, $x_i$ be the set of predictor values for case $i$, $i = 1, \ldots, n$, and $E$ the event of interest (e.g., hyperuricemia). Calculate the model based predicted probabilities $\hat{p}_i$ for each case and sort the probabilities in increasing order.
+  \item Let $n$ be the number of cases in the dataset, $x_i$ be the set of predictor values for case $i$, $i = 1, \ldots, n$, and $E$ the event of interest (e.g., hyperuricemia). Calculate the model-based predicted probabilities $\hat{p}_i$ for each case and sort the probabilities in increasing order.
 
   \item Group the observations into $g$ groups.   Hosmer and Lemeshow recommend $g = 10$ equally sized groups with boundaries based on the deciles of the sorted predicted probabilities.  The rows of Figure~\ref{figure:HLTestHyperuricemiaBmi} show the groups; the first group contains the $500/10 = 50$ cases with predicted probabilities between $0.0434$ and $0.0913$; the second group contains the 50 cases with predicted probabilities larger than $0.0913$ but no larger than $0.1144$, etc.  For instance, the case with $\textrm{bmi} = 17.68$ has an estimated probability of hyperuricemia $E$ given by
 \begin{align*}
@@ -1318,7 +1318,7 @@ The Hosmer-Lemeshow test has some weaknesses, and several alternatives have been
 
 The \term{Brier score} $B$ estimates prediction accuracy by comparing the predicted probabilities of the outcome to observed values:
        \[ B = \dfrac{1}{n}\sum_{i = 1}^n (y_i - \hat{p_i})^2,  \]
-where $\hat{p_i}$ and $y_i$ are the predicted probabilities and observed response, and $n$ is the sample size. Like mean square prediction error in linear regression, it assess fit by estimating the squared distance between observed and predicted values.
+where $\hat{p_i}$ and $y_i$ are the predicted probabilities and observed response, and $n$ is the sample size. Like mean square prediction error in linear regression, the Brier score assesses fit by estimating the squared distance between observed and predicted values.
 
 An observation $y_i$ can take on only two values, 0 or 1, and $\hat{p_i}$ will be a number in the interval $(0,1)$ since predicted probabilities are never exactly 0 or 1.  When $y_i = 1$ and $\hat{p}_i$ is close to 1 or when $y_i = 0$ and  $\hat{p}_i$ is close to 0, $\hat{p}_i$ is an accurate predictor for case $i$ and the contribution to the Brier score will be close to 0.  When the reverse happens ($\hat{p}_i$ is very different from $y_i$) the contribution to the Brier score will be close to 1.  A Brier score close to 0 indicates that predictions are generally accurate; if it is close to 1, predictions are generally poor.  When evaluating prediction accuracy, a low Brier score indicates a good prediction model.
 
@@ -1330,13 +1330,13 @@ There are analogues to $R^2$ from linear models not covered here and can be foun
 
 \subsubsection{Calibration plots}
 
-Calibration plots provide a visual display of the match between predicted probabilities and observed outcomes, and serve the role a both a tool for checking model fit and for assessing the agreement between predicted probabilities and outcomes. Figure~\ref{figure:calibrationHuBMISex} shows calibration plots for the logistic models for hyperuricemia with predictor BMI (blue) and with predictors BMI and sex.  Because the outcome is binary, the agreement between predicted probabilities and outcomes is difficult to see in a scatterplot of observed versus predicted values, so calibration plots typically add a best fitting smooth curve, using \texttt{loess} or a similar function in \textsf{R}.  If a model is well-calibrated, the smooth curve should lie close to the $45$-degree line $y = x$ (the dotted line in the curve).  The figure shows that the model using BMI alone is well-calibrated for predicted probabilities between 0.0 and 0.3, less so for probabilities larger than 0.4, where the data are sparse.  The model including BMI and sex is closer to the $45$-degree line and shows that model is a better fit to the data.  The largest values on the horizontal axis for the two curves are different to avoid extrapolation; the largest predicted probability is 0.722 for the model with BMI alone and 0.624 for the model that adds sex.
+Calibration plots provide a visual display of the match between predicted probabilities and observed outcomes, and and are useful for both checking model fit and assessing the agreement between predicted probabilities and outcomes. Figure~\ref{figure:calibrationHuBMISex} shows calibration plots for the logistic models for hyperuricemia with predictor BMI (blue) and with predictors BMI and sex (green).  Because the outcome is binary, the agreement between predicted probabilities and outcomes is difficult to see in a scatterplot of observed versus predicted values, so calibration plots typically add a best fitting smooth curve, using \texttt{loess} or a similar function in \textsf{R}.  If a model is \term{well-calibrated}, the smooth curve should lie close to the $45$-degree line $y = x$ (the dotted line in the curve).  The figure shows that the model using BMI alone is well-calibrated for predicted probabilities between 0.0 and 0.3, less so for probabilities larger than 0.4, where the data are sparse.  The model including BMI and sex is closer to the $45$-degree line and shows that model is a better fit to the data.  The largest values on the horizontal axis for the two curves are different to avoid extrapolation; the largest predicted probability is 0.722 for the model with BMI alone and 0.624 for the model that adds sex.  Extending the green curve to 0.722 would involve extrapolation.
 
 \begin{figure}[!tbh]
   \centering
   \includegraphics[width=0.70\textwidth]
   {ch_logistic_regression_oi_biostat/figures/calibrationHuBMISex/calibrationHuBMISex.pdf}
-    \caption{Calibration plots, logistic model for the association between hyperuricemia and BMI (blue) and for the model for hyperuricemia that includes both BMI and sex. The light blue dots at  $y = 0$ and $y = 1$ denote observed values of hyperuricemia (0 = "No", 1 = "Yes") plotted against predicted probabilities.   The smooth curves are drawn using the \textsf{R} function \texttt{loess} on the scatterplots of predicted versus observed probabilities for the two models.}
+    \caption{Calibration plots, logistic model for the association between hyperuricemia and BMI (blue) and green for the model for hyperuricemia that includes both BMI and sex. The light blue jittered dots at  $y = 0$ and $y = 1$ denote observed values of hyperuricemia (0 = "No", 1 = "Yes") plotted against predicted probabilities.   The smooth curves are drawn using the \textsf{R} function \texttt{loess} on the scatterplots of actual predicted versus observed probabilities for the two models.}
    \label{figure:calibrationHuBMISex}
 \end{figure}
 
@@ -1382,11 +1382,11 @@ Yes & 3 & 4 & 7 \\
 
 The error rates among cases with or without the outcome can be very different from the total error rate. The \term{false negative rate}, or \term{FNR}, of a prediction rule is the proportion of times cases with the outcome are predicted not to have it; it is an estimated conditional probability.  Figure~\ref{figure:predVsObsHuBMISex} shows that among the 95 cases that were hyperuricemic, 91 were predicted to be free of hyperuricemia, a false negative rate of $91/95 = 0.958$. The \term{false positive rate}, or \term{FPR}, is the proportion of times cases without the outcome are predicted to have it. For the prediction rule that uses a threshold of 0.50, the false positive rate is $3/405 = 0.007$.   
 
-If BMI and sex were used to screen for the possibility of hyperuricemia in a population similar to the study population, the high false positive rate indicates that it would never be used in practice.  More than $95\%$ of patients with undiagnosed hyperuricemia would be falsely predicted not to have the condition.
+If BMI and sex were used to screen for the possibility of hyperuricemia in a population similar to the study population, the high negative rate indicates that it would never be used in practice.  More than $95\%$ of patients with undiagnosed hyperuricemia would be falsely predicted not to have the condition.
 
-The error rates of a prediction rule change when the threshold value changes.  Increasing the threshold will lead to more cases predicted to have the outcome, leading to more cases with the outcome predicted correctly;  the FNR will be decreased  But it will also lead to more cases predicted to have the outcome among those without the outcome, increasing the FPR.
+The error rates of a prediction rule change when the threshold value changes. Increasing the threshold will lead to both more cases correctly being predicted as having the outcome (more true positive results) and more cases incorrectly being predicted as having the outcome (more false positive results). Since there is an increase in true positives, the FNR decreases; since there is an increase in false positives, the FPR increases.
 
-Figure~\ref{figure:fprFNRByCutoffHuBMISex} shows how the FPR and FNR change with the threshold value for the prediction rule.  Choosing a threshold is not a statistical problem; it involves assessing which of the two error rates should be kept small, and that will depend on the clinical situation.  In many settings it is reasonable to keep the false negative rate small if missed cases lead to bad outcomes, but if the intervention after a positive prediction has serious side effects, it might be better to keep false positive rates small.   
+Figure~\ref{figure:fprFNRByCutoffHuBMISex} shows how the FPR and FNR change with the threshold value for the prediction rule.  Choosing a threshold is not a statistical problem; it involves assessing which of the two error rates should be kept small, and that will depend on the clinical situation. In settings where it is important to avoid missing cases, it is reasonable to prioritize keeping the false negative rate small. However, it may be the case that for some conditions, the intervention that follows after a positive result has serious side effects; this would be a justification for keeping false positive rates small.
 
 Figure~\ref{figure:fprFNRByCutoffHuBMISex} shows that the FPR and FNR are approximately $0.40$ at a threshold of approximately $\hat{p} = 0.20$.  Any threshold value that yields an FNR lower than $0.40$ will lead to an FPR larger than $0.40$;  correspondingly, reducing the FPR by changing the threshold will increase the FNR. The figure reinforces the conclusion that the predictors BMI and sex do not provide enough information to accurately predict hyperuricemia, even though the calibration plot in Figure~\ref{figure:calibrationHuBMISex} indicates that the model is a good fit to the data.  There is more variability in the outcome than is captured by the model.  This is analogous to linear regression where residual plots indicate that a model is a reasonable fit to data but the $R^2$ is low.
 
@@ -1399,7 +1399,7 @@ Figure~\ref{figure:fprFNRByCutoffHuBMISex} shows that the FPR and FNR are approx
 \end{figure}
 
 
-A \term{receiver operating characteristic curve}, or \term{ROC curve}, is another graphic that shows how a binary classification rule behaves as its threshold value changes. The ROC curve plots the true positive rate (TPR) on the vertical axis against the false positive rate (FPR) on the horizontal axis at each threshold settings for the predicted probability of the outcome. An ROC curve shows directly that increases in the true positive rate can only be achieved by increasing the false positive rate. 
+A \term{receiver operating characteristic curve}, or \term{ROC curve}, is another graphic that shows how a binary classification rule behaves as its threshold value changes. The ROC curve plots the true positive rate (TPR) on the vertical axis against the false positive rate (FPR) on the horizontal axis at each threshold setting for the predicted probability of the outcome. An ROC curve shows directly that increases in the true positive rate can only be achieved by increasing the false positive rate. 
 
 Figure~\ref{figure:ROCHuBMISex} shows the ROC curve for the model for hyperuricemia based on BMI and sex.  When the FPR is approximately 0.40, the TPR is approximately 0.60. Suppose $\hat{y}$ is the predicted value of hyperuricemia.  Since 
 \begin{align*}
@@ -1418,9 +1418,9 @@ $\text{TPR} = 0.60$ corresponds to $\text{FNR} = 0.40$, and the point $(0.40, 0.
     \label{figure:ROCHuBMISex}
 \end{figure}
 
-If a prediction rule is used as a diagnostic test in a clinical setting (e.g., one which predicts whether someone has a disease), the TPR is the sensitivity of the test, and the FNR is 1 - the specificity.  ROC curves are widely used in evaluating diagnostic tests, and are often defined equivalently as plotting sensitivity against 1 - specificity.
+If a prediction rule is used as a diagnostic test in a clinical setting (e.g., one which predicts whether someone has a disease), the TPR is the sensitivity of the test, and the FNR is 1 - specificity.  ROC curves are widely used in evaluating diagnostic tests, and are often defined equivalently as plotting sensitivity against 1 - specificity.
 
-Each point on the 45-degree line corresponds to a prediction rule using a threshold that is a random value of the prediction probability between 0 and 1. The point $(0.50, 0.50)$ corresponds to guessing disease is present when the random number is less than $0.50$.  In a large sample, given that the disease is not present, this rule will guess incorrectly that it is present $50\%$ of the the time (FPR = $0.50$).  When the disease is present, it will also guess it is present $50\%$ of the time (TPR = $0.50$). If the rule guesses present when the random number is less than $0.25$, it leads to incorrect guesses $25\%$ of the time when disease not is present (FPR = $0.25$), and correct guesses $25\%$ of the time when disease is present (TPR = $0.25$), so the point $(0.25, 0.25)$ will be on the ROC curve.  
+Each point on the 45-degree line corresponds to  FPR and TPR on an ROC  using a prediction rule that is based on random guessing using a threshold probability between 0 and 1 without using any predictors. prediction rule that corresponds to random guessing using a threshold that is a random value of the prediction probability between 0 and 1. The point $(0.50, 0.50)$ corresponds to guessing disease is present when the random number is less than $0.50$.  In a large sample, given that the disease is not present, this rule will guess incorrectly that it is present $50\%$ of the the time (FPR = $0.50$).  When the disease is present, it will also guess it is present $50\%$ of the time (TPR = $0.50$). If the rule guesses present when the random number is less than $0.25$, it leads to incorrect guesses $25\%$ of the time when disease not is present (FPR = $0.25$), and correct guesses $25\%$ of the time when disease is present (TPR = $0.25$), so the point $(0.25, 0.25)$ will be on the ROC curve.  
 
 In models for the presence/absence of a disease (with presence labeled success), the area under an ROC curve (labeled \term{AUC},  \term{AUC-ROC} or the \term{c-statistic}) is the probability that a randomly selected case from the observations with  success has a higher predicted probability success than a randomly selected failure observation (derivation not shown).  The area under the 45-degree line (random guessing) is $0.50$.  ROC curves with an area larger than 0.50 are better than random guessing; if the area is less than $0.50$ corresponds to a model that is worse than random guessing.  
 
@@ -1456,7 +1456,7 @@ Figure~\ref{figure:ROCHuBMISex} shows four examples ROC curves corresponding to 
 \subsection{Out-of-sample accuracy of predictions}
 \label{section:outOfSamplePredictionAccuracy} 
 
-When predicting outcome is the goal of an analysis, the data used to estimate a prediction model is usually called the \term{training data}. When the prediction error from a model (such as a Brier score) is estimated using the training data, the estimate is called an \term{in-sample prediction error} or an \term{apparent prediction error}. Methods such as maximum likelihood, which is used to estimate a logistic regression model, choose parameter estimates that are best matched to the data, so in-sample prediction error is generally smaller than the error in new data where the relationships may be slightly different.  \term{Out-of-sample} prediction error characterizes the behavior of a model when fit to new data.  Out-of-sample prediction error can be estimated in a new dataset, usually called \term{test data} or \term{validation data}, or estimated using \term{cross-validation} when a validation dataset is not available.  The use of a validation dataset is illustrated in Section~\ref{section:validationRevisedTriageScore}; this section outlines cross-validation. 
+When predicting outcomes is the goal of an analysis, the data used to estimate a prediction model is usually called the \term{training data}. When the prediction error from a model (such as a Brier score) is estimated using the training data, the estimate is called an \term{in-sample prediction error} or an \term{apparent prediction error}. Methods such as maximum likelihood, which is used to estimate a logistic regression model, choose parameter estimates that are best matched to the data, so in-sample prediction error is generally smaller than the prediction error in new data where the relationships between outcome and predictors may be slightly different.  \term{Out-of-sample} prediction error characterizes the behavior of a model when fit to new data.  Out-of-sample prediction error can be estimated in a new dataset, usually called \term{test data} or \term{validation data}, or estimated using \term{cross-validation} when a validation dataset is not available.  The use of a validation dataset is illustrated in Section~\ref{section:validationRevisedTriageScore}; this section outlines cross-validation. 
 
 \subsubsection{Cross-validation}
 
@@ -1476,11 +1476,11 @@ Cross-validated Brier scores for the hyperuricemia data can be calculated using 
 
 Cross-validation can be used for more complicated estimates, such as a calibration curve, but the principle is the same.  For each fold, a model is re-estimated and the calibration curve is constructed using the data held out from the fold.  For 5-fold calibration, the resulting graph might show the 5 calibration curves as well as a curve constructed using the average value at each point on the 5 estimated curves. 
 
-Cross-validation has some drawbacks -- the best choice of $k$ for a given dataset is not always clear, the test sets are relatively small, and unlike using an external dataset, estimates of error rates do not generalize to populations that might differ in  important ways from the study sample.  It has some strengths, however, the most being that validation datasets large enough to be useful are rarely available.  Cross-validation is available in software such as \textsf{R}, it does not require an additional dataset, the training sets are relatively large, and averaging the $k$ estimated prediction error rates mitigates the small size of the test sets.  When a validation dataset is not available, cross-validation is the preferred method of estimating out-of-sample prediction error.
+Cross-validation has some drawbacks -- the best choice of $k$ for a given dataset is not always clear, the test sets are relatively small, and unlike using an external dataset, estimates of error rates do not generalize to populations that might differ in  important ways from the study sample.  However, validation datasets large enough to be useful are rarely available. Cross-validation has some strengths: it is available in software such as R, does not require an additional dataset, allows for relatively large training sets, and averaging the $k$ estimated prediction error rates mitigates the small size of the test sets.  When a validation dataset is not available, cross-validation is the preferred method of estimating out-of-sample prediction error.
 
 As noted earlier, prediction from statistical models is something that should be done with great care, especially in a clinical situation where prediction may be a diagnostic tool leading to an intervention.  In this setting is important to examine a statistical model from several perspectives.  
 
-What do these tools tell us about the relatively simple model for predicting hyperuricemia from BMI and sex along with the initial look at significance levels for predictors and changes in AIC? earlier in the chapter?.  Although the significant $p$-values for BMI and sex did not have the interpretation tests of predefined hypotheses, the suggested an potentially important association between the predictors and hyperuricemia.  The AIC statistic did not provide a clear answer about the value of adding the predictor sex to BMI, calibration plots showed that the two variable model was a better fit to the data.  Brier scores indicate that the two predictors may provide acceptably accurate predictions overall, but predictions within subsets of individuals either with or without underlying hyperuricemia were not always accurate, even after adjusting the thresh hold probability for predicting presence or absence.  In summary, a logistic regression with BMI and sex fits a model for the log(odds) of hyperuricemia reasonably well, but not well enough to be used as a diagnostic tool.
+What do these tools tell us about the relatively simple model for predicting hyperuricemia from BMI and sex along with the initial look at significance levels for predictors and changes in AIC earlier in the chapter?  Although the significant $p$-values for BMI and sex did not have the interpretation tests of predefined hypotheses, the suggested an potentially important association between the predictors and hyperuricemia.  While comparing AIC values did not provide a clear answer as to the value of adding sex as a predictor, the calibration plots suggested that the two-variable model better fit the data than the model with only BMI.  Brier scores indicate that the two predictors may provide acceptably accurate predictions overall, but predictions within subsets of individuals either with or without underlying hyperuricemia were not always accurate, even after adjusting the threshold probability for predicting presence or absence.  In summary, a logistic regression with BMI and sex fits a model for the log(odds) of hyperuricemia reasonably well, but not well enough to be used as a diagnostic tool.
 
 The hyperuricemia data is useful for exploring how logistic regression might describe the association between an outcome and predictors, but it is a simple example that does not reflect the complexity of many clinical situations.  The next section presents a case study on improving a triage strategy in an hospital emergency department based on a published paper.
 
@@ -1495,7 +1495,7 @@ Most hospital emergency departments triage arriving patients so that the most se
 
 % add data to the package
 
-At the time the study was published, the hospital used the Danish Emergency Process Triage (DEPT) algorithm.  DEPT is a 5-level system ranking patients based on vital signs and presenting conditions and assigns color codes for the predicted 30-day mortality probability.  Let $p$ be the probability of a patient dying within 30 days from admission to the ED\@.  The color codes corresponded to the following values of $p$: "red", $p > 0.25$; orange, $0.10 < p \leq 0.25$; "yellow",  $0.01 \leq  p  \leq 0.10$; "green",  $ < 0.01$; and "blue", minor conditions for which the patient should not be admitted to the ED\@. This analysis uses the term target probabilities for the probability ranges associated with each color. Patients in category "blue" are not included either the published analysis or the one presented here, making the triage classification a 4-level system for patients admitted to the ED\@.
+At the time the study was published, the hospital used the Danish Emergency Process Triage (DEPT) algorithm.  DEPT is a 5-level system ranking patients based on vital signs and presenting conditions that assigns color codes for the predicted 30-day mortality probability.  Let $p$ be the probability of a patient dying within 30 days from admission to the ED\@.  The color codes correspond to the following values of $p$: "red", $p > 0.25$; orange, $0.10 < p \leq 0.25$; "yellow",  $0.01 \leq  p  \leq 0.10$; "green",  $ < 0.01$; and "blue", minor conditions for which the patient should not be admitted to the ED\@. This analysis uses the term target probabilities for the probability ranges associated with each color. Patients in category "blue" are not included either in the published analysis or the one presented here, making the triage classification a 4-level system for patients admitted to the ED\@.
 
 Based on prior studies, the Kristensen team conjectured that revising DEPT to include the results of routine biochemical screening normally done in an ED (albumin, creatinine, c-reactive protein, hemoglobin, lactate dehydrogenase, leukocyte count, potassium, and sodium) would improve the algorithm.  The analysis in the paper showed that was indeed the case.
 
@@ -1544,7 +1544,7 @@ Triage classification & DEPT target probabilities & Observed proportion  \\
 red & $(0.25, 1.00]$ & 0.180   \\
 orange & $(0.10, 0.25]$ & 0.072   \\
 yellow & $[0.01, 0.10]$ & 0.047   \\
-green & $[0.00, 0.01)$ & 0.008   \\
+green & $[0.00, 0.01)$ & 0.026   \\
    \hline
 \end{tabular}
 \caption{DEPT target probabilities  versus observed proportion of death within 30 days for the DEPT color categories. The target probabilities are the ranges of 30-day mortality probabilities that define the color scores.} 
@@ -1721,7 +1721,7 @@ A logistic model for 30-day mortality with the addition of an age-sex interactio
 
 Figure~\ref{figure:predVsObsMort30CalibrateDanishED} shows calibration curves using the two methods discussed earlier -- computing average predicted probabilities with observed proportions of outcomes in buckets of the data (the plotted black points), and fitting a smooth curve to the scatterplot of observed outcomes versus predicted probabilities (the solid blue curve). 
 
-The black points with vertical lines provides a view similar to Figure~\ref{figure:predVsObsHuBMI} used to show the fit of the model for the association between hyperuricemia and BMI\@. The estimated proportion is plotted against the average probability in each bucket, and the scatter above and below the dashed line $y = x$ shows the extent to which the observed proportions and predicted probabilities agree.   Unlike Figure~\ref{figure:predVsObsHuBMI},  the large size of this data set has been exploited by adjusting the buckets adaptively to place more buckets in regions with a high density of predicted probabilities. The solid blue line is a smooth curve (using loess in \textsf{R}) to find a curve that best fits the data.
+The black points with vertical lines provides a view similar to Figure~\ref{figure:predVsObsHuBMI} used to show the fit of the model for the association between hyperuricemia and BMI\@. The estimated proportion is plotted against the average probability in each bucket, and the scatter above and below the dashed line $y = x$ shows the extent to which the observed proportions and predicted probabilities agree.   Unlike for Figure~\ref{figure:predVsObsHuBMI},  the large size of this data set has been exploited by adjusting the buckets adaptively to place more buckets in regions with a high density of predicted probabilities. The solid blue line is a smooth curve (using loess in \textsf{R}) to find a curve that best fits the data.
 
 Taken together, the two curves show that model predictions are reasonably accurate when the predicted probabilities are less then 0.2, but the smooth curve shows predicted probabilities larger than 0.2 are less accurate. The downward slope of the smooth blue curve indicates that observed outcomes happen less frequently that the model predicts.   Age is the only predictor that is not categorical so large predicted probabilities may be caused by outliers in age.
 
@@ -1745,9 +1745,9 @@ Figure~\ref{figure:predVsObsMort30CalibrateAgeLT100DanishED} uses the same calcu
     \label{figure:predVsObsMort30CalibrateAgeLT100DanishED}
 \end{figure}
 
-The different information provided by the two plots highlight both the strengths and weaknesses of each diagnostic. The putting data into buckets either predetermined as in Figure~\ref{figure:predVsObsHuBMI} or empirically determined as in Figure~\ref{figure:predVsObsMort30CalibrateAgeLT100DanishED}, shows the model fit in regions with substantial data along with the variability of the fit.  The smooth curve fit to the scatterplot hides the variability in regions with substantial amounts of data, but shows the effect of predictors that might be outliers.
+The different information provided by the two plots highlight both the strengths and weaknesses of each diagnostic. Putting data into buckets empirically determined shows the model fit in regions with substantial data;  it is not sensitive to outliers and so does not change when age is restricted.    The smooth curve fit to the scatterplot hides the variability in regions with substantial amounts of data, but shows the effect of predictors that might be outliers.
 
-Figure~\ref{figure:triageAgeSexMort30AgeRestrLogreg} shows the model coefficients using the age-restricted dataset. As would be expected the coefficients differ only slightly from those in Figure~\ref{figure:triageAgeSexInteractionMort30logreg}. This is the model that will be used for the revised triage score in the next section
+Figure~\ref{figure:triageAgeSexMort30AgeRestrLogreg} shows the model coefficients using the age-restricted dataset.  This is the model that will be used for the revised triage score in the next section.
 
 % latex table generated in R 4.1.2 by xtable 1.8-4 package
 % Thu Dec 22 10:52:19 2022
@@ -1833,7 +1833,7 @@ red & 78 & 88 & 87 & 18 & 271 \\
 \label{figure:DEPTColorVsNewColorPrimary}
 \end{figure}
 
-A model is also called a  \term{well-calibrated model} if the predicted proportion of events within categories matches the observed proportion, at least reasonably well.  The observed and cross-validated proportions in Figure~\ref{figure:mort30RatesByColorPrimary} for the model using DEPT, age and sex is well-calibrated but that the DEPT score is not, at least in the training data.
+ The observed and cross-validated proportions in Figure~\ref{figure:mort30RatesByColorPrimary} for the model using DEPT, age and sex is well-calibrated but the DEPT score based on the original model is not, at least in the training data.
 
 The estimated Brier score for the DEPT classification in the training cohort is 0.049. Using 10-fold cross validation, the estimated and cross-validated Brier score for the revised triage is 0.046, a slight improvement.
 

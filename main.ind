@@ -16,8 +16,8 @@
 		\hyperpage{266--272}
   \item apparent prediction error, \hyperindexformat{\textbf}{498}
   \item association, \hyperindexformat{\textbf}{40}
-  \item AUC, \hyperindexformat{\textbf}{496}
-  \item AUC-ROC, \hyperindexformat{\textbf}{496}
+  \item AUC, \hyperindexformat{\textbf}{497}
+  \item AUC-ROC, \hyperindexformat{\textbf}{497}
 
   \indexspace
 
@@ -29,11 +29,11 @@
   \item blocks, \hyperindexformat{\textbf}{28}
   \item Bonferroni correction, \hyperindexformat{\textbf}{271}
   \item boxplot, \hyperindexformat{\textbf}{36}
-  \item Brier score, \hyperindexformat{\textbf}{492}
+  \item Brier score, \hyperindexformat{\textbf}{493}
 
   \indexspace
 
-  \item c-statistic, \hyperindexformat{\textbf}{496}
+  \item c-statistic, \hyperindexformat{\textbf}{497}
   \item calibration plot, \hyperindexformat{\textbf}{468}
   \item case-control studies, \hyperpage{418--421}
     \subitem tests for association, \hyperpage{419}
@@ -444,7 +444,7 @@
   \item test data, \hyperindexformat{\textbf}{498}
   \item threshold probability, \hyperindexformat{\textbf}{494}
   \item time series, \hyperindexformat{\textbf}{296}
-  \item training data, \hyperindexformat{\textbf}{498}
+  \item training data, \hyperindexformat{\textbf}{497}
   \item transformation, \hyperindexformat{\textbf}{38}
   \item tree diagram, \hyperindexformat{\textbf}{114}, 118
   \item trial, \hyperindexformat{\textbf}{149}
@@ -469,7 +469,7 @@
   \indexspace
 
   \item weak relationship, \hyperindexformat{\textbf}{293}
-  \item well-calibrated model, \hyperindexformat{\textbf}{506}
+  \item well-calibrated, \hyperindexformat{\textbf}{493}
   \item whiskers, \hyperindexformat{\textbf}{37}
 
   \indexspace
