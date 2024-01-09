@@ -1420,9 +1420,46 @@ $\text{TPR} = 0.60$ corresponds to $\text{FNR} = 0.40$, and the point $(0.40, 0.
 
 If a prediction rule is used as a diagnostic test in a clinical setting (e.g., one which predicts whether someone has a disease), the TPR is the sensitivity of the test, and the FNR is 1 - specificity.  ROC curves are widely used in evaluating diagnostic tests, and are often defined equivalently as plotting sensitivity against 1 - specificity.
 
-Each point on the 45-degree line corresponds to  FPR and TPR on an ROC  using a prediction rule that is based on random guessing using a threshold probability between 0 and 1 without using any predictors. prediction rule that corresponds to random guessing using a threshold that is a random value of the prediction probability between 0 and 1. The point $(0.50, 0.50)$ corresponds to guessing disease is present when the random number is less than $0.50$.  In a large sample, given that the disease is not present, this rule will guess incorrectly that it is present $50\%$ of the the time (FPR = $0.50$).  When the disease is present, it will also guess it is present $50\%$ of the time (TPR = $0.50$). If the rule guesses present when the random number is less than $0.25$, it leads to incorrect guesses $25\%$ of the time when disease not is present (FPR = $0.25$), and correct guesses $25\%$ of the time when disease is present (TPR = $0.25$), so the point $(0.25, 0.25)$ will be on the ROC curve.  
+The 45-degree line on an ROC plot is used to distinguish between tests which may have some value vs. those which are worse than guessing.  Let $\text{D}$ and $\overline{\text{D}}$ indicate the presence or absence of a disease D respectively, and $+$ and $-$ indicate a positive or negative test.  For points on the 45-degree line, sensitivity equals 1 - specificity, so 
+\begin{align*}
+P(+ | \text{D}) &= 1 - P(- | \overline{\text{D}}) \\
+  &= P(+ | \overline{\text{D}}).
+\end{align*}
+The likelihood of a positive test is the same whether or not disease is present.  Bayes' rule can be used to show in this case that 
+\begin{align*}
+   \frac{P(\text{D}| +)}{P(\overline{\text{D}} | +)} =
+      \frac{P(D)}{P(\overline{\text{D}})}.
+\end{align*}
+In other words, the odds of disease given a positive test is the same as the odds of disease in the population in the absence of the test.  Diagnostic tests in which the ROC curve lies on the 45-degree line are no better than guessing the presence of disease using the overall prevalence.
 
-In models for the presence/absence of a disease (with presence labeled success), the area under an ROC curve (labeled \term{AUC},  \term{AUC-ROC} or the \term{c-statistic}) is the probability that a randomly selected case from the observations with  success has a higher predicted probability success than a randomly selected failure observation (derivation not shown).  The area under the 45-degree line (random guessing) is $0.50$.  ROC curves with an area larger than 0.50 are better than random guessing; if the area is less than $0.50$ corresponds to a model that is worse than random guessing.  
+The same algebra can be used to show that tests with ROC curves above the 45-degree line, the odds of disease given a positive test are larger than the odds of disease without the test, i.e., the diagnostic test is better than guessing based on the prevalence.   For tests with ROC curves below the 45-degree line the odds of disease given a positive test are lower than the odds of disease in the population; the diagnostic test is worse than guessing based on the population prevalence.
+
+\begin{comment}
+
+This might make a good exercise.
+
+Proof of the above:  When sensitivity equals 1 - specificity
+
+\begin{align*}
+P(+|D) &= 1 - P(- | \overline{D}) \\
+  &= P(+| \overline{D}) \\
+\frac{P(+|D)}{P(+| \overline{D})} &= 1\\
+P(+|D) &= \frac{P(D|+) P(+)}{P(D)} \\
+P(+|\overline{D}) &= \frac{P(\overline{D} | +) P(+)}{P(\overline{D})} 
+\end{align*}
+
+When the ratio is 1
+\begin{align*}
+\frac{P(D |+)}{P(D|+)} &= \frac{P(D)}{P(\overline{D})}
+\end{align*}
+
+\end{comment}
+
+The area under an ROC curve (labeled \term{AUC},  \term{AUC-ROC} or the \term{c-statistic}) is 0.5 when the curve is the 45-degree line, larger than 0.5 when the curve lies above the 45-degree line (the test is better than guessing)test and smaller than 0.5 when the curve lies below the 45-degree line (the test is worse than guessing).  It is possible to show 
+\begin{align*}
+\text{AUC} = \frac{P(+ | \text{D})}{P(+| \overline{\text{D}})}.
+\end{align*}
+A randomly selected member of the population without the disease is less likely to test positive by a factor of the value of AUC than a member selected from the population with the disease. More simply, the diagnostic test performs better in the population with than without the disease.
 
 How much better than random guessing is a prediction rule for hyperuricemia based on BMI and sex? The AUC for Figure~\ref{figure:ROCHuBMISex} is 0.678 -- the model has a $68\%$ chance of correctly distinguishing between an individual with versus  without hyperuricemia.  There is no single definition of a good AUC, but are guidelines that may be useful in some settings.  For biomedical data, Hosmer, et.\ al.\footfullcite{hosmer2013applied}, recommend the following:
 \begin{figure}[ht]
@@ -1721,7 +1758,7 @@ A logistic model for 30-day mortality with the addition of an age-sex interactio
 
 Figure~\ref{figure:predVsObsMort30CalibrateDanishED} shows calibration curves using the two methods discussed earlier -- computing average predicted probabilities with observed proportions of outcomes in buckets of the data (the plotted black points), and fitting a smooth curve to the scatterplot of observed outcomes versus predicted probabilities (the solid blue curve). 
 
-The black points with vertical lines provides a view similar to Figure~\ref{figure:predVsObsHuBMI} used to show the fit of the model for the association between hyperuricemia and BMI\@. The estimated proportion is plotted against the average probability in each bucket, and the scatter above and below the dashed line $y = x$ shows the extent to which the observed proportions and predicted probabilities agree.   Unlike for Figure~\ref{figure:predVsObsHuBMI},  the large size of this data set has been exploited by adjusting the buckets adaptively to place more buckets in regions with a high density of predicted probabilities. The solid blue line is a smooth curve (using loess in \textsf{R}) to find a curve that best fits the data.
+The black points with vertical lines provides a view similar to Figure~\ref{figure:predVsObsHuBMI} used to show the fit of the model for the association between hyperuricemia and BMI\@. The estimated proportion is plotted against the average probability in each bucket, and the scatter above and below the dashed line $y = x$ shows the extent to which the observed proportions and predicted probabilities agree.   Unlike for Figure~\ref{figure:predVsObsHuBMI},  the large size of this data set has been exploited by adjusting the buckets adaptively to place more buckets in regions with a high density of predicted probabilities, so that each bucket contains approximately 1\% of the predicted probabilities. The solid blue line is a smooth curve (using loess in \textsf{R}) to find a curve that best fits the data.
 
 Taken together, the two curves show that model predictions are reasonably accurate when the predicted probabilities are less then 0.2, but the smooth curve shows predicted probabilities larger than 0.2 are less accurate. The downward slope of the smooth blue curve indicates that observed outcomes happen less frequently that the model predicts.   Age is the only predictor that is not categorical so large predicted probabilities may be caused by outliers in age.
 
