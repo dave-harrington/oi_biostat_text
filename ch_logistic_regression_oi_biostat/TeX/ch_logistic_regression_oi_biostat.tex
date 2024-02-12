@@ -1173,7 +1173,7 @@ Each of the predictors has two values, so each participant falls into 1 of 4 pro
 \label{figure:tbInterruptProfiles}
 \end{figure}
 
-The first column labels the $4$ profiles, and columns $2-3$ show the values predictors.  The remaining columns contain the following data for each profile:
+The first column labels the $4$ profiles, and columns $2-3$ show the values of the predictors.  The remaining columns contain the following data for each profile:
 \begin{itemize}
 
 \item \textit{Observed responses:} The observed number of treatment interruptions.
@@ -1208,7 +1208,7 @@ The Pearson residual $r$ is a standardized version of the observed - predicted n
 \end{align*}
 The residual is small because the predicted value $45.02$ is close to the observed number of responses $44$.
 
- A $\chi^2$ goodness of fit is based on $\sum_i r_i^2$, with degrees of freedom equal to the number of profiles minus the total number of parameters (including the intercept).  For the TB data, the $\chi^2$ statistic $X^2$ is
+ A $\chi^2$ goodness of fit is based on $\sum_i r_i^2$, with degrees of freedom equal to the number of profiles minus the total number of parameters (including the intercept).  For the TB data, the $\chi^2$ statistic $\chi^2$ is
 \begin{align*}
    \chi^2 &= \sum_{i - 1}^4 r_i^2 \\
        &= (-0.157)^2 + (0.135)^2 + (0.418)^2 + (-.398)^2 \\
@@ -1238,7 +1238,7 @@ The $\chi^2$ goodness-of-fit test discussed above cannot be used when some profi
 \end{align*}
 so this observation is part of group 1.
 
-   \item For each group, record the observed numbers of individuals without and with the event ($o_0$ and $o_1$, respectively), and compute the expected counts for each category ($\hat{e}_0$ and $\hat{e}_1$).  The expected count $\hat{e}_0 =\sum(1 - \hat{p}_i)$, where the sum is over cases within a group, and $\hat{e}_1 = \sum \hat{p}_i$. The first row in Figure~\ref{figure:HLTestHyperuricemiaBmi} shows that in the smallest $10\%$ of the predicted probabilities, $48$ individuals did not experience hyperuricemia, while $2$ did.  The corresponding expected counts were $46.2$ and $3.8$.
+   \item For each of the $g$ groups, record the observed numbers of individuals without and with the event ($o_0$ and $o_1$, respectively), and compute the expected counts for each category ($\hat{e}_0$ and $\hat{e}_1$).  The expected count $\hat{e}_0 =\sum_{o_i = 0}(1 - \hat{p}_i)$, where the sum is over cases within a group, and $\hat{e}_1 = \sum_{o_i = 1} \hat{p}_i$. The first row in Figure~\ref{figure:HLTestHyperuricemiaBmi} shows that in the smallest $10\%$ of the predicted probabilities, $48$ individuals did not experience hyperuricemia, while $2$ did.  The corresponding expected counts were $46.2$ and $3.8$.
 
   \item Calculate the test statistic $\hat{C}$ and its significance level:
   \begin{align*}
@@ -1305,7 +1305,7 @@ Figure~\ref{figure:HLTestHyperuricemiaBMISex} shows a table summarizing the fit 
 \label{figure:HLTestHyperuricemiaBMISex}
 \end{figure}
 
-The hyperuricemia example highlights an important aspect of testing model fit.  The Hosmer-Lemeshow tests suggest that neither the one nor two variable model fits poorly. Since the models are nested, the deviance statistic can be used to test whether sex should be added to a model with BMI alone.  The difference between the residual deviances for the models is 3.90 and has an approximate $\chi^2$ distribution with 1df.  The $p$-value for the statistic is 0.048, but the AIC statistic for both models is 461.6, suggesting that adding the predictor sex to the model may not be worth the gain in model complexity.  Neither the model with BMI alone or the one with BMI and sex fit poorly, but the evidence is weak that the two variable model is better than the model with one variable.  
+The hyperuricemia example highlights an important aspect of testing model fit.  The Hosmer-Lemeshow tests suggest that neither the one nor two variable model fits poorly. Since the models are nested, the deviance statistic can be used to test whether sex should be added to a model with BMI alone.  The difference between the residual deviances for the models is 3.90 and has an approximate $\chi^2$ distribution with 1df.  The $p$-value for the statistic is 0.048, and the AIC statistic for both models is 461.6, suggesting that adding the predictor sex to the model may not be worth the gain in model complexity.  Neither the model with BMI alone or the one with BMI and sex fit poorly, but the evidence is weak that the two variable model is better than the model with one variable.  
 
 The Hosmer-Lemeshow test has some weaknesses, and several alternatives have been proposed, all with their own advantages and disadvantages.  Grouping cases by deciles of probabilities has no theoretical justification, a $\chi^2$  distribution with $g - 2$ degrees of freedom does not always provide a good approximation to the sampling distribution, and the test has been shown to have low power in some situations.  These shortcomings of the test, however, are largely about the statistical properties of the test statistic.  It is important to keep in mind that statistical tests for goodness-of-ft have limited value generally.  A statistical test for goodness-of-fit will reject the null hypothesis of adequate fit only when there is strong evidence of lack of fit.  Many models fit poorly but not so badly that a goodness-of-fit statistic is significant.  The table associated with the Hosmer-Lemeshow statistic is at least as valuable as its $p$-value, since it may show regions of the data where the fit is either adequate or particularly poor. Users of the test should pay more attention to the table than to the $p$-value.
 
@@ -1330,7 +1330,7 @@ There are analogues to $R^2$ from linear models not covered here and can be foun
 
 \subsubsection{Calibration plots}
 
-Calibration plots provide a visual display of the match between predicted probabilities and observed outcomes, and and are useful for both checking model fit and assessing the agreement between predicted probabilities and outcomes. Figure~\ref{figure:calibrationHuBMISex} shows calibration plots for the logistic models for hyperuricemia with predictor BMI (blue) and with predictors BMI and sex (green).  Because the outcome is binary, the agreement between predicted probabilities and outcomes is difficult to see in a scatterplot of observed versus predicted values, so calibration plots typically add a best fitting smooth curve, using \texttt{loess} or a similar function in \textsf{R}.  If a model is \term{well-calibrated}, the smooth curve should lie close to the $45$-degree line $y = x$ (the dotted line in the curve).  The figure shows that the model using BMI alone is well-calibrated for predicted probabilities between 0.0 and 0.3, less so for probabilities larger than 0.4, where the data are sparse.  The model including BMI and sex is closer to the $45$-degree line and shows that model is a better fit to the data.  The largest values on the horizontal axis for the two curves are different to avoid extrapolation; the largest predicted probability is 0.722 for the model with BMI alone and 0.624 for the model that adds sex.  Extending the green curve to 0.722 would involve extrapolation.
+Calibration plots are a visual display of the match between predicted probabilities and observed outcomes, and and are useful for both checking model fit and assessing the agreement between predicted probabilities and outcomes. Figure~\ref{figure:calibrationHuBMISex} shows calibration plots for the logistic models for hyperuricemia with predictor BMI (blue) and with predictors BMI and sex (green).  Because the outcome is binary, the agreement between predicted probabilities and outcomes is difficult to see in a scatterplot of observed versus predicted values, so calibration plots typically add a best fitting smooth curve, using \texttt{loess} or a similar function in \textsf{R}.  If a model is \term{well-calibrated}, the smooth curve should lie close to the $45$-degree line $y = x$ (the dotted line in the curve).  The figure shows that the model using BMI alone is well-calibrated for predicted probabilities between 0.0 and 0.3, less so for probabilities larger than 0.4, where the data are sparse.  The model including BMI and sex is closer to the $45$-degree line and shows that model is a better fit to the data.  The largest values on the horizontal axis for the two curves are different to avoid extrapolation; the largest predicted probability is 0.722 for the model with BMI alone and 0.624 for the model that adds sex.  Extending the green curve to 0.722 would involve extrapolation.
 
 \begin{figure}[!tbh]
   \centering
@@ -1401,13 +1401,7 @@ Figure~\ref{figure:fprFNRByCutoffHuBMISex} shows that the FPR and FNR are approx
 
 A \term{receiver operating characteristic curve}, or \term{ROC curve}, is another graphic that shows how a binary classification rule behaves as its threshold value changes. The ROC curve plots the true positive rate (TPR) on the vertical axis against the false positive rate (FPR) on the horizontal axis at each threshold setting for the predicted probability of the outcome. An ROC curve shows directly that increases in the true positive rate can only be achieved by increasing the false positive rate. 
 
-Figure~\ref{figure:ROCHuBMISex} shows the ROC curve for the model for hyperuricemia based on BMI and sex.  When the FPR is approximately 0.40, the TPR is approximately 0.60. Suppose $\hat{y}$ is the predicted value of hyperuricemia.  Since 
-\begin{align*}
-  \text{TPR} &= P(\hat{y} = 1| \text{hyperuricemia present}) \\
-     &= 1 - P(\hat{y} =  0 | \text{hyperuricemia present)} \\
-     &= 1 - \text{FNR},
-\end{align*}
-$\text{TPR} = 0.60$ corresponds to $\text{FNR} = 0.40$, and the point $(0.40, 0.60)$ (approximately) corresponds to the threshold value $0.20$ in Figure~\ref{figure:fprFNRByCutoffHuBMISex}.
+Figure~\ref{figure:ROCHuBMISex} shows the ROC curve for the model for hyperuricemia based on BMI and sex.  When the FPR is approximately 0.40, the TPR is approximately 0.60. Figure~\ref{figure:fprFNRByCutoffHuBMISex} shows that this corresponds to a threshold value of  $0.20$.
 
 
 \begin{figure}[!tbh]
@@ -1420,15 +1414,15 @@ $\text{TPR} = 0.60$ corresponds to $\text{FNR} = 0.40$, and the point $(0.40, 0.
 
 If a prediction rule is used as a diagnostic test in a clinical setting (e.g., one which predicts whether someone has a disease), the TPR is the sensitivity of the test, and the FNR is 1 - specificity.  ROC curves are widely used in evaluating diagnostic tests, and are often defined equivalently as plotting sensitivity against 1 - specificity.
 
-The 45-degree line on an ROC plot is used to distinguish between tests which may have some value vs. those which are worse than guessing.  Let $\text{D}$ and $\overline{\text{D}}$ indicate the presence or absence of a disease D respectively, and $+$ and $-$ indicate a positive or negative test.  For points on the 45-degree line, sensitivity equals 1 - specificity, so 
+The 45-degree line on an ROC plot is used to distinguish between tests which may have some value vs. those which are worse than guessing.  Let $\text{D}$ and $\text{D}^C$ indicate the presence or absence of a disease D respectively, and $+$ and $-$ indicate a positive or negative test.  For points on the 45-degree line, sensitivity equals 1 - specificity, so 
 \begin{align*}
-P(+ | \text{D}) &= 1 - P(- | \overline{\text{D}}) \\
-  &= P(+ | \overline{\text{D}}).
+P(+ | \text{D}) &= 1 - P(- | \text{D}^C) \\
+  &= P(+ | \text{D}^C).
 \end{align*}
 The likelihood of a positive test is the same whether or not disease is present.  Bayes' rule can be used to show in this case that 
 \begin{align*}
-   \frac{P(\text{D}| +)}{P(\overline{\text{D}} | +)} =
-      \frac{P(D)}{P(\overline{\text{D}})}.
+   \frac{P(\text{D}| +)}{P(\text{D}^C | +)} =
+      \frac{P(D)}{P(\text{D}^C)}.
 \end{align*}
 In other words, the odds of disease given a positive test is the same as the odds of disease in the population in the absence of the test.  Diagnostic tests in which the ROC curve lies on the 45-degree line are no better than guessing the presence of disease using the overall prevalence.
 
@@ -1455,11 +1449,13 @@ When the ratio is 1
 
 \end{comment}
 
-The area under an ROC curve (labeled \term{AUC},  \term{AUC-ROC} or the \term{c-statistic}) is 0.5 when the curve is the 45-degree line, larger than 0.5 when the curve lies above the 45-degree line (the test is better than guessing)test and smaller than 0.5 when the curve lies below the 45-degree line (the test is worse than guessing).  It is possible to show 
+The area under an ROC curve (labeled \term{AUC},  \term{AUC-ROC} or the \term{c-statistic}) is 0.5 when the curve is the 45-degree line, larger than 0.5 when the curve lies above the 45-degree line (the test is better than guessing) test and smaller than 0.5 when the curve lies below the 45-degree line (the test is worse than guessing).  It is possible to show 
 \begin{align*}
-\text{AUC} = \frac{P(+ | \text{D})}{P(+| \overline{\text{D}})}.
+\text{AUC} = \frac{P(+ | \text{D})}{P(+| \text{D}^C)}.
 \end{align*}
 A randomly selected member of the population without the disease is less likely to test positive by a factor of the value of AUC than a member selected from the population with the disease. More simply, the diagnostic test performs better in the population with than without the disease.
+
+Software can be used to calculate the AUC and confidence intervals for a given ROC.  The analyses in this and the next section use the \textsf{R} package \texttt{cvAUC}.
 
 How much better than random guessing is a prediction rule for hyperuricemia based on BMI and sex? The AUC for Figure~\ref{figure:ROCHuBMISex} is 0.678 -- the model has a $68\%$ chance of correctly distinguishing between an individual with versus  without hyperuricemia.  There is no single definition of a good AUC, but are guidelines that may be useful in some settings.  For biomedical data, Hosmer, et.\ al.\footfullcite{hosmer2013applied}, recommend the following:
 \begin{figure}[ht]
@@ -1480,7 +1476,7 @@ AUC under ROC curve & Suggested interpretation  \\
 \end{figure}
 Using these guidelines, the AUC for the model for hyperuricemia with predictors BMI and sex discriminates poorly between cases with and without hyperuricemia -- adding one more piece of information that the model would not be useful in a clinical setting.
 
-Figure~\ref{figure:ROCHuBMISex} shows four examples ROC curves corresponding to hypothetical models with increasing ability to discriminate: the 45-degree line, AUC = 0.5, random guessing; the green curve, AUC = 0.667, poor discrimination; blue curve, AUC = 0.785, acceptable discrimination; red curve, AUC = 0.874, excellent discrimination. ROC curves will be used to compare models for triage in an emergency department in the case study in Section~\ref{caseStudy}.
+Figure~\ref{figure:ROCHuBMISex} shows four example ROC curves corresponding to hypothetical models with increasing ability to discriminate: the 45-degree line, AUC = 0.5, random guessing; the green curve, AUC = 0.667, poor discrimination; blue curve, AUC = 0.785, acceptable discrimination; red curve, AUC = 0.874, excellent discrimination. ROC curves will be used to compare models for triage in an emergency department in the case study in Section~\ref{caseStudy}.
 
 \begin{figure}[!tbh]
   \centering
@@ -1490,16 +1486,18 @@ Figure~\ref{figure:ROCHuBMISex} shows four examples ROC curves corresponding to 
     \label{figure:ROCHuBMISex}
 \end{figure}
 
+Confidence intervals
+
 \subsection{Out-of-sample accuracy of predictions}
 \label{section:outOfSamplePredictionAccuracy} 
 
-When predicting outcomes is the goal of an analysis, the data used to estimate a prediction model is usually called the \term{training data}. When the prediction error from a model (such as a Brier score) is estimated using the training data, the estimate is called an \term{in-sample prediction error} or an \term{apparent prediction error}. Methods such as maximum likelihood, which is used to estimate a logistic regression model, choose parameter estimates that are best matched to the data, so in-sample prediction error is generally smaller than the prediction error in new data where the relationships between outcome and predictors may be slightly different.  \term{Out-of-sample} prediction error characterizes the behavior of a model when fit to new data.  Out-of-sample prediction error can be estimated in a new dataset, usually called \term{test data} or \term{validation data}, or estimated using \term{cross-validation} when a validation dataset is not available.  The use of a validation dataset is illustrated in Section~\ref{section:validationRevisedTriageScore}; this section outlines cross-validation. 
+When predicting outcomes is the goal of an analysis, the data used to estimate a prediction model is usually called the \term{training data}. When the prediction error from a model (such as a Brier score) is estimated using the training data, the estimate is called an \term{in-sample prediction error} or an \term{apparent prediction error}. Methods such as maximum likelihood (used to estimate a logistic regression model) choose parameter estimates that are best matched to the data, so in-sample prediction error is generally smaller than the prediction error in new data where the relationships between outcome and predictors may be slightly different.  \term{Out-of-sample} prediction error characterizes the behavior of a model when fit to new data.  Out-of-sample prediction error can be estimated in a new dataset, usually called \term{test data} or \term{validation data}, or estimated using \term{cross-validation} when a validation dataset is not available.  The use of a validation dataset is illustrated in Section~\ref{section:validationRevisedTriageScore}; this section outlines cross-validation. 
 
 \subsubsection{Cross-validation}
 
 Cross-validation estimates out-of-sample prediction error by repeatedly resampling from the training data to create a collection of paired training and test datasets. In \term{$k$-fold cross-validation} the data are randomly divided into $k$ non-overlapping, approximately equal sized subsets, called folds; typically $k = 5 \text{ or } 10$. Each fold is used as training data to re-estimate a model, then prediction error (e.g., a Brier score) is estimated by applying the re-estimated model to the data not in the fold, i.e., the data held out from the fold.  The process produces $k$ estimates of prediction error, which are then averaged. When the fold sizes are identical, a simple average can be used since each estimate of prediction error is based on the same amount of data. Figure~\ref{figure:crossValidation} shows a graphical representation of $5$-fold cross-validation.
 
-The randomly chosen subsets i.e., the folds, use training datasets that may reflect different associations between the response and predictors, so even though cross-validation uses the training data its estimates of error rates is less subject to the bias of in-sample estimates of error.
+The randomly chosen subsets i.e., the folds, use training datasets that may reflect different associations between the response and predictors, so even though cross-validation uses the training data its estimates of error rates are less subject to the bias of in-sample estimates of error.
 
 \begin{figure}[h!]
   \centering
@@ -1517,7 +1515,7 @@ Cross-validation has some drawbacks -- the best choice of $k$ for a given datase
 
 As noted earlier, prediction from statistical models is something that should be done with great care, especially in a clinical situation where prediction may be a diagnostic tool leading to an intervention.  In this setting is important to examine a statistical model from several perspectives.  
 
-What do these tools tell us about the relatively simple model for predicting hyperuricemia from BMI and sex along with the initial look at significance levels for predictors and changes in AIC earlier in the chapter?  Although the significant $p$-values for BMI and sex did not have the interpretation tests of predefined hypotheses, the suggested an potentially important association between the predictors and hyperuricemia.  While comparing AIC values did not provide a clear answer as to the value of adding sex as a predictor, the calibration plots suggested that the two-variable model better fit the data than the model with only BMI.  Brier scores indicate that the two predictors may provide acceptably accurate predictions overall, but predictions within subsets of individuals either with or without underlying hyperuricemia were not always accurate, even after adjusting the threshold probability for predicting presence or absence.  In summary, a logistic regression with BMI and sex fits a model for the log(odds) of hyperuricemia reasonably well, but not well enough to be used as a diagnostic tool.
+What do these methods for assessing a model tell us about the relatively simple model for predicting hyperuricemia from BMI and sex along with the initial look at significance levels for predictors and changes in AIC earlier in the chapter?  Although the significant $p$-values for BMI and sex did not have the interpretation as tests of predefined hypotheses, they suggested an potentially important association between the predictors and hyperuricemia.  While comparing AIC values did not provide a clear answer as to the value of adding sex as a predictor, the calibration plots suggested that the two-variable model better fit the data than the model with only BMI.  Brier scores indicate that the two predictors may provide acceptably accurate predictions overall, but predictions within subsets of individuals either with or without underlying hyperuricemia were not always accurate, even after adjusting the threshold probability for predicting presence or absence.  In summary, a logistic regression with BMI and sex fits a model for the log(odds) of hyperuricemia reasonably well, but not well enough to be used as a diagnostic tool.
 
 The hyperuricemia data is useful for exploring how logistic regression might describe the association between an outcome and predictors, but it is a simple example that does not reflect the complexity of many clinical situations.  The next section presents a case study on improving a triage strategy in an hospital emergency department based on a published paper.
 
@@ -1528,17 +1526,20 @@ The hyperuricemia data is useful for exploring how logistic regression might des
 \subsection{Introduction and background}
 \label{IntroDanishED}
 
-Most hospital emergency departments triage arriving patients so that the most severely compromised  are given higher priority. It is an especially valuable process when the case load is high, since waiting time to treatment is an important factor in outcome.  This section presents a case study developing a logistic regression model for triaging patients using data from Kristensen, et al.\footfullcite{kristensen2017routine}, a cohort study conducted in the Emergency Department (ED) of the Nordsj{\ae}lland University Hospital in Denmark.  In the paper, the study team proposed a revision to an ED triage algorithm based on predictions for the probability of death within 30 days from admission (30-day mortality).  The study used a primary cohort of $6,249$ participants to model alternative triage algorithms and a validation cohort of $6,383$ individuals to evaluate the models.   The full data for both cohorts are contained the data package \texttt{oibiostat}, as \texttt{DanishEDPrimaryCohort} and \texttt{DanishEDValidationCohort}.  These data sets have also been posted by the authors (\url{DOI:10.5061/dryad.m2bq5}).
+Most hospital emergency departments triage arriving patients so that the most severely compromised  are given higher priority. It is an especially valuable process when the case load is high, since waiting time to treatment is an important factor in outcome.  This section presents a case study developing a logistic regression model for triaging patients using data from Kristensen, et al.\footfullcite{kristensen2017routine}, a cohort study conducted in the Emergency Department (ED) of the Nordsj{\ae}lland University Hospital in Denmark.  In the paper, the study team proposed a revision to an ED triage algorithm based on predictions for the probability of death within 30 days from admission (30-day mortality).  The study used a primary cohort of $6,249$ participants to model alternative triage algorithms and a validation cohort of $6,383$ individuals to evaluate the models.   
 
 % add data to the package
 
-At the time the study was published, the hospital used the Danish Emergency Process Triage (DEPT) algorithm.  DEPT is a 5-level system ranking patients based on vital signs and presenting conditions that assigns color codes for the predicted 30-day mortality probability.  Let $p$ be the probability of a patient dying within 30 days from admission to the ED\@.  The color codes correspond to the following values of $p$: "red", $p > 0.25$; orange, $0.10 < p \leq 0.25$; "yellow",  $0.01 \leq  p  \leq 0.10$; "green",  $ < 0.01$; and "blue", minor conditions for which the patient should not be admitted to the ED\@. This analysis uses the term target probabilities for the probability ranges associated with each color. Patients in category "blue" are not included either in the published analysis or the one presented here, making the triage classification a 4-level system for patients admitted to the ED\@.
+At the time the study was published, the hospital used the Danish Emergency Process Triage (DEPT) algorithm.  DEPT is a 5-level system ranking patients based on vital signs and presenting conditions (listed in the Kristensen paper) that assigns color codes for the predicted 30-day mortality probability.  Let $p$ be the probability of a patient dying within 30 days from admission to the ED\@.  The color codes correspond to the following values of $p$: "red", $p > 0.25$; orange, $0.10 < p \leq 0.25$; "yellow",  $0.01 \leq  p  \leq 0.10$; "green",  $ < 0.01$; and "blue", minor conditions for which the patient should not be admitted to the ED\@. The analysis in this section uses the term target probabilities for the probability ranges associated with each color. Patients in category "blue" are not included either in the published analysis or the one presented here, making the triage classification a 4-level system for patients admitted to the ED.
 
-Based on prior studies, the Kristensen team conjectured that revising DEPT to include the results of routine biochemical screening normally done in an ED (albumin, creatinine, c-reactive protein, hemoglobin, lactate dehydrogenase, leukocyte count, potassium, and sodium) would improve the algorithm.  The analysis in the paper showed that was indeed the case.
+Based on prior studies, the Kristensen team conjectured that revising DEPT using  the results of routine biochemical screening normally done in an ED (albumin, creatinine, c-reactive protein, hemoglobin, lactate dehydrogenase, leukocyte count, potassium, and sodium) would improve the algorithm compared to the previous scoring based in vital signs and presenting conditions.  The analysis in the Kristensen paper showed that was indeed the case.
 
-This section examines a simpler modification of DEPT -- adding the demographic variables age and sex to the existing color rankings -- for several reasons. A more complete analysis might use a logistic regression that adds age and sex to the original variables used to create DEPT but those variables were not available for this case study.   Readers of this text are unlikely to be familiar with the definitions of the biochemical measurements and their clinical implications. The Nordsj{\ae}lland group used transformations of these measurements to model increased risk of death for abnormally low or high values of the biochemical measurements, and the transformations used are beyond the scope of this text. The steps used to build and test models that add only age and sex are the similar to those examining more predictors. Finally, while the triage system augmented by age and sex does not improve DEPT as much as the model in the Kristensen paper, it does surprisingly well.  It may not be a useful tool in an ED, but it is more than sufficient as an example to study risk classification.    Readers interested in the full analysis should be able to read the Kristensen paper after mastering the material in this section.
+This section examines a simpler modification of DEPT -- adding the demographic variables age and sex to the existing color rankings -- for several reasons. A more complete analysis might use a logistic regression that adds age and sex to the original variables used to create DEPT but those variables were not available for this case study.   Readers of this text are unlikely to be familiar with the definitions of the biochemical measurements and their clinical implications. The Nordsj{\ae}lland group used transformations of these measurements to model increased risk of death for abnormally low or high values of the biochemical measurements, and the transformations used are beyond the scope of this text. The steps used to build and test models that add only age and sex to DEPT are similar to those examining more predictors. Finally, while the triage system augmented by age and sex does not improve DEPT as much as the model in the Kristensen paper, it does surprisingly well.  It may not be a useful tool in an ED, but it is more than sufficient as an example to study risk classification.    Readers interested in the full analysis should be able to read the Kristensen paper after mastering the material in this section.
 
 Significance levels ($p$-values) are used differently here than in other sections of the text.  They are used to explore and screen models, not for inference about particular variables.  Since the goal of the analysis is the prediction of outcome rather than an explanatory model for the association of particular variables with outcome, the statistical properties of models are assessed by examining the accuracy of predictions.  
+
+The full data for both cohorts are contained the data package \texttt{oibiostat}, as \texttt{DanishEDPrimaryCohort} and \texttt{DanishEDValidationCohort}.  These datasets have also been posted by the authors (\url{DOI:10.5061/dryad.m2bq5}).  The datasets in \texttt{oibiostat} have been formatted for readability.
+
 
 
 \subsection{Examining the data}
@@ -1565,11 +1566,12 @@ red & 224 & 49 & 273 \\
    \hline
 \end{tabular}
 \caption{Association of DEPT triage classification with
-       30 day mortality.}
+       30-day mortality.}
 \label{figure:triageMort30Table}
 \end{figure}
 
-Figure~\ref{figure:predVsObsTriageMort30Table} shows that the observed proportion of deaths falls within the predicted range except for the two highest risk categories, "red" and "orange"; the proportion of deaths within 30 days is less than the lower bound of the target probability for both categories.  When applied to these data, the DEPT classification places too many low risk patients in the highest risk categories.
+Figure~\ref{figure:predVsObsTriageMort30Table} shows that the observed proportion of deaths falls outside the predicted range for three of the four categories: "red", "orange" and "green".  Since the observed proportion of deaths is less than the lower bound in the high risk categories "red" and "orange", too many low risk patients would be classified into those categories.  The reverse happens with the low risk category "green"; the observed proportion of deaths is larger than the upper bound for the target probabilities.  Too many higher risk patients would be classified as low risk.
+
 
 \begin{figure}[ht]
 \centering
@@ -1579,7 +1581,7 @@ Figure~\ref{figure:predVsObsTriageMort30Table} shows that the observed proportio
 Triage classification & DEPT target probabilities & Observed proportion  \\
   \hline
 red & $(0.25, 1.00]$ & 0.180   \\
-orange & $(0.10, 0.25]$ & 0.072   \\
+orange & $(0.10, 0.25]$ & 0.073   \\
 yellow & $[0.01, 0.10]$ & 0.047   \\
 green & $[0.00, 0.01)$ & 0.026   \\
    \hline
@@ -1598,7 +1600,7 @@ The minimum and maximum ages (in years) are 16 and 108, with a mean 59.6 and med
     \label{figure:histAgeDanishED}
 \end{figure}
 
-Figure~\ref{figure:mort30AgeTable} shows the association of age and 30 day mortality, with age grouped into quartiles. The table shows that the estimated probability of death increases monotonically from $6/1537 = 0.004$ in the youngest quartile to $184/1542 = 0.119$ in the oldest.  Since the $\chi^2$ statistic has value 233 on 3 degrees of freedom, the evidence for an association of age with 30-day mortality association is strong.
+Figure~\ref{figure:mort30AgeTable} shows the association of age and 30-day mortality, with age grouped into quartiles. The table shows that the estimated probability of death increases monotonically from $6/1537 = 0.004$ in the youngest quartile to $184/1542 = 0.119$ in the oldest.  Since the $\chi^2$ statistic has value 233 on 3 degrees of freedom, the evidence for an association of age with 30-day mortality association is strong.
 
 % latex table generated in R 4.1.2 by xtable 1.8-4 package
 % Sun Jul 10 17:33:56 2022
@@ -1617,11 +1619,11 @@ Age & No & Yes & Sum \\
    \hline
 \end{tabular}
 \caption{Association of age with
-       30-day mortality, with age in years grouped by quartiles. The named colors on the horizontal axis correspond to DEPT codes.}
+       30-day mortality, with age in years grouped by quartiles.}
 \label{figure:mort30AgeTable}
 \end{figure}
 
-Figure~\ref{figure:triageAgeCatTable} shows the relationship between age and triage score. The $\chi^2$ statistic for the table is 88 on 9 degrees of freedom, so the evidence for the association is also strong.  The segmented bar plot in Figure~\ref{figure:ageTriageSegBarDanishED} shows the relationship more clearly than the table -- individuals in the age group $(75, 108]$ are more likely to have been given a triage score of "red" than one of the lower risk categories, while the reverse is true for individuals with ages between 45 and 63.  
+Figure~\ref{figure:triageAgeCatTable} shows the relationship between age and triage score. The $\chi^2$ statistic for the table is 88 on 9 degrees of freedom, so the evidence for the association is also strong.  The segmented bar plot in Figure~\ref{figure:ageTriageSegBarDanishED} shows the relationship more clearly than the table.  As age quartile increases, individuals are more likely to be scored in the higher risk categories "red" and "orange", denoted in black and dark gray.
 
 %reversing rows and columns might be better.  The palette can also be improved.  The placement of the figure is awkward.
 
@@ -1650,7 +1652,7 @@ Figure~\ref{figure:triageAgeCatTable} shows the relationship between age and tri
   \centering
   \includegraphics[width=0.70\textwidth]
   {ch_logistic_regression_oi_biostat/figures/ageTriageSegBarDanishED/ageTriageSegBarDanishED.pdf}
-    \caption{Standardized segmented bar plot showing the relationship between triage score and age in years, grouped by quartiles.}
+    \caption{Standardized segmented bar plot showing the relationship between age (in years, grouped by quartiles) and triage score. The shading in the triage score goes from dark to light as risk decreases from "red" to "green".}
     \label{figure:ageTriageSegBarDanishED}
 \end{figure}
 
@@ -1671,12 +1673,12 @@ female & 3060 & 157 & 3217 \\
    \hline
 \end{tabular}
 \caption{Association of sex with
-       30 day mortality.}
+       30-day mortality.}
 \label{figure:sexMort30Table}
 \end{figure}
 
 
-\subsection{Modeling the relationship between 30-day mortality and DEPT triage score, age and sex}
+\subsection{Modeling the relationship between 30-day mortality and DEPT triage score, age and sex. The named colors on the horizontal axis correspond to DEPT codes.}
 \label{section:triageModelDEPTAgeSex}
 
 The initial analysis of the training data uses a logistic regression with response variable 30-day mortality and predictors DEPT triage score, age and sex.  Even though sex is not by itself strongly associated with 30-day mortality, it is included in the initial model to explore its relationship with outcome after adjusting for age and DEPT score.   The conditions for a logistic regression are met in this dataset: the cases are independent; 369 individuals died within 30 days after admission so a model can have up to 33 parameters (369/11 = 33.5); and since the study did not gather data using outcome-based sampling, probabilities can be estimated from logistic regression.  Goodness-of-fit tests used later in the section will show that the logistic model is reasonable but can be improved.
@@ -1782,7 +1784,7 @@ Figure~\ref{figure:predVsObsMort30CalibrateAgeLT100DanishED} uses the same calcu
     \label{figure:predVsObsMort30CalibrateAgeLT100DanishED}
 \end{figure}
 
-The different information provided by the two plots highlight both the strengths and weaknesses of each diagnostic. Putting data into buckets empirically determined shows the model fit in regions with substantial data;  it is not sensitive to outliers and so does not change when age is restricted.    The smooth curve fit to the scatterplot hides the variability in regions with substantial amounts of data, but shows the effect of predictors that might be outliers.
+The different information provided by the two plots highlight both the strengths and weaknesses of each diagnostic. Putting data into empirically-determined buckets shows the model fit in regions with substantial data;  it is not sensitive to outliers and so does not change when age is restricted.    The smooth curve fit to the scatterplot hides the variability in regions with substantial amounts of data, but shows the effect of predictors that might be outliers.
 
 Figure~\ref{figure:triageAgeSexMort30AgeRestrLogreg} shows the model coefficients using the age-restricted dataset.  This is the model that will be used for the revised triage score in the next section.
 
@@ -1960,7 +1962,7 @@ The ROC curves discussed in Section~\ref{section:predictiveAccuracy} quantify th
 \subsection{Summary}
 \label{section:interpretationNewColorScore}
 
-The ED triage model explored in this case study illustrates the steps that might be used in building and evaluating a prediction model.   The analysis makes compromises, however, that limit its practical value.  A more complete modification of the DEPT scoring should start by using the predictors used to construct DEPT, add age and sex to those predictors and construct a model based on the full set of predictors.   The analysis has not used any of the biochemical variables used in the Kristensen paper, many of which are strongly associated with 30-day mortality. The analysis here is dropped individuals older than 100, rather than explore transformations of the age variable that might have led to  better fit with the full dataset and to a model that could be applied to all age groups.  Incorporating an age-sex interaction led to a better fitting model, but it is possible that a model without the interaction term would have made accurate predictions and be easier to interpret. 
+The ED triage model explored in this case study illustrates the steps that might be used in building and evaluating a prediction model.   The analysis makes compromises, however, that limit its practical value.  A more complete modification of the DEPT scoring should start by using the predictors used to construct DEPT, add age and sex to those predictors and construct a model based on the full set of predictors.   The analysis has not used any of the biochemical variables used in the Kristensen paper, many of which are strongly associated with 30-day mortality. The analysis here dropped individuals older than 100, rather than exploring transformations of the age variable that might have led to  better fit with the full dataset and to a model that could be applied to all age groups.  Incorporating an age-sex interaction led to a better fitting model, but it is possible that a model without the interaction term would be easier to interpret and still have made accurate predictions 
 
 A full analysis would explore some questions suggested by even just the data used here.  What is the reason for the surprisingly low mortality among the oldest members of the study population? Are they truly more hardy, or are very old patients referred to the ED for different, perhaps less serious conditions and still coded as high-risk?  What might explain the age-sex interaction? 
 
