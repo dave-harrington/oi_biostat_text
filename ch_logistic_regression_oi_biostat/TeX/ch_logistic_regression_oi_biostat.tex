@@ -46,21 +46,19 @@ Hyperuricemia is the presence of abnormally high levels of uric acid in the bloo
 
 Zeng, et al.\footfullcite{zeng2015association} report a cross-sectional study examining the association of hyperuricemia with dietary magnesium in 5,168 participants in China. The study measured several other possible predictors, including body mass index (BMI).  Some literature has suggested that BMI has a strong association with hyperuricemia in various populations. This section explores that relationship in a random sample of 500 participants from the Zeng study. The full dataset (\texttt{hyperuricemia}) and the random sample (\texttt{hyperuricemia.samp}) are in the \texttt{oibiostat} data package.
 
- %JV: need to add hyperuricemia to data package
- %  too soon, since I am still recoding, defining some vars
-
+ 
  \begin{figure}[h!]
  	\centering
  	\includegraphics[width=0.80\textwidth]
  	{ch_logistic_regression_oi_biostat/figures/bmiHuProbSecondTile/bmiHuProbSecondTileDataOnly.pdf}
-     \caption{Estimated probability of hyperuricemia versus BMI. For each case, the value of $y$ equals 1 if hyperuricemia is present and equals 0 if hyperuricemia is absent. The values for $y$ have been jittered.}
+     \caption{Estimated probability of hyperuricemia versus BMI. For each case, the value of $y$ equals 1 if hyperuricemia is present (labeled Yes on the vertical axis) and 0 if hyperuricemia is absent (labeled No). The values for $y$ have been jittered.}
      \label{figure:bmiHuProbSecondTileDataOnly}
  \end{figure}
 
 
-Figure~\ref{figure:bmiHuProbSecondTileDataOnly} shows estimated probability of hyperuricemia on the $y$-axis and BMI on the $x$-axis. The light blue dots represent $(x_i, y_i)$ pairs for each individual in the sample of 500, where $x_i$ is an individual's BMI and $y_i$ equals 0 or 1 depending on whether the individual has hyperuricemia ($y_i= 1$ if hyperuricemia is present, and $y_i = 0$ otherwise). A small amount of random noise has been added to the $y$-values (this is referred to as "jittering") to make it easier to see where the points are most densely clustered.
+Figure~\ref{figure:bmiHuProbSecondTileDataOnly} shows the presence  of hyperuricemia on the $y$-axis and BMI on the $x$-axis. The light blue dots represent $(x_i, y_i)$ pairs for each individual in the sample of 500, where $x_i$ is an individual's BMI and $y_i$ equals 0 or 1 depending on whether the individual has hyperuricemia ($y_i= 1$ if hyperuricemia is present, and $y_i = 0$ otherwise). A small amount of random noise has been added to the $y$-values (this is referred to as "jittering") to make it easier to see where the points are most densely clustered.
 
-The blue dots at $y = 0$ cluster between BMI values of about 17 to 30, while the dots at $y = 1$ are most concentrated around BMI 23 to 28; this suggests that hyperuricemia is associated with larger values of BMI. However, it is difficult to see any further details of a trend or judge the strength of association from this plot alone. For example, while this plot clearly implies that an individual with BMI lower than 22 is unlikely to have hyperuricemia (since practically all points with BMI less than $22$ have $y = 0$), it is not clear how to judge the risk of hyperuricemia for individuals with moderate values of BMI, since points with BMI around $25$ exist at both $y = 0 and y = 1$.
+The blue dots at $y = 0$ cluster between BMI values of about 17 to 30, while the dots at $y = 1$ are most concentrated around BMI 23 to 28; this suggests that hyperuricemia is associated with larger values of BMI. However, it is difficult to see any further details of a trend or judge the strength of association from this plot alone. For example, while this plot clearly implies that an individual with BMI lower than 22 is unlikely to have hyperuricemia (since practically all points with BMI less than $22$ have $y = 0$), it is not clear how to judge the risk of hyperuricemia for individuals with moderate values of BMI, since points with BMI around $25$ exist at both $y = 0$ and $y = 1$.
 
 Computing summary measures can provide further insight about the association between hyperuricemia and BMI.
 
@@ -126,7 +124,7 @@ The least squares line in Figure~\ref{figure:bmiHuProbSecondTile} is based on th
 \end{align*}
 where $Y_i$ has value 1 when hyperuricemia is present and 0 otherwise.  The green line drops below 0 for the smaller values of BMI because the linear model does not restrict predicted values to lie between 0 and 1.
 
-The red curve, which shows a model-based estimate of the probability of hyperuricemia using logistic regression, is a better fit to the data across the range of BMI values. The logistic regression model predicts the log odds of hyperuricemia, rather than the probability of hyperuricemia.\footnote{Note that "log" refers to the natural log.} Suppose $E$ is an event, $x$ is a predictor, and $p_{E}(x)$ is the conditional probability of $E$ given $x$. The odds of $E$ given $x$ are $\frac{p_{E}(x)}{1 - p_{E}(x)}$. 
+The red curve, which shows a model-based estimate of the probability of hyperuricemia using logistic regression, is a better fit to the data across the range of BMI values. The logistic regression model predicts the log odds of hyperuricemia, rather than the probability of hyperuricemia.\footnote{Note that "log" refers to the natural log.} Suppose $E$ is an event, $x$ is a predictor, and $p_{E}(x)$ is the conditional probability of $E$ given $x$. The odds of $E$ given $x$ are $p_{E}(x)/(1 - p_{E}(x))$. 
 
 \begin{exercisewrap}
 \begin{nexercise}
@@ -295,7 +293,7 @@ model~\ref{eqn:bmiHyperuricemiaModel}.  Calculate the relative odds (i.e., odds 
 \footnotemark{}
 \end{nexercise}
 \end{exercisewrap}
-\footnotetext{The odds of hyperuricemia for the two individuals are $\exp[-6.054 + (0.185)(26)] = 0.288$ and $\exp[-6.054 + (0.185)(28)] = 0.417$. The relative odds is $0.417/0.288 = 1.45$.}
+\footnotetext{The odds of hyperuricemia for the two individuals are $\exp[-6.054 + (0.185)(26)] = 0.288$ and $\exp[-6.054 + (0.185)(28)] = 0.417$. The relative odds are $0.417/0.288 = 1.45$.}
 
 \begin{exercisewrap}
   \begin{nexercise}
@@ -497,7 +495,7 @@ Tuberculosis (TB) is a communicable disease that is among the top 10 causes of d
 
 The World Health Organization (WHO) and other health care organizations have used the term \textit{treatment default} in TB to denote a treatment interruption of at least two months, and nearly all published papers use that term. This chapter uses the more descriptive term \textit{two-month interruption} for the premature ending of treatment.  When the context is clear, this is shortened to \textit{interruption}.
 
-A 2015 cross-sectional study by Lackey, et. al \footfullcite{lackey2015patient}  examined patient characteristics associated with interrupted treatment in a section of Lima, Peru where the incidence of TB was 213 cases per 100,000 persons at the time the study was conducted. For comparison, the incidence of TB in the United States is approximately 2.8 cases per 100,000.\footfullcite{world2020global}   The study enrolled 1,294 participants and reported results based on data from 1,233 participants for whom there were no missing data on outcome and patient characteristics. \term{Complete case analysis} is the term used to refer to an analysis using only the cases without any missing observations; while this is usually not the best way to adjust for missing data, alternative methods are beyond the scope of this text. The dataset \texttt{tb} in the \texttt{oibiostat} package contains a subset of the variables for the complete case data analyzed by the study authors.
+A 2015 cross-sectional study by Lackey, et. al \footfullcite{lackey2015patient}  examined patient characteristics associated with interrupted treatment in a section of Lima, Peru where the incidence of TB was 213 cases per 100,000 persons at the time the study was conducted. For comparison, the incidence of TB in the United States is approximately 2.5 cases per 100,000.\footfullcite{https://www.cdc.gov/tb/statistics/default.htm}   The study enrolled 1,294 participants and reported results based on data from 1,233 participants for whom there were no missing data on outcome and patient characteristics. \term{Complete case analysis} is the term used to refer to an analysis using only the cases without any missing observations; while this is usually not the best way to adjust for missing data, alternative methods are beyond the scope of this text. The dataset \texttt{tb} in the \texttt{oibiostat} package contains a subset of the variables for the complete case data analyzed by the study authors.
 
 
 \begin{examplewrap} 
@@ -519,7 +517,7 @@ The confidence interval for the odds ratio is
 \end{nexample}
 \end{examplewrap}
 
-Confidence intervals for odds ratios can also be calculated using the methods in Section~\ref{inferenceOddsRatios}, although answers may differ slightly because of the different formulas.
+Confidence intervals for odds ratios can also be calculated using the methods in Section~\ref{section:inferenceOddsRatios}, although answers may differ slightly because of the different formulas.
 
 % latex table generated in R 4.1.0 by xtable 1.8-4 package
 % Wed Oct 27 10:08:39 2021
@@ -571,7 +569,7 @@ No interruption & 439 & 667 & 1106 \\
 \end{exercisewrap}
 \footnotetext{For participants without a secondary school education, the odds of treatment interruption are $75/439 = 0.171$.  For patients with at least a secondary school education, the corresponding odds are $52/667 = 0.078.$  The relative odds, or odds ratio, comparing those with a secondary school education to those without is $0.078/0.171 = 0.456$.}
 
-The $\chi^2$ value for the table (16.8 with one degree of freedom) is highly statistically significant ($p < 0.001$) as is the $z$ statistic in the logistic regression. In the setting of a $2 \times 2$ table, logistic regression produces the same summary statistic for an association as a direct analysis of the table; this is analogous to how linear regression with a binary predictor provides the same results as a two-sample $t$-test.
+The $\chi^2$ value for the table (16.8 with one degree of freedom) is highly statistically significant ($p < 0.001$) as is the $z$ statistic in the logistic regression in Figure~\ref{figure:tbInterruptionEduExample}. In the setting of a $2 \times 2$ table, logistic regression produces the same summary statistic for an association as a direct analysis of the table; this is analogous to how linear regression with a binary predictor provides the same results as a two-sample $t$-test.
 
 Associations in observational studies should never be interpreted as causal effects and this example underscores that principle.  Increasing access to secondary education in hopes of increasing successful completion of TB treatment may not change outcome; members of the population likely have many characteristics that enabled them to have access to both a secondary education and adequate health care.
 
@@ -679,7 +677,7 @@ A two-sided $100(1 - \alpha)$\% confidence interval for the model coefficient $\
 
 All statistical software packages provide standard errors (s.e.) of coefficients, and most provide the $z$ statistic and its $p$-value directly.
 
-A logistic regression model is not useful for estimating odds ratios or probabilities if a model with predictors is not significantly better than a model with only the intercept term, that is, if there is not strong evidence against the hypothesis that coefficients of the predictors are all 0.  A test of the null hypothesis that all model coefficients are 0  uses a statistic called the deviance. Multiple logistic regression models are estimated by the method of maximum likelihood, the same approach that is used for simple logistic regression, and the deviance is a function of the maximized likelihood function.  Its mathematical definition is beyond the scope of this book; it is enough to know that the deviance decreases as as the fit of a model improves.
+A logistic regression model is not useful for estimating odds ratios or probabilities if a model with predictors is not significantly better than a model with only the intercept term, that is, if there is not strong evidence against the hypothesis that coefficients of the predictors are all 0.  A test of the null hypothesis that all model coefficients are 0  uses a statistic called the deviance. Multiple logistic regression models are estimated by the method of maximum likelihood, the same approach that is used for simple logistic regression, and the deviance is a function of the maximized likelihood function.  Its mathematical definition is beyond the scope of this book; it is enough to know that the deviance decreases as the fit of a model improves.
 
 \begin{onebox}{The deviance statistic for overall model fit}
   In logistic regression, the \term{residual deviance} is a measure of the fit of an estimated model and \term{null deviance} is a measure of fit of a model with only an intercept term. A test of the hypothesis $H_0:\beta_1 = \beta_2 = \cdots = \beta_p = 0$ versus the alternative that at least one coefficient is not zero can be based on the statistic
@@ -731,7 +729,7 @@ The deviance $D_p$ will necessarily be smaller than $D_k$, but the larger model 
 
 \end{onebox}
 
-More advanced courses discuss the use of AIC in automated model selection along with possible sampling distributions for AIC, but neither topic is not covered here.  The analyses in this chapter use AIC informally to examine nested models.  
+More advanced courses discuss the use of AIC in automated model selection along with possible sampling distributions for AIC, but neither topic is covered here.  The analyses in this chapter use AIC informally to examine nested models.  
 
 The AIC is routinely provided in most software for logistic regression, and is part of the detailed output available in \textsf{R}.
 
@@ -802,7 +800,7 @@ In a model that includes BMI, the OR for hyperuricemia comparing females to male
 
 \begin{exercisewrap}
   \begin{nexercise}
-    Calculate a 95\% confidence intervals for the odds ratio of hyperuricemia associated with a three unit increase in BMI for two individuals of the same sex.     \footnotemark{}
+    Calculate a 95\% confidence interval for the odds ratio of hyperuricemia associated with a three unit increase in BMI for two individuals of the same sex.     \footnotemark{}
   \end{nexercise}
 \end{exercisewrap}
 \footnotetext{A 95\% confidence interval for the change in log(odds) for a 1 unit change in BMI is $0.171 \pm (1.96)(0.038) = (0.097, 0.246)$.  The confidence interval for a three unit change can be calculated by multiplying the lower and upper bounds by 3: $[(3)(0.097), (3)(0.246)] = (0.291, 0.738)$.  The corresponding interval for the OR is $(e^{0.290}, e^{0.736}) = (1.338, 2.092).$}
@@ -832,7 +830,7 @@ A female with BMI~28 has an estimated chance of 23\% of being hyperuricemic.
 \end{nexample}
 \end{examplewrap}
 
-The OR for hyperuricemia comparing males to females is the same, regardless of BMI, as long as BMI does not change. When both predictors change, the full model must be used to calculate odds ratios.
+The OR for hyperuricemia comparing males to females is the same, for any value of BMI as long as BMI is held constant. When both predictors change, the full model must be used to calculate odds ratios.
 
 \begin{examplewrap}
 \begin{nexample}{What is the OR for hyperuricemia, comparing a woman with BMI~32 to a male with BMI~30?}
@@ -858,9 +856,9 @@ In the model for hyperuricemia the change in log odds when when one predictor ch
 
 \begin{examplewrap}
 \begin{nexample}{For males, use the estimated probabilities of hyperuricemia for individuals with BMI~28 and BMI~30 to calculate estimated prevalence differences and ratios.  Repeat the calculation for females. }
-For a male with BMI~28 the estimated log odds and odds of hyperuricemia are $-5.503 + (0.171)(28) = -0.715$ and  $e^{-0.715} = 0.489$.  The estimated prevalence (probability) of hyperuricemia is $0.489/(1 + 0.489) = 0.328$.  The estimated odds of hyperuricemia for a male with BMI~30 were calculated in Example~\ref{example:ORBMI3032} and are $0.689$, so the estimated prevalence is $0.408$.  The estimated prevalence difference and ratio are, respectively, $0.080$ and $1.229$.
+For a male with BMI~28 the estimated log odds and odds of hyperuricemia are $-5.503 + (0.171)(28) = -0.715$ and  $e^{-0.715} = 0.489$.  The estimated prevalence (probability) of hyperuricemia is $0.489/(1 + 0.489) = 0.328$.  The estimated odds of hyperuricemia for a male with BMI~30 were calculated in Example~\ref{example:ORBMI3032} and are $0.689$, so the estimated prevalence is $0.408$.  The estimated prevalence difference and ratio are, respectively, $0.080$ and $1.244$.
 
-The prevalence difference and ratio for females are calculated similarly and are, respectively, $0.066$ and $1.290$. (See Exercise~\ref{exercise:prevDifferencesRatiosMalesFemales}.)  The prevalence differences and ratios associated with a change in BMI from 28 to 30 are different for males than for females, and must be calculated using all the coefficients in the model.  This result is another reason why an estimated OR from a logistic regression should not be interpreted as a prevalence or risk ratio.
+The prevalence difference and ratio for females are calculated similarly and are, respectively, $0.066$ and $1.290$.  The prevalence differences and ratios associated with a change in BMI from 28 to 30 are different for males than for females, and must be calculated using all the coefficients in the model.  This result is another reason why an estimated OR from a logistic regression should not be interpreted as a prevalence or risk ratio.
 
 \label{example:probsDependOnOtherVars}
 \end{nexample}
@@ -981,9 +979,9 @@ Finally, Exercise~\ref{exercise:BMISexInteractionDirect} outlines a method for e
 \subsection{Categorical predictors with more than two levels}
 \label{section:predictorsMoreThanTwoLevels}
 
-When spawning, a female horseshoe crab migrates to shore with a male attached to her spine to lay clusters of eggs in the sand.  Additional male crabs may join the pair and fertilize the eggs as well, presumably increasing genetic diversity of the offspring. The additional male crabs are called satellites\footnote{A description of the phenomenon may be found at \url{https://www.fws.gov/northeast/pdf/horseshoe.fs.pdf}}. The data used here originally appeared in Brockman \footfullcite{brockmann1996satellite} and can be found at the website for \textit{Categorical Data Analysis, 3rd ed.}\footfullcite{agresti2013categorical} and in the \textsf{R} package \texttt{glmbb}. The dataset contains information on 173 female crabs, 111 with at least one male satellite.
+When spawning, a female horseshoe crab migrates to shore with a male attached to her spine to lay clusters of eggs in the sand.  Additional male crabs may join the pair and fertilize the eggs as well, presumably increasing genetic diversity of the offspring. The additional male crabs are called satellites. The data used here originally appeared in Brockman \footfullcite{brockmann1996satellite} and can be found at the website for \textit{Categorical Data Analysis, 3rd ed.}\footfullcite{agresti2013categorical} and in the \textsf{R} package \texttt{glmbb}. The dataset contains information on 173 female crabs, 111 with at least one male satellite.
 
-This section examines the association between the odds of the event $E$ that a female has one or more satellites and her carapace (shell) width and color.   Let the variable $y$ denotes whether a female has one or more satellites ($y = 1$) or none ($y = 0$), \var{width} gives the carapace width in centimeters and the levels of the factor variable \var{color} are "Light", "MedLight" (for medium light), "MedDark" (for medium dark), and "Dark", denoting increasingly dark colors. The predictor \var{color} is an ordinal categorical variable, but since methods that take advantage of ordinal variables in contingency tables and logistic regression are beyond the scope of this text, the analyses in this section treat color as a standard unordered categorical variable.
+This section examines the association between the odds of the event $E$ that a female has one or more satellites and her carapace (shell) width and color.   Let the variable $y$ denote whether a female has one or more satellites ($y = 1$) or none ($y = 0$), \var{width} gives the carapace width in centimeters and the levels of the factor variable \var{color} are "Light", "MedLight" (for medium light), "MedDark" (for medium dark), and "Dark", denoting increasingly dark colors. The predictor \var{color} is an ordinal categorical variable, but since methods that take advantage of ordinal variables in contingency tables and logistic regression are beyond the scope of this text, the analyses in this section treat color as a standard unordered categorical variable.
 
 The contingency table in Figure~\ref{figure:colorSatelliteCrabs} shows the association between color and the presence of at least one satellite.  The estimated odds vary by color; the odds of dark females having at least one satellite are $7/15 = 0.467$, while the odds for a female with medium light color are $69/26 = 2.654$. The OR, comparing medium light to dark, is $2.654/0.467 = 5.683$; the odds of medium light female crab having at least one satellite are between $5$ and $6$ times larger than for a dark female.
 
@@ -1049,7 +1047,7 @@ Since the coefficient for the intercept cancels in the subtraction, the odds rat
 
 The calculation of a confidence interval for the OR comparing two categories that are not the reference category is a more difficult calculation, since it requires the standard error of the difference of two estimated log(OR)s, a topic not covered here.
 
-Since the $\chi^2$ test based on Figure~\ref{figure:colorSatelliteCrabs} and the deviance based test for model are both used to test the null hypothesis of no relationship between the response and the predictor, both should yield approximately the same statistic and $p$-value. The null and residual deviances for the model are $225.76$ and $212.06$.  The difference $13.7$ yields $p = 0.003$ for a $\chi^2$ with 3 degrees of freedom.  Both approaches support the conclusion that, when other factors are not accounted for, color is associated with the tendency for a female crab to have at least one satellite.  (The two $\chi^2$ values are slightly different because they are calculated using different formulas.)
+Since the $\chi^2$ test based on Figure~\ref{figure:colorSatelliteCrabs} and the deviance based test for the model are both used to test the null hypothesis of no relationship between the response and the predictor, both should yield approximately the same statistic and $p$-value. The null and residual deviances for the model are $225.76$ and $212.06$.  The difference $13.7$ yields $p = 0.003$ for a $\chi^2$ with 3 degrees of freedom.  Both approaches support the conclusion that, when other factors are not accounted for, color is associated with the tendency for a female crab to have at least one satellite.  (The two $\chi^2$ values are slightly different because they are calculated using different formulas.)
 
 The $p$-values of the coefficients are used to test the null hypothesis that the difference in log(odds) between a category and the reference "Dark" is 0, i.e. that the two log(odds) are equal.  They cannot be used to test the importance of a particular color, and since the colors are levels of the single predictor \var{color}, one level cannot be retained and the others dropped.  In these data, the $p$-values for the coefficients imply that all colors are associated with a significant increase in the odds of satellites compared to "Dark", but no adjustment has been made for multiple testing.  Using a Bonferroni correction as in ANOVA (Section~\ref{multipleComparisonsAndControllingTheType1ErrorRate}) and multiplying all $p$-values by 3 suggests that only "MedLight" crabs have significantly larger odds of satellites compared to "Dark".
 
@@ -1176,13 +1174,13 @@ Each of the predictors has two values, so each participant falls into 1 of 4 pro
 The first column labels the $4$ profiles, and columns $2-3$ show the values of the predictors.  The remaining columns contain the following data for each profile:
 \begin{itemize}
 
-\item \textit{Observed responses:} The observed number of treatment interruptions.
+\item \textit{Observed responses:} The observed number of participants with treatment interruptions.
 
 \item \textit{Predicted Probability}:  The predicted probability of a treatment interruption from the model.  Since the participants in a profile all have the same values for the predictor, there is a single predicted probability for a profile.
 
 \item \textit{n:} The number of participants who match the profile.
 
-\item \textit{Predicted responses}: The predicted number of treatment interruptions from the model, calculated below.
+\item \textit{Predicted responses}: The predicted number of participants with treatment interruptions from the model, calculated below.
 
 \item \textit{Pearson residual:}  The Pearson residual $r$, a measure of the discrepancy between the observed and predicted number of treatment interruptions.  The definition of the Pearson residual is given below.
 
@@ -1197,7 +1195,7 @@ The predicted probability of a treatment interruption can calculated directly fr
 The value in the table $(0.067)$ has been rounded from the more precise $0.06709$.  Using the more precise value, the predicted number of responses for profile 1 is
 \begin{align*}
     (n_1)(\hat{p}_1) &= (671)(0.06709) \\
-    & 45.02.
+    &= 45.02.
 \end{align*}
 
 The Pearson residual $r$ is a standardized version of the observed - predicted number of responses, using the formula for the standard error of a binomial variable.  For profile 1,
@@ -1210,7 +1208,7 @@ The residual is small because the predicted value $45.02$ is close to the observ
 
  A $\chi^2$ goodness of fit is based on $\sum_i r_i^2$, with degrees of freedom equal to the number of profiles minus the total number of parameters (including the intercept).  For the TB data, the $\chi^2$ statistic $\chi^2$ is
 \begin{align*}
-   \chi^2 &= \sum_{i - 1}^4 r_i^2 \\
+   \chi^2 &= \sum_{i = 1}^4 r_i^2 \\
        &= (-0.157)^2 + (0.135)^2 + (0.418)^2 + (-.398)^2 \\
        &= 0.376.
 \end{align*}
@@ -1476,14 +1474,14 @@ AUC under ROC curve & Suggested interpretation  \\
 \end{figure}
 Using these guidelines, the AUC for the model for hyperuricemia with predictors BMI and sex discriminates poorly between cases with and without hyperuricemia -- adding one more piece of information that the model would not be useful in a clinical setting.
 
-Figure~\ref{figure:ROCHuBMISex} shows four example ROC curves corresponding to hypothetical models with increasing ability to discriminate: the 45-degree line, AUC = 0.5, random guessing; the green curve, AUC = 0.667, poor discrimination; blue curve, AUC = 0.785, acceptable discrimination; red curve, AUC = 0.874, excellent discrimination. ROC curves will be used to compare models for triage in an emergency department in the case study in Section~\ref{caseStudy}.
+Figure~\ref{figure:ROCExamples} shows four example ROC curves corresponding to hypothetical models with increasing ability to discriminate: the 45-degree line, AUC = 0.5, random guessing; the green curve, AUC = 0.667, poor discrimination; blue curve, AUC = 0.785, acceptable discrimination; red curve, AUC = 0.874, excellent discrimination. ROC curves will be used to compare models for triage in an emergency department in the case study in Section~\ref{caseStudy}.
 
 \begin{figure}[!tbh]
   \centering
   \includegraphics[width=0.70\textwidth]
   {ch_logistic_regression_oi_biostat/figures/ROCExamples/ROCExamples.pdf}
     \caption{Example Receiver ROC curves for hypothetical prediction rules. The black line is the is 45-degree line $y = x$.}
-    \label{figure:ROCHuBMISex}
+    \label{figure:ROCExamples}
 \end{figure}
 
 Confidence intervals
@@ -1515,7 +1513,7 @@ Cross-validation has some drawbacks -- the best choice of $k$ for a given datase
 
 As noted earlier, prediction from statistical models is something that should be done with great care, especially in a clinical situation where prediction may be a diagnostic tool leading to an intervention.  In this setting is important to examine a statistical model from several perspectives.  
 
-What do these methods for assessing a model tell us about the relatively simple model for predicting hyperuricemia from BMI and sex along with the initial look at significance levels for predictors and changes in AIC earlier in the chapter?  Although the significant $p$-values for BMI and sex did not have the interpretation as tests of predefined hypotheses, they suggested an potentially important association between the predictors and hyperuricemia.  While comparing AIC values did not provide a clear answer as to the value of adding sex as a predictor, the calibration plots suggested that the two-variable model better fit the data than the model with only BMI.  Brier scores indicate that the two predictors may provide acceptably accurate predictions overall, but predictions within subsets of individuals either with or without underlying hyperuricemia were not always accurate, even after adjusting the threshold probability for predicting presence or absence.  In summary, a logistic regression with BMI and sex fits a model for the log(odds) of hyperuricemia reasonably well, but not well enough to be used as a diagnostic tool.
+What do these methods for assessing a model tell us about the relatively simple model for predicting hyperuricemia from BMI and sex along with the initial look at significance levels for predictors and changes in AIC earlier in the chapter?  Although the significant $p$-values for BMI and sex did not have the interpretation as tests of predefined hypotheses, they suggested a potentially important association between the predictors and hyperuricemia.  While comparing AIC values did not provide a clear answer as to the value of adding sex as a predictor, the calibration plots suggested that the two-variable model better fit the data than the model with only BMI.  Brier scores indicate that the two predictors may provide acceptably accurate predictions overall, but predictions within subsets of individuals either with or without underlying hyperuricemia were not always accurate, even after adjusting the threshold probability for predicting presence or absence.  In summary, a logistic regression with BMI and sex fits a model for the log(odds) of hyperuricemia reasonably well, but not well enough to be used as a diagnostic tool.
 
 The hyperuricemia data is useful for exploring how logistic regression might describe the association between an outcome and predictors, but it is a simple example that does not reflect the complexity of many clinical situations.  The next section presents a case study on improving a triage strategy in an hospital emergency department based on a published paper.
 
@@ -1600,7 +1598,7 @@ The minimum and maximum ages (in years) are 16 and 108, with a mean 59.6 and med
     \label{figure:histAgeDanishED}
 \end{figure}
 
-Figure~\ref{figure:mort30AgeTable} shows the association of age and 30-day mortality, with age grouped into quartiles. The table shows that the estimated probability of death increases monotonically from $6/1537 = 0.004$ in the youngest quartile to $184/1542 = 0.119$ in the oldest.  Since the $\chi^2$ statistic has value 233 on 3 degrees of freedom, the evidence for an association of age with 30-day mortality association is strong.
+Figure~\ref{figure:mort30AgeTable} shows the association of age and 30-day mortality, with age grouped into quartiles. The table shows that the estimated probability of death increases monotonically from $6/1537 = 0.004$ in the youngest quartile to $184/1542 = 0.119$ in the oldest.  Since the $\chi^2$ statistic has value 233 on 3 degrees of freedom, the evidence for an association of age with 30-day mortality is strong.
 
 % latex table generated in R 4.1.2 by xtable 1.8-4 package
 % Sun Jul 10 17:33:56 2022
@@ -1711,7 +1709,7 @@ Figure~\ref{figure:triageAgeSexMort30logreg} shows the initial model.  Somewhat 
 % Residual deviance: 2190.2  on 6197  degrees of freedom
 % AIC: 2202
 
-Figure~\ref{figure:mort30SexWithinAgeGroupTable} shows that the association between sex and 30-day mortality is very different within age groups.  In the age group 16-45, the overall proportion of deaths within 30 days is low ($(5 + 1)/(791 + 746) = 0.0039$, but the relative risk of death comparing males to females is $(1/746)/(6/791) = 0.212$.  Males in this age group are approximately $80\%$ less likely to die than females.  In contrast, in the highest age category, the relative risk of death comparing males to females is $1.646$.  Males in this age category are approximately $65\%$ more likely to die within 30 days.  There appears to be a strong age-sex interaction in the risk of death.
+Figure~\ref{figure:mort30SexWithinAgeGroupTable} shows that the association between sex and 30-day mortality is very different within age groups.  In the age group 16-45, the overall proportion of deaths within 30 days is low ($(5 + 1)/(791 + 746) = 0.0039$, but the relative risk of death comparing males to females is $(1/746)/(5/791) = 0.212$.  Males in this age group are approximately $80\%$ less likely to die than females.  In contrast, in the highest age category, the relative risk of death comparing males to females is $1.646$.  Males in this age category are approximately $65\%$ more likely to die within 30 days.  There appears to be a strong age-sex interaction in the risk of death, although because of the small numbers of deaths in these categories these relative risks should be interpreted with caution.
 
 \begin{figure}[ht]
 \centering
@@ -1784,7 +1782,7 @@ Figure~\ref{figure:predVsObsMort30CalibrateAgeLT100DanishED} uses the same calcu
     \label{figure:predVsObsMort30CalibrateAgeLT100DanishED}
 \end{figure}
 
-The different information provided by the two plots highlight both the strengths and weaknesses of each diagnostic. Putting data into empirically-determined buckets shows the model fit in regions with substantial data;  it is not sensitive to outliers and so does not change when age is restricted.    The smooth curve fit to the scatterplot hides the variability in regions with substantial amounts of data, but shows the effect of predictors that might be outliers.
+The different information provided by the two plots highlight both the strengths and weaknesses of each diagnostic. Putting data into empirically-determined buckets shows the model fit in regions with substantial data;  it is not sensitive to outliers and so does not change when age is restricted.    The smooth curve fit to the scatterplot hides the variability in regions with substantial amounts of data, but shows the effect of predictors that might have outliers.
 
 Figure~\ref{figure:triageAgeSexMort30AgeRestrLogreg} shows the model coefficients using the age-restricted dataset.  This is the model that will be used for the revised triage score in the next section.
 
@@ -1821,13 +1819,11 @@ Figure~\ref{figure:triageAgeSexMort30AgeRestrLogreg} shows the model coefficient
 
 The model in Figure~\ref{figure:triageAgeSexMort30AgeRestrLogreg} can be used to create a revised triage scoring system in the training data, using the same probability cutoff values as the DEPT classification, but now applied to individuals younger than 100.  Individuals with a predicted probability larger than $0.25$ are labeled "red.new", between $0.10$ and $0.25$ are labeled "orange.new", between $0.01$ and $0.10$, "yellow.new", and less than $0.01$, "green.new".  Unless otherwise stated, all tables and figures in this section used the age-restricted dataset. Since this dataset differs slightly from the full dataset explored in Section~\ref{section:examiningDataDanishED}, summary tables of predictors and outcome may differ from earlier tables. 
 
-Figures~\ref{figure:mort30RatesByColorPrimary} and~\ref{figure:DEPTColorVsNewColorPrimary} compare the behavior of the old and new scoring.   Figure~\ref{figure:mort30RatesByColorPrimary} compares the behavior of the DEPT triage classification with the modified version.  The first column shows the target ranges of 30-day mortality probabilities.  The second and third columns show estimated 30-day mortality probabilities when participants are assigned a color score using the DEPT or revised classifications, respectively.  The last column contains a 10-fold cross-validated estimate of the 30-day mortality probabilities using the revised classification. 
+Figures~\ref{figure:mort30RatesByColorPrimary} and~\ref{figure:DEPTColorVsNewColorPrimary} compare the behavior of the old and new scoring.   Figure~\ref{figure:mort30RatesByColorPrimary} compares the behavior of the DEPT triage classification with the modified version.  The first column shows the target ranges of 30-day mortality probabilities.  The second and third columns show estimated 30-day mortality probabilities when participants are assigned a color score using the DEPT or revised classifications, respectively.  The last column contains a 10-fold cross-validated estimate of the 30-day mortality probabilities using the revised classification. With the revised score, all 30-day mortality proportions now fall within the predicted ranges, as opposed to the DEPT scoring where 3 of 4 categories fall outside the predicted range.
 
-The figure shows that the tendency of the DEPT score to place too many low risk patients in the highest risk categories is not present in the revised classification.  The 30-day mortality proportions for the DEPT versus new classification in the two highest risk categories are $0.18$ versus $0.41$ and $0.07$ versus $0.12$, both within the predicted ranges for those categories.  In fact, all 30-day mortality proportions now fall within the predicted ranges.
+ The 10-fold cross-validated estimates of mortality probabilities in the last column are based on the assumption that the model that adds age, sex and an age-sex interaction is fixed.  The coefficients are re-estimated in each fold, and the mortality probabilities are estimated using the cases held-out of the fold.  The values in the table show the estimates after averaging over the 10-folds.  These out-of-sample estimates are generally consistent with the in-sample estimates in column 4.
 
- The 10-fold cross-validated estimates of mortality probabilities are based on the assumption that the model that adds age, sex and an age-sex interaction is fixed.  The coefficients are re-estimated in each fold, and the mortality probabilities are estimated using the cases held-out of the fold.  The values in the table show the estimates after averaging over the 10-folds.  These out-of-sample estimates are generally consistent with the in-sample estimates in column 4.
-
-The two-way table in Figure~\ref{figure:DEPTColorVsNewColorPrimary} shows that in fact the revised triage classification places fewer patients than DEPT in the two highest risk categories.  Only 115 of the 271 cases labeled "red" in DEPT are coded "red.new"; the remaining 156 are redistributed to lower risk categories.  That also happens in the "orange" classification in DEPT; of the 1576 originally coded "orange", 399 are coded "orange.new" and the majority of the remaining cases are regrouped into lower risk categories.
+The two-way table in Figure~\ref{figure:DEPTColorVsNewColorPrimary} shows that the revised triage classification places fewer patients than DEPT in the two highest risk categories.  Only 115 of the 271 cases labeled "red" in DEPT are coded "red.new"; the remaining 156 are redistributed to lower risk categories.  That also happens in the "orange" classification in DEPT; of the 1576 originally coded "orange", 797 are coded "orange.new" and the majority of the remaining cases are regrouped into lower risk categories.
 
 % table filled in from individual tables by scoring system
 % this table  now uses the age-restricted dataset
@@ -1886,9 +1882,9 @@ The study team for the Danish emergency department study made available both a t
 
 When a model estimated in a training dataset is evaluated in test data, the form of the model and its coefficients from the training data are kept fixed.  Predictions, estimated Brier scores, etc. are then calculated using that fixed model in the test dataset.  That approach is used in this section.
 
-An ED triage scoring system performs adequately if, on average, it classifies patients into correct risk groups.  Figure~\ref{figure:mort30RatesByColorPrimary} in Section~\ref{section:triageWithModifiedScore} shows that in the training sample the DEPT score modified with the addition of age and sex groups patients into categories with 30-day mortality proportions that are in the target ranges.  Figure~\ref{figure:mort30RatesByColorValid} shows similar information for the test data.
+An ED triage scoring system performs adequately if, on average, it classifies patients into correct risk groups.  The two right-most columns in Figure~\ref{figure:mort30RatesByColorPrimary}  show that in the training sample the DEPT score modified with the addition of age and sex groups patients into categories with 30-day mortality proportions that are in the target ranges.  Figure~\ref{figure:mort30RatesByColorValid} shows similar information for the test data.
 
-In the test data, the weakness of the DEPT classification is different from the training data.  The observed 30-day mortality proportion is too low in the Orange category and too high in the Green category. DEPT assigns too many low risk patients to the second highest risk category (Orange) and too many high risk patients to Green.  With the revised scoring, the observed 30-day mortality proportions are all in the target ranges, as they were in the training data.  Figure~\ref{figure:DEPTColorVsNewColorValid} shows that of the 1703 cases classified as Orange in DEPT, 1303 were reclassified as lower risk by the revised score.  Of the 1996 cases grouped in the lowest risk category by DEPT, all but 709 were grouped into higher risk categories by the revised score.
+In the test data, the weakness of the DEPT classification is different from the training data.  The observed 30-day mortality proportion is too low in the Orange category and too high in the Green category. DEPT assigns too many low risk patients to the second highest risk category (Orange) and too many high risk patients to Green.  With the revised scoring, the observed 30-day mortality proportions are all in the target ranges, as they were in the training data.  Figure~\ref{figure:DEPTColorVsNewColorValid} shows that of the 1703 cases classified as Orange in DEPT, $1703 - 752 = 951$ were reclassified as lower risk by the revised score.  Of the 1996 cases grouped in the lowest risk category by DEPT, all but 709 were grouped into higher risk categories by the revised score.
 
   Generally, a model is expected to perform less well in a test dataset than in the training dataset, since a model fit in the training dataset should reflect the characteristics of the training data, and those characteristics will not be identical in the test data. In this case, however, the Brier score in the test dataset is $0.036$ compared to $0.046$ in the training data.  Evidently, the model including DEPT score, age and sex is more accurate in predicting probabilities in the test data than in the training data. 
 

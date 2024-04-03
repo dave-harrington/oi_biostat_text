@@ -46,14 +46,14 @@ points(mean.bmi, prob, col = COL[1], bg = COL[1, 3],
 
 #draw the fitted logistic curve
 
-glm.fit = glm(hu ~ bmi, data = d, 
+glm.fit = glm(hu ~ bmi, data = d,
               family = "binomial")
 x = seq(15, 40, l = 200)
 pred.odds = exp(-(glm.fit$coef[1] + glm.fit$coef[2]*x))
 pred.prob = 1 / (1 + pred.odds)
 
-lines(x, pred.prob, col = COL[4])
-lines(d$bmi, lm.model$fitted.values, col = COL[2, 2])
+lines(x, pred.prob, col = COL[4], lwd = 1.75)
+lines(d$bmi, lm.model$fitted.values, col = COL[2, 2], lwd = 1.75)
 
 axis(1)
 axis(2)
@@ -72,12 +72,13 @@ plot(d$bmi, d$hu + noise,
      ylim = c(-0.10, 1.10),
      axes = FALSE,
      xlab = "BMI",
-     ylab = "Estimated probability",
+     ylab = "Hyperuricemia",
      col = fadeColor(COL[1], "60"),
      pch = 20)
 
-
 axis(1)
-axis(2)
+axis(2,
+     at = c(0,1),
+     labels = c("No", "Yes"))
 
 dev.off()
