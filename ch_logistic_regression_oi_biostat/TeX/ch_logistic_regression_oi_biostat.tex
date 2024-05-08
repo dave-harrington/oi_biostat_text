@@ -26,9 +26,9 @@
 \section{Chapter overview}
 \label{chapterOverview}
 
-This chapter focuses on traditional methods of inference for logistic regression that are commonly used in epidemiology and public health, with emphases on both inference for model parameters and prediction.  The interpretation and use of logistic models for inference is contained in the three sections following this overview; these sections contain the core material used in many applications in medical research, epidemiology and public health.  Logistic regression is still widely used in those fields, so the core material is likely to be particularly useful to students in those disciplines.
+This chapter focuses on traditional methods of inference for logistic regression that are commonly used in epidemiology and public health, with emphases on both inference for model parameters and prediction.  The interpretation and use of logistic models for inference is contained in the three sections following this overview; these sections contain the core material used in many applications in medical research, epidemiology and public health.  
 
-The last two sections before the end-of-chapter notes describe methods for assessing the fit of a logistic model, both for inference and for prediction, and present an extended case study using logistic regression to modify and evaluate a triage system in hospital emergency departments.  The section on assessing fit is longer than most sections in the book, but the material is necessary for understanding the behavior of the  proposed triage system. Since model predictions are sometimes used as diagnostic tools, it is particularly important to understand the strengths and weaknesses of a model, as well as methods for estimating error rates.
+The last two sections describe methods for assessing the fit of a logistic model, both for inference and for prediction, and present an extended case study using logistic regression to modify and evaluate a triage system in hospital emergency departments.  The section on assessing fit is longer than most sections in the book, but the material is necessary for understanding the behavior of the  proposed triage system. Since model predictions are sometimes used as diagnostic tools, it is particularly important to understand the strengths and weaknesses of a model, as well as methods for estimating error rates.
 
 Logistic regression relies heavily on software.  Even the simplest models cannot be fit by hand; direct formulas for parameter estimates and standard errors do not exist.  Consistent with earlier chapters, the treatment here emphasizes interpretation of both models and computer output for estimated models.  For students interested in working directly with data the chapter labs contain \textsf{R}-based exercises that illustrate how to fit and interpret models to data.
 
@@ -36,29 +36,36 @@ Logistic regression has also become an important tool in data exploration and de
 
 \section{Introduction to simple logistic regression}
 \label{introSimpleLogisticRegression}
-The first part of the chapter introduces simple logistic regression and explores two examples: 1) the relationship of hyperuricemia (abnormally high levels of uric acid in the blood) with body mass index (BMI); and 2), the association between the premature interruption of tuberculosis (TB) treatment and having a secondary school education. These two examples, in addition to ones using other data, are used in the second part of the chapter to discuss methods of inference in the context of multiple logistic regression.
-
 
 \subsection{The model for simple logistic regression}
 
-Hyperuricemia is the presence of abnormally high levels of uric acid in the blood.  This condition can lead to kidney stones and gout; hyperuricemia may also be responsible for chronic kidney disease, cardiovascular disease, and other metabolic disorders. Research suggests that risk of hyperuricemia is correlated with the consumption of red meat, seafood, and beans. Hyperuricemia is more common in high-income countries and economically developing countries with Western diets (characterized by high daily intake of saturated fats, animal protein, sodium, and refined sugars). The prevalence of hyperuricemia ranges between 15\% and 25\% in Asian countries.  Hyperuricemia is present without symptoms approximately 30\% of the time, so it would be useful to identify clinical measurements indicative of hyperuricemia; i.e., measurements signaling that a patient should have their uric acid level tested.
+Hyperuricemia is the presence of abnormally high levels of uric acid in the blood, a  condition can lead to kidney stones and gout; hyperuricemia may also be responsible for chronic kidney disease, cardiovascular disease, and other metabolic disorders. According to current criteria, men are diagnosed as having hyperuricemia if a measured uric acid is at least as large as $416\mu\text{mol/L}$.  The cutoff for women is $360\mu\text{mol/L}$. Research suggests that risk of hyperuricemia is correlated with the consumption of red meat, seafood, and beans. Hyperuricemia is more common in high-income countries and economically developing countries with Western diets (characterized by high daily intake of saturated fats, animal protein, sodium, and refined sugars). The prevalence of hyperuricemia ranges between 15\% and 25\% in Asian countries. 
 
+Hyperuricemia is present without symptoms approximately 30\% of the time, so it would be useful to identify clinical measurements indicative of hyperuricemia; i.e., measurements signaling that a patient should have their uric acid level tested.
 
-Zeng, et al.\footfullcite{zeng2015association} report a cross-sectional study examining the association of hyperuricemia with dietary magnesium in 5,168 participants in China. The study measured several other possible predictors, including body mass index (BMI).  Some literature has suggested that BMI has a strong association with hyperuricemia in various populations. This section explores that relationship in a random sample of 500 participants from the Zeng study. The full dataset (\texttt{hyperuricemia}) and the random sample (\texttt{hyperuricemia.samp}) are in the \texttt{oibiostat} data package.
+Zeng, et al.\footfullcite{zeng2015association} report a cross-sectional study examining the association of hyperuricemia with dietary magnesium in 5,168 participants in China. The study measured several other possible predictors, including body mass index (BMI,measured a $\text{kg/m}^2$.).  Some literature has suggested that BMI has a strong association with hyperuricemia in various populations. This section explores that relationship in a random sample of 500 participants from the Zeng study. The full dataset (\texttt{hyperuricemia}) and the random sample (\texttt{hyperuricemia.samp}) are in the data package \texttt{oibiostat}.
 
- 
- \begin{figure}[h!]
- 	\centering
- 	\includegraphics[width=0.80\textwidth]
- 	{ch_logistic_regression_oi_biostat/figures/bmiHuProbSecondTile/bmiHuProbSecondTileDataOnly.pdf}
-     \caption{Estimated probability of hyperuricemia versus BMI. For each case, the value of $y$ equals 1 if hyperuricemia is present (labeled Yes on the vertical axis) and 0 if hyperuricemia is absent (labeled No). The values for $y$ have been jittered.}
-     \label{figure:bmiHuProbSecondTileDataOnly}
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=0.80\textwidth]
+  {ch_logistic_regression_oi_biostat/figures/bmiHuDotplot/bmiHuDotplot.pdf}
+     \caption{Dot plots showing the distribution of BMI in participants without (labeled No) and with hyperuricemia (Yes).}
+     \label{figure:bmiHuDotplot}
  \end{figure}
 
+The side by side dot plots in Figure~\ref{figure:bmiHuDotplot} show that in this study sample hyperuricemia tends to occur more often with larger values of BMI; the mean of BMI (marked by "x" in the plot) in the groups with and without hyperuricemia are, respectively, 25.9 and 24 $\text{kg/m}^2$. But the figure does not provide information about a relationship between individual values of BMI and the presence of hyperuricemia.  As with linear regression, it might is useful to explore that relationship in a scatterplot.
+         
+     \begin{figure}[h!]
+        \centering
+        \includegraphics[width=0.80\textwidth]
+        {ch_logistic_regression_oi_biostat/figures/bmiHuProbSecondTile/bmiHuProbSecondTileDataOnly.pdf}
+         \caption{Presence of hyperuricemia versus BMI. For each case of $y_i = 1$ if hyperuricemia is present (labeled Yes on the vertical axis) and $y_i = 0$ if hyperuricemia is absent (labeled No). The $y$ values have been jittered. The mean BMI in each group is marked by an "x".}
+         \label{figure:bmiHuProbSecondTileDataOnly}
+     \end{figure}
 
-Figure~\ref{figure:bmiHuProbSecondTileDataOnly} shows the presence  of hyperuricemia on the $y$-axis and BMI on the $x$-axis. The light blue dots represent $(x_i, y_i)$ pairs for each individual in the sample of 500, where $x_i$ is an individual's BMI and $y_i$ equals 0 or 1 depending on whether the individual has hyperuricemia ($y_i= 1$ if hyperuricemia is present, and $y_i = 0$ otherwise). A small amount of random noise has been added to the $y$-values (this is referred to as "jittering") to make it easier to see where the points are most densely clustered.
+Figure~\ref{figure:bmiHuProbSecondTileDataOnly} shows the presence  of hyperuricemia on the $y$-axis and BMI on the $x$-axis. The light blue dots represent $(x_i, y_i)$ pairs for each individual in the sample of 500, where $x_i$ is an individual's BMI and $y_i$ equals 0 (hyperuricemia absent) or 1 (hyperuricemia present). A small amount of random noise has been added to the $y$-values (referred to as "jittering") to make it easier to see where the points are most densely clustered.
 
-The blue dots at $y = 0$ cluster between BMI values of about 17 to 30, while the dots at $y = 1$ are most concentrated around BMI 23 to 28; this suggests that hyperuricemia is associated with larger values of BMI. However, it is difficult to see any further details of a trend or judge the strength of association from this plot alone. For example, while this plot clearly implies that an individual with BMI lower than 22 is unlikely to have hyperuricemia (since practically all points with BMI less than $22$ have $y = 0$), it is not clear how to judge the risk of hyperuricemia for individuals with moderate values of BMI, since points with BMI around $25$ exist at both $y = 0$ and $y = 1$.
+The blue dots at $y = 0$ cluster between BMI values of about 17 to 30, while the dots at $y = 1$ are most concentrated around BMI 23 to 28, confirming that  hyperuricemia is associated with larger values of BMI. However, it is still difficult to see any further details of a trend or judge the strength of association from this plot alone. For example, while this plot clearly implies that an individual with BMI lower than 22 is unlikely to have hyperuricemia (since practically all points with BMI less than $22$ have $y = 0$), it is not clear how to judge the risk of hyperuricemia for individuals with moderate values of BMI, since points with BMI around $25$ exist at both $y = 0$ and $y = 1$.
 
 Computing summary measures can provide further insight about the association between hyperuricemia and BMI.
 
@@ -69,9 +76,9 @@ Computing summary measures can provide further insight about the association bet
 \end{nexample}
 \end{examplewrap}
 
-In the sample of 500 individuals, 95 were hyperuricemic and 405 were not, so the estimated probability and odds of hyperuricemia based on the sample of 500 are $95/500 = 0.190$ and $95/405 = 0.235$, respectively. Note how an individual drawn at random from the entire study sample has a lower probability of being hyperuricemic than an individual drawn at random from the participants with  $\text{BMI} \geq 25$: probability 0.235 versus 0.279. Thus, these data suggest an association between BMI and hyperuricemia; specifically, that higher BMI is associated with higher risk of hyperuricemia. This coheres with the trend visible in Figure~\ref{figure:bmiHuProbSecondTileDataOnly}.
+In the sample of 500 individuals, 95 were hyperuricemic and 405 were not, so the estimated probability and odds of hyperuricemia based on the sample of 500 are $95/500 = 0.190$ and $95/405 = 0.235$, respectively.  An individual drawn at random from the entire study sample has a lower probability of being hyperuricemic than an individual drawn at random from the participants with  $\text{BMI} \geq 25$: probability 0.235 versus 0.279. Thus, these data suggest an association between BMI and hyperuricemia; specifically, that larger BMI is associated with increased risk of hyperuricemia. This is consistent with the trend visible in Figure~\ref{figure:bmiHuProbSecondTileDataOnly}.
 
-Figure~\ref{figure:huBMIQuintiles} shows the prevalence of hyperuricemia by quintile of BMI.  Quintiles divide the study sample into five groups of equal size, so each row of the table has 100 observations. With increasing BMI quintile, the estimated probability and odds of hyperuricemia increase. In the lowest quintile, in which average BMI is 20.08, the probability of hyperuricemia is $0.05$ and the odds of hyperuricemia are $0.053$. In the highest quintile, in which average BMI is 28.92, the probability and odds of hyperuricemia are higher: $0.32$ and $0.471$, respectively.
+Figure~\ref{figure:huBMIQuintiles} shows the prevalence of hyperuricemia by quintile of BMI.  Quintiles divide the study sample into five groups of equal size, so each row of the table has 100 observations. With increasing BMI quintile, the estimated probability and odds of hyperuricemia increase. In the lowest quintile, in which average BMI is 20.08, the probability of hyperuricemia is $0.05$ and the odds of hyperuricemia are $0.053$. In the highest quintile, in which average BMI is 28.92, the probability and odds of hyperuricemia are larger: $0.32$ and $0.471$, respectively.
 
 Probabilities and odds are not identical but they provide similar information. Odds and probabilities increase or decrease together, and one can be calculated from the other.  If $p$ is the probability of an event, $p/(1 - p)$ are the odds.  Algebra can be used to show that $p = \textrm{odds} / (1 + \textrm{odds})$.
 
@@ -105,7 +112,7 @@ Probabilities and odds are not identical but they provide similar information. O
 \end{exercisewrap}
 \footnotetext{If $p = 0.05$, compute the odds as $p/(1-p) = 0.05/(1 - 0.05) = 0.053$. If the odds are $0.471$, compute the probability as $\text{odds}/(1 + \text{odds}) = 0.471/(1 + 0.471) = 0.32$. }
 
-Dividing the study sample into smaller groups and computing summary measures will provide more detail about how risk of hyperuricemia varies with individual BMI values. The dark blue circles in Figure~\ref{figure:bmiHuProbSecondTile} represent information obtained from grouping individuals into $2^{nd}$-percentiles, just as Figure~\ref{figure:huBMIQuintiles} groups individuals by every $20^{th}$ percentile; i.e., the 500 cases have been split into 50 groups of 10 cases per group. Each dark blue circle has $x$-value equal to the mean BMI within the group and $y$-value equal to the proportion of individuals with hyperuricemia within the group. The dark blue circles more clearly demonstrate that higher BMI tends to be associated with higher estimated probability of hyperuricemia than the light blue circles representing the observed data.
+Dividing the study sample into smaller groups and computing summary measures will provide more detail about how risk of hyperuricemia varies with individual BMI values. The dark blue circles in Figure~\ref{figure:bmiHuProbSecondTile} represent information obtained from grouping individuals into $2^{nd}$-percentiles, just as Figure~\ref{figure:huBMIQuintiles} groups individuals by every $20^{th}$ percentile; i.e., the 500 cases have been split into 50 groups of 10 cases per group. Each dark blue circle has $x$-value equal to the mean BMI within the group and $y$-value equal to the proportion of individuals with hyperuricemia within the group. The dark blue circles more clearly demonstrate that larger BMI tends to be associated with increased estimated probability of hyperuricemia than the light blue circles representing the observed data.
 
 \begin{figure}[h!]
 	\centering
@@ -115,17 +122,16 @@ Dividing the study sample into smaller groups and computing summary measures wil
     \label{figure:bmiHuProbSecondTile}
 \end{figure}
 
-The green line in Figure~\ref{figure:bmiHuProbSecondTile} is the least squares line for a model predicting hyperuricemia from BMI. Since the mean of a binary variable taking on values 0 and 1 equals the estimated probability of the variable taking on the value 1 (i.e., the proportion of times that $y = 1$), the linear model estimates the probability of hyperuricemia at each value of BMI. While the line mostly fits the data reasonably well, it shows a lack of fit at the smallest BMI values where it predicts probabilities to be less than 0. 
+The green line in Figure~\ref{figure:bmiHuProbSecondTile} is the least squares line for a model predicting hyperuricemia from BMI. Since the mean of a binary variable taking on values 0 and 1 equals the estimated probability of the variable taking on the value 1 (i.e., the proportion of times that $y = 1$), the linear model estimates the probability of hyperuricemia at each value of BMI. While the line mostly fits the data reasonably well, it shows a lack of fit at the smallest BMI values where it predicts probabilities less than 0. 
 
 The least squares line in Figure~\ref{figure:bmiHuProbSecondTile} is based on the model
 \begin{align*}
   E(Y_i) &= P(Y_i = 1) \\
          &= \beta_0 + \beta_1 (\text{bmi}),
 \end{align*}
-where $Y_i$ has value 1 when hyperuricemia is present and 0 otherwise.  The green line drops below 0 for the smaller values of BMI because the linear model does not restrict predicted values to lie between 0 and 1.
+where $Y_i$ has value 1 when hyperuricemia is present and 0 otherwise.  The green line drops below 0 for the smaller values of BMI because the linear model does not restrict predicted values to lie between 0 and 1.  The red curve, which shows a model-based estimate of the probability of hyperuricemia using logistic regression, is a better fit to the data across the range of BMI values. 
 
-The red curve, which shows a model-based estimate of the probability of hyperuricemia using logistic regression, is a better fit to the data across the range of BMI values. The logistic regression model predicts the log odds of hyperuricemia, rather than the probability of hyperuricemia.\footnote{Note that "log" refers to the natural log.} Suppose $E$ is an event, $x$ is a predictor, and $p_{E}(x)$ is the conditional probability of $E$ given $x$. The odds of $E$ given $x$ are $p_{E}(x)/(1 - p_{E}(x))$. 
-
+\begin{comment}
 \begin{exercisewrap}
 \begin{nexercise}
   Compute the odds and log odds for the probabilities $0.01, 0.10, 0.50, 0.95$ and $0.99$.\footnotemark{}
@@ -133,7 +139,9 @@ The red curve, which shows a model-based estimate of the probability of hyperuri
 \end{exercisewrap}
 \footnotetext{For a probability $p$, use the formula $\text{odds} = p/(1-p)$. For probability $0.01$ the odds and log odds are respectively, $0.010$ and $-4.595$. For $0.10$, the odds and log odds are $0.111$ and $-2.197$.  For $0.50$, the odds and log odds are $1$ and $0$.  For $0.95$, the odds and log odds are $19$ and $2.944$.  For $0.99$, the odds and log odds are $99$ and $4.595$.}
 
-The logistic regression model for the odds of $E$ given $x$ is a linear model on the log(odds) scale. Just as in least squares linear regression, the right-hand side of the model is a linear combination of parameters (the intercept and slope) and $x$: 
+\end{comment}
+
+Suppose $E$ is an event, $x$ is a predictor, and $p_{E}(x)$ is the conditional probability of $E$ given $x$. The odds of $E$ given $x$ are $p_{E}(x)/(1 - p_{E}(x))$. The logistic regression model for the odds of $E$ given $x$ is a linear model on the log(odds) scale. Just as in least squares linear regression, the right-hand side of the model is a linear combination of parameters (the intercept and slope) and $x$: 
 \begin{align}
    \log\left(\frac{p_{\text{E}}(x)}
   {1 - p_\text{E}(x)}\right) &= \beta_0 + \beta_1 x,
@@ -160,7 +168,7 @@ Probabilities can be estimated using the relationship
 \begin{align}
   p_{E}(x) &= \frac{\text{odds}_{E}(x)}{1 + \text{odds}_{E}(x)} \notag \\
         &= \frac{\exp(\beta_0 + \beta_1 x)}
-        { 1 + \exp(\beta_0 + \beta_1 x)}.
+        {1 + \exp(\beta_0 + \beta_1 x)}.
         \label{eqn:probLogisticRegression}
  \end{align}
 
@@ -179,7 +187,7 @@ Calculate the odds and probability of $E$ when $x = 1.0$.
 \end{exercisewrap}
 \footnotetext{The log(odds) are $0.5 - 0.75(1) = -0.25$, so the odds and probability are, respectively, $\exp(-0.25) = 0.779$ and $0.779/(1 + 0.779) = 0.438$.}
 
-Computer algorithms that estimate the parameters in logistic regression use the method of \term{maximum likelihood}.  Since a logistic regression model can be converted to a model for the probability of an event $E$ given set of predictors, these probabilities can be used to write an algebraic expression for the probability of the observed responses given the predictors (details shown in more advanced courses).  This expression is called the likelihood of the data; the method of maximum likelihood selects estimates for $\beta_0$ and $\beta_1$ that make the likelihood as large as possible.
+Computer algorithms that estimate the parameters in logistic regression use the method of \term{maximum likelihood}.  Since a logistic regression model can be converted to a model for the probability of an event $E$ given set of predictors, these probabilities can be used to write an algebraic expression for the probability of a set of observed responses given the predictors (details shown in more advanced courses).  This expression is called the likelihood of the data; the method of maximum likelihood selects estimates for $\beta_0$ and $\beta_1$ that make the likelihood as large as possible.
 
 The estimated logistic regression model shown in the red curve in Figure~\ref{figure:bmiHuProbSecondTile} is explored in Section~\ref{section:analyzingHyperuricemia}.
 
@@ -239,7 +247,6 @@ Expressed algebraically, the estimated model is
 
 The red curve in Figure~\ref{figure:bmiHuProbSecondTile} is drawn using this estimated model after log(odds) were converted to probabilities, just as in Guided Practice~\ref{guidedPracticeSimpleModel}. For example, a member of the study population with BMI 30.0 has an estimated log(odds) of hyperuricemia of $-6.054 + (0.185)(30) = -0.504$. To compute the odds, exponentiate the estimated log odds: $\exp(\log(\widehat{\text{odds}})) = \exp(-0.504) = 0.604$. Then, convert from odds to probability: the predicted probability of hyperuricemia for an individual with BMI 30.0 is $0.604/(1 + 0.604) = 0.377$. If these data represent a random sample from a large population, about 38\% of individuals with $\text{BMI} = 30$ are predicted to have hyperuricemia.
 
-
 Just as with $2 \times 2$ tables, probabilities can be estimated with logistic regression in either cross-sectional studies or studies with exposure based sampling; the hyperuricemia study was a cross-sectional study, so probabilities can be estimated using the estimated model. This issue is discussed in detail for $2 \times 2$ tables in Section~\ref{designVsAnalysisBinaryData} in the web supplement and is part of the assumptions for logistic regression listed in Section~\ref{inferenceSimpleLogisticRegression}.
 
 The coefficient $0.185$ has an interpretation similar to a slope in linear regression: every one unit change in BMI is associated with an additive increase of $0.185$ in the log odds of hyperuricemia.
@@ -262,7 +269,7 @@ Odds ratios can be calculated directly from the coefficients in the model. Since
 \end{align*}
 the difference in log odds for two values $x_1$ and $x_2$ is
 \begin{align*}
-  \log[\text{odds}(x_2)] - \log[\text{odds}(x_1)] & \beta_1(x_2 - x_1).
+  \log[\text{odds}(x_2)] - \log[\text{odds}(x_1)] &= \beta_1(x_2 - x_1).
 \end{align*}
 The relationship
 \begin{align*}
@@ -306,7 +313,7 @@ model~\ref{eqn:bmiHyperuricemiaModel}.  Calculate the relative odds (i.e., odds 
 The model can also be used to estimate prevalence ratios as discussed in Section~\ref{introAndTerminologyForRisk}.
 
 \begin{examplewrap}
-  \begin{nexample}{What is the estimated prevalence (i.e. probability) of hyperuricemia for two individuals with BMI $30.0$ and $33.2$? What is the estimated prevalence ratio for hyperuricemia, comparing the individual with BMI = $33.2$ to the one with BMI = $30.0$?}\label{example:RRHyperuricemia33v30}
+  \begin{nexample}{What is the estimated prevalence (i.e.\ probability) of hyperuricemia for two individuals with BMI $30.0$ and $33.2$? What is the estimated prevalence ratio for hyperuricemia, comparing the individual with BMI = $33.2$ to the one with BMI = $30.0$?}\label{example:RRHyperuricemia33v30}
     As mentioned earlier, the hyperuricemia data were collected in a cross-sectional study, so probabilities can be estimated (estimated probabilities were used to construct the red curve in Figure~\ref{figure:bmiHuProbSecondTile}).
 
     For these two individuals, the estimated probabilities of hyperuricemia are
@@ -319,7 +326,8 @@ and
   \hat{p}_E(30.0) &=\frac{0.604}{1 + 0.604} \\
             &= 0.377.
 \end{align*}
-The prevalence ratio, comparing the participant with BMI = $33.2$ to the one with BMI = $30.0$ is $0.522/0.377 = 1.38$; the prevalence of hyperuricemia for individual with BMI = $33.2$ is estimated to be almost $1.4$ times ($40\%$ higher) that of the individual with the lower BMI.
+The prevalence ratio, comparing the participant with BMI = $33.2$ to the one with BMI = $30.0$ is $0.522/0.377 = 1.38$; the prevalence of hyperuricemia for individual with BMI = $33.2$ is estimated to be almost $1.4$ times ($40\%$ larger) that of the individual with the lower BMI.  Using the language of 
+Section~\ref{inferenceBinaryData}, the relative risk of hyperuricemia for an individual with a BMI of $33.2$ vs $30.0$ is approximately $1.4$.
   \end{nexample}
 \end{examplewrap}
 
@@ -328,7 +336,7 @@ The prevalence ratio, comparing the participant with BMI = $33.2$ to the one wit
 
 This section describes a graphical method for checking the fit of a logistic model with a single continuous predictor, such as BMI. Methods for checking fit that use the inferential properties of logistic regression are discussed in Section~\ref{assessingModelFitMultipleLogisticRegression}.
 
-Figure~\ref{figure:probVsObsHuBMI} shows values of the outcome variable $Y = 0$ (no hyperuricemia) or $Y = 1$ (hyperuricemia) plotted against model predicted probabilities. It is the analogue of plotting observed versus predicted values in linear regression, but because all the observed values are clustered at 0 or 1, it is less useful as a diagnostic than in linear regression.  As noted earlier, close inspection of the plot indicates that larger predicted probabilities tend to have a higher frequency of $Y = 1$, but the trend is subtle.
+Figure~\ref{figure:probVsObsHuBMI} shows values of the outcome variable $Y = 0$ (no hyperuricemia) or $Y = 1$ (hyperuricemia) plotted against model predicted probabilities. It is the analogue of plotting observed versus predicted values in linear regression, but because all the observed values are clustered at 0 or 1, it is less useful as a diagnostic than in linear regression.  As noted earlier, close inspection of the plot indicates that larger predicted probabilities tend to have a increased frequency of $Y = 1$, but the trend is subtle.
 
 \begin{figure}[!tbh]
   \centering
@@ -338,7 +346,7 @@ Figure~\ref{figure:probVsObsHuBMI} shows values of the outcome variable $Y = 0$ 
     \label{figure:probVsObsHuBMI}
 \end{figure}
 
-Grouping observations reduces the variability in a plot and can sometimes be helpful in checking a model. Figure ~\ref{figure:predVsObsHuBMI} shows the same plot as in Figure 9.6, but with the addition of summary statistics computed within 10 equally sized buckets of size 50.  Each group is formed based on the predicted probability of hyperuricemia. For instance, the left-most point represents the group consisting of the 50 cases with the smallest predicted probabilities of hyperuricemia based on the model, which range between 0.043 to 0.091. Within this group, 2 individuals (a proportion of $2/50 = 0.04$) were hyperuricemic and the average predicted probability was $0.076$, so the point is at $(0.076, 0.040)$.  The vertical lines show $95\%$ confidence intervals for each estimated proportion.  If the logistic regression is a good fit, the estimated proportions and average predicted probabilities should be similar in each decile; the dashed line $y = x$ shows the extent to which the observed proportions and predicted probabilities agree.  Since all of  the confidence intervals touch the dashed line, the model seems to fit reasonably well.
+Grouping observations reduces the variability in a plot and can sometimes be helpful in checking a model. Figure~\ref{figure:predVsObsHuBMI} shows the same plot as in Figure 9.6, but with the addition of summary statistics computed within 10 equally sized buckets of size 50.  Each group is formed based on the predicted probability of hyperuricemia. For instance, the left-most point represents the group consisting of the 50 cases with the smallest predicted probabilities of hyperuricemia based on the model, which range between 0.043 to 0.091. Within this group, 2 individuals (a proportion of $2/50 = 0.04$) were hyperuricemic and the average predicted probability was $0.076$, so the point is at $(0.076, 0.040)$.  The vertical lines show $95\%$ confidence intervals for each estimated proportion.  If the logistic regression is a good fit, the estimated proportions and average predicted probabilities should be similar in each decile; the dashed line $y = x$ shows the extent to which the observed proportions and predicted probabilities agree.  Since all of  the confidence intervals touch the dashed line, the model seems to fit reasonably well.
 
 With larger datasets, it is possible to obtain a clearer picture of the fit by increasing the number of buckets and/or the number of observations in each bucket. 
 
@@ -374,7 +382,7 @@ Confidence intervals and tests for parameters in simple logistic regression will
   \begin{enumerate}
       \item The logistic transformation is thought to be a reasonable model for the dependence of conditional probability or odds for the response variable given the predictor.
       \item The observations are independent pairs, i.e., no single pair depends on any of the others.
-      \item If the sample was drawn using exposure-based or cross-sectional sampling, the conditional odds and probability of $E$ given $x$ can be estimated using relationships~\ref{eqn:oddsLogisticRegression} and \ref{eqn:probLogisticRegression}.  These estimates can be used to estimate odds and prevalence ratios.
+      \item If the sample was drawn using exposure-based or cross-sectional sampling, the conditional odds and probability of $E$ given $x$ can be estimated using relationships~\ref{eqn:oddsLogisticRegression} and ~\ref{eqn:probLogisticRegression}.  These estimates can be used to estimate odds and prevalence ratios.
       \item If the data are from a case-control study (i.e., outcome-based sampling) in which the sampling did not depend on exposure, conditional odds can be estimated but conditional probabilities cannot. Odds ratios can be estimated from the model, but prevalence ratios cannot.
   \end{enumerate}
 \end{onebox}
@@ -392,7 +400,7 @@ Suppose
 \[
   \widehat{\log(\textrm{odds}_{E}(x))} = b_0 + b_1 x
 \]
-is an estimated logistic regression model from a dataset with $n$ observations on the outcome of $E$ and predictor $x$.  The standardized statistic
+is an estimated logistic regression model from a dataset with $n$ observations on the outcome $E$ and predictor $x$.  The standardized statistic
 \[
       \frac{b_1 - \beta_1}{\textrm{s.e.}(b_1)}
 \]
@@ -430,7 +438,7 @@ A two-sided $100(1 - \alpha)$\% confidence interval for the model coefficient $\
 
 All statistical software packages provide standard errors (s.e.) of coefficients, and most provide the $z$ statistic and its $p$-value directly.  The estimate $b_0$ has a sampling distribution as well, but since the coefficient is often not scientifically meaningful, tests and intervals for $\beta_0$ are not discussed here.
 
-Inference for the association of BMI with hyperuricemia can be based on the more complete table of output from \textsf{R} shown in Figure~\ref{figure:bmiHyperuricemiaLogReg} (output has been rounded to three significant digits for readability).  The assumptions for logistic regression seem reasonable for this example. Figure~\ref{figure:bmiHuProbSecondTile} suggests that the probability of hyperuricemia follows a logistic function as BMI increases, and assumptions 2 and 3 are satisfied since this was a cohort study with independent data from the participants. In the sample of 500, 95 were hyperuricemic and 405 were not, so the sample size is sufficient.
+Inference for the association of BMI with hyperuricemia can be based on the more complete table of output from \textsf{R} shown in Figure~\ref{figure:bmiHyperuricemiaLogReg} (output has been rounded to two or three significant digits for readability).  The assumptions for logistic regression seem reasonable for this example. Figure~\ref{figure:bmiHuProbSecondTile} suggests that the probability of hyperuricemia follows a logistic function as BMI increases, and assumptions 2 and 3 are satisfied since this was a cohort study with independent data from the participants. In the sample of 500, 95 were hyperuricemic and 405 were not, so the sample size is sufficient.
 
 \begin{figure}[ht]
 \centering
@@ -442,7 +450,7 @@ Inference for the association of BMI with hyperuricemia can be based on the more
   bmi & 0.185 & 0.037 & 4.99 & < 0.001 \\
    \hline
 \end{tabular}
-\caption{Logistic regression with response hyperuricemia
+\caption{Logistic regression with response variable hyperuricemia
         and predictor BMI.}
 \label{figure:bmiHyperuricemiaLogReg}
 \end{figure}
@@ -460,7 +468,7 @@ In the hyperuricemia example, the 95\% confidence interval for the coefficient o
   0.185 \pm (1.96)(0.037) \longrightarrow (0.113, 0.258) \longrightarrow (e^{0.113}, e^{0.258}) = (1.119, 1.294).
 \]
 
-These data suggest that with 95\% confidence, an increase of 1 unit BMI is associated with a higher odds of hyperuricemia by a factor of 1.1 to 1.3. In other words, with 95\% confidence, when comparing individuals who differ in BMI by 1 unit, the individual with higher BMI has a higher odds of hyperuricemia that may be from 1.1 times as large to 1.3 times as large relative to the individual with lower BMI.
+These data suggest that with 95\% confidence, an increase of 1 unit BMI is associated with a larger odds of hyperuricemia by a factor of 1.1 to 1.3. 
 
 \begin{examplewrap}
 \begin{nexample}{Calculate and interpret a 95\% confidence interval for the odds ratio of hyperuricemia comparing two individuals with BMI 33 and 30.}
@@ -473,7 +481,7 @@ Since computing a confidence interval for $a\beta_1$ on the log(odds) scale invo
   \[((0.113)(3), (0.258)(3)) = (0.339, 0.774). \]
 This interval differs slightly from the one computed previously only due to rounding of the original confidence interval bounds. If no rounding is done in the intermediate calculations, the confidence interval on the odds scale is $(1.401, 2.165)$.
 
-These data suggest that with 95\% confidence, the odds ratio of hyperuricemia for participants with a BMI of 33 versus 30 is between $1.40$ and $2.17$. The individual with BMI higher by 3 units has a odds of hyperuricemia that may be from $1.40$ to $2.17$ times higher. This confidence interval depends only on the difference in the values of BMI, so it applies to any two values of BMI that differ by 3.
+These data suggest that with 95\% confidence, the odds ratio of hyperuricemia for participants with a BMI of 33 versus 30 is between $1.40$ and $2.17$. The individual with BMI larger by 3 units has a odds of hyperuricemia that may be from $1.40$ to $2.17$ times higher. This confidence interval depends only on the difference in the values of BMI, so it applies to any two values of BMI that differ by 3.
 \end{nexample}
 \end{examplewrap}
 
@@ -495,13 +503,13 @@ Tuberculosis (TB) is a communicable disease that is among the top 10 causes of d
 
 The World Health Organization (WHO) and other health care organizations have used the term \textit{treatment default} in TB to denote a treatment interruption of at least two months, and nearly all published papers use that term. This chapter uses the more descriptive term \textit{two-month interruption} for the premature ending of treatment.  When the context is clear, this is shortened to \textit{interruption}.
 
-A 2015 cross-sectional study by Lackey, et. al \footfullcite{lackey2015patient}  examined patient characteristics associated with interrupted treatment in a section of Lima, Peru where the incidence of TB was 213 cases per 100,000 persons at the time the study was conducted. For comparison, the incidence of TB in the United States is approximately 2.5 cases per 100,000.\footfullcite{https://www.cdc.gov/tb/statistics/default.htm}   The study enrolled 1,294 participants and reported results based on data from 1,233 participants for whom there were no missing data on outcome and patient characteristics. \term{Complete case analysis} is the term used to refer to an analysis using only the cases without any missing observations; while this is usually not the best way to adjust for missing data, alternative methods are beyond the scope of this text. The dataset \texttt{tb} in the \texttt{oibiostat} package contains a subset of the variables for the complete case data analyzed by the study authors.
+A 2015 cross-sectional study by Lackey, et.\ al. \footfullcite{lackey2015patient}  examined patient characteristics associated with interrupted treatment in a section of Lima, Peru where the incidence of TB was 213 cases per 100,000 persons at the time the study was conducted. For comparison, the incidence of TB in the United States is approximately 2.5 cases per 100,000.\footfullcite{https://www.cdc.gov/tb/statistics/default.htm}   The study enrolled 1,294 participants and reported results based on data from 1,233 participants for whom there were no missing data on outcome and patient characteristics. Figure 1 in the Lackey article describes the criteria for exclusions that led to the data from 1,233 participants used in their analysis. \term{Complete case analysis} is the term used to refer to an analysis using only the cases without any missing observations; while this is often not the best way to adjust for missing data, alternative methods are beyond the scope of this text. The dataset \texttt{tb.interruption} in the \texttt{oibiostat} package contains data on 1,293 of the 1,294 all the participants enrolled; data from one participant whose treatment was stopped prematurely by the clinical team  was dropped before the dataset was posted by the study team.  
 
 
 \begin{examplewrap} 
   \begin{nexample}  {Figure~\ref{figure:tbInterruptionEduLogReg} shows a logistic regression model estimating the association of a two-month treatment interruption among participants who had completed a secondary school education. (Decimals from the output have been rounded to 3 significant figures for readability.) Interruption (the variable \texttt{two.mo.interruption} in the dataset) is a binary variable coded \texttt{0} for individuals who completed therapy and 1 for those who did not. The predictor \texttt{education} is a factor variable, with levels {"Yes"} and {"No"} for participants with and without secondary school education, respectively.  Among the $1,233$ cases in the dataset, $127$ $(10.3\%)$ experienced a treatment interruption and $719$ had at least a secondary school education. Compute the odds ratio for ending TB therapy prematurely, comparing participants with a secondary school education to those without, along with a 95\% confidence interval for the odds ratio.}
 
-The assumptions for the logistic model are reasonable in this example. The participants were sampled independently, the predictor is binary, and there are more than 10 cases with either outcome.  The coefficient of \texttt{educationYes} indicates that participants with secondary school education have a log(odds) that is reduced additively by $0.785$ compared to those without secondary school education.  The odds ratio comparing someone with secondary school education to someone without is $e^{-0.785}=0.456.$  The odds of a premature treatment interruption among participants with a secondary school education are $0.456$ times the odds of those without a secondary education.  The odds are reduced by more than $50\%$.
+The assumptions for the logistic model are reasonable in this example. The participants were sampled independently, the predictor is binary, and there are more than 10 cases with either outcome.  The coefficient of \texttt{educationYes} indicates that participants with secondary school education have a log(odds) that is reduced additively by $0.785$ compared to those without secondary school education.  The odds ratio comparing someone with secondary school education to someone without is $e^{-0.785}=0.456$.  The odds of a premature treatment interruption among participants with a secondary school education are $0.456$ times the odds of those without a secondary education.  The odds are reduced by more than $50\%$.
 
 Because the $z$ statistic has value -4.12, the evidence for an association is strong ($p < 0.001$).  A 95\% confidence interval for the odds ratio can be calculated by first calculating the corresponding interval for the log(OR) and exponentiating.  The 95\% confidence interval for the log(OR) is
 \begin{align*}
@@ -567,7 +575,7 @@ No interruption & 439 & 667 & 1106 \\
     \footnotemark{}
   \end{nexercise}
 \end{exercisewrap}
-\footnotetext{For participants without a secondary school education, the odds of treatment interruption are $75/439 = 0.171$.  For patients with at least a secondary school education, the corresponding odds are $52/667 = 0.078.$  The relative odds, or odds ratio, comparing those with a secondary school education to those without is $0.078/0.171 = 0.456$.}
+\footnotetext{For participants without a secondary school education, the odds of treatment interruption are $75/439 = 0.171$.  For patients with at least a secondary school education, the corresponding odds are $52/667 = 0.078$.  The relative odds, or odds ratio, comparing those with a secondary school education to those without is $0.078/0.171 = 0.456$.}
 
 The $\chi^2$ value for the table (16.8 with one degree of freedom) is highly statistically significant ($p < 0.001$) as is the $z$ statistic in the logistic regression in Figure~\ref{figure:tbInterruptionEduExample}. In the setting of a $2 \times 2$ table, logistic regression produces the same summary statistic for an association as a direct analysis of the table; this is analogous to how linear regression with a binary predictor provides the same results as a two-sample $t$-test.
 
@@ -576,10 +584,300 @@ Associations in observational studies should never be interpreted as causal effe
 \section{Multiple logistic regression}
 \label{generalMultipleLogistic}
 
+\subsection{Models with two predictors}
+\label{section:modelsWithTwoPredictors}
+
+The next sections introduce multiple logistic regression using examples with two predictors and categorical predictors with more than two levels.  The more abstract discussion of the general logistic regression model and methods for inference for its parameters are deferred to Section~\ref{inferenceMultipleLogisticRegression}.
+
+Women are generally less likely to experience hyperuricemia than men for reasons that are not completely understood, but may be due to increased levels of estrogen\footfullcite{halperin2020sex}.  Figure~\ref{figure:huSexTable} shows that is the case in these data, where the estimated OR for hyperuricemia, comparing females to males is $(34/213)/(61/192) = 0.5025$. In these data, the odds of hyperuricemia in females is half what it is in males.  Does the relationship between hyperuricemia and BMI in Figure~\ref{figure:bmiHyperuricemiaLogReg} change when sex is added to the model?
+
+% latex table generated in R 4.2.3 by xtable 1.8-4 package
+% Mon Apr 22 10:28:44 2024
+\begin{figure}[ht]
+\centering
+\begin{tabular}{rrrr}
+  \hline
+ & No & Yes & Sum \\ 
+  \hline
+male & 192 & 61 & 253 \\ 
+  female & 213 & 34 & 247 \\ 
+  Sum & 405 & 95 & 500 \\ 
+   \hline
+\end{tabular}
+\caption{Table showing the association between hyperuricemia (No, Yes)
+       and sex in the random sample of 500 participants from the hyperuricemia
+       data} 
+\label{figure:huSexTable}
+\end{figure}
+
+Let $E$ denote hyperuricemia, and
+\begin{align*}
+p_E(\text{bmi, sex}) = P(E | \text{bmi, sex}).
+\end{align*}
+The two-variable model used to answer this question is 
+\begin{align}
+\log\left[\frac{p_E(\text{bmi, sex})}{1 - p_E(\text{bmi, sex})}\right] = \beta_0 +
+\beta_1 \text{bmi}  + \beta_2 \text{sex}.
+\label{eqn:hyperuricemiaBMISex}
+\end{align}
+
+The sample size guidelines for logistic regression outlined  in Section~\ref{inferenceMultipleLogisticRegression} specify that the number of predictors in a model (including the intercept) should be no larger than 10\% of the smaller of the number of successes or failures.  There are 95 cases in the dataset with hyperuricemia (the smaller number of the two outcomes), so a model with 2 predictors meets the sample size guideline. The estimated model is shown in Figure~\ref{figure:huBmiSexLogReg}.  The factor \var{sex} is coded "male" (the baseline category) or "female", and the units of BMI are $\text{kg/m}^2$. The estimated regression indicates that BMI remains strongly associated with hyperuricemia after adjusting for  sex.
+
+% latex table generated in R 4.1.0 by xtable 1.8-4 package
+% Tue Nov 23 11:14:22 2021
+\begin{figure}[ht]
+\centering
+\begin{tabular}{rrrrr}
+  \hline
+ & Estimate & Std. Error & z value & Pr($>$$|$z$|$) \\
+  \hline
+(Intercept) & -5.503 & 0.982 & -5.61 0.000 \\
+  bmi & 0.171 & 0.038 & 4.56 & 0.000 \\
+  sexfemale & -0.480 & 0.245 & -1.96 & 0.050 \\
+   \hline
+\end{tabular}
+\caption{Logistic regression with response variable hyperuricemia
+        predictors BMI and sex.}
+\label{figure:huBmiSexLogReg}
+\end{figure}
+
+The algebraic form of the estimated model is
+\begin{align}
+  \log(\widehat{\text{odds}}_E) = -5.503 + (0.171)\text{bmi}
+      -(0.480)\text{sexfemale}.
+      \label{eqn:huBmiSexLogReg}
+\end{align}
+
+A great deal can be learned about the interpretation of logistic regression from even this simple model.  The coefficient of BMI can be used to calculate the estimated change in odds associated with a change in BMI as long as the sex variable remains constant, i.e., for participants of the same sex.
+
+\begin{examplewrap} 
+\begin{nexample}{Calculate the OR for two individuals of the same sex but with BMI values of 28 and 29.}
+  The estimated model coefficients can be used to calculate the difference in log(odds) for one unit change in BMI using the same steps that led to Equation~\ref{eqn:oddsRatioLogisticRegression}.  When the variable \var{sex} does not change, the difference in log odds for two values of \var{bmi} given by $x_1$ and $x_2$ is  
+\begin{align}
+  [b_0 + b_1(x_2) + b_2(\text{sex})] &- [b_0 + b_1(x_1) + b_2(\text{sex})] \\
+      & = b_1(x_2 - x_1).
+      \label{eqn:ORChangeTwoVar}
+\end{align}
+For a one unit change in BMI the difference in log odds is the $b_1 = 0.171$, and the odds ratio is
+\[
+  \text{OR} = e^{0.171} = 1.186,
+\]
+a roughly 20\% increase in the odds of hyperuricemia associated with the larger BMI.
+
+\label{example:huBMISexOR}
+\end{nexample}
+\end{examplewrap}
+
+Confidence intervals are calculated using standard errors just as in single variable logistic regression.
+
+\begin{exercisewrap}
+  \begin{nexercise}
+    Calculate a 95\% confidence interval for the odds ratio of hyperuricemia associated with a three unit increase in BMI for two individuals of the same sex.     \footnotemark{}
+  \end{nexercise}
+\end{exercisewrap}
+\footnotetext{A 95\% confidence interval for the change in log(odds) for a 1 unit change in BMI is $0.171 \pm (1.96)(0.038) = (0.097, 0.246)$.  The confidence interval for a three unit change can be calculated by multiplying the lower and upper bounds by 3: $[(3)(0.097), (3)(0.246)] = (0.291, 0.738)$.  The corresponding interval for the OR is $(e^{0.290}, e^{0.736}) = (1.338, 2.092)$.}
+
+\begin{exercisewrap}
+\begin{nexercise}
+Does the intercept have scientific meaning in this model? \footnotemark{}
+\end{nexercise}
+\end{exercisewrap}
+\footnotetext{No.  The intercept is the log(odds) for an individual with baseline category "male" but BMI = 0.}
+
+Since the hyperuricemia study had a cross-sectional design, the probability of hyperuricemia for values of the predictors can be estimated from the model, as discussed later in Section~\ref{inferenceMultipleLogisticRegression}.
+
+\begin{examplewrap} 
+\begin{nexample}{Calculate the estimated probability of hyperuricemia for a female with BMI~28.}
+The log(odds) are
+\[
+    -5.503 + (0.171)(28)  - 0.480 = -1.195,
+\]
+so the odds are $e^{-1.195} = 0.303$.  The estimated probability of hyperuricemia is
+\[
+   \text{exp}  \left[ \frac{0.303}{1 + 0.303} \right] = 0.232.
+\]
+A female with BMI~28 has an estimated chance of 23\% of being hyperuricemic.
+
+\label{example:huBMISexProbabilities}
+\end{nexample}
+\end{examplewrap}
+
+The OR for hyperuricemia comparing males to females is the same, for any value of BMI as long as BMI is held constant. When both predictors change, the full model must be used to calculate odds ratios.
+
+\begin{examplewrap}
+\begin{nexample}{What is the OR for hyperuricemia, comparing a woman with BMI~32 to a male with BMI~30?}
+The log(odds) of hyperuricemia for a woman with BMI 32 is
+\begin{align*}
+   -5.503 + (0.171)(32) - 0.480 = -0.511,
+\end{align*}
+so the corresponding odds are $e^{-0.511} = 0.600$.
+
+For the male with BMI~30, the log(odds) are
+\begin{align*}
+-5.503 + (0.171)(30) = -0.373,
+\end{align*}
+so the odds of hyperuricemia are $0.689$.
+The OR comparing the female to the male is $0.600/0.689 = 0.871$.
+
+A woman whose BMI is 2$\text{kg/m}^2$ larger than a male still has a lower estimated odds of hyperuricemia.
+\label{example:ORBMI3032}
+\end{nexample}
+\end{examplewrap}
+
+In the model for hyperuricemia the change in log odds when when one predictor changes does not depend on the value of the other predictor.  The same is not true for estimated probabilities.
+
+\begin{examplewrap}
+\begin{nexample}{For males, use the estimated probabilities of hyperuricemia for individuals with BMI~28 and BMI~30 to calculate estimated prevalence differences and risk ratios.  Repeat the calculation for females. }
+For a male with BMI~28 the estimated log odds and odds of hyperuricemia are $-5.503 + (0.171)(28) = -0.715$ and  $e^{-0.715} = 0.489$.  The estimated prevalence (probability) of hyperuricemia is $0.489/(1 + 0.489) = 0.328$.  The estimated odds of hyperuricemia for a male with BMI~30 were calculated in Example~\ref{example:ORBMI3032} and are $0.689$, so the estimated prevalence is $0.408$.  The estimated prevalence difference and ratio risk are, respectively, $ 0.408 - 0.328 = 0.080$ and $ 0.408/0.328 = 1.244$.
+
+The prevalence difference and risk ratio for females are calculated similarly and are, respectively, $0.066$ and $1.290$.  The prevalence differences and ratios associated with a change in BMI from 28 to 30 are different for males than for females, and must be calculated using all the coefficients in the model.  This result is another reason why an estimated OR from a logistic regression should not be interpreted as a risk ratio.
+
+\label{example:probsDependOnOtherVars}
+\end{nexample}
+\end{examplewrap}
+
+In a model that includes sex, the log(OR) for hyperuricemia for a one unit change in BMI for participants of the same sex is $0.171$, slightly attenuated toward 0 from the earlier log(OR) of $0.185$ in the model with only BMI. In these data, males tend to have larger BMI (25 vs 23.6$\text{kg/m}^2$) and have double the odds hyperuricemia than females, so the estimated association in the model with BMI alone is influenced by the males with larger BMI.  Adding sex to the model separates the sex and BMI associations, at least within the assumptions of the logistic model.
+
+
+% still need a better explanation
+
+\subsection{Modeling a possible interaction}
+\label{section:interactionLogisticRegression}
+
+A regression model is called an \term{additive model} in the predictors when the change in association between a response and predictor does not depend on values of the other predictors. The logistic model in Equation~\ref{eqn:huBmiSexLogReg} is additive in the predictors BMI and sex for the log odds of hyperuricemia; the difference in log(odds) for two values of BMI does not depend on sex. What is the evidence that the association between BMI and hyperuricemia might differ for males and females?
+
+When an association may differ between categories of another predictor, such as sex, it is common in the epidemiological literature to call that predictor a potential \term{effect modifier}, and the phenomenon is called \term{effect modification}.  This section does not use that terminology for reasons explained later and instead uses the more statistically descriptive term \term{interaction}.
+
+In regression models interactions are usually explored by including an interaction term.  Section~\ref{interactionRegression} discusses modeling an interaction in linear regression.  In these data, a two variable model with an interaction term in the logistic model is
+\begin{align}
+  \log(\text{odds}_E) = \beta_0 + \beta_1 \text{bmi}
+       + \beta_2 \text{sex} + \beta_3 (\text{bmi}\times\text{sex}).
+       \label{eqn:huBmiSexInteraction}
+\end{align}
+The last term is the product of \texttt{bmi} and \texttt{sex}.
+
+The interaction term (\var{bmi}$\times$\var{sex}) allows the slope coefficient for \var{bmi} to depend on \var{sex}.  For the reference sex category "male" the coefficient of \var{bmi} is $\beta_1$; for the category "female" the slope of \var{bmi} is $\beta_1 + \beta_3$.  Confidence intervals for $\beta_3$ or a test of the null hypothesis $\beta_3 = 0$ can be used to assess the evidence against the hypothesis that the log(odds) for the relationship between hyperuricemia and BMI does not depend on sex.
+
+The number of hyperuricemic events (95) is sufficient to add another parameter, and  Figure~\ref{figure:huBmiSexInteractionLogReg} shows the estimated model.  Equation~\ref{eqn:huBmiSexInteractionLogReg} shows the algebraic form of the this model.
+
+% latex table generated in R 4.1.0 by xtable 1.8-4 package
+% Tue Nov 23 11:18:33 2021
+\begin{figure}[ht]
+\centering
+\begin{tabular}{rrrrr}
+  \hline
+ & Estimate & Std. Error & z value & Pr($>$$|$z$|$) \\
+  \hline
+(Intercept) & -5.006 & 1.264 & -3.96 & 0.000 \\
+  bmi & 0.152 & 0.049 & 3.12 & 0.002 \\
+  sexfemale & -1.652 & 1.947 & -0.85 & 0.396 \\
+  bmi:sexfemale & 0.046 & 0.077 & 0.61 & 0.544 \\
+   \hline
+\end{tabular}
+\caption{Logistic regression with interaction: response variable hyperuricemia,
+        predictors BMI and sex.}
+\label{figure:huBmiSexInteractionLogReg}
+\end{figure}
+
+
+\begin{align}
+  \widehat{\log}\left[\text{odds}_E(\text{bmi, sex})\right] &= b_0 + b_1\text{bmi}
+  + b_2\text{sexfemale} + b_3\text{(bmi)(sexfemale)} \notag \\
+  &= -5.006 + (0.152)\text{bmi}
+  -(1.652)\text{sexfemale} + (0.046)\text{(bmi)(sexfemale)}.
+  \label{eqn:huBmiSexInteractionLogReg}
+\end{align}
+
+The evidence for the interaction term is weak ($p = 0.544$). The observed difference in association between the log odds of hyperuricemia and BMI between males and females is not inconsistent with what would be expected if there were actually no population-level difference in association. In this model, there is no support for the hypothesis that the relationship between hyperuricemia and BMI differs by sex, and the interaction term should be left out of the exploratory model. Exercise~\ref{exercise:BMISexInteractionModel} explores the interpretation of a model with an interaction term.
+
+A data analyst starting with the interaction model might mistakenly conclude that neither \var{sex} nor the interaction of \var{sex} with \var{bmi} should be retained.  Analyses should always begin without interaction terms and add them only when there is a reason to look more closely at the relationship between a response and a predictor  across the levels of another variable.
+
+This chapter avoids the use of the terms effect modifier and effect modification in observational studies. The term "effect" implies a causal link that cannot be established in an observational study with the methods described in this text.  It is common, though, in applications to label the non-interaction terms as \term{main effects} and interaction terms as \term{interaction effects}.  The terminology can be a useful abbreviation as long as no causal association is meant or inferred.
+
+\subsection{Categorical predictors with more than two levels}
+\label{section:predictorsMoreThanTwoLevels}
+
+When spawning, a female horseshoe crab migrates to shore with a male attached to her spine to lay clusters of eggs in the sand.  Additional male crabs may join the pair and fertilize the eggs as well, presumably increasing genetic diversity of the offspring. The additional male crabs are called satellites. The data used here originally appeared in Brockman \footfullcite{brockmann1996satellite} and can be found at the website for \textit{Categorical Data Analysis, 3rd ed.}\footfullcite{agresti2013categorical} and in the \textsf{R} package \texttt{glmbb}. The dataset contains information on 173 female crabs, 111 with at least one male satellite.
+
+This section examines the association between the odds of the event $E$ that a female has one or more satellites and her carapace (shell) width and color.   Let the variable $y$ denote whether a female has one or more satellites ($y = 1$) or none ($y = 0$), \var{width} gives the carapace width in centimeters and the levels of the factor variable \var{color} are "Light", "MedLight" (for medium light), "MedDark" (for medium dark), and "Dark", denoting increasingly dark colors. The predictor \var{color} is an ordinal categorical variable, but since methods that take advantage of ordinal variables in contingency tables and logistic regression are beyond the scope of this text, the analyses in this section treat color as a standard unordered categorical variable.
+
+The contingency table in Figure~\ref{figure:colorSatelliteCrabs} shows the association between color and the presence of at least one satellite.  The estimated odds vary by color; the odds of dark females having at least one satellite are $7/15 = 0.467$, while the odds for a female with medium light color are $69/26 = 2.654$. The OR, comparing medium light to dark, is $2.654/0.467 = 5.683$; the odds of medium light female crab having at least one satellite are between $5$ and $6$ times larger than for a dark female.
+
+The conditions given in Section~\ref{theChiSquaredTestStatistic} for the validity of a $\chi^2$ test are met in the table (just barely, see Exercise~\ref{exercise:colorsSatellitesCrabsChiSq}); the $\chi^2$ statistic has value 14.08 on 3 degrees of freedom, $p = 0.003$.  The extension of Fisher's exact test to a $4 \times 2$ table yields the same $p$-value, so the table provides evidence that in these data, color and having more than one satellite are not independent.
+
+\begin{figure}[ht]
+\centering
+\begin{tabular}{lrrr}
+Color & $y = 0$ & $y = 1$ & Sum \\ \hline
+Dark & 15 & 7 & 22 \\
+MedDark & 18 & 26 & 44 \\
+MedLight & 26 & 69 & 95 \\
+Light & 3 & 9 & 12 \\ \hline
+Sum & 62 & 111 & 173
+\end{tabular}
+\caption{Absence ($y = 0$) or presence ($y = 1$) of at least one satellite versus color of a female horseshoe crab.}
+\label{figure:colorSatelliteCrabs}
+\end{figure}
+
+The interpretation of logistic regression with a categorical predictor with four levels is the same as that for a predictor with 2 levels described in Section~\ref{section:logisticChiSqTest}  --  odds ratios calculated from the $4 \times 2$ table will match those computed from the regression coefficients.  Figure~\ref{figure:satellitesColorCrabsLogReg} shows the estimated regression with the predictor \var{color}, with the color "Dark" set as the reference category. The less frequent response category $y = 0$ has 62 observations and the model has 4 parameters including the intercept, 2 fewer than the maximum 6 the guidelines suggest, so estimates and inference should be reliable.
+
+
+% latex table generated in R 4.1.0 by xtable 1.8-4 package
+% Fri Jan  7 11:38:53 2022
+\begin{figure}[ht]
+\centering
+\begin{tabular}{rrrrr}
+  \hline
+ & Estimate & Std. Error & z value & Pr($>$$|$z$|$) \\
+  \hline
+(Intercept) & -0.762 & 0.458 & -1.67 & 0.096 \\
+  colorMedDark & 1.130 & 0.551 & 2.05 & 0.040 \\
+  colorMedLight & 1.738 & 0.512 & 3.39 & 0.001 \\
+  colorLight & 1.861 & 0.809 & 2.30 & 0.021 \\
+   \hline
+\end{tabular}
+\caption{Logistic regression with horseshoe crab data, response variable
+       presence of male satellites, predictor variable \var{color}.}
+\label{figure:satellitesColorCrabsLogReg}
+\end{figure}
+
+
+The algebraic form of the model is
+\begin{align}
+\log\left[\text{odds}_{E}(\text{color})\right] = -0.762 + (1.130)\texttt{colorMedDark}
+ + (1.738)\texttt{colorMedLight} + (1.861)\texttt{colorLight}.
+ \label{eqn:satellitesColorCrabsLogReg}
+\end{align}
+
+Since the reference category is "Dark", the log(odds) of a dark female having at least one satellite is the intercept term $-0.762$, with corresponding odds $e^{-0.762} = 0.467$, the same value when using the table in Figure~\ref{figure:colorSatelliteCrabs}. This is one instance where the intercept term is meaningful. More generally, when there are no other predictors in a model with a categorical predictor, the intercept term is the log(odds) of the outcome for the reference category. Using Equation~\ref{eqn:satellitesColorCrabsLogReg}, the log(odds) for the color "MedLight" is $-0.762 + 1.738 = 0.976$, with corresponding odds $e^{0.976} = 2.654$. The OR comparing "MedLight" to "Dark" $2.654/0.467 = 5.683$, also agreeing with the OR calculated from Figure~\ref{figure:colorSatelliteCrabs}.  When comparing a category against the reference, ORs can be calculated directly.  The coefficient for "MedLight" is the difference in log(odds) between "MedLight" and the reference category "Dark", so the OR comparing the two categories is $e^{1.738} = 5.686$.  The small difference between this OR and the one calculated from Figure~\ref{figure:colorSatelliteCrabs} is due to the rounding of the coefficients from the logistic model.
+
+% this explanation is lame.  I could not confirm this was the cause.
+
+The pattern of the coefficients is consistent with what is known about horseshoe crabs -- the log(odds) and hence odds and probability of having satellites increase with lighter colors of the female carapace.
+
+Calculating ORs for two categories that do not include "Dark" can be done with the model coefficients.  The log(odds) for the category "Light" is $-0.762 + 1.861 = 1.099$.  The difference in log(odds), comparing "Light" to "MedLight" is $1.099 - 0.976 = 0.123$, so the OR is $e^{0.123} = 1.131$.  This odds ratio can also be calculated directly from model coefficients.  Suppose $b_0$ is the intercept, and let $b_3$ and $b_4$ denote the coefficients of the categories "MedLight" and "Light", respectively.  The difference in log(odds) for the two categories is
+\begin{align*}
+   (b_0 + b_4) - (b_0 + b_3) &= b_4 - b_3 \\
+      &= 1.861 - 1.738 \\
+      &= 0.123.
+\end{align*}
+Since the coefficient for the intercept cancels in the subtraction, the odds ratio comparing "MedLight" to "Light" is $\exp(b_4 - b_3) = \exp(0.123) = 0.131$.  This argument easily generalizes to any two categories when predictors have more than 4 levels.
+
+The calculation of a confidence interval for the OR comparing two categories that are not the reference category is a more difficult calculation, since it requires the standard error of the difference of two estimated log(OR)s, a topic not covered here.
+
+Since the $\chi^2$ test based on Figure~\ref{figure:colorSatelliteCrabs} and the deviance based test for the model are both used to test the null hypothesis of no relationship between the response and the predictor, both should yield approximately the same statistic and $p$-value. The null and residual deviances for the model are $225.76$ and $212.06$.  The difference $13.7$ yields $p = 0.003$ for a $\chi^2$ with 3 degrees of freedom.  Both approaches support the conclusion that, when other factors are not accounted for, color is associated with the tendency for a female crab to have at least one satellite.  (The two $\chi^2$ values are slightly different because they are calculated using different formulas.)
+
+The $p$-values of the coefficients are used to test the null hypothesis that the difference in log(odds) between a category and the reference "Dark" is 0, i.e. that the two log(odds) are equal.  They cannot be used to test the importance of a particular color, and since the colors are levels of the single predictor \var{color}, one level cannot be retained and the others dropped.  In these data, the $p$-values for the coefficients may that all colors are associated with an increase in the odds of satellites compared to "Dark", but no adjustment has been made for multiple testing.  Using a Bonferroni correction as in ANOVA (Section~\ref{multipleComparisonsAndControllingTheType1ErrorRate}) and multiplying all $p$-values by 3 suggests that only "MedLight" crabs have significantly larger odds of satellites compared to "Dark".
+
+%\subsection{Confounding}
+
+%\textbf{Still to be written, perhaps should be confounding vs interaction.  Need a good example.}
+
+
 \subsection{Inference for multiple logistic regression}
 \label{inferenceMultipleLogisticRegression}
 
-The extension from simple to multiple logistic regression follows the pattern seen in linear regression.   In the multiple regression model, $E$ is an event (e.g., a TB treatment interruption, or presence of hyperuricemia) that may be associated with $p$ predictors $X_1, \ldots, X_p$. Let $x = (x_1,\ldots,x_p)$ and $p_E(x)$ the conditional probability
+This section discusses the principles used for inference in multiple logistic regression,putting some of the model features discussed earlier in a general context. In the multiple regression model, $E$ is an event (e.g., a TB treatment interruption, or presence of hyperuricemia) that may be associated with $p$ predictors $X_1, \ldots, X_p$. Let $x = (x_1,\ldots,x_p)$ and $p_E(x)$ the conditional probability
 \begin{align*}
   p_E(x) = p_E(x_1, x_2,\cdots, x_p) = P(E| x_1, x_2,\cdots,x_p).
 \end{align*}
@@ -601,8 +899,7 @@ The model is sometimes written in terms of the log odds of a binary response var
 \]
 In statistical terms, $Y$ is the indicator variable for the event $E$.
 
-The coefficient of a predictor is the change in the conditional log(odds) of $E$ associated with a one unit change of that predictor, if the values of the other variables in the model do not change.  The argument showing that the change in log(odds) for a variable depends on only its coefficient and not on the intercept or the values of the other variables is similar to that used in deriving Equation~\ref{eqn:oddsRatioLogisticRegression}.  Suppose for simplicity that the logistic regression is the two variable model
-\[
+The coefficient of a predictor is the change in the conditional log(odds) of $E$ associated with a one unit change of that predictor, if the values of the other variables in the model do not change.  The argument showing that the change in log(odds) for a variable depends on only its coefficient and not on the intercept or the values of the other variables is similar to that used in deriving Equations~\ref{eqn:oddsRatioLogisticRegression} and~\ref{eqn:ORChangeTwoVar}.  Suppose for simplicity that the logistic regression is the two variable model\[
   \log\left[\text{odds}_E(x)\right] = \beta_0 + \beta_1 x_1 +
       \beta_2 x_2.
 \]
@@ -626,7 +923,7 @@ and using the relationship between odds and probabilities,
          \label{eqn:probabilityMultipleLogistic}
 \end{align}
 
-The assumptions for inference with multiple logistic regression are similar to those for simple logistic regression: (1), the transformation $\beta_0 + \beta_1 x_1 + \cdots + \beta_p x_p$ is a reasonable model for the log odds of $E$; (2), the set of response and predictor variables for each case are independent of those in other cases; (3), log(odds), odds and probabilities can all be estimated when the data are a random sample in an exposure-based or cross-sectional design; and (4), log(odds) and odds can be estimated in case-control studies but probabilities cannot.
+The assumptions for inference with multiple logistic regression are similar to those for simple logistic regression: (1), the transformation $\beta_0 + \beta_1 x_1 + \cdots + \beta_p x_p$ is a reasonable model for the log odds of $E$; (2), the set of response and predictor variables for each case are independent of those in the other cases; (3), log(odds), odds and probabilities can all be estimated when the data are a random sample in an exposure-based or cross-sectional design; and (4), log(odds) and odds can be estimated in case-control studies but probabilities cannot.
 
 The first assumption is usually the most difficult to justify without some of the diagnostic tools discussed in Section~\ref{assessingModelFitMultipleLogisticRegression}.  The other three all depend on the study design, just as in simple logistic regression.
 
@@ -677,7 +974,7 @@ A two-sided $100(1 - \alpha)$\% confidence interval for the model coefficient $\
 
 All statistical software packages provide standard errors (s.e.) of coefficients, and most provide the $z$ statistic and its $p$-value directly.
 
-A logistic regression model is not useful for estimating odds ratios or probabilities if a model with predictors is not significantly better than a model with only the intercept term, that is, if there is not strong evidence against the hypothesis that coefficients of the predictors are all 0.  A test of the null hypothesis that all model coefficients are 0  uses a statistic called the deviance. Multiple logistic regression models are estimated by the method of maximum likelihood, the same approach that is used for simple logistic regression, and the deviance is a function of the maximized likelihood function.  Its mathematical definition is beyond the scope of this book; it is enough to know that the deviance decreases as the fit of a model improves.
+The selection of variables to include in a regression model depends on many factors, including the intent of the analysis and the statistical precision of estimated coefficients.  The selection rarely depends only on a significance test, but assessing the strength of evidence of the association between a variable or set of variables and a response is a good place to start the process, and the deviance statistic is a useful statistic.  An analysis often begins by assessing whether a model is useful at all.  A logistic regression model may not useful for estimating odds ratios or probabilities if a model with predictors is not significantly better than a model with only the intercept term, that is, if there is not strong evidence against the hypothesis that coefficients of the predictors are all 0.  A test of the null hypothesis that all model coefficients are 0  uses a statistic called the deviance. Multiple logistic regression models are estimated by the method of maximum likelihood, the same approach that is used for simple logistic regression, and the deviance is a function of the maximized likelihood function.  Its mathematical definition is beyond the scope of this book; it is enough to know that the deviance decreases as the fit of a model improves.
 
 \begin{onebox}{The deviance statistic for overall model fit}
   In logistic regression, the \term{residual deviance} is a measure of the fit of an estimated model and \term{null deviance} is a measure of fit of a model with only an intercept term. A test of the hypothesis $H_0:\beta_1 = \beta_2 = \cdots = \beta_p = 0$ versus the alternative that at least one coefficient is not zero can be based on the statistic
@@ -689,7 +986,9 @@ A logistic regression model is not useful for estimating odds ratios or probabil
 
 The statistic $D$ will be small when the residual deviance for the current model is close to the deviance of a model without any predictors; the current model is unlikely to be useful.  Large values of $D$ mean that the residual deviance for the current model is much smaller than the deviance for a model with no predictors and, consequently, provides a useful summary of the data.  The statistic $D$ uses a different metric than the overall $F$-statistic in least squares regression, but it serves the same purpose.
 
-The deviance statistic can also be used to compare two nested models, i.e., models where the parameters in one are a subset of those  in the second.  Nested models most commonly occur when examining the evidence for keeping a set of variables as part of a larger model.
+In the model for hyperuricemia with predictors \var{sex} and \var{bmi}, both coefficients have small $p$-values, so it is reasonable to expect that model including the two variables is better than a model with only an intercept, and the deviance statistic confirms that.  The software \textsf{R} reports that the null and residual deviances are 486.22 and 455.27, respectively.  The difference, 30.95, yields $p < 0.001$ from a $\chi^2$ with 2 degrees of freedom.  
+
+The deviance statistic can also be used to compare two nested models, i.e., models where the parameters in one are a subset of those in the second.  Nested models most commonly occur when examining the evidence for keeping a set of variables as part of a larger model.
 
 \begin{onebox}{The deviance statistic for comparing two nested models}
 
@@ -707,15 +1006,15 @@ Let
       \beta_2 x_2 + \cdots + \beta_k x_k
       \label{eqn:nestedModelKPredictors}
   \end{align}
-  is based on only the first $k$ of the $p$ predictors, where $k<p$, and let $D_k$ be the residual deviance for the smaller, nested model.   The hypothesis that the $p - k$ predictors $x_{k+1}, x_{k+2}, \ldots, x_{p}$ are not needed in the model is equivalent to the null hypothesis $H_0: \beta_{k+1} = \beta_{k+2} = \cdots  = \beta_p = 0$.
+  is based on only the first $k$ of the $p$ predictors, where $k<p$, and let $D_k$ be the residual deviance for the smaller, nested model.   The hypothesis that the $p - k$ predictors $x_{k+1}, x_{k+2}, \ldots, x_{p}$ may not be needed in the model is equivalent to the null hypothesis $H_0: \beta_{k+1} = \beta_{k+2} = \cdots  = \beta_p = 0$.
   \vspace{0.1in}
 
- If the conditions for logistic regression are met, then under $H_0$, $D_k - D_p$ has a $\chi^2$ distribution with $p - k$ degrees of freedom.  The hypothesis $H_0$  is rejected at level $\alpha$ if $D_k - D_p$ is in the right tail with area $\alpha$ of a $\chi^2$ distribution with $p - k$ degrees of freedom.
+If the conditions for logistic regression are met, then under $H_0$, $D_k - D_p$ has a $\chi^2$ distribution with $p - k$ degrees of freedom.  The hypothesis $H_0$  is rejected at level $\alpha$ if $D_k - D_p$ is in the right tail with area $\alpha$ of a $\chi^2$ distribution with $p - k$ degrees of freedom.
 \end{onebox}
 
 The coefficients in $H_0$ can, of course, can be any subset of the $p$ variables in the full model and need not be adjacent in the variable listing.
 
-The residual deviance always decreases when variables are added to a model, just as $R^2$ always increases in linear regression.  Section~\ref{section:adjustedRSquared} describes an adjusted $R^2$ that `penalizes' $R^2$ by a factor that depends on the number of parameters.  The \term{Akaike Information Criterion}, or \term{AIC}, plays a similar role with the deviance.
+The residual deviance always decreases when variables are added to a model, just as $R^2$ always increases in linear regression. Adding variables simply because the deviance is decreasing can lead to overfitting. Section~\ref{section:adjustedRSquared} describes an adjusted $R^2$ that `penalizes' $R^2$ by a factor that depends on the number of parameters.  The \term{Akaike Information Criterion}, or \term{AIC}, plays a similar role with the deviance.
 
 \begin{onebox}{The Akaike Information Criterion (AIC) for comparing two nested models}
 
@@ -725,371 +1024,28 @@ The Akaike Information Criterion (AIC) for a model with $p$ predictors is given 
 \end{align*}
 Let $D_p$ and $D_k$ be the residual deviances for the larger and smaller (nested) models, respectively, and let $\text{AIC}_p$ and $\text{AIC}_k$ be the respective values of AIC.
 
-The deviance $D_p$ will necessarily be smaller than $D_k$, but the larger model may not be worth its added complexity if $\text{AIC}_p \geq \text{AIC}_k$.
+The deviance $D_p$ will necessarily be smaller than $D_k$, but the larger model may not be worth the added complexity if $\text{AIC}_p \geq \text{AIC}_k$.
 
 \end{onebox}
 
-More advanced courses discuss the use of AIC in automated model selection along with possible sampling distributions for AIC, but neither topic is covered here.  The analyses in this chapter use AIC informally to examine nested models.  
-
-The AIC is routinely provided in most software for logistic regression, and is part of the detailed output available in \textsf{R}.
-
-\subsection{Models with two predictors}
-\label{section:modelsWithTwoPredictors}
-
-Women are generally less likely to experience hyperuricemia than men for reasons that are not completely understood, but may be due to increased levels of estrogen\footfullcite{halperin2020sex}.  That is the case in the hyperuricemia data, where the estimated OR for hyperuricemia, comparing females to males is 0.502; in these data, the odds of hyperuricemia in females is half what it is in males and the reduction is statistically significant, $p = 0.004$.
-In a model that contains both BMI and sex, is sex still associated with a statistically significant reduction in the odds of hyperuricemia?
-
-Let $E$ denote hyperuricemia, and
-\begin{align*}
-p_E(\text{bmi, sex}) = P(E | \text{bmi, sex}).
-\end{align*}
-The two-variable model used to answer this question is given in Equation~\ref{eqn:hyperuricemiaBMISex}:
-
+In the two variable model for hyperuricemia, the evidence for the value of \var{sex} as a predictor is weaker than for \var{bmi} but still relatively strong, with a $p$-value of $0.05$.  Should it be kept in the simple model for hyperuricemia using \var{bmi} alone? The deviance statistics for the two models  are $D_{\text{bmi}} = 459.54$ and $D_{\text{bmi,sex}} = 455.26$.
+As expected, $D_{\text{bmi,sex}} < D_{\text{bmi}}$.  The AIC for the two variable model is 
 \begin{align}
-\log\left[\frac{p_E(\text{bmi, sex})}{1 - p_E(\text{bmi, sex})}\right] = \beta_0 +
-\beta_1 \text{bmi}  + \beta_2 \text{sex}.
-\label{eqn:hyperuricemiaBMISex}
-\end{align}
-
-There are 95 cases in the dataset with hyperuricemia (the smaller number of the two outcomes), so a model with 2 predictors meets the guideline for the validity of the regression. The estimated model is shown in Figure~\ref{figure:huBmiSexLogReg}.  The factor \var{sex} is coded "male" (the baseline category) or "female", and the units of BMI are $\text{kg/m}^2$. The estimated regression indicates that sex is a statistically significant predictor after adjusting for BMI.
-
-% latex table generated in R 4.1.0 by xtable 1.8-4 package
-% Tue Nov 23 11:14:22 2021
-\begin{figure}[ht]
-\centering
-\begin{tabular}{rrrrr}
-  \hline
- & Estimate & Std. Error & z value & Pr($>$$|$z$|$) \\
-  \hline
-(Intercept) & -5.503 & 0.982 & -5.61 & 0.000 \\
-  bmi & 0.171 & 0.038 & 4.56 & 0.000 \\
-  sexfemale & -0.480 & 0.245 & -1.96 & 0.050 \\
-   \hline
-\end{tabular}
-\caption{Logistic regression with response hyperuricemia
-        predictors BMI and sex.}
-\label{figure:huBmiSexLogReg}
-\end{figure}
-
-Since the coefficients for both predictors are statistically significant, it is reasonable to expect that model including \var{sex} and \var{bmi} is significantly better than a model with only an intercept, and the deviance statistic confirms that.  The software \textsf{R} reports that the null and residual deviances are 486.22 and 455.27, respectively.  The difference, 30.95, yields $p < 0.001$ from a $\chi^2$ with 2 degrees of freedom.  
-
-The predictor \var{sex} is marginally significant in a model that includes \text{bmi}.  Should it be kept in this simple model for hyperuricemia? The deviance statistics for the two models  are $D_{\text{bmi}} = 459.54$ and $D_{\text{bmi,sex}} = 455.26$.
-As expected, $D_{\text{bmi,sex}} < D_{\text{bmi}}$.
-
-The AIC for the two variable model is 
-\begin{align*}
 \text{AIC}_{\text{bmi, sex}} &= 455.26 + 2(3) \\
              &= 461.26,
-\end{align*}
+             \label{eqn:AICBMISex}
+\end{align}
 while the AIC for the one variable model
-\begin{align*}
+\begin{align}
 \text{AIC}_{\text{bmi}} &= 459.54 + 2(2)  \\
              &= 463.26.
-\end{align*}
-The AIC for the larger model is still smaller than that for the smaller model even after accounting for  the number of parameters, so it seems reasonable to leave \var{sex} in the model for hyperuricemia.
-
-The algebraic form of the estimated model is
-
-\begin{align}
-  \log(\widehat{\text{odds}}_E) = -5.503 + (0.171)\text{bmi}
-      -(0.480)\text{sexfemale}.
-      \label{eqn:huBmiSexLogReg}
+             \label{eqn:AICBMI}
 \end{align}
-In a model that includes BMI, the OR for hyperuricemia comparing females to males with identical values of BMI is $e^{-0.480} = 0.612$, which differs slightly from the earlier estimate of $0.502$ from the model including only \var{sex}.  Confidence intervals are calculated using standard errors just as in single variable logistic regression.
+The AIC for the larger model is still smaller than that for the smaller model even after accounting for  the number of parameters, so it seems reasonable to leave \var{sex} in an explanatory model for hyperuricemia.  AIC is also an indirect measure of how well a model predicts future observations and is discussed in that context in subsection on estimating discrimination.
 
+Selecting a model often involves a balance between the goal of an analysis and the use of AIC or other in automated model selection methods. An extended discussion of model selection is beyond the scope of this text. The analyses later in this chapter use AIC informally along with the context of the analysis to examine the value of nested models.  
 
-\begin{exercisewrap}
-  \begin{nexercise}
-    Calculate a 95\% confidence interval for the odds ratio of hyperuricemia associated with a three unit increase in BMI for two individuals of the same sex.     \footnotemark{}
-  \end{nexercise}
-\end{exercisewrap}
-\footnotetext{A 95\% confidence interval for the change in log(odds) for a 1 unit change in BMI is $0.171 \pm (1.96)(0.038) = (0.097, 0.246)$.  The confidence interval for a three unit change can be calculated by multiplying the lower and upper bounds by 3: $[(3)(0.097), (3)(0.246)] = (0.291, 0.738)$.  The corresponding interval for the OR is $(e^{0.290}, e^{0.736}) = (1.338, 2.092).$}
-
-\begin{exercisewrap}
-\begin{nexercise}
-Does the intercept have scientific meaning in this model? \footnotemark{}
-\end{nexercise}
-\end{exercisewrap}
-\footnotetext{No.  The intercept is the log(odds) for an individual with baseline category "male" but BMI = 0.}
-
-Since the hyperuricemia study had a cross-sectional design, the probability of hyperuricemia for values of the predictors can be estimated from the model.
-
-\begin{examplewrap} 
-\begin{nexample}{Calculate the estimated probability of hyperuricemia for a female with BMI~28.}
-The log(odds) are
-\[
-    -5.503 + (0.171)(28)  - 0.480 = -1.195,
-\]
-so the odds are $e^{-1.195} = 0.303$.  The estimated probability of hyperuricemia is
-\[
-   \text{exp}  \left[ \frac{0.303}{1 + 0.303} \right] = 0.232.
-\]
-A female with BMI~28 has an estimated chance of 23\% of being hyperuricemic.
-
-\label{example:huBMISexProbabilities}
-\end{nexample}
-\end{examplewrap}
-
-The OR for hyperuricemia comparing males to females is the same, for any value of BMI as long as BMI is held constant. When both predictors change, the full model must be used to calculate odds ratios.
-
-\begin{examplewrap}
-\begin{nexample}{What is the OR for hyperuricemia, comparing a woman with BMI~32 to a male with BMI~30?}
-The log(odds) of hyperuricemia for a woman with BMI 32 is
-\begin{align*}
-   -5.503 + (0.171)(32) - 0.480 = -0.511,
-\end{align*}
-so the corresponding odds are $e^{-0.511} = 0.600$.
-
-For the male with BMI~30, the log(odds) are
-\begin{align*}
--5.503 + (0.171)(30) = -0.373,
-\end{align*}
-so the odds of hyperuricemia are $0.689$.
-The OR comparing the female to the male is $0.600/0.689 = 0.871$.
-
-A woman whose BMI is 2$\text{kg/m}^2$ higher than a male still has a lower estimated odds of hyperuricemia.
-\label{example:ORBMI3032}
-\end{nexample}
-\end{examplewrap}
-
-In the model for hyperuricemia the change in log odds when when one predictor changes does not depend on the value of the other predictor.  The same is not true for estimated probabilities.
-
-\begin{examplewrap}
-\begin{nexample}{For males, use the estimated probabilities of hyperuricemia for individuals with BMI~28 and BMI~30 to calculate estimated prevalence differences and ratios.  Repeat the calculation for females. }
-For a male with BMI~28 the estimated log odds and odds of hyperuricemia are $-5.503 + (0.171)(28) = -0.715$ and  $e^{-0.715} = 0.489$.  The estimated prevalence (probability) of hyperuricemia is $0.489/(1 + 0.489) = 0.328$.  The estimated odds of hyperuricemia for a male with BMI~30 were calculated in Example~\ref{example:ORBMI3032} and are $0.689$, so the estimated prevalence is $0.408$.  The estimated prevalence difference and ratio are, respectively, $0.080$ and $1.244$.
-
-The prevalence difference and ratio for females are calculated similarly and are, respectively, $0.066$ and $1.290$.  The prevalence differences and ratios associated with a change in BMI from 28 to 30 are different for males than for females, and must be calculated using all the coefficients in the model.  This result is another reason why an estimated OR from a logistic regression should not be interpreted as a prevalence or risk ratio.
-
-\label{example:probsDependOnOtherVars}
-\end{nexample}
-\end{examplewrap}
-
-
-\subsection{Modeling a possible interaction}
-\label{section:interactionLogisticRegression}
-
-A regression model is called an \term{additive model} in the predictors when the change in association between a response and predictor does not depend on values of the other predictors. The logistic model in Equation~\ref{eqn:huBmiSexLogReg} is additive in the predictors BMI and sex for the log odds of hyperuricemia; the difference in log(odds) for two values of BMI does not depend on sex. 
-
-Someone studying the association of hyperuricemia and BMI might, however, be interested in whether the association between hyperuricemia and BMI is different for males and females. When an association may differ between categories of another predictor, such as sex, it is common in the epidemiological literature to call that predictor a potential \term{effect modifier}, and the phenomenon is called \term{effect modification}.  This section does not use that terminology for reasons explained later and instead uses the more statistically accurate term \term{interaction}.
-
-The two most common ways to examine the possibility of an interaction are estimating the association separately within subgroups of the second variable (\var{sex} in this case), or including an interaction term in a logistic regression.  Both approaches are illustrated in this section.
-
-Two hundred forty-seven of the 500 participants in the random sample were female, of whom 34 were hyperuricemic, and among the 253 males, 61 were hyperuricemic, so there are enough events in both subsets to meet the assumptions of separate logistic regression models.  The median BMI among the females was 23.45 $\text{kg/m}^2$; among the males median BMI was 25.00.
-
-Figures~\ref{figure:bmiHyperuricemiaFemalesLogReg} and \ref{figure:bmiHyperuricemiaMalesLogReg} show two logistic models for the association of hyperuricemia and BMI, the first estimated in the subset of females and the second in males. The slope coefficients for \var{bmi} are 0.198 and 0.152, respectively, so the ORs corresponding to a one unit increase in BMI are $e^{0.198} = 1.219$ for females and $e^{0.152} = 1.164$ for males. Both slope coefficients are statistically significant and appear different from each other.  But how strong is the evidence that the difference between these coefficients is larger than would be expected by chance under the assumption that there is no population-level difference in association by sex?
-
-
-% latex table generated in R 4.1.0 by xtable 1.8-4 package
-% Thu Dec  9 12:03:07 2021
-\begin{figure}[ht]
-\centering
-\begin{tabular}{rrrrr}
-  \hline
- & Estimate & Std. Error & z value & Pr($>$$|$z$|$) \\
-  \hline
-(Intercept) & -6.658 & 1.481 & -4.50 & 0.000 \\
-  bmi & 0.198 & 0.059 & 3.36 & 0.001 \\
-   \hline
-\end{tabular}
-\caption{Logistic regression within females with response hyperuricemia
-        and predictor BMI.}
-\label{figure:bmiHyperuricemiaFemalesLogReg}
-\end{figure}
-
-
-% latex table generated in R 4.1.0 by xtable 1.8-4 package
-% Thu Dec  9 12:04:12 2021
-\begin{figure}[ht]
-\centering
-\begin{tabular}{rrrrr}
-  \hline
- & Estimate & Std. Error & z value & Pr($>$$|$z$|$) \\
-  \hline
-(Intercept) & -5.006 & 1.264 & -3.96 & 0.000 \\
-  bmi & 0.152 & 0.049 & 3.12 & 0.002 \\
-   \hline
-\end{tabular}
-\caption{Logistic regression within males with response hyperuricemia
-        and predictor BMI.}
-\label{figure:bmiHyperuricemiaMalesLogReg}
-\end{figure}
-
-The separate estimates of the association between hyperuricemia and BMI come from different subsets, so it is difficult to compare them directly. The logistic regression in the full sample of 500 participants can be expanded by adding an interaction term that allows the coefficient of \var{bmi} to differ according to \var{sex}. The added term is a new variable that is the product of \var{bmi} and \var{sex}. The expanded model provides a method to assess the evidence against the null hypothesis that the relationship between hyperuricemia and BMI is the same for females and males.  It is important to note that it is not equivalent to fitting separate models in subsets, since it is based on a specific model for how the association of BMI and hyperuricemia might differ in males and females.
-
-In these data, a two variable model with an interaction term is
-\begin{align}
-  \log(\text{odds}_E) = \beta_0 + \beta_1 \text{bmi}
-       + \beta_2 \text{sex} + \beta_3 (\text{bmi}\times\text{sex}).
-       \label{eqn:huBmiSexInteraction}
-\end{align}
-The last term is the product of \texttt{bmi} and \texttt{sex}.
-
-The interaction term (\var{bmi}$\times$\var{sex}) allows the slope coefficient for \var{bmi} to depend on \var{sex}.  For the reference sex category "male" the coefficient of \var{bmi} is $\beta_1$; for the category "female" the slope of \var{bmi} is $\beta_1 + \beta_3$.  A test of the null hypothesis $\beta_3 = 0$ can be used to assess the evidence against the hypothesis that the log(odds) for the relationship between hyperuricemia and BMI does not depend on sex.
-
-Figure~\ref{figure:huBmiSexInteractionLogReg} shows the estimated model, and Equation~\ref{eqn:huBmiSexInteractionLogReg} shows the algebraic form of the this model.
-
-% latex table generated in R 4.1.0 by xtable 1.8-4 package
-% Tue Nov 23 11:18:33 2021
-\begin{figure}[ht]
-\centering
-\begin{tabular}{rrrrr}
-  \hline
- & Estimate & Std. Error & z value & Pr($>$$|$z$|$) \\
-  \hline
-(Intercept) & -5.006 & 1.264 & -3.96 & 0.000 \\
-  bmi & 0.152 & 0.049 & 3.12 & 0.002 \\
-  sexfemale & -1.652 & 1.947 & -0.85 & 0.396 \\
-  bmi:sexfemale & 0.046 & 0.077 & 0.61 & 0.544 \\
-   \hline
-\end{tabular}
-\caption{Logistic regression with interaction: response hyperuricemia,
-        predictors BMI and sex.}
-\label{figure:huBmiSexInteractionLogReg}
-\end{figure}
-
-
-\begin{align}
-  \widehat{\log}\left[\text{odds}_E(\text{bmi, sex})\right] &= b_0 + b_1\text{bmi}
-  + b_2\text{sexfemale} + b_3\text{(bmi)(sexfemale)} \notag \\
-  &= -5.006 + (0.152)\text{bmi}
-  -(1.652)\text{sexfemale} + (0.046)\text{(bmi)(sexfemale)}.
-  \label{eqn:huBmiSexInteractionLogReg}
-\end{align}
-
-The $p$-value for the interaction term is $0.544$, so the evidence against the null hypothesis $\beta_3 = 0$ is weak. The observed difference in association between the log odds of hyperuricemia and BMI between males and females is consistent with what would be expected (due to sampling variability) if there were actually no population-level difference in association. In this model, there is no support for the claim that the relationship between hyperuricemia and BMI differs by sex.  Exercise~\ref{exercise:BMISexInteractionModel} explores the interpretation of a model with an interaction term.
-
-The presence of the interaction term has caused the coefficient of \var{sex} to be non-significant because the estimated association by sex is now split between the predictor \var{sex} and the interaction term.  A data analyst starting with the interaction model might mistakenly conclude that neither \var{sex} nor the interaction of \var{sex} with \var{bmi} should be retained, clearly a wrong conclusion.  Analyses should always begin without interaction terms and add them only there is a scientific reason to suspect that the nature of a relationship between a response and a predictor varies across the levels of another variable.
-
-Interaction in logistic regression is more complex than in least squares linear regression and should be used sparingly. The model for interaction shown here allows for non-additivity in log(odds) and  a non-multiplicative effect on the OR scale. But it is less useful if the primary interest in an analysis is the relationship between probabilities and predictors.  As Example~\ref{example:probsDependOnOtherVars} shows, even in additive models estimated prevalence ratios and differences depend on the other predictors.  Adding an interaction term in a model for log(odds) may have implications for estimated probabilities that are not scientifically reasonable.  If estimating probabilities is the primary goal of an analysis, the effect of adding an interaction term should be checked by calculating estimated probabilities to see if they are reasonable.
-
-% we should say more here, it is still vague. Check what happens to probablities
-
-
-This chapter avoids the use of the terms effect modifier and effect modification in observational studies. The term "effect" implies a causal link that cannot be established in an observational study with the methods described in this text.
-
-\begin{comment}
- and "effect modification" connotes an underlying scientific relationship that may not be accurately modeled in a typical regression model with interaction terms.  Fitting a model with interactions is a statistical device to improve the fit of a model and that device may not match the underlying phenomenon.
-\end{comment}
-
-It is very common in applications to label the non-interaction terms as \term{main effects} and interaction terms as \term{interaction effects}.  The terminology can be a useful abbreviation as long as no causal association is meant.
-
-Finally, Exercise~\ref{exercise:BMISexInteractionDirect} outlines a method for examining the evidence that the slope coefficients are different in two subgroups without adding an interaction term to a model.  It is less model-dependent (potentially useful) but estimates calculated using subsets have larger standard errors (so are less precise).
-
-
-\subsection{Categorical predictors with more than two levels}
-\label{section:predictorsMoreThanTwoLevels}
-
-When spawning, a female horseshoe crab migrates to shore with a male attached to her spine to lay clusters of eggs in the sand.  Additional male crabs may join the pair and fertilize the eggs as well, presumably increasing genetic diversity of the offspring. The additional male crabs are called satellites. The data used here originally appeared in Brockman \footfullcite{brockmann1996satellite} and can be found at the website for \textit{Categorical Data Analysis, 3rd ed.}\footfullcite{agresti2013categorical} and in the \textsf{R} package \texttt{glmbb}. The dataset contains information on 173 female crabs, 111 with at least one male satellite.
-
-This section examines the association between the odds of the event $E$ that a female has one or more satellites and her carapace (shell) width and color.   Let the variable $y$ denote whether a female has one or more satellites ($y = 1$) or none ($y = 0$), \var{width} gives the carapace width in centimeters and the levels of the factor variable \var{color} are "Light", "MedLight" (for medium light), "MedDark" (for medium dark), and "Dark", denoting increasingly dark colors. The predictor \var{color} is an ordinal categorical variable, but since methods that take advantage of ordinal variables in contingency tables and logistic regression are beyond the scope of this text, the analyses in this section treat color as a standard unordered categorical variable.
-
-The contingency table in Figure~\ref{figure:colorSatelliteCrabs} shows the association between color and the presence of at least one satellite.  The estimated odds vary by color; the odds of dark females having at least one satellite are $7/15 = 0.467$, while the odds for a female with medium light color are $69/26 = 2.654$. The OR, comparing medium light to dark, is $2.654/0.467 = 5.683$; the odds of medium light female crab having at least one satellite are between $5$ and $6$ times larger than for a dark female.
-
-The conditions given in Section~\ref{theChiSquaredTestStatistic} for the validity of a $\chi^2$ test are met in the table (just barely, see Exercise~\ref{exercise:colorsSatellitesCrabsChiSq}); the $\chi^2$ statistic has value 14.08 on 3 degrees of freedom, $p = 0.003$.  The extension of Fisher's exact test to a $4 \times 2$ table yields the same $p$-value, so the table provides strong evidence that in these data, color and having more than one satellite are not independent.
-
-\begin{figure}[ht]
-\centering
-\begin{tabular}{lrrr}
-Color & $y = 0$ & $y = 1$ & Sum \\ \hline
-Dark & 15 & 7 & 22 \\
-MedDark & 18 & 26 & 44 \\
-MedLight & 26 & 69 & 95 \\
-Light & 3 & 9 & 12 \\ \hline
-Sum & 62 & 111 & 173
-\end{tabular}
-\caption{Absence ($y = 0$) or presence ($y = 1$) of at least one satellite versus color of a female horseshoe crab.}
-\label{figure:colorSatelliteCrabs}
-\end{figure}
-
-The interpretation of logistic regression with a categorical predictor with four levels is the same as that for a predictor with 2 levels described in Section~\ref{section:logisticChiSqTest}  --  odds ratios calculated from the $4 \times 2$ table will match those computed from the regression coefficients.  Figure~\ref{figure:satellitesColorCrabsLogReg} shows the estimated regression with the predictor \var{color}, with the color "Dark" set as the reference category. The less frequent response category $y = 0$ has 62 observations and the model has 4 parameters including the intercept, 2 fewer than the maximum 6 the guidelines suggest, so estimates and inference should be accurate.
-
-
-% latex table generated in R 4.1.0 by xtable 1.8-4 package
-% Fri Jan  7 11:38:53 2022
-\begin{figure}[ht]
-\centering
-\begin{tabular}{rrrrr}
-  \hline
- & Estimate & Std. Error & z value & Pr($>$$|$z$|$) \\
-  \hline
-(Intercept) & -0.762 & 0.458 & -1.67 & 0.096 \\
-  colorMedDark & 1.130 & 0.551 & 2.05 & 0.040 \\
-  colorMedLight & 1.738 & 0.512 & 3.39 & 0.001 \\
-  colorLight & 1.861 & 0.809 & 2.30 & 0.021 \\
-   \hline
-\end{tabular}
-\caption{Logistic regression with horseshoe crab data, response
-       presence of male satellites, predictor \var{color}.}
-\label{figure:satellitesColorCrabsLogReg}
-\end{figure}
-
-
-The algebraic form of the model is
-\begin{align}
-\log\left[\text{odds}_{E}(\text{color})\right] = -0.762 + (1.130)\texttt{colorMedDark}
- + (1.738)\texttt{colorMedLight} + (1.861)\texttt{colorLight}.
- \label{eqn:satellitesColorCrabsLogReg}
-\end{align}
-
-Since the reference category is "Dark", the log(odds) of a dark female having at least one satellite is the intercept term $-0.762$, with corresponding odds $e^{-0.762} = 0.467$, the same value when using the table in Figure~\ref{figure:colorSatelliteCrabs}.  More generally, when there are no other predictors in a model with a categorical predictor, the intercept term is the log(odds) of the outcome for the reference category. Using Equation~\ref{eqn:satellitesColorCrabsLogReg}, the log(odds) for the color "MedLight" is $-0.762 + 1.738 = 0.976$, with corresponding odds $e^{0.976} = 2.654$. The OR comparing "MedLight" to "Dark" $2.654/0.467 = 5.683$, also agreeing with the OR calculated from Figure~\ref{figure:colorSatelliteCrabs}.  When comparing a category against the reference, ORs can be calculated directly.  The coefficient for "MedLight" is the difference in log(odds) between "MedLight" and the reference category "Dark", so the OR comparing the two categories is $e^{1.738} = 5.686$.  The small difference between this OR and the one calculated from Figure~\ref{figure:colorSatelliteCrabs} is due to the rounding of the coefficients from the logistic model.
-
-% this explanation is lame.  I could not confirm this was the cause.
-
-The pattern of the coefficients is consistent with what is known about horseshoe crabs -- the log(odds) and hence odds and probability of having satellites increase with lighter colors of the female carapace.
-
-Calculating ORs for two categories that do not include "Dark" requires more care.  The log(odds) for the category "Light" is $-0.762 + 1.861 = 1.099$.  The difference in log(odds), comparing "Light" to "MedLight" is $1.099 - 0.976 = 0.123$, so the OR is $e^{0.123} = 1.131$.  This odds ratio can also be calculated directly from model coefficients.  Suppose $b_0$ is the intercept, and let $b_3$ and $b_4$ denote the coefficients of the categories "MedLight" and "Light", respectively.  The difference in log(odds) for the two categories is
-\begin{align*}
-   (b_0 + b_4) - (b_0 + b_3) &= b_4 - b_3 \\
-      &= 1.861 - 1.738 \\
-      &= 0.123.
-\end{align*}
-Since the coefficient for the intercept cancels in the subtraction, the odds ratio comparing "MedLight" to "Light" is $\exp(b_4 - b_3) = \exp(0.123) = 0.131$.  This argument easily generalizes to any two categories when predictors have more than 4 levels.
-
-The calculation of a confidence interval for the OR comparing two categories that are not the reference category is a more difficult calculation, since it requires the standard error of the difference of two estimated log(OR)s, a topic not covered here.
-
-Since the $\chi^2$ test based on Figure~\ref{figure:colorSatelliteCrabs} and the deviance based test for the model are both used to test the null hypothesis of no relationship between the response and the predictor, both should yield approximately the same statistic and $p$-value. The null and residual deviances for the model are $225.76$ and $212.06$.  The difference $13.7$ yields $p = 0.003$ for a $\chi^2$ with 3 degrees of freedom.  Both approaches support the conclusion that, when other factors are not accounted for, color is associated with the tendency for a female crab to have at least one satellite.  (The two $\chi^2$ values are slightly different because they are calculated using different formulas.)
-
-The $p$-values of the coefficients are used to test the null hypothesis that the difference in log(odds) between a category and the reference "Dark" is 0, i.e. that the two log(odds) are equal.  They cannot be used to test the importance of a particular color, and since the colors are levels of the single predictor \var{color}, one level cannot be retained and the others dropped.  In these data, the $p$-values for the coefficients imply that all colors are associated with a significant increase in the odds of satellites compared to "Dark", but no adjustment has been made for multiple testing.  Using a Bonferroni correction as in ANOVA (Section~\ref{multipleComparisonsAndControllingTheType1ErrorRate}) and multiplying all $p$-values by 3 suggests that only "MedLight" crabs have significantly larger odds of satellites compared to "Dark".
-
-\begin{comment}
-
-REPHRASE AND ADD TO EXERCISES
-
-Females with wider carapaces are known to attract more males. A logistic regression with carapace width as the only predictor confirms the association between the odds of one or more satellites and width -- the estimated log(odds) are $0.497$ with $p < 0.001$. When color is held constant, each centimeter of width increases the odds of having satellites by a factor of $e^{0.497} = 1.644$.  How strong is the evidence that color is an important predictor in a model that adjusts for carapace width?
-
-Figure~\ref{figure:satellitesWidthColorCrabsLogReg} shows an estimated model with both width and color as predictors.
-% latex table generated in R 4.1.0 by xtable 1.8-4 package
-% Fri Jan  7 13:21:49 2022
-\begin{figure}[ht]
-\centering
-\begin{tabular}{rrrrr}
-  \hline
- & Estimate & Std. Error & z value & Pr($>$$|$z$|$) \\
-  \hline
-(Intercept) & -12.715 & 2.762 & -4.60 & 0.000 \\
-  width & 0.468 & 0.106 & 4.43 & < 0.001 \\
-  colorMedDark & 1.106 & 0.592 & 1.87 & 0.062 \\
-  colorMedLight & 1.402 & 0.548 & 2.56 & 0.011 \\
-  colorLight & 1.330 & 0.853 & 1.56 & 0.119 \\
-   \hline
-\end{tabular}
-\caption{Logistic regression with horseshoe crab data, response
-       presence of male satellites, predictors \var{width} and \var{color}.}
-\label{figure:satellitesWidthColorCrabsLogReg}
-\end{figure}
-
-The residual deviances for the regression with just \var{width} and with \var{width} and \var{color} are, respectively, $194.45$ and $187.46$, respectively.  Comparing the difference 6.99 with a $\chi^2$ with $4 - 1 = 3$ degrees of freedom yields $p = 0.072$.  The logistic regression with color as the only predictor suggests the evidence is strong for \var{color} as an important predictor, but when the model includes carapace width, the evidence for the importance of \var{color} is weaker. The model with width alone has two parameters total, so the AIC is $194.45 + (2)(2) = 198.45$. The AIC for the model including color is $187.46 + (2)(5) = 197.46$.  The residual deviance has decreased by almost 7, but after penalizing for model complexity, the decrease in AIC is much smaller, consistent with the conclusion that after adjusting for \var{width} the evidence for \var{color} as a predictor is weaker.
-
-
-% guided practice in models with just color and color + width.
-
-\end{comment}
-
-%\subsection{Confounding}
-
-%\textbf{Still to be written, perhaps should be confounding vs interaction.  Need a good example.}
-
-\section{Assessing model fit}
+\section{Assessing model adequacy}
 \label{assessingModelFitMultipleLogisticRegression}
 
 \begin{comment}
@@ -1098,21 +1054,24 @@ The major weakness here: does not make the point that model checking is for expl
 
 Be more specific in the summary.  Perhaps list all the methods at the beginning with settings where they are used.
 
-Stages in checking: asess fit, in sample prediction error, out of sample prediction error.  Important to give a context.  Explain that methods are more complex than linear, give specific reference to linear regression diagnostics.  Material can be consisted optional for most readers.
+Stages in checking: assess fit, in sample prediction error, out of sample prediction error.  Important to give a context.  Explain that methods are more complex than linear, give specific reference to linear regression diagnostics.  Material can be consisted optional for most readers.
 
 Reasonable to make the case that model checking here has important similarities and differences when compared to linear regression.
 
-The section on ROC curves is particularly week.  Best to fix it when the overal picture is more clear.
+The section on ROC curves is particularly week.  Best to fix it when the overall picture is more clear.
 
 \end{comment}
 
-There are two general approaches to checking the fit of a logistic regression, one based on goodness-of-fit statistics and another on statistics that estimate the accuracy of predictions. The two approaches serve different purposes.  When the primary goal of an analysis is drawing inferential conclusions about the relationship between an outcome variable and predictors, goodness-of-fit statistics should be used to check whether the model fits the data reasonably well.  A reasonable model that does not substantially deviate from the model assumptions is usually sufficient for inference about parameters. The explanatory model fit to assess the association between hyperuricemia and the predictors BMI and sex is an example of an analysis conducted to draw inference about parameters.
+Exploring model diagnostics is an important part of any analysis and should not be overlooked.  This section discusses diagnostics commonly used with logistic regression, using the TB and hyperuricemia data as examples.
 
-Predictive accuracy of a model should be checked when the purpose of an analysis is to predict individual outcomes or classify individuals according to predicted outcomes for individuals not in the original study population.  The case study in the next section explores models for classifying patients admitted to a hospital emergency department according to the risk of death within 30 days of admission (30-day mortality).  In this analysis, the main goal is to assess the likelihood of classification errors arising from inaccurate predictions of 30-day mortality, rather than understand what variables might be strongly associated with higher risk of 30-day mortality.
+The first step in model checking should assess how well the model matches the data.  Section~\ref{section:goodnesOfFitLogistic} discusses two goodness-of-fit statistics, a traditional $\chi^2$ statistic when all predictors are categorical, and the more general \term{Hosmer-Lemeshow} statistic that allows continuous predictors.  These two statistics may be sufficient when the goal of an analysis is an explanatory model to estimate associations between a response and predictors.
 
-Some model diagnostics, such as calibration plots, are useful both for checking the fit of a model and predictive accuracy.  Regardless of whether one is examining goodness-of-fit or predictive accuracy, probabilities calculated from an estimated  model are referred to as predicted probabilities.  Predicted numbers of events are sometimes also called expected number of events.
+Logistic regression is often used to predict binary outcomes (might this person be hyperuricemic?) or to build a classification model that groups members of a population into categories (which patients admitted to a hospital emergency room should be given high priority for care?).  After checking model fit, it is important to use some of the methods in Section~\ref{section:predictiveAccuracyLogistic} to check the accuracy of predictions.  The \term{Brier score} is a summary statistic used to estimate how well predicted probabilities match observed outcomes.  \term{Calibration plots} provide more detail than Brier scores; they provide a graphical diagnostic for the match between predicted probabilities and outcomes.  When a logistic model will be used to classify individuals into two subgroups of a population (typically, those with or without an undiagnosed condition) \term{false negative rates} and \term{false positive rates} estimate the probabilities of incorrectly classifying an individual with (false negative) or without (false positive) the condition.  \term{Receiving operator characteristic curves} (\term{ROC curves}) show graphically how classification errors depend on the prediction rule.
 
-\subsection{Goodness-of-Fit}
+When statistics and graphics for checking the accuracy of predictions are calculated using the data on which the model for the model fit, estimated errors are called \term{apparent error rates} and may not accurately reflect errors when the model is used in new data.  Section~\ref{section:outOfSamplePredictionAccuracy} explores the use \term{cross-validation} for estimating \term{out-of-sample prediction error}.  The use of a \term{validation dataset} (also called a \term{test dataset}) is explored in the case study in Section~\ref{caseStudy}.
+
+\subsection{Goodness-of-Fit Statistics}
+\label{section:goodnesOfFitLogistic}
 
 Goodness-of-fit statistics typically assess how well estimates from a model match the observed data, similar to the use of a $\chi^2$ test for the fit of a distribution discussed in Section~\ref{oneWayChiSquare}. The deviance statistic used in Section~\ref{section:modelsWithTwoPredictors} is sometimes called a goodness-of-fit statistic, but it assesses whether a model is better than no model at all (i.e., "better than nothing"). A significant deviance statistic can be useful in deciding whether to examine a model more closely, but it does not imply that the model adequately reflects the data.  The use of the deviance to compare nested models, as in  Section~\ref{section:predictorsMoreThanTwoLevels}, should also not be viewed as a goodness-of-fit statistic.  It provides guidance on whether a smaller model is adequate compared to a larger model, but does not test the fit of either.
 
@@ -1138,7 +1097,7 @@ Treatment for multidrug-resistant tuberculosis (MDR-TB) lasts longer than standa
   mdr.tbYes & 0.861 & 0.300 & 2.869 & 0.004 \\
    \hline
 \end{tabular}
-\caption{Logistic regression, response two month interruption,
+\caption{Logistic regression, response variable two-month interruption,
        predictors \texttt{education} and \texttt{mdr.tb}.}
 \label{treatmentInterruptEducMdrLogreg}
 \end{figure}
@@ -1221,7 +1180,7 @@ The $\chi^2$ goodness-of-fit test discussed above cannot be used when some profi
 \subsubsection{The Hosmer-Lemeshow goodness-of-fit test}
 %\label{section:HosmerLemeshowGoF}
 
- When the data cannot be grouped into profiles, Hosmer and Lemeshow have proposed a significance test for goodness-of-fit that uses groupings according to predicted probabilities.   The test is described in more detail in Hosmer, Lemeshow and Sturdivant\footfullcite{hosmer2013applied} and is outlined here, using the logistic model for the association of hyperuricemia and BMI in Figure~\ref{figure:bmiHyperuricemiaLogRegCoeff}.
+ When the data cannot be grouped into profiles, Hosmer and Lemeshow have proposed a goodness-of-fit statistic that uses groupings according to predicted probabilities.   The test is described in more detail in Hosmer, Lemeshow and Sturdivant\footfullcite{hosmer2013applied} and is outlined here, using the logistic model for the association of hyperuricemia and BMI in Figure~\ref{figure:bmiHyperuricemiaLogRegCoeff}.
 
 \begin{enumerate}
   \item Let $n$ be the number of cases in the dataset, $x_i$ be the set of predictor values for case $i$, $i = 1, \ldots, n$, and $E$ the event of interest (e.g., hyperuricemia). Calculate the model-based predicted probabilities $\hat{p}_i$ for each case and sort the probabilities in increasing order.
@@ -1299,18 +1258,18 @@ Figure~\ref{figure:HLTestHyperuricemiaBMISex} shows a table summarizing the fit 
    \hline
 \end{tabular}
 \caption{Hosmer-Lemeshow goodness of fit table for the
-       logistic regression with response hyperuricemia and predictors BMI and sex.}
+       logistic regression with response variable hyperuricemia and predictors BMI and sex.}
 \label{figure:HLTestHyperuricemiaBMISex}
 \end{figure}
 
-The hyperuricemia example highlights an important aspect of testing model fit.  The Hosmer-Lemeshow tests suggest that neither the one nor two variable model fits poorly. Since the models are nested, the deviance statistic can be used to test whether sex should be added to a model with BMI alone.  The difference between the residual deviances for the models is 3.90 and has an approximate $\chi^2$ distribution with 1df.  The $p$-value for the statistic is 0.048, and the AIC statistic for both models is 461.6, suggesting that adding the predictor sex to the model may not be worth the gain in model complexity.  Neither the model with BMI alone or the one with BMI and sex fit poorly, but the evidence is weak that the two variable model is better than the model with one variable.  
+The hyperuricemia example highlights an important aspect of testing model fit.  The Hosmer-Lemeshow tests suggest that neither the one nor two variable model fits poorly. The AIC statistics for the models with and without \var{sex} in Equations~\ref{eqn:AICBMISex} and~\ref{eqn:AICBMI} suggested that adding the predictor sex to the model with BMI  may be worth the small increase in model complexity, especially because measuring and recording sex for each participant is relatively easy. Even though the model with BMI alone does not fail a goodness-of-fit test it may not be the better model. 
 
 The Hosmer-Lemeshow test has some weaknesses, and several alternatives have been proposed, all with their own advantages and disadvantages.  Grouping cases by deciles of probabilities has no theoretical justification, a $\chi^2$  distribution with $g - 2$ degrees of freedom does not always provide a good approximation to the sampling distribution, and the test has been shown to have low power in some situations.  These shortcomings of the test, however, are largely about the statistical properties of the test statistic.  It is important to keep in mind that statistical tests for goodness-of-ft have limited value generally.  A statistical test for goodness-of-fit will reject the null hypothesis of adequate fit only when there is strong evidence of lack of fit.  Many models fit poorly but not so badly that a goodness-of-fit statistic is significant.  The table associated with the Hosmer-Lemeshow statistic is at least as valuable as its $p$-value, since it may show regions of the data where the fit is either adequate or particularly poor. Users of the test should pay more attention to the table than to the $p$-value.
 
  Advanced texts explore a wider range of alternative goodness-of-fit statistics that are beyond the level of this text, such as those described in Section 5.2 of Hosmer, et.\ al\footfullcite{hosmer2013applied} and Section 10.5 of Harrell\footfullcite{harrell2015regression}.
 
 \subsection{Estimating the accuracy of predictions}
-\label{section:predictiveAccuracy}
+\label{section:predictiveAccuracyLogistic}
 
  \subsubsection{The Brier score}
 
@@ -1320,7 +1279,9 @@ where $\hat{p_i}$ and $y_i$ are the predicted probabilities and observed respons
 
 An observation $y_i$ can take on only two values, 0 or 1, and $\hat{p_i}$ will be a number in the interval $(0,1)$ since predicted probabilities are never exactly 0 or 1.  When $y_i = 1$ and $\hat{p}_i$ is close to 1 or when $y_i = 0$ and  $\hat{p}_i$ is close to 0, $\hat{p}_i$ is an accurate predictor for case $i$ and the contribution to the Brier score will be close to 0.  When the reverse happens ($\hat{p}_i$ is very different from $y_i$) the contribution to the Brier score will be close to 1.  A Brier score close to 0 indicates that predictions are generally accurate; if it is close to 1, predictions are generally poor.  When evaluating prediction accuracy, a low Brier score indicates a good prediction model.
 
-There is no universal definition of a good Brier score, but a simple example helps.  If all predicted probabilities are 0.50 (essentially, coin flips), the contribution of each case to the Brier score will always be 0.25, since $y_i - \hat{p}_i$ is always 0.5.  So a Brier score of 0.25 is no better than guessing an outcome with probability 0.5.  In most cases, investigators want a Brier score smaller than $0.20$ or $0.15$.  In the hyperuricemia data, the Brier score for the model with predictor BMI (Equation~\ref{eqn:bmiHyperuricemiaModel}) is $0.1459$, suggesting reasonably accurate predictions overall; the Brier score when both BMI and sex are used is $0.1447$, a very small improvement.  As will be seen in the methods for evaluating discrimination discussed later,  a model may make reasonably accurate predictions overall, but be a poor predictor in some subsets of cases.
+There is no universal definition of a good Brier score, but a simple example helps.  If all predicted probabilities are 0.50 (essentially, coin flips), the contribution of each case to the Brier score will always be 0.25, since $y_i - \hat{p}_i$ is always 0.5.  So a Brier score of 0.25 is no better than guessing an outcome with probability 0.5.  In most cases, investigators want a Brier score smaller than $0.20$ or $0.15$.  In the hyperuricemia data, the Brier score for the model with predictor BMI (Equation~\ref{eqn:bmiHyperuricemiaModel}) is $0.1459$, suggesting reasonably accurate predictions overall; the Brier score when both BMI and sex are used is $0.1447$, a small improvement that is consistent with the relatively small decrease in the AIC when \var{sex} is added to the model.  The two variable model seems to be better, but not by much.
+
+As will be seen in the methods for evaluating discrimination discussed later,  a model may make reasonably accurate predictions overall, but be a poor predictor in some subsets of cases.
 
 There are analogues to $R^2$ from linear models not covered here and can be found in more advanced texts, such as Agresti\footfullcite{agresti2013categorical} and Hosmer, Lemeshow and Sturdivant\footfullcite{hosmer2013applied}.
 
@@ -1328,13 +1289,13 @@ There are analogues to $R^2$ from linear models not covered here and can be foun
 
 \subsubsection{Calibration plots}
 
-Calibration plots are a visual display of the match between predicted probabilities and observed outcomes, and and are useful for both checking model fit and assessing the agreement between predicted probabilities and outcomes. Figure~\ref{figure:calibrationHuBMISex} shows calibration plots for the logistic models for hyperuricemia with predictor BMI (blue) and with predictors BMI and sex (green).  Because the outcome is binary, the agreement between predicted probabilities and outcomes is difficult to see in a scatterplot of observed versus predicted values, so calibration plots typically add a best fitting smooth curve, using \texttt{loess} or a similar function in \textsf{R}.  If a model is \term{well-calibrated}, the smooth curve should lie close to the $45$-degree line $y = x$ (the dotted line in the curve).  The figure shows that the model using BMI alone is well-calibrated for predicted probabilities between 0.0 and 0.3, less so for probabilities larger than 0.4, where the data are sparse.  The model including BMI and sex is closer to the $45$-degree line and shows that model is a better fit to the data.  The largest values on the horizontal axis for the two curves are different to avoid extrapolation; the largest predicted probability is 0.722 for the model with BMI alone and 0.624 for the model that adds sex.  Extending the green curve to 0.722 would involve extrapolation.
+Calibration plots are a visual display of the match between predicted probabilities and observed outcomes and are useful for both checking model fit and assessing the agreement between predicted probabilities and outcomes. Figure~\ref{figure:calibrationHuBMISex} shows calibration plots for the logistic models for hyperuricemia with predictor BMI (blue) and with predictors BMI and sex (green).  Because the outcome is binary, the agreement between predicted probabilities and outcomes is difficult to see in a scatterplot of observed versus predicted values, so calibration plots typically add a best fitting smooth curve, using \texttt{loess} or a similar function in \textsf{R}.  If a model is \term{well-calibrated}, the smooth curve should lie close to the $45$-degree line $y = x$ (the dotted line in the curve).  The figure shows that the model using BMI alone is well-calibrated for predicted probabilities between 0.0 and 0.3, less so for probabilities larger than 0.4, where the data are sparse.  The model including BMI and sex is closer to the $45$-degree line and shows that model is a better fit to the data.  The largest values on the horizontal axis for the two curves are different to avoid extrapolation; the largest predicted probability is 0.722 for the model with BMI alone and 0.624 for the model that adds sex.  Extending the green curve to 0.722 would involve extrapolation. It is also clear that in the model with BMI alone the predicted probabilities larger than about $0.60$ are too large. 
 
 \begin{figure}[!tbh]
   \centering
   \includegraphics[width=0.70\textwidth]
   {ch_logistic_regression_oi_biostat/figures/calibrationHuBMISex/calibrationHuBMISex.pdf}
-    \caption{Calibration plots, logistic model for the association between hyperuricemia and BMI (blue) and green for the model for hyperuricemia that includes both BMI and sex. The light blue jittered dots at  $y = 0$ and $y = 1$ denote observed values of hyperuricemia (0 = "No", 1 = "Yes") plotted against predicted probabilities.   The smooth curves are drawn using the \textsf{R} function \texttt{loess} on the scatterplots of actual predicted versus observed probabilities for the two models.}
+    \caption{Calibration plots, logistic model for the association between hyperuricemia and the predictor BMI (blue) and the predictors BMI and sex. The light blue jittered dots at  $y = 0$ and $y = 1$ denote observed values of hyperuricemia (0 = "No", 1 = "Yes") plotted against predicted probabilities.   The smooth curves are drawn using the \textsf{R} function \texttt{loess} on the scatterplots of actual predicted versus observed probabilities for the two models.}
    \label{figure:calibrationHuBMISex}
 \end{figure}
 
@@ -1380,7 +1341,29 @@ Yes & 3 & 4 & 7 \\
 
 The error rates among cases with or without the outcome can be very different from the total error rate. The \term{false negative rate}, or \term{FNR}, of a prediction rule is the proportion of times cases with the outcome are predicted not to have it; it is an estimated conditional probability.  Figure~\ref{figure:predVsObsHuBMISex} shows that among the 95 cases that were hyperuricemic, 91 were predicted to be free of hyperuricemia, a false negative rate of $91/95 = 0.958$. The \term{false positive rate}, or \term{FPR}, is the proportion of times cases without the outcome are predicted to have it. For the prediction rule that uses a threshold of 0.50, the false positive rate is $3/405 = 0.007$.   
 
-If BMI and sex were used to screen for the possibility of hyperuricemia in a population similar to the study population, the high negative rate indicates that it would never be used in practice.  More than $95\%$ of patients with undiagnosed hyperuricemia would be falsely predicted not to have the condition.
+If BMI and sex were used to screen for the possibility of hyperuricemia in a population similar to the study population, the large false negative rate indicates that it would never be used in practice.  More than $95\%$ of patients with undiagnosed hyperuricemia would be falsely predicted not to have the condition.
+
+When \var{sex} was added to \var{bmi} in the model for hyperuricemia, the AIC for the two variable model was slightly smaller than for the single variable model (461.26 vs. 463.26), suggesting that the two variable model might provide more accurate predictions.  Figure~\ref{figure:predVsObsHuBMI} shows observed vs. predicted cases of hyperuricemia in the model with \var{bmi} alone.  Comparing it with Figure~\ref{figure:predVsObsHuBMISex} shows the small differences between the model predictions. The model with \var{sex} predicts an additional false negative case, and one fewer false positive. 
+
+% latex table generated in R 4.2.3 by xtable 1.8-4 package
+% Sun May  5 15:28:04 2024
+\begin{figure}[ht]
+\centering
+\begin{tabular}{rrrr}
+  \hline
+  & \multicolumn{2}{c}{Observed} & \\
+  \hline
+ & 0 & 1 & Sum \\ 
+  \hline
+FALSE & 403 & 92 & 495 \\ 
+  TRUE & 2 & 3 & 5 \\ 
+  Sum & 405 & 95 & 500 \\ 
+   \hline
+\end{tabular}
+\caption{Predicted versus observed hyperuricemia,
+       threshold value 0.50, logistic model with predictor BMI} 
+\label{figure:predVsObsHuBMI}
+\end{figure}
 
 The error rates of a prediction rule change when the threshold value changes. Increasing the threshold will lead to both more cases correctly being predicted as having the outcome (more true positive results) and more cases incorrectly being predicted as having the outcome (more false positive results). Since there is an increase in true positives, the FNR decreases; since there is an increase in false positives, the FPR increases.
 
@@ -1395,7 +1378,6 @@ Figure~\ref{figure:fprFNRByCutoffHuBMISex} shows that the FPR and FNR are approx
     \caption{Estimated false positive (solid line) and false negative (dotted line) probabilities of hyperuricemia as a function of estimated cutoff value for the predicted probability of hyperuricemia.  Predicted probabilities are from the logistic model for the odds of hyperuricemia as a function of BMI and sex.}
     \label{figure:fprFNRByCutoffHuBMISex}
 \end{figure}
-
 
 A \term{receiver operating characteristic curve}, or \term{ROC curve}, is another graphic that shows how a binary classification rule behaves as its threshold value changes. The ROC curve plots the true positive rate (TPR) on the vertical axis against the false positive rate (FPR) on the horizontal axis at each threshold setting for the predicted probability of the outcome. An ROC curve shows directly that increases in the true positive rate can only be achieved by increasing the false positive rate. 
 
@@ -1455,7 +1437,8 @@ A randomly selected member of the population without the disease is less likely 
 
 Software can be used to calculate the AUC and confidence intervals for a given ROC.  The analyses in this and the next section use the \textsf{R} package \texttt{cvAUC}.
 
-How much better than random guessing is a prediction rule for hyperuricemia based on BMI and sex? The AUC for Figure~\ref{figure:ROCHuBMISex} is 0.678 -- the model has a $68\%$ chance of correctly distinguishing between an individual with versus  without hyperuricemia.  There is no single definition of a good AUC, but are guidelines that may be useful in some settings.  For biomedical data, Hosmer, et.\ al.\footfullcite{hosmer2013applied}, recommend the following:
+How much better than random guessing is a prediction rule for hyperuricemia based on BMI and sex? The AUC for Figure~\ref{figure:ROCHuBMISex} is 0.678 -- the model has a $68\%$ chance of correctly distinguishing between an individual with versus  without hyperuricemia.  There is no single definition of a good AUC, but there are guidelines that may be useful in some settings.  For biomedical data, Hosmer, et.\ al.\footfullcite{hosmer2013applied}, recommend the guidelines in Figure~\ref{figure:AUCGuidelines}.
+
 \begin{figure}[ht]
 \centering
   \begin{tabular}{cl}
@@ -1469,9 +1452,11 @@ AUC under ROC curve & Suggested interpretation  \\
     $[0.90, 1.00)$ & Outstanding discrimination   \\
    \hline
 \end{tabular}
-  \caption{Hosmer, Lemeshow and Sturdivant suggested interpretations for the area under the ROC curve (AUC).}
-\label{figure:predVsObsTriageMort30Table}
+  \caption{Hosmer, Lemeshow and Sturdivant suggested guidelines for interpreting the area under the ROC curve (AUC).}
+\label{figure:AUCGuidelines}
 \end{figure}
+
+
 Using these guidelines, the AUC for the model for hyperuricemia with predictors BMI and sex discriminates poorly between cases with and without hyperuricemia -- adding one more piece of information that the model would not be useful in a clinical setting.
 
 Figure~\ref{figure:ROCExamples} shows four example ROC curves corresponding to hypothetical models with increasing ability to discriminate: the 45-degree line, AUC = 0.5, random guessing; the green curve, AUC = 0.667, poor discrimination; blue curve, AUC = 0.785, acceptable discrimination; red curve, AUC = 0.874, excellent discrimination. ROC curves will be used to compare models for triage in an emergency department in the case study in Section~\ref{caseStudy}.
@@ -1489,11 +1474,11 @@ Confidence intervals
 \subsection{Out-of-sample accuracy of predictions}
 \label{section:outOfSamplePredictionAccuracy} 
 
-When predicting outcomes is the goal of an analysis, the data used to estimate a prediction model is usually called the \term{training data}. When the prediction error from a model (such as a Brier score) is estimated using the training data, the estimate is called an \term{in-sample prediction error} or an \term{apparent prediction error}. Methods such as maximum likelihood (used to estimate a logistic regression model) choose parameter estimates that are best matched to the data, so in-sample prediction error is generally smaller than the prediction error in new data where the relationships between outcome and predictors may be slightly different.  \term{Out-of-sample} prediction error characterizes the behavior of a model when fit to new data.  Out-of-sample prediction error can be estimated in a new dataset, usually called \term{test data} or \term{validation data}, or estimated using \term{cross-validation} when a validation dataset is not available.  The use of a validation dataset is illustrated in Section~\ref{section:validationRevisedTriageScore}; this section outlines cross-validation. 
+When predicting outcomes is the goal of an analysis, the data used to estimate a prediction model is usually called the \term{training data}. When the prediction error from a model such as a Brier score or a false negative rate is estimated using the training data, the estimate is called an \term{in-sample prediction error} or an \term{apparent prediction error}. Methods such as maximum likelihood (used to estimate a logistic regression model) choose parameter estimates that are well matched to the data, so in-sample prediction error is generally smaller than the prediction error in new data where the relationships between outcome and predictors may be slightly different.  \term{Out-of-sample} prediction error characterizes the behavior of a model when fit to new data.  Out-of-sample prediction error can be estimated in a new dataset, usually called \term{test data} or \term{validation data} or using \term{cross-validation} when a validation dataset is not available.  The use of a validation dataset is illustrated in Section~\ref{section:validationRevisedTriageScore}; this section outlines cross-validation. 
 
 \subsubsection{Cross-validation}
 
-Cross-validation estimates out-of-sample prediction error by repeatedly resampling from the training data to create a collection of paired training and test datasets. In \term{$k$-fold cross-validation} the data are randomly divided into $k$ non-overlapping, approximately equal sized subsets, called folds; typically $k = 5 \text{ or } 10$. Each fold is used as training data to re-estimate a model, then prediction error (e.g., a Brier score) is estimated by applying the re-estimated model to the data not in the fold, i.e., the data held out from the fold.  The process produces $k$ estimates of prediction error, which are then averaged. When the fold sizes are identical, a simple average can be used since each estimate of prediction error is based on the same amount of data. Figure~\ref{figure:crossValidation} shows a graphical representation of $5$-fold cross-validation.
+Cross-validation estimates out-of-sample prediction error by repeatedly resampling from the training data to create a collection of paired training and test datasets. In \term{$k$-fold cross-validation} the data are randomly divided into $k$ non-overlapping, approximately equal sized subsets, called folds; typically $k = 5 \text{ or } 10$. Each fold is used as training data to re-estimate a model, then a prediction error (e.g., a Brier score or a false negative rate) is estimated by applying the re-estimated model to the data not in the fold, i.e., the data held out from the fold.  The process produces $k$ estimates of prediction error, which are then averaged. When the fold sizes are identical, a simple average can be used since each estimate of prediction error is based on the same amount of data. Figure~\ref{figure:crossValidation} shows a graphical representation of $5$-fold cross-validation.
 
 The randomly chosen subsets i.e., the folds, use training datasets that may reflect different associations between the response and predictors, so even though cross-validation uses the training data its estimates of error rates are less subject to the bias of in-sample estimates of error.
 
@@ -1509,7 +1494,7 @@ Cross-validated Brier scores for the hyperuricemia data can be calculated using 
 
 Cross-validation can be used for more complicated estimates, such as a calibration curve, but the principle is the same.  For each fold, a model is re-estimated and the calibration curve is constructed using the data held out from the fold.  For 5-fold calibration, the resulting graph might show the 5 calibration curves as well as a curve constructed using the average value at each point on the 5 estimated curves. 
 
-Cross-validation has some drawbacks -- the best choice of $k$ for a given dataset is not always clear, the test sets are relatively small, and unlike using an external dataset, estimates of error rates do not generalize to populations that might differ in  important ways from the study sample.  However, validation datasets large enough to be useful are rarely available. Cross-validation has some strengths: it is available in software such as R, does not require an additional dataset, allows for relatively large training sets, and averaging the $k$ estimated prediction error rates mitigates the small size of the test sets.  When a validation dataset is not available, cross-validation is the preferred method of estimating out-of-sample prediction error.
+Cross-validation has some drawbacks -- the best choice of $k$ for a given dataset is not always clear, the test sets are relatively small, and unlike using an external dataset, estimates of error rates do not generalize to populations that might differ in  important ways from the study sample.  However, validation datasets large enough to be useful are rarely available. Cross-validation has some strengths: it is available in software such as \textsf{R}, does not require an additional dataset, allows for relatively large training sets, and averaging the $k$ estimated prediction error rates mitigates the small size of the test sets.  When a validation dataset is not available, cross-validation is the preferred method of estimating out-of-sample prediction error.
 
 As noted earlier, prediction from statistical models is something that should be done with great care, especially in a clinical situation where prediction may be a diagnostic tool leading to an intervention.  In this setting is important to examine a statistical model from several perspectives.  
 
@@ -1522,7 +1507,7 @@ The hyperuricemia data is useful for exploring how logistic regression might des
 \label{caseStudy}
 
 \subsection{Introduction and background}
-\label{IntroDanishED}
+\label{section:IntroDanishED}
 
 Most hospital emergency departments triage arriving patients so that the most severely compromised  are given higher priority. It is an especially valuable process when the case load is high, since waiting time to treatment is an important factor in outcome.  This section presents a case study developing a logistic regression model for triaging patients using data from Kristensen, et al.\footfullcite{kristensen2017routine}, a cohort study conducted in the Emergency Department (ED) of the Nordsj{\ae}lland University Hospital in Denmark.  In the paper, the study team proposed a revision to an ED triage algorithm based on predictions for the probability of death within 30 days from admission (30-day mortality).  The study used a primary cohort of $6,249$ participants to model alternative triage algorithms and a validation cohort of $6,383$ individuals to evaluate the models.   
 
@@ -1942,7 +1927,7 @@ Along with the low Brier score, calibration curves help explain why the new scor
 \end{figure}
 
 
-The ROC curves discussed in Section~\ref{section:predictiveAccuracy} quantify the improvement in prediction from adding age and sex to the DEPT scoring system.   Figure~\ref{figure:ROCDanishED} shows ROC curves for the DEPT and modified triage systems in both the training and test data.  The blue ROC curves are for the model that adds age and sex to DEPT; the green are for DEPT alone.  Solid lines show the fit to the training data, dashed lines to the test data.  The model specific curves for the training and test data are similar, consistent with the nearly equal Brier scores in the training and test data.  The area under the ROC curve (AUC) for the expanded model applied to the test data is $0.802$ ($95\%$ confidence interval $(0.79, 0.825)$). The corresponding value for the DEPT classification alone is $0.632$ (confidence interval $(0.590,0.674)$).  The DEPT classification has a $63\%$ chance of distinguishing between an individual who will survive at least 30 days after admission to an ED versus dying; the expanded model is $80\%$ likely to make that distinction.
+The ROC curves discussed in Section~\ref{section:predictiveAccuracyLogistic} quantify the improvement in prediction from adding age and sex to the DEPT scoring system.   Figure~\ref{figure:ROCDanishED} shows ROC curves for the DEPT and modified triage systems in both the training and test data.  The blue ROC curves are for the model that adds age and sex to DEPT; the green are for DEPT alone.  Solid lines show the fit to the training data, dashed lines to the test data.  The model specific curves for the training and test data are similar, consistent with the nearly equal Brier scores in the training and test data.  The area under the ROC curve (AUC) for the expanded model applied to the test data is $0.802$ ($95\%$ confidence interval $(0.79, 0.825)$). The corresponding value for the DEPT classification alone is $0.632$ (confidence interval $(0.590,0.674)$).  The DEPT classification has a $63\%$ chance of distinguishing between an individual who will survive at least 30 days after admission to an ED versus dying; the expanded model is $80\%$ likely to make that distinction.
 
 
 \begin{figure}[!tbh]
@@ -1972,6 +1957,5 @@ Despite the caveats, the analysis illustrates aspects that readers should look f
 This and other chapters use body mass index (BMI) in several examples and analyses because it is widely available and has been measured and recorded in many studies of human populations. Despite its widespread use, BMI is now increasingly questioned because of its potential bias in when applied to certain populations.
 
 BMI was first proposed in 1832 by Adolphe Quetelet based on data from Caucasian western Europeans and was originally known as the Quetelet Index. The category labels for BMI were set in 1995 by an expert panel sponsored by WHO but their applicability in Asian and other populations have been questioned and studied.  Several large studies have confirmed that high and low values of BMI in Asians confer an elevated risk of death just as in European populations (for example Lin, et al.\footfullcite{lin2011body}) but did not find evidence that the WHO cutpoints should be adjusted for Chinese populations, so the analysis here retains the current WHO categories when analyzing the hyperuricemia dataset.  In general, labeled categories associated with cutpoints in a continuous predictor should be interpreted with caution.  Chapter 2 of Wiggins and Jones\footnote{Wiggins C and Jones ML.  How Data Happened.  A History from the Age of Reason to the Age of Algorithms (2023).  WW Norton and Company.} describe some of Quetelet's work on BMI and his place in the history of statistics.
-
 
 

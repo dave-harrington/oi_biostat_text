@@ -1,20 +1,21 @@
 \begin{theindex}
 
-  \item $k$-fold cross-validation, \hyperindexformat{\textbf}{498}
+  \item $k$-fold cross-validation, \hyperindexformat{\textbf}{499}
 
   \indexspace
 
   \item $A^c$, \hyperpage{102}
-  \item additive model, \hyperindexformat{\textbf}{482}
+  \item additive model, \hyperindexformat{\textbf}{479}
   \item adjusted $R^2$ ($R_{adj}^2$), \hyperindexformat{\textbf}{343}, 
 		\hyperpage{343}
   \item adjusted R-squared, \hyperindexformat{\textbf}{343}
-  \item AIC, \hyperindexformat{\textbf}{479}
-  \item Akaike Information Criterion, \hyperindexformat{\textbf}{479}
+  \item AIC, \hyperindexformat{\textbf}{486}
+  \item Akaike Information Criterion, \hyperindexformat{\textbf}{486}
   \item alternative hypothesis ($H_A$), \hyperindexformat{\textbf}{214}
   \item analysis of variance (ANOVA), \hyperindexformat{\textbf}{266}, 
 		\hyperpage{266--272}
-  \item apparent prediction error, \hyperindexformat{\textbf}{498}
+  \item apparent error rates, \hyperindexformat{\textbf}{488}
+  \item apparent prediction error, \hyperindexformat{\textbf}{499}
   \item association, \hyperindexformat{\textbf}{40}
   \item AUC, \hyperindexformat{\textbf}{497}
   \item AUC-ROC, \hyperindexformat{\textbf}{497}
@@ -29,12 +30,14 @@
   \item blocks, \hyperindexformat{\textbf}{28}
   \item Bonferroni correction, \hyperindexformat{\textbf}{271}
   \item boxplot, \hyperindexformat{\textbf}{36}
-  \item Brier score, \hyperindexformat{\textbf}{493}
+  \item Brier score, \hyperindexformat{\textbf}{488}, 
+		\hyperindexformat{\textbf}{493}
 
   \indexspace
 
   \item c-statistic, \hyperindexformat{\textbf}{497}
   \item calibration plot, \hyperindexformat{\textbf}{468}
+  \item Calibration plots, \hyperindexformat{\textbf}{488}
   \item case-control studies, \hyperpage{418--421}
     \subitem tests for association, \hyperpage{419}
   \item categorical variable, \hyperindexformat{\textbf}{18}
@@ -75,7 +78,8 @@
   \item correlated random variables, \hyperindexformat{\textbf}{182}
   \item correlation, \hyperindexformat{\textbf}{42}
   \item correlation coefficient, \hyperindexformat{\textbf}{42}
-  \item cross-validation, \hyperindexformat{\textbf}{498}
+  \item cross-validation, \hyperindexformat{\textbf}{488}, 
+		\hyperindexformat{\textbf}{499}
 
   \indexspace
 
@@ -140,8 +144,8 @@
 
   \indexspace
 
-  \item effect modification, \hyperindexformat{\textbf}{482}
-  \item effect modifier, \hyperindexformat{\textbf}{482}
+  \item effect modification, \hyperindexformat{\textbf}{479}
+  \item effect modifier, \hyperindexformat{\textbf}{479}
   \item effect size, \hyperpage{237}
   \item empirical rule, \hyperindexformat{\textbf}{38}
   \item estimate, \hyperindexformat{\textbf}{201}
@@ -162,8 +166,10 @@
   \item failure, \hyperindexformat{\textbf}{149}
   \item false negative, \hyperindexformat{\textbf}{114}
   \item false negative rate, \hyperindexformat{\textbf}{495}
+  \item false negative rates, \hyperindexformat{\textbf}{488}
   \item false positive, \hyperindexformat{\textbf}{114}
   \item false positive rate, \hyperindexformat{\textbf}{495}
+  \item false positive rates, \hyperindexformat{\textbf}{488}
   \item Fisher's exact test, \hyperindexformat{\textbf}{411}
   \item FNR, \hyperindexformat{\textbf}{495}
   \item FPR, \hyperindexformat{\textbf}{495}
@@ -184,6 +190,7 @@
   \item high leverage, \hyperindexformat{\textbf}{307}
   \item histogram, \hyperindexformat{\textbf}{35}, 
 		\hyperindexformat{\textbf}{50}
+  \item Hosmer-Lemeshow, \hyperindexformat{\textbf}{488}
   \item hypothesis testing, \hyperpage{214--224}
     \subitem decision errors, 223
     \subitem significance level, \hyperpage{223--224}
@@ -191,14 +198,14 @@
 
   \indexspace
 
-  \item in-sample prediction error, \hyperindexformat{\textbf}{498}
+  \item in-sample prediction error, \hyperindexformat{\textbf}{499}
   \item independent, \hyperindexformat{\textbf}{40}, 
 		\hyperindexformat{\textbf}{103}
   \item independent random variables, \hyperindexformat{\textbf}{182}
   \item influential, \hyperindexformat{\textbf}{308}
   \item interaction, \hyperindexformat{\textbf}{354}, 
-		\hyperindexformat{\textbf}{483}
-  \item interaction effects, \hyperindexformat{\textbf}{484}
+		\hyperindexformat{\textbf}{479}
+  \item interaction effects, \hyperindexformat{\textbf}{480}
   \item interquartile range, \hyperindexformat{\textbf}{34}
 
   \indexspace
@@ -223,7 +230,7 @@
 
   \indexspace
 
-  \item main effects, \hyperindexformat{\textbf}{484}
+  \item main effects, \hyperindexformat{\textbf}{480}
   \item margin of error, \hyperindexformat{\textbf}{207}, 
 		\hyperindexformat{\textbf}{395}, \hyperpage{395--396}
   \item marginal distribution, \hyperindexformat{\textbf}{180}
@@ -277,7 +284,7 @@
   \item normal probability plot, \hyperindexformat{\textbf}{165}, 
 		\hyperpage{165--169}, \hyperpage{303}, \hyperpage{341}
   \item normal probability table, \hyperindexformat{\textbf}{158}
-  \item null deviance, \hyperindexformat{\textbf}{478}
+  \item null deviance, \hyperindexformat{\textbf}{485}
   \item null hypothesis ($H_0$), \hyperindexformat{\textbf}{214}
   \item numerical variable, \hyperindexformat{\textbf}{17}
     \subitem continuous, \hyperindexformat{\textbf}{17}
@@ -290,7 +297,8 @@
   \item odds ratio, \hyperindexformat{\textbf}{48}, 
 		\hyperindexformat{\textbf}{420}
     \subitem case-control studies, \hyperpage{420}
-  \item Out-of-sample, \hyperindexformat{\textbf}{498}
+  \item Out-of-sample, \hyperindexformat{\textbf}{499}
+  \item out-of-sample prediction error, \hyperindexformat{\textbf}{488}
   \item outlier, \hyperindexformat{\textbf}{37}
   \item outlier in regression, \hyperindexformat{\textbf}{308}
 
@@ -337,7 +345,9 @@
   \item random variable, \hyperindexformat{\textbf}{141}, 
 		\hyperpage{141--148}
   \item receiver operating characteristic curve, 
-		\hyperindexformat{\textbf}{495}
+		\hyperindexformat{\textbf}{496}
+  \item Receiving operator characteristic curves, 
+		\hyperindexformat{\textbf}{488}
   \item rejection region, \hyperindexformat{\textbf}{219}, 
 		\hyperindexformat{\textbf}{260}
   \item relative frequency table, \hyperindexformat{\textbf}{39}
@@ -346,7 +356,7 @@
   \item replication, \hyperindexformat{\textbf}{28}
   \item residual, \hyperindexformat{\textbf}{297}
   \item residual confounders, \hyperindexformat{\textbf}{353}
-  \item residual deviance, \hyperindexformat{\textbf}{478}
+  \item residual deviance, \hyperindexformat{\textbf}{485}
   \item residuals, \hyperpage{300--303}
     \subitem contingency table, \hyperpage{408}
     \subitem regression, \hyperpage{297}, \hyperpage{340}
@@ -354,7 +364,8 @@
 		\hyperindexformat{\textbf}{293}
   \item retrospective study, \hyperindexformat{\textbf}{31}
   \item robust estimates, \hyperindexformat{\textbf}{34}
-  \item ROC curve, \hyperindexformat{\textbf}{495}
+  \item ROC curve, \hyperindexformat{\textbf}{496}
+  \item ROC curves, \hyperindexformat{\textbf}{488}
   \item row totals, \hyperindexformat{\textbf}{45}
 
   \indexspace
@@ -441,7 +452,8 @@
     \subitem one-sample, \hyperpage{243--245}
     \subitem paired data, \hyperpage{246--247}
     \subitem two independent groups, \hyperpage{251--253}
-  \item test data, \hyperindexformat{\textbf}{498}
+  \item test data, \hyperindexformat{\textbf}{499}
+  \item test dataset, \hyperindexformat{\textbf}{488}
   \item threshold probability, \hyperindexformat{\textbf}{494}
   \item time series, \hyperindexformat{\textbf}{296}
   \item training data, \hyperindexformat{\textbf}{498}
@@ -461,7 +473,8 @@
 
   \indexspace
 
-  \item validation data, \hyperindexformat{\textbf}{498}
+  \item validation data, \hyperindexformat{\textbf}{499}
+  \item validation dataset, \hyperindexformat{\textbf}{488}
   \item variables, \hyperindexformat{\textbf}{16}
   \item variance, \hyperindexformat{\textbf}{33}, \hyperpage{145}
   \item Venn diagrams, \hyperindexformat{\textbf}{97}
