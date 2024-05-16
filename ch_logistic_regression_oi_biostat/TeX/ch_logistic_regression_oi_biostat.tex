@@ -1515,20 +1515,18 @@ Most hospital emergency departments triage arriving patients so that the most se
 
 At the time the study was published, the hospital used the Danish Emergency Process Triage (DEPT) algorithm.  DEPT is a 5-level system ranking patients based on vital signs and presenting conditions (listed in the Kristensen paper) that assigns color codes for the predicted 30-day mortality probability.  Let $p$ be the probability of a patient dying within 30 days from admission to the ED\@.  The color codes correspond to the following values of $p$: "red", $p > 0.25$; orange, $0.10 < p \leq 0.25$; "yellow",  $0.01 \leq  p  \leq 0.10$; "green",  $ < 0.01$; and "blue", minor conditions for which the patient should not be admitted to the ED\@. The analysis in this section uses the term target probabilities for the probability ranges associated with each color. Patients in category "blue" are not included either in the published analysis or the one presented here, making the triage classification a 4-level system for patients admitted to the ED.
 
-Based on prior studies, the Kristensen team conjectured that revising DEPT using  the results of routine biochemical screening normally done in an ED (albumin, creatinine, c-reactive protein, hemoglobin, lactate dehydrogenase, leukocyte count, potassium, and sodium) would improve the algorithm compared to the previous scoring based in vital signs and presenting conditions.  The analysis in the Kristensen paper showed that was indeed the case.
+Based on prior studies, the Kristensen team conjectured that revising DEPT using  the results of routine biochemical screening normally done in an ED (albumin, creatinine, c-reactive protein, hemoglobin, lactate dehydrogenase, leukocyte count, potassium, and sodium) would improve the algorithm compared to the previous scoring based on vital signs and presenting conditions.  The analysis in the Kristensen paper showed that was indeed the case.
 
 This section examines a simpler modification of DEPT -- adding the demographic variables age and sex to the existing color rankings -- for several reasons. A more complete analysis might use a logistic regression that adds age and sex to the original variables used to create DEPT but those variables were not available for this case study.   Readers of this text are unlikely to be familiar with the definitions of the biochemical measurements and their clinical implications. The Nordsj{\ae}lland group used transformations of these measurements to model increased risk of death for abnormally low or high values of the biochemical measurements, and the transformations used are beyond the scope of this text. The steps used to build and test models that add only age and sex to DEPT are similar to those examining more predictors. Finally, while the triage system augmented by age and sex does not improve DEPT as much as the model in the Kristensen paper, it does surprisingly well.  It may not be a useful tool in an ED, but it is more than sufficient as an example to study risk classification.    Readers interested in the full analysis should be able to read the Kristensen paper after mastering the material in this section.
 
-Significance levels ($p$-values) are used differently here than in other sections of the text.  They are used to explore and screen models, not for inference about particular variables.  Since the goal of the analysis is the prediction of outcome rather than an explanatory model for the association of particular variables with outcome, the statistical properties of models are assessed by examining the accuracy of predictions.  
+Since the goal of this analysis is a potential prediction model, statistical significance levels are less relevant than model fit and predictive accuracy.  In most cases, point estimates, standard errors, confidence intervals and z scores are provided instead for summary statistics and model coefficients.  
 
-The full data for both cohorts are contained the data package \texttt{oibiostat}, as \texttt{DanishEDPrimaryCohort} and \texttt{DanishEDValidationCohort}.  These datasets have also been posted by the authors (\url{DOI:10.5061/dryad.m2bq5}).  The datasets in \texttt{oibiostat} have been formatted for readability.
-
-
+The full data for both cohorts are contained the data package \texttt{oibiostat}, as \texttt{DanishEDPrimaryCohort} and \texttt{DanishEDValidationCohort}.  These datasets have also been posted by the authors (\url{DOI:10.5061/dryad.m2bq5}).  The datasets in \texttt{oibiostat} have been re-formatted for readability.
 
 \subsection{Examining the data}
 \label{section:examiningDataDanishED}
 
-The training dataset used here is based on data from $6,203$ participants from the original cohort of $6,279$ for whom there were no missing values for the DEPT score, 30-day mortality, age and sex.  Since this excludes only 1.2\% ($76/6,279$) of the cohort, there is little chance of bias caused by a complete case analysis.  
+The training dataset used here is based on data from $6,203$ participants from the original cohort of $6,279$ for whom there were no missing values for the DEPT score, 30-day mortality, age and sex.  Since this excludes only 1.2\% ($76/6279$) of the cohort, there is little chance of bias caused by a complete case analysis.  
 
 Of the $6,203$ participants, $325$ ($5.2\%$) died within 30 days from admission to the ED.  Figure~\ref{figure:triageMort30Table} shows the association of the original DEPT scoring with 30-day mortality.   The scoring was based on prior studies of ED outcomes, so, as expected, the $\chi^2$ test of for the null hypothesis of independence shows strong evidence of an association ($\chi^2 = 131$, $p < 0.001$).  The scoring identifies clusters of cases with decreasing risk of dying within 30 days; the estimated probabilities of death decrease monotonically from $ 49/273 =  0.179$ to $ 51/1972 = 0.026$ as the categories change from "red" (highest risk) to "green" (lowest risk).
 
@@ -1573,7 +1571,7 @@ green & $[0.00, 0.01)$ & 0.026   \\
 \label{figure:predVsObsTriageMort30Table}
 \end{figure}
 
-The minimum and maximum ages (in years) are 16 and 108, with a mean 59.6 and median 63. (Figure~\ref{figure:histAgeDanishED}).  The maximum age of 108 is striking, but not impossible, so the case was left in the dataset, at least for now.
+The minimum and maximum ages (in years) are 16 and 108, with a mean 59.6 and median 63.  The maximum age of 108 is striking, and the histogram in Figure~\ref{figure:histAgeDanishED} shows that there are several elders in the study sample at least 100  years old.  These cases have been left in the dataset for the initial analysis, but are re-examined later as the model is refined.
 
 \begin{figure}[!tbh]
   \centering
@@ -1583,7 +1581,7 @@ The minimum and maximum ages (in years) are 16 and 108, with a mean 59.6 and med
     \label{figure:histAgeDanishED}
 \end{figure}
 
-Figure~\ref{figure:mort30AgeTable} shows the association of age and 30-day mortality, with age grouped into quartiles. The table shows that the estimated probability of death increases monotonically from $6/1537 = 0.004$ in the youngest quartile to $184/1542 = 0.119$ in the oldest.  Since the $\chi^2$ statistic has value 233 on 3 degrees of freedom, the evidence for an association of age with 30-day mortality is strong.
+Figure~\ref{figure:mort30AgeTable} shows the association of age and 30-day mortality, with age grouped by quartile. The table shows (unsurprisingly) that the estimated probability of death increases monotonically from $6/1537 = 0.004$ in the youngest quartile to $184/1542 = 0.119$ in the oldest.  The odds ratio comparing 30-day mortality in the oldest to youngest quartile  is $(184/1358)/(6/1531) = 34.5$, $95\%$ confidence interval $(15.5, 95.5)$.  The association of age with outcome is clearly important.
 
 % latex table generated in R 4.1.2 by xtable 1.8-4 package
 % Sun Jul 10 17:33:56 2022
@@ -1601,10 +1599,11 @@ Age & No & Yes & Sum \\
   Sum & 5829 & 325 & 6154 \\
    \hline
 \end{tabular}
-\caption{Association of age with
-       30-day mortality, with age in years grouped by quartiles.}
+\caption{Age quartile versus 30-day mortality}
 \label{figure:mort30AgeTable}
 \end{figure}
+
+\begin{comment} 
 
 Figure~\ref{figure:triageAgeCatTable} shows the relationship between age and triage score. The $\chi^2$ statistic for the table is 88 on 9 degrees of freedom, so the evidence for the association is also strong.  The segmented bar plot in Figure~\ref{figure:ageTriageSegBarDanishED} shows the relationship more clearly than the table.  As age quartile increases, individuals are more likely to be scored in the higher risk categories "red" and "orange", denoted in black and dark gray.
 
@@ -1639,7 +1638,9 @@ Figure~\ref{figure:triageAgeCatTable} shows the relationship between age and tri
     \label{figure:ageTriageSegBarDanishED}
 \end{figure}
 
-In these data, women are less likely than men to die within 30 days of admission to the ED. In Figure~\ref{figure:sexMort30Table} the estimated probabilities for 30-day mortality for women and men are, respectively, $157/3217 = 4.9\%$ and $168/2986 = 5.6\%$.  This small difference is not statistically significant; the $\chi^2$ statistic has value $1.7$ on 1 df, $p = 0.2$.
+\end{comment}
+
+In these data, women are less likely than men to die within 30 days of admission to the ED. In Figure~\ref{figure:sexMort30Table} the estimated probabilities for 30-day mortality for women and men are, respectively, $157/3217 = 4.9\%$ and $168/2986 = 5.6\%$.  The OR for 30-day mortality comparing men to women is $(168/2818)/(157/3060) = 1.16$, with $95\%$ confidence interval $(0.92, 1.46)$.  The association between sex and outcome does not appear to be a strong one.  
 
 % latex table generated in R 4.1.2 by xtable 1.8-4 package
 % Tue Jul  5 08:18:56 2022
@@ -1660,28 +1661,28 @@ female & 3060 & 157 & 3217 \\
 \label{figure:sexMort30Table}
 \end{figure}
 
-
-\subsection{Modeling the relationship between 30-day mortality and DEPT triage score, age and sex. The named colors on the horizontal axis correspond to DEPT codes.}
+\subsection{Modeling the relationship between 30-day mortality and DEPT triage score, age and sex.}
 \label{section:triageModelDEPTAgeSex}
 
-The initial analysis of the training data uses a logistic regression with response variable 30-day mortality and predictors DEPT triage score, age and sex.  Even though sex is not by itself strongly associated with 30-day mortality, it is included in the initial model to explore its relationship with outcome after adjusting for age and DEPT score.   The conditions for a logistic regression are met in this dataset: the cases are independent; 369 individuals died within 30 days after admission so a model can have up to 33 parameters (369/11 = 33.5); and since the study did not gather data using outcome-based sampling, probabilities can be estimated from logistic regression.  Goodness-of-fit tests used later in the section will show that the logistic model is reasonable but can be improved.
+The initial analysis of the training data uses a logistic regression with response variable 30-day mortality and predictors DEPT triage score, age and sex.  Even though sex is not by itself strongly associated with 30-day mortality, it is included in the initial model to explore its relationship with outcome after adjusting for age and DEPT score.   The conditions for a logistic regression are met in this dataset: the cases are independent; 369 individuals died within 30 days after admission so a model can have up to 33 parameters $(369/11 = 33.5)$; and since the study did not gather data using outcome-based sampling, probabilities can be estimated from logistic regression.  
 
-Figure~\ref{figure:triageAgeSexMort30logreg} shows the initial model.  Somewhat surprisingly, sex is now a significant predictor in the adjusted model, suggesting that the relationship between 30-day mortality, age and sex should be explored more closely.
+
+Figure~\ref{figure:triageAgeSexMort30logreg} shows the initial model. Except for sex, the z statistics are substantially different from 0, but even the z statistic of 2.29 for sex suggests that sex might be important in this adjusted model. 
 
 % latex table generated in R 4.1.2 by xtable 1.8-4 package
 % Tue Jul  5 09:53:21 2022
 \begin{figure}[ht]
 \centering
-\begin{tabular}{rrrrr}
+\begin{tabular}{rrrr}
   \hline
- & Estimate & Std. Error & z value & Pr($>$$|$z$|$) \\
+ & Estimate & Std. Error & z value  \\
   \hline
-(Intercept) & -5.589 & 0.367 & -15.21 & 0.000 \\
-  triageorange & -1.244 & 0.198 & -6.29 & 0.000 \\
-  triageyellow & -1.545 & 0.197 & -7.84 & 0.000 \\
-  triagegreen & -2.122 & 0.223 & -9.51 & 0.000 \\
-  age & 0.059 & 0.004 & 13.64 & 0.000 \\
-  sexmale & 0.274 & 0.120 & 2.29 & 0.022 \\
+(Intercept) & -5.589 & 0.367 & -15.21  \\
+  triageorange & -1.244 & 0.198 & -6.29  \\
+  triageyellow & -1.545 & 0.197 & -7.84  \\
+  triagegreen & -2.122 & 0.223 & -9.51  \\
+  age & 0.059 & 0.004 & 13.64  \\
+  sexmale & 0.274 & 0.120 & 2.29  \\
    \hline
 \end{tabular}
 \caption{Logistic regression with response 30-day mortality and
@@ -1689,12 +1690,7 @@ Figure~\ref{figure:triageAgeSexMort30logreg} shows the initial model.  Somewhat 
 \label{figure:triageAgeSexMort30logreg}
 \end{figure}
 
-
-% Null deviance: 2549.5  on 6202  degrees of freedom
-% Residual deviance: 2190.2  on 6197  degrees of freedom
-% AIC: 2202
-
-Figure~\ref{figure:mort30SexWithinAgeGroupTable} shows that the association between sex and 30-day mortality is very different within age groups.  In the age group 16-45, the overall proportion of deaths within 30 days is low ($(5 + 1)/(791 + 746) = 0.0039$, but the relative risk of death comparing males to females is $(1/746)/(5/791) = 0.212$.  Males in this age group are approximately $80\%$ less likely to die than females.  In contrast, in the highest age category, the relative risk of death comparing males to females is $1.646$.  Males in this age category are approximately $65\%$ more likely to die within 30 days.  There appears to be a strong age-sex interaction in the risk of death, although because of the small numbers of deaths in these categories these relative risks should be interpreted with caution.
+The role of the predictor \var{sex} warrants a closer look, for several reasons.  In most countries, women outlive men, and that is true in the country where these data were collected.  According to the Norwegian Institute of Public Health,  the life expectancy Norwegian women in 2016 was 84.2 years versus 80.6 for men.  This suggests that as Norwegians age, women at a certain age are healthier or more robust than their male counterparts, suggesting that 30-day mortality rates for elders in an ED may be different for females than males.  In fact, Figure~\ref{figure:mort30SexWithinAgeGroupTable} shows that the association between sex and 30-day mortality is very different within age groups.  In the age group 16-45, the overall proportion of deaths within 30 days is low ($(5 + 1)/(791 + 746) = 0.0039$, but the relative risk of death comparing males to females is $(1/746)/(5/791) = 0.212$.  Males in this age group are approximately $80\%$ less likely to die than females.  In contrast, in the highest age category, the relative risk of death comparing males to females is $1.646$.  Males in this age category are approximately $65\%$ more likely to die within 30 days.  There appears to be an age-sex interaction in the risk of death.  
 
 \begin{figure}[ht]
 \centering
@@ -1717,23 +1713,24 @@ Age category & Sex & Yes & No \\
 \label{figure:mort30SexWithinAgeGroupTable}
 \end{figure}
 
-A logistic model for 30-day mortality with the addition of an age-sex interaction is shown in Figure~\ref{figure:triageAgeSexInteractionMort30logreg}.  All of the predictors are highly significant, and the deviance-based statistic comparing this model to the nested model that does not include the interaction has value $12.39$ on 2 df ($p < 0.001$).  The AICs for the models without and with the interaction term are, respectively, 2192 and 2202, an increase of 10.39.  The evidence suggests the interaction term should be left in the model.
+A logistic model for 30-day mortality with the addition of an age-sex interaction is shown in Figure~\ref{figure:triageAgeSexInteractionMort30logreg}.  The z scores for all of the coefficients are substantially different from 0.
+
 
 % latex table generated in R 4.1.2 by xtable 1.8-4 package
 % Tue Jul  5 10:04:32 2022
 \begin{figure}[ht]
 \centering
-\begin{tabular}{rrrrr}
+\begin{tabular}{rrrr}
   \hline
- & Estimate & Std. Error & z value & Pr($>$$|$z$|$) \\
+ & Estimate & Std. Error & z value  \\
   \hline
-(Intercept) & -4.514 & 0.444 & -10.18 & 0.000 \\
-  triageorange & -1.253 & 0.199 & -6.29 & 0.000 \\
-  triageyellow & -1.564 & 0.198 & -7.89 & 0.000 \\
-  triagegreen & -2.155 & 0.225 & -9.59 & 0.000 \\
-  age & 0.045 & 0.006 & 8.09 & 0.000 \\
-  sexmale & -1.983 & 0.655 & -3.03 & 0.002 \\
-  age:sexmale & 0.030 & 0.009 & 3.50 & 0.000 \\
+(Intercept) & -4.514 & 0.444 & -10.18 \\
+  triageorange & -1.253 & 0.199 & -6.29  \\
+  triageyellow & -1.564 & 0.198 & -7.89  \\
+  triagegreen & -2.155 & 0.225 & -9.59  \\
+  age & 0.045 & 0.006 & 8.09  \\
+  sexmale & -1.983 & 0.655 & -3.03  \\
+  age:sexmale & 0.030 & 0.009 & 3.50  \\
    \hline
 \end{tabular}
 \caption{Logistic regression with response 30-day mortality and
@@ -1741,11 +1738,34 @@ A logistic model for 30-day mortality with the addition of an age-sex interactio
 \label{figure:triageAgeSexInteractionMort30logreg}
 \end{figure}
 
+AIC statistics can be used to examine the potential predictive value of adding predictors to the base model with only the DEPT score in the sequence of models that add  \var{age} ($M_1$), then \var{sex} ($M_2$), then the interaction \var{age-sex} ($M_3$).  Figure~\ref{DevianceAICDeptAgeSexFullData} shows the deviance ($D$), number of predictors ($p$) and AIC ($D + 2(p+1)$) statistics for each of the 3 models.  The values of the AIC statistics continue to decrease as parameters are added to the model so none of these variables will be retained.  
+
+\begin{figure}[ht]
+  \centering
+    \begin{tabular}{rrrr}
+    \hline
+      Model & Deviance & No. Predictors ($p$) & AIC \\
+      \hline
+      $M_1$ & 2195.5 &  4 & 2205.5 \\
+      $M_2$ & 2190.2 &  5 & 2202.2 \\
+      $M_3$ & 2177.9 &  6 & 2192.9 \\
+      \hline
+    \end{tabular}
+  \caption{Deviance and AIC statistics for the sequence of models $M_1$ - $M_3$}
+  \label{DevianceAICDeptAgeSexFullData}
+\end{figure}
+
+How well does this model fit the data?  The Hosmer-Lemeshow $\chi^2$ statistic has value $9.7$ on 8~df (right tail area $0.3$) for this model so does not provide numerical evidence for a lack of fit.  Calibration curves, however, suggest model something else.
+
 Figure~\ref{figure:predVsObsMort30CalibrateDanishED} shows calibration curves using the two methods discussed earlier -- computing average predicted probabilities with observed proportions of outcomes in buckets of the data (the plotted black points), and fitting a smooth curve to the scatterplot of observed outcomes versus predicted probabilities (the solid blue curve). 
 
-The black points with vertical lines provides a view similar to Figure~\ref{figure:predVsObsHuBMI} used to show the fit of the model for the association between hyperuricemia and BMI\@. The estimated proportion is plotted against the average probability in each bucket, and the scatter above and below the dashed line $y = x$ shows the extent to which the observed proportions and predicted probabilities agree.   Unlike for Figure~\ref{figure:predVsObsHuBMI},  the large size of this data set has been exploited by adjusting the buckets adaptively to place more buckets in regions with a high density of predicted probabilities, so that each bucket contains approximately 1\% of the predicted probabilities. The solid blue line is a smooth curve (using loess in \textsf{R}) to find a curve that best fits the data.
+The black points with vertical lines provide a view similar to Figure~\ref{figure:predVsObsHuBMI} used to show the fit of the model for the association between hyperuricemia and BMI\@. The estimated proportion is plotted against the average probability in each bucket, and the scatter above and below the dashed line $y = x$ shows the extent to which the observed proportions and predicted probabilities agree.   Unlike Figure~\ref{figure:predVsObsHuBMI},  the large size of this data set has been exploited by adjusting the buckets adaptively to place more buckets in regions with a high density of predicted probabilities, so that each bucket contains approximately 1\% of the predicted probabilities. The solid blue line uses the \texttt{loess} function in \textsf{R}) to fit a smooth curve to predicted probabilities versus observed events.
 
 Taken together, the two curves show that model predictions are reasonably accurate when the predicted probabilities are less then 0.2, but the smooth curve shows predicted probabilities larger than 0.2 are less accurate. The downward slope of the smooth blue curve indicates that observed outcomes happen less frequently that the model predicts.   Age is the only predictor that is not categorical so large predicted probabilities may be caused by outliers in age.
+
+The different information provided by the two plots highlight both the strengths and weaknesses of each diagnostic. Putting data into empirically-determined buckets shows the model fit in regions with substantial data;  it is not sensitive to outliers and so does not change when age is restricted.    The smooth curve fit to the scatterplot hides the variability in regions with substantial amounts of data, but shows the effect of predictors that might have outliers.
+
+
 
 \begin{figure}[!tbh]
   \centering
@@ -1757,7 +1777,7 @@ Taken together, the two curves show that model predictions are reasonably accura
 
 In the training dataset there are 5 cases older than 100 years old, and none died within 30 days. It is possible that these elderly cases are different from the rest of the population in important ways. There are two general approaches that might be used here -- adapt the model using a transformation of the predictor \texttt{age}, or drop the cases older than 100 from the analysis and state explicitly that the subsequent model applies only to patients less than 100 years old.  The analysis here uses the latter approach.   
 
-Figure~\ref{figure:predVsObsMort30CalibrateAgeLT100DanishED} uses the same calculations as for Figure~\ref{figure:predVsObsMort30CalibrateDanishED}, but with the model re-estimated using the dataset restricted to patients less that 100 years old. The calibration plot shows the model fits the restricted dataset much better than the full dataset.  The Hosmer-Lemeshow goodness-of-fit statistic shows no evidence of lack of fit, with $\chi^2 = 0.4$ on 8df, $p = 0.40$.
+Figure~\ref{figure:predVsObsMort30CalibrateAgeLT100DanishED} uses the same calculations as for Figure~\ref{figure:predVsObsMort30CalibrateDanishED}, but with the model re-estimated using the dataset restricted to patients less that 100 years old. The calibration plot shows the model fits the restricted dataset much better than the full dataset.  The Hosmer-Lemeshow goodness-of-fit statistic again shows no evidence of lack of fit, with $\chi^2 = 0.4$ on 8df, right tail area = 0.40.
 
 \begin{figure}[!tbh]
   \centering
@@ -1767,46 +1787,40 @@ Figure~\ref{figure:predVsObsMort30CalibrateAgeLT100DanishED} uses the same calcu
     \label{figure:predVsObsMort30CalibrateAgeLT100DanishED}
 \end{figure}
 
-The different information provided by the two plots highlight both the strengths and weaknesses of each diagnostic. Putting data into empirically-determined buckets shows the model fit in regions with substantial data;  it is not sensitive to outliers and so does not change when age is restricted.    The smooth curve fit to the scatterplot hides the variability in regions with substantial amounts of data, but shows the effect of predictors that might have outliers.
-
 Figure~\ref{figure:triageAgeSexMort30AgeRestrLogreg} shows the model coefficients using the age-restricted dataset.  This is the model that will be used for the revised triage score in the next section.
 
 % latex table generated in R 4.1.2 by xtable 1.8-4 package
 % Thu Dec 22 10:52:19 2022
 \begin{figure}[ht]
 \centering
-\begin{tabular}{rrrrr}
+\begin{tabular}{rrrr}
   \hline
- & Estimate & Std. Error & z value & Pr($>$$|$z$|$) \\ 
+ & Estimate & Std. Error & z value  \\ 
   \hline
-(Intercept) & -4.518 & 0.445 & -10.15 & 0.000 \\ 
-  triageorange & -1.301 & 0.199 & -6.52 & 0.000 \\ 
-  triageyellow & -1.611 & 0.199 & -8.11 & 0.000 \\ 
-  triagegreen & -2.179 & 0.225 & -9.71 & 0.000 \\ 
-  age & 0.045 & 0.006 & 8.14 & 0.000 \\ 
-  sexmale & -2.151 & 0.671 & -3.21 & 0.001 \\ 
-  age:sexmale & 0.033 & 0.009 & 3.69 & 0.000 \\ 
+(Intercept) & -4.518 & 0.445 & -10.15 \\ 
+  triageorange & -1.301 & 0.199 & -6.52  \\ 
+  triageyellow & -1.611 & 0.199 & -8.11  \\ 
+  triagegreen & -2.179 & 0.225 & -9.71  \\ 
+  age & 0.045 & 0.006 & 8.14 \\ 
+  sexmale & -2.151 & 0.671 & -3.21 \\ 
+  age:sexmale & 0.033 & 0.009 & 3.69  \\ 
    \hline
 \end{tabular}
 \caption{Logistic regression with response 30-day mortality and 
-       predictors triage, age and sex; dataset restricted to patients < 100 years old} 
+       predictors triage, age, sex and an age-sex interaction; dataset restricted to patients < 100 years old} 
 \label{figure:triageAgeSexMort30AgeRestrLogreg}
 \end{figure}
 
-
+% edits to  here 12 May 2024
 
 \subsection{Triaging patients with a modified score}
 \label{section:triageWithModifiedScore}
 
-% edits to here 29 Dec 2022
-% changes not yet made to the figures and tables below using the 
-% age restricted dataset except figure:DEPTColorVsNewColorPrimary
-
 The model in Figure~\ref{figure:triageAgeSexMort30AgeRestrLogreg} can be used to create a revised triage scoring system in the training data, using the same probability cutoff values as the DEPT classification, but now applied to individuals younger than 100.  Individuals with a predicted probability larger than $0.25$ are labeled "red.new", between $0.10$ and $0.25$ are labeled "orange.new", between $0.01$ and $0.10$, "yellow.new", and less than $0.01$, "green.new".  Unless otherwise stated, all tables and figures in this section used the age-restricted dataset. Since this dataset differs slightly from the full dataset explored in Section~\ref{section:examiningDataDanishED}, summary tables of predictors and outcome may differ from earlier tables. 
 
-Figures~\ref{figure:mort30RatesByColorPrimary} and~\ref{figure:DEPTColorVsNewColorPrimary} compare the behavior of the old and new scoring.   Figure~\ref{figure:mort30RatesByColorPrimary} compares the behavior of the DEPT triage classification with the modified version.  The first column shows the target ranges of 30-day mortality probabilities.  The second and third columns show estimated 30-day mortality probabilities when participants are assigned a color score using the DEPT or revised classifications, respectively.  The last column contains a 10-fold cross-validated estimate of the 30-day mortality probabilities using the revised classification. With the revised score, all 30-day mortality proportions now fall within the predicted ranges, as opposed to the DEPT scoring where 3 of 4 categories fall outside the predicted range.
+Figures~\ref{figure:mort30RatesByColorPrimary} and~\ref{figure:DEPTColorVsNewColorPrimary} compare the behavior of the old and new scoring.   Figure~\ref{figure:mort30RatesByColorPrimary} compares the behavior of the DEPT triage classification with the modified version.  The first column shows the target ranges of 30-day mortality probabilities.  The second and third columns show estimated 30-day mortality probabilities when participants are assigned a color score using the DEPT or revised classification, respectively.  The last column contains a 10-fold cross-validated estimate of the 30-day mortality probabilities using the revised classification. With the revised score, all 30-day mortality proportions now fall within the predicted ranges, as opposed to the DEPT scoring where 3 of 4 categories fell outside the predicted range.
 
- The 10-fold cross-validated estimates of mortality probabilities in the last column are based on the assumption that the model that adds age, sex and an age-sex interaction is fixed.  The coefficients are re-estimated in each fold, and the mortality probabilities are estimated using the cases held-out of the fold.  The values in the table show the estimates after averaging over the 10-folds.  These out-of-sample estimates are generally consistent with the in-sample estimates in column 4.
+ The 10-fold cross-validated estimates of mortality probabilities in the last column are based on the assumption that the model that adds age, sex and an age-sex interaction is fixed.  The coefficients are re-estimated in each fold, and the mortality probabilities are estimated using the cases held-out of the fold.  The values in the table show the estimates after averaging over the 10 folds.  These out-of-sample estimates are generally consistent with the in-sample estimates in column 4.
 
 The two-way table in Figure~\ref{figure:DEPTColorVsNewColorPrimary} shows that the revised triage classification places fewer patients than DEPT in the two highest risk categories.  Only 115 of the 271 cases labeled "red" in DEPT are coded "red.new"; the remaining 156 are redistributed to lower risk categories.  That also happens in the "orange" classification in DEPT; of the 1576 originally coded "orange", 797 are coded "orange.new" and the majority of the remaining cases are regrouped into lower risk categories.
 
@@ -1855,7 +1869,7 @@ red & 78 & 88 & 87 & 18 & 271 \\
 
  The observed and cross-validated proportions in Figure~\ref{figure:mort30RatesByColorPrimary} for the model using DEPT, age and sex is well-calibrated but the DEPT score based on the original model is not, at least in the training data.
 
-The estimated Brier score for the DEPT classification in the training cohort is 0.049. Using 10-fold cross validation, the estimated and cross-validated Brier score for the revised triage is 0.046, a slight improvement.
+The estimated Brier score for the DEPT classification in the training cohort is 0.049. Using 10-fold cross validation, the estimated and cross-validated Brier score for the revised triage is 0.046, a small improvement.
 
 Section~\ref{section:validationRevisedTriageScore} uses an external dataset to check the predictions of the revised classification system.
 
@@ -1865,13 +1879,13 @@ Section~\ref{section:validationRevisedTriageScore} uses an external dataset to c
 
 The study team for the Danish emergency department study made available both a training dataset (their primary cohort) used in deriving their revision to the DEPT score and a test dataset (their validation cohort).  In the Danish study the training and test data are based on cohorts treated in the emergency department during 2010 and 2013, respectively.  The 2013 cohort consists of $6,383$ individuals treated in the Nordsj{\ae}lland University Hospital ED.  The test dataset for this analysis consists of $6,224$ participants with no missing values on DEPT score, age or sex, are not coded with DEPT score "blue" (no intervention needed) and are less than 100 years old.   There were $249$ deaths within 30 days after admission, a proportion of $249/6224 = 0.040$, lower than the $325/6198 = 0.052$ proportion in the age-restricted training data. 
 
-When a model estimated in a training dataset is evaluated in test data, the form of the model and its coefficients from the training data are kept fixed.  Predictions, estimated Brier scores, etc. are then calculated using that fixed model in the test dataset.  That approach is used in this section.
+When a model estimated in a training dataset is evaluated in test data, the model and its coefficients are kept are not re-estimated.  Predictions, estimated Brier scores, etc., are  calculated using the model estimated in the test dataset.  That approach is used in this section.
 
 An ED triage scoring system performs adequately if, on average, it classifies patients into correct risk groups.  The two right-most columns in Figure~\ref{figure:mort30RatesByColorPrimary}  show that in the training sample the DEPT score modified with the addition of age and sex groups patients into categories with 30-day mortality proportions that are in the target ranges.  Figure~\ref{figure:mort30RatesByColorValid} shows similar information for the test data.
 
-In the test data, the weakness of the DEPT classification is different from the training data.  The observed 30-day mortality proportion is too low in the Orange category and too high in the Green category. DEPT assigns too many low risk patients to the second highest risk category (Orange) and too many high risk patients to Green.  With the revised scoring, the observed 30-day mortality proportions are all in the target ranges, as they were in the training data.  Figure~\ref{figure:DEPTColorVsNewColorValid} shows that of the 1703 cases classified as Orange in DEPT, $1703 - 752 = 951$ were reclassified as lower risk by the revised score.  Of the 1996 cases grouped in the lowest risk category by DEPT, all but 709 were grouped into higher risk categories by the revised score.
+In the age-restricted test data, the inaccuracy of the DEPT classification is different from the training data.  The observed 30-day mortality proportion is too low in the category "orange" and too high in the "green" category.  With the revised scoring, the observed 30-day mortality proportions are all in the target ranges, as they were in the training data.  Figure~\ref{figure:DEPTColorVsNewColorValid} shows that of the 1703 cases classified as "orange" in DEPT, $1703 - 752 = 951$ were reclassified as lower risk by the revised score.  Of the 1996 cases grouped in the lowest risk category by DEPT, all but 709 were grouped into higher risk categories by the revised score.
 
-  Generally, a model is expected to perform less well in a test dataset than in the training dataset, since a model fit in the training dataset should reflect the characteristics of the training data, and those characteristics will not be identical in the test data. In this case, however, the Brier score in the test dataset is $0.036$ compared to $0.046$ in the training data.  Evidently, the model including DEPT score, age and sex is more accurate in predicting probabilities in the test data than in the training data. 
+Generally, a model is expected to perform less well in a test versus a training dataset.  In this case, however, the Brier score in the test dataset is $0.036$ compared to $0.046$ in the training data.  Evidently, the model including DEPT score, age and sex is more accurate in predicting probabilities in the test data than in the training data. 
 
 
 % this table now uses age restricted dataset
@@ -1889,11 +1903,10 @@ In the test data, the weakness of the DEPT classification is different from the 
   Green & $ [0.00, 0.01)$ & 0.020 & 0.001 \\
    \hline
 \end{tabular}
-\caption{Target probability ranges and estimated 30-day mortality probability by triage score, test dataset. The grouping "Red" denotes "red" for DEPT and "red.new" for the revised score.  The same convention is used for the other groupings.}
+\caption{Target probability ranges and estimated 30-day mortality probability by triage score, age-restricted test dataset. The grouping "Red" denotes "red" for DEPT and "red.new" for the revised score.  The same convention is used for the other groupings. Revised scoring uses coefficients from the model fit to the age-restricted training data with predictors  age, sex and an age-sex interaction.}
 \label{figure:mort30RatesByColorValid}
 \end{figure}
 
-% table now  uses age-restricted dataset
 % latex table generated in R 4.1.2 by xtable 1.8-4 package
 % Fri Jan 27 12:08:54 2023
 \begin{figure}[ht]
@@ -1910,7 +1923,7 @@ red & 19 & 15 & 3 & 1 & 38 \\
    \hline
 \end{tabular}
 \caption{DEPT classification versus the revised scoring in the 
-       validation cohort. Revised scoring uses coefficients from the 
+       age-restricted test data. Revised scoring uses coefficients from the 
        model fit to the age-restricted training data with predictors  
        age, sex and an age-sex interaction.} 
 \label{figure:DEPTColorVsNewColorValid}
@@ -1926,15 +1939,13 @@ Along with the low Brier score, calibration curves help explain why the new scor
     \label{figure:predVsObsMort30CalibrateAgeLT100DanishEDValid}
 \end{figure}
 
-
-The ROC curves discussed in Section~\ref{section:predictiveAccuracyLogistic} quantify the improvement in prediction from adding age and sex to the DEPT scoring system.   Figure~\ref{figure:ROCDanishED} shows ROC curves for the DEPT and modified triage systems in both the training and test data.  The blue ROC curves are for the model that adds age and sex to DEPT; the green are for DEPT alone.  Solid lines show the fit to the training data, dashed lines to the test data.  The model specific curves for the training and test data are similar, consistent with the nearly equal Brier scores in the training and test data.  The area under the ROC curve (AUC) for the expanded model applied to the test data is $0.802$ ($95\%$ confidence interval $(0.79, 0.825)$). The corresponding value for the DEPT classification alone is $0.632$ (confidence interval $(0.590,0.674)$).  The DEPT classification has a $63\%$ chance of distinguishing between an individual who will survive at least 30 days after admission to an ED versus dying; the expanded model is $80\%$ likely to make that distinction.
-
+The ROC curves discussed in Section~\ref{section:predictiveAccuracyLogistic} can be used to quantify the improvement in prediction from adding age, sex and the age-sex interaction to the DEPT scoring system.   Figure~\ref{figure:ROCDanishED} shows ROC curves for the DEPT and modified triage systems in the test data.  The blue ROC curves correspond to the model that adds age and sex to DEPT; the green are for DEPT alone.   The area under the ROC curve (AUC) for the expanded model applied to the test data is $0.802$ ($95\%$ confidence interval $(0.79, 0.825)$). The corresponding value for the DEPT classification alone is $0.632$ (confidence interval $(0.590,0.674)$).  The DEPT classification has a $63\%$ chance of distinguishing between an individual who will survive at least 30 days after admission to an ED versus dying; the expanded model is $80\%$ likely to make that distinction\footnote{The AUC estimates and confidence intervals were calculation using the function \texttt{AUC} in the \textsf{R} package \texttt{cvAUC}.}.
 
 \begin{figure}[!tbh]
   \centering
   \includegraphics[width=0.70\textwidth]
   {ch_logistic_regression_oi_biostat/figures/ROCDanishED/ROCDanishED.pdf}
-    \caption{Receiver operating curves (ROC) for predicting 30-day mortality,  green for the DEPT triage system, blue for the model that adds age and sex to DEPT\@.  The solid lines show ROC curves fit to the training data; the dashed lines show the ROC curves for the test data.  The black line is the is 45-degree line $y = x$. }
+    \caption{Receiver operating curves (ROC) for predicting 30-day mortality,  green for the DEPT triage system, blue for the model that adds age and sex to DEPT\@.  The black line is the is 45-degree line $y = x$.}
     \label{figure:ROCDanishED}
 \end{figure}
 
@@ -1943,9 +1954,9 @@ The ROC curves discussed in Section~\ref{section:predictiveAccuracyLogistic} qua
 \subsection{Summary}
 \label{section:interpretationNewColorScore}
 
-The ED triage model explored in this case study illustrates the steps that might be used in building and evaluating a prediction model.   The analysis makes compromises, however, that limit its practical value.  A more complete modification of the DEPT scoring should start by using the predictors used to construct DEPT, add age and sex to those predictors and construct a model based on the full set of predictors.   The analysis has not used any of the biochemical variables used in the Kristensen paper, many of which are strongly associated with 30-day mortality. The analysis here dropped individuals older than 100, rather than exploring transformations of the age variable that might have led to  better fit with the full dataset and to a model that could be applied to all age groups.  Incorporating an age-sex interaction led to a better fitting model, but it is possible that a model without the interaction term would be easier to interpret and still have made accurate predictions 
+The ED triage model explored in this case study illustrates the steps used in building and evaluating a prediction model.   The analysis makes compromises, however, that limit its practical value.  A more complete modification of the DEPT scoring should start by using the predictors used to construct DEPT, add age and sex to those predictors and construct a model based on the full set of predictors.   The analysis here has not used any of the biochemical variables used in the Kristensen paper, many of which are strongly associated with 30-day mortality. The analysis dropped individuals older than 100, rather than exploring transformations of the age variable that might have led to  better fit with the full dataset and to a model that could be applied to all age groups.  Incorporating an age-sex interaction led to a better fitting model, but it is possible that a model without the interaction term would be easier to interpret and still have made reasonably accurate predictions. 
 
-A full analysis would explore some questions suggested by even just the data used here.  What is the reason for the surprisingly low mortality among the oldest members of the study population? Are they truly more hardy, or are very old patients referred to the ED for different, perhaps less serious conditions and still coded as high-risk?  What might explain the age-sex interaction? 
+A full analysis would explore some questions raised by the analysis here.  What is the reason for the surprisingly low mortality among the oldest members of the study population? Are they truly more hardy, or are very old patients referred to the ED for different, perhaps less serious conditions and still coded as high-risk?  What might explain the age-sex interaction? 
 
 Despite the caveats, the analysis illustrates aspects that readers should look for in similar analyses. The source of the data should be clearly articulated; steps in model building should be clearly explained; model evaluation should incorporate diagnostic plots whenever  possible and not rely on only numerical  measures of fit.  The predictive ability in models for binary outcome data should always include ROC curves and estimates and confidence intervals for AUC.
 
@@ -1957,5 +1968,4 @@ Despite the caveats, the analysis illustrates aspects that readers should look f
 This and other chapters use body mass index (BMI) in several examples and analyses because it is widely available and has been measured and recorded in many studies of human populations. Despite its widespread use, BMI is now increasingly questioned because of its potential bias in when applied to certain populations.
 
 BMI was first proposed in 1832 by Adolphe Quetelet based on data from Caucasian western Europeans and was originally known as the Quetelet Index. The category labels for BMI were set in 1995 by an expert panel sponsored by WHO but their applicability in Asian and other populations have been questioned and studied.  Several large studies have confirmed that high and low values of BMI in Asians confer an elevated risk of death just as in European populations (for example Lin, et al.\footfullcite{lin2011body}) but did not find evidence that the WHO cutpoints should be adjusted for Chinese populations, so the analysis here retains the current WHO categories when analyzing the hyperuricemia dataset.  In general, labeled categories associated with cutpoints in a continuous predictor should be interpreted with caution.  Chapter 2 of Wiggins and Jones\footnote{Wiggins C and Jones ML.  How Data Happened.  A History from the Age of Reason to the Age of Algorithms (2023).  WW Norton and Company.} describe some of Quetelet's work on BMI and his place in the history of statistics.
-
 
