@@ -181,19 +181,49 @@ magnesium in their daily diet.
 
 }{}
 
-\eoce{\qt{TB treatment interruption and secondary education} The two-way table in Figure~\ref{figure:tbInterruptionEduExample} summarizes the data
-used to estimate the model in Figure~\ref{figure:tbInterruptionEduLogReg} in Example~\ref{example:tbInterruptionEducation}. \textbf{replace this problem; it duplicates later material}
+\eoce{\qt{TB treatment interruption and sex of the participant} The two-way table in Figure~\ref{figure:treatmentInterruptSexTable} shows the relationship between the occurrence of a two-month TB treatment interruption and the recorded sex of the study participant in the TB data.  Figure~\ref{figure:treatmentInterruptSexLogreg} contains the result of a logistic regression fit to the participant level data with response two-month interruption and predictor sex, with "female" as the reference category.
+% latex table generated in R 4.2.3 by xtable 1.8-4 package
+% Tue May 21 10:45:43 2024
+\begin{figure}[ht]
+\centering
+\begin{tabular}{rrrr}
+  \hline
+  &\multicolumn{2}{c}{Treatment Interruption} \\
+ & No & Yes & Sum \\ 
+  \hline
+Female & 461 & 29 & 490 \\ 
+  Male & 645 & 98 & 743 \\ 
+  Sum & 1106 & 127 & 1233 \\ 
+   \hline
+\end{tabular}
+\caption{Sex versus a two-month treatment interruption} 
+\label{figure:treatmentInterruptSexTable}
+\end{figure}
+
+% latex table generated in R 4.2.3 by xtable 1.8-4 package
+% Tue May 21 10:49:44 2024
+\begin{figure}[ht]
+\centering
+\begin{tabular}{rrrrr}
+  \hline
+ & Estimate & Std. Error & z value & Pr($>$$|$z$|$) \\ 
+  \hline
+(Intercept) & -2.766 & 0.191 & -14.449 & 0.000 \\ 
+  sexMale & 0.882 & 0.220 & 4.008 & 0.000 \\ 
+   \hline
+\end{tabular}
+\caption{Logistic regression, response two month interruption,
+       predictor recorded sex of participant} 
+\label{figure:treatmentInterruptSexLogreg}
+\end{figure}
 
 \begin{parts}
 
-\item Use the methods outlined in Section~\ref{inferenceOddsRatios} to calculate a  $95\%$ confidence interval for the OR in part~(a).
+\item Show that the odds ratios for an interruption, comparing males to females, is the same in using the data in the table and the logistic regression.
 
-\item  Conduct a test of $H_0:\text{OR} = 1$ using the confidence interval in part~(a).
-
-\item  Explain why the results of this problem are similar to those obtained in Example~\ref{example:tbInterruptionEducation}.
+\item Show that a 95\% confidence interval for the OR in part~(a) can be calculated using either the logistic regression output or the methods outlined Section~\ref{section:inferenceOddsRatios} for ORs calculated in two-way tables.
 
 \end{parts}
-
 }{}
 
 
@@ -450,11 +480,11 @@ Show that the conditions for a $\chi^2$ test are met for the data displayed in F
 }{}
 
 \eoce{\qt{Emergency room outcomes in Denmark, I
-   \label{exercise:mort1000Triage}}
+   \label{exercise:mort30TriageSample1000}}
 
 An important problem in emergency medicine is the prioritization of high-risk patients. Traditional triage algorithms classify patients into categories based on vital signs (such as heart rate and level of consciousness) in addition to the patient's reason for seeking medical care: "red" (life-threatening), "orange" (seriously ill), "yellow" (ill), "green" (needs assessment), and "blue" (minor complaints). A study in Denmark\footfullcite{kristensen2017routine} studied the association of triage score and other variables with 30 day mortality in a dataset of 12,661 individuals\footfullcite{Data available at DOI:10.5061/dryad.m2bq5} treated in the Emergency Department (ED) of  Nordsj{\ae}lland University Hospital in Denmark.  
 
-The model in Figure~\ref{figure:mort30TriageSample1000} is the result of fitting a logistic regression with response variable 30-day mortality (0 = alive 30 days a after admission) and predictor triage score in a random sample of 1,000 cases from the 5,371 participants in the primary dataset used for initial model building.  In this sample of 1,000, there were 62 deaths within 30 days from admission to the ED.
+The model in Figure~\ref{table:mort30TriageSample1000LogReg} is the result of fitting a logistic regression with response variable 30-day mortality (0 = alive 30 days a after admission) and predictor triage score in a random sample of 1,000 cases from the 5,371 participants in the primary dataset used for initial model building.  In this sample of 1,000, there were 62 deaths within 30 days from admission to the ED.
 
 Individuals classified as category blue were not included in the study.
 
@@ -475,7 +505,7 @@ Individuals classified as category blue were not included in the study.
 \caption{Logistic regression with response 30 day mortality and
        predictor triage level, using a random sample of 1,000 cases 
        from Danish ED study primary cohort.} 
-\label{figure:mort30TriageSample1000}
+\label{table:mort30TriageSample1000LogReg}
 \end{figure}
 
 \begin{parts}
@@ -496,10 +526,9 @@ Individuals classified as category blue were not included in the study.
 
 }{}
 
-\eoce{\qt{Emergency room outcomes in Denmark, II
-\label{exercise:mortTriageColorTable}}
+\eoce{\qt{Emergency room outcomes in Denmark, II \label{exercise:mort30TriageColorTable}}
 
-Figure\ref{figure:tableTriageMort30Sample1000} is a contingency table showing the association between 30 day mortality and triage classification for the data used in Exercise\ref{exercise:mort1000Triage}.
+Figure\ref{table:mort30TriageSample1000} is a contingency table showing the association between 30-day mortality and DEPT triage classification for the data used in Exercise\ref{exercise:mort30TriageSample1000}.
 
 % latex table generated in R 4.1.2 by xtable 1.8-4 package
 % Mon Jun 27 09:41:20 2022
@@ -507,7 +536,8 @@ Figure\ref{figure:tableTriageMort30Sample1000} is a contingency table showing th
 \centering
 \begin{tabular}{rrrr}
   \hline
- & 0 & 1 & Sum \\ 
+  & \multicolumn{2}{c}{Died within 30 days} & \\
+ & No & Yes & Sum \\ 
   \hline
 red & 33 & 7 & 40 \\ 
   orange & 258 & 21 & 279 \\ 
@@ -516,26 +546,27 @@ red & 33 & 7 & 40 \\
   Sum & 938 & 62 & 1000 \\ 
    \hline
 \end{tabular}
-\caption{Contingency table of 30 day mortality by triage classification,
+\caption{Contingency table of 30-day mortality by triage classification,
        Danish ED study, random sample of 1,000 participants} 
-\label{figure:tableTriageMort30Sample1000}
+\label{table:mort30TriageSample1000}
 \end{figure}
 
 \begin{parts}
 
-\item Show that the table can be used to calculate the estimate of  the intercept given in Figure~\ref{figure:mort30TriageSample1000}.
+\item Show that the table can be used to calculate the estimate of  the intercept given in Figure~\ref{table:mort30TriageSample1000LogReg}.
 
 \item The data in the table can be used to estimate each of the coefficients in the logistic model. Show that it can be used to calculate the estimate of the coefficient for the triage category "green".
 
-\item Can the estimates of the standard errors in Figure~\ref{figure:mort30TriageSample1000} be calculated directly from the table?
+\item Can the estimates of the standard errors in 
+  Figure~\ref{table:mort30TriageSample1000LogReg} be calculated directly from the table?
 
 \end{parts}
 }{}
 
 \eoce{\qt{Emergency room outcomes in Denmark, III
-   \label{exercise:mortTriageAgeSex1000}}
+   \label{exercise:mort30TriageAgeSex1000}}
 
-The dataset used in Exercise~\ref{exercise:mort1000Triage} also contains the age and sex of the participants.  Figure~\ref{figure:mort30TriageAgeSexSample1000} shows the logistic model in which age in years and sex have been added to the traditional triage coding.
+The dataset used in Exercise~\ref{exercise:mort30TriageSample1000} also contains the age and sex of the participants.  Figure~\ref{table:mort30TriageAgeSexSample1000LogReg} shows the logistic model in which age in years and sex have been added to the traditional triage coding.
 
 % latex table generated in R 4.1.2 by xtable 1.8-4 package
 % Mon Jun 27 09:12:22 2022
@@ -556,7 +587,7 @@ The dataset used in Exercise~\ref{exercise:mort1000Triage} also contains the age
 \caption{Logistic regression with response 30 day mortality and
        predictors triage level, age and sex, using a random sample of 1,000 cases 
        from Danish ED study.} 
-\label{figure:mort30TriageAgeSexSample1000}
+\label{table:mort30TriageAgeSexSample1000LogReg}
 \end{figure}
 
 \begin{parts}
@@ -565,7 +596,7 @@ The dataset used in Exercise~\ref{exercise:mort1000Triage} also contains the age
 
 \item Is increasing age associated with in increase or decrease in the risk of 30 day mortality?
 
-\item The residual deviance for the model in Figures~\ref{figure:mort30TriageAgeSexSample1000} and \ref{figure:mortTriage1000} are, respectively, $407.58$ and $463.60$.  Conduct a test of the null hypothesis that the pair of variables \var{age} and \var{sex} do not add useful information to a model based on triage score alone.  
+\item The residual deviance for the models in Figures~\ref{table:mort30TriageAgeSexSample1000LogReg} and \ref{table:mort30TriageSample1000LogReg} are, respectively, $407.58$ and $463.60$.  Conduct a test of the null hypothesis that the pair of variables \var{age} and \var{sex} do not add useful information to a model based on triage score alone.  
 
 \item Based on the estimated model and your answers to the above, do you believe that both age and sex should be retained in the model?  Explain your answer.
 
@@ -573,7 +604,7 @@ The dataset used in Exercise~\ref{exercise:mort1000Triage} also contains the age
 
 }{}
 
-\eoce{\qt{Interaction in logistic regression, I
+\eoce{\qt{Interaction in logistic regression
    \label{exercise:BMISexInteractionModel}}
 
 The interaction term in the model given in Equation~\ref{eqn:huBmiSexInteractionLogReg} would not be retained in a model with BMI and sex, but it is instructive to explore the implications of an interaction when estimating ORs.
@@ -587,7 +618,6 @@ The interaction term in the model given in Equation~\ref{eqn:huBmiSexInteraction
 \item How do these estimates differ from the corresponding ORs when using the model without an interaction in Figure~\ref{figure:huBmiSexLogReg}?
 
 \end{parts}
-
 }{}    
 
 \eoce{\qt{Color and width of female crabs
