@@ -9,13 +9,14 @@
   \item adjusted $R^2$ ($R_{adj}^2$), \hyperindexformat{\textbf}{343}, 
 		\hyperpage{343}
   \item adjusted R-squared, \hyperindexformat{\textbf}{343}
-  \item AIC, \hyperindexformat{\textbf}{486}
-  \item Akaike Information Criterion, \hyperindexformat{\textbf}{486}
+  \item AIC, 
+		\hyperindexformat{\see Akaike Information Criterion (AIC)}{486}
+  \item Akaike Information Criterion (AIC), \hyperpage{486}
   \item alternative hypothesis ($H_A$), \hyperindexformat{\textbf}{214}
   \item analysis of variance (ANOVA), \hyperindexformat{\textbf}{266}, 
 		\hyperpage{266--272}
-  \item apparent error rates, \hyperindexformat{\textbf}{488}
-  \item apparent prediction error, \hyperindexformat{\textbf}{499}
+  \item apparent error rate, \hyperpage{488}
+  \item apparent prediction error, \hyperpage{499}
   \item association, \hyperindexformat{\textbf}{40}
   \item AUC, \hyperindexformat{\textbf}{497}
   \item AUC-ROC, \hyperindexformat{\textbf}{497}
@@ -36,8 +37,11 @@
   \indexspace
 
   \item c-statistic, \hyperindexformat{\textbf}{497}
-  \item calibration plot, \hyperindexformat{\textbf}{468}
+  \item calibration plot, \hyperindexformat{\textbf}{468}, 
+		\hyperpage{468}
+    \subitem well-calibrated model, \hyperpage{493}
   \item Calibration plots, \hyperindexformat{\textbf}{488}
+  \item calibration plots, \hyperpage{493}
   \item case-control studies, \hyperpage{418--421}
     \subitem tests for association, \hyperpage{419}
   \item categorical variable, \hyperindexformat{\textbf}{18}
@@ -47,6 +51,7 @@
   \item Central Limit Theorem, \hyperpage{204}
   \item chi-square distribution, \hyperindexformat{\textbf}{406}
   \item chi-square statistic, \hyperpage{405}
+    \subitem logistic regression goodness-of-fit, \hyperpage{488}
   \item chi-square table, \hyperindexformat{\textbf}{407}
   \item cohort, \hyperindexformat{\textbf}{26}
   \item collections, \hyperpage{96}
@@ -62,7 +67,9 @@
     \subitem difference of two means, \hyperpage{250--251}
     \subitem difference of two proportions, \hyperpage{398}
     \subitem interpretation, \hyperpage{211--212}
+    \subitem multiple logistic regression coefficients, \hyperpage{484}
     \subitem regression coefficient, \hyperpage{311}
+    \subitem simple logistic regression coefficient, \hyperpage{470}
     \subitem single proportion, \hyperpage{391}
   \item confident, \hyperindexformat{\textbf}{207}
   \item confounder, \hyperindexformat{\textbf}{30}, 
@@ -78,8 +85,7 @@
   \item correlated random variables, \hyperindexformat{\textbf}{182}
   \item correlation, \hyperindexformat{\textbf}{42}
   \item correlation coefficient, \hyperindexformat{\textbf}{42}
-  \item cross-validation, \hyperindexformat{\textbf}{488}, 
-		\hyperindexformat{\textbf}{499}
+  \item cross-validation, \hyperpage{488}, \hyperpage{499}
 
   \indexspace
 
@@ -89,6 +95,8 @@
     \subitem breast cancer, \hyperpage{399--402}
     \subitem cdc, \hyperpage{202}
     \subitem Congress approval rating, \hyperpage{396}
+    \subitem crabs, \hyperpage{480--482}
+    \subitem Danish emergency department (ED, \hyperpage{501--510}
     \subitem developmental disability support, \hyperpage{255--257}, 
 		\hyperpage{341--342}
     \subitem dolphins and mercury, \hyperpage{243--244}
@@ -103,6 +111,8 @@
     \subitem Golub, \hyperpage{61--69}
     \subitem health care, \hyperpage{398}
     \subitem hiv, \hyperpage{404}, \hyperpage{409}
+    \subitem hyperuricemia, \hyperpage{459--468}, \hyperpage{491--492}, 
+		\hyperpage{496--498}
     \subitem LEAP, \hyperpage{14--15}, \hyperpage{28}, \hyperpage{410}
     \subitem life.expectancy, \hyperpage{42}
     \subitem mammography, \hyperpage{399--402}
@@ -114,11 +124,13 @@
 		\hyperpage{352--353}
     \subitem stem cells, heart function, \hyperpage{249--251}
     \subitem swim suit velocities, \hyperpage{246}
+    \subitem tuberculosis, \hyperpage{472--475}, \hyperpage{488--490}
     \subitem white fish and mercury, \hyperpage{245}
   \item data density, \hyperindexformat{\textbf}{35}
   \item data fishing, \hyperindexformat{\textbf}{268}
   \item data matrix, \hyperindexformat{\textbf}{17}
   \item deck of cards, \hyperpage{97}
+  \item deviance statistic, \hyperpage{485}
   \item deviation, \hyperindexformat{\textbf}{33}
   \item discrete probability distributions, 
 		\hyperindexformat{\textbf}{100}
@@ -165,14 +177,12 @@
   \item factorial, \hyperindexformat{\textbf}{151}
   \item failure, \hyperindexformat{\textbf}{149}
   \item false negative, \hyperindexformat{\textbf}{114}
-  \item false negative rate, \hyperindexformat{\textbf}{495}
-  \item false negative rates, \hyperindexformat{\textbf}{488}
+  \item false negative rate (FNR), \hyperpage{488}, \hyperpage{495}
   \item false positive, \hyperindexformat{\textbf}{114}
-  \item false positive rate, \hyperindexformat{\textbf}{495}
-  \item false positive rates, \hyperindexformat{\textbf}{488}
+  \item false positive rate (FPR), \hyperpage{488}, \hyperpage{495}
   \item Fisher's exact test, \hyperindexformat{\textbf}{411}
-  \item FNR, \hyperindexformat{\textbf}{495}
-  \item FPR, \hyperindexformat{\textbf}{495}
+  \item FNR, \hyperindexformat{\see{false negative rate (FNR)}}{488}
+  \item FPR, \hyperindexformat{\see{false positive rate (FPR)}}{488}
   \item frequency table, \hyperindexformat{\textbf}{39}
 
   \indexspace
@@ -190,15 +200,18 @@
   \item high leverage, \hyperindexformat{\textbf}{307}
   \item histogram, \hyperindexformat{\textbf}{35}, 
 		\hyperindexformat{\textbf}{50}
-  \item Hosmer-Lemeshow, \hyperindexformat{\textbf}{488}
+  \item Hosmer-Lemeshow statistic, \hyperindexformat{\textbf}{488}, 
+		\hyperpage{491}
   \item hypothesis testing, \hyperpage{214--224}
     \subitem decision errors, 223
+    \subitem multiple logistic regression coefficients, \hyperpage{484}
     \subitem significance level, \hyperpage{223--224}
+    \subitem simple logistic regression coefficient, \hyperpage{470}
     \subitem single proportion, \hyperpage{392}
 
   \indexspace
 
-  \item in-sample prediction error, \hyperindexformat{\textbf}{499}
+  \item in-sample prediction error, \hyperpage{499}
   \item independent, \hyperindexformat{\textbf}{40}, 
 		\hyperindexformat{\textbf}{103}
   \item independent random variables, \hyperindexformat{\textbf}{182}
@@ -210,6 +223,7 @@
 
   \indexspace
 
+  \item jittering, \hyperindexformat{\textbf}{459}
   \item joint distribution, \hyperindexformat{\textbf}{179}, 
 		\hyperindexformat{\textbf}{183}
   \item joint distribution for random variables, \hyperpage{179--185}
@@ -226,6 +240,8 @@
 		\hyperindexformat{\textbf}{297, 298}
   \item linear association, \hyperindexformat{\textbf}{40}
   \item linear model, \hyperindexformat{\textbf}{297}
+  \item logistic regression, \hyperindexformat{\textbf}{457}
+  \item logit function, \hyperindexformat{\textbf}{463}
   \item lurking variable, \hyperindexformat{\textbf}{30}
 
   \indexspace
@@ -240,7 +256,8 @@
   \item marginal probability, \hyperindexformat{\textbf}{109}, 
 		\hyperpage{108--109}
   \item marginal totals, \hyperindexformat{\textbf}{45}
-  \item maximum likelihood, \hyperindexformat{\textbf}{463}
+  \item maximum likelihood, \hyperindexformat{\textbf}{463}, 
+		\hyperpage{463}
   \item mean, \hyperindexformat{\textbf}{32}
     \subitem average, \hyperpage{32}
   \item mean square between groups ($MSG$), 
@@ -271,6 +288,13 @@
     \subitem prediction interval, \hyperpage{348}
     \subitem residual plots, \hyperpage{340}
     \subitem residuals, \hyperpage{340}, \hyperpage{345}
+  \item multiple logistic regression
+    \subitem calculating probabilities, \hyperpage{483}
+    \subitem deviance statistic, \hyperpage{485}
+    \subitem estimating probabilities, \hyperpage{477}
+    \subitem interaction, \hyperpage{479--480}
+    \subitem model assumptions, \hyperpage{483}
+    \subitem odds ratio, \hyperpage{477}
   \item Multiplication Rule, \hyperindexformat{\textbf}{105}
   \item mutually exclusive events, \hyperindexformat{\textbf}{95}
 
@@ -293,12 +317,13 @@
   \indexspace
 
   \item observational study, \hyperindexformat{\textbf}{26}
-  \item odds, \hyperindexformat{\textbf}{420}
+  \item odds, \hyperindexformat{\textbf}{420}, \hyperpage{461}
   \item odds ratio, \hyperindexformat{\textbf}{48}, 
-		\hyperindexformat{\textbf}{420}
+		\hyperindexformat{\textbf}{420}, \hyperpage{465}
     \subitem case-control studies, \hyperpage{420}
-  \item Out-of-sample, \hyperindexformat{\textbf}{499}
-  \item out-of-sample prediction error, \hyperindexformat{\textbf}{488}
+    \subitem multiple logistic regression, \hyperpage{477}
+  \item out-of-sample prediction error, \hyperpage{488}, 
+		\hyperpage{499}
   \item outlier, \hyperindexformat{\textbf}{37}
   \item outlier in regression, \hyperindexformat{\textbf}{308}
 
@@ -344,10 +369,8 @@
   \item random phenomena, 95
   \item random variable, \hyperindexformat{\textbf}{141}, 
 		\hyperpage{141--148}
-  \item receiver operating characteristic curve, 
-		\hyperindexformat{\textbf}{496}
-  \item Receiving operator characteristic curves, 
-		\hyperindexformat{\textbf}{488}
+  \item receiving operator characteristic curve (ROC curve), 
+		\hyperpage{488}, \hyperpage{496}
   \item rejection region, \hyperindexformat{\textbf}{219}, 
 		\hyperindexformat{\textbf}{260}
   \item relative frequency table, \hyperindexformat{\textbf}{39}
@@ -364,8 +387,8 @@
 		\hyperindexformat{\textbf}{293}
   \item retrospective study, \hyperindexformat{\textbf}{31}
   \item robust estimates, \hyperindexformat{\textbf}{34}
-  \item ROC curve, \hyperindexformat{\textbf}{496}
-  \item ROC curves, \hyperindexformat{\textbf}{488}
+  \item ROC curve, 
+		\hyperindexformat{\see{receiver operator characteristic curve (ROC curve)}}{488}
   \item row totals, \hyperindexformat{\textbf}{45}
 
   \indexspace
@@ -396,9 +419,11 @@
   \item sample space, \hyperindexformat{\textbf}{102}
   \item sampling distribution
     \subitem difference of two proportions, \hyperpage{397}
+    \subitem multiple logistic regression coefficients, \hyperpage{483}
     \subitem regression coefficient, \hyperpage{310}, \hyperpage{346}
     \subitem sample mean, \hyperindexformat{\textbf}{204}
     \subitem sample proportion, \hyperpage{391}
+    \subitem simple logistic regression coefficient, \hyperpage{469}
   \item sampling variation, \hyperindexformat{\textbf}{203}
   \item scatter plots, 296
   \item scatterplot, \hyperindexformat{\textbf}{40}
@@ -419,6 +444,10 @@
     \subitem outliers, \hyperpage{307}
     \subitem prediction intervals, \hyperpage{316}
     \subitem R-squared ($R^2$), \hyperpage{304}
+  \item simple logistic regression, \hyperpage{461}
+    \subitem estimating probabilities, \hyperpage{462}
+    \subitem model assumptions, \hyperpage{469}
+    \subitem model parameters, \hyperpage{464}
   \item simple random sample, \hyperindexformat{\textbf}{22}
   \item Simpson's paradox, \hyperindexformat{\textbf}{59}
   \item skew
@@ -452,11 +481,11 @@
     \subitem one-sample, \hyperpage{243--245}
     \subitem paired data, \hyperpage{246--247}
     \subitem two independent groups, \hyperpage{251--253}
-  \item test data, \hyperindexformat{\textbf}{499}
-  \item test dataset, \hyperindexformat{\textbf}{488}
+  \item test data, \hyperpage{499}
+  \item test dataset, \hyperpage{488}
   \item threshold probability, \hyperindexformat{\textbf}{494}
   \item time series, \hyperindexformat{\textbf}{296}
-  \item training data, \hyperindexformat{\textbf}{498}
+  \item training data, \hyperpage{498}
   \item transformation, \hyperindexformat{\textbf}{38}
   \item tree diagram, \hyperindexformat{\textbf}{114}, 118
   \item trial, \hyperindexformat{\textbf}{149}
@@ -473,8 +502,7 @@
 
   \indexspace
 
-  \item validation data, \hyperindexformat{\textbf}{499}
-  \item validation dataset, \hyperindexformat{\textbf}{488}
+  \item validation dataset, \hyperindexformat{\see {test dataset}}{488}
   \item variables, \hyperindexformat{\textbf}{16}
   \item variance, \hyperindexformat{\textbf}{33}, \hyperpage{145}
   \item Venn diagrams, \hyperindexformat{\textbf}{97}
@@ -482,7 +510,6 @@
   \indexspace
 
   \item weak relationship, \hyperindexformat{\textbf}{293}
-  \item well-calibrated, \hyperindexformat{\textbf}{493}
   \item whiskers, \hyperindexformat{\textbf}{37}
 
   \indexspace
