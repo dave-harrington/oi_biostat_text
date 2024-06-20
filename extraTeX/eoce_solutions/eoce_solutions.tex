@@ -2468,7 +2468,6 @@ The conditions for the $\chi^2$ test are discussed in Section~\ref{theChiSquared
 (a)~The estimate of the intercept is $log(7/33) = -1.551$.
 (b)~The estimate for the triage category "green" is the log of the estimated OR comparing "green" to "red", $log((11/253)/(7/33)) = -1.585$.
 (c)~Yes.  Each of the log odds ratios comparing a category with "red" can be thought of as coming from a $2 \times 2$ table with the two rows consisting of counts from "red" and the category of interest.  In those tables, the standard errors of the log(OR) can be calculated using the formulas in Section~\ref{section:inferenceOddsRatios}.  For instance for the category "green" the standard error of the log(OR), the standard error is given by $\sqrt(1/253 + 1/11 + 1/33 + 1/7) = 0.518$.  Because the calculations of standard errors in logistic regression and 2-way tables are different the standard errors from the two methods may differ slightly.
-(d)~By splitting the data into two smaller groups, estimates of coefficients will be less precise (have larger standard error) so hypothesis tests will have smaller power. For these data, the evidence for an interaction is weak using both this approach and using a model for the interaction term as in Figure~\ref{eqn:huBmiSexInteractionLogReg}.  The advantage of this approach is that it does not assume a model for the interaction and may be more reliable when the association of the interaction is not linear on the log(odds) scale.
 }
 
 % EVEN Emergency room outcomes III
