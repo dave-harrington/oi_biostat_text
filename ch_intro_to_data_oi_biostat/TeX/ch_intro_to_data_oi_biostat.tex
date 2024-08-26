@@ -32,7 +32,7 @@ The study team enrolled children in the United Kingdom between 2006 and 2009, se
 
 At 5 years of age, each child was tested for peanut allergy using an oral food challenge (OFC): 5 grams of peanut protein in a single dose. A child was recorded as passing the oral food challenge if no allergic reaction was detected, and failing the oral food challenge if an allergic reaction occurred. These children had previously been tested for peanut allergy through a skin test, conducted at the time of study entry; the main analysis presented in the paper was based on data from 530 children with an earlier negative skin test.\footnote{Although a total of 542 children had an earlier negative skin test, data collection did not occur for 12 children.} 
 
-Individual-level data from the study are shown in Figure~\ref{leapStudyResultsDF} for 5 of the 530 children\textemdash each row represents a participant and shows the participant's study ID number, treatment group assignment, and OFC outcome.\footnote{The data are available as \data{LEAP} in the \textsf{R} package \texttt{oibiostat}.}
+Individual-level data from the study are shown in Figure~\ref{leapStudyResultsDF}, which is restricted to children with a negative skin prick test for a peanut allergy at the time of randomization. For 5 of the 530 children\textemdash each row represents a participant and shows the participant's study ID number, treatment group assignment, and OFC outcome.\footnote{The data are available as \data{LEAP} in the \textsf{R} package \texttt{oibiostat}.}
  
 % latex table generated in R 3.1.1 by xtable 1.7-4 package
 % Mon Sep 28 09:14:28 2015
@@ -879,7 +879,13 @@ BMI acts as a relative measure of weight that accounts for height. Specifically,
 
 \textD{\newpage}
 
-\index{data!life.expectancy|(}
+%\index{data!life.expectancy|(}
+
+\begin{comment}
+
+The wdi data has been removed from the package, so the example below and the subsequent example using a transformation  have to be replaced.  It should be possible to get similar, more updated data with clear provenance.  Data replaced by wbi, which should show the same patterns
+
+\end{comment}
 
 \begin{examplewrap}
 \begin{nexample}{Figure~\ref{incomeLifeExpectancy} is a scatterplot of life expectancy versus annual per capita income for 165 countries in 2011. Life expectancy is measured as the expected lifespan for children born in 2011 and income is adjusted for purchasing power in a country. Describe the relationship between life expectancy and annual per capita income; do they seem to be linearly associated?}
