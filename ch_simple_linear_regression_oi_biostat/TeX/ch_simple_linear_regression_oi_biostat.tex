@@ -375,6 +375,13 @@ If a linear model has a very strong negative relationship with a correlation of 
 
 \index{simple linear regression!categorical predictors}
 
+\begin{comment}
+
+The wdi.2011 dataset has been replaced in the package by wdi_2022.  This section has to be rewritten
+
+\end{comment}
+
+
 Although the response variable in linear regression is necessarily numerical, the predictor variable may be either numerical or categorical. This section explores the association between a country's infant mortality rate and whether or not 50\% of the population has access to adequate sanitation facilities. 
 
 The World Development Indicators (WDI) is a database of country-level variables (i.e., indicators) recording outcomes for a variety of topics, including economics, health, mortality, fertility, and education.\footnote{\url{http://data.worldbank.org/data-catalog/world-development-indicators}} The dataset \data{wdi.2011} contains a subset of variables on 165 countries from the year 2011.\footnote{The data were collected by a Harvard undergraduate in the Statistics department, and are accessible via the \data{oibiostat} package.} The infant mortality rate in a country is recorded as the number of deaths in the first year of life per 1,000 live births. Access to sanitation is recorded as the percentage of the population with adequate disposal facilities for human waste. Due to the availability of death certificates, infant mortality is measured reasonably accurately throughout the world. However, it is more difficult to obtain precise measurements of the percentage of a population with access to adequate sanitation facilities; instead, considering whether half the population has such access may be a more reliable measure. The analysis presented here is based on 163 of the 165 countries; the values for access to sanitation are missing for New Zealand and Turkmenistan.
